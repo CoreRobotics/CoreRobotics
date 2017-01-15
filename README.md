@@ -1,4 +1,4 @@
-# CoreRobotics Open Source Library Project
+# CoreRobotics Open Source Project
 Created: January 14, 2016
 University of Washington
 College of Engineering
