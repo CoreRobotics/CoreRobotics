@@ -4,7 +4,8 @@
 Created: January 14, 2016
 
 Currently in beta.
-Platforms: Windows 8.1, Mac OS X 10, and Linux.
+- MATLAB Version: R2016a (Windows, Mac, Linux)
+- C++ Platforms: Windows 8.1, Mac OS X 10, and Linux.
 
 ## Description:
 This git project hosts code for the CoreRobotics open source robotic control library.  The CoreRobotics library is distrubted under the [BSD-3-Clause license](https://opensource.org/licenses/BSD-3-Clause).  This allows unlimited redistribution as long as the copyright notices and disclaimers of warranty are maintained.  The third clause indicates permission is required to the use of names of contributors for endorsement in any derived work.
