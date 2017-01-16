@@ -1,4 +1,4 @@
-# CoreRobotics Open Source Project
+# CoreRobotics Project
 #### University of Washington
 #### College of Engineering
 Created: January 14, 2016
