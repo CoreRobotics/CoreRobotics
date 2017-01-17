@@ -167,6 +167,35 @@ classdef Frame < CoreRobotics.InputHandler
                 end
             end
         end
+        function obj = PlotFrame(obj,h_axes,scale)
+            % obj = obj.PlotFrame(h_axes,scale) plots the Frame object in
+            % the axes specified by the h_axes.  If h_axes is not
+            % specified, the current axes is used.  The scale determines
+            % the scale factor used to plot the frame vectors.  The plotted
+            % frame has a representation of x (red), y (green), and z
+            % (blue).
+            if nargin == 1
+                h_axes = gca;
+                scale = 1;
+            elseif nargin == 2
+                scale = 1;
+            end
+            axes(h_axes)
+            N = obj.dimension;
+            coor = [zeros(N,1), scale*eye(N)];
+            coor = obj.TransformToFramePrev(coor);
+            X = [coor(:,1), coor(:,2)];
+            Y = [coor(:,1), coor(:,3)];
+            if N == 2
+                plot(X(1,:),X(2,:),'-r')
+                plot(Y(1,:),Y(2,:),'-g')
+            elseif N == 3
+                Z = [coor(:,1), coor(:,4)];
+                plot3(X(1,:),X(2,:),X(3,:),'-r')
+                plot3(Y(1,:),Y(2,:),Y(3,:),'-g')
+                plot3(Z(1,:),Z(2,:),Z(3,:),'-b')
+            end
+        end
         function obj = set.dimension(obj,value)
             if CheckValue(obj,'dimension',value,'numeric',{2,3})
                 obj.dimension = value;

@@ -85,6 +85,27 @@ classdef Manipulator < CoreRobotics.InputHandler
             end
         end
         
+        function frame = GetToolFrame(obj)
+            % frame = GetToolFrame(obj) returns the Frame object containing
+            % the tool pose relative to the manipulator obj origin.
+            i = obj.size_links;
+            M = eye(obj.dimension+1);
+            while i~=0
+                T = obj.list_links(i).frame;
+                M = T.GetTransformToPrev*M;
+                i = obj.list_parents(i);
+            end
+            r = M(1:end-1,1:end-1);
+            t = M(1:end-1,end);
+            % P.Owan: this is slow - allocating a new object every time the
+            % method gets called.  This should be updated for better
+            % efficiency, maybe allocate once on construct.  Think about 
+            % how to handle the dimension, then the tool_frame can be a
+            % dependent property.
+            frame = CoreRobotics.Frame('dimension',obj.dimension);
+            frame = frame.SetRotationAndTranslation(r,t);
+        end
+        
         function [FK,obj] = GetForwardKinematics(obj,u)
             % [FK,obj] = obj.GetForwardKinematics(u) computes the
             % matrix of points along the forward kinematics FK for the

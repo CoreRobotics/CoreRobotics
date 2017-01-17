@@ -1,6 +1,6 @@
-%% RobotExample2D
+%% RobotExample3D
 %
-% Here we create an example robot in 2D to provide insight to the
+% Here we create an example robot in 3D to provide insight to the
 % kinematics methods accessible through the Manipulator class.
 %
 % This script is set up to run from inside the matlab/examples
@@ -17,15 +17,14 @@ import CoreRobotics.*
 
 %% Create the Robot
 
-l1 = 0.5;   % [m] - link 1 length
-l2 = 1.0;   % [m] - link 2 length
-l3 = 0.4;   % [m] - link 3 length
+l1 = 1.0;   % [m] - link 1 length
+l2 = 0.5;   % [m] - link 2 length
 
 % Define the transformations
-T(1) = CoreRobotics.Frame2D('ang_a',0,'free_variables','ang_a');
-T(2) = CoreRobotics.Frame2D('ang_a',-pi/2,'pos_x',l1,'free_variables','ang_a');
-T(3) = CoreRobotics.Frame2D('ang_a',0,'pos_x',l2,'free_variables','ang_a');
-T(4) = CoreRobotics.Frame2D('pos_x',l3);
+T(1) = CoreRobotics.Frame3D('convention','xyz','free_variables','ang_g');
+T(2) = CoreRobotics.Frame3D('convention','xyz','free_variables','ang_a');
+T(3) = CoreRobotics.Frame3D('convention','xyz','free_variables','ang_a','pos_y',l1);
+T(4) = CoreRobotics.Frame3D('pos_y',l2);
 
 % Create the Manipulator object and add RigidBody links
 Robot = CoreRobotics.Manipulator;
@@ -39,17 +38,20 @@ end
 
 % Generate the free variable input (the order is because of how we added
 % them to the Manipulator object)
-u = [linspace(0,pi,101);            % T(1).ang_a
-     linspace(-pi/2,pi/2,101);      % T(2).ang_a
-     linspace(-pi,0,101)];          % T(3).ang_a
+u = [linspace(-pi,0,101);           % T(1).ang_a
+     linspace(pi/2,pi/4,101);       % T(2).ang_a
+     linspace(-pi/2,-pi/4,101)];    % T(3).ang_a
+
 
 % Set up a plot.
 figure(1),clf
 hold on; grid on; axis equal;
-xlabel('x'), ylabel('y')
-title('Planar Robot with Jacobian vectors shown')
-xlim([-2 2])
-ylim([-2 2])
+xlabel('x'), ylabel('y'), zlabel('z')
+title('3D Robot')
+xlim([-1.5 1.5])
+ylim([-1.5 1.5])
+zlim([0 2])
+view(3)
 
 % Loop through the input vectors
 for k = 1:length(u)
@@ -59,19 +61,7 @@ for k = 1:length(u)
     
     % Plot the FK point
     figure(1),cla
-    plot(FK(1,:),FK(2,:),'.-k','MarkerSize',20,'LineWidth',3)
-    
-    % Now get the Jacobian for all links and plot the vectors to visualize
-    % the effect of each transformation on the joints.
-    J = Robot.GetJacobian(1);
-    L = Robot.size_driven_links;
-    for i = 1:Robot.size_links
-        X = FK(1,i)*ones(1,L);
-        Y = FK(2,i)*ones(1,L);
-        U = J(1,:,i);
-        V = J(2,:,i);
-        quiver(X,Y,U,V)
-    end
+    plot3(FK(1,:),FK(2,:),FK(3,:),'.-k','MarkerSize',20,'LineWidth',3)
     tool = Robot.GetToolFrame;
     tool.PlotFrame(gca,0.25);
     drawnow

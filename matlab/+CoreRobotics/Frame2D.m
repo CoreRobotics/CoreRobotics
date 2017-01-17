@@ -58,7 +58,7 @@ classdef Frame2D < CoreRobotics.Frame
             obj.rot = [cos(obj.ang_a), -sin(obj.ang_a);
                         sin(obj.ang_a),  cos(obj.ang_a)];
             obj.trans = [obj.pos_x; obj.pos_y];
-        end 
+        end
         function obj = set.pos_x(obj,value)
             if isnumeric(value) && CheckSize(obj,value,[1 1])
                 obj.pos_x = value;
