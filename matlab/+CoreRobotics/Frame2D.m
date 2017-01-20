@@ -15,6 +15,29 @@
 %   The transformation T as defined above takes a point in frame i (next)
 %   to a point in frame i-1 (prev).
 %
+% Frame2D Properties:
+%
+%   dimension                 - dimension of the frame transformation
+%   free_variables            - free (driven) variables of the frame transformation
+%   pos_x                     - x position
+%   pos_y                     - y position
+%   ang_a                     - rotation angle (radians)
+%
+% Frame2D Methods:
+%
+%   Set                       - sets name/value parameter pairs
+%   GetRotation               - returns the rotation matrix
+%   GetTranslation            - returns the translation matrix
+%   GetTransformToNext        - returns the transformation to the next frame
+%   GetTransformToPrev        - returns the transformation to the previous frame
+%   TransformToFrameNext      - transforms a set of points to the next frame
+%   TransformToFramePrev      - transforms a set of points to the previous frame
+%   HasFreeVariables          - returns if the frame has free variables defined
+%   SetRotationAndTranslation - sets the rotation and translation matrices
+%   SetFreeVariables          - sets the defined free variable
+%   GetFreeVariables          - gets the value of the free variable
+%   PlotFrame                 - plots the i-j-k vectors associated with the frame
+%
 % Example:
 %
 %   myTform = CoreRobotics.Frame2D('ang_a',pi/4,'pos_x',1);
@@ -40,8 +63,8 @@ classdef Frame2D < CoreRobotics.Frame
             % obj = Frame2D(Name,Value) constructs the
             % Frame2D object for the Name/Value pairs, where Name 
             % is the property to be set on construct.
-            obj.dimension = 2;
-            obj.free_variables_values_ = {'pos_x','pos_y','ang_a'};
+            obj.dimension = 3;
+            obj.free_variables_values = {'pos_x','pos_y','ang_a'};
             if CheckVarargin(obj,varargin)
                 for k = 1:2:length(varargin)
                     field = varargin{k};
@@ -54,11 +77,15 @@ classdef Frame2D < CoreRobotics.Frame
         end
         function obj = SetRotationAndTranslation(obj)
             % obj = obj.SetRotationAndTranslation() sets the rot and 
-            % trans properties from the 2D transformation parameters.
-            obj.rot = [cos(obj.ang_a), -sin(obj.ang_a);
-                        sin(obj.ang_a),  cos(obj.ang_a)];
-            obj.trans = [obj.pos_x; obj.pos_y];
+            % trans properties from the 2D transformation parameters
+            % (rotation around z).
+            obj.rot = [cos(obj.ang_a), -sin(obj.ang_a), 0;
+                       sin(obj.ang_a),  cos(obj.ang_a), 0;
+                       0,               0,              1];
+            obj.trans = [obj.pos_x; obj.pos_y; 0];
         end
+        
+        % Setters and getters
         function obj = set.pos_x(obj,value)
             if isnumeric(value) && CheckSize(obj,value,[1 1])
                 obj.pos_x = value;

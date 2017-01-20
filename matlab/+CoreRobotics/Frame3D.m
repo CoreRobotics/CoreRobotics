@@ -21,6 +21,33 @@
 %   which the 'ang_a', 'ang_b', and 'ang_g' angle rotations are applied.
 %   There are 12 standard allowable rotation methods.
 %
+% Frame3D Properties:
+%
+%   dimension                 - dimension of the frame transformation
+%   free_variables            - free (driven) variables of the frame transformation
+%   pos_x                     - x position
+%   pos_y                     - y position
+%   pos_z                     - z position
+%   ang_a                     - alpha rotation angle (radians)
+%   ang_b                     - beta rotation angle (radians)
+%   ang_g                     - gamma rotation angle (radians)
+%   convention                - Euler rotation convention (e.g.: 'xyz')
+%
+% Frame3D Methods:
+%
+%   Set                       - sets name/value parameter pairs
+%   GetRotation               - returns the rotation matrix
+%   GetTranslation            - returns the translation matrix
+%   GetTransformToNext        - returns the transformation to the next frame
+%   GetTransformToPrev        - returns the transformation to the previous frame
+%   TransformToFrameNext      - transforms a set of points to the next frame
+%   TransformToFramePrev      - transforms a set of points to the previous frame
+%   HasFreeVariables          - returns if the frame has free variables defined
+%   SetRotationAndTranslation - sets the rotation and translation matrices
+%   SetFreeVariables          - sets the defined free variable
+%   GetFreeVariables          - gets the value of the free variable
+%   PlotFrame                 - plots the i-j-k vectors associated with the frame
+%
 % Example:
 %
 %   myTform = CoreRobotics.Frame3D('ang_b',pi,'pos_z',5,'convention','xyx');
@@ -53,8 +80,8 @@ classdef Frame3D < CoreRobotics.Frame
             % Frame3D object for the Name/Value pairs, where Name 
             % is the property to be set on construct.
             obj.dimension = 3;
-            obj.free_variables_values_ = {'pos_x','pos_y','pos_z',...
-                                          'ang_a','ang_b','ang_g'};
+            obj.free_variables_values = {'pos_x','pos_y','pos_z',...
+                                         'ang_a','ang_b','ang_g'};
             if CheckVarargin(obj,varargin)
                 for k = 1:2:length(varargin)
                     field = varargin{k};
@@ -80,6 +107,8 @@ classdef Frame3D < CoreRobotics.Frame
             obj.rot = Rot;
             obj.trans = [obj.pos_x; obj.pos_y; obj.pos_z];
         end
+        
+        % Setters and getters
         function obj = set.convention(obj,value)
             if CheckValue(obj,'convention',value,'char',...
                     {'zxz','xyx','yzy','zyz','xzx','yxy',...

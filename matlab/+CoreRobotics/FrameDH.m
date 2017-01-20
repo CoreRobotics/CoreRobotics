@@ -25,6 +25,31 @@
 %           translation/rotation operation set is about about common normal
 %           x_{i-1} and the second operation set is about z_{i}.
 %
+% FrameDH Properties:
+%
+%   dimension                 - dimension of the frame transformation
+%   free_variables            - free (driven) variables of the frame transformation
+%   dh_r                      - DH parameter r (sometimes 'a' in texts)
+%   dh_alpha                  - DH parameter alpha (radians)
+%   dh_d                      - DH parameter d
+%   dh_theta                  - DH parameter theta (radians)
+%   method                    - specify the DH convention ('modified' or 'classic')
+%
+% FrameDH Methods:
+%
+%   Set                       - sets name/value parameter pairs
+%   GetRotation               - returns the rotation matrix
+%   GetTranslation            - returns the translation matrix
+%   GetTransformToNext        - returns the transformation to the next frame
+%   GetTransformToPrev        - returns the transformation to the previous frame
+%   TransformToFrameNext      - transforms a set of points to the next frame
+%   TransformToFramePrev      - transforms a set of points to the previous frame
+%   HasFreeVariables          - returns if the frame has free variables defined
+%   SetRotationAndTranslation - sets the rotation and translation matrices
+%   SetFreeVariables          - sets the defined free variable
+%   GetFreeVariables          - gets the value of the free variable
+%   PlotFrame                 - plots the i-j-k vectors associated with the frame
+%
 % Example:
 %
 %   myTform = CoreRobotics.FrameDH('dh_r',0.2,'dh_theta',pi/8,'method','modified');
@@ -58,7 +83,7 @@ classdef FrameDH < CoreRobotics.Frame
             % FrameDH object for the Name/Value pairs, where Name 
             % is the property to be set on construct.
             obj.dimension = 3;
-            obj.free_variables_values_ = {'dh_r','dh_alpha','dh_d','dh_theta'};
+            obj.free_variables_values = {'dh_r','dh_alpha','dh_d','dh_theta'};
             if CheckVarargin(obj,varargin)
                 for k = 1:2:length(varargin)
                     field = varargin{k};
@@ -98,6 +123,8 @@ classdef FrameDH < CoreRobotics.Frame
                          obj.dh_d*cos(obj.dh_alpha)];
             end
         end
+        
+        % Setters and getters
         function obj = set.method(obj,value)
             if CheckValue(obj,'method',value,'char',{'classic','modified'})
                 obj.method = value;

@@ -69,8 +69,22 @@ classdef InputHandler < handle
                 isGood = 1;
             else
                 error('CoreRobotics:InputHandler:BadSize',...
-                    'Property %s expects a value with size %i x %i',...
+                    'Property expects a value with size %i x %i',...
                     sizeReqm(1),sizeReqm(2))
+            end
+        end
+        
+        
+        
+        function isGood = CheckClass(obj,value,classType)
+            % isGood = obj.CheckClass(value,classType) checks the class of
+            % value against the char classType.
+            isGood = 0;
+            if isa(value,classType)
+                isGood = 1;
+            else
+                error('CoreRobotics:InputHandler:BadClass',...
+                    'Property expects a class of type %s',classType)
             end
         end
     end

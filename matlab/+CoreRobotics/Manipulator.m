@@ -1,13 +1,31 @@
 % CoreRobotics.Manipulator provides access to serial chain robotic
-% manipulator kinematic and methods for easily computing the forward
+% manipulator kinematics and methods for easily computing the forward
 % kinematics and jacobians.
 % 
 % Usage:
 % 
-%   Use AddLink(RigidBody link) to add a rigid body frame to the
+%   Use AddLink(<a href="matlab:help CoreRobotics.RigidBody">RigidBody</a> link) to add a rigid body frame to the
 %   kinematic chain.  Use other methods to access the forward kinematics
 %   and Jacobian of the manipulator, or set the driven variables.
 % 
+% Manipulator Properties:
+%
+%   name              - character name of the Manipulator
+%   list_links        - a list of the rigid body links comprising the Manipulator
+%   list_parents      - a list of the parents to the links
+%   list_driven_links - a list of the driven rigid body links
+%   size_links        - number of links in the list_links
+%   size_driven_links - number of links in the list_driven_links
+%   tool_frame        - frame of the tool pose
+%
+% Manipulator Methods:
+%
+%   AddLink              - adds a rigid body link to the list of links
+%   SetDrivenVariables   - sets the driven variable values
+%   GetDrivenVariables   - gets the driven variable values
+%   GetForwardKinematics - returns the forward kinematics for the given driven variables
+%   GetJacobian          - returns the numerical Jacobian for the Manipulator
+%   
 % Example:
 %
 %   T(1) = CoreRobotics.Frame2D('ang_a',0,'free_variables','ang_a');
@@ -18,7 +36,7 @@
 %       Link = CoreRobotics.RigidBody('frame',T(k));
 %       Robot = Robot.AddLink(Link);
 %   end
-% 
+%
 % References:
 %
 %   [1] J. Craig, "Introduction to Robotics: Mechanics and Control",
@@ -26,26 +44,28 @@
 % 
 classdef Manipulator < CoreRobotics.InputHandler
     
+    properties
+        name; % Character name of the manipulator
+    end
+    
     properties (SetAccess = protected)
         list_links = []; % List of the links of class CoreRobotics.RigidBody.
         list_parents = []; % List of indices for the parents of the corresponding link in list_links.
         list_driven_links = []; % List of indices for the links that have driven variables.
+        tool_frame = CoreRobotics.Frame('dimension',3); % Frame object representing the tool pose
     end
     
     properties (Dependent)
         size_links; % Number of links in list_links and list_parents.
         size_driven_links; % Number of driven (free) variables in the list_links.
-        dimension; % Dimension inherited from the first supplied RigidBody object.
     end
     
     methods
         function obj = AddLink(obj,link)
             % obj = obj.AddLink(link) adds a link to the manipulator object
             % where link is an object of class CoreRobotics.RigidBody.
-            %
-            % TODO: Allow user to supply Parent as
-            % an input - this will be tricky because it necessitates
-            % supporting
+            % Note that the Manipulator class only currently supports
+            % serial (chain) manipulators.
             if isa(link,'CoreRobotics.RigidBody')
                 parent = obj.size_links;
                 obj.list_links = [obj.list_links; link];
@@ -68,8 +88,8 @@ classdef Manipulator < CoreRobotics.InputHandler
             if CheckSize(obj,u,[M 1])
                 l = obj.list_driven_links;
                 for k = 1:M
-                    name = obj.list_links(l(k)).frame.free_variables;
-                    obj.list_links(l(k)).frame.(name) = u(k);
+                    var = obj.list_links(l(k)).frame.free_variables;
+                    obj.list_links(l(k)).frame.(var) = u(k);
                 end
             end
         end
@@ -85,27 +105,6 @@ classdef Manipulator < CoreRobotics.InputHandler
             end
         end
         
-        function frame = GetToolFrame(obj)
-            % frame = GetToolFrame(obj) returns the Frame object containing
-            % the tool pose relative to the manipulator obj origin.
-            i = obj.size_links;
-            M = eye(obj.dimension+1);
-            while i~=0
-                T = obj.list_links(i).frame;
-                M = T.GetTransformToPrev*M;
-                i = obj.list_parents(i);
-            end
-            r = M(1:end-1,1:end-1);
-            t = M(1:end-1,end);
-            % P.Owan: this is slow - allocating a new object every time the
-            % method gets called.  This should be updated for better
-            % efficiency, maybe allocate once on construct.  Think about 
-            % how to handle the dimension, then the tool_frame can be a
-            % dependent property.
-            frame = CoreRobotics.Frame('dimension',obj.dimension);
-            frame = frame.SetRotationAndTranslation(r,t);
-        end
-        
         function [FK,obj] = GetForwardKinematics(obj,u)
             % [FK,obj] = obj.GetForwardKinematics(u) computes the
             % matrix of points along the forward kinematics FK for the
@@ -117,10 +116,10 @@ classdef Manipulator < CoreRobotics.InputHandler
             % is not specified, then the method uses the current values
             % specified for the free variables in the frames.
             if nargin == 2
-                obj = obj.SetDrivenVariables(u);
+                obj.SetDrivenVariables(u);
             end
             % Apply forward frame of points back to origin frame
-            FK = zeros(obj.dimension,obj.size_links);
+            FK = zeros(3,obj.size_links);
             for k = 1:obj.size_links
                 i = k;
                 while i~=0
@@ -130,7 +129,6 @@ classdef Manipulator < CoreRobotics.InputHandler
                 end
             end
         end
-        
         
         function J = GetJacobian(obj,allLinksFlag)
             % J = obj.GetJacobian(allLinksFlag) returns the numerical 
@@ -145,7 +143,7 @@ classdef Manipulator < CoreRobotics.InputHandler
             end
             if CheckValue(obj,'allLinksFlag',allLinksFlag,'numeric',{0,1})
                 dq = 1e-9; % dq
-                N = obj.dimension;
+                N = 3;
                 M = obj.size_driven_links;
                 L = obj.size_links;
                 if allLinksFlag
@@ -170,21 +168,33 @@ classdef Manipulator < CoreRobotics.InputHandler
             end
         end
         
-        % get methods
+        % setters and getters
+        function obj = set.name(obj,value)
+            if ischar(value)
+                obj.name = value;
+            else
+                warning('CoreRobotics:Manipulator:BadManipulatorName',...
+                	'robot_name expects a char array.')
+            end
+        end
         function value = get.size_links(obj)
             value = length(obj.list_links);
         end
         function value = get.size_driven_links(obj)
             value = length(obj.list_driven_links);
         end
-        function value = get.dimension(obj)
-            if isempty(obj.list_links)
-                warning('CoreRobotics:Manipulator:NolinksDefined',...
-                	'No links are defined to set the dimension property.')
-                value = [];
-            else
-                value = obj.list_links(1).dimension;
+        function tool = get.tool_frame(obj)
+            i = obj.size_links;
+            M = eye(4);
+            while i~=0
+                T = obj.list_links(i).frame;
+                M = T.GetTransformToPrev*M;
+                i = obj.list_parents(i);
             end
+            r = M(1:end-1,1:end-1);
+            t = M(1:end-1,end);
+            obj.tool_frame.SetRotationAndTranslation(r,t);
+            tool = obj.tool_frame;
         end
     end
 end

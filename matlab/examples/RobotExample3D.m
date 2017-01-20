@@ -62,8 +62,7 @@ for k = 1:length(u)
     % Plot the FK point
     figure(1),cla
     plot3(FK(1,:),FK(2,:),FK(3,:),'.-k','MarkerSize',20,'LineWidth',3)
-    tool = Robot.GetToolFrame;
-    tool.PlotFrame(gca,0.25);
+    Robot.tool_frame.PlotFrame(gca,0.25);
     drawnow
 end
 

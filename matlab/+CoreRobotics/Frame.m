@@ -13,6 +13,26 @@
 %
 %   The transformation T as defined above takes a point in frame i (next)
 %   to a point in frame i-1 (prev).
+%
+% Frame Properties:
+%
+%   dimension                 - dimension of the frame transformation
+%   free_variables            - free (driven) variables of the frame transformation
+%
+% Frame Methods:
+%
+%   Set                       - sets name/value parameter pairs
+%   GetRotation               - returns the rotation matrix
+%   GetTranslation            - returns the translation matrix
+%   GetTransformToNext        - returns the transformation to the next frame
+%   GetTransformToPrev        - returns the transformation to the previous frame
+%   TransformToFrameNext      - transforms a set of points to the next frame
+%   TransformToFramePrev      - transforms a set of points to the previous frame
+%   HasFreeVariables          - returns if the frame has free variables defined
+%   SetRotationAndTranslation - sets the rotation and translation matrices
+%   SetFreeVariables          - sets the defined free variable
+%   GetFreeVariables          - gets the value of the free variable
+%   PlotFrame                 - plots the i-j-k vectors associated with the frame
 % 
 % Example:
 %
@@ -36,7 +56,7 @@ classdef Frame < CoreRobotics.InputHandler
     properties (Access = protected)
         rot = eye(3); % (Protected) Rotation matrix data.
         trans = zeros(3,1); % (Protected) Translation matrix data.
-        free_variables_values_ = {}; % (Protected) List of properties that can be set as free variables.
+        free_variables_values = {}; % (Protected) List of properties that can be set as free variables.
     end
     
     
@@ -103,7 +123,6 @@ classdef Frame < CoreRobotics.InputHandler
             else
                 Points = bsxfun(@plus,obj.rot'*PointsToTransform,...
                          -obj.rot'*obj.trans);
-                
             end
             
         end
@@ -132,6 +151,16 @@ classdef Frame < CoreRobotics.InputHandler
                 TF = false;
             end
         end
+        function obj = SetRotationAndTranslation(obj,rot,trans)
+            % obj = obj.SetRotationAndTranslation(rot,trans) sets the rot 
+            % and trans properties from the rot and trans values.
+            if isnumeric(rot) && CheckSize(obj,rot,obj.dimension*[1 1])
+                if isnumeric(trans) && CheckSize(obj,trans,[obj.dimension 1])
+                    obj.rot = rot;
+                    obj.trans = trans;
+                end
+            end
+        end
         function obj = SetFreeVariables(obj,value)
             % obj = obj.SetFreeVariables(value) sets the free variable to
             % the input value.
@@ -155,16 +184,6 @@ classdef Frame < CoreRobotics.InputHandler
                 value = obj.(obj.free_variables);
             else
                 value = [];
-            end
-        end
-        function obj = SetRotationAndTranslation(obj,rot,trans)
-            % obj = obj.SetRotationAndTranslation(rot,trans) sets the rot 
-            % and trans properties from the rot and trans values.
-            if isnumeric(rot) && CheckSize(obj,rot,obj.dimension*[1 1])
-                if isnumeric(trans) && CheckSize(obj,trans,[obj.dimension 1])
-                    obj.rot = rot;
-                    obj.trans = trans;
-                end
             end
         end
         function obj = PlotFrame(obj,h_axes,scale)
@@ -196,14 +215,16 @@ classdef Frame < CoreRobotics.InputHandler
                 plot3(Z(1,:),Z(2,:),Z(3,:),'-b')
             end
         end
+        
+        % Setters and getters
         function obj = set.dimension(obj,value)
-            if CheckValue(obj,'dimension',value,'numeric',{2,3})
-                obj.dimension = value;
+            if CheckValue(obj,'free_variables_values',value,'numeric',{2,3})
+                obj.free_variables_values = value;
             end
         end
         function obj = set.free_variables(obj,value)
             if CheckValue(obj,'free_variables',value,'char',...
-                    obj.free_variables_values_)
+                    obj.free_variables_values)
                 obj.free_variables = value;
             end
         end

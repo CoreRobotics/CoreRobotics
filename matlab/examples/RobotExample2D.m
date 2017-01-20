@@ -72,8 +72,7 @@ for k = 1:length(u)
         V = J(2,:,i);
         quiver(X,Y,U,V)
     end
-    tool = Robot.GetToolFrame;
-    tool.PlotFrame(gca,0.25);
+    Robot.tool_frame.PlotFrame(gca,0.25);
     drawnow
 end
 
