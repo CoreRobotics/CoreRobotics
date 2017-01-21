@@ -23,6 +23,8 @@ The project is split into 2 general folders: *matlab/* for the MATLAB library an
 
 
 ## Developer Guidelines:
+For general questions about git, see the [Gitlab help pages](https://gitlab.com/help/)
+
 1. Absolutely all class methods must have existing references in peer-reviewed publications (text books, conference papers, journal papers, etc…), and the reference must be included in the source code.  Do not add your fancy algorithms here until you’ve published.  If you’re considering putting something into the library that has a lot of data, it doesn’t belong there - this is a project for implementing generic robotics math, not specific applications.
 2. Please keep everything in object-oriented form (class definitions). If you are unsure about what this is, refer to the [C++ Reference](http://www.learncpp.com/cpp-tutorial/81-welcome-to-object-oriented-programming/) or the [MATLAB Documentation](https://www.mathworks.com/discovery/object-oriented-programming.html).
 3. Keep the C++ code crossplatform (i.e. don’t use OS-specific functions unless you check the OS and have a method for each OS.  Plan to support Windows 8.1, Mac OS, and Linux Ubuntu.
