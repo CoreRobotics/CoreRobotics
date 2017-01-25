@@ -41,6 +41,9 @@
 %
 %   [1] J. Craig, "Introduction to Robotics: Mechanics and Control",
 %       Ed. 3, Pearson,  2004.
+%
+%   [2] R. Murray, Z. Li, and S. Sastry, "A Mathematical Introduction to
+%       Robot Manipulation", Ed. 1, CRC Press, 1993. <a href="http://www.cds.caltech.edu/~murray/mlswiki/index.php/Main_Page">Available online.</a>
 % 
 classdef Manipulator < CoreRobotics.InputHandler
     
