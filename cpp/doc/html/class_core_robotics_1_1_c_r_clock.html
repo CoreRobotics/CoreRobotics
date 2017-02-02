@@ -112,8 +112,16 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class implements a clock for timing code sections and control loop rates. </p>
-<p><a class="el" href="class_core_robotics_1_1_c_r_clock.html" title="This class implements a clock for timing code sections and control loop rates. ">CRClock</a> implements a clock. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h1><a class="anchor" id="Description"></a>
+Description</h1>
+<p><a class="el" href="class_core_robotics_1_1_c_r_clock.html" title="This class implements a clock for timing code sections and control loop rates. ">CRClock</a> implements a simple clock interface for timing the execution of code.</p>
+<ul>
+<li><a class="el" href="class_core_robotics_1_1_c_r_clock.html#ae71375830bb386ab41823a40d37878a6" title="Start the timer. ">CRClock::startTimer</a> starts the clock.</li>
+<li><a class="el" href="class_core_robotics_1_1_c_r_clock.html#a2876bc82edf2bb63a610ce0a20457491" title="Get the elapsed time [s] since startTimer() was called. ">CRClock::getElapsedTime</a> returns the elapsed time (in seconds) since the most recent call of <a class="el" href="class_core_robotics_1_1_c_r_clock.html#ae71375830bb386ab41823a40d37878a6" title="Start the timer. ">startTimer()</a>.</li>
+</ul>
+<h1><a class="anchor" id="Example"></a>
+Example</h1>
+<p>This example creates a <a class="el" href="class_core_robotics_1_1_c_r_clock.html" title="This class implements a clock for timing code sections and control loop rates. ">CRClock</a>. Note: because of the call to usleep(), this example does not work on Windows platforms. </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;CoreRobotics.hpp&quot;</span></div><div class="line"><span class="preprocessor">#include &lt;stdio&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span> <span class="comment">// only for Linux/Unix</span></div><div class="line"></div><div class="line"><span class="keyword">using namespace </span><a class="code" href="namespace_core_robotics.html">CoreRobotics</a>;</div><div class="line"></div><div class="line">main() {</div><div class="line">   <a class="code" href="class_core_robotics_1_1_c_r_clock.html">CRClock</a> MyClock;</div><div class="line">   <span class="keywordtype">double</span> t;</div><div class="line">   useconds_t wait = 1.0e6;</div><div class="line">   MyClock.<a class="code" href="class_core_robotics_1_1_c_r_clock.html#ae71375830bb386ab41823a40d37878a6">startTimer</a>();</div><div class="line">   usleep(wait);</div><div class="line">   MyClock.<a class="code" href="class_core_robotics_1_1_c_r_clock.html#a2876bc82edf2bb63a610ce0a20457491">getElapsedTime</a>(t);</div><div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;Elapsed time = &quot;</span> &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot; sec&quot;</span> &lt;&lt; std::endl;</div><div class="line">   usleep(wait);</div><div class="line">   MyClock.<a class="code" href="class_core_robotics_1_1_c_r_clock.html#a2876bc82edf2bb63a610ce0a20457491">getElapsedTime</a>(t);</div><div class="line">   std::cout &lt;&lt; <span class="stringliteral">&quot;Elapsed time = &quot;</span> &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot; sec&quot;</span> &lt;&lt; std::endl;</div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a18a02d61d96d3bd2af000a9d5bd55dcf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a18a02d61d96d3bd2af000a9d5bd55dcf">&#9670;&nbsp;</a></span>CRClock()</h2>
 

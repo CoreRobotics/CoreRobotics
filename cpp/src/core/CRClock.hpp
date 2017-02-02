@@ -66,7 +66,39 @@ namespace CoreRobotics {
  control loop rates.
  
  \details
- CRClock implements a clock.
+ \section Description
+ CRClock implements a simple clock interface for timing the 
+ execution of code.
+ 
+ - CRClock::startTimer starts the clock.
+ - CRClock::getElapsedTime returns the elapsed time (in seconds) 
+ since the most recent call of startTimer().
+ 
+ \section Example
+ This example creates a CRClock. Note: because of the call to
+ usleep(), this example does not work on Windows platforms.
+ \code
+ 
+ #include "CoreRobotics.hpp"
+ #include <stdio>
+ #include <unistd.h> // only for Linux/Unix
+ 
+ using namespace CoreRobotics;
+ 
+ main() {
+    CRClock MyClock;
+    double t;
+    useconds_t wait = 1.0e6;
+    MyClock.startTimer();
+    usleep(wait);
+    MyClock.getElapsedTime(t);
+    std::cout << "Elapsed time = " << t << " sec" << std::endl;
+    usleep(wait);
+    MyClock.getElapsedTime(t);
+    std::cout << "Elapsed time = " << t << " sec" << std::endl;
+ }
+ 
+ \endcode
  */
 //=====================================================================
 class CRClock {

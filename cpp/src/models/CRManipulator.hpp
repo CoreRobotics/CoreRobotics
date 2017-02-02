@@ -66,7 +66,115 @@ namespace CoreRobotics {
  series of rigid bodies.  Currently only supports serial manipulators.
  
  \details
- CRManipulator implements a robotic serial manipulator.
+ \section Description
+ CRManipulator implements a robot manipulator as a series of rigid body
+ links.  The free variables of the frames contained in the rigid bodies
+ determine the degrees of freedom of the robot.
+ 
+ These methods are used to build the manipulator:
+ - CRManipulator::addLink adds a link to the kinematic chain.  Note that
+ as of now, only serial manipulators are supported.
+ - CRManipulator::mode is member that sets how the manipulator is
+ driven.  Available options are in CoreRobotics::CRManipulatorType.
+ 
+ These methods operate on the configuration space (i.e. joint space) 
+ of the robot:
+ - CRManipulator::getConfiguration outputs the vector of configuration
+ values (i.e. joint angles for purely revolute joints).
+ - CRManipulator::setConfiguration sets the configuration of the 
+ manipulator.
+ 
+ These methods return useful information for control:
+ - CRManipulator::getForwardKinematics returns a matrix of the Euclidean
+ poses at each frame (starting with the base frame and moving out to the
+ tool frame) for the current configuration.
+ - CRManipulator::getJacobian returns the tool space (last frame) 
+ Jacobian matrix that maps joint velocities to tool velocities for the 
+ current configuration.
+ 
+ \section Example
+ This example creates a CRManipulator class.
+ \code
+ 
+ #include "CoreRobotics.hpp"
+ #include <stdio>
+ 
+ const double CR_PI = 3.1415926535897932384626433832795;
+ 
+ using namespace CoreRobotics;
+ 
+ main() {
+ 
+    CRManipulator MyRobot;
+
+    // create a couple of rigid body links
+    CRFrameEuler* F0 = new CRFrameEuler();
+    CRFrameEuler* F1 = new CRFrameEuler();
+    CRFrameEuler* F2 = new CRFrameEuler();
+    CRRigidBody* Link0 = new CRRigidBody();
+    CRRigidBody* Link1 = new CRRigidBody();
+    CRRigidBody* Link2 = new CRRigidBody();
+
+
+    // Set info for Link 0 and add to MyRobot
+    F0->freeVar = CR_EULER_FREE_ANG_G;
+    F0->setMode(CR_EULER_MODE_XYZ);
+    F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
+    Link0->frame = F0;
+    MyRobot.addLink(Link0);
+
+    // Set info for Link 1 and add to MyRobot
+    F1->freeVar = CR_EULER_FREE_ANG_G;
+    F1->setMode(CR_EULER_MODE_XYZ);
+    F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
+    Link1->frame = F1;
+    MyRobot.addLink(Link1);
+
+    // Set info for Link 2 and add to MyRobot
+    F2->freeVar = CR_EULER_FREE_NONE;
+    F2->setMode(CR_EULER_MODE_XYZ);
+    F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
+    Link2->frame = F2;
+    MyRobot.addLink(Link2);
+
+
+    // Now get the configuration values
+    int dof;
+    Eigen::VectorXd jointAngles;
+    MyRobot.getDegreesOfFreedom(dof);
+    MyRobot.getConfiguration(jointAngles);
+    std::cout << "MyRobot has " << dof << " DOF, with joint angles = ("
+    << jointAngles.transpose() << ") rad" << std::endl;
+
+    // Now get the Forward Kinematics and Jacobian
+    Eigen::MatrixXd Jacobian, FwdKin;
+    MyRobot.getForwardKinematics(FwdKin);
+    MyRobot.getJacobian(Jacobian);
+    std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
+    std::cout << "Jacobian = \n" << Jacobian << std::endl;
+
+    // now set a new robot configuration and get the FK and jacobian
+    jointAngles << CR_PI/4.0, -CR_PI/4.0;
+    std::cout << "Set joint angles = ("
+    << jointAngles.transpose() << ") rad" << std::endl;
+    MyRobot.setConfiguration(jointAngles);
+    MyRobot.getForwardKinematics(FwdKin);
+    MyRobot.getJacobian(Jacobian);
+    std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
+    std::cout << "Jacobian = \n" << Jacobian << std::endl;
+ 
+ }
+ 
+ \endcode
+ 
+ \section References
+ [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
+ Pearson, 2004.
+ 
+ [2] R. Murray, Z. Li, and S. Sastry, "A Mathematical Introduction to Robot
+ Manipulation", Ed. 1, CRC Press, 1993.
+ <a href="http://www.cds.caltech.edu/~murray/mlswiki/index.php/Main_Page">
+ Available online.</a> \n\n
  */
 //=====================================================================
 //! Enumerator for specifying how the manipulator is driven
@@ -118,9 +226,6 @@ public:
 //---------------------------------------------------------------------
 // Public Members
 public:
-    
-    //! Define the signal type for the input signal
-    // CRSignalType inputSignal; // (todo)
     
     //! Define the manipulator type
     CRManipulatorType mode;

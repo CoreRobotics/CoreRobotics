@@ -135,7 +135,6 @@ void CRManipulator::getJacobian(Eigen::MatrixXd &jacobian)
     jacobian.setZero(3,listDriven.size());
     this->getConfiguration(q0);
     for (int k = 0; k < listDriven.size(); k++) {
-        std::cout << "Iteration " << k << std::endl;
         qd.setZero(q0.size(),1);
         qd(k) = delta;
         this->setConfiguration(q0+qd);

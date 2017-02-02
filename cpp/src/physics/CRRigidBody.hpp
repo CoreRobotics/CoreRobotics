@@ -70,7 +70,31 @@ namespace CoreRobotics {
  dynamic properties necessary for multibody representations.
  
  \details
- CRRigidBody implements a rigid body container.
+ \section Description
+ CRRigidBody implements a container for representing rigid body
+ dynamics.  At a minimum it points to a CoreRobotics::CRFrame class or
+ derived subclass.
+ 
+ \section Example
+ This example creates an Rigid body object.
+ \code
+ 
+ #include "CoreRobotics.hpp"
+ #include <stdio>
+ 
+ main() {
+ 
+    CoreRobotics::CRRigidBody Link;
+    CoreRobotics::CRFrame* Frame = new CoreRobotics::CRFrame();
+
+    Link.frame = Frame;
+ }
+ 
+ \endcode
+ 
+ \section References
+ [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
+ Pearson, 2004.
  */
 //=====================================================================
 class CRRigidBody {

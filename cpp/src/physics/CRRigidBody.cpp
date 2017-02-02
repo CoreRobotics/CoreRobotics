@@ -58,7 +58,7 @@ CRRigidBody::CRRigidBody() { }
 
 //=====================================================================
 /*!
- The destructor frees up memory.\n
+ Destructor.\n
  */
 //---------------------------------------------------------------------
 CRRigidBody::~CRRigidBody() {

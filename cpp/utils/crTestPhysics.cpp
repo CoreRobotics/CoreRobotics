@@ -15,10 +15,12 @@ using namespace CoreRobotics;
 using namespace Eigen;
 using namespace std;
 
+const double CR_PI = 3.1415926535897932384626433832795;
+
+#include <unistd.h>
+
 
 int crTestPhysics(int N){
-    
-    const double CR_PI = 3.1415926535897932384626433832795;
     
     /*
     cout << "The average compute times (us) for the Frame() classes\n";
@@ -68,6 +70,7 @@ int crTestPhysics(int N){
         << y.transpose() << std::endl;
     */
     
+    /*
     CoreRobotics::CRFrameDh Frame;
     Frame.setParameters(0.1, 0.0, 2.1, 0.7);
     Eigen::Matrix4d T;
@@ -78,6 +81,11 @@ int crTestPhysics(int N){
     Frame.transformToParent(p, y);
     std::cout << "Point " << p.transpose() << " transformed to "
     << y.transpose() << std::endl;
+    */
+    
+    
+    
+    
     
     /*
     
@@ -136,83 +144,73 @@ int crTestPhysics(int N){
     
     F1->freeVar = CR_DH_FREE_THETA;
     cout << F1->isDriven() << endl;
-     
+    */
     
     
     //-----------------------------------------------------------------
     // Now test the manipulator class
-    CRManipulator Robot;
+    /*
+    CRManipulator MyRobot;
     
     // create a couple of rigid body links
     CRFrameEuler* F0 = new CRFrameEuler();
     CRFrameEuler* F1 = new CRFrameEuler();
     CRFrameEuler* F2 = new CRFrameEuler();
-    CRFrameEuler* F3 = new CRFrameEuler();
-    CRFrameEuler* F4 = new CRFrameEuler();
-    CRFrameEuler* F5 = new CRFrameEuler();
     CRRigidBody* Link0 = new CRRigidBody();
     CRRigidBody* Link1 = new CRRigidBody();
     CRRigidBody* Link2 = new CRRigidBody();
-    CRRigidBody* Link3 = new CRRigidBody();
-    CRRigidBody* Link4 = new CRRigidBody();
-    CRRigidBody* Link5 = new CRRigidBody();
     
     
-    // Link 0
-    // myClock.startTimer();
+    // Set info for Link 0 and add to MyRobot
     F0->freeVar = CR_EULER_FREE_ANG_G;
     F0->setMode(CR_EULER_MODE_XYZ);
-    F0->setPositionAndOrientation(0, 0, 0.090, 0, 0, 0);
+    F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
     Link0->frame = F0;
-    Robot.addLink(Link0);
+    MyRobot.addLink(Link0);
     
-    // Link 1
+    // Set info for Link 1 and add to MyRobot
     F1->freeVar = CR_EULER_FREE_ANG_G;
     F1->setMode(CR_EULER_MODE_XYZ);
-    F1->setPositionAndOrientation(0.241, 0, 0, 0, 0, 0);
+    F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
     Link1->frame = F1;
-    Robot.addLink(Link1);
+    MyRobot.addLink(Link1);
     
-    // Link 2
-    F2->freeVar = CR_EULER_FREE_ANG_G;
+    // Set info for Link 2 and add to MyRobot
+    F2->freeVar = CR_EULER_FREE_NONE;
     F2->setMode(CR_EULER_MODE_XYZ);
-    F2->setPositionAndOrientation(0.321, 0, 0, CR_PI, 0, 0);
+    F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
     Link2->frame = F2;
-    Robot.addLink(Link2);
-    
-    // Link 3
-    F3->freeVar = CR_EULER_FREE_NONE;
-    F3->setMode(CR_EULER_MODE_XYZ);
-    F3->setPositionAndOrientation(0.136, 0, 0, 0, CR_PI/4.0, 0);
-    Link3->frame = F3;
-    Robot.addLink(Link3);
-    
-    // Link 4
-    F4->freeVar = CR_EULER_FREE_ANG_B;
-    F4->setMode(CR_EULER_MODE_XYZ);
-    F4->setPositionAndOrientation(0, 0, 0, 0, 0, 0);
-    Link4->frame = F4;
-    Robot.addLink(Link4);
-    
-    // Link 5
-    F5->freeVar = CR_EULER_FREE_NONE;
-    F5->setMode(CR_EULER_MODE_XYZ);
-    F5->setPositionAndOrientation(0.051, 0, 0, -CR_PI, 0, 0);
-    Link5->frame = F5;
-    Robot.addLink(Link5);
+    MyRobot.addLink(Link2);
     
     
-    // Now set & get the configuration values
+    // Now get the configuration values
     int dof;
-    VectorXd jointAngles;
-    Robot.getDegreesOfFreedom(dof);
-    Robot.getConfiguration(jointAngles);
-    cout << "Robot joint angles = " << endl;
-    cout << jointAngles << endl;
+    Eigen::VectorXd jointAngles;
+    MyRobot.getDegreesOfFreedom(dof);
+    MyRobot.getConfiguration(jointAngles);
+    std::cout << "MyRobot has " << dof << " DOF, with joint angles = ("
+        << jointAngles.transpose() << ") rad" << std::endl;
     
-    jointAngles << CR_PI/4.0, 0, CR_PI/4.0, -CR_PI/8.0;
-    Robot.setConfiguration(jointAngles);
+    // Now get the Forward Kinematics and Jacobian
+    Eigen::MatrixXd Jacobian, FwdKin;
+    MyRobot.getForwardKinematics(FwdKin);
+    MyRobot.getJacobian(Jacobian);
+    std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
+    std::cout << "Jacobian = \n" << Jacobian << std::endl;
     
+    // now set a new robot configuration and get the FK and jacobian
+    jointAngles << CR_PI/4.0, -CR_PI/4.0;
+    std::cout << "Set joint angles = ("
+        << jointAngles.transpose() << ") rad" << std::endl;
+    MyRobot.setConfiguration(jointAngles);
+    MyRobot.getForwardKinematics(FwdKin);
+    MyRobot.getJacobian(Jacobian);
+    std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
+    std::cout << "Jacobian = \n" << Jacobian << std::endl;
+    
+    */
+    
+    /*
     Eigen::MatrixXd fk;
     Robot.getForwardKinematics(fk);
     cout << "Robot forward kinematics = " << endl;
@@ -236,6 +234,19 @@ int crTestPhysics(int N){
     
     cout << "Robot Jacobian = " << endl;
     cout << J << endl;
-    */
+     */
+    
+    CRClock MyClock;
+    double t;
+    useconds_t wait = 1.0e6;
+    MyClock.startTimer();
+    usleep(wait);
+    MyClock.getElapsedTime(t);
+    std::cout << "Elapsed time = " << t << " sec" << std::endl;
+    usleep(wait);
+    MyClock.getElapsedTime(t);
+    std::cout << "Elapsed time = " << t << " sec" << std::endl;
+    
+    
     return 0;
 }

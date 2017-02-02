@@ -113,7 +113,14 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is a container for rigid body transformations and dynamic properties necessary for multibody representations. </p>
-<p><a class="el" href="class_core_robotics_1_1_c_r_rigid_body.html" title="This class is a container for rigid body transformations and dynamic properties necessary for multibo...">CRRigidBody</a> implements a rigid body container. </p>
+<h1><a class="anchor" id="Description"></a>
+Description</h1>
+<p><a class="el" href="class_core_robotics_1_1_c_r_rigid_body.html" title="This class is a container for rigid body transformations and dynamic properties necessary for multibo...">CRRigidBody</a> implements a container for representing rigid body dynamics. At a minimum it points to a <a class="el" href="class_core_robotics_1_1_c_r_frame.html" title="This class implements a basic homogeneous transformation made up of rotations and translations...">CoreRobotics::CRFrame</a> class or derived subclass.</p>
+<h1><a class="anchor" id="Example"></a>
+Example</h1>
+<p>This example creates an Rigid body object. </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;CoreRobotics.hpp&quot;</span></div><div class="line"><span class="preprocessor">#include &lt;stdio&gt;</span></div><div class="line"></div><div class="line">main() {</div><div class="line"></div><div class="line">   <a class="code" href="class_core_robotics_1_1_c_r_rigid_body.html">CoreRobotics::CRRigidBody</a> Link;</div><div class="line">   <a class="code" href="class_core_robotics_1_1_c_r_frame.html">CoreRobotics::CRFrame</a>* Frame = <span class="keyword">new</span> <a class="code" href="class_core_robotics_1_1_c_r_frame.html">CoreRobotics::CRFrame</a>();</div><div class="line"></div><div class="line">   Link.<a class="code" href="class_core_robotics_1_1_c_r_rigid_body.html#aa7fff874e850074af6662887cdad323f">frame</a> = Frame;</div><div class="line">}</div></div><!-- fragment --><h1><a class="anchor" id="References"></a>
+References</h1>
+<p>[1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3, Pearson, 2004. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a576e8b7b3f746718408ddc2e7329cca7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a576e8b7b3f746718408ddc2e7329cca7">&#9670;&nbsp;</a></span>CRRigidBody()</h2>
@@ -160,7 +167,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Class destructor. </p>
-<p>The destructor frees up memory.<br />
+<p>Destructor.<br />
 </p>
 
 </div>
