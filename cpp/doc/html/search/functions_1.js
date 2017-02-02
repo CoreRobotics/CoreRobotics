@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['getfreevalue',['getFreeValue',['../class_core_robotics_1_1_c_r_frame_dh.html#ac7d1f059b40673c8ce854225f80bce44',1,'CoreRobotics::CRFrameDh::getFreeValue()'],['../class_core_robotics_1_1_c_r_frame_euler.html#a473674820fc3268ff777bf6da924b1a2',1,'CoreRobotics::CRFrameEuler::getFreeValue()']]],
-  ['getmode',['getMode',['../class_core_robotics_1_1_c_r_frame_dh.html#ad215b0cbca77a584ce023b3930440ac8',1,'CoreRobotics::CRFrameDh::getMode()'],['../class_core_robotics_1_1_c_r_frame_euler.html#ad53b438dc24bd13e3c2be7b2f5c9410c',1,'CoreRobotics::CRFrameEuler::getMode()']]],
-  ['getorientation',['getOrientation',['../class_core_robotics_1_1_c_r_frame_euler.html#acbe508721a408d34fcb6112c5d56d85d',1,'CoreRobotics::CRFrameEuler']]],
-  ['getparameters',['getParameters',['../class_core_robotics_1_1_c_r_frame_dh.html#a5bf16b3889fc95d573e08125818187c9',1,'CoreRobotics::CRFrameDh']]],
-  ['getposition',['getPosition',['../class_core_robotics_1_1_c_r_frame_euler.html#ac90ab692759f3f963a17c98aa3c24f03',1,'CoreRobotics::CRFrameEuler']]],
-  ['getpositionandorientation',['getPositionAndOrientation',['../class_core_robotics_1_1_c_r_frame_euler.html#a06bfbdaba293a7ef624ca53a6e33bfae',1,'CoreRobotics::CRFrameEuler']]],
-  ['getrotationandtranslation',['getRotationAndTranslation',['../class_core_robotics_1_1_c_r_frame.html#a457c1d322593ac3b9f086856c5ccced6',1,'CoreRobotics::CRFrame']]],
-  ['gettransformtochild',['getTransformToChild',['../class_core_robotics_1_1_c_r_frame.html#a1a675789ba828b5047faa5b4b56be9c5',1,'CoreRobotics::CRFrame']]],
-  ['gettransformtoparent',['getTransformToParent',['../class_core_robotics_1_1_c_r_frame.html#a917770d41821c1e5debb7fddda5a79a1',1,'CoreRobotics::CRFrame']]]
+  ['crclock',['CRClock',['../class_core_robotics_1_1_c_r_clock.html#a18a02d61d96d3bd2af000a9d5bd55dcf',1,'CoreRobotics::CRClock']]],
+  ['crframe',['CRFrame',['../class_core_robotics_1_1_c_r_frame.html#ab8e862519eb6147dfb11ad4f882ae027',1,'CoreRobotics::CRFrame::CRFrame()'],['../class_core_robotics_1_1_c_r_frame.html#a6a4951e335ee7240a7658ed20fd64885',1,'CoreRobotics::CRFrame::CRFrame(Eigen::Matrix3d rot, Eigen::Vector3d trans)']]],
+  ['crframedh',['CRFrameDh',['../class_core_robotics_1_1_c_r_frame_dh.html#a548019eda4fddcdc5f3de51705cfed81',1,'CoreRobotics::CRFrameDh::CRFrameDh(double r, double alpha, double d, double theta, CRDhMode mode, CRDhFreeVariable free)'],['../class_core_robotics_1_1_c_r_frame_dh.html#a199259b47334574fb3b2d7defd08ecb2',1,'CoreRobotics::CRFrameDh::CRFrameDh()']]],
+  ['crframeeuler',['CRFrameEuler',['../class_core_robotics_1_1_c_r_frame_euler.html#a4f4b22c070b4db23e069763953f8ffe3',1,'CoreRobotics::CRFrameEuler::CRFrameEuler(double x, double y, double z, double a, double b, double g, CREulerMode mode, CREulerFreeVariable free)'],['../class_core_robotics_1_1_c_r_frame_euler.html#abaa994a5255b86f1e5e81d83505127a1',1,'CoreRobotics::CRFrameEuler::CRFrameEuler()']]],
+  ['crmanipulator',['CRManipulator',['../class_core_robotics_1_1_c_r_manipulator.html#ab7b57b627f1e48ae293dd5152c3fdfbc',1,'CoreRobotics::CRManipulator']]],
+  ['crrigidbody',['CRRigidBody',['../class_core_robotics_1_1_c_r_rigid_body.html#a576e8b7b3f746718408ddc2e7329cca7',1,'CoreRobotics::CRRigidBody']]]
 ];

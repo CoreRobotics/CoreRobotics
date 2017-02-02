@@ -54,36 +54,57 @@ namespace CoreRobotics {
  The constructor sets the rotation and translation parameters upon
  construction, with defaults listed in parenthesis.\n
  
- \param  rot    The 3x3 rotation matrix (identity)
- \param  trans  The 3x1 translation vector (zeros)
+ \param[in]  rot   - the 3x3 rotation matrix (identity)
+ \param[in]  trans - the 3x1 translation vector (zeros)
  */
 //---------------------------------------------------------------------
-CRFrame::CRFrame()
-{
-    rotation << 1, 0, 0, 0, 1, 0, 0, 0, 1;
-    translation << 0, 0, 0;
-}
 CRFrame::CRFrame(Eigen::Matrix3d rot, Eigen::Vector3d trans)
 {
     rotation = rot;
     translation = trans;
 }
+CRFrame::CRFrame()
+{
+    rotation << 1, 0, 0, 0, 1, 0, 0, 0, 1;
+    translation << 0, 0, 0;
+}
+    
+    
+//=====================================================================
+/*!
+ This method sets the value of the free variable.  The method returns a
+ false if there is no free variable.\n
+ 
+ \param[in] q - value of the variable to be set
+ */
+//---------------------------------------------------------------------
+bool CRFrame::setFreeValue(double q)
+{
+    return false;
+}
+
 
 
 //=====================================================================
 /*!
- The destructor frees up memory:\n
+ This method gets the value of the free variable.  The method returns
+ q = NULL if there is no free variable.\n
+ 
+ \param[out] q - value of the free variable.
  */
 //---------------------------------------------------------------------
-CRFrame::~CRFrame() { }
+void CRFrame::getFreeValue(double &q)
+{
+    q = NULL;
+}
 
 
 //=====================================================================
 /*!
  This method returns a 4x4 homogeneous matrix of the frame 
- transformation to the parent frame \f$i-1\f$. \n
+ transformation to the parent frame (i-1). \n
  
- \param transform - the 4x4 homogeneous transformation matrix
+ \param[out] transform - the 4x4 homogeneous transformation matrix
  */
 //---------------------------------------------------------------------
 void CRFrame::getTransformToParent(Eigen::Matrix4d &transform) {
@@ -99,9 +120,9 @@ void CRFrame::getTransformToParent(Eigen::Matrix4d &transform) {
 //=====================================================================
 /*!
  This method returns a 4x4 homogeneous matrix of the frame 
- transformation to the child frame \f$i\f$. \n
+ transformation to the child frame (i). \n
  
- \param transform - the 4x4 homogeneous transformation matrix
+ \param[out] transform - the 4x4 homogeneous transformation matrix
  */
 //---------------------------------------------------------------------
 void CRFrame::getTransformToChild(Eigen::Matrix4d &transform) {
@@ -119,14 +140,12 @@ void CRFrame::getTransformToChild(Eigen::Matrix4d &transform) {
  This method transforms points \f$p\f$ in the child frame to points 
  \f$y\f$ in the parent frame.\n
  
- \param p - the input points to be transformed
- \param y - the transformed points
+ \param[in]  p - points in the child frame
+ \param[out] y - the points transformed into the parent frame
  */
 //---------------------------------------------------------------------
-void CRFrame::transformToParent(Eigen::Matrix<double, 3, Eigen::Dynamic> p, Eigen::Matrix<double, 3, Eigen::Dynamic> &y) {
-    Eigen::MatrixXd ones;
-    ones.setOnes(1,p.cols());
-    y = rotation*p + translation*ones;
+void CRFrame::transformToParent(Eigen::Vector3d p, Eigen::Vector3d &y) {
+    y = rotation*p + translation;
 }
 
 
@@ -135,14 +154,26 @@ void CRFrame::transformToParent(Eigen::Matrix<double, 3, Eigen::Dynamic> p, Eige
  This method transforms points \f$p\f$ in the parent frame to points 
  \f$y\f$ in the child frame.\n
  
- \param p - the input points to be transformed
- \param y - the transformed points
+ \param[in]  p - points in the parent frame
+ \param[out] y - the points transformed into the child frame
  */
 //---------------------------------------------------------------------
-void CRFrame::transformToChild(Eigen::Matrix<double, 3, Eigen::Dynamic> p, Eigen::Matrix<double, 3, Eigen::Dynamic> &y) {
-    Eigen::MatrixXd ones;
-    ones.setOnes(1,p.cols());
-    y = rotation.transpose()*p - rotation.transpose()*translation*ones;
+void CRFrame::transformToChild(Eigen::Vector3d p, Eigen::Vector3d &y) {
+    y = rotation.transpose()*p - rotation.transpose()*translation;
+}
+    
+    
+//=====================================================================
+/*!
+ This method returns a true if the frame is driven (i.e. has a free
+ variable) or a false if the frame is not driven.\n
+ 
+ \return result - T/F indicator for the frame having a free variable.
+ 
+ */
+//---------------------------------------------------------------------
+bool CRFrame::isDriven() {
+    return false;
 }
 
 

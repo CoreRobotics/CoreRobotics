@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['translation',['translation',['../class_core_robotics_1_1_c_r_frame.html#a872391e909ac5a094c19f63c9fff2a9d',1,'CoreRobotics::CRFrame']]]
+  ['mode',['mode',['../class_core_robotics_1_1_c_r_manipulator.html#ac0f5dba1fbcc7ff83cba54c76777a17e',1,'CoreRobotics::CRManipulator']]]
 ];

@@ -1,10 +1,9 @@
 %% RobotExample2D
 %
-% Here we create an example robot in 2D to provide insight to the
+% Here we create an example robot in 2D to provide insight to the 
 % kinematics methods accessible through the Manipulator class.
 %
-% This script is set up to run from inside the matlab/examples
-% folder.
+% This script is set up to run from inside the matlab/examples folder.
 %
 clear all
 clc

@@ -1,0 +1,5 @@
+
+
+
+files = dir;
+files.isdir

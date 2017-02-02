@@ -69,7 +69,51 @@ namespace CoreRobotics {
  the rotations and translations are defined by DH parameters.
  
  \details
- CRFrameDh implements a homogeneous transformation
+ \section Description
+ CRFrameDh implements a DH parameter transformation specified by 4 
+ parameters (<a href="wikipedia.org/wiki/Denavit–Hartenberg_parameters">
+ see Wikipedia article).</a>
+ 
+ Properties of the transform can be set with methods
+ - CRFrameDh::setParameters sets the DH parameter values.
+ - CRFrameDh::setMode sets the DH convention (options are in
+ CoreRobotics::CRDhMode).
+ 
+ The free variable can be specified by the CRFrameDh::freeVar member
+ (options are in CoreRobotics::CRDhFreeVariable).
+ 
+ \section Example
+ This example creates a DH parameter frame class.
+ \code
+ 
+ #include "CoreRobotics.hpp"
+ #include <stdio>
+ 
+ main() {
+    CoreRobotics::CRFrameDh Frame;
+
+    Frame.setParameters(0.1, 0.0, 2.1, 0.7);
+
+    Eigen::Matrix4d T;
+    Frame.getTransformToParent(T);
+    std::cout << "Transformation to parent\n" << T << std::endl;
+
+    Eigen::Vector3d p, y;
+    p << 5, 6, 7;
+    Frame.transformToParent(p, y);
+    std::cout << "Point " << p.transpose() << " transformed to "
+    << y.transpose() << std::endl;
+ }
+ 
+ \endcode
+ 
+ \section References
+ [1] J. Denavit and R. Hartenberg, "A kinematic notation for lower-pair
+ mechanisms based on matrices". Trans ASME J. Appl. Mech. 23, pp. 215-221, 1955.
+ 
+ [2] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
+ Pearson, 2004.
+ 
  */
 //=====================================================================
 //! Enumerator for handling DH parameter free variable candidates
@@ -97,13 +141,9 @@ class CRFrameDh : public CRFrame  {
 public:
 
     //! Class constructor
-    CRFrameDh();
     CRFrameDh(double r, double alpha, double d, double theta,
               CRDhMode mode, CRDhFreeVariable free);
-
-    //! Class destructor
-    virtual ~CRFrameDh();
-
+    CRFrameDh();
 
 //---------------------------------------------------------------------
 // Get/Set Methods
@@ -127,7 +167,12 @@ public:
     //! Get the x position
     void getParameters(double &r, double &alpha, double &d, double &theta);
     
-
+//---------------------------------------------------------------------
+// Public Methods
+public:
+    
+    //! Query if the frame is driven, i.e. has a free variable
+    bool isDriven();
     
 //---------------------------------------------------------------------
 // Public Members

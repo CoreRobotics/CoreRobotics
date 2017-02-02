@@ -54,21 +54,78 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
-\file CRFrame.hpp
-\brief Implements a basic frame class for handling 3D Euclidean affine
-transformations.
-*/
+ \file CRFrame.hpp
+ \brief Implements a basic frame class for handling 3D Euclidean affine
+ transformations.
+ */
 //---------------------------------------------------------------------
 /*!
-\class CRFrame
-\ingroup physics
+ \class CRFrame
+ \ingroup physics
  
-\brief This class implements a basic homogeneous transformation in the
-special Euclidean group made up of rotations and translations.
+ \brief This class implements a basic homogeneous transformation made 
+ up of rotations and translations.
  
-\details
-CRFrame implements a homogeneous transformation
-*/
+ \details
+ \section Description
+ CRFrame implements a homogeneous transformation specified by a 
+ rotation matrix \f$r\f$ and a translation vector \f$t\f$.  The
+ transformation matrix
+ \f[
+ ^{i-1}_{i}T = \left(\begin{array}{cc}
+ r & t \\ 0^\top & 1
+ \end{array}\right)
+ \f]
+ transforms a point \f$^i p\f$ in the child frame (i) to a point
+ \f$^{i-1} p\f$ in the parent frame (i-1) by the operation
+ \f[
+ {^{i-1} p} = ^{i-1}^{i}T {^i p}.
+ \f]
+ 
+ These methods return the transformation \f$T\f$ and inverse 
+ \f$T^{-1}\f$:
+ - CRFrame::getTransformToParent outputs \f$^{i-1}_{i}T\f$.
+ - CRFrame::getTransformToChild outputs \f$_{i-1}^{i}T\f$.
+ 
+ These methods perform the transformation operation on a vector \f$p\f$
+ - CRFrame::transformToParent performs \f$y = ^{i-1}_{i}T p\f$
+ - CRFrame::transformToChild performs \f$y = _{i-1}^{i}T p\f$
+ 
+ \section Example
+ This example creates a frame class.
+ \code
+ 
+ #include "CoreRobotics.hpp"
+ #include <stdio>
+ 
+ main() {
+    CoreRobotics::CRFrame Frame;
+
+    Eigen::Matrix3d Rot;
+    Eigen::Vector3d Trans;
+    Rot << 0, -1, 0, 1, 0, 0, 0, 0, 1;
+    Trans << -2, 2, 3;
+
+    Frame.setRotationAndTranslation(Rot, Trans);
+
+    Eigen::Matrix4d T;
+    Frame.getTransformToParent(T);
+    std::cout << "Transformation to parent\n" << T << std::endl;
+
+    Eigen::Vector3d p, y;
+    p << 5, 6, 7;
+    Frame.transformToParent(p, y);
+    std::cout << "Point " << p.transpose() << " transformed to "
+    << y.transpose() << std::endl;
+ }
+ 
+ \endcode
+ 
+ \section References
+ [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
+ Pearson, 2004.
+ 
+ */
 //=====================================================================
 //! Enumerator for handling Euler angle conventions
 enum CREulerMode {
@@ -96,21 +153,22 @@ public:
     //! Class constructor
     CRFrame();
     CRFrame(Eigen::Matrix3d rot, Eigen::Vector3d trans);
-
-    //! Class destructor
-    virtual ~CRFrame();
-    
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
 
+    //! Set the value of the free variable
+    virtual bool setFreeValue(double q);
+    
+    //! Get the value of the free variable
+    virtual void getFreeValue(double &q);
+    
     //! Set the rotation and translation
-    void setRotationAndTranslation(Eigen::Matrix3d rot, Eigen::Vector3d trans) {rotation = rot; translation = trans;}
+    virtual void setRotationAndTranslation(Eigen::Matrix3d rot, Eigen::Vector3d trans) {rotation = rot; translation = trans;}
 
     //! Return the rotation and translation
     void getRotationAndTranslation(Eigen::Matrix3d &rot, Eigen::Vector3d &trans) {rot = rotation; trans = translation;}
-    
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -123,11 +181,13 @@ public:
     void getTransformToChild(Eigen::Matrix4d &transform);
     
     //! Transform points p in the child frame to points y in the parent frame
-    void transformToParent(Eigen::Matrix<double, 3, Eigen::Dynamic> p, Eigen::Matrix<double, 3, Eigen::Dynamic> &y);
+    void transformToParent(Eigen::Vector3d p, Eigen::Vector3d &y);
     
     //! Transform points p in the parent frame to points y in the child frame
-    void transformToChild(Eigen::Matrix<double, 3, Eigen::Dynamic> p, Eigen::Matrix<double, 3, Eigen::Dynamic> &y);
+    void transformToChild(Eigen::Vector3d p, Eigen::Vector3d &y);
     
+    //! Query if the frame is driven, i.e. has a free variable
+    virtual bool isDriven();
 
     //! Get the pose vectors where the Euler orientation convention is specified by the crEulerMode enumerator
     // void getPoseVectors(CREulerMode mode, Eigen::Vector3d &position, Eigen::Vector3d &orientation);
@@ -141,7 +201,6 @@ protected:
 
     //! Translation vector data
     Eigen::Vector3d translation;
-
 
 };
     

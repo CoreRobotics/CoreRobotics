@@ -69,7 +69,50 @@ namespace CoreRobotics {
  the rotations are defined by Euler angles.
  
  \details
- CRFrameEuler implements a homogeneous transformation
+ \section Description
+ CRFrameEuler implements an transformation where the rotation is 
+ specified by three Euler angles (<a href="wikipedia.org/wiki/Euler_angles">
+ see Wikipedia article).</a>
+ 
+ Properties of the transform can be set with methods
+ - CRFrameEuler::setPosition, CRFrameEuler::setOrientation and
+ CRFrameEuler::setPositionAndOrientation set transformation values.
+ - CRFrameEuler::setMode sets the Euler angle convention (options are in
+ CoreRobotics::CREulerMode).
+ 
+ The free variable can be specified by the CRFrameEuler::freeVar member
+ (options are in CoreRobotics::CREulerFreeVariable).
+ 
+ \section Example
+ This example creates an Euler frame class.
+ \code
+ 
+ #include "CoreRobotics.hpp"
+ #include <stdio>
+ 
+ main() {
+    CoreRobotics::CRFrameEuler Frame;
+
+    Frame.setPositionAndOrientation(0, 0, 1, 0, 0, 0.7);
+    Frame.setMode(CoreRobotics::CR_EULER_MODE_XYZ);
+
+    Eigen::Matrix4d T;
+    Frame.getTransformToParent(T);
+    std::cout << "Transformation to parent\n" << T << std::endl;
+
+    Eigen::Vector3d p, y;
+    p << 5, 6, 7;
+    Frame.transformToParent(p, y);
+    std::cout << "Point " << p.transpose() << " transformed to "
+    << y.transpose() << std::endl;
+ }
+ 
+ \endcode
+ 
+ \section References
+ [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
+ Pearson, 2004.
+ 
  */
 //=====================================================================
 //! Enumerator for handling Euler angle free variable candidates
@@ -92,13 +135,9 @@ class CRFrameEuler : public CRFrame  {
 public:
 
     //! Class constructor
-    CRFrameEuler();
     CRFrameEuler(double x, double y, double z, double a, double b,
                  double g, CREulerMode mode, CREulerFreeVariable free);
-
-    //! Class destructor
-    virtual ~CRFrameEuler();
-
+    CRFrameEuler();
 
 //---------------------------------------------------------------------
 // Get/Set Methods
@@ -133,9 +172,14 @@ public:
     
     //! Get the position and angle values
     void getPositionAndOrientation(double &x, double &y, double &z, double &a, double &b, double &g);
-    
 
+//---------------------------------------------------------------------
+// Public Methods
+public:
     
+    //! Query if the frame is driven, i.e. has a free variable
+    bool isDriven();
+
 //---------------------------------------------------------------------
 // Public Members
 public:
@@ -168,7 +212,6 @@ private:
     //! gamma angle [rad]
     double ang_g;
     
-    
 //---------------------------------------------------------------------
 // Private Methods
 private:
@@ -185,7 +228,6 @@ private:
     
     //! standard rotation about the z axis
     void rotAboutZ(double ang, Eigen::Matrix3d &rot);
-
 
 };
 

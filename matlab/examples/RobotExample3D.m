@@ -3,8 +3,7 @@
 % Here we create an example robot in 3D to provide insight to the
 % kinematics methods accessible through the Manipulator class.
 %
-% This script is set up to run from inside the matlab/examples
-% folder.
+% This script is set up to run from inside the matlab/examples folder.
 %
 clear all
 clc
@@ -24,7 +23,7 @@ l2 = 0.5;   % [m] - link 2 length
 T(1) = CoreRobotics.Frame3D('convention','xyz','free_variables','ang_g');
 T(2) = CoreRobotics.Frame3D('convention','xyz','free_variables','ang_a');
 T(3) = CoreRobotics.Frame3D('convention','xyz','free_variables','ang_a','pos_y',l1);
-T(4) = CoreRobotics.Frame3D('pos_y',l2);
+T(4) = CoreRobotics.Frame3D('convention','xyz','pos_y',l2);
 
 % Create the Manipulator object and add RigidBody links
 Robot = CoreRobotics.Manipulator;

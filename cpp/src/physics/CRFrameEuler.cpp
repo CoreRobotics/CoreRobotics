@@ -54,28 +54,16 @@ namespace CoreRobotics {
  The constructor sets the rotation and translation parameters upon
  construction, with defaults listed in parenthesis.\n
  
- \param   x      - x position of the frame (0)
- \param   y      - y position of the frame (0)
- \param   z      - z position of the frame (0)
- \param   a      - alpha angle of the frame [rad] (0)
- \param   b      - beta angle of the frame [rad] (0)
- \param   g      - gamma angle of the frame [rad] (0)
- \param   mode   - Euler angle convention (CR_EULER_MODE_ZXZ)
- \param   free   - free variable (CR_EULER_FREE_NONE)
+ \param[in]   x      - x position of the frame (0)
+ \param[in]   y      - y position of the frame (0)
+ \param[in]   z      - z position of the frame (0)
+ \param[in]   a      - alpha angle of the frame [rad] (0)
+ \param[in]   b      - beta angle of the frame [rad] (0)
+ \param[in]   g      - gamma angle of the frame [rad] (0)
+ \param[in]   mode   - Euler angle convention (CR_EULER_MODE_ZXZ)
+ \param[in]   free   - free variable (CR_EULER_FREE_NONE)
  */
 //---------------------------------------------------------------------
-CRFrameEuler::CRFrameEuler()
-{
-    pos_x = 0.0;
-    pos_y = 0.0;
-    pos_z = 0.0;
-    ang_a = 0.0;
-    ang_b = 0.0;
-    ang_g = 0.0;
-    eulerMode = CR_EULER_MODE_ZXZ;
-    freeVar = CR_EULER_FREE_NONE;
-    setRotationAndTranslation();
-}
 CRFrameEuler::CRFrameEuler(double x, double y, double z, double a, double b, double g,
                            CREulerMode mode, CREulerFreeVariable free)
 {
@@ -89,15 +77,18 @@ CRFrameEuler::CRFrameEuler(double x, double y, double z, double a, double b, dou
     freeVar = free;
     setRotationAndTranslation();
 }
-
-
-//=====================================================================
-/*!
- The destructor frees up memory:\n
- */
-//---------------------------------------------------------------------
-CRFrameEuler::~CRFrameEuler()
-{ }
+CRFrameEuler::CRFrameEuler()
+{
+    pos_x = 0.0;
+    pos_y = 0.0;
+    pos_z = 0.0;
+    ang_a = 0.0;
+    ang_b = 0.0;
+    ang_g = 0.0;
+    eulerMode = CR_EULER_MODE_ZXZ;
+    freeVar = CR_EULER_FREE_NONE;
+    setRotationAndTranslation();
+}
 
 
 
@@ -107,7 +98,7 @@ CRFrameEuler::~CRFrameEuler()
  a true if the value was written and a false if freeVar is set to 
  CR_EULER_FREE_NONE.\n
  
- \param   q   - value of the variable to be set
+ \param[in]   q   - value of the variable to be set
  */
 //---------------------------------------------------------------------
 bool CRFrameEuler::setFreeValue(double q)
@@ -147,7 +138,7 @@ bool CRFrameEuler::setFreeValue(double q)
  This method get the value of the free variable.  The method returns 
  q = NULL if freeVar is set to CR_EULER_FREE_NONE.\n
  
- \param   q   - value of the free variable.
+ \param[out]   q   - value of the free variable.
  */
 //---------------------------------------------------------------------
 void CRFrameEuler::getFreeValue(double &q)
@@ -183,7 +174,7 @@ void CRFrameEuler::getFreeValue(double &q)
 /*!
  This method sets the value of the Euler convention.\n
  
- \param   mode   - Euler convention
+ \param[in]   mode   - Euler convention
  */
 //---------------------------------------------------------------------
 void CRFrameEuler::setMode(CREulerMode mode)
@@ -198,7 +189,7 @@ void CRFrameEuler::setMode(CREulerMode mode)
 /*!
  This method gets the value of the Euler convention.\n
  
- \param   mode   - Euler convention.
+ \param[out]   mode   - Euler convention.
  */
 //---------------------------------------------------------------------
 void CRFrameEuler::getMode(CREulerMode &mode)
@@ -212,9 +203,9 @@ void CRFrameEuler::getMode(CREulerMode &mode)
 /*!
  This method sets the position values of the frame transformation.\n
  
- \param   x   - x position of the frame
- \param   y   - y position of the frame
- \param   z   - z position of the frame
+ \param[in]   x   - x position of the frame
+ \param[in]   y   - y position of the frame
+ \param[in]   z   - z position of the frame
  */
 //---------------------------------------------------------------------
 void CRFrameEuler::setPosition(double x, double y, double z)
@@ -230,9 +221,9 @@ void CRFrameEuler::setPosition(double x, double y, double z)
 /*!
  This method gets the position values of the frame transformation.\n
  
- \param   x   x position of the frame
- \param   y   y position of the frame
- \param   z   z position of the frame
+ \param[out]   x   x position of the frame
+ \param[out]   y   y position of the frame
+ \param[out]   z   z position of the frame
  */
 //---------------------------------------------------------------------
 void CRFrameEuler::getPosition(double &x, double &y, double &z)
@@ -248,9 +239,9 @@ void CRFrameEuler::getPosition(double &x, double &y, double &z)
 /*!
  This method sets the orientation values of the frame transformation.\n
  
- \param   a   - alpha angle of the frame [rad]
- \param   b   - beta angle of the frame [rad]
- \param   g   - gamma angle of the frame [rad]
+ \param[in]   a   - alpha angle of the frame [rad]
+ \param[in]   b   - beta angle of the frame [rad]
+ \param[in]   g   - gamma angle of the frame [rad]
  */
 //---------------------------------------------------------------------
 void CRFrameEuler::setOrientation(double a, double b, double g)
@@ -266,9 +257,9 @@ void CRFrameEuler::setOrientation(double a, double b, double g)
 /*!
  This method gets the orientation values of the frame transformation.\n
  
- \param   a   - alpha angle of the frame [rad]
- \param   b   - beta angle of the frame [rad]
- \param   g   - gamma angle of the frame [rad]
+ \param[out]   a   - alpha angle of the frame [rad]
+ \param[out]   b   - beta angle of the frame [rad]
+ \param[out]   g   - gamma angle of the frame [rad]
  */
 //---------------------------------------------------------------------
 void CRFrameEuler::getOrientation(double &a, double &b, double &g)
@@ -285,12 +276,12 @@ void CRFrameEuler::getOrientation(double &a, double &b, double &g)
  This method sets the position and orientation values of the frame 
  transformation.\n
  
- \param   x   - x position of the frame
- \param   y   - y position of the frame
- \param   z   - z position of the frame
- \param   a   - alpha angle of the frame [rad]
- \param   b   - beta angle of the frame [rad]
- \param   g   - gamma angle of the frame [rad]
+ \param[in]   x   - x position of the frame
+ \param[in]   y   - y position of the frame
+ \param[in]   z   - z position of the frame
+ \param[in]   a   - alpha angle of the frame [rad]
+ \param[in]   b   - beta angle of the frame [rad]
+ \param[in]   g   - gamma angle of the frame [rad]
  */
 //---------------------------------------------------------------------
 void CRFrameEuler::setPositionAndOrientation(double x, double y, double z, double a, double b, double g)
@@ -305,18 +296,37 @@ void CRFrameEuler::setPositionAndOrientation(double x, double y, double z, doubl
  TThis method gets the position and orientation values of the frame 
  transformation.\n
  
- \param   x   - x position of the frame
- \param   y   - y position of the frame
- \param   z   - z position of the frame
- \param   a   - alpha angle of the frame [rad]
- \param   b   - beta angle of the frame [rad]
- \param   g   - gamma angle of the frame [rad]
+ \param[out]   x   - x position of the frame
+ \param[out]   y   - y position of the frame
+ \param[out]   z   - z position of the frame
+ \param[out]   a   - alpha angle of the frame [rad]
+ \param[out]   b   - beta angle of the frame [rad]
+ \param [out]  g   - gamma angle of the frame [rad]
  */
 //---------------------------------------------------------------------
 void CRFrameEuler::getPositionAndOrientation(double &x, double &y, double &z, double &a, double &b, double &g)
 {
     getPosition(x,y,z);
     getOrientation(a,b,g);
+}
+    
+    
+    
+//=====================================================================
+/*!
+ This method returns a true if the frame is driven (i.e. has a free 
+ variable) or a false if the frame is not driven.\n
+ 
+ \return - true = is driven, false = is not driven
+ 
+ */
+//---------------------------------------------------------------------
+bool CRFrameEuler::isDriven() {
+    if (freeVar == CR_EULER_FREE_NONE) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 

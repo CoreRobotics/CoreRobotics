@@ -25,5 +25,11 @@ var searchData=
   ['cr_5feuler_5fmode_5fzxy',['CR_EULER_MODE_ZXY',['../namespace_core_robotics.html#abbd772864f61f6e048afb1bd5caadbdfac30c6634d262ca23a1727418ffa5dbef',1,'CoreRobotics']]],
   ['cr_5feuler_5fmode_5fzxz',['CR_EULER_MODE_ZXZ',['../namespace_core_robotics.html#abbd772864f61f6e048afb1bd5caadbdfadea3f8ae34a894427b9c8a3c95fcdcf5',1,'CoreRobotics']]],
   ['cr_5feuler_5fmode_5fzyx',['CR_EULER_MODE_ZYX',['../namespace_core_robotics.html#abbd772864f61f6e048afb1bd5caadbdfa6182acad99d544e4e84d389d6d080c65',1,'CoreRobotics']]],
-  ['cr_5feuler_5fmode_5fzyz',['CR_EULER_MODE_ZYZ',['../namespace_core_robotics.html#abbd772864f61f6e048afb1bd5caadbdfa6b375f1c7d7ffb904fa3cb604b13dd2a',1,'CoreRobotics']]]
+  ['cr_5feuler_5fmode_5fzyz',['CR_EULER_MODE_ZYZ',['../namespace_core_robotics.html#abbd772864f61f6e048afb1bd5caadbdfa6b375f1c7d7ffb904fa3cb604b13dd2a',1,'CoreRobotics']]],
+  ['cr_5fmanipulator_5fmode_5fposition',['CR_MANIPULATOR_MODE_POSITION',['../namespace_core_robotics.html#a3ce93821eca5f814b40cbdaa32a5a272a3156e09d7b4b0ba8753e58a9567bb24f',1,'CoreRobotics']]],
+  ['cr_5fsignal_5facceleration',['CR_SIGNAL_ACCELERATION',['../namespace_core_robotics.html#a6cb48edf36db16b60f099e975d329464abcc5e5667522c6db456121fff479228d',1,'CoreRobotics']]],
+  ['cr_5fsignal_5fforce',['CR_SIGNAL_FORCE',['../namespace_core_robotics.html#a6cb48edf36db16b60f099e975d329464ac7a8466576bc8bfb1211cd007b049274',1,'CoreRobotics']]],
+  ['cr_5fsignal_5fgeneric',['CR_SIGNAL_GENERIC',['../namespace_core_robotics.html#a6cb48edf36db16b60f099e975d329464a7008dc138303f0d5db6b16fd2bc116e3',1,'CoreRobotics']]],
+  ['cr_5fsignal_5fposition',['CR_SIGNAL_POSITION',['../namespace_core_robotics.html#a6cb48edf36db16b60f099e975d329464a62cf5039ca170573d4b4079232c2a2f0',1,'CoreRobotics']]],
+  ['cr_5fsignal_5fvelocity',['CR_SIGNAL_VELOCITY',['../namespace_core_robotics.html#a6cb48edf36db16b60f099e975d329464ae9a758eb19d8ac1258b3dfbcd5fe15ac',1,'CoreRobotics']]]
 ];

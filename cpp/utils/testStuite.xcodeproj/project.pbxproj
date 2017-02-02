@@ -1,0 +1,367 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BE7686C71E4038BB00FA6911 /* crTestModules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE7686C61E4038BB00FA6911 /* crTestModules.cpp */; };
+		BE7686D81E40398400FA6911 /* CRFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE7686D11E40398400FA6911 /* CRFrame.cpp */; };
+		BE7686D91E40398400FA6911 /* CRFrameDh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE7686D31E40398400FA6911 /* CRFrameDh.cpp */; };
+		BE7686DA1E40398400FA6911 /* CRFrameEuler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE7686D51E40398400FA6911 /* CRFrameEuler.cpp */; };
+		BE7686DC1E403A9100FA6911 /* crTestPhysics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE7686DB1E403A9100FA6911 /* crTestPhysics.cpp */; };
+		BE7686DF1E4062B300FA6911 /* CRClock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE7686DD1E4062B300FA6911 /* CRClock.cpp */; };
+		BE7686E41E416F3100FA6911 /* CRRigidBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE7686E31E416F3100FA6911 /* CRRigidBody.cpp */; };
+		BEE58DA31E42EC0400FA6C9D /* CRManipulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEE58DA11E42EC0400FA6C9D /* CRManipulator.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BE7686BA1E40389800FA6911 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BE7686BC1E40389800FA6911 /* testStuite */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testStuite; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE7686C61E4038BB00FA6911 /* crTestModules.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = crTestModules.cpp; sourceTree = SOURCE_ROOT; };
+		BE7686C81E40395E00FA6911 /* crTestModules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crTestModules.h; sourceTree = SOURCE_ROOT; };
+		BE7686CC1E40398400FA6911 /* CoreRobotics.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CoreRobotics.hpp; sourceTree = "<group>"; };
+		BE7686D11E40398400FA6911 /* CRFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CRFrame.cpp; sourceTree = "<group>"; };
+		BE7686D21E40398400FA6911 /* CRFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CRFrame.hpp; sourceTree = "<group>"; };
+		BE7686D31E40398400FA6911 /* CRFrameDh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CRFrameDh.cpp; sourceTree = "<group>"; };
+		BE7686D41E40398400FA6911 /* CRFrameDh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CRFrameDh.hpp; sourceTree = "<group>"; };
+		BE7686D51E40398400FA6911 /* CRFrameEuler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CRFrameEuler.cpp; sourceTree = "<group>"; };
+		BE7686D61E40398400FA6911 /* CRFrameEuler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CRFrameEuler.hpp; sourceTree = "<group>"; };
+		BE7686DB1E403A9100FA6911 /* crTestPhysics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = crTestPhysics.cpp; sourceTree = SOURCE_ROOT; };
+		BE7686DD1E4062B300FA6911 /* CRClock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CRClock.cpp; sourceTree = "<group>"; };
+		BE7686DE1E4062B300FA6911 /* CRClock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CRClock.hpp; sourceTree = "<group>"; };
+		BE7686E11E416B8E00FA6911 /* CRRigidBody.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CRRigidBody.hpp; sourceTree = "<group>"; };
+		BE7686E31E416F3100FA6911 /* CRRigidBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CRRigidBody.cpp; sourceTree = "<group>"; };
+		BEE58DA01E42731000FA6C9D /* CRSignalType.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CRSignalType.hpp; sourceTree = "<group>"; };
+		BEE58DA11E42EC0400FA6C9D /* CRManipulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CRManipulator.cpp; sourceTree = "<group>"; };
+		BEE58DA21E42EC0400FA6C9D /* CRManipulator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CRManipulator.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE7686B91E40389800FA6911 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE7686B31E40389800FA6911 = {
+			isa = PBXGroup;
+			children = (
+				BE7686C91E40398400FA6911 /* src */,
+				BE7686BE1E40389800FA6911 /* testStuite */,
+				BE7686BD1E40389800FA6911 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BE7686BD1E40389800FA6911 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE7686BC1E40389800FA6911 /* testStuite */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE7686BE1E40389800FA6911 /* testStuite */ = {
+			isa = PBXGroup;
+			children = (
+				BE7686C61E4038BB00FA6911 /* crTestModules.cpp */,
+				BE7686C81E40395E00FA6911 /* crTestModules.h */,
+				BE7686DB1E403A9100FA6911 /* crTestPhysics.cpp */,
+			);
+			path = testStuite;
+			sourceTree = "<group>";
+		};
+		BE7686C91E40398400FA6911 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				BE7686CA1E40398400FA6911 /* controllers */,
+				BE7686CB1E40398400FA6911 /* core */,
+				BE7686CC1E40398400FA6911 /* CoreRobotics.hpp */,
+				BE7686CD1E40398400FA6911 /* estimators */,
+				BE7686CE1E40398400FA6911 /* math */,
+				BE7686CF1E40398400FA6911 /* models */,
+				BE7686D01E40398400FA6911 /* physics */,
+				BE7686D71E40398400FA6911 /* world */,
+			);
+			name = src;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+		BE7686CA1E40398400FA6911 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		BE7686CB1E40398400FA6911 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				BEE58DA01E42731000FA6C9D /* CRSignalType.hpp */,
+				BE7686DD1E4062B300FA6911 /* CRClock.cpp */,
+				BE7686DE1E4062B300FA6911 /* CRClock.hpp */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		BE7686CD1E40398400FA6911 /* estimators */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = estimators;
+			sourceTree = "<group>";
+		};
+		BE7686CE1E40398400FA6911 /* math */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = math;
+			sourceTree = "<group>";
+		};
+		BE7686CF1E40398400FA6911 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				BEE58DA11E42EC0400FA6C9D /* CRManipulator.cpp */,
+				BEE58DA21E42EC0400FA6C9D /* CRManipulator.hpp */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		BE7686D01E40398400FA6911 /* physics */ = {
+			isa = PBXGroup;
+			children = (
+				BE7686D21E40398400FA6911 /* CRFrame.hpp */,
+				BE7686D11E40398400FA6911 /* CRFrame.cpp */,
+				BE7686D41E40398400FA6911 /* CRFrameDh.hpp */,
+				BE7686D31E40398400FA6911 /* CRFrameDh.cpp */,
+				BE7686D61E40398400FA6911 /* CRFrameEuler.hpp */,
+				BE7686D51E40398400FA6911 /* CRFrameEuler.cpp */,
+				BE7686E11E416B8E00FA6911 /* CRRigidBody.hpp */,
+				BE7686E31E416F3100FA6911 /* CRRigidBody.cpp */,
+			);
+			path = physics;
+			sourceTree = "<group>";
+		};
+		BE7686D71E40398400FA6911 /* world */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = world;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE7686BB1E40389800FA6911 /* testStuite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE7686C31E40389800FA6911 /* Build configuration list for PBXNativeTarget "testStuite" */;
+			buildPhases = (
+				BE7686B81E40389800FA6911 /* Sources */,
+				BE7686B91E40389800FA6911 /* Frameworks */,
+				BE7686BA1E40389800FA6911 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = testStuite;
+			productName = testStuite;
+			productReference = BE7686BC1E40389800FA6911 /* testStuite */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE7686B41E40389800FA6911 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = CoreRobotics;
+				TargetAttributes = {
+					BE7686BB1E40389800FA6911 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = BE7686B71E40389800FA6911 /* Build configuration list for PBXProject "testStuite" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BE7686B31E40389800FA6911;
+			productRefGroup = BE7686BD1E40389800FA6911 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE7686BB1E40389800FA6911 /* testStuite */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE7686B81E40389800FA6911 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE7686DC1E403A9100FA6911 /* crTestPhysics.cpp in Sources */,
+				BE7686D81E40398400FA6911 /* CRFrame.cpp in Sources */,
+				BE7686D91E40398400FA6911 /* CRFrameDh.cpp in Sources */,
+				BEE58DA31E42EC0400FA6C9D /* CRManipulator.cpp in Sources */,
+				BE7686DF1E4062B300FA6911 /* CRClock.cpp in Sources */,
+				BE7686DA1E40398400FA6911 /* CRFrameEuler.cpp in Sources */,
+				BE7686C71E4038BB00FA6911 /* crTestModules.cpp in Sources */,
+				BE7686E41E416F3100FA6911 /* CRRigidBody.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BE7686C11E40389800FA6911 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BE7686C21E40389800FA6911 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BE7686C41E40389800FA6911 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = ../src/;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BE7686C51E40389800FA6911 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = ../src/;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE7686B71E40389800FA6911 /* Build configuration list for PBXProject "testStuite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE7686C11E40389800FA6911 /* Debug */,
+				BE7686C21E40389800FA6911 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE7686C31E40389800FA6911 /* Build configuration list for PBXNativeTarget "testStuite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE7686C41E40389800FA6911 /* Debug */,
+				BE7686C51E40389800FA6911 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE7686B41E40389800FA6911 /* Project object */;
+}

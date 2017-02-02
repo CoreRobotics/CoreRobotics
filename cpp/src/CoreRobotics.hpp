@@ -104,7 +104,23 @@ Todo
 //---------------------------------------------------------------------------
 /*!
 \page references References
-Todo 
+
+ [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3, 
+     Pearson, 2004. \n\n
+ 
+ [2] J. Denavit and R. Hartenberg, "A kinematic notation for lower-pair 
+     mechanisms based on matrices". Trans ASME J. Appl. Mech. 23, pp. 215-221, 1955. \n\n
+ 
+ [3] R. Murray, Z. Li, and S. Sastry, "A Mathematical Introduction to Robot 
+     Manipulation", Ed. 1, CRC Press, 1993. 
+     <a href="http://www.cds.caltech.edu/~murray/mlswiki/index.php/Main_Page">
+     Available online.</a> \n\n
+ 
+ [4] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems", 
+     Ed. 2, CRC Press, 2012. \n\n
+ 
+ [5] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press, 2006. \n\n
+ 
 */
 //===========================================================================
 
@@ -120,8 +136,11 @@ Todo
 //---------------------------------------------------------------------------
 //! \defgroup core Core
 //! \brief Implements core functionality.
-//! \details Todo
+//! \details This module implements the core functionality of the library,
+//! such as timing, loop definitions and threading.
 //---------------------------------------------------------------------------
+#include "core/CRClock.hpp"
+#include "core/CRSignalType.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -136,9 +155,10 @@ Todo
 //! \brief Implements physics (kinematics and dynamics) representations.
 //! \details Todo
 //---------------------------------------------------------------------------
-#include "../src/physics/CRFrame.hpp"
-#include "../src/physics/CRFrameEuler.hpp"
-#include "../src/physics/CRFrameDH.hpp"
+#include "physics/CRFrame.hpp"
+#include "physics/CRFrameEuler.hpp"
+#include "physics/CRFrameDH.hpp"
+#include "physics/CRRigidBody.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -146,6 +166,7 @@ Todo
 //! \brief Implements model (sensor, motion, and noise) representations.
 //! \details Todo
 //---------------------------------------------------------------------------
+#include "models/CRManipulator.hpp"
 
 
 //---------------------------------------------------------------------------
