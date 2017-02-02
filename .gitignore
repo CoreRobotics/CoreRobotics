@@ -1,0 +1,28 @@
+# Mac files
+.DS_Store
+
+# Compiled objects
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Exectuables
+*.exe
+*.out
+*.app
