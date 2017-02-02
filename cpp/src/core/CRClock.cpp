@@ -53,7 +53,10 @@ namespace CoreRobotics {
  The constructor defines a clock.\n
  */
 //---------------------------------------------------------------------
-CRClock::CRClock() { }
+CRClock::CRClock() { 
+	t0 = clock.now();
+	t1 = clock.now();
+}
 
 
 //=====================================================================
@@ -70,7 +73,7 @@ CRClock::~CRClock() { }
  */
 //---------------------------------------------------------------------
 void CRClock::startTimer() {
-    t0 = std::chrono::steady_clock::now();
+	t0 = clock.now();
 }
 
 
@@ -83,7 +86,7 @@ void CRClock::startTimer() {
  */
 //---------------------------------------------------------------------
 void CRClock::getElapsedTime(double &t) {
-    t1 =std::chrono::steady_clock::now();
+    t1 = clock.now();
     elapsed = t1-t0;
     t = elapsed.count();
 }

@@ -129,9 +129,12 @@ public:
 //---------------------------------------------------------------------
 // Protected Members
 private:
+
+	//! steady_clock object
+	std::chrono::steady_clock clock;
     
     //! steady_clock timepoints
-    std::chrono::time_point<std::chrono::steady_clock> t0, t1;
+	std::chrono::steady_clock::time_point t0, t1;
     
     //! elapsed time in seconds
     std::chrono::duration<double> elapsed;
