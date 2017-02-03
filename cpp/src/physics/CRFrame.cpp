@@ -40,8 +40,10 @@
 */
 //=====================================================================
 
+#include <iostream>
 #include "CRFrame.hpp"
 #include "../../external/eigen/Eigen/Dense"
+#include "../math/CRMath.hpp"
 
 
 //=====================================================================
@@ -177,6 +179,97 @@ bool CRFrame::isDriven() {
 }
 
 
+//=====================================================================
+/*!
+This method gets a vector of Euler angles of the frame.
+
+Source: http://www.staff.city.ac.uk/~sbbh653/publications/euler.pdf 
+
+\param[in]  mode - the Euler mode enumerator
+\param[out] pose - vector of Euler angles of the frame.
+*/
+//---------------------------------------------------------------------
+void CRFrame::getEulerPose(CREulerMode mode, Eigen::Vector3d &pose)
+{
+    double a, b, g;
+
+    if (this->rotation(2, 0) != 1 && this->rotation(2, 0) != -1)
+    {
+        double b1 = -asin(this->rotation(2, 0));
+        double b2 = CoreRobotics::PI - b1;
+
+        double g1 = atan2(this->rotation(2, 1) / cos(b1), this->rotation(2, 2) / cos(b1));
+        double g2 = atan2(this->rotation(2, 1) / cos(b2), this->rotation(2, 2) / cos(b2));
+
+        double a1 = atan2(this->rotation(1, 0) / cos(b1), this->rotation(0, 0) / cos(b1));
+        double a2 = atan2(this->rotation(1, 0) / cos(b1), this->rotation(0, 0) / cos(b1));
+
+        std::cout << "a1 = " << a1 << ", a2 = " << a2 << std::endl;
+        std::cout << "b1 = " << b1 << ", b2 = " << b2 << std::endl;
+        std::cout << "g1 = " << g1 << ", g2 = " << g2 << std::endl;
+
+
+        // take the positive value if multiple solutions
+        if (a1 >= 0) { a = a1; } else { a = a2; }
+        if (b1 >= -CoreRobotics::PI / 2 && b1 <= CoreRobotics::PI / 2) 
+        { 
+            b = b1; 
+        } 
+        else 
+        { 
+            b = b2; 
+        }
+        if (g1 >= 0) { g = g1; } else { g = g2; }
+
+    }
+    else
+    {
+        a = 0;
+        if (this->rotation(2, 0) == -1)
+        {
+            b = CoreRobotics::PI / 2.0;
+            g = a + atan2(this->rotation(0, 1), this->rotation(0, 2));
+        }
+        else
+        {
+            b = -PI / 2.0;
+            g = -a + atan2(-this->rotation(0, 1), -this->rotation(0, 2));
+        }
+    }
+
+    pose << a, b, g;
+
+    double a1 = CoreRobotics::CRMath::rad2deg(a);
+    double b1 = CoreRobotics::CRMath::rad2deg(b);
+    double g1 = CoreRobotics::CRMath::rad2deg(g);
+
+}
+
+
+void CRFrame::getEulerPose2(CREulerMode mode, Eigen::Vector3d &pose)
+{
+
+    float sy = sqrt(rotation(0, 0) * rotation(0, 0) + rotation(1, 0) * rotation(1, 0));
+
+    bool singular = sy < 1e-6; // If
+
+    double x, y, z;
+    if (!singular)
+    {
+        x = atan2(rotation(2, 1), rotation(2, 2));
+        y = atan2(rotation(2, 0), sy);
+        z = atan2(rotation(1, 0), rotation(0, 0));
+    }
+    else
+    {
+        x = atan2(rotation(1, 2), rotation(1, 1));
+        y = atan2(rotation(2, 0), sy);
+        z = 0;
+    }
+    pose << x, y, z;
+        
+
+}
 
 //=====================================================================
 // End namespace

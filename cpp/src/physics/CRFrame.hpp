@@ -189,6 +189,10 @@ public:
     //! Query if the frame is driven, i.e. has a free variable
     virtual bool isDriven();
 
+    //! Gets a vector of the Euler angles
+    void getEulerPose(CREulerMode mode, Eigen::Vector3d &pose);
+    void getEulerPose2(CREulerMode mode, Eigen::Vector3d &pose);
+
     //! Get the pose vectors where the Euler orientation convention is specified by the crEulerMode enumerator
     // void getPoseVectors(CREulerMode mode, Eigen::Vector3d &position, Eigen::Vector3d &orientation);
     
