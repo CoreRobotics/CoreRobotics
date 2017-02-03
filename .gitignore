@@ -5,7 +5,7 @@
 *.vcxproj.filters
 *.VC.opendb
 .vs
-
+Debug/
 
 # Mac files
 .DS_Store
