@@ -69,7 +69,7 @@ CRManipulator::CRManipulator() {
 //---------------------------------------------------------------------
 void CRManipulator::setConfiguration(Eigen::VectorXd q)
 {
-    for (int i = 0; i < listDriven.size(); i++) {
+    for (size_t i = 0; i < listDriven.size(); i++) {
         listLinks.at(listDriven.at(i))->frame->setFreeValue(q(i));
     }
 }
@@ -87,7 +87,7 @@ void CRManipulator::setConfiguration(Eigen::VectorXd q)
 void CRManipulator::getConfiguration(Eigen::VectorXd &q)
 {
     q.setZero(listDriven.size(),1);
-    for (int i = 0; i < listDriven.size(); i++) {
+    for (size_t i = 0; i < listDriven.size(); i++) {
         listLinks.at(listDriven.at(i))->frame->getFreeValue(q(i));
     }
 }
@@ -105,7 +105,7 @@ void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
 {
     Eigen::Vector3d v;
     y.setZero(3,listParents.size()+1);
-    for (int k = 0; k < listParents.size(); k++) {
+    for (size_t k = 0; k < listParents.size(); k++) {
         int i = k;
         v << 0, 0, 0;
         while (i > -1) {
@@ -134,7 +134,7 @@ void CRManipulator::getJacobian(Eigen::MatrixXd &jacobian)
     Eigen::MatrixXd qBwd;
     jacobian.setZero(3,listDriven.size());
     this->getConfiguration(q0);
-    for (int k = 0; k < listDriven.size(); k++) {
+    for (size_t k = 0; k < listDriven.size(); k++) {
         qd.setZero(q0.size(),1);
         qd(k) = delta;
         this->setConfiguration(q0+qd);

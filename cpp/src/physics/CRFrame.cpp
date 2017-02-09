@@ -68,7 +68,7 @@ CRFrame::CRFrame()
     rotation << 1, 0, 0, 0, 1, 0, 0, 0, 1;
     translation << 0, 0, 0;
 }
-    
+
     
 //=====================================================================
 /*!
@@ -95,7 +95,7 @@ bool CRFrame::setFreeValue(double q)
 //---------------------------------------------------------------------
 void CRFrame::getFreeValue(double &q)
 {
-    q = NULL;
+    q = 0.0;
 }
 
 
