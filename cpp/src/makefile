@@ -48,21 +48,18 @@ $(MODELS):
 	@$(MAKE) -C $@;
 
 .PHONY: all 
-all: $(MY_TARGETS) $(SRCS)
-	$(CXX) $(CXXFLAGS) $(SRCS) $(LIBS) -o $(PROJ).out
+all: lib $(SRCS)
+	$(CXX) $(CXXFLAGS) $(SRCS) $(PROJ).o -o $(PROJ).out
 	
 .PHONY: lib
-lib: $(MY_TARGETS) $(SRCS)
+lib: $(MY_TARGETS) 
 	ld -r $(LIBS) -o $(PROJ).o
 	
-debug: $(PROJ)
-	valgrind $(VOPT) ./$(PROJ)
+debug: all
+	valgrind $(VOPT) ./$(PROJ).out
 
-run: $(OBJS) 
-	$(CXX) $(CXXFLAGS) $^ -o $(PROJ) && ./$(PROJ)
-
-zip:
-	zip $(PROJ).zip *.cpp *.hpp makefile
+run: all
+	./$(PROJ).out
 
 clean:
-	rm $(CORE)/*.o $(PHYSICS)/*.o $(MODELS)/*.o $(PROJ).out $(PROJ).o
+	rm $(CORE)/*.o $(PHYSICS)/*.o $(MODELS)/*.o $(PROJ).out $(PROJ).o $(OBJS)

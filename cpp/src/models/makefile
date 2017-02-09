@@ -32,15 +32,6 @@ $(PROJ): $(OBJS)
 %.o: %.cpp %.hpp
 	$(CXX) $(CXXFLAGS) -c $^
 
-debug: $(PROJ)
-	valgrind $(VOPT) ./$(PROJ)
-
-run: $(OBJS) 
-	$(CXX) $(CXXFLAGS) $^ -o $(PROJ) && ./$(PROJ)
-
-zip:
-	zip $(PROJ).zip *.cpp *.hpp makefile
-
 clean:
 	rm *.o
 
