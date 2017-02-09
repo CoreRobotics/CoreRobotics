@@ -5,6 +5,9 @@
 *.vcxproj.filters
 *.VC.opendb
 .vs
+Debug
+x64
+x86
 
 
 # Mac files
