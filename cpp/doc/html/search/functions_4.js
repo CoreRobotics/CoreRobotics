@@ -8,5 +8,6 @@ var searchData=
   ['setposition',['setPosition',['../class_core_robotics_1_1_c_r_frame_euler.html#a41a87a26e86c04376ab7c6688ae65bfc',1,'CoreRobotics::CRFrameEuler']]],
   ['setpositionandorientation',['setPositionAndOrientation',['../class_core_robotics_1_1_c_r_frame_euler.html#aefa674e78ac23d3a1efd96d8bca53996',1,'CoreRobotics::CRFrameEuler']]],
   ['setrotationandtranslation',['setRotationAndTranslation',['../class_core_robotics_1_1_c_r_frame.html#a3042af86cf97c7213aa7f5410bd396c9',1,'CoreRobotics::CRFrame']]],
+  ['sleep',['sleep',['../class_core_robotics_1_1_c_r_clock.html#a616f4e19da054d7d84c87e73e4deee6e',1,'CoreRobotics::CRClock']]],
   ['starttimer',['startTimer',['../class_core_robotics_1_1_c_r_clock.html#ae71375830bb386ab41823a40d37878a6',1,'CoreRobotics::CRClock']]]
 ];

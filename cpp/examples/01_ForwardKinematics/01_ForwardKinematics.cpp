@@ -53,9 +53,9 @@ int main(int argc, const char * argv[]) {
     
     cout << "Hello, CoreRobotics!\n";
     
+    /*
     // Set up a CoreRobotics frame
     CRFrame myFrame = *new CRFrame();
-    
     
     // Get the default rot and trans
     Matrix3d r;
@@ -117,7 +117,7 @@ int main(int argc, const char * argv[]) {
     Frame1.getTransformToParent(FrameTform);
     cout << FrameTform << endl;
     
-    
+    */
     
     return 0;
 }

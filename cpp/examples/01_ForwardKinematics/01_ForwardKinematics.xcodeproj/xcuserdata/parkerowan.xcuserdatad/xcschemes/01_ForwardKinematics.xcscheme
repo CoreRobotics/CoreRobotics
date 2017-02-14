@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BEAE34ED1E3ADE090040449B"
-               BuildableName = "cr_exampleKinematics"
-               BlueprintName = "cr_exampleKinematics"
-               ReferencedContainer = "container:cr_exampleKinematics.xcodeproj">
+               BlueprintIdentifier = "BE50AB2D1E52CEB8001B1247"
+               BuildableName = "01_ForwardKinematics"
+               BlueprintName = "01_ForwardKinematics"
+               ReferencedContainer = "container:01_ForwardKinematics.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BEAE34ED1E3ADE090040449B"
-            BuildableName = "cr_exampleKinematics"
-            BlueprintName = "cr_exampleKinematics"
-            ReferencedContainer = "container:cr_exampleKinematics.xcodeproj">
+            BlueprintIdentifier = "BE50AB2D1E52CEB8001B1247"
+            BuildableName = "01_ForwardKinematics"
+            BlueprintName = "01_ForwardKinematics"
+            ReferencedContainer = "container:01_ForwardKinematics.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BEAE34ED1E3ADE090040449B"
-            BuildableName = "cr_exampleKinematics"
-            BlueprintName = "cr_exampleKinematics"
-            ReferencedContainer = "container:cr_exampleKinematics.xcodeproj">
+            BlueprintIdentifier = "BE50AB2D1E52CEB8001B1247"
+            BuildableName = "01_ForwardKinematics"
+            BlueprintName = "01_ForwardKinematics"
+            ReferencedContainer = "container:01_ForwardKinematics.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -74,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BEAE34ED1E3ADE090040449B"
-            BuildableName = "cr_exampleKinematics"
-            BlueprintName = "cr_exampleKinematics"
-            ReferencedContainer = "container:cr_exampleKinematics.xcodeproj">
+            BlueprintIdentifier = "BE50AB2D1E52CEB8001B1247"
+            BuildableName = "01_ForwardKinematics"
+            BlueprintName = "01_ForwardKinematics"
+            ReferencedContainer = "container:01_ForwardKinematics.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
