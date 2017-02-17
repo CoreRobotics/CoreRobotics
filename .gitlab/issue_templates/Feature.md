@@ -1,5 +1,3 @@
-- Short name: 
-- Short justification: 
-- Feature description:
+- Short feature description:
 - Level of importance (1 minimal - 3 significant): 
 - Estimated implementation time: (1 easy - 3 involved): 

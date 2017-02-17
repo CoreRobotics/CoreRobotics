@@ -41,6 +41,8 @@
 //=====================================================================
 
 #include "CRClock.hpp"
+#include <chrono>
+#include <thread>
 
 
 //=====================================================================
@@ -82,13 +84,27 @@ void CRClock::startTimer() {
  This method returns the elapsed time since the last call of 
  the startTimer() method.
  
- \param t - the time [s] since the last call of startTimer()
+ \param[out] t - the time [s] since the last call of startTimer()
  */
 //---------------------------------------------------------------------
 void CRClock::getElapsedTime(double &t) {
     t1 = clock.now();
     elapsed = t1-t0;
     t = elapsed.count();
+}
+    
+    
+//=====================================================================
+/*!
+ This method sleeps the current thread for t seconds
+ 
+ \param[in] t - the time [s] to sleep
+ */
+//---------------------------------------------------------------------
+void CRClock::sleep(double t) {
+    const unsigned long ts = static_cast<unsigned long>( t * 1000 );
+    // std::this_thread::sleep_for(std::chrono::duration<double>(t));
+    std::this_thread::sleep_for(std::chrono::milliseconds(ts));
 }
 
 

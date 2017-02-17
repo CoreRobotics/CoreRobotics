@@ -1,0 +1,280 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BE50AB391E52CED5001B1247 /* 01_ForwardKinematics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE50AB381E52CED5001B1247 /* 01_ForwardKinematics.cpp */; };
+		BE50AB3B1E52D2B8001B1247 /* libCoreRobotics.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE50AB3A1E52D2B8001B1247 /* libCoreRobotics.dylib */; };
+		BE50AB3F1E536D8F001B1247 /* libCoreRobotics.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE50AB3A1E52D2B8001B1247 /* libCoreRobotics.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BE50AB2C1E52CEB8001B1247 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = /usr/local/lib;
+			dstSubfolderSpec = 0;
+			files = (
+				BE50AB3F1E536D8F001B1247 /* libCoreRobotics.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BE50AB2E1E52CEB8001B1247 /* 01_ForwardKinematics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 01_ForwardKinematics; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE50AB381E52CED5001B1247 /* 01_ForwardKinematics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = 01_ForwardKinematics.cpp; sourceTree = SOURCE_ROOT; };
+		BE50AB3A1E52D2B8001B1247 /* libCoreRobotics.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCoreRobotics.dylib; path = ../../lib/Release/libCoreRobotics.dylib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE50AB2B1E52CEB8001B1247 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE50AB3B1E52D2B8001B1247 /* libCoreRobotics.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE50AB251E52CEB8001B1247 = {
+			isa = PBXGroup;
+			children = (
+				BE50AB3A1E52D2B8001B1247 /* libCoreRobotics.dylib */,
+				BE50AB301E52CEB8001B1247 /* 01_ForwardKinematics */,
+				BE50AB2F1E52CEB8001B1247 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BE50AB2F1E52CEB8001B1247 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE50AB2E1E52CEB8001B1247 /* 01_ForwardKinematics */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE50AB301E52CEB8001B1247 /* 01_ForwardKinematics */ = {
+			isa = PBXGroup;
+			children = (
+				BE50AB381E52CED5001B1247 /* 01_ForwardKinematics.cpp */,
+			);
+			path = 01_ForwardKinematics;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE50AB2D1E52CEB8001B1247 /* 01_ForwardKinematics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE50AB351E52CEB8001B1247 /* Build configuration list for PBXNativeTarget "01_ForwardKinematics" */;
+			buildPhases = (
+				BE50AB2A1E52CEB8001B1247 /* Sources */,
+				BE50AB2B1E52CEB8001B1247 /* Frameworks */,
+				BE50AB2C1E52CEB8001B1247 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = 01_ForwardKinematics;
+			productName = 01_ForwardKinematics;
+			productReference = BE50AB2E1E52CEB8001B1247 /* 01_ForwardKinematics */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE50AB261E52CEB8001B1247 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = CoreRobotics;
+				TargetAttributes = {
+					BE50AB2D1E52CEB8001B1247 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = BE50AB291E52CEB8001B1247 /* Build configuration list for PBXProject "01_ForwardKinematics" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BE50AB251E52CEB8001B1247;
+			productRefGroup = BE50AB2F1E52CEB8001B1247 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE50AB2D1E52CEB8001B1247 /* 01_ForwardKinematics */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE50AB2A1E52CEB8001B1247 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE50AB391E52CED5001B1247 /* 01_ForwardKinematics.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BE50AB331E52CEB8001B1247 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BE50AB341E52CEB8001B1247 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BE50AB361E52CEB8001B1247 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = ../../src;
+				INSTALL_PATH = "";
+				LD_DYLIB_INSTALL_NAME = "";
+				LIBRARY_SEARCH_PATHS = ../../lib/Release;
+				OBJROOT = obj;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ../../bin;
+			};
+			name = Debug;
+		};
+		BE50AB371E52CEB8001B1247 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = ../../src;
+				INSTALL_PATH = "";
+				LD_DYLIB_INSTALL_NAME = "";
+				LIBRARY_SEARCH_PATHS = ../../lib/Release;
+				OBJROOT = obj;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ../../bin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE50AB291E52CEB8001B1247 /* Build configuration list for PBXProject "01_ForwardKinematics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE50AB331E52CEB8001B1247 /* Debug */,
+				BE50AB341E52CEB8001B1247 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE50AB351E52CEB8001B1247 /* Build configuration list for PBXNativeTarget "01_ForwardKinematics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE50AB361E52CEB8001B1247 /* Debug */,
+				BE50AB371E52CEB8001B1247 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE50AB261E52CEB8001B1247 /* Project object */;
+}

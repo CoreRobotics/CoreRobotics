@@ -133,7 +133,7 @@ void CRFrameDh::getFreeValue(double &q)
 {
     switch (freeVar){
         case CR_DH_FREE_NONE:
-            q = NULL;
+            q = 0.0;
             break;
         case CR_DH_FREE_R:
             q = dh_r;

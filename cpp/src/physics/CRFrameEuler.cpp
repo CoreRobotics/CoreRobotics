@@ -145,7 +145,7 @@ void CRFrameEuler::getFreeValue(double &q)
 {
     switch (freeVar){
         case CR_EULER_FREE_NONE:
-            q = NULL;
+            q = 0.0;
             break;
         case CR_EULER_FREE_POS_X:
             q = pos_x;

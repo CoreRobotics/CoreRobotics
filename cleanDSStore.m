@@ -1,5 +1,0 @@
-
-
-
-files = dir;
-files.isdir

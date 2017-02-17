@@ -125,6 +125,9 @@ public:
     //! Get the elapsed time [s] since startTimer() was called
     void getElapsedTime(double &t);
     
+    //! Sleep the current thread
+    void sleep(double t);
+    
     
 //---------------------------------------------------------------------
 // Protected Members

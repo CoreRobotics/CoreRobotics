@@ -5,7 +5,13 @@
 *.vcxproj.filters
 *.VC.opendb
 .vs
-Debug/
+Debug
+x64
+x86
+
+# temp folders
+DerivedData
+obj
 
 # Mac files
 .DS_Store

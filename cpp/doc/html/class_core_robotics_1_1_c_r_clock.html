@@ -109,6 +109,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2876bc82edf2bb63a610ce0a20457491"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_core_robotics_1_1_c_r_clock.html#a2876bc82edf2bb63a610ce0a20457491">getElapsedTime</a> (double &amp;t)</td></tr>
 <tr class="memdesc:a2876bc82edf2bb63a610ce0a20457491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the elapsed time [s] since <a class="el" href="class_core_robotics_1_1_c_r_clock.html#ae71375830bb386ab41823a40d37878a6" title="Start the timer. ">startTimer()</a> was called.  <a href="#a2876bc82edf2bb63a610ce0a20457491">More...</a><br /></td></tr>
 <tr class="separator:a2876bc82edf2bb63a610ce0a20457491"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a616f4e19da054d7d84c87e73e4deee6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_core_robotics_1_1_c_r_clock.html#a616f4e19da054d7d84c87e73e4deee6e">sleep</a> (double t)</td></tr>
+<tr class="memdesc:a616f4e19da054d7d84c87e73e4deee6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleep the current thread.  <a href="#a616f4e19da054d7d84c87e73e4deee6e">More...</a><br /></td></tr>
+<tr class="separator:a616f4e19da054d7d84c87e73e4deee6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class implements a clock for timing code sections and control loop rates. </p>
@@ -193,7 +196,34 @@ Example</h1>
 <p>This method returns the elapsed time since the last call of the <a class="el" href="class_core_robotics_1_1_c_r_clock.html#ae71375830bb386ab41823a40d37878a6" title="Start the timer. ">startTimer()</a> method.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>- the time [s] since the last call of <a class="el" href="class_core_robotics_1_1_c_r_clock.html#ae71375830bb386ab41823a40d37878a6" title="Start the timer. ">startTimer()</a> </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">t</td><td>- the time [s] since the last call of <a class="el" href="class_core_robotics_1_1_c_r_clock.html#ae71375830bb386ab41823a40d37878a6" title="Start the timer. ">startTimer()</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a616f4e19da054d7d84c87e73e4deee6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a616f4e19da054d7d84c87e73e4deee6e">&#9670;&nbsp;</a></span>sleep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CoreRobotics::CRClock::sleep </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sleep the current thread. </p>
+<p>This method sleeps the current thread for t seconds</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>- the time [s] to sleep </td></tr>
   </table>
   </dd>
 </dl>
