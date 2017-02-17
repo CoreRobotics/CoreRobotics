@@ -183,7 +183,7 @@ bool CRFrame::isDriven() {
 /*!
 This method gets a vector of Euler angles of the frame.
 
-Source: http://www.staff.city.ac.uk/~sbbh653/publications/euler.pdf 
+Source: https://www.geometrictools.com/Documentation/EulerAngles.pdf
 
 \param[in]  mode - the Euler mode enumerator
 \param[out] pose - vector of Euler angles of the frame.
@@ -193,83 +193,302 @@ void CRFrame::getEulerPose(CREulerMode mode, Eigen::Vector3d &pose)
 {
     double a, b, g;
 
-    if (this->rotation(2, 0) != 1 && this->rotation(2, 0) != -1)
+    double r00 = this->rotation(0, 0);
+    double r01 = this->rotation(0, 1);
+    double r02 = this->rotation(0, 2);
+    double r10 = this->rotation(1, 0);
+    double r11 = this->rotation(1, 1);
+    double r12 = this->rotation(1, 2);
+    double r20 = this->rotation(2, 0);
+    double r21 = this->rotation(2, 1);
+    double r22 = this->rotation(2, 2);
+
+    switch (mode)
     {
-        double b1 = -asin(this->rotation(2, 0));
-        double b2 = CoreRobotics::PI - b1;
-
-        double g1 = atan2(this->rotation(2, 1) / cos(b1), this->rotation(2, 2) / cos(b1));
-        double g2 = atan2(this->rotation(2, 1) / cos(b2), this->rotation(2, 2) / cos(b2));
-
-        double a1 = atan2(this->rotation(1, 0) / cos(b1), this->rotation(0, 0) / cos(b1));
-        double a2 = atan2(this->rotation(1, 0) / cos(b1), this->rotation(0, 0) / cos(b1));
-
-        std::cout << "a1 = " << a1 << ", a2 = " << a2 << std::endl;
-        std::cout << "b1 = " << b1 << ", b2 = " << b2 << std::endl;
-        std::cout << "g1 = " << g1 << ", g2 = " << g2 << std::endl;
-
-
-        // take the positive value if multiple solutions
-        if (a1 >= 0) { a = a1; } else { a = a2; }
-        if (b1 >= -CoreRobotics::PI / 2 && b1 <= CoreRobotics::PI / 2) 
-        { 
-            b = b1; 
-        } 
-        else 
-        { 
-            b = b2; 
-        }
-        if (g1 >= 0) { g = g1; } else { g = g2; }
-
-    }
-    else
-    {
-        a = 0;
-        if (this->rotation(2, 0) == -1)
+    case CR_EULER_MODE_ZXZ:
+        if (r22 < 1)
         {
-            b = CoreRobotics::PI / 2.0;
-            g = a + atan2(this->rotation(0, 1), this->rotation(0, 2));
+            if (r22 > -1)
+            {
+                b = acos(r22);
+                a = atan2(r02, -r12);
+                g = atan2(r20, r21);
+            }
+            else
+            {
+                b = CoreRobotics::PI;
+                a = -atan2(-r01, r00);
+                g = 0;
+            }
         }
         else
         {
-            b = -PI / 2.0;
-            g = -a + atan2(-this->rotation(0, 1), -this->rotation(0, 2));
+            b = 0;
+            a = atan2(-r02, r00);
+            g = 0;
         }
+        break;
+    case CR_EULER_MODE_XYX:
+        if (r00 < 1)
+        {
+            if (r00 > -1)
+            {
+                b = acos(r00);
+                a = atan2(r10, -r20);
+                g = atan2(r01, r02);
+            }
+            else
+            {
+                b = CoreRobotics::PI;
+                a = -atan2(-r12, r11);
+                g = 0;
+            }
+        }
+        else
+        {
+            b = 0;
+            a = atan2(-r12, r11);
+            g = 0;
+        }
+        break;
+    case CR_EULER_MODE_YZY:
+        if (r11 < 1)
+        {
+            if (r11 > -1)
+            {
+                b = acos(r11);
+                a = atan2(r21, -r01);
+                g = atan2(r12, r10);
+            }
+            else
+            {
+                b = CoreRobotics::PI;
+                a = -atan2(-r20, r22);
+                g = 0;
+            }
+        }
+        else
+        {
+            b = 0;
+            a = atan2(-r20, r22);
+            g = 0;
+        }
+        break;
+    case CR_EULER_MODE_ZYZ:
+        if (r22 < 1)
+        {
+            if (r22 > -1)
+            {
+                b = acos(r22);
+                a = atan2(r12, r02);
+                g = atan2(r21, -r20);
+            }
+            else
+            {
+                b = CoreRobotics::PI;
+                a = -atan2(r10, r11);
+                g = 0;
+            }
+        }
+        else
+        {
+            b = 0;
+            a = atan2(r10, r11);
+            g = 0;
+        }
+        break;
+    case CR_EULER_MODE_XZX:
+        if (r00 < 1)
+        {
+            if (r00 > -1)
+            {
+                b = acos(r00);
+                a = atan2(r20, r10);
+                g = atan2(r02, -r01);
+            }
+            else
+            {
+                b = CoreRobotics::PI;
+                a = -atan2(r21, r22);
+                g = 0;
+            }
+        }
+        else
+        {
+            b = 0;
+            a = atan2(r21, r22);
+            g = 0;
+        }
+        break;
+    case CR_EULER_MODE_YXY:
+        if (r11 < 1)
+        {
+            if (r11 > -1)
+            {
+                b = acos(r11);
+                a = atan2(r01, r21);
+                g = atan2(r10, -r12);
+            }
+            else
+            {
+                b = CoreRobotics::PI;
+                a = -atan2(r02, r00);
+                g = 0;
+            }
+        }
+        else
+        {
+            b = 0;
+            a = atan2(r02, r00);
+            g = 0;
+        }
+        break;
+    case CR_EULER_MODE_XYZ:
+
+        if (r02 < 1)
+        {
+            if (r02 > -1)
+            {
+                b = asin(r02);
+                a = atan2(-r12, r22);
+                g = atan2(-r01, r00);
+            }
+            else
+            {
+                b = -CoreRobotics::PI / 2;
+                a = -atan2(r10, r11);
+                g = 0;
+            }
+        } 
+        else 
+        {
+            b = CoreRobotics::PI / 2;
+            a = atan2(r10, r11);
+            g = 0;
+        }
+        break;
+    case CR_EULER_MODE_YZX:
+        if (r10 < 1)
+        {
+            if (10 > -1)
+            {
+                b = asin(r10);
+                a = atan2(-r20, r00);
+                g = atan2(-r12, r11);
+            }
+            else
+            {
+                b = CoreRobotics::PI / 2;
+                a = -atan2(r21, r22);
+                g = 0;
+            }
+        }
+        else
+        {
+            b = CoreRobotics::PI / 2;
+            a = atan2(r21, r22);
+            g = 0;
+        }
+        break;
+    case CR_EULER_MODE_ZXY:
+        if (r21 < 1)
+        {
+            if (r21 > -1)
+            {
+                b = asin(r21);
+                a = atan2(-r01, r11);
+                g = atan2(-r20, r22);
+            }
+            else
+            {
+                b = CoreRobotics::PI / 2;
+                a = -atan2(r02, r00);
+                g = 0;
+            }
+        }
+        else
+        {
+            b = CoreRobotics::PI / 2;
+            a = atan2(r02, r00);
+            g = 0;
+        }
+        break;
+    case CR_EULER_MODE_XZY:
+        if (r01 < 1)
+        {
+            if (r01 > -1)
+            {
+                b = asin(-r01);
+                a = atan2(r21, r11);
+                g = atan2(r02, r00);
+            }
+            else
+            {
+                b = CoreRobotics::PI / 2;
+                a = -atan2(-r20, r22);
+                g = 0;
+            }
+        }
+        else
+        {
+            b = CoreRobotics::PI / 2;
+            a = atan2(-r20, r22);
+            g = 0;
+        }
+        break;
+    case CR_EULER_MODE_ZYX:
+        if (r20 < 1)
+        {
+            if (r20 > -1)
+            {
+                b = asin(-r20);
+                a = atan2(r10, r00);
+                g = atan2(r21, r22);
+            }
+            else
+            {
+                b = CoreRobotics::PI / 2;
+                a = -atan2(-r12, r11);
+                g = 0;
+            }
+        }
+        else
+        {
+            b = -CoreRobotics::PI / 2;
+            a = atan2(-r12, r11);
+            g = 0;
+        }
+        break;
+    case CR_EULER_MODE_YXZ:
+        if (r12 < 1)
+        {
+            if (r12 > -1)
+            {
+                b = asin(-r12);
+                a = atan2(r02, r22);
+                g = atan2(r10, r11);
+            }
+            else
+            {
+                b = CoreRobotics::PI / 2;
+                a = -atan2(-r01, r00);
+                g = 0;
+            }
+        }
+        else
+        {
+            b = CoreRobotics::PI / 2;
+            a = atan2(-r01, r00);
+            g = 0;
+        }
+        break;
+    default:
+        break;
     }
 
     pose << a, b, g;
-
-    double a1 = CoreRobotics::CRMath::rad2deg(a);
-    double b1 = CoreRobotics::CRMath::rad2deg(b);
-    double g1 = CoreRobotics::CRMath::rad2deg(g);
-
 }
 
-
-void CRFrame::getEulerPose2(CREulerMode mode, Eigen::Vector3d &pose)
-{
-
-    float sy = sqrt(rotation(0, 0) * rotation(0, 0) + rotation(1, 0) * rotation(1, 0));
-
-    bool singular = sy < 1e-6; // If
-
-    double x, y, z;
-    if (!singular)
-    {
-        x = atan2(rotation(2, 1), rotation(2, 2));
-        y = atan2(rotation(2, 0), sy);
-        z = atan2(rotation(1, 0), rotation(0, 0));
-    }
-    else
-    {
-        x = atan2(rotation(1, 2), rotation(1, 1));
-        y = atan2(rotation(2, 0), sy);
-        z = 0;
-    }
-    pose << x, y, z;
-        
-
-}
 
 //=====================================================================
 // End namespace
