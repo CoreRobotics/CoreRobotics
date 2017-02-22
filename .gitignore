@@ -9,9 +9,10 @@ Debug
 x64
 x86
 
-# temp folders
+# temp & build folders
 DerivedData
 obj
+build
 
 # Mac files
 .DS_Store
