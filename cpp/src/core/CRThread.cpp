@@ -40,54 +40,69 @@
  */
 //=====================================================================
 
-#ifndef CRMath_hpp
-#define CRMath_hpp
-
-//=====================================================================
-// Includes
-#include "../../external/eigen/Eigen/Dense"
+#include "CRThread.hpp"
+#include <thread>
 
 
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
+    
+    
+//=====================================================================
+/*!
+ The constructor defines a thread.\n
+ */
+//---------------------------------------------------------------------
+CRThread::CRThread() {
+    loop = new std::thread;
+}
 
-    const double PI = 3.1415926535897932384626433832795;
 
-    //=====================================================================
-    /*!
-    \file CRMath.hpp
-    \brief Implements utility math functions.
-    */
-    //---------------------------------------------------------------------
-    /*!
-    \class CRFrame
-    \ingroup Math
+//=====================================================================
+/*!
+ The destructor frees up memory.\n
+ */
+//---------------------------------------------------------------------
+CRThread::~CRThread() { }
 
-    \brief This class implements various math related helper functions.
+    
 
-    \details
-    \section Description
-    CRMathimplements various math related helper functions.
+//=====================================================================
+/*!
+ This method sets the thread callback function.
+ 
+ \param [in] callbackFunction - the callback function to be executed 
+                                by the thread
+ */
+//---------------------------------------------------------------------
+void CRThread::setCallback(void(callbackFunction)()) {
+    *loop = std::thread(callbackFunction);
+}
 
-    */
 
-    //=====================================================================
-    class CRMath {
-
-    //---------------------------------------------------------------------
-    // Constructor and Destructor
-
-    //---------------------------------------------------------------------
-    // Public Methods
-    public:
-        static double deg2rad(double deg) { return PI * deg / 180.0; }
-        static double rad2deg(double rad) { return 180.0 * rad / PI; }
-    };
+//=====================================================================
+/*!
+ This method starts the thread by joining it to the main thread.
+ */
+//---------------------------------------------------------------------
+void CRThread::start() {
+    loop->join();
+}
+    
+    
+//=====================================================================
+/*!
+ This method stops the thread execution.
+ */
+//---------------------------------------------------------------------
+void CRThread::stop() {
+    loop->detach();
+}
 
 
 //=====================================================================
 // End namespace
 }
 
-#endif /* CRMath_hpp */
+

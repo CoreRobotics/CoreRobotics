@@ -140,6 +140,7 @@ Todo
 //! such as timing, loop definitions and threading.
 //---------------------------------------------------------------------------
 #include "core/CRClock.hpp"
+#include "core/CRThread.hpp"
 #include "core/CRSignalType.hpp"
 
 

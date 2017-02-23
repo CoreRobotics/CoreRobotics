@@ -40,54 +40,75 @@
  */
 //=====================================================================
 
-#ifndef CRMath_hpp
-#define CRMath_hpp
-
-//=====================================================================
-// Includes
-#include "../../external/eigen/Eigen/Dense"
+#include <iostream>
+#include "CoreRobotics.hpp"
 
 
-//=====================================================================
-// CoreRobotics namespace
-namespace CoreRobotics {
 
-    const double PI = 3.1415926535897932384626433832795;
-
-    //=====================================================================
-    /*!
-    \file CRMath.hpp
-    \brief Implements utility math functions.
-    */
-    //---------------------------------------------------------------------
-    /*!
-    \class CRFrame
-    \ingroup Math
-
-    \brief This class implements various math related helper functions.
-
-    \details
-    \section Description
-    CRMathimplements various math related helper functions.
-
-    */
-
-    //=====================================================================
-    class CRMath {
-
-    //---------------------------------------------------------------------
-    // Constructor and Destructor
-
-    //---------------------------------------------------------------------
-    // Public Methods
-    public:
-        static double deg2rad(double deg) { return PI * deg / 180.0; }
-        static double rad2deg(double rad) { return 180.0 * rad / PI; }
-    };
+void callback1(void);
+void callback2(void);
 
 
-//=====================================================================
-// End namespace
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
+
+void CRTestCore(void){
+    
+    // Create a clock
+    CRClock MyClock;
+    
+    // Create a thread
+    CRThread myThread1;
+    myThread1.setCallback(*callback1);
+    
+    // Create another thread
+    CRThread myThread2;
+    myThread2.setCallback(*callback2);
+    
+    
+    // start the threads
+    myThread1.start();
+    myThread2.start();
 }
 
-#endif /* CRMath_hpp */
+
+
+// Callback for the first thread
+void callback1(void){
+    
+    CRClock c;
+    
+    int i = 0;
+    
+    double dt = 0.1;
+    double t  = 0.0;
+    
+    while(i<100){
+        c.startTimer();
+        i++;
+        printf("Thread 1: i = %i \n",i);
+        c.getElapsedTime(t);
+        c.sleep(dt-t);
+    }
+}
+
+
+
+// Callback for the second thread
+void callback2(void){
+    
+    CRClock c;
+    
+    int i = 0;
+    
+    double dt = 1.0;
+    double t  = 0.0;
+    
+    while(i<10){
+        c.startTimer();
+        i++;
+        printf("Thread 2: i = %i \n",i);
+        c.getElapsedTime(t);
+        c.sleep(dt-t);
+    }
+}

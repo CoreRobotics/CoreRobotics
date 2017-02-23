@@ -40,15 +40,12 @@
  */
 //=====================================================================
 
-#ifndef CRRigidBody_hpp
-#define CRRigidBody_hpp
+#ifndef CRThread_hpp
+#define CRThread_hpp
 
 //=====================================================================
 // Includes
-// #include "../../external/eigen/Eigen/Dense"
-#include "CRFrame.hpp"
-#include "CRFrameDh.hpp"
-#include "CRFrameEuler.hpp"
+#include <thread>
 
 
 //=====================================================================
@@ -57,67 +54,95 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRRigidBody.hpp
- \brief Implements a container class for rigid body transformations and
- dynamics properties.
+ \file CRThread.hpp
+ \brief Implements thread execution.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRRigidBody
- \ingroup physics
+ \class CRThread
+ \ingroup core
  
- \brief This class is a container for rigid body transformations and
- dynamic properties necessary for multibody representations.
+ \brief This class implements threads to enable running multiple
+ control loops within a single application.
  
  \details
  \section Description
- CRRigidBody implements a container for representing rigid body
- dynamics.  At a minimum it points to a CoreRobotics::CRFrame class or
- derived subclass.
+ CRThread implements a simple thread interface for setting a callback
+ and starting and stopping thread execution.
+ 
+ - CRClock::setCallback sets the callback function.
+ - CRClock::start starts the thread execution.
+ - CRClock::stop stops the thread execution.
  
  \section Example
- This example creates an Rigid body object.
+ This example creates and runs a simple CRThread.
  \code
  
  #include "CoreRobotics.hpp"
- #include <stdio>
+ 
+ using namespace CoreRobotics;
+ 
+ void callback(void);
  
  main() {
+    CRThread MyThread;
+    MyThread.setCallback(*callback);
+    MyThread.start();
+ }
  
-    CoreRobotics::CRRigidBody Link;
-    CoreRobotics::CRFrame* Frame = new CoreRobotics::CRFrame();
-
-    Link.frame = Frame;
+ // define a callback function for the thread
+ void callback(void){
+    CRClock clock;
+    int i = 0;
+    double et = 0.0;
+    clock.startTimer();
+    while(et < 10.0){
+        printf("i = %i, et = %4.2f s\n",i,et);
+        i++;                        // increment the counter
+        clock.sleep(1.0);           // sleep for 1 second
+        clock.getElapsedTime(et);   // return the elapsed time
+    }
  }
  
  \endcode
- 
- \section References
- [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
- Pearson, 2004.
  */
 //=====================================================================
-class CRRigidBody {
+class CRThread {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRRigidBody();
+    CRThread();
     
     //! Class destructor
-    virtual ~CRRigidBody();
+    virtual ~CRThread();
+    
     
 //---------------------------------------------------------------------
-// Public Members
+// Public Methods
 public:
     
-    //! Pointer to the rigid body frame transformation
-    CoreRobotics::CRFrame* frame;
+    //! Set the thread callback function
+    void setCallback(void(callbackFunction)());
+    
+    //! Start the thread
+    void start();
+    
+    //! Stop the thread
+    void stop();
+    
+    
+//---------------------------------------------------------------------
+// Protected Members
+private:
+
+	//! thread pointer
+    std::thread* loop;
+    
     
 };
-
 //=====================================================================
 // End namespace
 }

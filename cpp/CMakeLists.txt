@@ -39,24 +39,41 @@
 #
 # =====================================================================
 
-
-# cmake flags
+# =====================================================================
+# CMAKE Flags and variables
 cmake_minimum_required(VERSION 2.8)
 
 # Require C++11
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Specify the configuration
+set(CMAKE_BUILD_TYPE Release)
+
 # Define the project name and other CoreRobotics parameters
 set(PROJECT_NAME "CoreRobotics")
+set(LIB_TARGET_NAME ${PROJECT_NAME})
+set(UTIL_TARGET_NAME "TestModules")
 
 # project title
 project( ${PROJECT_NAME} )
 
+# =====================================================================
+# 1. Setup the library target
+#
 # Include headers
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-# Include source files
+# Header files
+file(GLOB HEADERS
+    src/*.hpp
+    src/core/*.hpp
+    src/math/*.hpp
+    src/models/*.hpp
+    src/physics/*.hpp
+)
+
+# Source files
 file(GLOB SOURCES
     src/core/*.cpp
     src/math/*.cpp
@@ -64,18 +81,39 @@ file(GLOB SOURCES
     src/physics/*.cpp
 )
 
-# sort into a group structure
-source_group( ${PROJECT_NAME} )
+# Create static (or shared) library
+add_library(${LIB_TARGET_NAME} STATIC ${SOURCES})
 
-# Create shared library
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+# Set the output directory
+set_target_properties( ${LIB_TARGET_NAME} PROPERTIES 
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+)
 
-# Create a static library
-# add_library( ${PROJECT_NAME} STATIC ${SOURCES} )
+# Sort into a group structure
+source_group( ${LIB_TARGET_NAME}/src FILES SOURCES)
+source_group( ${LIB_TARGET_NAME}/include FILES HEADERS)
 
-# Install library
-set_target_properties( ${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib )
-install( TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_SOURCE_DIR}/lib )
+# =====================================================================
+# 2. Setup the utility target
+#
+# Source files
+file(GLOB UTILITIES
+    utils/*.cpp
+)
 
+# Add an executable for the utilities
+add_executable( ${UTIL_TARGET_NAME} ${UTILITIES} )
 
+# Set the output directory
+set_target_properties( ${UTIL_TARGET_NAME} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/utils/bin
+)
 
+# Add the library as a build dependency
+add_dependencies(${UTIL_TARGET_NAME} ${LIB_TARGET_NAME})
+
+# Link the library binary
+target_link_libraries( ${UTIL_TARGET_NAME} 
+    ${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
+)

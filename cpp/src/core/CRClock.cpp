@@ -32,9 +32,9 @@
  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- \author CoreRobotics Project
- \author www.corerobotics.org
- \author Parker Owan
+ \project CoreRobotics Project
+ \url     www.corerobotics.org
+ \author  Parker Owan
  \version 0.0
  
  */
@@ -89,8 +89,8 @@ void CRClock::startTimer() {
 //---------------------------------------------------------------------
 void CRClock::getElapsedTime(double &t) {
     t1 = clock.now();
-    elapsed = t1-t0;
-    t = elapsed.count();
+    auto elapsed = t1-t0;
+    t = double(elapsed.count()) * double(period.num)/double(period.den);
 }
     
     
@@ -102,9 +102,8 @@ void CRClock::getElapsedTime(double &t) {
  */
 //---------------------------------------------------------------------
 void CRClock::sleep(double t) {
-    const unsigned long ts = static_cast<unsigned long>( t * 1000 );
-    // std::this_thread::sleep_for(std::chrono::duration<double>(t));
-    std::this_thread::sleep_for(std::chrono::milliseconds(ts));
+    const unsigned long ts = static_cast<unsigned long>( t * 1000000000 );
+    std::this_thread::sleep_for(std::chrono::nanoseconds(ts));
 }
 
 
