@@ -32,9 +32,9 @@
  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- \author CoreRobotics Project
- \author www.corerobotics.org
- \author Parker Owan
+ \project CoreRobotics Project
+ \url     www.corerobotics.org
+ \author  Parker Owan
  \version 0.0
  
  */

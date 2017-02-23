@@ -32,16 +32,17 @@
  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- \author CoreRobotics Project
- \author www.corerobotics.org
- \author Parker Owan
+ \project CoreRobotics Project
+ \url     www.corerobotics.org
+ \author  Parker Owan
  \version 0.0
  
  */
 //=====================================================================
 
 #include <iostream>
-#include "crTestModules.h"
+#include "CRTestModules.hpp"
+#include "CoreRobotics.hpp"
 
 
 using namespace std;
@@ -51,11 +52,8 @@ int main(int argc, const char * argv[]) {
     
     cout << "Running the CoreRobotics test suite." << endl;
     
-    // Test parameters
-    int N = 100;        // number of method evaluations for time
-    
-    // Run the physics test suite
-    int res1 = crTestPhysics(N);
+    // Run the core test
+    CRTestCore();
     
     
     return 0;

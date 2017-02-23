@@ -40,54 +40,13 @@
  */
 //=====================================================================
 
-#ifndef CRMath_hpp
-#define CRMath_hpp
-
-//=====================================================================
-// Includes
-#include "../../external/eigen/Eigen/Dense"
+#ifndef CRTestModules_hpp
+#define CRTestModules_hpp
 
 
-//=====================================================================
-// CoreRobotics namespace
-namespace CoreRobotics {
-
-    const double PI = 3.1415926535897932384626433832795;
-
-    //=====================================================================
-    /*!
-    \file CRMath.hpp
-    \brief Implements utility math functions.
-    */
-    //---------------------------------------------------------------------
-    /*!
-    \class CRFrame
-    \ingroup Math
-
-    \brief This class implements various math related helper functions.
-
-    \details
-    \section Description
-    CRMathimplements various math related helper functions.
-
-    */
-
-    //=====================================================================
-    class CRMath {
-
-    //---------------------------------------------------------------------
-    // Constructor and Destructor
-
-    //---------------------------------------------------------------------
-    // Public Methods
-    public:
-        static double deg2rad(double deg) { return PI * deg / 180.0; }
-        static double rad2deg(double rad) { return 180.0 * rad / PI; }
-    };
+void CRTestCore(void);      // Core test suite
 
 
-//=====================================================================
-// End namespace
-}
 
-#endif /* CRMath_hpp */
+
+#endif /* CRTestModules_hpp */
