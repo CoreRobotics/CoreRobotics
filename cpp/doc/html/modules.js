@@ -1,7 +1,7 @@
 var modules =
 [
     [ "Core", "group__core.html", "group__core" ],
-    [ "Math", "group__math.html", null ],
+    [ "Math", "group__math.html", "group__math" ],
     [ "Physics", "group__physics.html", "group__physics" ],
     [ "Models", "group__models.html", "group__models" ],
     [ "World", "group__world.html", null ],

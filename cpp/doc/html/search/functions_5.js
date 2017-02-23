@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['transformtochild',['transformToChild',['../class_core_robotics_1_1_c_r_frame.html#a9294b716cfe34b7aee8efe78bdd179a6',1,'CoreRobotics::CRFrame']]],
-  ['transformtoparent',['transformToParent',['../class_core_robotics_1_1_c_r_frame.html#a3406b9110fc241af18007db6251f2069',1,'CoreRobotics::CRFrame']]]
+  ['isdriven',['isDriven',['../class_core_robotics_1_1_c_r_frame.html#a4e73223b105c3d4a119c92b155268304',1,'CoreRobotics::CRFrame::isDriven()'],['../class_core_robotics_1_1_c_r_frame_dh.html#ad93bced3e6a05a8013f888b277fe36a0',1,'CoreRobotics::CRFrameDh::isDriven()'],['../class_core_robotics_1_1_c_r_frame_euler.html#a15294f433ecb6e0a7319a6737335dfaf',1,'CoreRobotics::CRFrameEuler::isDriven()']]]
 ];

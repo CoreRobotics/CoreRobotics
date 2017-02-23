@@ -2,6 +2,7 @@ var class_core_robotics_1_1_c_r_frame =
 [
     [ "CRFrame", "class_core_robotics_1_1_c_r_frame.html#ab8e862519eb6147dfb11ad4f882ae027", null ],
     [ "CRFrame", "class_core_robotics_1_1_c_r_frame.html#a6a4951e335ee7240a7658ed20fd64885", null ],
+    [ "getEulerPose", "class_core_robotics_1_1_c_r_frame.html#a7eb471c82879513caa7e010e3f848bb2", null ],
     [ "getFreeValue", "class_core_robotics_1_1_c_r_frame.html#aed506d8dbd500743b4cf93357fc1aa19", null ],
     [ "getRotationAndTranslation", "class_core_robotics_1_1_c_r_frame.html#a457c1d322593ac3b9f086856c5ccced6", null ],
     [ "getTransformToChild", "class_core_robotics_1_1_c_r_frame.html#a1a675789ba828b5047faa5b4b56be9c5", null ],

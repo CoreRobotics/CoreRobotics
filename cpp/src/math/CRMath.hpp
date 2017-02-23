@@ -61,14 +61,20 @@ namespace CoreRobotics {
     */
     //---------------------------------------------------------------------
     /*!
-    \class CRFrame
-    \ingroup Math
+    \class CRMath
+    \ingroup math
 
     \brief This class implements various math related helper functions.
 
     \details
     \section Description
-    CRMathimplements various math related helper functions.
+    CRMath implements math static helper functions.
+     
+     
+    References:
+    
+    [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,
+    John Wiley & Sons, 2011.
 
     */
 
@@ -76,13 +82,31 @@ namespace CoreRobotics {
     class CRMath {
 
     //---------------------------------------------------------------------
-    // Constructor and Destructor
-
-    //---------------------------------------------------------------------
-    // Public Methods
+    // Static conversion methods
     public:
+        
+        //! Convert angles in degrees to radians
         static double deg2rad(double deg) { return PI * deg / 180.0; }
+        
+        //! Convert angles in radians to degrees
         static double rad2deg(double rad) { return 180.0 * rad / PI; }
+        
+        
+    //---------------------------------------------------------------------
+    // Numerical integration routines
+    public:
+        
+        //! Forward euler integration
+        static Eigen::VectorXd forwardEulerStep(
+            Eigen::VectorXd(dyanmicSystem)(double, Eigen::VectorXd, Eigen::VectorXd),
+            double t, Eigen::VectorXd x, Eigen::VectorXd u, double dt);
+        
+        //! Runge-Kutta 4th order integration
+        static Eigen::VectorXd rungeKuttaStep(
+             Eigen::VectorXd(dyanmicSystem)(double, Eigen::VectorXd, Eigen::VectorXd),
+             double t, Eigen::VectorXd x, Eigen::VectorXd u, double dt);
+        
+        
     };
 
 

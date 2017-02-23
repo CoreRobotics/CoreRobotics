@@ -55,7 +55,7 @@ namespace CoreRobotics {
  */
 //---------------------------------------------------------------------
 CRThread::CRThread() {
-    loop = new std::thread;
+    this->loop = new std::thread;
 }
 
 

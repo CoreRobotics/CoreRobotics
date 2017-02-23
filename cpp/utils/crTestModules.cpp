@@ -55,6 +55,9 @@ int main(int argc, const char * argv[]) {
     // Run the core test
     CRTestCore();
     
+    // Run the math test
+    CRTestMath();
+    
     
     return 0;
 }

@@ -40,10 +40,8 @@
  */
 //=====================================================================
 
-#include <unistd.h>
 #include <iostream>
 #include "CoreRobotics.hpp"
-
 
 
 void callback1(void);
@@ -55,6 +53,9 @@ using namespace CoreRobotics;
 
 void CRTestCore(void){
     
+    std::cout << "**********************\n";
+    std::cout << "Running the CRTestCore\n";
+    
     double t;
     
     // Create a clock
@@ -62,14 +63,12 @@ void CRTestCore(void){
     
     
     MyClock.startTimer();
-//    usleep(1000000);
     MyClock.sleep(0.1);
     MyClock.getElapsedTime(t);
     
     std::cout << "t = " << t << std::endl;
     
     
-    /*
     // Create a thread
     CRThread myThread1;
     myThread1.setCallback(*callback1);
@@ -82,7 +81,7 @@ void CRTestCore(void){
     // start the threads
     myThread1.start();
     myThread2.start();
-    */
+    
 }
 
 
@@ -97,7 +96,7 @@ void callback1(void){
     double dt = 0.1;
     double t  = 0.0;
     
-    while(i<100){
+    while(i<10){
         c.startTimer();
         i++;
         printf("Thread 1: i = %i \n",i);
@@ -115,10 +114,10 @@ void callback2(void){
     
     int i = 0;
     
-    double dt = 1.0;
+    double dt = 0.25;
     double t  = 0.0;
     
-    while(i<10){
+    while(i<4){
         c.startTimer();
         i++;
         printf("Thread 2: i = %i \n",i);

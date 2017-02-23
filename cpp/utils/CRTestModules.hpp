@@ -44,8 +44,8 @@
 #define CRTestModules_hpp
 
 
-void CRTestCore(void);      // Core test suite
-
+void CRTestCore(void);      // Core tests
+void CRTestMath(void);      // Math tests
 
 
 

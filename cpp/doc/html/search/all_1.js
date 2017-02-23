@@ -45,6 +45,8 @@ var searchData=
   ['crframeeuler',['CRFrameEuler',['../class_core_robotics_1_1_c_r_frame_euler.html',1,'CoreRobotics::CRFrameEuler'],['../class_core_robotics_1_1_c_r_frame_euler.html#a4f4b22c070b4db23e069763953f8ffe3',1,'CoreRobotics::CRFrameEuler::CRFrameEuler(double x, double y, double z, double a, double b, double g, CREulerMode mode, CREulerFreeVariable free)'],['../class_core_robotics_1_1_c_r_frame_euler.html#abaa994a5255b86f1e5e81d83505127a1',1,'CoreRobotics::CRFrameEuler::CRFrameEuler()']]],
   ['crmanipulator',['CRManipulator',['../class_core_robotics_1_1_c_r_manipulator.html',1,'CoreRobotics::CRManipulator'],['../class_core_robotics_1_1_c_r_manipulator.html#ab7b57b627f1e48ae293dd5152c3fdfbc',1,'CoreRobotics::CRManipulator::CRManipulator()']]],
   ['crmanipulatortype',['CRManipulatorType',['../namespace_core_robotics.html#a3ce93821eca5f814b40cbdaa32a5a272',1,'CoreRobotics']]],
+  ['crmath',['CRMath',['../class_core_robotics_1_1_c_r_math.html',1,'CoreRobotics']]],
   ['crrigidbody',['CRRigidBody',['../class_core_robotics_1_1_c_r_rigid_body.html',1,'CoreRobotics::CRRigidBody'],['../class_core_robotics_1_1_c_r_rigid_body.html#a576e8b7b3f746718408ddc2e7329cca7',1,'CoreRobotics::CRRigidBody::CRRigidBody()']]],
-  ['crsignaltype',['CRSignalType',['../namespace_core_robotics.html#a6cb48edf36db16b60f099e975d329464',1,'CoreRobotics']]]
+  ['crsignaltype',['CRSignalType',['../namespace_core_robotics.html#a6cb48edf36db16b60f099e975d329464',1,'CoreRobotics']]],
+  ['crthread',['CRThread',['../class_core_robotics_1_1_c_r_thread.html',1,'CoreRobotics::CRThread'],['../class_core_robotics_1_1_c_r_thread.html#a9549618f88d62bf381cf676069df6c02',1,'CoreRobotics::CRThread::CRThread()']]]
 ];

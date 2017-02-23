@@ -140,6 +140,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4e73223b105c3d4a119c92b155268304"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_core_robotics_1_1_c_r_frame.html#a4e73223b105c3d4a119c92b155268304">isDriven</a> ()</td></tr>
 <tr class="memdesc:a4e73223b105c3d4a119c92b155268304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query if the frame is driven, i.e. has a free variable.  <a href="#a4e73223b105c3d4a119c92b155268304">More...</a><br /></td></tr>
 <tr class="separator:a4e73223b105c3d4a119c92b155268304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7eb471c82879513caa7e010e3f848bb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_core_robotics_1_1_c_r_frame.html#a7eb471c82879513caa7e010e3f848bb2">getEulerPose</a> (<a class="el" href="namespace_core_robotics.html#abbd772864f61f6e048afb1bd5caadbdf">CREulerMode</a> mode, Eigen::Vector3d &amp;pose)</td></tr>
+<tr class="memdesc:a7eb471c82879513caa7e010e3f848bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a vector of the Euler angles.  <a href="#a7eb471c82879513caa7e010e3f848bb2">More...</a><br /></td></tr>
+<tr class="separator:a7eb471c82879513caa7e010e3f848bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -230,6 +233,45 @@ References</h1>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7eb471c82879513caa7e010e3f848bb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7eb471c82879513caa7e010e3f848bb2">&#9670;&nbsp;</a></span>getEulerPose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CoreRobotics::CRFrame::getEulerPose </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_core_robotics.html#abbd772864f61f6e048afb1bd5caadbdf">CREulerMode</a>&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Eigen::Vector3d &amp;&#160;</td>
+          <td class="paramname"><em>pose</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a vector of the Euler angles. </p>
+<p>This method gets a vector of Euler angles of the frame.</p>
+<p>Source: <a href="https://www.geometrictools.com/Documentation/EulerAngles.pdf">https://www.geometrictools.com/Documentation/EulerAngles.pdf</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">mode</td><td>- the Euler mode enumerator </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">pose</td><td>- vector of Euler angles of the frame. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aed506d8dbd500743b4cf93357fc1aa19"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aed506d8dbd500743b4cf93357fc1aa19">&#9670;&nbsp;</a></span>getFreeValue()</h2>
 

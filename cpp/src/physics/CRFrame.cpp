@@ -40,7 +40,6 @@
  */
 //=====================================================================
 
-#include <iostream>
 #include "CRFrame.hpp"
 #include "../../external/eigen/Eigen/Dense"
 #include "../math/CRMath.hpp"
