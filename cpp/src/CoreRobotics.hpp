@@ -139,9 +139,9 @@ Todo
 //! \details This module implements the core functionality of the library,
 //! such as timing, loop definitions and threading.
 //---------------------------------------------------------------------------
-#include "core/CRClock.hpp"
-#include "core/CRThread.hpp"
-#include "core/CRSignalType.hpp"
+#include "CRClock.hpp"
+#include "CRThread.hpp"
+#include "CRSignalType.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -149,7 +149,7 @@ Todo
 //! \brief Implements math components.
 //! \details Todo
 //---------------------------------------------------------------------------
-#include "math/CRMath.hpp"
+#include "CRMath.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -157,10 +157,10 @@ Todo
 //! \brief Implements physics (kinematics and dynamics) representations.
 //! \details Todo
 //---------------------------------------------------------------------------
-#include "physics/CRFrame.hpp"
-#include "physics/CRFrameEuler.hpp"
-#include "physics/CRFrameDH.hpp"
-#include "physics/CRRigidBody.hpp"
+#include "CRFrame.hpp"
+#include "CRFrameEuler.hpp"
+#include "CRFrameDH.hpp"
+#include "CRRigidBody.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -168,7 +168,7 @@ Todo
 //! \brief Implements model (sensor, motion, and noise) representations.
 //! \details Todo
 //---------------------------------------------------------------------------
-#include "models/CRManipulator.hpp"
+#include "CRManipulator.hpp"
 
 
 //---------------------------------------------------------------------------

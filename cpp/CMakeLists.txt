@@ -62,7 +62,18 @@ project( ${PROJECT_NAME} )
 # 1. Setup the library target
 #
 # Include headers
-include_directories(${CMAKE_SOURCE_DIR}/src)
+include_directories(
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/src/core
+    ${CMAKE_SOURCE_DIR}/src/math
+    ${CMAKE_SOURCE_DIR}/src/models
+    ${CMAKE_SOURCE_DIR}/src/physics
+)
+
+# Include 3rd part library headers
+include_directories(
+    ${CMAKE_SOURCE_DIR}/external/eigen/
+)
 
 # Header files
 file(GLOB HEADERS
@@ -82,7 +93,7 @@ file(GLOB SOURCES
 )
 
 # Create static (or shared) library
-add_library(${LIB_TARGET_NAME} STATIC ${SOURCES})
+add_library(${LIB_TARGET_NAME} STATIC ${SOURCES} ${HEADERS})
 
 # Set the output directory
 set_target_properties( ${LIB_TARGET_NAME} PROPERTIES 
@@ -91,8 +102,8 @@ set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
 )
 
 # Sort into a group structure
-source_group( ${LIB_TARGET_NAME}/src FILES SOURCES)
-source_group( ${LIB_TARGET_NAME}/include FILES HEADERS)
+source_group( "src" FILES ${SOURCES})
+source_group( "include" FILES ${HEADERS})
 
 # =====================================================================
 # 2. Setup the utility target

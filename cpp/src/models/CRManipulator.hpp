@@ -46,7 +46,7 @@
 //=====================================================================
 // Includes
 #include <vector>
-#include "../physics/CRRigidBody.hpp"
+#include "CRRigidBody.hpp"
 
 //=====================================================================
 // CoreRobotics namespace

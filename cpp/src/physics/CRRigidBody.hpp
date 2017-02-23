@@ -45,7 +45,6 @@
 
 //=====================================================================
 // Includes
-// #include "../../external/eigen/Eigen/Dense"
 #include "CRFrame.hpp"
 #include "CRFrameDh.hpp"
 #include "CRFrameEuler.hpp"
