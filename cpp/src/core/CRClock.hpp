@@ -139,9 +139,6 @@ private:
     //! steady_clock timepoints
 	std::chrono::steady_clock::time_point t0, t1;
     
-    //! Get the denominator of the steady clock
-    std::chrono::steady_clock::period period;
-    
     
 };
 //=====================================================================

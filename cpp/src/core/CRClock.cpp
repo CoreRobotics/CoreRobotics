@@ -89,8 +89,8 @@ void CRClock::startTimer() {
 //---------------------------------------------------------------------
 void CRClock::getElapsedTime(double &t) {
     t1 = clock.now();
-    auto elapsed = t1-t0;
-    t = double(elapsed.count()) * double(period.num)/double(period.den);
+    std::chrono::duration<double> elapsed = t1-t0;
+    t = elapsed.count();
 }
     
     
@@ -102,7 +102,7 @@ void CRClock::getElapsedTime(double &t) {
  */
 //---------------------------------------------------------------------
 void CRClock::sleep(double t) {
-    const unsigned long ts = static_cast<unsigned long>( t * 1000000000 );
+    const unsigned long ts = static_cast<unsigned long>( t * 1000000000.0 );
     std::this_thread::sleep_for(std::chrono::nanoseconds(ts));
 }
 
