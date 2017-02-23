@@ -96,13 +96,28 @@ void CRClock::getElapsedTime(double &t) {
     
 //=====================================================================
 /*!
- This method sleeps the current thread for t seconds.
+ This method sleeps the current thread for t seconds.  Note that for 
+ short sleep durations (i.e. < 50 ms), this method will spinlock the
+ current thread (maintaining full thread utilization), while for higher
+ sleep durations, the method will sleep the thread to free up process.
  
  \param[in] t - the time [s] to sleep
  */
 //---------------------------------------------------------------------
 void CRClock::sleep(double t) {
-    std::this_thread::sleep_for(std::chrono::duration<double>(t));
+	if (t < 0.05) {
+		// spinlock the thread
+		std::chrono::steady_clock::time_point tNow0 = this->clock.now();
+		std::chrono::steady_clock::time_point tNow1 = this->clock.now();
+		std::chrono::duration<double> et = tNow1 - tNow0;
+		while (et.count() < t) {
+			tNow1 = this->clock.now();
+			et = tNow1 - tNow0;
+		}
+	} else {
+		// sleep the thread to free up processor
+		std::this_thread::sleep_for(std::chrono::duration<double>(t));
+	}
 }
 
 
