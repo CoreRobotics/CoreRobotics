@@ -102,8 +102,7 @@ void CRClock::getElapsedTime(double &t) {
  */
 //---------------------------------------------------------------------
 void CRClock::sleep(double t) {
-    const unsigned long ts = static_cast<unsigned long>( t * 1000000000.0 );
-    std::this_thread::sleep_for(std::chrono::nanoseconds(ts));
+    std::this_thread::sleep_for(std::chrono::duration<double>(t));
 }
 
 
