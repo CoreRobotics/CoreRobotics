@@ -154,6 +154,9 @@ public:
     CRFrame();
     CRFrame(Eigen::Matrix3d rot, Eigen::Vector3d trans);
     
+    //! Class destructor
+    virtual ~CRFrame() = 0;
+    
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
@@ -191,9 +194,6 @@ public:
 
     //! Gets a vector of the Euler angles
     void getEulerPose(CREulerMode mode, Eigen::Vector3d &pose);
-
-    //! Get the pose vectors where the Euler orientation convention is specified by the crEulerMode enumerator
-    // void getPoseVectors(CREulerMode mode, Eigen::Vector3d &position, Eigen::Vector3d &orientation);
     
 //---------------------------------------------------------------------
 // Protected Members

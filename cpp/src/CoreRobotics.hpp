@@ -139,9 +139,9 @@ Todo
 //! \details This module implements the core functionality of the library,
 //! such as timing, loop definitions and threading.
 //---------------------------------------------------------------------------
+#include "CRSignalType.hpp"
 #include "CRClock.hpp"
 #include "CRThread.hpp"
-#include "CRSignalType.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -169,6 +169,9 @@ Todo
 //! \details Todo
 //---------------------------------------------------------------------------
 #include "CRManipulator.hpp"
+#include "CRMotionModel.hpp"
+//#include "CRSensorModel.hpp"
+//#include "CRNoiseModel.hpp"
 
 
 //---------------------------------------------------------------------------

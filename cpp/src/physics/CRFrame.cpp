@@ -71,6 +71,15 @@ CRFrame::CRFrame()
 }
     
     
+    
+//=====================================================================
+/*!
+ The destructor frees up memory.\n
+ */
+//---------------------------------------------------------------------
+CRFrame::~CRFrame(){ }
+    
+    
 //=====================================================================
 /*!
  This method sets the value of the free variable.  The method returns a
@@ -180,7 +189,7 @@ bool CRFrame::isDriven() {
 
 //=====================================================================
 /*!
-This method gets a vector of Euler angles of the frame.
+This method gets a vector of Euler angles from the frame.
 
 Source: https://www.geometrictools.com/Documentation/EulerAngles.pdf
 

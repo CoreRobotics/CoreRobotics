@@ -58,6 +58,9 @@ int main(int argc, const char * argv[]) {
     // Run the math test
     CRTestMath();
     
+    // Run the model test
+    CRTestModels();
+    
     
     return 0;
 }

@@ -46,7 +46,7 @@
 
 void CRTestCore(void);      // Core tests
 void CRTestMath(void);      // Math tests
-
+void CRTestModels(void);    // Model tests
 
 
 #endif /* CRTestModules_hpp */

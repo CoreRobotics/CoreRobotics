@@ -333,15 +333,17 @@ bool CRFrameEuler::isDriven() {
 
 //=====================================================================
 // Private Methods:
-
+    
 //! sets the private rotation and translation members - Note that
 //  anytime a parameter gets set in the frame class, this method gets
 //  called to update the rotation/translation members.
 void CRFrameEuler::setRotationAndTranslation()
 {
-    Eigen::Matrix3d r1;
-    Eigen::Matrix3d r2;
-    Eigen::Matrix3d r3;
+    
+    Eigen::Matrix3d r1 = Eigen::Matrix3d::Identity();
+    Eigen::Matrix3d r2 = Eigen::Matrix3d::Identity();
+    Eigen::Matrix3d r3 = Eigen::Matrix3d::Identity();
+    
     switch (eulerMode){
         case CR_EULER_MODE_ZXZ:
             rotAboutZ(ang_a, r1);

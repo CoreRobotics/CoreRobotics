@@ -218,7 +218,8 @@ private:
     
     //! Overload the inhereted method to set the rotation and
     //  translation explicitly for Euler angles
-    virtual void setRotationAndTranslation();
+    using CRFrame::setRotationAndTranslation;
+    void setRotationAndTranslation();
     
     //! standard rotation about the x axis
     void rotAboutX(double ang, Eigen::Matrix3d &rot);

@@ -135,6 +135,7 @@ enum CRDhMode {
 
 //=====================================================================
 class CRFrameDh : public CRFrame  {
+    
 
 //---------------------------------------------------------------------
 // Constructor and Destructor
@@ -200,15 +201,14 @@ private:
     //! theta angle parameter [rad]
     double dh_theta;
     
-    
 //---------------------------------------------------------------------
 // Private Methods
 private:
     
     //! Overload the inhereted method to set the rotation and
     //  translation explicitly for DH parameters
+    using CRFrame::setRotationAndTranslation;
     void setRotationAndTranslation();
-
 
 };
 

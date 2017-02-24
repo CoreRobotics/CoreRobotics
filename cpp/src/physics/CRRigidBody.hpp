@@ -106,7 +106,7 @@ public:
     CRRigidBody();
     
     //! Class destructor
-    virtual ~CRRigidBody();
+    virtual ~CRRigidBody() = 0;
     
 //---------------------------------------------------------------------
 // Public Members
