@@ -51,18 +51,19 @@ using namespace CoreRobotics;
 // declare the callback functions
 Eigen::VectorXd cdynamics(double t, Eigen::VectorXd x, Eigen::VectorXd u);
 Eigen::VectorXd ddynamics(double t, Eigen::VectorXd x, Eigen::VectorXd u);
-Eigen::VectorXd observation(double t, Eigen::VectorXd x, Eigen::VectorXd u);
+Eigen::VectorXd obsv(Eigen::VectorXd x, Eigen::VectorXd u);
 
 // define a time step
 double dt = 0.1;
- 
+
+
 // main
 void CRTestModels(void){
     
     std::cout << "**********************\n";
     std::cout << "Running the CRTestModels\n";
     
-
+    
     // define the time (s)
     double t = 0;
     
@@ -74,37 +75,54 @@ void CRTestModels(void){
     Eigen::VectorXd u(1);
     u << 1;
     
+    // Define a measurement vector
+    Eigen::VectorXd z(1);
+    z << 0;
+    
+    // initialize a sensor model
+    CRSensorModel sensor = CRSensorModel(x);
+    sensor.setCallbackObsv(obsv);
+    sensor.simulateMeasurement(u, false);
+    sensor.getMeasurement(z);
+    
     
     // initialize a discrete dynamic model
     CRMotionModel dModel = CRMotionModel(x,dt,CR_MODEL_DISCRETE);
-    dModel.setDynamics(ddynamics);
+    dModel.setCallbackDyn(ddynamics);
     
     std::cout << "\nDiscrete simulation:\n";
-    printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
+    printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
     
     while(t<2){
         dModel.simulateMotion(u, false);
         dModel.getState(x);
         dModel.getTime(t);
-        printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
+        sensor.setState(x);
+        sensor.simulateMeasurement(u, false);
+        sensor.getMeasurement(z);
+        printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
     }
     
     // Reset IC
     t = 0;
     x << 0, 0;
+    z << 0;
     
     // initialize a continuous dynamic model
     CRMotionModel cModel = CRMotionModel(x,dt,CR_MODEL_CONTINUOUS);
-    cModel.setDynamics(cdynamics);
+    cModel.setCallbackDyn(cdynamics);
     
     std::cout << "\nContinuous simulation:\n";
-    printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
+    printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
     
     while(t<2){
         cModel.simulateMotion(u, false);
         cModel.getState(x);
         cModel.getTime(t);
-        printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
+        sensor.setState(x);
+        sensor.simulateMeasurement(u, false);
+        sensor.getMeasurement(z);
+        printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
     }
     
     
@@ -140,7 +158,7 @@ Eigen::VectorXd ddynamics(double t, Eigen::VectorXd x, Eigen::VectorXd u){
 
 
 // Callback for the sensor model
-Eigen::VectorXd observation(double t, Eigen::VectorXd x, Eigen::VectorXd u){
+Eigen::VectorXd obsv(Eigen::VectorXd x, Eigen::VectorXd u){
     
     Eigen::Matrix<double, 1, 2> C;
     Eigen::Matrix<double, 1, 1> D;
@@ -150,7 +168,6 @@ Eigen::VectorXd observation(double t, Eigen::VectorXd x, Eigen::VectorXd u){
     
     return C*x + D*u;
 }
-
 
 
 

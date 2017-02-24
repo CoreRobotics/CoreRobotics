@@ -40,8 +40,7 @@
  */
 //=====================================================================
 
-#include "CRMotionModel.hpp"
-#include "CRMath.hpp"
+#include "CRSensorModel.hpp"
 
 
 //=====================================================================
@@ -54,75 +53,45 @@ namespace CoreRobotics {
  The constructor creates a motion model.\n
  
  \param [in] x0 - the initial state
- \param [in] dt - the time step (s)
- \param [in] type - the motion model type, 
-                    see: CoreRobotics::CRMotionModelType
  */
 //---------------------------------------------------------------------
-CRMotionModel::CRMotionModel(Eigen::VectorXd x0, double dt, CRMotionModelType type) {
-    this->setState(x0);
-    this->setTimeStep(dt);
-    this->setType(type);
-    this->time = 0;
+CRSensorModel::CRSensorModel(Eigen::VectorXd x0) {
+    this->state = x0;
 }
     
     
 //=====================================================================
 /*!
- This method sets the callback to the dynamic equation function.  If 
- type is specified as CR_MODEL_DISCRETE, then this function must
- describe the difference equation:\n
+ This method sets the callback to the observation equation function of
+ the form:
  
- \f$ x_{k+1} =  f(t_k,x_k,u_k) \f$
+ \f$ z =  h(x,u) \f$
  
- If the type is specified as CR_MODEL_CONTINUOUS, then this function
- must describe the differential equation:\n
- 
- \f$ \dot{x} =  f(t,x,u) \f$
- 
- \param[in] dynamicFcn - a callback function of the above form.
+ \param[in] observationFcn - an observation function of the above form.
  */
 //---------------------------------------------------------------------
-void CRMotionModel::setCallbackDyn(Eigen::VectorXd(dynamicFcn)(double,
-                                                               Eigen::VectorXd,
-                                                               Eigen::VectorXd))
+void CRSensorModel::setCallbackObsv(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
+                                                                    Eigen::VectorXd))
 {
-    this->dynFcn = dynamicFcn;
+    this->obsFcn = observationFcn;
 }
 
 
 //=====================================================================
 /*!
- This method simulates the motion forward by one step from the current
- state.  If the motion model is discrete, this just evaluates the 
- dynamics equation (callback) for the specified input u.  However,
- if the model is continuous, then a Runge-Kutta integration scheme is 
- used to simulate the next time step.  The sampleNoise flag can be set
- to simulate the motion with additive noise sampled from the supplied 
- noise model.  If the noise model is not defined, the flag does 
- nothing.\n
+ This method simulates the measurement from the value of the underlying
+ state. The sampleNoise flag can be set to simulate the motion with 
+ additive noise sampled from the supplied noise model.  If the noise 
+ model is not defined, the flag does nothing.\n
  
  \param[in] u - input (forcing term) vector
  \param[in] sampleNoise - a boolean flag specifying if the noise model
-                should be sampled to add noise to the simulation.
+                should be sampled to add noise to the measurement.
  */
 //---------------------------------------------------------------------
-void CRMotionModel::simulateMotion(Eigen::VectorXd u, bool sampleNoise)
+void CRSensorModel::simulateMeasurement(Eigen::VectorXd u, bool sampleNoise)
 {
-    double t = this->time;
-    double dt = this->timeStep;
-    
-    if (this->type == CR_MODEL_DISCRETE) {
-        // update the state
-        this->state = (this->dynFcn)(t,this->state,u);
-        
-    } else if (this->type == CR_MODEL_CONTINUOUS) {
-        // update the state
-        this->state = CRMath::rungeKuttaStep(this->dynFcn,t,this->state,u,dt);
-    }
-    
-    // update the time
-    this->time = t+dt;
+    this->measurement = (this->obsFcn)(this->state,u);
 }
 
 

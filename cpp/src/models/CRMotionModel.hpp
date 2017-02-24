@@ -80,7 +80,7 @@ namespace CoreRobotics {
  \f$t\f$ is time, and \f$k\f$ is the discrete time index.
  
  These methods are used to set up the motion model:
- - CRMotionModel::setDynamics sets the dynamics callback function 
+ - CRMotionModel::setCallbackDyn sets the dynamics callback function 
  (one of the two types specified above).
  - CRMotionModel::setType sets the type of the callback function.
  - CRMotionModel::setTimeStep sets the time step (s).
@@ -123,7 +123,7 @@ namespace CoreRobotics {
  
     // initialize a continuous dynamic model
     CRMotionModel cModel = CRMotionModel(x,dt,CR_MODEL_CONTINUOUS);
-    cModel.setDynamics(dynEqn);
+    cModel.setCallbackDyn(dynEqn);
  
     std::cout << "\nContinuous simulation:\n";
     printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
@@ -168,13 +168,13 @@ public:
 // Get/Set Methods
 public:
     
-    //! Set the dynamic function.
-    virtual void setDynamics(Eigen::VectorXd(dynamicFunction)(double,
-                                                              Eigen::VectorXd,
-                                                              Eigen::VectorXd));
+    //! Set the dynamics callback function.
+    virtual void setCallbackDyn(Eigen::VectorXd(dynamicFcn)(double,
+                                                            Eigen::VectorXd,
+                                                            Eigen::VectorXd));
     
     //! Set the process noise model.
-    // virtual void setNoise(CRNoiseModel noise);
+    // virtual void setProcessNoise(CRNoiseModel noise);
     
     //! Set the supplied dynamic function type.
     void setType(CRMotionModelType type) {this->type = type;}
@@ -215,13 +215,13 @@ protected:
     Eigen::VectorXd state;
     
     //! Pointer to the process noise model
-    // CRNoiseModel *processNoise;
+    // CRNoiseModel *dynNoise;
     
     //! Callback to the dynamic model function \dot{x} = f(t,x,u) or
     //! x_kp1 = f(t_k,x_k,u_k) depending on what the type is set to.
-    Eigen::VectorXd(*dynamics)(double,
-                               Eigen::VectorXd,
-                               Eigen::VectorXd);
+    Eigen::VectorXd(*dynFcn)(double,
+                             Eigen::VectorXd,
+                             Eigen::VectorXd);
     
 };
 
