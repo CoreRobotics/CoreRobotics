@@ -60,18 +60,20 @@ namespace CoreRobotics {
  \param[in]   theta  - alpha angle of the frame [rad] (0)
  \param[in]   mode   - DH convention (CR_DH_MODE_MODIFIED)
  \param[in]   free   - free variable (CR_DH_FREE_NONE)
+ \param[in]   offset - free variable offset [rad] (0)
  */
 //=====================================================================
-CRFrameDh::CRFrameDh(double r, double alpha, double d, double theta,
-                     CRDhMode mode, CRDhFreeVariable free)
+CRFrameDh::CRFrameDh(double r, double alpha, double d, double theta, double offset,
+					CRDhMode mode, CRDhFreeVariable free)
 {
     dh_r = r;
     dh_alpha = alpha;
     dh_d = d;
     dh_theta = theta;
-    dhMode = mode;
+	dhMode = mode;
     freeVar = free;
-    setRotationAndTranslation();
+	freeVarOffset = offset;
+	setRotationAndTranslation();
 }
 CRFrameDh::CRFrameDh()
 {
@@ -81,6 +83,7 @@ CRFrameDh::CRFrameDh()
     dh_theta = 0.0;
     dhMode = CR_DH_MODE_MODIFIED;
     freeVar = CR_DH_FREE_NONE;
+	freeVarOffset = 0.0;
     setRotationAndTranslation();
 }
 
@@ -103,16 +106,16 @@ bool CRFrameDh::setFreeValue(double q)
             isWritable = false;
             break;
         case CR_DH_FREE_R:
-            dh_r = q;
+            dh_r = q + freeVarOffset;
             break;
         case CR_DH_FREE_ALPHA:
-            dh_alpha = q;
+            dh_alpha = q + freeVarOffset;
             break;
         case CR_DH_FREE_D:
-            dh_d = q;
+            dh_d = q + freeVarOffset;
             break;
         case CR_DH_FREE_THETA:
-            dh_theta = q;
+            dh_theta = q + freeVarOffset;
         break;
     }
     setRotationAndTranslation();

@@ -44,9 +44,6 @@
 #include "CoreRobotics.hpp"
 
 
-Eigen::VectorXd linearSystem(double t, Eigen::VectorXd x, Eigen::VectorXd u);
-
-
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
@@ -55,43 +52,8 @@ void CRTestFrameOffset(void){
     std::cout << "**********************\n";
     std::cout << "Running the CRTestFrameOffset\n";
     
-    
-    // Define a state vector
-    Eigen::VectorXd x(2);
-    x << 0, 0; // IC
-    
-    // Define an input
-    Eigen::VectorXd u(1);
-    u << 1;  // IC
-    
-    // Time settings
-    double t = 0;
-    double dt = 0.1;
-    
-    // Forward euler
-    std::cout << "\nForward Euler integrator:\n";
-    printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
-    
-    // loop for 2 seconds
-    while (t < 2){
-        x = CRMath::forwardEulerStep(*linearSystem, t, x, u, dt);
-        printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
-        t = t+dt;
-    }
-    
-    
-    // Runga Kutta
-    x << 0, 0;
-    t = 0;
-    std::cout << "\nRunga Kutta integrator:\n";
-    printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
-    
-    // loop for 2 seconds
-    while (t < 2){
-        x = CRMath::rungeKuttaStep(*linearSystem, t, x, u, dt);
-        printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
-        t = t+dt;
-    }
+	CRFrameDh();
+	
 
 }
 
