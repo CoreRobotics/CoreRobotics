@@ -173,6 +173,39 @@ void CRManipulator::getDegreesOfFreedom(int &dof)
     dof = (int)listDriven.size();
 }
 
+
+
+//=====================================================================
+/*!
+This method returns a tool frame for the current robot pose.  Note that
+a tool must have been added to the manipulator using the 
+CRManipulator::addTool method prior to calling this method.\n
+
+\param[in] toolIndex - index of the tool to query
+\param[out] tool - the tool frame transformation referenced to the
+robot base frame for the current manipulator configuration
+*/
+//---------------------------------------------------------------------
+void CRManipulator::getToolFrame(unsigned toolIndex, CRFrame &tool)
+{
+	Eigen::Matrix4d T, T0;
+
+	// return the transformation
+	this->listToolFrames.at(toolIndex)->getTransformToParent(T);
+
+	// now iterate back to the base frame
+	int i = this->listToolParents.at(toolIndex);
+	while (i > -1) {
+
+		this->listLinks.at(i)->frame->getTransformToParent(T0);
+		T = T0*T;
+		i = listParents.at(i);
+	}
+
+	// tool.setRotationAndTranslation(rot, trans);
+	tool.setRotationAndTranslation(T.block(0, 0, 3, 3), T.block(0, 3, 3, 1));
+}
+
     
     
 //=====================================================================
@@ -198,6 +231,36 @@ void CRManipulator::addLink(CoreRobotics::CRRigidBody* link)
     if (link->frame->isDriven()) {
         listDriven.push_back(n);
     }
+}
+
+
+
+//=====================================================================
+/*!
+This method adds a frame to the list of tools. \n
+
+\param[in] parentIndex - the index of the parent frame to which the
+supplied tool frame is referenced.
+\param[in] tool - a CRFrame object containing the frame transformation 
+to the specified parent link.
+\return - returns true if the tool was set, returns a false if it was 
+not set due to an invalid parentIndex
+*/
+//---------------------------------------------------------------------
+bool CRManipulator::addTool(unsigned parentIndex, CRFrame* tool)
+{
+	// get the number of links
+	int n;
+	this->getNumberOfLinks(n);
+
+	// add the parent integer
+	if (parentIndex > unsigned(n-1)) {
+		return false;
+	} else {
+		listToolFrames.push_back(tool);
+		listToolParents.push_back(parentIndex);
+		return true;
+	}
 }
 
 
