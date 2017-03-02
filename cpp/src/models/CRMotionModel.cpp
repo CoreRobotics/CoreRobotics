@@ -53,13 +53,21 @@ namespace CoreRobotics {
 /*!
  The constructor creates a motion model.\n
  
- \param [in] x0 - the initial state
- \param [in] dt - the time step (s)
- \param [in] type - the motion model type, 
+ \param[in] dynamicFcn - a callback function for the dynamics: see
+    CRMotionModel::setCallbackDyn() for more information.
+ \param[in] x0 - the initial state
+ \param[in] dt - the time step (s)
+ \param[in] type - the motion model type,
                     see: CoreRobotics::CRMotionModelType
  */
 //---------------------------------------------------------------------
-CRMotionModel::CRMotionModel(Eigen::VectorXd x0, double dt, CRMotionModelType type) {
+CRMotionModel::CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
+                                                         Eigen::VectorXd,
+                                                         Eigen::VectorXd),
+                             Eigen::VectorXd x0,
+                             double dt,
+                             CRMotionModelType type) {
+    this->setCallbackDyn(dynamicFcn);
     this->setState(x0);
     this->setTimeStep(dt);
     this->setType(type);

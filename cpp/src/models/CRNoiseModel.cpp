@@ -40,7 +40,9 @@
  */
 //=====================================================================
 
-#include "CRSensorModel.hpp"
+#include "Eigen/Dense"
+#include "CRNoiseModel.hpp"
+#include <chrono>
 
 
 //=====================================================================
@@ -50,58 +52,68 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- The constructor creates a sensor model of the form:\n
- 
- \f$ z =  h(x,u) \f$
- 
- \param[in] observationFcn - an observation function of the above form.
- \param[in] x0 - the initial state.
+ The constructor creates a noise model.\n
  */
 //---------------------------------------------------------------------
-CRSensorModel::CRSensorModel(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
-                                                             Eigen::VectorXd),
-                             Eigen::VectorXd x0)
-{
-    this->setCallbackObsv(observationFcn);
-    this->setState(x0);
+CRNoiseModel::CRNoiseModel() {
+    
+    // get a seed
+    typedef std::chrono::steady_clock clock;
+    clock::time_point t0 = clock::now();
+    for(int i=0; i < 1000000; i++){
+        clock::now();
+    }
+    clock::duration d = clock::now() - t0;
+    this->seed = unsigned(10000*d.count());
+    
+    // set the seed
+    this->generator.seed(this->seed);
+}
+CRNoiseModel::CRNoiseModel(unsigned seed) {
+    this->seed = seed;
+    this->generator.seed(this->seed);
 }
     
     
 //=====================================================================
 /*!
- This method sets the callback to the observation equation function of
- the form:
+ This method sets the paramters of the noise model.  The icdFunction is
+ an inverse cumulative distribution of the form:
  
- \f$ z =  h(x,u) \f$
+ \f$ v = cdf^{-1}(P) \f$
  
- \param[in] observationFcn - an observation function of the above form.
+ where \f$v\f$ is the noise and \f$P\f$ is the cumulative probability
+ [0,1].  The function must take a double between 0,1 and output a
+ double.  See: `https://en.wikipedia.org/wiki/Inverse_transform_sampling
+ 
+ \param[in] type - enumerator declaring distribution type, see 
+                   CoreRobotics::CRNoiseType
+ \param[in] icdFunction - inverse CDF of the distribution.  This function
+                   is sampled with a uniform distribution over [0,1]
  */
 //---------------------------------------------------------------------
-void CRSensorModel::setCallbackObsv(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
-                                                                    Eigen::VectorXd))
+void CRNoiseModel::setParameters(CRNoiseType type,
+                                 double(icdFunction)(double))
 {
-    this->obsFcn = observationFcn;
+    this->parameters.type = type;
+    this->parameters.icdFunction = icdFunction;
 }
 
 
 //=====================================================================
 /*!
- This method simulates the measurement from the value of the underlying
- state. The sampleNoise flag can be set to simulate the motion with 
- additive noise sampled from the supplied noise model.  If the noise 
- model is not defined, the flag does nothing.\n
+ This method samples a random number using the inverse sampling method. 
+ This method uniformly draws a number from [0,1] and applies it to the 
+ supplied inverse cumulative distribution (ICD) function.\n
  
- \param[in] u - input (forcing term) vector.
- \param[in] sampleNoise - a boolean flag specifying if the noise model
-                should be sampled to add noise to the measurement.
- \param[out] z - simulated measurement.
+ \param[out] x - sampled state
  */
 //---------------------------------------------------------------------
-void CRSensorModel::simulateMeasurement(Eigen::VectorXd u,
-                                        bool sampleNoise,
-                                        Eigen::VectorXd &z)
+void CRNoiseModel::sample(Eigen::Matrix<double,1,1> &x)
 {
-    z = (this->obsFcn)(this->state,u);
+    // Uniform real distribution
+    std::uniform_real_distribution<double> uniform(0.0,1.0);
+    x << (this->parameters.icdFunction)(uniform(this->generator));
 }
 
 

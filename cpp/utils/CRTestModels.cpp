@@ -40,6 +40,8 @@
  */
 //=====================================================================
 
+
+#include <random>
 #include <iostream>
 #include "CoreRobotics.hpp"
 
@@ -52,6 +54,7 @@ using namespace CoreRobotics;
 Eigen::VectorXd cdynamics(double t, Eigen::VectorXd x, Eigen::VectorXd u);
 Eigen::VectorXd ddynamics(double t, Eigen::VectorXd x, Eigen::VectorXd u);
 Eigen::VectorXd obsv(Eigen::VectorXd x, Eigen::VectorXd u);
+double icdf(double);
 
 // define a time step
 double dt = 0.1;
@@ -80,15 +83,13 @@ void CRTestModels(void){
     z << 0;
     
     // initialize a sensor model
-    CRSensorModel sensor = CRSensorModel(x);
-    sensor.setCallbackObsv(obsv);
-    sensor.simulateMeasurement(u, false);
-    sensor.getMeasurement(z);
+    CRSensorModel sensor = CRSensorModel(obsv,x);
+    sensor.simulateMeasurement(u, 0, z);
+    // sensor.getMeasurement(z);
     
     
     // initialize a discrete dynamic model
-    CRMotionModel dModel = CRMotionModel(x,dt,CR_MODEL_DISCRETE);
-    dModel.setCallbackDyn(ddynamics);
+    CRMotionModel dModel = CRMotionModel(ddynamics,x,dt,CR_MODEL_DISCRETE);
     
     std::cout << "\nDiscrete simulation:\n";
     printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
@@ -98,8 +99,7 @@ void CRTestModels(void){
         dModel.getState(x);
         dModel.getTime(t);
         sensor.setState(x);
-        sensor.simulateMeasurement(u, false);
-        sensor.getMeasurement(z);
+        sensor.simulateMeasurement(u, false, z);
         printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
     }
     
@@ -109,8 +109,7 @@ void CRTestModels(void){
     z << 0;
     
     // initialize a continuous dynamic model
-    CRMotionModel cModel = CRMotionModel(x,dt,CR_MODEL_CONTINUOUS);
-    cModel.setCallbackDyn(cdynamics);
+    CRMotionModel cModel = CRMotionModel(cdynamics, x,dt,CR_MODEL_CONTINUOUS);
     
     std::cout << "\nContinuous simulation:\n";
     printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
@@ -120,11 +119,89 @@ void CRTestModels(void){
         cModel.getState(x);
         cModel.getTime(t);
         sensor.setState(x);
-        sensor.simulateMeasurement(u, false);
-        sensor.getMeasurement(z);
+        sensor.simulateMeasurement(u, false, z);
         printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
     }
     
+    
+    
+    
+    // initialize a noise model
+    Eigen::Matrix<double,1,1> v;
+    CRNoiseModel genericNoise = CRNoiseModel();
+    genericNoise.setParameters(CR_NOISE_CONTINUOUS, icdf);
+    
+    
+    std::cout << "\nInverse CDF noise sampling:\n";
+    
+    const int nrolls=10000;  // number of experiments
+    const int nstars=100;    // maximum number of stars to distribute
+    const int nintervals=10; // number of intervals
+    int p[10]={};
+    
+    
+    for (int i=0; i<nrolls; ++i) {
+        genericNoise.sample(v);
+        ++p[int(nintervals*v(0))];
+    }
+    
+    std::cout << "uniform_real_distribution (0.0,1.0):" << std::endl;
+    std::cout << std::fixed; std::cout.precision(1);
+    
+    for (int i=0; i<nintervals; ++i) {
+        std::cout << float(i)/nintervals << "-" << float(i+1)/nintervals << ": ";
+        std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+    }
+    
+    
+    
+    /*
+    // from c++
+    const int nrolls=10000;  // number of experiments
+    const int nstars=100;    // maximum number of stars to distribute
+    const int nintervals=10; // number of intervals
+    
+    std::cout << "\nRandom model sampling:\n";
+    
+    // Normal random number generator
+    std::default_random_engine generator;
+    std::normal_distribution<double> gaussian(5.0,2.0);
+    
+    int p[10]={};
+    
+    for (int i=0; i<nrolls; ++i) {
+        double number = gaussian(generator);
+        if ((number>=0.0)&&(number<10.0)) ++p[int(number)];
+    }
+    
+    std::cout << "normal_distribution (5.0,2.0):" << std::endl;
+    
+    for (int i=0; i<10; ++i) {
+        std::cout << i << "-" << (i+1) << ": ";
+        std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+    }
+    
+    
+    
+    
+    // Uniform random number generator
+    std::uniform_real_distribution<double> unfrmreal(0.0,1.0);
+    
+    int p2[nintervals]={};
+    
+    for (int i=0; i<nrolls; ++i) {
+        double number = unfrmreal(generator);
+        ++p2[int(nintervals*number)];
+    }
+    
+    std::cout << "uniform_real_distribution (0.0,1.0):" << std::endl;
+    std::cout << std::fixed; std::cout.precision(1);
+    
+    for (int i=0; i<nintervals; ++i) {
+        std::cout << float(i)/nintervals << "-" << float(i+1)/nintervals << ": ";
+        std::cout << std::string(p2[i]*nstars/nrolls,'*') << std::endl;
+    }
+    */
     
 }
 
@@ -169,6 +246,13 @@ Eigen::VectorXd obsv(Eigen::VectorXd x, Eigen::VectorXd u){
     return C*x + D*u;
 }
 
+
+// Callback for inverse CDF (triangular PDF over [0,1])
+double icdf(double P){
+    
+    return sqrt(P);
+    
+}
 
 
 

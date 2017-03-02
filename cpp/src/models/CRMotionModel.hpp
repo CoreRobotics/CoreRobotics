@@ -122,8 +122,7 @@ namespace CoreRobotics {
     u << 1; // make the input constant for the demonstration
  
     // initialize a continuous dynamic model
-    CRMotionModel cModel = CRMotionModel(x,dt,CR_MODEL_CONTINUOUS);
-    cModel.setCallbackDyn(dynEqn);
+    CRMotionModel cModel = CRMotionModel(dynEqn,x,dt,CR_MODEL_CONTINUOUS);
  
     std::cout << "\nContinuous simulation:\n";
     printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
@@ -162,7 +161,12 @@ class CRMotionModel {
 public:
     
     //! Class constructor
-    CRMotionModel(Eigen::VectorXd x0, double dt, CRMotionModelType type);
+    CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
+                                              Eigen::VectorXd,
+                                              Eigen::VectorXd),
+                  Eigen::VectorXd x0,
+                  double dt,
+                  CRMotionModelType type);
     
 //---------------------------------------------------------------------
 // Get/Set Methods

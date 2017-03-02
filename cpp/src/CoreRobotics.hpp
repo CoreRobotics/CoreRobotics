@@ -171,7 +171,7 @@ Todo
 #include "CRManipulator.hpp"
 #include "CRMotionModel.hpp"
 #include "CRSensorModel.hpp"
-//#include "CRNoiseModel.hpp"
+#include "CRNoiseModel.hpp"
 
 
 //---------------------------------------------------------------------------

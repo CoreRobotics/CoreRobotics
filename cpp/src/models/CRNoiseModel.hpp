@@ -40,12 +40,13 @@
  */
 //=====================================================================
 
-#ifndef CRSensorModel_hpp
-#define CRSensorModel_hpp
+#ifndef CRNoiseModel_hpp
+#define CRNoiseModel_hpp
 
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
+#include <random>
 
 //=====================================================================
 // CoreRobotics namespace
@@ -80,6 +81,7 @@ namespace CoreRobotics {
  
  These methods return states of the model:
  - CRSensorModel::getState outputs the state vector.
+ - CRSensorModel::getMeasurement outputs the measurement vector.
  
  These methods simulate sensor measurements:
  - CRSensorModel::simulateMeasurement computes the measurement vector (z)
@@ -94,43 +96,8 @@ namespace CoreRobotics {
  
  using namespace CoreRobotics;
  
- // declare the observation system callback (z = h(x,u))
-    Eigen::VectorXd obsEqn(Eigen::VectorXd x, Eigen::VectorXd u){
-    Eigen::Matrix<double, 1, 2> C;
-    C << 1, 0;
-    return C*x;
- }
- 
  main() {
-     double dt = 0.1; // time step (s)
-     double t = 0;    // define the time (s)
-     Eigen::VectorXd x(2); // Define a state vector
-     x << 0, 0; // state IC
-     Eigen::VectorXd u(1); // Define an input vector
-     u << 1; // make the input constant for the demonstration
-     Eigen::VectorXd z(1); // Define a measurement vector
-     z << 0; // init value in memory
-     
-     // initialize a sensor model
-     CRSensorModel sensor = CRSensorModel(obsEqn,x);
-     
-     std::cout << "\nSensor simulation:\n";
-     printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
-     
-     // Now perform a simulation of the system reponse over 2 seconds
-     while(t<2){
-     
-         // simulate a simple dynamic system
-         double x0 = x(0)+dt*x(1);
-         double x1 = -dt*10*x(0)+(1-dt*6)*x(1)+dt*u(0);
-         x << x0, x1;
-         
-         sensor.setState(x);
-         sensor.simulateMeasurement(u, false, z);
-         printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
-         
-         t = t+dt;
-     }
+ 
  }
  
  \endcode
@@ -143,56 +110,58 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-class CRSensorModel {
+//! Enumerator for specifying whether the specified dynamic model is
+//  either continuous or discrete.
+enum CRNoiseType {
+    CR_NOISE_CONTINUOUS,
+    CR_NOISE_DISCRETE
+};
+    
+//=====================================================================
+// ! Paramter structure declaration
+struct icdParam{
+    CRNoiseType type;
+    double(*icdFunction)(double);
+};
+    
+//=====================================================================
+class CRNoiseModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRSensorModel(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
-                                                  Eigen::VectorXd),
-                  Eigen::VectorXd x0);
+    CRNoiseModel();
+    CRNoiseModel(unsigned seed);
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
-    //! Set the observation callback function.
-    virtual void setCallbackObsv(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
-                                                                 Eigen::VectorXd));
-    
-    //! Set the process noise model.
-    // virtual void setMeasurementNoise(CRNoiseModel noise);
-    
-    //! Set the system state vector (x)
-    void setState(Eigen::VectorXd x) {this->state = x;}
-    
-    //! Get the state vector (x)
-    void getState(Eigen::VectorXd &x) {x = this->state;}
+    //! Set the parameters that describe the distribution
+    virtual void setParameters(CRNoiseType type,
+                               double(*icdFunction)(double));
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
-    //! Simulate the measurement
-    void simulateMeasurement(Eigen::VectorXd u,
-                             bool sampleNoise,
-                             Eigen::VectorXd &z);
+    //! Sample a noise vector from the density
+    virtual void sample(Eigen::Matrix<double,1,1> &x);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
-    //! Underlying state of the system
-    Eigen::VectorXd state;
+    //! Noise model type
+    icdParam parameters;
     
-    //! Pointer to the measurement noise model
-    // CRNoiseModel *obsNoise;
+    //! Seed value
+    unsigned seed;
     
-    //! Callback to the measurement model function z = h(x,u)
-    Eigen::VectorXd(*obsFcn)(Eigen::VectorXd,
-                             Eigen::VectorXd);
+    //! Random number generator
+    std::default_random_engine generator;
     
 };
 
