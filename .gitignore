@@ -13,6 +13,7 @@ x86
 DerivedData
 obj
 build
+html
 
 # Mac files
 .DS_Store
