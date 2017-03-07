@@ -40,13 +40,14 @@
  */
 //=====================================================================
 
-#ifndef CRNoiseModel_hpp
-#define CRNoiseModel_hpp
+#ifndef CRNoiseGaussian_hpp
+#define CRNoiseGaussian_hpp
 
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
 #include <random>
+#include "CRNoiseModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -54,21 +55,22 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRNoiseModel.hpp
- \brief Implements a class that handles sensor models.
+ \file CRNoiseGaussian.hpp
+ \brief Implements a class for modeling Gaussian noise.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRNoiseModel
+ \class CRNoiseGaussian
  \ingroup models
  
- \brief This class implements a noise model.
+ \brief Implements a class for modeling Gaussian noise.
  
  \details
  \section Description
+ CRNoiseGaussian implements a
  
  \section Example
- This example demonstrates use of the CRNoiseModel class.
+ This example demonstrates use of the CRNoiseGaussian class.
  \code
  
  #include "CoreRobotics.hpp"
@@ -90,52 +92,46 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-//! Enumerator for specifying whether the specified dynamic model is
-//  either continuous or discrete.
-enum CRNoiseType {
-    CR_NOISE_CONTINUOUS,
-    CR_NOISE_DISCRETE
+// Paramter structure declaration
+struct gaussianParam{
+    Eigen::MatrixXd cov;
+    Eigen::VectorXd mean;
 };
     
 //=====================================================================
-// ICDF Paramter structure declaration
-struct CRParamIcdf{
-    CRNoiseType type;
-    double(*icdFunction)(double);
-};
-    
-//=====================================================================
-class CRNoiseModel {
+class CRNoiseGaussian : public CRNoiseModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRNoiseModel();
-    CRNoiseModel(unsigned seed);
+    CRNoiseGaussian();
+    CRNoiseGaussian(unsigned seed);
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
     //! Set the parameters that describe the distribution
-    virtual void setParameters(CRNoiseType type,
-                               double(*icdFunction)(double));
+    using CRNoiseModel::setParameters;
+    void setParameters(Eigen::MatrixXd cov,
+                       Eigen::VectorXd mean);
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Sample a noise vector from the density
-    virtual void sample(Eigen::Matrix<double,1,1> &x);
+    using CRNoiseModel::sample;
+    void sample(Eigen::VectorXd &x);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
     //! Noise model type
-    CRParamIcdf parameters;
+    gaussianParam parameters;
     
     //! Seed value
     unsigned seed;

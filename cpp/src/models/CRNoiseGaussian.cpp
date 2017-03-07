@@ -40,114 +40,81 @@
  */
 //=====================================================================
 
-#ifndef CRNoiseModel_hpp
-#define CRNoiseModel_hpp
-
-//=====================================================================
-// Includes
 #include "Eigen/Dense"
-#include <random>
+#include "CRNoiseGaussian.hpp"
+#include <chrono>
+
 
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
     
+    
 //=====================================================================
 /*!
- \file CRNoiseModel.hpp
- \brief Implements a class that handles sensor models.
+ The constructor creates a noise model.\n
  */
 //---------------------------------------------------------------------
+CRNoiseGaussian::CRNoiseGaussian() {
+    
+    // get a seed
+    typedef std::chrono::steady_clock clock;
+    clock::time_point t0 = clock::now();
+    for(int i=0; i < 1000000; i++){
+        clock::now();
+    }
+    clock::duration d = clock::now() - t0;
+    this->seed = unsigned(10000*d.count());
+    
+    // set the seed
+    this->generator.seed(this->seed);
+}
+CRNoiseGaussian::CRNoiseGaussian(unsigned seed) {
+    this->seed = seed;
+    this->generator.seed(this->seed);
+}
+    
+    
+//=====================================================================
 /*!
- \class CRNoiseModel
- \ingroup models
+ This method sets the paramters of the noise model.  The Gaussian is the
+ multivariate standard normal distribution with mean and covariance, as
+ in http://en.wikipedia.org/wiki/Normal_distribution
  
- \brief This class implements a noise model.
- 
- \details
- \section Description
- 
- \section Example
- This example demonstrates use of the CRNoiseModel class.
- \code
- 
- #include "CoreRobotics.hpp"
- #include <iostream>
- 
- using namespace CoreRobotics;
- 
- main() {
- 
- }
- 
- \endcode
- 
- \section References
- [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
- Ed. 2, CRC Press, 2012. \n\n
- 
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
- 2006. \n\n
+ \param[in] cov - covariance matrix of the Gaussian distribution
+ \param[in] mean - mean vector of the Gaussian distribution
  */
+//---------------------------------------------------------------------
+void CRNoiseGaussian::setParameters(Eigen::MatrixXd cov,
+                                         Eigen::VectorXd mean)
+{
+    this->parameters.cov = cov;
+    this->parameters.mean = mean;
+}
+
+
 //=====================================================================
-//! Enumerator for specifying whether the specified dynamic model is
-//  either continuous or discrete.
-enum CRNoiseType {
-    CR_NOISE_CONTINUOUS,
-    CR_NOISE_DISCRETE
-};
-    
-//=====================================================================
-// ICDF Paramter structure declaration
-struct CRParamIcdf{
-    CRNoiseType type;
-    double(*icdFunction)(double);
-};
-    
-//=====================================================================
-class CRNoiseModel {
-    
+/*!
+ This method samples a random number from the specified Gaussian normal
+ distribution..\n
+ 
+ \param[out] x - sampled state
+ */
 //---------------------------------------------------------------------
-// Constructor and Destructor
-public:
-    
-    //! Class constructor
-    CRNoiseModel();
-    CRNoiseModel(unsigned seed);
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
-public:
-    
-    //! Set the parameters that describe the distribution
-    virtual void setParameters(CRNoiseType type,
-                               double(*icdFunction)(double));
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Sample a noise vector from the density
-    virtual void sample(Eigen::Matrix<double,1,1> &x);
-    
-//---------------------------------------------------------------------
-// Protected Members
-protected:
-    
-    //! Noise model type
-    CRParamIcdf parameters;
-    
-    //! Seed value
-    unsigned seed;
-    
-    //! Random number generator
-    std::default_random_engine generator;
-    
-};
+void CRNoiseGaussian::sample(Eigen::VectorXd &x)
+{
+    // Normal distribution
+    std::normal_distribution<double> gaussian(0.0,1.0);
+    for (int i=0; i<this->parameters.mean.size(); i++){
+        x(i) = gaussian(this->generator);
+    }
+    // compute the Cholesky decomposition of A
+    Eigen::LLT<Eigen::MatrixXd> lltOfCov(this->parameters.cov);
+    Eigen::MatrixXd L = lltOfCov.matrixL();
+    x = L*x + this->parameters.mean;
+}
+
 
 //=====================================================================
 // End namespace
 }
-
-
-#endif

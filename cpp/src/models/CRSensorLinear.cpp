@@ -40,8 +40,7 @@
  */
 //=====================================================================
 
-#include "CRMath.hpp"
-#include "Eigen/Dense"
+#include "CRSensorModel.hpp"
 
 
 //=====================================================================
@@ -51,68 +50,61 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- This method performs a forward euler integration step for the dynamical
- system:\n
+ The constructor creates a sensor model of the form:\n
  
- /f$ \dot{x} = f(t,x,u,p) /f$
+ \f$ z =  h(x,u) \f$
  
- This equation is specified as a callback function to the integration.
- 
- \param [in] dynamicSystem - the continuous time dynamic system.
- \param [in] t - the current time in seconds
- \param [in] x - the current state vector
- \param [in] u - the current input vector
- \param [in] dt - the time step to integrate over
- \return the state vector at t+dt
- 
+ \param[in] observationFcn - an observation function of the above form.
+ \param[in] x0 - the initial state.
  */
 //---------------------------------------------------------------------
-vec CRMath::forwardEulerStep(vec(dynamicSystem)(double, vec, vec),
-                                                double t,
-                                                vec x,
-                                                vec u,
-                                                double dt){
-    // forward integration step
-    return x + dt*dynamicSystem(t,x,u);
+CRSensorModel::CRSensorModel(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
+                                                             Eigen::VectorXd),
+                             Eigen::VectorXd x0)
+{
+    this->setCallbackObsv(observationFcn);
+    this->setState(x0);
 }
     
     
 //=====================================================================
 /*!
- This method performs a Runge-Kutta integration step for the dynamical
- system:\n
+ This method sets the callback to the observation equation function of
+ the form:
  
- /f$ \dot{x} = f(t,x,u,p) /f$
+ \f$ z =  h(x,u) \f$
  
- This equation is specified as a callback function to the integration.
- The Runga-Kutta integration is an accurate integration scheme at the
- expense of computational complexity over the forward Euler method.
- 
- \param [in] dynamicSystem - the continuous time dynamic system.
- \param [in] t - the current time in seconds
- \param [in] x - the current state vector
- \param [in] u - the current input vector
- \param [in] dt - the time step to integrate over
- \return the state vector at t+dt
- 
+ \param[in] observationFcn - an observation function of the above form.
  */
 //---------------------------------------------------------------------
-vec CRMath::rungeKuttaStep(vec(dynamicSystem)(double, vec, vec),
-                           double t,
-                           vec x,
-                           vec u,
-                           double dt){
-    // RK4 step
-    Eigen::VectorXd f1 = dynamicSystem(t,x,u);
-    Eigen::VectorXd f2 = dynamicSystem(t+dt/2,x+dt*f1/2,u);
-    Eigen::VectorXd f3 = dynamicSystem(t+dt/2,x+dt*f2/2,u);
-    Eigen::VectorXd f4 = dynamicSystem(t+dt,x+dt*f3,u);
-    return x + dt/6*(f1 + 2*f2 + 2*f3 + f4);
+void CRSensorModel::setCallbackObsv(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
+                                                                    Eigen::VectorXd))
+{
+    this->obsFcn = observationFcn;
+}
+
+
+//=====================================================================
+/*!
+ This method simulates the measurement from the value of the underlying
+ state. The sampleNoise flag can be set to simulate the motion with 
+ additive noise sampled from the supplied noise model.  If the noise 
+ model is not defined, the flag does nothing.\n
+ 
+ \param[in] u - input (forcing term) vector.
+ \param[in] sampleNoise - a boolean flag specifying if the noise model
+                should be sampled to add noise to the measurement.
+ \param[out] z - simulated measurement.
+ */
+//---------------------------------------------------------------------
+void CRSensorModel::simulateMeasurement(Eigen::VectorXd u,
+                                        bool sampleNoise,
+                                        Eigen::VectorXd &z)
+{
+    z = (this->obsFcn)(this->state,u);
 }
 
 
 //=====================================================================
 // End namespace
 }
-
-

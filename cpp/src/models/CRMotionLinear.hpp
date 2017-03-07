@@ -40,13 +40,14 @@
  */
 //=====================================================================
 
-#ifndef CRMotionModel_hpp
-#define CRMotionModel_hpp
+#ifndef CRMotionLinear_hpp
+#define CRMotionLinear_hpp
 
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include <vector>
+#include "CRMotionModel.hpp"
+#include "CRMath.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -54,20 +55,20 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRMotionModel.hpp
+ \file CRMotionLinear.hpp
  \brief Implements a class that handles dynamic models.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRMotionModel
+ \class CRMotionLinear
  \ingroup models
  
  \brief This class implements a motion model.
  
  \details
  \section Description
- CRMotionModel implements a motion model from a supplied dynamics 
- callback function.  Specifically, CRMotionModel sets up a container
+ CRMotionLinear implements a motion model from a supplied dynamics 
+ callback function.  Specifically, CRMotionLinear sets up a container
  and methods for simulating either a continuous-time set of differential
  equations as in
  
@@ -81,23 +82,23 @@ namespace CoreRobotics {
  \f$t\f$ is time, and \f$k\f$ is the discrete time index.
  
  These methods are used to set up the motion model:
- - CRMotionModel::setDynamics sets the dynamics callback function 
+ - CRMotionLinear::setDynamics sets the dynamics callback function 
  (one of the two types specified above).
- - CRMotionModel::setType sets the type of the callback function.
- - CRMotionModel::setTimeStep sets the time step (s).
- - CRMotionModel::setState sets the underlying state vector.
+ - CRMotionLinear::setType sets the type of the callback function.
+ - CRMotionLinear::setTimeStep sets the time step (s).
+ - CRMotionLinear::setState sets the underlying state vector.
  
  These methods return states of the model:
- - CRMotionModel::getState outputs the state vector.
+ - CRMotionLinear::getState outputs the state vector.
  - CRManipulator::getTime outputs the associated time (s);
  
  These methods simulate dynamic motion:
- - CRMotionModel::simulateMotion updates the underlying state and time
+ - CRMotionLinear::simulateMotion updates the underlying state and time
  by solving the dynamic equation for the input vector and current 
  underlying state and time.
  
  \section Example
- This example demonstrates use of the CRMotionModel class.
+ This example demonstrates use of the CRMotionLinear class.
  \code
  
  #include "CoreRobotics.hpp"
@@ -123,7 +124,7 @@ namespace CoreRobotics {
     u << 1; // make the input constant for the demonstration
  
     // initialize a continuous dynamic model
-    CRMotionModel cModel = CRMotionModel(dynEqn,x,dt,CR_MODEL_CONTINUOUS);
+    CRMotionLinear cModel = CRMotionLinear(dynEqn,x,dt,CR_MODEL_CONTINUOUS);
  
     std::cout << "\nContinuous simulation:\n";
     printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
@@ -147,98 +148,50 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-//! Enumerator for specifying whether the specified dynamic model is
-//  either continuous or discrete.
-enum CRMotionModelType {
-    CR_MODEL_CONTINUOUS,
-    CR_MODEL_DISCRETE
-};
-    
-//=====================================================================
-class CRMotionModel {
+class CRMotionLinear : public CRMotionModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
-                                              Eigen::VectorXd,
-                                              Eigen::VectorXd),
-                  Eigen::VectorXd x0,
-                  double dt,
-                  CRMotionModelType type);
-    CRMotionModel();
+    CRMotionLinear(Eigen::MatrixXd A,
+                   Eigen::MatrixXd B,
+                   Eigen::VectorXd x0,
+                   double dt,
+                   CRMotionModelType type);
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
     //! Set the dynamics callback function.
-    virtual void setDynamics(Eigen::VectorXd(dynamicFcn)(double,
-                                                         Eigen::VectorXd,
-                                                         Eigen::VectorXd));
-    
-    //! Set the process noise model.
-    // virtual void setProcessNoise(CRNoiseModel noise);
-    
-    //! Set the supplied dynamic function type.
-    void setType(CRMotionModelType type) {this->type = type;}
-    
-    //! Set the time step (s)
-    void setTimeStep(double dt) {this->timeStep = dt;}
-    
-    //! Set the system state vector (x)
-    void setState(Eigen::VectorXd x) {this->state = x;}
-    
-    //! Get the state vector (x)
-    void getState(Eigen::VectorXd &x) {x = this->state;}
-    
-    //! Get the model time (s)
-    void getTime(double &t) {t = this->time;}
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Simulate the model forward a single step
-    virtual void simulateMotion(Eigen::VectorXd u,
-                                bool sampleNoise);
-    
-    
-//---------------------------------------------------------------------
-// Protected Methods
-public:
-    
-    //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(double t,
-                            Eigen::VectorXd x,
-                            Eigen::VectorXd u);
+    using CRMotionModel::setDynamics;
+    virtual void setDynamics(Eigen::MatrixXd A, Eigen::MatrixXd B);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
-    //! Dynamic model function callback type
-    CRMotionModelType type;
+    //! Dynamics matrix
+    Eigen::MatrixXd A;
     
-    //! Sample rate (s)
-    double timeStep;
+    //! Input matrix
+    Eigen::MatrixXd B;
     
-    //! Current time (s)
-    double time;
+    //! Callback to the dynamic model function \dot{x} = f(t,x,u) or
+    //! x_kp1 = f(t_k,x_k,u_k) depending on what the type is set to.
+    Eigen::VectorXd dynFcn(double t,
+                           Eigen::VectorXd x,
+                           Eigen::VectorXd u);
+
+//---------------------------------------------------------------------
+// Private Members
     
-    //! Dynamic state of the system
-    Eigen::VectorXd state;
-    
-    //! Pointer to the process noise model
-    // CRNoiseModel *dynNoise;
-    
-    //! Callback to the dynamic model function \dot{x} = f(t,x,u,p) or
-    //! x_kp1 = f(t_k,x_k,u_k,p) depending on what the type is set to.
-    Eigen::VectorXd(*dynFcn)(double,
-                             Eigen::VectorXd,
-                             Eigen::VectorXd);
+    //! Pointer to the dynamic function
+    Eigen::VectorXd(CRMotionLinear::*dynFcnPtr)(double,
+                                                Eigen::VectorXd,
+                                                Eigen::VectorXd);
     
 };
 

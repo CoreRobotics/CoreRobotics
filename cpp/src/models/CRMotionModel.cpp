@@ -54,7 +54,7 @@ namespace CoreRobotics {
  The constructor creates a motion model.\n
  
  \param[in] dynamicFcn - a callback function for the dynamics: see
-    CRMotionModel::setCallbackDyn() for more information.
+    CRMotionModel::setDynamics() for more information.
  \param[in] x0 - the initial state
  \param[in] dt - the time step (s)
  \param[in] type - the motion model type,
@@ -67,10 +67,14 @@ CRMotionModel::CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
                              Eigen::VectorXd x0,
                              double dt,
                              CRMotionModelType type) {
-    this->setCallbackDyn(dynamicFcn);
+    this->setDynamics(dynamicFcn);
     this->setState(x0);
     this->setTimeStep(dt);
     this->setType(type);
+    this->time = 0;
+}
+CRMotionModel::CRMotionModel()
+{
     this->time = 0;
 }
     
@@ -91,9 +95,9 @@ CRMotionModel::CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
  \param[in] dynamicFcn - a callback function of the above form.
  */
 //---------------------------------------------------------------------
-void CRMotionModel::setCallbackDyn(Eigen::VectorXd(dynamicFcn)(double,
-                                                               Eigen::VectorXd,
-                                                               Eigen::VectorXd))
+void CRMotionModel::setDynamics(Eigen::VectorXd(dynamicFcn)(double,
+                                                            Eigen::VectorXd,
+                                                            Eigen::VectorXd))
 {
     this->dynFcn = dynamicFcn;
 }
@@ -126,11 +130,30 @@ void CRMotionModel::simulateMotion(Eigen::VectorXd u, bool sampleNoise)
         
     } else if (this->type == CR_MODEL_CONTINUOUS) {
         // update the state
-        this->state = CRMath::rungeKuttaStep(this->dynFcn,t,this->state,u,dt);
+        this->state = this->rk4step(t,this->state,u);
     }
     
     // update the time
     this->time = t+dt;
+}
+    
+    
+//=====================================================================
+/*!
+ This method performs a Runge Kutta step on the dynFcn member.\n
+ */
+//---------------------------------------------------------------------
+Eigen::VectorXd CRMotionModel::rk4step(double t,
+                                       Eigen::VectorXd x,
+                                       Eigen::VectorXd u)
+{
+    double dt = this->timeStep;
+    // RK4 step
+    Eigen::VectorXd f1 = (this->dynFcn)(t,x,u);
+    Eigen::VectorXd f2 = (this->dynFcn)(t+dt/2,x+dt*f1/2,u);
+    Eigen::VectorXd f3 = (this->dynFcn)(t+dt/2,x+dt*f2/2,u);
+    Eigen::VectorXd f4 = (this->dynFcn)(t+dt,x+dt*f3,u);
+    return x + dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
 
 

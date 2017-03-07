@@ -170,8 +170,10 @@ Todo
 //---------------------------------------------------------------------------
 #include "CRManipulator.hpp"
 #include "CRMotionModel.hpp"
+#include "CRMotionLinear.hpp"
 #include "CRSensorModel.hpp"
 #include "CRNoiseModel.hpp"
+#include "CRNoiseGaussian.hpp"
 
 
 //---------------------------------------------------------------------------

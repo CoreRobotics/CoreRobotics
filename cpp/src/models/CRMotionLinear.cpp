@@ -40,114 +40,75 @@
  */
 //=====================================================================
 
-#ifndef CRNoiseModel_hpp
-#define CRNoiseModel_hpp
+#include "CRMotionModel.hpp"
+#include "CRMotionLinear.hpp"
+#include "CRMath.hpp"
 
-//=====================================================================
-// Includes
-#include "Eigen/Dense"
-#include <random>
 
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
     
+    
 //=====================================================================
 /*!
- \file CRNoiseModel.hpp
- \brief Implements a class that handles sensor models.
+ The constructor creates a linear motion model.\n
+ 
+ \param[in] A - dynamics matrix
+ \param[in] B - input matrix
+ \param[in] x0 - the initial state
+ \param[in] dt - the time step (s)
+ \param[in] type - the motion model type,
+                    see: CoreRobotics::CRMotionModelType
  */
 //---------------------------------------------------------------------
+CRMotionLinear::CRMotionLinear(Eigen::MatrixXd A,
+                               Eigen::MatrixXd B,
+                               Eigen::VectorXd x0,
+                               double dt,
+                               CRMotionModelType type)
+{
+    this->setState(x0);
+    this->setTimeStep(dt);
+    this->setType(type);
+    this->time = 0;
+}
+    
+    
+//=====================================================================
 /*!
- \class CRNoiseModel
- \ingroup models
+ This method sets the callback to the dynamic equation function.  If 
+ type is specified as CR_MODEL_DISCRETE, then this function must
+ describe the difference equation:\n
  
- \brief This class implements a noise model.
+ \f$ x_{k+1} =  f(t_k,x_k,u_k) \f$
  
- \details
- \section Description
+ If the type is specified as CR_MODEL_CONTINUOUS, then this function
+ must describe the differential equation:\n
  
- \section Example
- This example demonstrates use of the CRNoiseModel class.
- \code
+ \f$ \dot{x} =  f(t,x,u) \f$
  
- #include "CoreRobotics.hpp"
- #include <iostream>
- 
- using namespace CoreRobotics;
- 
- main() {
- 
- }
- 
- \endcode
- 
- \section References
- [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
- Ed. 2, CRC Press, 2012. \n\n
- 
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
- 2006. \n\n
+ \param[in] dynamicFcn - a callback function of the above form.
  */
-//=====================================================================
-//! Enumerator for specifying whether the specified dynamic model is
-//  either continuous or discrete.
-enum CRNoiseType {
-    CR_NOISE_CONTINUOUS,
-    CR_NOISE_DISCRETE
-};
-    
-//=====================================================================
-// ICDF Paramter structure declaration
-struct CRParamIcdf{
-    CRNoiseType type;
-    double(*icdFunction)(double);
-};
+//---------------------------------------------------------------------
+void CRMotionLinear::setDynamics(Eigen::MatrixXd A,
+                                 Eigen::MatrixXd B)
+{
+    this->A = A;
+    this->B = B;
+}
+
     
 //=====================================================================
-class CRNoiseModel {
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
-public:
-    
-    //! Class constructor
-    CRNoiseModel();
-    CRNoiseModel(unsigned seed);
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
-public:
-    
-    //! Set the parameters that describe the distribution
-    virtual void setParameters(CRNoiseType type,
-                               double(*icdFunction)(double));
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Sample a noise vector from the density
-    virtual void sample(Eigen::Matrix<double,1,1> &x);
-    
-//---------------------------------------------------------------------
-// Protected Members
-protected:
-    
-    //! Noise model type
-    CRParamIcdf parameters;
-    
-    //! Seed value
-    unsigned seed;
-    
-    //! Random number generator
-    std::default_random_engine generator;
-    
-};
+// Private Members:
+
+//! sets the linear dynamic model
+Eigen::VectorXd CRMotionLinear::dynFcn(double t,
+                                       Eigen::VectorXd x,
+                                       Eigen::VectorXd u){
+    return (this->A*x + this->B*u);
+}
 
 //=====================================================================
 // End namespace
 }
-
-
-#endif

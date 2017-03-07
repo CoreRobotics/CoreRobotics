@@ -49,6 +49,11 @@
 
 
 //=====================================================================
+// Type definitions
+typedef Eigen::VectorXd (vec);
+
+
+//=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
 
@@ -97,14 +102,18 @@ namespace CoreRobotics {
     public:
         
         //! Forward euler integration
-        static Eigen::VectorXd forwardEulerStep(
-            Eigen::VectorXd(dyanmicSystem)(double, Eigen::VectorXd, Eigen::VectorXd),
-            double t, Eigen::VectorXd x, Eigen::VectorXd u, double dt);
+        static vec forwardEulerStep(vec(dyanmicSystem)(double, vec, vec),
+                                    double t,
+                                    vec x,
+                                    vec u,
+                                    double dt);
         
         //! Runge-Kutta 4th order integration
-        static Eigen::VectorXd rungeKuttaStep(
-             Eigen::VectorXd(dyanmicSystem)(double, Eigen::VectorXd, Eigen::VectorXd),
-             double t, Eigen::VectorXd x, Eigen::VectorXd u, double dt);
+        static vec rungeKuttaStep(vec(dynamicSystem)(double, vec, vec),
+                                  double t,
+                                  vec x,
+                                  vec u,
+                                  double dt);
         
         
     };

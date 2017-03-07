@@ -145,12 +145,35 @@ void CRTestModels(void){
         ++p[int(nintervals*v(0))];
     }
     
-    std::cout << "uniform_real_distribution (0.0,1.0):" << std::endl;
     std::cout << std::fixed; std::cout.precision(1);
-    
     for (int i=0; i<nintervals; ++i) {
-        std::cout << float(i)/nintervals << "-" << float(i+1)/nintervals << ": ";
+        std::cout << float(i)/nintervals << " - " << float(i+1)/nintervals << ": ";
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+    }
+    
+    
+    
+    // try a Gaussian model
+    Eigen::Vector2d mean;
+    mean << 5, 5;
+    Eigen::VectorXd v2(2);
+    CRNoiseGaussian normalNoise = CRNoiseGaussian();
+    normalNoise.setParameters(2*Eigen::Matrix2d::Identity(),
+                              mean);
+    
+    std::cout << "\nGaussian noise sampling:\n";
+    
+    int p2[10]={};
+    
+    for (int i=0; i<nrolls; ++i) {
+        normalNoise.sample(v2);
+        if ((v2(0)>=0.0)&&(v2(0)<10.0)) ++p2[int(v2(0))];
+    }
+    
+    
+    for (int i=0; i<10; ++i) {
+        std::cout << i << " - " << (i+1) << ": ";
+        std::cout << std::string(p2[i]*nstars/nrolls,'*') << std::endl;
     }
     
     

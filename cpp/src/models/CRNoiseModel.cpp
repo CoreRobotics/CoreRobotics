@@ -53,6 +53,9 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  The constructor creates a noise model.\n
+ 
+ \param[in] - seed specifies the seed to use for the generator.  If not
+ specified, a random seed is chosen.
  */
 //---------------------------------------------------------------------
 CRNoiseModel::CRNoiseModel() {
