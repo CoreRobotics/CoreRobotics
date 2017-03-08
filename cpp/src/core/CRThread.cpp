@@ -42,13 +42,14 @@
 
 #include "CRThread.hpp"
 #include <thread>
+#include <iostream>
 
 // platform specific includes
 #if defined(WIN32) || defined(WIN64)
 	#include <windows.h>
 #endif
 
-#if defined(LINUX) || defined(MACOSX)
+#if defined(__linux__) || defined(__APPLE__)
 	#include <pthread.h>
 #endif
 
@@ -139,8 +140,35 @@ void CRThread::setPriority(CRThreadPriority priority) {
 	#endif
 
 
-	#if defined(LINUX) || defined(MACOSX)
-
+	#if defined(__linux__) || defined(__APPLE__)
+    
+        // get the thread handle
+        pthread_t hThread = this->loop->native_handle();
+    
+        // return the policy and params for the thread
+        struct sched_param sch;
+        int tPolicy;
+        pthread_getschedparam(hThread, &tPolicy, &sch);
+    
+        switch (priority) {
+            case CR_PRIORITY_LOWEST:
+                sch.sched_priority = 1;
+                break;
+            case CR_PRIORITY_LOW:
+                sch.sched_priority = 25;
+                break;
+            case CR_PRIORITY_NORMAL:
+                sch.sched_priority = 50;
+                break;
+            case CR_PRIORITY_HIGH:
+                sch.sched_priority = 75;
+                break;
+            case CR_PRIORITY_HIGHEST:
+                sch.sched_priority = 99;
+                break;
+        }
+        pthread_setschedparam(hThread, SCHED_FIFO, &sch);
+        std::cout << sch.sched_priority << std::endl;
 
 	#endif
 
