@@ -68,7 +68,7 @@ namespace CoreRobotics {
  \section Description
  CRNoiseModel implements methods for sampling from a distribution and
  serves as a base class to specfic distributions.  CRNoiseModel uses
- inverse transform sampling to generate a state.  This requires the
+ inverse transform sampling [3] to generate a state.  This requires the
  user to define an inverse cumulative density according to
  
  \f$ x = F^{-1}(P) \f$
@@ -131,6 +131,8 @@ namespace CoreRobotics {
  
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
+ 
+ [3] en.wikipedia.org/wiki/Inverse_transform_sampling
  */
 //=====================================================================
 // ICDF Paramter structure declaration
