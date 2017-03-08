@@ -55,7 +55,7 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  \file CRNoiseModel.hpp
- \brief Implements a class that handles sensor models.
+ \brief Implements a class for modeling noise.
  */
 //---------------------------------------------------------------------
 /*!
@@ -66,20 +66,63 @@ namespace CoreRobotics {
  
  \details
  \section Description
+ CRNoiseModel implements methods for sampling from a distribution and
+ serves as a base class to specfic distributions.  CRNoiseModel uses
+ inverse transform sampling to generate a state.  This requires the
+ user to define an inverse cumulative density according to
+ 
+ \f$ x = F^{-1}(P) \f$
+ 
+ where \f$F^{-1}\f$ is the inverse cumulative density.
  
  \section Example
  This example demonstrates use of the CRNoiseModel class.
+ 
  \code
- 
- #include "CoreRobotics.hpp"
  #include <iostream>
+ #include "CoreRobotics.hpp"
  
+ // Use the CoreRobotics namespace
  using namespace CoreRobotics;
  
- main() {
- 
+ // declare an inverse cumulative distribution - this is the invserse
+ // CDF for a triangular distribution from [0,1].
+ Eigen::VectorXd icdf(double P){
+     Eigen::VectorXd v(1);
+     v(0) = sqrt(P);
+     return v;
  }
  
+ void main(void){
+ 
+     std::cout << "*************************************\n";
+     std::cout << "Demonstration of CRNoiseModel.\n";
+     
+     // initialize a noise model
+     CRNoiseModel genericNoise = CRNoiseModel();
+     genericNoise.setParameters(icdf);
+     
+     // initialize a vector to sample into
+     Eigen::VectorXd v(1);
+     
+     const int nrolls=10000;  // number of experiments
+     const int nstars=100;    // maximum number of stars to distribute
+     const int nintervals=10; // number of intervals
+     int p[10]={};
+     
+     // sample the distribution
+     for (int i=0; i<nrolls; ++i) {
+         genericNoise.sample(v);
+         ++p[int(nintervals*v(0))];
+     }
+     
+     // print out the result with stars to indicate density
+     std::cout << std::fixed; std::cout.precision(1);
+     for (int i=0; i<nintervals; ++i) {
+         std::cout << float(i)/nintervals << " - " << float(i+1)/nintervals << ": ";
+         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+     }
+ }
  \endcode
  
  \section References
@@ -90,18 +133,9 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-//! Enumerator for specifying whether the specified dynamic model is
-//  either continuous or discrete.
-enum CRNoiseType {
-    CR_NOISE_CONTINUOUS,
-    CR_NOISE_DISCRETE
-};
-    
-//=====================================================================
 // ICDF Paramter structure declaration
 struct CRParamIcdf{
-    CRNoiseType type;
-    double(*icdFunction)(double);
+    Eigen::VectorXd(*icdFunction)(double);
 };
     
 //=====================================================================
@@ -120,8 +154,7 @@ public:
 public:
     
     //! Set the parameters that describe the distribution
-    virtual void setParameters(CRNoiseType type,
-                               double(*icdFunction)(double));
+    virtual void setParameters(Eigen::VectorXd(*icdFunction)(double));
     
 //---------------------------------------------------------------------
 // Public Methods

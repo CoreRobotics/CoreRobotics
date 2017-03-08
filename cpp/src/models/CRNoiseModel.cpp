@@ -54,8 +54,7 @@ namespace CoreRobotics {
 /*!
  The constructor creates a noise model.\n
  
- \param[in] - seed specifies the seed to use for the generator.  If not
- specified, a random seed is chosen.
+ \param[in] - seed for the random generator
  */
 //---------------------------------------------------------------------
 CRNoiseModel::CRNoiseModel(unsigned seed) {
@@ -83,31 +82,25 @@ CRNoiseModel::CRNoiseModel() {
  This method sets the paramters of the noise model.  The icdFunction is
  an inverse cumulative distribution of the form:
  
- \f$ v = cdf^{-1}(P) \f$
+ \f$ v = F^{-1}(P) \f$
  
  where \f$v\f$ is the noise and \f$P\f$ is the cumulative probability
  [0,1].  The function must take a double between 0,1 and output a
- double.  See: `https://en.wikipedia.org/wiki/Inverse_transform_sampling
+ double.  See: https://en.wikipedia.org/wiki/Inverse_transform_sampling
  
- \param[in] type - enumerator declaring distribution type, see 
-                   CoreRobotics::CRNoiseType
  \param[in] icdFunction - inverse CDF of the distribution.  This function
                    is sampled with a uniform distribution over [0,1]
  */
 //---------------------------------------------------------------------
-void CRNoiseModel::setParameters(CRNoiseType type,
-                                 double(icdFunction)(double))
+void CRNoiseModel::setParameters(Eigen::VectorXd(icdFunction)(double))
 {
-    this->parameters.type = type;
     this->parameters.icdFunction = icdFunction;
 }
 
 
 //=====================================================================
 /*!
- This method samples a random number using the inverse sampling method. 
- This method uniformly draws a number from [0,1] and applies it to the 
- supplied inverse cumulative distribution (ICD) function.\n
+ This method samples the distribution and returns the sample x.\n
  
  \param[out] x - sampled state
  */
@@ -116,7 +109,7 @@ void CRNoiseModel::sample(Eigen::VectorXd &x)
 {
     // Uniform real distribution
     std::uniform_real_distribution<double> uniform(0.0,1.0);
-    x << (this->parameters.icdFunction)(uniform(this->generator));
+    x = (this->parameters.icdFunction)(uniform(this->generator));
 }
 
 
