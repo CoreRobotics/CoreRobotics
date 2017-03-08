@@ -42,7 +42,6 @@
 
 #include "CRThread.hpp"
 #include <thread>
-#include <iostream>
 
 // platform specific includes
 #if defined(WIN32) || defined(WIN64)
@@ -168,7 +167,6 @@ void CRThread::setPriority(CRThreadPriority priority) {
                 break;
         }
         pthread_setschedparam(hThread, SCHED_FIFO, &sch);
-        std::cout << sch.sched_priority << std::endl;
 
 	#endif
 
