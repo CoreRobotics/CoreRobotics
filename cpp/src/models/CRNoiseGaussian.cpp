@@ -69,6 +69,7 @@ CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd cov,
 CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd cov,
                                  Eigen::VectorXd mean){
     this->setParameters(cov,mean);
+    this->randomSeed();
 }
 CRNoiseGaussian::CRNoiseGaussian(){
     Eigen::MatrixXd cov(1,1);
@@ -76,6 +77,7 @@ CRNoiseGaussian::CRNoiseGaussian(){
     Eigen::VectorXd mean(1);
     mean(0) = 0;
     this->setParameters(cov,mean);
+    this->randomSeed();
 }
     
     

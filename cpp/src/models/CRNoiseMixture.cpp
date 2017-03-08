@@ -62,18 +62,7 @@ CRNoiseMixture::CRNoiseMixture(unsigned seed) {
     this->generator.seed(this->seed);
 }
 CRNoiseMixture::CRNoiseMixture() {
-    
-    // get a seed
-    typedef std::chrono::steady_clock clock;
-    clock::time_point t0 = clock::now();
-    for(int i=0; i < 1000000; i++){
-        clock::now();
-    }
-    clock::duration d = clock::now() - t0;
-    this->seed = unsigned(10000*d.count());
-    
-    // set the seed
-    this->generator.seed(this->seed);
+    this->randomSeed();
 }
     
     

@@ -69,6 +69,7 @@ CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd a,
 CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd a,
                                Eigen::VectorXd b){
     this->setParameters(a,b);
+    this->randomSeed();
 }
 CRNoiseUniform::CRNoiseUniform(){
     Eigen::VectorXd a(1);
@@ -76,6 +77,7 @@ CRNoiseUniform::CRNoiseUniform(){
     a(0) = 0;
     b(0) = 1;
     this->setParameters(a,b);
+    this->randomSeed();
 }
     
     
