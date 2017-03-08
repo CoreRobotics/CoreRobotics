@@ -43,6 +43,14 @@
 #include "CRThread.hpp"
 #include <thread>
 
+// platform specific includes
+#if defined(WIN32) || defined(WIN64)
+	#include <windows.h>
+#endif
+
+#if defined(LINUX) || defined(MACOSX)
+	#include <pthread.h>
+#endif
 
 //=====================================================================
 // CoreRobotics namespace
@@ -52,10 +60,17 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  The constructor defines a thread.\n
+
+ \param[in] priority - the thread priority, see CoreRobotics::CRThreadPriority
  */
 //---------------------------------------------------------------------
+CRThread::CRThread(CRThreadPriority priority) {
+	this->loop = new std::thread;
+	this->setPriority(priority);
+}
 CRThread::CRThread() {
     this->loop = new std::thread;
+	this->setPriority(CR_PRIORITY_NORMAL);
 }
 
 
@@ -78,6 +93,57 @@ CRThread::~CRThread() { }
 //---------------------------------------------------------------------
 void CRThread::setCallback(void(callbackFunction)()) {
     *loop = std::thread(callbackFunction);
+}
+
+
+
+//=====================================================================
+/*!
+This method sets the thread priority.
+
+\param[in] priority - the thread priority, see CoreRobotics::CRThreadPriority
+*/
+//---------------------------------------------------------------------
+void CRThread::setPriority(CRThreadPriority priority) {
+
+	// Windows
+	#if defined(WIN32) || defined(WIN64)
+
+		// get the thread handle
+		HANDLE hThread = this->loop->native_handle();
+
+		// get the process
+		HANDLE process = GetCurrentProcess();
+		SetPriorityClass(process, HIGH_PRIORITY_CLASS);
+
+		int tPriority = THREAD_PRIORITY_NORMAL;
+		switch (priority) {
+			case CR_PRIORITY_LOWEST:	// 11
+				tPriority = THREAD_PRIORITY_LOWEST;
+				break;
+			case CR_PRIORITY_LOW:		// 12
+				tPriority = THREAD_PRIORITY_BELOW_NORMAL;
+				break;
+			case CR_PRIORITY_NORMAL:	// 13
+				tPriority = THREAD_PRIORITY_NORMAL;
+				break;
+			case CR_PRIORITY_HIGH:		// 14
+				tPriority = THREAD_PRIORITY_ABOVE_NORMAL;
+				break;
+			case CR_PRIORITY_HIGHEST:   // 15
+				tPriority = THREAD_PRIORITY_HIGHEST;
+				break;
+		}
+		SetThreadPriority(hThread, tPriority);
+
+	#endif
+
+
+	#if defined(LINUX) || defined(MACOSX)
+
+
+	#endif
+
 }
 
 
