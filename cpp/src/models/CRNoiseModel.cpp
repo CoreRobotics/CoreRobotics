@@ -62,18 +62,7 @@ CRNoiseModel::CRNoiseModel(unsigned seed) {
     this->generator.seed(this->seed);
 }
 CRNoiseModel::CRNoiseModel() {
-    
-    // get a seed
-    typedef std::chrono::steady_clock clock;
-    clock::time_point t0 = clock::now();
-    for(int i=0; i < 1000000; i++){
-        clock::now();
-    }
-    clock::duration d = clock::now() - t0;
-    this->seed = unsigned(10000*d.count());
-    
-    // set the seed
-    this->generator.seed(this->seed);
+    this->randomSeed();
 }
     
     
@@ -110,6 +99,27 @@ void CRNoiseModel::sample(Eigen::VectorXd &x)
     // Uniform real distribution
     std::uniform_real_distribution<double> uniform(0.0,1.0);
     x = (this->parameters.icdFunction)(uniform(this->generator));
+}
+    
+    
+//=====================================================================
+/*!
+ This method randomizes the seed of the NoiseModel using clock.\n
+ */
+//---------------------------------------------------------------------
+void CRNoiseModel::randomSeed()
+{
+    // get a seed
+    typedef std::chrono::steady_clock clock;
+    clock::time_point t0 = clock::now();
+    for(int i=0; i < 1000000; i++){
+        clock::now();
+    }
+    clock::duration d = clock::now() - t0;
+    this->seed = unsigned(10000*d.count());
+    
+    // set the seed
+    this->generator.seed(this->seed);
 }
 
 

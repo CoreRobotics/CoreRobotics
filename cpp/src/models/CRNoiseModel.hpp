@@ -164,6 +164,13 @@ public:
     
     //! Sample a noise vector from the density
     virtual void sample(Eigen::VectorXd &x);
+
+//---------------------------------------------------------------------
+// Protected Methods
+protected:
+    
+    //! Random seed generator
+    void randomSeed();
     
 //---------------------------------------------------------------------
 // Protected Members
