@@ -40,114 +40,62 @@
  */
 //=====================================================================
 
-#ifndef CRNoiseModel_hpp
-#define CRNoiseModel_hpp
-
-//=====================================================================
-// Includes
 #include "Eigen/Dense"
-#include <random>
+#include "CRNoiseDirac.hpp"
+#include <chrono>
+
 
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
     
+    
 //=====================================================================
 /*!
- \file CRNoiseModel.hpp
- \brief Implements a class that handles sensor models.
+ The constructor creates a noise model.\n
+ 
+ \param[in] point - the vector of the dirac point distribution
  */
 //---------------------------------------------------------------------
+CRNoiseDirac::CRNoiseDirac(Eigen::VectorXd point) {
+    this->setParameters(point);
+}
+CRNoiseDirac::CRNoiseDirac() {
+    Eigen::VectorXd point(1);
+    point(0) = 0;
+    this->setParameters(point);
+}
+    
+    
+//=====================================================================
 /*!
- \class CRNoiseModel
- \ingroup models
+ This method sets the paramters of the noise model.  The Dirac is a point
+ distribution with Prob=1 of drawing a sample from the point.  This is an
+ effective way to model deterministic processes.
  
- \brief This class implements a noise model.
- 
- \details
- \section Description
- 
- \section Example
- This example demonstrates use of the CRNoiseModel class.
- \code
- 
- #include "CoreRobotics.hpp"
- #include <iostream>
- 
- using namespace CoreRobotics;
- 
- main() {
- 
- }
- 
- \endcode
- 
- \section References
- [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
- Ed. 2, CRC Press, 2012. \n\n
- 
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
- 2006. \n\n
+ \param[in] point - point vector of the Dirac distribution
  */
+//---------------------------------------------------------------------
+void CRNoiseDirac::setParameters(Eigen::VectorXd point)
+{
+    this->parameters.point = point;
+}
+
+
 //=====================================================================
-//! Enumerator for specifying whether the specified dynamic model is
-//  either continuous or discrete.
-enum CRNoiseType {
-    CR_NOISE_CONTINUOUS,
-    CR_NOISE_DISCRETE
-};
-    
-//=====================================================================
-// ICDF Paramter structure declaration
-struct CRParamIcdf{
-    CRNoiseType type;
-    double(*icdFunction)(double);
-};
-    
-//=====================================================================
-class CRNoiseModel {
-    
+/*!
+ This method samples a random number from the specified Dirac
+ distribution.\n
+ 
+ \param[out] x - sampled state
+ */
 //---------------------------------------------------------------------
-// Constructor and Destructor
-public:
-    
-    //! Class constructor
-    CRNoiseModel(unsigned seed);
-    CRNoiseModel();
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
-public:
-    
-    //! Set the parameters that describe the distribution
-    virtual void setParameters(CRNoiseType type,
-                               double(*icdFunction)(double));
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Sample a noise vector from the density
-    virtual void sample(Eigen::VectorXd &x);
-    
-//---------------------------------------------------------------------
-// Protected Members
-protected:
-    
-    //! Noise model type
-    CRParamIcdf parameters;
-    
-    //! Seed value
-    unsigned seed;
-    
-    //! Random number generator
-    std::default_random_engine generator;
-    
-};
+void CRNoiseDirac::sample(Eigen::VectorXd &x)
+{
+    x = this->parameters.point;
+}
+
 
 //=====================================================================
 // End namespace
 }
-
-
-#endif

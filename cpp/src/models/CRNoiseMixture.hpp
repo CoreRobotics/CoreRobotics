@@ -40,13 +40,15 @@
  */
 //=====================================================================
 
-#ifndef CRNoiseModel_hpp
-#define CRNoiseModel_hpp
+#ifndef CRNoiseMixture_hpp
+#define CRNoiseMixture_hpp
 
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
 #include <random>
+#include <vector>
+#include "CRNoiseModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -54,21 +56,22 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRNoiseModel.hpp
- \brief Implements a class that handles sensor models.
+ \file CRNoiseMixture.hpp
+ \brief Implements a class for modeling Gaussian noise.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRNoiseModel
+ \class CRNoiseMixture
  \ingroup models
  
- \brief This class implements a noise model.
+ \brief Implements a class for modeling Gaussian noise.
  
  \details
  \section Description
+ CRNoiseMixture implements a
  
  \section Example
- This example demonstrates use of the CRNoiseModel class.
+ This example demonstrates use of the CRNoiseMixture class.
  \code
  
  #include "CoreRobotics.hpp"
@@ -90,58 +93,50 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-//! Enumerator for specifying whether the specified dynamic model is
-//  either continuous or discrete.
-enum CRNoiseType {
-    CR_NOISE_CONTINUOUS,
-    CR_NOISE_DISCRETE
+// Paramter structure declaration
+struct mixtureParam{
+    std::vector<CoreRobotics::CRNoiseModel*> models;
+    std::vector<double> weights;
 };
     
 //=====================================================================
-// ICDF Paramter structure declaration
-struct CRParamIcdf{
-    CRNoiseType type;
-    double(*icdFunction)(double);
-};
-    
-//=====================================================================
-class CRNoiseModel {
+class CRNoiseMixture : public CRNoiseModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRNoiseModel(unsigned seed);
-    CRNoiseModel();
+    CRNoiseMixture(unsigned seed);
+    CRNoiseMixture();
     
 //---------------------------------------------------------------------
-// Get/Set Methods
+// Add models to the mixture
 public:
     
-    //! Set the parameters that describe the distribution
-    virtual void setParameters(CRNoiseType type,
-                               double(*icdFunction)(double));
+    //! Add a distribution to the mixture model
+    void add(CRNoiseModel* model, double weight);
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Sample a noise vector from the density
-    virtual void sample(Eigen::VectorXd &x);
+    using CRNoiseModel::sample;
+    void sample(Eigen::VectorXd &x);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
-    //! Noise model type
-    CRParamIcdf parameters;
+    //! Noise model parameters
+    mixtureParam parameters;
     
-    //! Seed value
-    unsigned seed;
+private:
     
-    //! Random number generator
-    std::default_random_engine generator;
+    //! hide the setParameters method and make it do nothing
+    using CRNoiseModel::setParameters;
+    void setParameters(void) {};
     
 };
 

@@ -40,114 +40,101 @@
  */
 //=====================================================================
 
-#ifndef CRNoiseModel_hpp
-#define CRNoiseModel_hpp
-
-//=====================================================================
-// Includes
 #include "Eigen/Dense"
-#include <random>
+#include "CRNoiseMixture.hpp"
+#include <chrono>
+
 
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
     
+    
 //=====================================================================
 /*!
- \file CRNoiseModel.hpp
- \brief Implements a class that handles sensor models.
+ The constructor creates a noise model.\n
+ 
+ \param[in] seed - seed for the random generator
  */
 //---------------------------------------------------------------------
+CRNoiseMixture::CRNoiseMixture(unsigned seed) {
+    this->seed = seed;
+    this->generator.seed(this->seed);
+}
+CRNoiseMixture::CRNoiseMixture() {
+    
+    // get a seed
+    typedef std::chrono::steady_clock clock;
+    clock::time_point t0 = clock::now();
+    for(int i=0; i < 1000000; i++){
+        clock::now();
+    }
+    clock::duration d = clock::now() - t0;
+    this->seed = unsigned(10000*d.count());
+    
+    // set the seed
+    this->generator.seed(this->seed);
+}
+    
+    
+//=====================================================================
 /*!
- \class CRNoiseModel
- \ingroup models
+ This method adds a distribution to the mixture model 
  
- \brief This class implements a noise model.
- 
- \details
- \section Description
- 
- \section Example
- This example demonstrates use of the CRNoiseModel class.
- \code
- 
- #include "CoreRobotics.hpp"
- #include <iostream>
- 
- using namespace CoreRobotics;
- 
- main() {
- 
- }
- 
- \endcode
- 
- \section References
- [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
- Ed. 2, CRC Press, 2012. \n\n
- 
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
- 2006. \n\n
+ \param[in] model - a CRNoiseModel distribution
+ \param[in] weight - the weight of the added distribution
  */
+//---------------------------------------------------------------------
+void CRNoiseMixture::add(CRNoiseModel* model, double weight)
+{
+    this->parameters.models.push_back(model);
+    this->parameters.weights.push_back(weight);
+}
+
+
 //=====================================================================
-//! Enumerator for specifying whether the specified dynamic model is
-//  either continuous or discrete.
-enum CRNoiseType {
-    CR_NOISE_CONTINUOUS,
-    CR_NOISE_DISCRETE
-};
-    
-//=====================================================================
-// ICDF Paramter structure declaration
-struct CRParamIcdf{
-    CRNoiseType type;
-    double(*icdFunction)(double);
-};
-    
-//=====================================================================
-class CRNoiseModel {
-    
+/*!
+ This method samples a random number from the mixture model.\n
+ 
+ \param[out] x - sampled state
+ */
 //---------------------------------------------------------------------
-// Constructor and Destructor
-public:
+void CRNoiseMixture::sample(Eigen::VectorXd &x)
+{
     
-    //! Class constructor
-    CRNoiseModel(unsigned seed);
-    CRNoiseModel();
+    // return the sum of the weights
+    double sum_of_weights = 0;
+    for (size_t i = 0; i < parameters.weights.size(); i++) {
+        sum_of_weights += parameters.weights[i];
+    }
     
-//---------------------------------------------------------------------
-// Get/Set Methods
-public:
+    // now push into a cdf vector
+    std::vector<double> cdf;
+    cdf.resize(parameters.weights.size());
+    double wPrev = 0;
+    for (size_t i = 0; i < parameters.weights.size(); i++) {
+        cdf[i] = parameters.weights[i]/sum_of_weights + wPrev;
+        wPrev = cdf[i];
+    }
     
-    //! Set the parameters that describe the distribution
-    virtual void setParameters(CRNoiseType type,
-                               double(*icdFunction)(double));
+    // set up a uniform sample generator \in [0,1]
+    std::uniform_real_distribution<double> uniform(0.0,1.0);
+    double s = uniform(this->generator);
     
-//---------------------------------------------------------------------
-// Public Methods
-public:
+    // Now iterate through the cdf and get the index (inverse CDF discrete sampling)
+    int index = 0;
+    while(s > cdf[index]){
+        index++;
+    }
     
-    //! Sample a noise vector from the density
-    virtual void sample(Eigen::VectorXd &x);
+    // Finally sample from the distribution specified by index
+    this->parameters.models[index]->sample(x);
     
-//---------------------------------------------------------------------
-// Protected Members
-protected:
+    // return index;
     
-    //! Noise model type
-    CRParamIcdf parameters;
-    
-    //! Seed value
-    unsigned seed;
-    
-    //! Random number generator
-    std::default_random_engine generator;
-    
-};
+}
+
 
 //=====================================================================
 // End namespace
 }
-
-
-#endif

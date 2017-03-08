@@ -40,12 +40,14 @@
  */
 //=====================================================================
 
-#ifndef CRSensorModel_hpp
-#define CRSensorModel_hpp
+#ifndef CRMotionLinear_hpp
+#define CRMotionLinear_hpp
 
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
+#include "CRMotionModel.hpp"
+#include "CRMath.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -53,40 +55,50 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRSensorModel.hpp
- \brief Implements a class that handles sensor models.
+ \file CRMotionLinear.hpp
+ \brief Implements a class that handles dynamic models.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRSensorModel
+ \class CRMotionLinear
  \ingroup models
  
- \brief This class implements a sensor model.
+ \brief This class implements a motion model.
  
  \details
  \section Description
- CRSensorModel implements a seensor model from a supplied observation
- callback function.  Specifically, CRSensorModel sets up a container
- for the model
+ CRMotionLinear implements a motion model from a supplied dynamics 
+ callback function.  Specifically, CRMotionLinear sets up a container
+ and methods for simulating either a continuous-time set of differential
+ equations as in
  
- \f$ z = h(x,u) \f$,
+ \f$ \dot{x} = f (t,x,u) \f$,
+ 
+ or a discrete-time set of difference equations as in
+ 
+ \f$ x_{k+1} = f(t_k,x_k,u_k) \f$,
  
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
- and \f$z\f$ is the sensor measurement vector.
+ \f$t\f$ is time, and \f$k\f$ is the discrete time index.
  
- These methods are used to set up the sensor model:
- - CRSensorModel::setCallbackObsv sets the observation callback function.
- - CRSensorModel::setState sets the underlying state vector.
+ These methods are used to set up the motion model:
+ - CRMotionLinear::setDynamics sets the dynamics callback function 
+ (one of the two types specified above).
+ - CRMotionLinear::setType sets the type of the callback function.
+ - CRMotionLinear::setTimeStep sets the time step (s).
+ - CRMotionLinear::setState sets the underlying state vector.
  
  These methods return states of the model:
- - CRSensorModel::getState outputs the state vector.
+ - CRMotionLinear::getState outputs the state vector.
+ - CRManipulator::getTime outputs the associated time (s);
  
- These methods simulate sensor measurements:
- - CRSensorModel::simulateMeasurement computes the measurement vector (z)
- from the underlying state (x) for a given input (u).
+ These methods simulate dynamic motion:
+ - CRMotionLinear::simulateMotion updates the underlying state and time
+ by solving the dynamic equation for the input vector and current 
+ underlying state and time.
  
  \section Example
- This example demonstrates use of the CRSensorModel class.
+ This example demonstrates use of the CRMotionLinear class.
  \code
  
  #include "CoreRobotics.hpp"
@@ -94,43 +106,36 @@ namespace CoreRobotics {
  
  using namespace CoreRobotics;
  
- // declare the observation system callback (z = h(x,u))
-    Eigen::VectorXd obsEqn(Eigen::VectorXd x, Eigen::VectorXd u){
-    Eigen::Matrix<double, 1, 2> C;
-    C << 1, 0;
-    return C*x;
+ // declare the dynamic system callback (xdot = f(t,x,u))
+ Eigen::VectorXd dynEqn(double t, Eigen::VectorXd x, Eigen::VectorXd u){
+    Eigen::Matrix2d A;
+    Eigen::Vector2d B;
+    A << 0.0, 1.0, -10.0, -6.0;
+    B << 0.0, 1.0;
+    return A*x + B*u;
  }
  
  main() {
-     double dt = 0.1; // time step (s)
-     double t = 0;    // define the time (s)
-     Eigen::VectorXd x(2); // Define a state vector
-     x << 0, 0; // state IC
-     Eigen::VectorXd u(1); // Define an input vector
-     u << 1; // make the input constant for the demonstration
-     Eigen::VectorXd z(1); // Define a measurement vector
-     z << 0; // init value in memory
-     
-     // initialize a sensor model
-     CRSensorModel sensor = CRSensorModel(obsEqn,x);
-     
-     std::cout << "\nSensor simulation:\n";
-     printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
-     
-     // Now perform a simulation of the system reponse over 2 seconds
-     while(t<2){
-     
-         // simulate a simple dynamic system
-         double x0 = x(0)+dt*x(1);
-         double x1 = -dt*10*x(0)+(1-dt*6)*x(1)+dt*u(0);
-         x << x0, x1;
-         
-         sensor.setState(x);
-         sensor.simulateMeasurement(u, false, z);
-         printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
-         
-         t = t+dt;
-     }
+    double dt = 0.1; // time step (s)
+    double t = 0; // define the time (s)
+    Eigen::VectorXd x(2); // Define a state vector
+    x << 0, 0; // state IC
+    Eigen::VectorXd u(1); // Define an input vector
+    u << 1; // make the input constant for the demonstration
+ 
+    // initialize a continuous dynamic model
+    CRMotionLinear cModel = CRMotionLinear(dynEqn,x,dt,CR_MODEL_CONTINUOUS);
+ 
+    std::cout << "\nContinuous simulation:\n";
+    printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
+ 
+    // Now perform a simulation of the system reponse over 2 seconds
+    while(t<2){
+        cModel.simulateMotion(u, false);
+        cModel.getState(x);
+        cModel.getTime(t);
+        printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
+    }
  }
  
  \endcode
@@ -143,56 +148,50 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-class CRSensorModel {
+class CRMotionLinear : public CRMotionModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRSensorModel(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
-                                                  Eigen::VectorXd),
-                  Eigen::VectorXd x0);
+    CRMotionLinear(Eigen::MatrixXd A,
+                   Eigen::MatrixXd B,
+                   Eigen::VectorXd x0,
+                   double dt,
+                   CRMotionModelType type);
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
-    //! Set the observation callback function.
-    virtual void setCallbackObsv(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
-                                                                 Eigen::VectorXd));
-    
-    //! Set the process noise model.
-    // virtual void setMeasurementNoise(CRNoiseModel noise);
-    
-    //! Set the system state vector (x)
-    void setState(Eigen::VectorXd x) {this->state = x;}
-    
-    //! Get the state vector (x)
-    void getState(Eigen::VectorXd &x) {x = this->state;}
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Simulate the measurement
-    void simulateMeasurement(Eigen::VectorXd u,
-                             bool sampleNoise,
-                             Eigen::VectorXd &z);
+    //! Set the dynamics callback function.
+    using CRMotionModel::setDynamics;
+    virtual void setDynamics(Eigen::MatrixXd A, Eigen::MatrixXd B);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
-    //! Underlying state of the system
-    Eigen::VectorXd state;
+    //! Dynamics matrix
+    Eigen::MatrixXd A;
     
-    //! Pointer to the measurement noise model
-    // CRNoiseModel *obsNoise;
+    //! Input matrix
+    Eigen::MatrixXd B;
     
-    //! Callback to the measurement model function z = h(x,u)
-    Eigen::VectorXd(*obsFcn)(Eigen::VectorXd,
-                             Eigen::VectorXd);
+    //! Callback to the dynamic model function \dot{x} = f(t,x,u) or
+    //! x_kp1 = f(t_k,x_k,u_k) depending on what the type is set to.
+    Eigen::VectorXd dynFcn(double t,
+                           Eigen::VectorXd x,
+                           Eigen::VectorXd u);
+
+//---------------------------------------------------------------------
+// Private Members
+    
+    //! Pointer to the dynamic function
+    Eigen::VectorXd(CRMotionLinear::*dynFcnPtr)(double,
+                                                Eigen::VectorXd,
+                                                Eigen::VectorXd);
     
 };
 

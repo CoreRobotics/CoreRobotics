@@ -41,7 +41,7 @@
 
 # =====================================================================
 # CMAKE Flags and variables
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 # Require C++11
 set(CMAKE_CXX_STANDARD 11)
@@ -76,24 +76,48 @@ include_directories(
 )
 
 # Header files
-file(GLOB HEADERS
-    src/*.hpp
+#file(GLOB HEADERS
+#    src/*.hpp
+#    src/core/*.hpp
+#    src/math/*.hpp
+#    src/models/*.hpp
+#    src/physics/*.hpp
+#)
+file(GLOB HEADERS_CORE
     src/core/*.hpp
+)
+file(GLOB HEADERS_MATH
     src/math/*.hpp
+)
+file(GLOB HEADERS_MODELS
     src/models/*.hpp
+)
+file(GLOB HEADERS_PHYSICS
     src/physics/*.hpp
 )
 
 # Source files
-file(GLOB SOURCES
+#file(GLOB SOURCES
+#    src/core/*.cpp
+#    src/math/*.cpp
+#    src/models/*.cpp
+#    src/physics/*.cpp
+#)
+file(GLOB SOURCES_CORE
     src/core/*.cpp
+)
+file(GLOB SOURCES_MATH
     src/math/*.cpp
+)
+file(GLOB SOURCES_MODELS
     src/models/*.cpp
+)
+file(GLOB SOURCES_PHYSICS
     src/physics/*.cpp
 )
 
 # Create static (or shared) library
-add_library(${LIB_TARGET_NAME} STATIC ${SOURCES} ${HEADERS})
+add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS})
 
 # Set the output directory
 set_target_properties( ${LIB_TARGET_NAME} PROPERTIES 
@@ -102,8 +126,15 @@ set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
 )
 
 # Sort into a group structure
-source_group( "src" FILES ${SOURCES})
-source_group( "include" FILES ${HEADERS})
+source_group( "include" FILES "src/CoreRobotics.hpp")
+source_group( "include\\core" FILES ${HEADERS_CORE})
+source_group( "include\\math" FILES ${HEADERS_MATH})
+source_group( "include\\models" FILES ${HEADERS_MODELS})
+source_group( "include\\physics" FILES ${HEADERS_PHYSICS})
+source_group( "src\\core" FILES ${SOURCES_CORE})
+source_group( "src\\math" FILES ${SOURCES_MATH})
+source_group( "src\\models" FILES ${SOURCES_MODELS})
+source_group( "src\\physics" FILES ${SOURCES_PHYSICS})
 
 # =====================================================================
 # 2. Setup the utility target

@@ -58,6 +58,10 @@ namespace CoreRobotics {
  specified, a random seed is chosen.
  */
 //---------------------------------------------------------------------
+CRNoiseModel::CRNoiseModel(unsigned seed) {
+    this->seed = seed;
+    this->generator.seed(this->seed);
+}
 CRNoiseModel::CRNoiseModel() {
     
     // get a seed
@@ -70,10 +74,6 @@ CRNoiseModel::CRNoiseModel() {
     this->seed = unsigned(10000*d.count());
     
     // set the seed
-    this->generator.seed(this->seed);
-}
-CRNoiseModel::CRNoiseModel(unsigned seed) {
-    this->seed = seed;
     this->generator.seed(this->seed);
 }
     
@@ -112,7 +112,7 @@ void CRNoiseModel::setParameters(CRNoiseType type,
  \param[out] x - sampled state
  */
 //---------------------------------------------------------------------
-void CRNoiseModel::sample(Eigen::Matrix<double,1,1> &x)
+void CRNoiseModel::sample(Eigen::VectorXd &x)
 {
     // Uniform real distribution
     std::uniform_real_distribution<double> uniform(0.0,1.0);

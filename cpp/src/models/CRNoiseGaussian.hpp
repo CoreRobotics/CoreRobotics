@@ -106,8 +106,12 @@ class CRNoiseGaussian : public CRNoiseModel {
 public:
     
     //! Class constructor
+    CRNoiseGaussian(Eigen::MatrixXd cov,
+                    Eigen::VectorXd mean,
+                    unsigned seed);
+    CRNoiseGaussian(Eigen::MatrixXd cov,
+                    Eigen::VectorXd mean);
     CRNoiseGaussian();
-    CRNoiseGaussian(unsigned seed);
     
 //---------------------------------------------------------------------
 // Get/Set Methods

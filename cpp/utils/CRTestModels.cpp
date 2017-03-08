@@ -87,7 +87,6 @@ void CRTestModels(void){
     sensor.simulateMeasurement(u, 0, z);
     // sensor.getMeasurement(z);
     
-    
     // initialize a discrete dynamic model
     CRMotionModel dModel = CRMotionModel(ddynamics,x,dt,CR_MODEL_DISCRETE);
     
@@ -127,7 +126,7 @@ void CRTestModels(void){
     
     
     // initialize a noise model
-    Eigen::Matrix<double,1,1> v;
+    Eigen::VectorXd v(1);
     CRNoiseModel genericNoise = CRNoiseModel();
     genericNoise.setParameters(CR_NOISE_CONTINUOUS, icdf);
     
@@ -158,7 +157,7 @@ void CRTestModels(void){
     mean << 5, 5;
     Eigen::VectorXd v2(2);
     CRNoiseGaussian normalNoise = CRNoiseGaussian();
-    normalNoise.setParameters(2*Eigen::Matrix2d::Identity(),
+    normalNoise.setParameters(3*Eigen::Matrix2d::Identity(),
                               mean);
     
     std::cout << "\nGaussian noise sampling:\n";
@@ -170,7 +169,6 @@ void CRTestModels(void){
         if ((v2(0)>=0.0)&&(v2(0)<10.0)) ++p2[int(v2(0))];
     }
     
-    
     for (int i=0; i<10; ++i) {
         std::cout << i << " - " << (i+1) << ": ";
         std::cout << std::string(p2[i]*nstars/nrolls,'*') << std::endl;
@@ -178,53 +176,36 @@ void CRTestModels(void){
     
     
     
-    /*
-    // from c++
-    const int nrolls=10000;  // number of experiments
-    const int nstars=100;    // maximum number of stars to distribute
-    const int nintervals=10; // number of intervals
+    // now create a mixture model
+    std::cout << "\nMixture model sampling:\n";
     
-    std::cout << "\nRandom model sampling:\n";
+    Eigen::VectorXd pd1(1);
+    pd1(0) = 1;
+    Eigen::VectorXd pd2(1);
+    pd2(0) = 4;
+    Eigen::VectorXd pd3(1);
+    pd3(0) = 8;
     
-    // Normal random number generator
-    std::default_random_engine generator;
-    std::normal_distribution<double> gaussian(5.0,2.0);
+    CRNoiseDirac* dirac[3] = {new CRNoiseDirac(pd1),
+        new CRNoiseDirac(pd2), new CRNoiseDirac(pd3)};
+    double w[3] = {0.2, 0.8, 1.0};
     
-    int p[10]={};
-    
-    for (int i=0; i<nrolls; ++i) {
-        double number = gaussian(generator);
-        if ((number>=0.0)&&(number<10.0)) ++p[int(number)];
+    CRNoiseMixture dmm = CRNoiseMixture();
+    for (int i = 0; i < 3; i++){
+        dmm.add(dirac[i], w[i]);
     }
+    Eigen::VectorXd s;
     
-    std::cout << "normal_distribution (5.0,2.0):" << std::endl;
+    int p3[10]={};
+    for (int i=0; i<nrolls; ++i) {
+        dmm.sample(s);
+        if ((s(0)>=0.0)&&(s(0)<10.0)) ++p3[int(s(0))];
+    }
     
     for (int i=0; i<10; ++i) {
-        std::cout << i << "-" << (i+1) << ": ";
-        std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+        std::cout << i << " - " << (i+1) << ": ";
+        std::cout << std::string(p3[i]*nstars/nrolls,'*') << std::endl;
     }
-    
-    
-    
-    
-    // Uniform random number generator
-    std::uniform_real_distribution<double> unfrmreal(0.0,1.0);
-    
-    int p2[nintervals]={};
-    
-    for (int i=0; i<nrolls; ++i) {
-        double number = unfrmreal(generator);
-        ++p2[int(nintervals*number)];
-    }
-    
-    std::cout << "uniform_real_distribution (0.0,1.0):" << std::endl;
-    std::cout << std::fixed; std::cout.precision(1);
-    
-    for (int i=0; i<nintervals; ++i) {
-        std::cout << float(i)/nintervals << "-" << float(i+1)/nintervals << ": ";
-        std::cout << std::string(p2[i]*nstars/nrolls,'*') << std::endl;
-    }
-    */
     
 }
 

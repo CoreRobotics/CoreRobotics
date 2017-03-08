@@ -53,25 +53,29 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  The constructor creates a noise model.\n
+ 
+ \param[in] cov - covariance
+ \param[in] mean - mean
+ \param[in] seed - seed for the random generator
  */
 //---------------------------------------------------------------------
-CRNoiseGaussian::CRNoiseGaussian() {
-    
-    // get a seed
-    typedef std::chrono::steady_clock clock;
-    clock::time_point t0 = clock::now();
-    for(int i=0; i < 1000000; i++){
-        clock::now();
-    }
-    clock::duration d = clock::now() - t0;
-    this->seed = unsigned(10000*d.count());
-    
-    // set the seed
-    this->generator.seed(this->seed);
-}
-CRNoiseGaussian::CRNoiseGaussian(unsigned seed) {
+CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd cov,
+                                 Eigen::VectorXd mean,
+                                 unsigned seed){
+    this->setParameters(cov,mean);
     this->seed = seed;
     this->generator.seed(this->seed);
+}
+CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd cov,
+                                 Eigen::VectorXd mean){
+    this->setParameters(cov,mean);
+}
+CRNoiseGaussian::CRNoiseGaussian(){
+    Eigen::MatrixXd cov(1,1);
+    cov(0) = 1;
+    Eigen::VectorXd mean(1);
+    mean(0) = 0;
+    this->setParameters(cov,mean);
 }
     
     
@@ -86,7 +90,7 @@ CRNoiseGaussian::CRNoiseGaussian(unsigned seed) {
  */
 //---------------------------------------------------------------------
 void CRNoiseGaussian::setParameters(Eigen::MatrixXd cov,
-                                         Eigen::VectorXd mean)
+                                    Eigen::VectorXd mean)
 {
     this->parameters.cov = cov;
     this->parameters.mean = mean;

@@ -57,10 +57,24 @@ namespace CoreRobotics {
     CRMotionModel::setDynamics() for more information.
  \param[in] x0 - the initial state
  \param[in] dt - the time step (s)
- \param[in] type - the motion model type,
-                    see: CoreRobotics::CRMotionModelType
+ \param[in] type - the motion model type, see: CoreRobotics::CRMotionModelType
+ \param[in] noise - the process noise model, see CoreRobotics::CRNoiseModel
  */
 //---------------------------------------------------------------------
+CRMotionModel::CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
+                                                         Eigen::VectorXd,
+                                                         Eigen::VectorXd),
+                             Eigen::VectorXd x0,
+                             double dt,
+                             CRMotionModelType type,
+                             CRNoiseModel* noise) {
+    this->setDynamics(dynamicFcn);
+    this->setState(x0);
+    this->setTimeStep(dt);
+    this->setType(type);
+    this->setProcessNoise(noise);
+    this->time = 0;
+}
 CRMotionModel::CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
                                                          Eigen::VectorXd,
                                                          Eigen::VectorXd),
@@ -124,13 +138,22 @@ void CRMotionModel::simulateMotion(Eigen::VectorXd u, bool sampleNoise)
     double t = this->time;
     double dt = this->timeStep;
     
+    // sample the noise
+    Eigen::VectorXd w;
+    if (this->usingNoise && sampleNoise){
+        this->processNoise->sample(w);
+    } else {
+        w = this->state;
+        w.setZero();
+    }
+    
     if (this->type == CR_MODEL_DISCRETE) {
         // update the state
-        this->state = (this->dynFcn)(t,this->state,u);
+        this->state = (this->dynFcn)(t,this->state,u) + w;
         
     } else if (this->type == CR_MODEL_CONTINUOUS) {
         // update the state
-        this->state = this->rk4step(t,this->state,u);
+        this->state = this->rk4step(t,this->state,u) + w;
     }
     
     // update the time

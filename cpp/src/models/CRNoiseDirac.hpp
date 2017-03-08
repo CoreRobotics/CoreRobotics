@@ -40,13 +40,14 @@
  */
 //=====================================================================
 
-#ifndef CRNoiseModel_hpp
-#define CRNoiseModel_hpp
+#ifndef CRNoiseDirac_hpp
+#define CRNoiseDirac_hpp
 
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
 #include <random>
+#include "CRNoiseModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -54,21 +55,22 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRNoiseModel.hpp
- \brief Implements a class that handles sensor models.
+ \file CRNoiseDirac.hpp
+ \brief Implements a class for modeling Gaussian noise.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRNoiseModel
+ \class CRNoiseDirac
  \ingroup models
  
- \brief This class implements a noise model.
+ \brief Implements a class for modeling Gaussian noise.
  
  \details
  \section Description
+ CRNoiseDirac implements a
  
  \section Example
- This example demonstrates use of the CRNoiseModel class.
+ This example demonstrates use of the CRNoiseDirac class.
  \code
  
  #include "CoreRobotics.hpp"
@@ -90,58 +92,44 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-//! Enumerator for specifying whether the specified dynamic model is
-//  either continuous or discrete.
-enum CRNoiseType {
-    CR_NOISE_CONTINUOUS,
-    CR_NOISE_DISCRETE
+// Paramter structure declaration
+struct diracParam{
+    Eigen::VectorXd point;
 };
     
 //=====================================================================
-// ICDF Paramter structure declaration
-struct CRParamIcdf{
-    CRNoiseType type;
-    double(*icdFunction)(double);
-};
-    
-//=====================================================================
-class CRNoiseModel {
+class CRNoiseDirac : public CRNoiseModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRNoiseModel(unsigned seed);
-    CRNoiseModel();
+    CRNoiseDirac(Eigen::VectorXd point);
+    CRNoiseDirac();
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
     //! Set the parameters that describe the distribution
-    virtual void setParameters(CRNoiseType type,
-                               double(*icdFunction)(double));
+    using CRNoiseModel::setParameters;
+    void setParameters(Eigen::VectorXd point);
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Sample a noise vector from the density
-    virtual void sample(Eigen::VectorXd &x);
+    using CRNoiseModel::sample;
+    void sample(Eigen::VectorXd &x);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
     //! Noise model type
-    CRParamIcdf parameters;
-    
-    //! Seed value
-    unsigned seed;
-    
-    //! Random number generator
-    std::default_random_engine generator;
+    diracParam parameters;
     
 };
 

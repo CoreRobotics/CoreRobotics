@@ -40,114 +40,80 @@
  */
 //=====================================================================
 
-#ifndef CRNoiseModel_hpp
-#define CRNoiseModel_hpp
-
-//=====================================================================
-// Includes
 #include "Eigen/Dense"
-#include <random>
+#include "CRNoiseUniform.hpp"
+#include <chrono>
+
 
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
     
+    
 //=====================================================================
 /*!
- \file CRNoiseModel.hpp
- \brief Implements a class that handles sensor models.
+ The constructor creates a noise model.\n
  */
 //---------------------------------------------------------------------
+CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd a,
+                               Eigen::VectorXd b,
+                               unsigned seed){
+    this->setParameters(a,b);
+    this->seed = seed;
+    this->generator.seed(this->seed);
+}
+CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd a,
+                               Eigen::VectorXd b){
+    this->setParameters(a,b);
+}
+CRNoiseUniform::CRNoiseUniform(){
+    Eigen::VectorXd a(1);
+    Eigen::VectorXd b(1);
+    a(0) = 0;
+    b(0) = 1;
+    this->setParameters(a,b);
+}
+    
+    
+//=====================================================================
 /*!
- \class CRNoiseModel
- \ingroup models
+ This method sets the paramters of the noise model.  The Gaussian is the
+ multivariate standard normal distribution with mean and covariance, as
+ in http://en.wikipedia.org/wiki/Normal_distribution
  
- \brief This class implements a noise model.
- 
- \details
- \section Description
- 
- \section Example
- This example demonstrates use of the CRNoiseModel class.
- \code
- 
- #include "CoreRobotics.hpp"
- #include <iostream>
- 
- using namespace CoreRobotics;
- 
- main() {
- 
- }
- 
- \endcode
- 
- \section References
- [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
- Ed. 2, CRC Press, 2012. \n\n
- 
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
- 2006. \n\n
+ \param[in] a - lower bound of the uniform distribution domain
+ \param[in] b - upper bound of the uniform distribution domain
  */
+//---------------------------------------------------------------------
+void CRNoiseUniform::setParameters(Eigen::VectorXd a,
+                                   Eigen::VectorXd b)
+{
+    this->parameters.a = a;
+    this->parameters.b = b;
+}
+
+
 //=====================================================================
-//! Enumerator for specifying whether the specified dynamic model is
-//  either continuous or discrete.
-enum CRNoiseType {
-    CR_NOISE_CONTINUOUS,
-    CR_NOISE_DISCRETE
-};
-    
-//=====================================================================
-// ICDF Paramter structure declaration
-struct CRParamIcdf{
-    CRNoiseType type;
-    double(*icdFunction)(double);
-};
-    
-//=====================================================================
-class CRNoiseModel {
-    
+/*!
+ This method samples a random number from the specified uniform
+ distribution.\n
+ 
+ \param[out] x - sampled state
+ */
 //---------------------------------------------------------------------
-// Constructor and Destructor
-public:
-    
-    //! Class constructor
-    CRNoiseModel(unsigned seed);
-    CRNoiseModel();
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
-public:
-    
-    //! Set the parameters that describe the distribution
-    virtual void setParameters(CRNoiseType type,
-                               double(*icdFunction)(double));
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Sample a noise vector from the density
-    virtual void sample(Eigen::VectorXd &x);
-    
-//---------------------------------------------------------------------
-// Protected Members
-protected:
-    
-    //! Noise model type
-    CRParamIcdf parameters;
-    
-    //! Seed value
-    unsigned seed;
-    
-    //! Random number generator
-    std::default_random_engine generator;
-    
-};
+void CRNoiseUniform::sample(Eigen::VectorXd &x)
+{
+    // Uniform distribution
+    std::uniform_real_distribution<double> uniform(0.0,1.0);
+    for (int i=0; i<this->parameters.a.size(); i++){
+        x(i) = uniform(this->generator);
+    }
+    // linearly scale the output of the unit uniform
+    Eigen::VectorXd L = parameters.b - parameters.a;
+    x = L.asDiagonal()*x + this->parameters.a;
+}
+
 
 //=====================================================================
 // End namespace
 }
-
-
-#endif

@@ -169,11 +169,15 @@ Todo
 //! \details Todo
 //---------------------------------------------------------------------------
 #include "CRManipulator.hpp"
-#include "CRMotionModel.hpp"
-#include "CRMotionLinear.hpp"
-#include "CRSensorModel.hpp"
 #include "CRNoiseModel.hpp"
 #include "CRNoiseGaussian.hpp"
+#include "CRNoiseDirac.hpp"
+#include "CRNoiseUniform.hpp"
+#include "CRNoiseMixture.hpp"
+#include "CRSensorModel.hpp"
+#include "CRSensorLinear.hpp"
+#include "CRMotionModel.hpp"
+#include "CRMotionLinear.hpp"
 
 
 //---------------------------------------------------------------------------

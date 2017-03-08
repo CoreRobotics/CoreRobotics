@@ -47,6 +47,7 @@
 // Includes
 #include "Eigen/Dense"
 #include <vector>
+#include "CRNoiseModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -167,6 +168,13 @@ public:
                                               Eigen::VectorXd),
                   Eigen::VectorXd x0,
                   double dt,
+                  CRMotionModelType type,
+                  CRNoiseModel* noise);
+    CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
+                                              Eigen::VectorXd,
+                                              Eigen::VectorXd),
+                  Eigen::VectorXd x0,
+                  double dt,
                   CRMotionModelType type);
     CRMotionModel();
     
@@ -180,7 +188,10 @@ public:
                                                          Eigen::VectorXd));
     
     //! Set the process noise model.
-    // virtual void setProcessNoise(CRNoiseModel noise);
+    virtual void setProcessNoise(CRNoiseModel* noise) {
+        this->processNoise = noise;
+        this->usingNoise = true;
+    }
     
     //! Set the supplied dynamic function type.
     void setType(CRMotionModelType type) {this->type = type;}
@@ -208,7 +219,7 @@ public:
     
 //---------------------------------------------------------------------
 // Protected Methods
-public:
+protected:
     
     //! A Runge-Kutta solver on the dynFcn
     Eigen::VectorXd rk4step(double t,
@@ -231,8 +242,11 @@ protected:
     //! Dynamic state of the system
     Eigen::VectorXd state;
     
+    //! Flag to use noise model
+    bool usingNoise = false;
+    
     //! Pointer to the process noise model
-    // CRNoiseModel *dynNoise;
+    CRNoiseModel *processNoise;
     
     //! Callback to the dynamic model function \dot{x} = f(t,x,u,p) or
     //! x_kp1 = f(t_k,x_k,u_k,p) depending on what the type is set to.
