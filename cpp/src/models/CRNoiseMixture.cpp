@@ -54,7 +54,7 @@ namespace CoreRobotics {
 /*!
  The constructor creates a noise model.\n
  
- \param[in] seed - seed for the random generator
+ \param[in] seed - seed for the random generator.
  */
 //---------------------------------------------------------------------
 CRNoiseMixture::CRNoiseMixture(unsigned seed) {
@@ -79,10 +79,10 @@ CRNoiseMixture::CRNoiseMixture() {
     
 //=====================================================================
 /*!
- This method adds a distribution to the mixture model 
+ This method adds a distribution to the mixture model.
  
- \param[in] model - a CRNoiseModel distribution
- \param[in] weight - the weight of the added distribution
+ \param[in] model - a CRNoiseModel distribution.
+ \param[in] weight - the corresponding weight of the added distribution.
  */
 //---------------------------------------------------------------------
 void CRNoiseMixture::add(CRNoiseModel* model, double weight)
@@ -96,7 +96,7 @@ void CRNoiseMixture::add(CRNoiseModel* model, double weight)
 /*!
  This method samples a random number from the mixture model.\n
  
- \param[out] x - sampled state
+ \param[out] x - sampled state.
  */
 //---------------------------------------------------------------------
 void CRNoiseMixture::sample(Eigen::VectorXd &x)
@@ -129,8 +129,6 @@ void CRNoiseMixture::sample(Eigen::VectorXd &x)
     
     // Finally sample from the distribution specified by index
     this->parameters.models[index]->sample(x);
-    
-    // return index;
     
 }
 

@@ -57,32 +57,83 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  \file CRNoiseMixture.hpp
- \brief Implements a class for modeling Gaussian noise.
+ \brief Implements a class for modeling noise as a mixture of distributions.
  */
 //---------------------------------------------------------------------
 /*!
  \class CRNoiseMixture
  \ingroup models
  
- \brief Implements a class for modeling Gaussian noise.
+ \brief Implements a class for modeling noise as a mixture of distributions.
  
  \details
  \section Description
- CRNoiseMixture implements a
+ CRNoiseMixture implements methods for sampling and modeling noise as a
+ mixture of probability distributions [2-3].  Each specified noise model
+ is also accompanied by a weight, indicating the probability of that
+ distribution being selected for sampling of the noise.
  
  \section Example
  This example demonstrates use of the CRNoiseMixture class.
+ 
  \code
- 
- #include "CoreRobotics.hpp"
  #include <iostream>
+ #include "CoreRobotics.hpp"
  
+ // Use the CoreRobotics namespace
  using namespace CoreRobotics;
  
- main() {
+ void main(void){
  
+     std::cout << "*************************************\n";
+     std::cout << "Demonstration of test_CRNoiseMixture.\n";
+     
+     // initialize a noise mixture model
+     CRNoiseMixture mixModel = CRNoiseMixture();
+     
+     // define a Gaussian distribution & add it to the mixture model
+     Eigen::MatrixXd cov(1,1);
+     cov(0) = 1;
+     Eigen::VectorXd mean(1);
+     mean(0) = 3;
+     CRNoiseGaussian* gaussian = new CRNoiseGaussian(cov, mean);
+     mixModel.add(gaussian, 0.7);
+     
+     // define a uniform distribution & add it to the mixture model
+     Eigen::VectorXd a(1);
+     a(0) = 1;
+     Eigen::VectorXd b(1);
+     b(0) = 9;
+     CRNoiseUniform* uniform = new CRNoiseUniform(a, b);
+     mixModel.add(uniform, 0.6);
+     
+     // define a point mass distribution & add it to the mixture model
+     Eigen::VectorXd c(1);
+     c(0) = 8;
+     CRNoiseDirac* dirac = new CRNoiseDirac(c);
+     mixModel.add(dirac, 0.2);
+     
+     
+     // initialize a vector to sample into
+     Eigen::VectorXd v(1);
+     
+     const int nrolls=10000;  // number of experiments
+     const int nstars=100;     // maximum number of stars to distribute
+     int p[10]={};
+     
+     // sample the distribution
+     for (int i=0; i<nrolls; ++i) {
+         mixModel.sample(v);
+         if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
+     }
+     
+     // print out the result with stars to indicate density
+     std::cout << std::fixed; std::cout.precision(1);
+     for (int i=0; i<10; ++i) {
+         std::cout << i << " - " << (i+1) << ": ";
+         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+     }
  }
- 
  \endcode
  
  \section References
@@ -91,6 +142,8 @@ namespace CoreRobotics {
  
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
+ 
+ [3] en.wikipedia.org/wiki/Mixture_model
  */
 //=====================================================================
 // Paramter structure declaration
