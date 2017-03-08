@@ -46,7 +46,6 @@
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include <random>
 #include "CRNoiseModel.hpp"
 
 //=====================================================================
@@ -56,32 +55,64 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  \file CRNoiseDirac.hpp
- \brief Implements a class for modeling Gaussian noise.
+ \brief Implements a class for modeling deterministic processes.
  */
 //---------------------------------------------------------------------
 /*!
  \class CRNoiseDirac
  \ingroup models
  
- \brief Implements a class for modeling Gaussian noise.
+ \brief Implements a class for modeling deterministic processes.
  
  \details
  \section Description
- CRNoiseDirac implements a
+ CRNoiseDirac implements a deterministic noise model - a point mass at
+ a specific point, where the probability of sampling that point is 1,
+ see [3].
  
  \section Example
  This example demonstrates use of the CRNoiseDirac class.
+ 
  \code
- 
- #include "CoreRobotics.hpp"
  #include <iostream>
+ #include "CoreRobotics.hpp"
  
+ // Use the CoreRobotics namespace
  using namespace CoreRobotics;
  
- main() {
+ void main(void){
  
+     std::cout << "*************************************\n";
+     std::cout << "Demonstration of CRNoiseDirac.\n";
+     
+     // define the Dirac properties
+     Eigen::VectorXd point(1);
+     point << 5;
+     
+     // initialize a noise model
+     CRNoiseDirac diracNoise = CRNoiseDirac();
+     diracNoise.setParameters(point);
+     
+     // initialize a vector to sample into
+     Eigen::VectorXd v(1);
+     
+     const int nrolls=10000;  // number of experiments
+     const int nstars=20;     // maximum number of stars to distribute
+     int p[10]={};
+     
+     // sample the distribution
+     for (int i=0; i<nrolls; ++i) {
+         diracNoise.sample(v);
+         if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
+     }
+     
+     // print out the result with stars to indicate density
+     std::cout << std::fixed; std::cout.precision(1);
+     for (int i=0; i<10; ++i) {
+         std::cout << i << " - " << (i+1) << ": ";
+         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+     }
  }
- 
  \endcode
  
  \section References
@@ -90,6 +121,8 @@ namespace CoreRobotics {
  
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
+ 
+ [3] en.wikipedia.org/wiki/Dirac_delta_function
  */
 //=====================================================================
 // Paramter structure declaration

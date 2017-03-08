@@ -40,61 +40,47 @@
  */
 //=====================================================================
 
-#include "Eigen/Dense"
-#include "CRNoiseDirac.hpp"
 
+#include <iostream>
+#include "CoreRobotics.hpp"
 
-//=====================================================================
-// CoreRobotics namespace
-namespace CoreRobotics {
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
+
+void test_CRNoiseDirac(void){
     
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of CRNoiseDirac.\n";
     
-//=====================================================================
-/*!
- The constructor creates a noise model.\n
- 
- \param[in] point - the vector of the dirac point distribution
- */
-//---------------------------------------------------------------------
-CRNoiseDirac::CRNoiseDirac(Eigen::VectorXd point) {
-    this->setParameters(point);
-}
-CRNoiseDirac::CRNoiseDirac() {
+    // define the Dirac properties
     Eigen::VectorXd point(1);
-    point(0) = 0;
-    this->setParameters(point);
-}
+    point << 5;
     
+    // initialize a noise model
+    CRNoiseDirac diracNoise = CRNoiseDirac();
+    diracNoise.setParameters(point);
     
-//=====================================================================
-/*!
- This method sets the paramters of the noise model.  The Dirac is a point
- distribution with P=1 of drawing a sample from the point.  This is an
- effective way to model deterministic processes.
- 
- \param[in] point - point vector of the Dirac distribution
- */
-//---------------------------------------------------------------------
-void CRNoiseDirac::setParameters(Eigen::VectorXd point)
-{
-    this->parameters.point = point;
+    // initialize a vector to sample into
+    Eigen::VectorXd v(1);
+    
+    const int nrolls=10000;  // number of experiments
+    const int nstars=20;     // maximum number of stars to distribute
+    int p[10]={};
+    
+    // sample the distribution
+    for (int i=0; i<nrolls; ++i) {
+        diracNoise.sample(v);
+        if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
+    }
+    
+    // print out the result with stars to indicate density
+    std::cout << std::fixed; std::cout.precision(1);
+    for (int i=0; i<10; ++i) {
+        std::cout << i << " - " << (i+1) << ": ";
+        std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+    }
 }
 
 
-//=====================================================================
-/*!
- This method samples a random number from the specified Dirac
- distribution.\n
- 
- \param[out] x - sampled state
- */
-//---------------------------------------------------------------------
-void CRNoiseDirac::sample(Eigen::VectorXd &x)
-{
-    x = this->parameters.point;
-}
 
 
-//=====================================================================
-// End namespace
-}
