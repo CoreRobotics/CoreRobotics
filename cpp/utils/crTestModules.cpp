@@ -59,8 +59,14 @@ int main(int argc, const char * argv[]) {
     //CRTestMath();
     
     // Run the model test
-    CRTestModels();
+    // CRTestModels();
     
+    // Test the noise models
+    test_CRNoiseModel();
+    test_CRNoiseGaussian();
+    test_CRNoiseDirac();
+    test_CRNoiseUniform();
+    test_CRNoiseMixture();
     
     return 0;
 }

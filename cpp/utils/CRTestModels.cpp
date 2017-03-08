@@ -54,7 +54,6 @@ using namespace CoreRobotics;
 Eigen::VectorXd cdynamics(double t, Eigen::VectorXd x, Eigen::VectorXd u);
 Eigen::VectorXd ddynamics(double t, Eigen::VectorXd x, Eigen::VectorXd u);
 Eigen::VectorXd obsv(Eigen::VectorXd x, Eigen::VectorXd u);
-double icdf(double);
 
 // define a time step
 double dt = 0.1;
@@ -121,92 +120,6 @@ void CRTestModels(void){
         sensor.simulateMeasurement(u, false, z);
         printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
     }
-    
-    
-    
-    
-    // initialize a noise model
-    Eigen::VectorXd v(1);
-    CRNoiseModel genericNoise = CRNoiseModel();
-    genericNoise.setParameters(CR_NOISE_CONTINUOUS, icdf);
-    
-    
-    std::cout << "\nInverse CDF noise sampling:\n";
-    
-    const int nrolls=10000;  // number of experiments
-    const int nstars=100;    // maximum number of stars to distribute
-    const int nintervals=10; // number of intervals
-    int p[10]={};
-    
-    
-    for (int i=0; i<nrolls; ++i) {
-        genericNoise.sample(v);
-        ++p[int(nintervals*v(0))];
-    }
-    
-    std::cout << std::fixed; std::cout.precision(1);
-    for (int i=0; i<nintervals; ++i) {
-        std::cout << float(i)/nintervals << " - " << float(i+1)/nintervals << ": ";
-        std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
-    }
-    
-    
-    
-    // try a Gaussian model
-    Eigen::Vector2d mean;
-    mean << 5, 5;
-    Eigen::VectorXd v2(2);
-    CRNoiseGaussian normalNoise = CRNoiseGaussian();
-    normalNoise.setParameters(3*Eigen::Matrix2d::Identity(),
-                              mean);
-    
-    std::cout << "\nGaussian noise sampling:\n";
-    
-    int p2[10]={};
-    
-    for (int i=0; i<nrolls; ++i) {
-        normalNoise.sample(v2);
-        if ((v2(0)>=0.0)&&(v2(0)<10.0)) ++p2[int(v2(0))];
-    }
-    
-    for (int i=0; i<10; ++i) {
-        std::cout << i << " - " << (i+1) << ": ";
-        std::cout << std::string(p2[i]*nstars/nrolls,'*') << std::endl;
-    }
-    
-    
-    
-    // now create a mixture model
-    std::cout << "\nMixture model sampling:\n";
-    
-    Eigen::VectorXd pd1(1);
-    pd1(0) = 1;
-    Eigen::VectorXd pd2(1);
-    pd2(0) = 4;
-    Eigen::VectorXd pd3(1);
-    pd3(0) = 8;
-    
-    CRNoiseDirac* dirac[3] = {new CRNoiseDirac(pd1),
-        new CRNoiseDirac(pd2), new CRNoiseDirac(pd3)};
-    double w[3] = {0.2, 0.8, 1.0};
-    
-    CRNoiseMixture dmm = CRNoiseMixture();
-    for (int i = 0; i < 3; i++){
-        dmm.add(dirac[i], w[i]);
-    }
-    Eigen::VectorXd s;
-    
-    int p3[10]={};
-    for (int i=0; i<nrolls; ++i) {
-        dmm.sample(s);
-        if ((s(0)>=0.0)&&(s(0)<10.0)) ++p3[int(s(0))];
-    }
-    
-    for (int i=0; i<10; ++i) {
-        std::cout << i << " - " << (i+1) << ": ";
-        std::cout << std::string(p3[i]*nstars/nrolls,'*') << std::endl;
-    }
-    
 }
 
 
@@ -251,12 +164,7 @@ Eigen::VectorXd obsv(Eigen::VectorXd x, Eigen::VectorXd u){
 }
 
 
-// Callback for inverse CDF (triangular PDF over [0,1])
-double icdf(double P){
-    
-    return sqrt(P);
-    
-}
+
 
 
 
