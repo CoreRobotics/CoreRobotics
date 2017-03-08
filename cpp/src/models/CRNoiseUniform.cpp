@@ -53,6 +53,10 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  The constructor creates a noise model.\n
+ 
+ \param[in] a - lower bound of the uniform distribution domain
+ \param[in] b - upper bound of the uniform distribution domain
+ \param[in] seed - seed for the random generator
  */
 //---------------------------------------------------------------------
 CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd a,
