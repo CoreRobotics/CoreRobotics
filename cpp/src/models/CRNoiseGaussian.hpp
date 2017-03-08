@@ -67,21 +67,55 @@ namespace CoreRobotics {
  
  \details
  \section Description
- CRNoiseGaussian implements a
+ CRNoiseGaussian implements methods for sampling from and modeling 
+ multivariate Gaussian noise (see [1-3]). The Gaussian is completely
+ defined by a mean \f$\mu\f$ and covariance \f$\Sigma\f$.
  
  \section Example
  This example demonstrates use of the CRNoiseGaussian class.
+ 
  \code
- 
- #include "CoreRobotics.hpp"
  #include <iostream>
+ #include "CoreRobotics.hpp"
  
+ // Use the CoreRobotics namespace
  using namespace CoreRobotics;
  
- main() {
+ void main(void){
  
+     std::cout << "*************************************\n";
+     std::cout << "Demonstration of CRNoiseGaussian.\n";
+     
+     // define the Gaussian properties
+     Eigen::Vector2d mean;
+     mean << 5, 5;
+     Eigen::Matrix2d cov;
+     cov << 3, 0, 0, 3;
+     
+     // initialize a noise model
+     CRNoiseGaussian normalNoise = CRNoiseGaussian();
+     normalNoise.setParameters(cov, mean);
+     
+     // initialize a vector to sample into
+     Eigen::VectorXd v(2);
+     
+     const int nrolls=10000;  // number of experiments
+     const int nstars=100;    // maximum number of stars to distribute
+     int p[10]={};
+     
+     // sample the distribution
+     for (int i=0; i<nrolls; ++i) {
+         normalNoise.sample(v);
+         if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
+     }
+     
+     // print out the result with stars to indicate density
+     std::cout << std::fixed; std::cout.precision(1);
+     for (int i=0; i<10; ++i) {
+         std::cout << i << " - " << (i+1) << ": ";
+         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+     }
  }
- 
  \endcode
  
  \section References
@@ -90,6 +124,8 @@ namespace CoreRobotics {
  
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
+ 
+ [3] en.wikipedia.org/wiki/Multivariate_normal_distribution
  */
 //=====================================================================
 // Paramter structure declaration

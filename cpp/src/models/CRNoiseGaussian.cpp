@@ -99,8 +99,7 @@ void CRNoiseGaussian::setParameters(Eigen::MatrixXd cov,
 
 //=====================================================================
 /*!
- This method samples a random number from the specified Gaussian normal
- distribution..\n
+ This method samples a random number from the Gaussian distribution.\n
  
  \param[out] x - sampled state
  */
