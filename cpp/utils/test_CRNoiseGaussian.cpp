@@ -47,41 +47,42 @@
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-// declare an inverse cumulative distribution - this is the invserse
-// CDF for a triangular distribution from [0,1].
-Eigen::VectorXd icdf(double P){
-    Eigen::VectorXd v(1);
-    v(0) = sqrt(P);
-    return v;
-}
-
-void test_CRNoiseModel(void){
+void test_CRNoiseGaussian(void){
     
     std::cout << "*************************************\n";
-    std::cout << "Demonstration of CRNoiseModel.\n";
+    std::cout << "Demonstration of CRNoiseGaussian.\n";
+    
+    // define the Gaussian properties
+    Eigen::Vector2d mean;
+    mean << 5, 5;
+    Eigen::Matrix2d cov;
+    cov << 3, 0, 0, 3;
     
     // initialize a noise model
-    CRNoiseModel genericNoise = CRNoiseModel();
-    genericNoise.setParameters(icdf);
+    CRNoiseGaussian normalNoise = CRNoiseGaussian();
+    normalNoise.setParameters(cov, mean);
     
     // initialize a vector to sample into
-    Eigen::VectorXd v(1);
+    Eigen::VectorXd v(2);
     
     const int nrolls=10000;  // number of experiments
     const int nstars=100;    // maximum number of stars to distribute
-    const int nintervals=10; // number of intervals
     int p[10]={};
     
     // sample the distribution
     for (int i=0; i<nrolls; ++i) {
-        genericNoise.sample(v);
-        ++p[int(nintervals*v(0))];
+        normalNoise.sample(v);
+        if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
     }
     
     // print out the result with stars to indicate density
     std::cout << std::fixed; std::cout.precision(1);
-    for (int i=0; i<nintervals; ++i) {
-        std::cout << float(i)/nintervals << " - " << float(i+1)/nintervals << ": ";
+    for (int i=0; i<10; ++i) {
+        std::cout << i << " - " << (i+1) << ": ";
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
     }
 }
+
+
+
+
