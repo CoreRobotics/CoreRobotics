@@ -142,6 +142,7 @@ source_group( "src\\physics" FILES ${SOURCES_PHYSICS})
 # Source files
 file(GLOB UTILITIES
     utils/*.cpp
+    utils/*.hpp
 )
 
 # Add an executable for the utilities

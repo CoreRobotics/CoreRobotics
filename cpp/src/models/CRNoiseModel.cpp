@@ -100,7 +100,26 @@ void CRNoiseModel::sample(Eigen::VectorXd &x)
     std::uniform_real_distribution<double> uniform(0.0,1.0);
     x = (this->parameters.icdFunction)(uniform(this->generator));
 }
-    
+   
+
+//=====================================================================
+/*!
+ This method computes the probability of x from the density.\n
+ 
+ \param[in] in_x - random vector to be evaluated
+ \param[out] out_p - probability of in_x
+ */
+//---------------------------------------------------------------------
+void CRNoiseModel::probability(Eigen::VectorXd in_x, double &out_p)
+{
+    // TODO - this is gonna be tricky
+    // 1.  Find the p* = F(x) (optimization)
+    // 2a. Get x+ <- F^{-1}(p*+)
+    // 2b. Get x- <- F^{-1}(p*-)
+    // 3.  Central difference: p = (p*+ - p*-)/(x+ - x-)
+    out_p = 1.0;
+}
+
     
 //=====================================================================
 /*!

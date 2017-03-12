@@ -65,7 +65,7 @@ void CRTestModels(void){
     std::cout << "**********************\n";
     std::cout << "Running the CRTestModels\n";
     
-    
+    /*
     // define the time (s)
     double t = 0;
     
@@ -120,6 +120,7 @@ void CRTestModels(void){
         sensor.simulateMeasurement(u, false, z);
         printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
     }
+     */
 }
 
 

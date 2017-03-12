@@ -40,36 +40,37 @@
  */
 //=====================================================================
 
-#include <iostream>
-#include "CRTestModules.hpp"
-#include "CoreRobotics.hpp"
+#ifndef CRTypes_hpp
+#define CRTypes_hpp
 
+//=====================================================================
+// CoreRobotics namespace
+namespace CoreRobotics {
+    
+//=====================================================================
+/*!
+ \file CRSignalType.hpp
+ \brief Signal type enumerator.
+ */
+//=====================================================================
+//! Enumerator for signal types
+enum CRSignalType {
+    CR_SIGNAL_FORCE,
+    CR_SIGNAL_POSITION,
+    CR_SIGNAL_VELOCITY,
+    CR_SIGNAL_ACCELERATION,
+    CR_SIGNAL_GENERIC
+};
 
-using namespace std;
+//=====================================================================
+//! Enumerator for model type
+enum CRModelType {
+    CR_MODEL_DETERMINISTIC,
+    CR_MODEL_STOCHASTIC
+};
+    
 
-
-int main(int argc, const char * argv[]) {
-    
-    cout << "Running the CoreRobotics test suite." << endl;
-    
-    // Run the core test
-    //CRTestCore();
-    
-    // Run the math test
-    //CRTestMath();
-    
-    // Run the model test
-    // CRTestModels();
-    
-    // Test the noise models
-    test_CRNoiseModel();
-    test_CRNoiseGaussian();
-    test_CRNoiseDirac();
-    test_CRNoiseUniform();
-    test_CRNoiseMixture();
-    
-    // Test the sensor models
-    test_CRSensorModel();
-    
-    return 0;
+//=====================================================================
+// End namespace
 }
+#endif /* CRSignalType_hpp */

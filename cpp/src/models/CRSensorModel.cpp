@@ -50,58 +50,120 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- The constructor creates a sensor model of the form:\n
+ The constructor creates a sensor model.  The in_fcn specifies the
+ observation equation.  There are 2 options for the in_fcn:\n
  
- \f$ z =  h(x,u) \f$
+ Option 1: Deterministic Model. This function has the mathematical form:
  
- \param[in] observationFcn - an observation function of the above form.
- \param[in] x0 - the initial state.
+ \f$ zPredict =  h(x) \f$
+ 
+ Where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
+ sensor observation. For this case, the function prototype is
+ \code
+ void in_fcn(Eigen::VectorXd x,
+             Eigen::VectorXd& zPredict){
+    // compute zPredict from x here.
+ };
+ \endcode
+ and the internal model type state is set to deterministic.
+ 
+ Option 2: Probabilistic Model.  This model type is more complex and a
+ generalization of option 2, and has the mathematical form:
+ 
+ \f$p(z \mid x)\f$
+ 
+ For this case, the function prototype is
+ \code
+ void in_fcn(Eigen::VectorXd x,
+             Eigen::VectorXd z,
+             bool s,
+             Eigen::VectorXd& zPredict,
+             double& probOfZ){
+    // compute zPredict from x here.
+    // if s == true, sample zPredict from the probability density.
+    // compute probOfZ by evaluating p(z|x) = p(z|zPredict)
+ };
+ \endcode
+ 
+ 
+ \param[in] in_fcn - a model function of the form specified above
+ \param[in] in_x0 - the initial state.
  */
 //---------------------------------------------------------------------
-CRSensorModel::CRSensorModel(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
-                                                             Eigen::VectorXd),
-                             Eigen::VectorXd x0)
+CRSensorModel::CRSensorModel(void(in_fcn)(Eigen::VectorXd,
+                                          Eigen::VectorXd&),
+                             Eigen::VectorXd in_x0)
 {
-    this->setCallbackObsv(observationFcn);
-    this->setState(x0);
+    this->detModel = in_fcn;
+    this->type = CR_MODEL_DETERMINISTIC;
+    this->setState(in_x0);
 }
-    
-    
-//=====================================================================
-/*!
- This method sets the callback to the observation equation function of
- the form:
- 
- \f$ z =  h(x,u) \f$
- 
- \param[in] observationFcn - an observation function of the above form.
- */
-//---------------------------------------------------------------------
-void CRSensorModel::setCallbackObsv(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
-                                                                    Eigen::VectorXd))
-{
-    this->obsFcn = observationFcn;
+CRSensorModel::CRSensorModel(void(in_fcn)(Eigen::VectorXd,
+                                          Eigen::VectorXd,
+                                          bool,
+                                          Eigen::VectorXd&,
+                                          double&),
+                             Eigen::VectorXd in_x0){
+    this->probModel = in_fcn;
+    this->type = CR_MODEL_STOCHASTIC;
+    this->setState(in_x0);
 }
 
 
 //=====================================================================
 /*!
  This method simulates the measurement from the value of the underlying
- state. The sampleNoise flag can be set to simulate the motion with 
- additive noise sampled from the supplied noise model.  If the noise 
- model is not defined, the flag does nothing.\n
+ state. The sampleNoise flag can be set to simulate the sensor with
+ noise sampled from the internal noise model.  If the model is 
+ deterministic, the sample noise flag does nothing.\n
  
- \param[in] u - input (forcing term) vector.
- \param[in] sampleNoise - a boolean flag specifying if the noise model
-                should be sampled to add noise to the measurement.
- \param[out] z - simulated measurement.
+ \param[in] in_sampleNoise - a boolean flag specifying if the noise 
+            model should be sampled to add noise to the measurement.
+ \param[out] out_z - simulated measurement.
  */
 //---------------------------------------------------------------------
-void CRSensorModel::simulateMeasurement(Eigen::VectorXd u,
-                                        bool sampleNoise,
-                                        Eigen::VectorXd &z)
+void CRSensorModel::measurement(bool in_sampleNoise,
+                                Eigen::VectorXd &out_z)
 {
-    z = (this->obsFcn)(this->state,u);
+    if (this->type == CR_MODEL_DETERMINISTIC){
+        (this->detModel)(this->state,out_z);
+    } else if (this->type == CR_MODEL_STOCHASTIC){
+        Eigen::VectorXd v1;
+        double p;
+        (this->probModel)(this->state, v1, in_sampleNoise, out_z, p);
+    }
+}
+    
+    
+//=====================================================================
+/*!
+ This method computes the likelihood of a measurement z from the 
+ underlying state.  This evaluates the model
+ 
+ \f$ p(z\mid x) \f$
+ 
+ If the model is deterministic, out_p will be 1 only if z is identical
+ to the estimated value.\n
+ 
+ \param[in] in_z - the measurement to be evaluated
+ \param[out] out_p - the likelihood of the measurement z
+ */
+//---------------------------------------------------------------------
+void CRSensorModel::likelihood(Eigen::VectorXd in_z,
+                               double &out_p)
+{
+    if (this->type == CR_MODEL_DETERMINISTIC){
+        Eigen::VectorXd zPred;
+        (this->detModel)(this->state, zPred);
+        if (zPred == in_z){
+            out_p = 1;
+        } else {
+            out_p = 0;
+        }
+    } else if (this->type == CR_MODEL_STOCHASTIC){
+        Eigen::VectorXd v1;
+        (this->probModel)(this->state, in_z, false, v1, out_p);
+    }
 }
 
 

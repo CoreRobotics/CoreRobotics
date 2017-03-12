@@ -162,8 +162,11 @@ public:
 // Public Methods
 public:
     
-    //! Sample a noise vector from the density
+    //! Sample a vector from the density
     virtual void sample(Eigen::VectorXd &x);
+    
+    //! Evaluate the probability from the density
+    virtual void probability(Eigen::VectorXd x, double &p);
 
 //---------------------------------------------------------------------
 // Protected Methods

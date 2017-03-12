@@ -40,28 +40,66 @@
  */
 //=====================================================================
 
-#ifndef CRSignalType_hpp
-#define CRSignalType_hpp
 
-//=====================================================================
-// CoreRobotics namespace
-namespace CoreRobotics {
+#include <iostream>
+#include "CoreRobotics.hpp"
+
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
+
+// Declare a probabilistic model - fcn(x,z,s,zHat,p)
+void probMdlFcn(Eigen::VectorXd x,
+                Eigen::VectorXd z,
+                bool s,
+                Eigen::VectorXd &zHat,
+                double &p){
+    zHat = x;  // observation
     
-//=====================================================================
-/*!
- \file CRSignalType.hpp
- \brief Signal type enumerator.
- */
-//=====================================================================
-//! Enumerator for signal types
-enum CRSignalType {
-    CR_SIGNAL_FORCE,
-    CR_SIGNAL_POSITION,
-    CR_SIGNAL_VELOCITY,
-    CR_SIGNAL_ACCELERATION,
-    CR_SIGNAL_GENERIC
-};
-//=====================================================================
-// End namespace
+    // noise model
+    Eigen::MatrixXd cov(1,1);
+    cov << 1;
+    CRNoiseGaussian noise = CRNoiseGaussian();
+    noise.setParameters(cov, zHat);
+    if (s){
+        noise.sample(zHat);
+    }
+    // p = 1/sqrt(2*CoreRobotics::PI)*exp(-(z-zHat)*(z-zHat)/2);
+    p = 1.0;
 }
-#endif /* CRSignalType_hpp */
+
+// Declare a deterministic model - fcn(x,zHat)
+void detMdlFcn(Eigen::VectorXd x,
+               Eigen::VectorXd &zHat){
+    zHat = x;  // observation
+}
+
+void test_CRSensorModel(void){
+    
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of CRSensorModel.\n";
+    
+    // initialize a state vector
+    Eigen::VectorXd x0(1);
+    x0 << 5;
+    
+    // initialize a probabilistic sensor model
+    CRSensorModel myProbSensor = CRSensorModel(*detMdlFcn,x0);
+    
+    // initialize a sensor prediction vector
+    Eigen::VectorXd zPredict(1);
+    myProbSensor.measurement(false, zPredict);
+    std::cout << "Predicted measurement = " << zPredict << std::endl;
+    
+    
+    // now evaluate the likelihood
+    std::cout << "Likelihood:\n";
+    double p;
+    Eigen::VectorXd zMeasured(1);
+    for (int i = 0; i < 10; ++i){
+        zMeasured << double(i);
+        myProbSensor.likelihood(zMeasured, p);
+        std::cout << i << ": " << p << std::endl;
+    }
+    
+    
+}

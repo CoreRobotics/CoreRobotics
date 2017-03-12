@@ -46,6 +46,7 @@
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
+#include "CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -150,35 +151,40 @@ class CRSensorModel {
 public:
     
     //! Class constructor
-    CRSensorModel(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
-                                                  Eigen::VectorXd),
-                  Eigen::VectorXd x0);
+    CRSensorModel(void(in_fcn)(Eigen::VectorXd,
+                               Eigen::VectorXd&),
+                  Eigen::VectorXd in_x0);
+    CRSensorModel(void(in_fcn)(Eigen::VectorXd,
+                               Eigen::VectorXd,
+                               bool,
+                               Eigen::VectorXd&,
+                               double&),
+                  Eigen::VectorXd in_x0);
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
-    //! Set the observation callback function.
-    virtual void setCallbackObsv(Eigen::VectorXd(observationFcn)(Eigen::VectorXd,
-                                                                 Eigen::VectorXd));
-    
-    //! Set the process noise model.
-    // virtual void setMeasurementNoise(CRNoiseModel noise);
-    
-    //! Set the system state vector (x)
-    void setState(Eigen::VectorXd x) {this->state = x;}
+    //! Set the state vector (x)
+    void setState(Eigen::VectorXd in_x) {this->state = in_x;}
     
     //! Get the state vector (x)
-    void getState(Eigen::VectorXd &x) {x = this->state;}
+    void getState(Eigen::VectorXd &out_x) {out_x = this->state;}
+    
+    //! Get the model type
+    void getType(CRModelType &out_type) {out_type = this->type;}
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Simulate the measurement
-    void simulateMeasurement(Eigen::VectorXd u,
-                             bool sampleNoise,
-                             Eigen::VectorXd &z);
+    void measurement(bool in_sampleNoise,
+                     Eigen::VectorXd &out_z);
+    
+    //! Get the likelihood of a measurement
+    void likelihood(Eigen::VectorXd in_z,
+                    double &out_p);
     
 //---------------------------------------------------------------------
 // Protected Members
@@ -187,12 +193,19 @@ protected:
     //! Underlying state of the system
     Eigen::VectorXd state;
     
-    //! Pointer to the measurement noise model
-    // CRNoiseModel *obsNoise;
+    //! Model type flag
+    CRModelType type;
     
-    //! Callback to the measurement model function z = h(x,u)
-    Eigen::VectorXd(*obsFcn)(Eigen::VectorXd,
-                             Eigen::VectorXd);
+    //! Callback to the measurement model function z = h(x)
+    void(*detModel)(Eigen::VectorXd,
+                    Eigen::VectorXd&);
+    
+    //! Callback to the probabilistic model function p(z|x)
+    void(*probModel)(Eigen::VectorXd,
+                     Eigen::VectorXd,
+                     bool,
+                     Eigen::VectorXd&,
+                     double&);
     
 };
 

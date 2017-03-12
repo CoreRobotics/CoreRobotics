@@ -52,8 +52,11 @@ void CRTestModels(void);    // Model tests
 void test_CRNoiseModel(void);       // test CRNoiseModel
 void test_CRNoiseGaussian(void);    // test CRNoiseGaussian
 void test_CRNoiseDirac(void);       // test CRNoiseDirac
-void test_CRNoiseUniform(void);     // test test_CRNoiseUniform
-void test_CRNoiseMixture(void);     // test test_CRNoiseMixture
+void test_CRNoiseUniform(void);     // test CRNoiseUniform
+void test_CRNoiseMixture(void);     // test CRNoiseMixture
+
+// Sensor model tests
+void test_CRSensorModel(void);      // test CRSensorModel
 
 
 #endif /* CRTestModules_hpp */
