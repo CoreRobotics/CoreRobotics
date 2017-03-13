@@ -51,9 +51,40 @@ void CRTestFrameOffset(void){
     
     std::cout << "**********************\n";
     std::cout << "Running the CRTestFrameOffset\n";
-    
-	CRFrameDh();
+
+	CRManipulator MyRobot;
+
+	CRFrameEuler* F0 = new CRFrameDh();
+	CRRigidBody* Link0 = new CRRigidBody();
+		
+
 	
+	
+	// Set info for Link 0 and add to MyRobot
+	F0->freeVar = CR_DH_FREE_THETA;
+	// DH free variables
+		/*CR_DH_FREE_NONE
+		CR_DH_FREE_R
+		CR_DH_FREE_ALPHA
+		CR_DH_FREE_D
+		CR_DH_FREE_THETA */
+
+	F0->setMode(CR_DH_MODE_MODIFIED);
+	// DH modes
+	/*	CR_DH_MODE_CLASSIC
+		CR_DH_MODE_MODIFIED */
+
+	F0->setParameters(0, 0, 0.5, 0);
+	// Set Parameters
+	/*(double 	r,
+		double 	alpha,
+		double 	d,
+		double 	theta
+		)*/
+
+	Link0->frame = F0;
+	MyRobot.addLink(Link0);
+
 
 }
 
