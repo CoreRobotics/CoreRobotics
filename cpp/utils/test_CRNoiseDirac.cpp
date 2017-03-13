@@ -79,6 +79,12 @@ void test_CRNoiseDirac(void){
         std::cout << i << " - " << (i+1) << ": ";
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
     }
+    
+    // Return the probability
+    double prob;
+    diracNoise.probability(point, prob);
+    std::cout << prob << std::endl;
+    
 }
 
 

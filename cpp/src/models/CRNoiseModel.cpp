@@ -54,11 +54,11 @@ namespace CoreRobotics {
 /*!
  The constructor creates a noise model.\n
  
- \param[in] - seed for the random generator
+ \param[in] in_seed - seed for the random generator
  */
 //---------------------------------------------------------------------
-CRNoiseModel::CRNoiseModel(unsigned seed) {
-    this->seed = seed;
+CRNoiseModel::CRNoiseModel(unsigned in_seed) {
+    this->seed = in_seed;
     this->generator.seed(this->seed);
 }
 CRNoiseModel::CRNoiseModel() {
@@ -68,7 +68,7 @@ CRNoiseModel::CRNoiseModel() {
     
 //=====================================================================
 /*!
- This method sets the paramters of the noise model.  The icdFunction is
+ This method sets the paramters of the noise model. The icd function is
  an inverse cumulative distribution of the form:
  
  \f$ v = F^{-1}(P) \f$
@@ -77,13 +77,13 @@ CRNoiseModel::CRNoiseModel() {
  [0,1].  The function must take a double between 0,1 and output a
  double.  See: https://en.wikipedia.org/wiki/Inverse_transform_sampling
  
- \param[in] icdFunction - inverse CDF of the distribution.  This function
+ \param[in] in_icd - inverse CDF of the distribution.  This function
                    is sampled with a uniform distribution over [0,1]
  */
 //---------------------------------------------------------------------
-void CRNoiseModel::setParameters(Eigen::VectorXd(icdFunction)(double))
+void CRNoiseModel::setParameters(Eigen::VectorXd(in_icd)(double))
 {
-    this->parameters.icdFunction = icdFunction;
+    this->parameters.icdFunction = in_icd;
 }
 
 
@@ -91,14 +91,14 @@ void CRNoiseModel::setParameters(Eigen::VectorXd(icdFunction)(double))
 /*!
  This method samples the distribution and returns the sample x.\n
  
- \param[out] x - sampled state
+ \param[out] out_x - sampled state
  */
 //---------------------------------------------------------------------
-void CRNoiseModel::sample(Eigen::VectorXd &x)
+void CRNoiseModel::sample(Eigen::VectorXd &out_x)
 {
     // Uniform real distribution
     std::uniform_real_distribution<double> uniform(0.0,1.0);
-    x = (this->parameters.icdFunction)(uniform(this->generator));
+    out_x = (this->parameters.icdFunction)(uniform(this->generator));
 }
    
 

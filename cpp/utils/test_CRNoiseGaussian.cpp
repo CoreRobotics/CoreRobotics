@@ -81,6 +81,11 @@ void test_CRNoiseGaussian(void){
         std::cout << i << " - " << (i+1) << ": ";
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
     }
+    
+    // Return the probability
+    double prob;
+    normalNoise.probability(mean, prob);
+    std::cout << prob << std::endl;
 }
 
 

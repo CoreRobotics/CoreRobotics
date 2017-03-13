@@ -53,11 +53,11 @@ namespace CoreRobotics {
 /*!
  The constructor creates a noise model.\n
  
- \param[in] point - the vector of the dirac point distribution
+ \param[in] in_point - the vector of the dirac point distribution
  */
 //---------------------------------------------------------------------
-CRNoiseDirac::CRNoiseDirac(Eigen::VectorXd point) {
-    this->setParameters(point);
+CRNoiseDirac::CRNoiseDirac(Eigen::VectorXd in_point) {
+    this->setParameters(in_point);
 }
 CRNoiseDirac::CRNoiseDirac() {
     Eigen::VectorXd point(1);
@@ -72,12 +72,12 @@ CRNoiseDirac::CRNoiseDirac() {
  distribution with P=1 of drawing a sample from the point.  This is an
  effective way to model deterministic processes.
  
- \param[in] point - point vector of the Dirac distribution
+ \param[in] in_point - point vector of the Dirac distribution
  */
 //---------------------------------------------------------------------
-void CRNoiseDirac::setParameters(Eigen::VectorXd point)
+void CRNoiseDirac::setParameters(Eigen::VectorXd in_point)
 {
-    this->parameters.point = point;
+    this->parameters.point = in_point;
 }
 
 
@@ -86,12 +86,30 @@ void CRNoiseDirac::setParameters(Eigen::VectorXd point)
  This method samples a random number from the specified Dirac
  distribution.\n
  
- \param[out] x - sampled state
+ \param[out] out_x - sampled state
  */
 //---------------------------------------------------------------------
-void CRNoiseDirac::sample(Eigen::VectorXd &x)
+void CRNoiseDirac::sample(Eigen::VectorXd &out_x)
 {
-    x = this->parameters.point;
+    out_x = this->parameters.point;
+}
+    
+    
+//=====================================================================
+/*!
+ This method returns the probability of x.\n
+ 
+ \param[in] in_x - state to evaluate
+ \param[out] out_p - probability of in_x
+ */
+//---------------------------------------------------------------------
+void CRNoiseDirac::probability(Eigen::VectorXd in_x, double &out_p)
+{
+    if (in_x == this->parameters.point){
+        out_p = 1.0;
+    } else {
+        out_p = 0.0;
+    }
 }
 
 

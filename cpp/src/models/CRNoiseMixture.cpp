@@ -54,11 +54,11 @@ namespace CoreRobotics {
 /*!
  The constructor creates a noise model.\n
  
- \param[in] seed - seed for the random generator.
+ \param[in] in_seed - seed for the random generator.
  */
 //---------------------------------------------------------------------
-CRNoiseMixture::CRNoiseMixture(unsigned seed) {
-    this->seed = seed;
+CRNoiseMixture::CRNoiseMixture(unsigned in_seed) {
+    this->seed = in_seed;
     this->generator.seed(this->seed);
 }
 CRNoiseMixture::CRNoiseMixture() {
@@ -70,14 +70,14 @@ CRNoiseMixture::CRNoiseMixture() {
 /*!
  This method adds a distribution to the mixture model.
  
- \param[in] model - a CRNoiseModel distribution.
- \param[in] weight - the corresponding weight of the added distribution.
+ \param[in] in_model - a CRNoiseModel distribution.
+ \param[in] in_weight - the corresponding weight of the added distribution.
  */
 //---------------------------------------------------------------------
-void CRNoiseMixture::add(CRNoiseModel* model, double weight)
+void CRNoiseMixture::add(CRNoiseModel* in_model, double in_weight)
 {
-    this->parameters.models.push_back(model);
-    this->parameters.weights.push_back(weight);
+    this->parameters.models.push_back(in_model);
+    this->parameters.weights.push_back(in_weight);
 }
 
 
@@ -85,10 +85,10 @@ void CRNoiseMixture::add(CRNoiseModel* model, double weight)
 /*!
  This method samples a random number from the mixture model.\n
  
- \param[out] x - sampled state.
+ \param[out] out_x - sampled state.
  */
 //---------------------------------------------------------------------
-void CRNoiseMixture::sample(Eigen::VectorXd &x)
+void CRNoiseMixture::sample(Eigen::VectorXd &out_x)
 {
     
     // return the sum of the weights
@@ -117,8 +117,27 @@ void CRNoiseMixture::sample(Eigen::VectorXd &x)
     }
     
     // Finally sample from the distribution specified by index
-    this->parameters.models[index]->sample(x);
+    this->parameters.models[index]->sample(out_x);
     
+}
+    
+    
+//=====================================================================
+/*!
+ This method returns the probability of x.\n
+ 
+ \param[in] in_x - state to evaluate
+ \param[out] out_p - probability of in_x
+ */
+//---------------------------------------------------------------------
+void CRNoiseMixture::probability(Eigen::VectorXd in_x, double &out_p)
+{
+    out_p = 0.0;
+    double p = 0.0;
+    for (size_t i = 0; i < parameters.weights.size(); i++) {
+        this->parameters.models[i]->probability(in_x, p);
+        out_p += this->parameters.weights[i]*p;
+    }
 }
 
 

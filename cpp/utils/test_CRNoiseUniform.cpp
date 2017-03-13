@@ -56,7 +56,7 @@ void test_CRNoiseUniform(void){
     Eigen::VectorXd a(1);
     Eigen::VectorXd b(1);
     a << 2;
-    b << 8;
+    b << 7;
     
     // initialize a noise model
     CRNoiseUniform uniformNoise = CRNoiseUniform();
@@ -81,6 +81,11 @@ void test_CRNoiseUniform(void){
         std::cout << i << " - " << (i+1) << ": ";
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
     }
+    
+    // Return the probability
+    double prob;
+    uniformNoise.probability(a, prob);
+    std::cout << prob << std::endl;
 }
 
 

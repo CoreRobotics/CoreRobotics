@@ -97,6 +97,11 @@ void test_CRNoiseMixture(void){
         std::cout << i << " - " << (i+1) << ": ";
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
     }
+    
+    // Return the probability
+    double prob;
+    mixModel.probability(mean, prob);
+    std::cout << prob << std::endl;
 }
 
 
