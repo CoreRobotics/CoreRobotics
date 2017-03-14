@@ -46,6 +46,7 @@
 
 void CRTestCore(void);      // Core tests
 void CRTestMath(void);      // Math tests
+void CRTestFrameOffset(void); // Frame Tests
 
 
 
