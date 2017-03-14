@@ -34,7 +34,7 @@
  
  \project CoreRobotics Project
  \url     www.corerobotics.org
- \author  Parker Owan
+ \author  Parker Owan, Tony Piaskowy
  \version 0.0
  
  */
@@ -54,14 +54,17 @@ void CRTestFrameOffset(void){
 
 	CRManipulator MyRobot;
 
-	CRFrameEuler* F0 = new CRFrameDh();
-	CRRigidBody* Link0 = new CRRigidBody();
-		
+	CRFrameDh* F0 = new CRFrameDh();
+	// pointer to the CRFrameDh Class, F0 will now reference the CRFrameDh not copy the structure
+	CRFrameDh* F1 = new CRFrameDh();
 
-	
+
+	CRRigidBody* Link0 = new CRRigidBody();
+	CRRigidBody* Link1 = new CRRigidBody();
 	
 	// Set info for Link 0 and add to MyRobot
 	F0->freeVar = CR_DH_FREE_THETA;
+	F1->freeVar = CR_DH_FREE_NONE;
 	// DH free variables
 		/*CR_DH_FREE_NONE
 		CR_DH_FREE_R
@@ -70,21 +73,46 @@ void CRTestFrameOffset(void){
 		CR_DH_FREE_THETA */
 
 	F0->setMode(CR_DH_MODE_MODIFIED);
+	F1->setMode(CR_DH_MODE_MODIFIED);
 	// DH modes
 	/*	CR_DH_MODE_CLASSIC
 		CR_DH_MODE_MODIFIED */
 
-	F0->setParameters(0, 0, 0.5, 0);
+	/*double drvienangle;
+	F0->getFreeValue(drvienangle); */
+
+	F0->setParameters(0, 0, 0.2, 0, 3.1415/2.0);
+	F1->setParameters(0.1, 0, 0, 0, 0);
 	// Set Parameters
 	/*(double 	r,
 		double 	alpha,
 		double 	d,
-		double 	theta
+		double 	theta,
+		double  offset		-		free variable offset distance or angle
 		)*/
 
 	Link0->frame = F0;
+	Link1->frame = F1;
 	MyRobot.addLink(Link0);
+	MyRobot.addLink(Link1);
 
+		
+	F0->setFreeValue(0);
+
+	// Now get the configuration values
+	int dof;
+	Eigen::VectorXd jointAngles;
+	MyRobot.getDegreesOfFreedom(dof);
+	MyRobot.getConfiguration(jointAngles);
+	std::cout << "MyRobot has " << dof << " DOF, with joint angles = ("
+	<< jointAngles.transpose() << ") rad" << std::endl;
+
+	// Now get the Forward Kinematics and Jacobian
+	Eigen::MatrixXd Jacobian, FwdKin;
+	MyRobot.getForwardKinematics(FwdKin);
+	MyRobot.getJacobian(Jacobian);
+	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
+	std::cout << "Jacobian = \n" << Jacobian << std::endl;
 
 }
 

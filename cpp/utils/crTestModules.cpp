@@ -34,7 +34,7 @@
  
  \project CoreRobotics Project
  \url     www.corerobotics.org
- \author  Parker Owan
+ \author  Parker Owan, Tony Piaskowy
  \version 0.0
  
  */
@@ -57,6 +57,9 @@ int main(int argc, const char * argv[]) {
     
     // Run the math test
     CRTestMath();
+
+	// Run CR Test Frame Offset
+	CRTestFrameOffset();
     
     
     return 0;
