@@ -93,11 +93,12 @@ namespace CoreRobotics {
 CRSensorModel::CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
                              Eigen::VectorXd in_x0)
 {
-    this->m_detPredictor = in_predictor;
-    this->m_type = CR_MODEL_DETERMINISTIC;
+    this->m_predictorFcn = in_predictor;
+    // this->m_type = CR_MODEL_DETERMINISTIC;
     this->setState(in_x0);
 }
     
+/*
 CRSensorModel::CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd,
                                                            bool),
                              double(in_likelihood)(Eigen::VectorXd,
@@ -105,9 +106,10 @@ CRSensorModel::CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd,
                              Eigen::VectorXd in_x0){
     this->m_probPredictor = in_predictor;
     this->m_probLikelihood = in_likelihood;
-    this->m_type = CR_MODEL_STOCHASTIC;
+    this->m_type = CR_MODEL_PROBABILISTIC;
     this->setState(in_x0);
 }
+*/
 
 
 //=====================================================================
@@ -122,14 +124,18 @@ CRSensorModel::CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd,
  \param[out] out_z - simulated measurement.
  */
 //---------------------------------------------------------------------
-void CRSensorModel::measurement(bool in_sampleNoise,
-                                Eigen::VectorXd &out_z)
+// void CRSensorModel::measurement(bool in_sampleNoise,
+//                                 Eigen::VectorXd &out_z)
+void CRSensorModel::measurement(Eigen::VectorXd &out_z)
 {
+    out_z = (this->m_predictorFcn)(this->m_state);
+    /*
     if (this->m_type == CR_MODEL_DETERMINISTIC){
         out_z = (this->m_detPredictor)(this->m_state);
-    } else if (this->m_type == CR_MODEL_STOCHASTIC){
+    } else if (this->m_type == CR_MODEL_PROBABILISTIC){
         out_z = (this->m_probPredictor)(this->m_state, in_sampleNoise);
     }
+    */
 }
     
     
@@ -147,6 +153,7 @@ void CRSensorModel::measurement(bool in_sampleNoise,
  \param[out] out_p - the likelihood of the measurement z
  */
 //---------------------------------------------------------------------
+/*
 void CRSensorModel::likelihood(Eigen::VectorXd in_z,
                                double &out_p)
 {
@@ -158,10 +165,11 @@ void CRSensorModel::likelihood(Eigen::VectorXd in_z,
         } else {
             out_p = 0;
         }
-    } else if (this->m_type == CR_MODEL_STOCHASTIC){
+    } else if (this->m_type == CR_MODEL_PROBABILISTIC){
         out_p = (this->m_probLikelihood)(this->m_state, in_z);
     }
 }
+*/
 
 
 //=====================================================================

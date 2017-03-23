@@ -61,13 +61,6 @@ enum CRSignalType {
     CR_SIGNAL_ACCELERATION,
     CR_SIGNAL_GENERIC
 };
-
-//=====================================================================
-//! Enumerator for model type
-enum CRModelType {
-    CR_MODEL_DETERMINISTIC,
-    CR_MODEL_STOCHASTIC
-};
     
 
 //=====================================================================

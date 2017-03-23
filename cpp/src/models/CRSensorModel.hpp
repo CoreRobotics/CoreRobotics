@@ -154,11 +154,13 @@ public:
     CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
                   Eigen::VectorXd in_x0);
     
+    /*
     CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd,
                                                 bool),
                   double(in_likelihood)(Eigen::VectorXd,
                                         Eigen::VectorXd),
                   Eigen::VectorXd in_x0);
+     */
     
 //---------------------------------------------------------------------
 // Get/Set Methods
@@ -171,19 +173,20 @@ public:
     void getState(Eigen::VectorXd &out_x) {out_x = this->m_state;}
     
     //! Get the model type
-    void getType(CRModelType &out_type) {out_type = this->m_type;}
+    // void getType(CRModelType &out_type) {out_type = this->m_type;}
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Simulate the measurement
-    void measurement(bool in_sampleNoise,
-                     Eigen::VectorXd &out_z);
+    // void measurement(bool in_sampleNoise,
+    //                  Eigen::VectorXd &out_z);
+    void measurement(Eigen::VectorXd &out_z);
     
     //! Get the likelihood of a measurement
-    void likelihood(Eigen::VectorXd in_z,
-                    double &out_p);
+    //void likelihood(Eigen::VectorXd in_z,
+    //                double &out_p);
     
 //---------------------------------------------------------------------
 // Protected Members
@@ -193,18 +196,18 @@ protected:
     Eigen::VectorXd m_state;
     
     //! Model type flag
-    CRModelType m_type;
+    // CRModelType m_type;
     
     //! Callback to the deterministic predictor function z = h(x)
-    Eigen::VectorXd(*m_detPredictor)(Eigen::VectorXd);
+    Eigen::VectorXd(*m_predictorFcn)(Eigen::VectorXd);
     
     //! Callback to the probabilistic predictor function z = p(h(x))
-    Eigen::VectorXd(*m_probPredictor)(Eigen::VectorXd,
-                                      bool);
+    // Eigen::VectorXd(*m_probPredictor)(Eigen::VectorXd,
+    //                                   bool);
     
     //! Callback to the probabilistic likelihood function p(z|x)
-    double(*m_probLikelihood)(Eigen::VectorXd,
-                              Eigen::VectorXd);
+    // double(*m_probLikelihood)(Eigen::VectorXd,
+    //                           Eigen::VectorXd);
     
 };
 

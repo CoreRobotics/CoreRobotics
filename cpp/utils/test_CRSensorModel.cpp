@@ -50,6 +50,7 @@ using namespace CoreRobotics;
 // Create a global noise model
 CRNoiseGaussian* noise;
 
+/*
 // -------------------------------------------------------------
 // Declare a probabilistic prediction model - fcn(x,sample,zHat)
 Eigen::VectorXd probPredFcn(Eigen::VectorXd x,
@@ -76,6 +77,7 @@ double probLikFcn(Eigen::VectorXd x,
 
     return p;
 }
+*/
 
 // -------------------------------------------------------------
 // Declare a deterministic model - fcn(x,zHat)
@@ -104,17 +106,19 @@ void test_CRSensorModel(void){
     
     
     // initialize a deterministic sensor model
-    // CRSensorModel myProbSensor = CRSensorModel(*detPredFcn,x0);
+    CRSensorModel myProbSensor = CRSensorModel(*detPredFcn,x0);
     
     // initialize a probabilistic sensor model
-    CRSensorModel myProbSensor = CRSensorModel(*probPredFcn,*probLikFcn,x0);
+    // CRSensorModel myProbSensor = CRSensorModel(*probPredFcn,*probLikFcn,x0);
     
     
     // initialize a sensor prediction vector
     Eigen::VectorXd zPredict(1);
-    myProbSensor.measurement(false, zPredict);
+    // myProbSensor.measurement(false, zPredict);
+    myProbSensor.measurement(zPredict);
     std::cout << "Predicted measurement = " << zPredict << std::endl;
     
+    /*
     // init variables for storing measurement and probability
     double p;
     Eigen::VectorXd zMeasured(1);
@@ -127,6 +131,6 @@ void test_CRSensorModel(void){
         myProbSensor.likelihood(zMeasured, p);
         printf("  %5.2f     |   %6.4f\n",i,p);
     }
-    
+    */
 }
 // -------------------------------------------------------------
