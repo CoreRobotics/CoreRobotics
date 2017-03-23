@@ -163,19 +163,19 @@ class CRMotionModel {
 public:
     
     //! Class constructor
-    CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
-                                              Eigen::VectorXd,
-                                              Eigen::VectorXd),
-                  Eigen::VectorXd x0,
-                  double dt,
-                  CRMotionModelType type,
-                  CRNoiseModel* noise);
-    CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
-                                              Eigen::VectorXd,
-                                              Eigen::VectorXd),
-                  Eigen::VectorXd x0,
-                  double dt,
-                  CRMotionModelType type);
+    CRMotionModel(Eigen::VectorXd(in_dynamicFcn)(double,
+                                                 Eigen::VectorXd,
+                                                 Eigen::VectorXd),
+                  Eigen::VectorXd in_x0,
+                  double in_dt,
+                  CRMotionModelType in_type,
+                  CRNoiseModel* in_noise);
+    CRMotionModel(Eigen::VectorXd(in_dynamicFcn)(double,
+                                                 Eigen::VectorXd,
+                                                 Eigen::VectorXd),
+                  Eigen::VectorXd in_x0,
+                  double in_dt,
+                  CRMotionModelType in_type);
     CRMotionModel();
     
 //---------------------------------------------------------------------
@@ -183,38 +183,38 @@ public:
 public:
     
     //! Set the dynamics callback function.
-    virtual void setDynamics(Eigen::VectorXd(dynamicFcn)(double,
-                                                         Eigen::VectorXd,
-                                                         Eigen::VectorXd));
+    virtual void setDynamics(Eigen::VectorXd(in_dynamicFcn)(double,
+                                                            Eigen::VectorXd,
+                                                            Eigen::VectorXd));
     
     //! Set the process noise model.
-    virtual void setProcessNoise(CRNoiseModel* noise) {
-        this->processNoise = noise;
-        this->usingNoise = true;
+    virtual void setProcessNoise(CRNoiseModel* in_noise) {
+        this->m_processNoise = in_noise;
+        this->m_usingNoise = true;
     }
     
     //! Set the supplied dynamic function type.
-    void setType(CRMotionModelType type) {this->type = type;}
+    void setType(CRMotionModelType in_type) {this->m_type = in_type;}
     
     //! Set the time step (s)
-    void setTimeStep(double dt) {this->timeStep = dt;}
+    void setTimeStep(double in_dt) {this->m_timeStep = in_dt;}
     
     //! Set the system state vector (x)
-    void setState(Eigen::VectorXd x) {this->state = x;}
+    void setState(Eigen::VectorXd in_x) {this->m_state = in_x;}
     
     //! Get the state vector (x)
-    void getState(Eigen::VectorXd &x) {x = this->state;}
+    void getState(Eigen::VectorXd &out_x) {out_x = this->m_state;}
     
     //! Get the model time (s)
-    void getTime(double &t) {t = this->time;}
+    void getTime(double &out_t) {out_t = this->m_time;}
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Simulate the model forward a single step
-    virtual void simulateMotion(Eigen::VectorXd u,
-                                bool sampleNoise);
+    virtual void simulateMotion(Eigen::VectorXd in_u,
+                                bool in_sampleNoise);
     
     
 //---------------------------------------------------------------------
@@ -222,37 +222,37 @@ public:
 protected:
     
     //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(double t,
-                            Eigen::VectorXd x,
-                            Eigen::VectorXd u);
+    Eigen::VectorXd rk4step(double in_t,
+                            Eigen::VectorXd in_x,
+                            Eigen::VectorXd in_u);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
     //! Dynamic model function callback type
-    CRMotionModelType type;
+    CRMotionModelType m_type;
     
     //! Sample rate (s)
-    double timeStep;
+    double m_timeStep;
     
     //! Current time (s)
-    double time;
+    double m_time;
     
     //! Dynamic state of the system
-    Eigen::VectorXd state;
+    Eigen::VectorXd m_state;
     
     //! Flag to use noise model
-    bool usingNoise = false;
+    bool m_usingNoise = false;
     
     //! Pointer to the process noise model
-    CRNoiseModel *processNoise;
+    CRNoiseModel *m_processNoise;
     
     //! Callback to the dynamic model function \dot{x} = f(t,x,u,p) or
     //! x_kp1 = f(t_k,x_k,u_k,p) depending on what the type is set to.
-    Eigen::VectorXd(*dynFcn)(double,
-                             Eigen::VectorXd,
-                             Eigen::VectorXd);
+    Eigen::VectorXd(*m_dynFcn)(double,
+                               Eigen::VectorXd,
+                               Eigen::VectorXd);
     
 };
 

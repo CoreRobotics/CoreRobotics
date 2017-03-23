@@ -61,35 +61,35 @@ namespace CoreRobotics {
  \param[in] noise - the process noise model, see CoreRobotics::CRNoiseModel
  */
 //---------------------------------------------------------------------
-CRMotionModel::CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
-                                                         Eigen::VectorXd,
-                                                         Eigen::VectorXd),
-                             Eigen::VectorXd x0,
-                             double dt,
-                             CRMotionModelType type,
-                             CRNoiseModel* noise) {
-    this->setDynamics(dynamicFcn);
-    this->setState(x0);
-    this->setTimeStep(dt);
-    this->setType(type);
-    this->setProcessNoise(noise);
-    this->time = 0;
+CRMotionModel::CRMotionModel(Eigen::VectorXd(in_dynamicFcn)(double,
+                                                            Eigen::VectorXd,
+                                                            Eigen::VectorXd),
+                             Eigen::VectorXd in_x0,
+                             double in_dt,
+                             CRMotionModelType in_type,
+                             CRNoiseModel* in_noise) {
+    this->setDynamics(in_dynamicFcn);
+    this->setState(in_x0);
+    this->setTimeStep(in_dt);
+    this->setType(in_type);
+    this->setProcessNoise(in_noise);
+    this->m_time = 0;
 }
-CRMotionModel::CRMotionModel(Eigen::VectorXd(dynamicFcn)(double,
-                                                         Eigen::VectorXd,
-                                                         Eigen::VectorXd),
-                             Eigen::VectorXd x0,
-                             double dt,
-                             CRMotionModelType type) {
-    this->setDynamics(dynamicFcn);
-    this->setState(x0);
-    this->setTimeStep(dt);
-    this->setType(type);
-    this->time = 0;
+CRMotionModel::CRMotionModel(Eigen::VectorXd(in_dynamicFcn)(double,
+                                                            Eigen::VectorXd,
+                                                            Eigen::VectorXd),
+                             Eigen::VectorXd in_x0,
+                             double in_dt,
+                             CRMotionModelType in_type) {
+    this->setDynamics(in_dynamicFcn);
+    this->setState(in_x0);
+    this->setTimeStep(in_dt);
+    this->setType(in_type);
+    this->m_time = 0;
 }
 CRMotionModel::CRMotionModel()
 {
-    this->time = 0;
+    this->m_time = 0;
 }
     
     
@@ -109,11 +109,11 @@ CRMotionModel::CRMotionModel()
  \param[in] dynamicFcn - a callback function of the above form.
  */
 //---------------------------------------------------------------------
-void CRMotionModel::setDynamics(Eigen::VectorXd(dynamicFcn)(double,
-                                                            Eigen::VectorXd,
-                                                            Eigen::VectorXd))
+void CRMotionModel::setDynamics(Eigen::VectorXd(in_dynamicFcn)(double,
+                                                               Eigen::VectorXd,
+                                                               Eigen::VectorXd))
 {
-    this->dynFcn = dynamicFcn;
+    this->m_dynFcn = in_dynamicFcn;
 }
 
 
@@ -133,31 +133,31 @@ void CRMotionModel::setDynamics(Eigen::VectorXd(dynamicFcn)(double,
                 should be sampled to add noise to the simulation.
  */
 //---------------------------------------------------------------------
-void CRMotionModel::simulateMotion(Eigen::VectorXd u, bool sampleNoise)
+void CRMotionModel::simulateMotion(Eigen::VectorXd in_u, bool in_sampleNoise)
 {
-    double t = this->time;
-    double dt = this->timeStep;
+    double t = this->m_time;
+    double dt = this->m_timeStep;
     
     // sample the noise
     Eigen::VectorXd w;
-    if (this->usingNoise && sampleNoise){
-        this->processNoise->sample(w);
+    if (this->m_usingNoise && in_sampleNoise){
+        this->m_processNoise->sample(w);
     } else {
-        w = this->state;
+        w = this->m_state;
         w.setZero();
     }
     
-    if (this->type == CR_MODEL_DISCRETE) {
+    if (this->m_type == CR_MODEL_DISCRETE) {
         // update the state
-        this->state = (this->dynFcn)(t,this->state,u) + w;
+        this->m_state = (this->m_dynFcn)(t,this->m_state,in_u) + w;
         
-    } else if (this->type == CR_MODEL_CONTINUOUS) {
+    } else if (this->m_type == CR_MODEL_CONTINUOUS) {
         // update the state
-        this->state = this->rk4step(t,this->state,u) + w;
+        this->m_state = this->rk4step(t,this->m_state,in_u) + w;
     }
     
     // update the time
-    this->time = t+dt;
+    this->m_time = t+dt;
 }
     
     
@@ -166,17 +166,17 @@ void CRMotionModel::simulateMotion(Eigen::VectorXd u, bool sampleNoise)
  This method performs a Runge Kutta step on the dynFcn member.\n
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRMotionModel::rk4step(double t,
-                                       Eigen::VectorXd x,
-                                       Eigen::VectorXd u)
+Eigen::VectorXd CRMotionModel::rk4step(double in_t,
+                                       Eigen::VectorXd in_x,
+                                       Eigen::VectorXd in_u)
 {
-    double dt = this->timeStep;
+    double dt = this->m_timeStep;
     // RK4 step
-    Eigen::VectorXd f1 = (this->dynFcn)(t,x,u);
-    Eigen::VectorXd f2 = (this->dynFcn)(t+dt/2,x+dt*f1/2,u);
-    Eigen::VectorXd f3 = (this->dynFcn)(t+dt/2,x+dt*f2/2,u);
-    Eigen::VectorXd f4 = (this->dynFcn)(t+dt,x+dt*f3,u);
-    return x + dt/6*(f1 + 2*f2 + 2*f3 + f4);
+    Eigen::VectorXd f1 = (this->m_dynFcn)(in_t,in_x,in_u);
+    Eigen::VectorXd f2 = (this->m_dynFcn)(in_t+dt/2,in_x+dt*f1/2,in_u);
+    Eigen::VectorXd f3 = (this->m_dynFcn)(in_t+dt/2,in_x+dt*f2/2,in_u);
+    Eigen::VectorXd f4 = (this->m_dynFcn)(in_t+dt,in_x+dt*f3,in_u);
+    return in_x + dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
 
 
