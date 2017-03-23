@@ -58,8 +58,8 @@ namespace CoreRobotics {
  */
 //---------------------------------------------------------------------
 CRNoiseModel::CRNoiseModel(unsigned in_seed) {
-    this->seed = in_seed;
-    this->generator.seed(this->seed);
+    this->m_seed = in_seed;
+    this->m_generator.seed(this->m_seed);
 }
 CRNoiseModel::CRNoiseModel() {
     this->randomSeed();
@@ -83,7 +83,7 @@ CRNoiseModel::CRNoiseModel() {
 //---------------------------------------------------------------------
 void CRNoiseModel::setParameters(Eigen::VectorXd(in_icd)(double))
 {
-    this->parameters.icdFunction = in_icd;
+    this->m_parameters.icdFunction = in_icd;
 }
 
 
@@ -98,7 +98,7 @@ void CRNoiseModel::sample(Eigen::VectorXd &out_x)
 {
     // Uniform real distribution
     std::uniform_real_distribution<double> uniform(0.0,1.0);
-    out_x = (this->parameters.icdFunction)(uniform(this->generator));
+    out_x = (this->m_parameters.icdFunction)(uniform(this->m_generator));
 }
    
 
@@ -135,10 +135,10 @@ void CRNoiseModel::randomSeed()
         clock::now();
     }
     clock::duration d = clock::now() - t0;
-    this->seed = unsigned(10000*d.count());
+    this->m_seed = unsigned(10000*d.count());
     
     // set the seed
-    this->generator.seed(this->seed);
+    this->m_generator.seed(this->m_seed);
 }
 
 

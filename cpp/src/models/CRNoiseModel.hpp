@@ -180,13 +180,13 @@ protected:
 protected:
     
     //! Noise model type
-    CRParamIcdf parameters;
+    CRParamIcdf m_parameters;
     
     //! Seed value
-    unsigned seed;
+    unsigned m_seed;
     
     //! Random number generator
-    std::default_random_engine generator;
+    std::default_random_engine m_generator;
     
 };
 

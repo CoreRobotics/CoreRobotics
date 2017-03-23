@@ -66,7 +66,7 @@ CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd in_cov,
                                  unsigned in_seed){
     this->setParameters(in_cov,in_mean);
     this->m_seed = in_seed;
-    this->generator.seed(this->m_seed);
+    this->m_generator.seed(this->m_seed);
 }
 CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd in_cov,
                                  Eigen::VectorXd in_mean){

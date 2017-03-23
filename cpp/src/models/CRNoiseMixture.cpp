@@ -58,11 +58,17 @@ namespace CoreRobotics {
  */
 //---------------------------------------------------------------------
 CRNoiseMixture::CRNoiseMixture(unsigned in_seed) {
-    this->seed = in_seed;
-    this->generator.seed(this->seed);
+    
+    this->m_seed = in_seed;
+    this->m_generator.seed(this->m_seed);
+    
 }
+    
+    
 CRNoiseMixture::CRNoiseMixture() {
+    
     this->randomSeed();
+    
 }
     
     
@@ -76,8 +82,10 @@ CRNoiseMixture::CRNoiseMixture() {
 //---------------------------------------------------------------------
 void CRNoiseMixture::add(CRNoiseModel* in_model, double in_weight)
 {
+    
     this->m_parameters.models.push_back(in_model);
     this->m_parameters.weights.push_back(in_weight);
+    
 }
 
 
@@ -93,14 +101,19 @@ void CRNoiseMixture::sample(Eigen::VectorXd &out_x)
     
     // return the sum of the weights
     double sum_of_weights = 0;
+    
     for (size_t i = 0; i < m_parameters.weights.size(); i++) {
         sum_of_weights += m_parameters.weights[i];
     }
     
+    
     // now push into a cdf vector
     std::vector<double> cdf;
+    
     cdf.resize(m_parameters.weights.size());
+    
     double wPrev = 0;
+    
     for (size_t i = 0; i < m_parameters.weights.size(); i++) {
         cdf[i] = m_parameters.weights[i]/sum_of_weights + wPrev;
         wPrev = cdf[i];
@@ -108,10 +121,11 @@ void CRNoiseMixture::sample(Eigen::VectorXd &out_x)
     
     // set up a uniform sample generator \in [0,1]
     std::uniform_real_distribution<double> uniform(0.0,1.0);
-    double s = uniform(this->generator);
+    double s = uniform(this->m_generator);
     
     // Now iterate through the cdf and get the index (inverse CDF discrete sampling)
     int index = 0;
+    
     while(s > cdf[index]){
         index++;
     }
@@ -133,7 +147,9 @@ void CRNoiseMixture::sample(Eigen::VectorXd &out_x)
 void CRNoiseMixture::probability(Eigen::VectorXd in_x, double &out_p)
 {
     out_p = 0.0;
+    
     double p = 0.0;
+    
     for (size_t i = 0; i < m_parameters.weights.size(); i++) {
         this->m_parameters.models[i]->probability(in_x, p);
         out_p += this->m_parameters.weights[i]*p;

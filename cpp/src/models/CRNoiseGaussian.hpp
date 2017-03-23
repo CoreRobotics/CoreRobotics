@@ -178,12 +178,6 @@ protected:
     //! Noise model type
     gaussianParam m_parameters;
     
-    //! Seed value
-    unsigned m_seed;
-    
-    //! Random number generator
-    std::default_random_engine m_generator;
-    
 };
 
 //=====================================================================

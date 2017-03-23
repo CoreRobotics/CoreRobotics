@@ -62,22 +62,32 @@ namespace CoreRobotics {
 CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd in_a,
                                Eigen::VectorXd in_b,
                                unsigned in_seed){
+    
     this->setParameters(in_a,in_b);
-    this->seed = in_seed;
-    this->generator.seed(this->seed);
+    this->m_seed = in_seed;
+    this->m_generator.seed(this->m_seed);
+    
 }
+    
+    
 CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd in_a,
                                Eigen::VectorXd in_b){
+    
     this->setParameters(in_a,in_b);
     this->randomSeed();
+    
 }
+    
+    
 CRNoiseUniform::CRNoiseUniform(){
+    
     Eigen::VectorXd a(1);
     Eigen::VectorXd b(1);
     a(0) = 0;
     b(0) = 1;
     this->setParameters(a,b);
     this->randomSeed();
+    
 }
     
     
@@ -94,8 +104,8 @@ CRNoiseUniform::CRNoiseUniform(){
 void CRNoiseUniform::setParameters(Eigen::VectorXd in_a,
                                    Eigen::VectorXd in_b)
 {
-    this->parameters.a = in_a;
-    this->parameters.b = in_b;
+    this->m_parameters.a = in_a;
+    this->m_parameters.b = in_b;
 }
 
 
@@ -109,14 +119,19 @@ void CRNoiseUniform::setParameters(Eigen::VectorXd in_a,
 //---------------------------------------------------------------------
 void CRNoiseUniform::sample(Eigen::VectorXd &out_x)
 {
+    
     // Uniform distribution
     std::uniform_real_distribution<double> uniform(0.0,1.0);
-    for (int i=0; i<this->parameters.a.size(); i++){
-        out_x(i) = uniform(this->generator);
+    
+    for (int i=0; i<this->m_parameters.a.size(); i++){
+        out_x(i) = uniform(this->m_generator);
     }
+    
+    
     // linearly scale the output of the unit uniform
-    Eigen::VectorXd L = parameters.b - parameters.a;
-    out_x = L.asDiagonal()*out_x + this->parameters.a;
+    Eigen::VectorXd L = m_parameters.b - m_parameters.a;
+    
+    out_x = L.asDiagonal()*out_x + this->m_parameters.a;
 }
     
     
@@ -130,13 +145,17 @@ void CRNoiseUniform::sample(Eigen::VectorXd &out_x)
 //---------------------------------------------------------------------
 void CRNoiseUniform::probability(Eigen::VectorXd in_x, double &out_p)
 {
-    Eigen::VectorXd e = (this->parameters.b-this->parameters.a);
+    
+    Eigen::VectorXd e = (this->m_parameters.b-this->m_parameters.a);
     out_p = 1/e.prod();
+    
+    
     for(int i = 0; i < in_x.size(); i++){
-        if ((in_x(i) > this->parameters.b(i)) || (in_x(i) < this->parameters.a(i))){
+        if ((in_x(i) > this->m_parameters.b(i)) || (in_x(i) < this->m_parameters.a(i))){
             out_p = 0.0;
         }
     }
+    
 }
 
 

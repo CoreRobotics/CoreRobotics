@@ -176,13 +176,7 @@ public:
 protected:
     
     //! Noise model type
-    uniformParam parameters;
-    
-    //! Seed value
-    unsigned seed;
-    
-    //! Random number generator
-    std::default_random_engine generator;
+    uniformParam m_parameters;
     
 };
 
