@@ -76,8 +76,8 @@ CRNoiseMixture::CRNoiseMixture() {
 //---------------------------------------------------------------------
 void CRNoiseMixture::add(CRNoiseModel* in_model, double in_weight)
 {
-    this->parameters.models.push_back(in_model);
-    this->parameters.weights.push_back(in_weight);
+    this->m_parameters.models.push_back(in_model);
+    this->m_parameters.weights.push_back(in_weight);
 }
 
 
@@ -93,16 +93,16 @@ void CRNoiseMixture::sample(Eigen::VectorXd &out_x)
     
     // return the sum of the weights
     double sum_of_weights = 0;
-    for (size_t i = 0; i < parameters.weights.size(); i++) {
-        sum_of_weights += parameters.weights[i];
+    for (size_t i = 0; i < m_parameters.weights.size(); i++) {
+        sum_of_weights += m_parameters.weights[i];
     }
     
     // now push into a cdf vector
     std::vector<double> cdf;
-    cdf.resize(parameters.weights.size());
+    cdf.resize(m_parameters.weights.size());
     double wPrev = 0;
-    for (size_t i = 0; i < parameters.weights.size(); i++) {
-        cdf[i] = parameters.weights[i]/sum_of_weights + wPrev;
+    for (size_t i = 0; i < m_parameters.weights.size(); i++) {
+        cdf[i] = m_parameters.weights[i]/sum_of_weights + wPrev;
         wPrev = cdf[i];
     }
     
@@ -117,7 +117,7 @@ void CRNoiseMixture::sample(Eigen::VectorXd &out_x)
     }
     
     // Finally sample from the distribution specified by index
-    this->parameters.models[index]->sample(out_x);
+    this->m_parameters.models[index]->sample(out_x);
     
 }
     

@@ -187,7 +187,7 @@ public:
 protected:
     
     //! Noise model parameters
-    mixtureParam parameters;
+    mixtureParam m_parameters;
     
 private:
     
