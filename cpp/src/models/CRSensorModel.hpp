@@ -167,13 +167,13 @@ public:
 public:
     
     //! Set the state vector (x)
-    void setState(Eigen::VectorXd in_x) {this->state = in_x;}
+    void setState(Eigen::VectorXd in_x) {this->m_state = in_x;}
     
     //! Get the state vector (x)
-    void getState(Eigen::VectorXd &out_x) {out_x = this->state;}
+    void getState(Eigen::VectorXd &out_x) {out_x = this->m_state;}
     
     //! Get the model type
-    void getType(CRModelType &out_type) {out_type = this->type;}
+    void getType(CRModelType &out_type) {out_type = this->m_type;}
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -192,24 +192,24 @@ public:
 protected:
     
     //! Underlying state of the system
-    Eigen::VectorXd state;
+    Eigen::VectorXd m_state;
     
     //! Model type flag
-    CRModelType type;
+    CRModelType m_type;
     
     //! Callback to the deterministic predictor function z = h(x)
-    void(*detPredictor)(Eigen::VectorXd,
-                        Eigen::VectorXd&);
+    void(*m_detPredictor)(Eigen::VectorXd,
+                          Eigen::VectorXd&);
     
     //! Callback to the probabilistic predictor function z = p(h(x))
-    void(*probPredictor)(Eigen::VectorXd,
-                         bool,
-                         Eigen::VectorXd&);
+    void(*m_probPredictor)(Eigen::VectorXd,
+                           bool,
+                           Eigen::VectorXd&);
     
     //! Callback to the probabilistic likelihood function p(z|x)
-    void(*probLikelihood)(Eigen::VectorXd,
-                          Eigen::VectorXd,
-                          double&);
+    void(*m_probLikelihood)(Eigen::VectorXd,
+                            Eigen::VectorXd,
+                            double&);
     
 };
 
