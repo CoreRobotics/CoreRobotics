@@ -134,9 +134,9 @@ void CRNoiseMixture::probability(Eigen::VectorXd in_x, double &out_p)
 {
     out_p = 0.0;
     double p = 0.0;
-    for (size_t i = 0; i < parameters.weights.size(); i++) {
-        this->parameters.models[i]->probability(in_x, p);
-        out_p += this->parameters.weights[i]*p;
+    for (size_t i = 0; i < m_parameters.weights.size(); i++) {
+        this->m_parameters.models[i]->probability(in_x, p);
+        out_p += this->m_parameters.weights[i]*p;
     }
 }
 
