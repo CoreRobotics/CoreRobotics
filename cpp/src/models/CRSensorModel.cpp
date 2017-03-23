@@ -90,20 +90,18 @@ namespace CoreRobotics {
  \param[in] in_x0 - the initial state.
  */
 //---------------------------------------------------------------------
-CRSensorModel::CRSensorModel(void(in_predictor)(Eigen::VectorXd,
-                                                Eigen::VectorXd&),
+CRSensorModel::CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
                              Eigen::VectorXd in_x0)
 {
     this->m_detPredictor = in_predictor;
     this->m_type = CR_MODEL_DETERMINISTIC;
     this->setState(in_x0);
 }
-CRSensorModel::CRSensorModel(void(in_predictor)(Eigen::VectorXd,
-                                                bool,
-                                                Eigen::VectorXd&),
-                             void(in_likelihood)(Eigen::VectorXd,
-                                                 Eigen::VectorXd,
-                                                 double&),
+    
+CRSensorModel::CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd,
+                                                           bool),
+                             double(in_likelihood)(Eigen::VectorXd,
+                                                   Eigen::VectorXd),
                              Eigen::VectorXd in_x0){
     this->m_probPredictor = in_predictor;
     this->m_probLikelihood = in_likelihood;
@@ -128,9 +126,9 @@ void CRSensorModel::measurement(bool in_sampleNoise,
                                 Eigen::VectorXd &out_z)
 {
     if (this->m_type == CR_MODEL_DETERMINISTIC){
-        (this->m_detPredictor)(this->m_state, out_z);
+        out_z = (this->m_detPredictor)(this->m_state);
     } else if (this->m_type == CR_MODEL_STOCHASTIC){
-        (this->m_probPredictor)(this->m_state, in_sampleNoise, out_z);
+        out_z = (this->m_probPredictor)(this->m_state, in_sampleNoise);
     }
 }
     
@@ -154,14 +152,14 @@ void CRSensorModel::likelihood(Eigen::VectorXd in_z,
 {
     if (this->m_type == CR_MODEL_DETERMINISTIC){
         Eigen::VectorXd zPred;
-        (this->m_detPredictor)(this->m_state, zPred);
+        zPred = (this->m_detPredictor)(this->m_state);
         if (zPred == in_z){
             out_p = 1;
         } else {
             out_p = 0;
         }
     } else if (this->m_type == CR_MODEL_STOCHASTIC){
-        (this->m_probLikelihood)(this->m_state, in_z, out_p);
+        out_p = (this->m_probLikelihood)(this->m_state, in_z);
     }
 }
 

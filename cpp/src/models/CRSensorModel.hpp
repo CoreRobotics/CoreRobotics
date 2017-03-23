@@ -151,15 +151,13 @@ class CRSensorModel {
 public:
     
     //! Class constructor
-    CRSensorModel(void(in_predictor)(Eigen::VectorXd,
-                                     Eigen::VectorXd&),
+    CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
                   Eigen::VectorXd in_x0);
-    CRSensorModel(void(in_predictor)(Eigen::VectorXd,
-                                     bool,
-                                     Eigen::VectorXd&),
-                  void(in_likelihood)(Eigen::VectorXd,
-                                      Eigen::VectorXd,
-                                      double&),
+    
+    CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd,
+                                                bool),
+                  double(in_likelihood)(Eigen::VectorXd,
+                                        Eigen::VectorXd),
                   Eigen::VectorXd in_x0);
     
 //---------------------------------------------------------------------
@@ -198,18 +196,15 @@ protected:
     CRModelType m_type;
     
     //! Callback to the deterministic predictor function z = h(x)
-    void(*m_detPredictor)(Eigen::VectorXd,
-                          Eigen::VectorXd&);
+    Eigen::VectorXd(*m_detPredictor)(Eigen::VectorXd);
     
     //! Callback to the probabilistic predictor function z = p(h(x))
-    void(*m_probPredictor)(Eigen::VectorXd,
-                           bool,
-                           Eigen::VectorXd&);
+    Eigen::VectorXd(*m_probPredictor)(Eigen::VectorXd,
+                                      bool);
     
     //! Callback to the probabilistic likelihood function p(z|x)
-    void(*m_probLikelihood)(Eigen::VectorXd,
-                            Eigen::VectorXd,
-                            double&);
+    double(*m_probLikelihood)(Eigen::VectorXd,
+                              Eigen::VectorXd);
     
 };
 
