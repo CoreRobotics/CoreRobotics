@@ -90,21 +90,23 @@ namespace CoreRobotics {
  \param[in] in_x0 - the initial state.
  */
 //---------------------------------------------------------------------
-CRSensorModel::CRSensorModel(void(in_fcn)(Eigen::VectorXd,
-                                          Eigen::VectorXd&),
+CRSensorModel::CRSensorModel(void(in_predictor)(Eigen::VectorXd,
+                                                Eigen::VectorXd&),
                              Eigen::VectorXd in_x0)
 {
-    this->detModel = in_fcn;
+    this->detPredictor = in_predictor;
     this->type = CR_MODEL_DETERMINISTIC;
     this->setState(in_x0);
 }
-CRSensorModel::CRSensorModel(void(in_fcn)(Eigen::VectorXd,
-                                          Eigen::VectorXd,
-                                          bool,
-                                          Eigen::VectorXd&,
-                                          double&),
+CRSensorModel::CRSensorModel(void(in_predictor)(Eigen::VectorXd,
+                                                bool,
+                                                Eigen::VectorXd&),
+                             void(in_likelihood)(Eigen::VectorXd,
+                                                 Eigen::VectorXd,
+                                                 double&),
                              Eigen::VectorXd in_x0){
-    this->probModel = in_fcn;
+    this->probPredictor = in_predictor;
+    this->probLikelihood = in_likelihood;
     this->type = CR_MODEL_STOCHASTIC;
     this->setState(in_x0);
 }
@@ -126,11 +128,9 @@ void CRSensorModel::measurement(bool in_sampleNoise,
                                 Eigen::VectorXd &out_z)
 {
     if (this->type == CR_MODEL_DETERMINISTIC){
-        (this->detModel)(this->state,out_z);
+        (this->detPredictor)(this->state, out_z);
     } else if (this->type == CR_MODEL_STOCHASTIC){
-        Eigen::VectorXd v1;
-        double p;
-        (this->probModel)(this->state, v1, in_sampleNoise, out_z, p);
+        (this->probPredictor)(this->state, in_sampleNoise, out_z);
     }
 }
     
@@ -154,15 +154,14 @@ void CRSensorModel::likelihood(Eigen::VectorXd in_z,
 {
     if (this->type == CR_MODEL_DETERMINISTIC){
         Eigen::VectorXd zPred;
-        (this->detModel)(this->state, zPred);
+        (this->detPredictor)(this->state, zPred);
         if (zPred == in_z){
             out_p = 1;
         } else {
             out_p = 0;
         }
     } else if (this->type == CR_MODEL_STOCHASTIC){
-        Eigen::VectorXd v1;
-        (this->probModel)(this->state, in_z, false, v1, out_p);
+        (this->probLikelihood)(this->state, in_z, out_p);
     }
 }
 

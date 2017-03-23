@@ -47,29 +47,35 @@
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-// Declare a probabilistic model - fcn(x,z,s,zHat,p)
-void probMdlFcn(Eigen::VectorXd x,
+// Create a global noise model
+CRNoiseGaussian noise;
+
+// Declare a probabilistic prediction model - fcn(x,sample,zHat)
+void probPredFcn(Eigen::VectorXd x,
+                 bool s,
+                 Eigen::VectorXd &zHat){
+    Eigen::VectorXd v(1);
+    if (s){
+        noise.sample(v);
+    } else {
+        v << 0;
+    }
+    zHat = x + v;  // observation
+}
+
+// Declare a likelihood model - fcn(x,z,p)
+void probLikFcn(Eigen::VectorXd x,
                 Eigen::VectorXd z,
-                bool s,
-                Eigen::VectorXd &zHat,
                 double &p){
-    zHat = x;  // observation
-    
-    // noise model
     Eigen::MatrixXd cov(1,1);
     cov << 1;
-    CRNoiseGaussian noise = CRNoiseGaussian();
-    noise.setParameters(cov, zHat);
-    if (s){
-        noise.sample(zHat);
-    }
-    // p = 1/sqrt(2*CoreRobotics::PI)*exp(-(z-zHat)*(z-zHat)/2);
-    p = 1.0;
+    noise.setParameters(cov, x);
+    noise.probability(z, p);
 }
 
 // Declare a deterministic model - fcn(x,zHat)
-void detMdlFcn(Eigen::VectorXd x,
-               Eigen::VectorXd &zHat){
+void detPredFcn(Eigen::VectorXd x,
+                Eigen::VectorXd &zHat){
     zHat = x;  // observation
 }
 
@@ -78,12 +84,22 @@ void test_CRSensorModel(void){
     std::cout << "*************************************\n";
     std::cout << "Demonstration of CRSensorModel.\n";
     
+    // initialize the noise model
+    Eigen::MatrixXd cov(1,1);
+    cov << 1;
+    Eigen::VectorXd mean(1);
+    mean << 0;
+    noise = CRNoiseGaussian(cov, mean);
+    
+    
     // initialize a state vector
     Eigen::VectorXd x0(1);
     x0 << 5;
     
     // initialize a probabilistic sensor model
-    CRSensorModel myProbSensor = CRSensorModel(*detMdlFcn,x0);
+    // CRSensorModel myProbSensor = CRSensorModel(*detPredFcn,x0);
+    CRSensorModel myProbSensor = CRSensorModel(*probPredFcn,*probLikFcn,x0);
+    
     
     // initialize a sensor prediction vector
     Eigen::VectorXd zPredict(1);
@@ -92,6 +108,7 @@ void test_CRSensorModel(void){
     
     
     // now evaluate the likelihood
+    std::cout << std::fixed; std::cout.precision(8);
     std::cout << "Likelihood:\n";
     double p;
     Eigen::VectorXd zMeasured(1);
@@ -100,6 +117,5 @@ void test_CRSensorModel(void){
         myProbSensor.likelihood(zMeasured, p);
         std::cout << i << ": " << p << std::endl;
     }
-    
     
 }
