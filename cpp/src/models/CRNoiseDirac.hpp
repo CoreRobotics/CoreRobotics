@@ -166,7 +166,7 @@ public:
 protected:
     
     //! Noise model type
-    diracParam parameters;
+    diracParam m_parameters;
     
 };
 

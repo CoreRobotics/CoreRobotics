@@ -77,7 +77,7 @@ CRNoiseDirac::CRNoiseDirac() {
 //---------------------------------------------------------------------
 void CRNoiseDirac::setParameters(Eigen::VectorXd in_point)
 {
-    this->parameters.point = in_point;
+    this->m_parameters.point = in_point;
 }
 
 
@@ -91,7 +91,7 @@ void CRNoiseDirac::setParameters(Eigen::VectorXd in_point)
 //---------------------------------------------------------------------
 void CRNoiseDirac::sample(Eigen::VectorXd &out_x)
 {
-    out_x = this->parameters.point;
+    out_x = this->m_parameters.point;
 }
     
     
@@ -105,7 +105,7 @@ void CRNoiseDirac::sample(Eigen::VectorXd &out_x)
 //---------------------------------------------------------------------
 void CRNoiseDirac::probability(Eigen::VectorXd in_x, double &out_p)
 {
-    if (in_x == this->parameters.point){
+    if (in_x == this->m_parameters.point){
         out_p = 1.0;
     } else {
         out_p = 0.0;
