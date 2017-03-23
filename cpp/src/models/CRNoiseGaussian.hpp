@@ -131,6 +131,7 @@ namespace CoreRobotics {
 // Paramter structure declaration
 struct gaussianParam{
     Eigen::MatrixXd cov;
+    Eigen::MatrixXd covInv;
     Eigen::VectorXd mean;
 };
     

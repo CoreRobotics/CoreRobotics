@@ -92,16 +92,16 @@ void test_CRNoiseMixture(void){
     }
     
     // print out the result with stars to indicate density
+    double prob;
     std::cout << std::fixed; std::cout.precision(1);
     for (int i=0; i<10; ++i) {
-        std::cout << i << " - " << (i+1) << ": ";
+        printf("%2i - %2i | ",i,i+1);
+        Eigen::VectorXd point(1);
+        point << double(i);
+        mixModel.probability(point, prob);
+        printf("%6.4f | ",prob);
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
     }
-    
-    // Return the probability
-    double prob;
-    mixModel.probability(mean, prob);
-    std::cout << prob << std::endl;
 }
 
 

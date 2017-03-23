@@ -97,6 +97,7 @@ void CRNoiseGaussian::setParameters(Eigen::MatrixXd in_cov,
                                     Eigen::VectorXd in_mean)
 {
     this->parameters.cov = in_cov;
+    this->parameters.covInv = in_cov.inverse();
     this->parameters.mean = in_mean;
 }
 
@@ -132,11 +133,19 @@ void CRNoiseGaussian::sample(Eigen::VectorXd &out_x)
 //---------------------------------------------------------------------
 void CRNoiseGaussian::probability(Eigen::VectorXd in_x, double &out_p)
 {
+    // out_p = 1.2;
+    Eigen::MatrixXd cov2pi = 2*CoreRobotics::PI*this->parameters.cov;
+    Eigen::VectorXd error = in_x - this->parameters.mean;
+    double k = 1/sqrt(cov2pi.determinant());
+    double arg = -0.5*error.transpose()*this->parameters.covInv*error;
+    out_p = k*exp(arg);
+    /*   THINK THIS IS BROKEN!!! - fix first
     Eigen::MatrixXd cov2pi = 2*CoreRobotics::PI*this->parameters.cov;
     Eigen::VectorXd error = in_x - this->parameters.mean;
     double k = 1/sqrt(cov2pi.determinant());
     double arg = -0.5*error.transpose()*this->parameters.cov.inverse()*error;
     out_p = k*exp(arg);
+     */
 }
 
 
