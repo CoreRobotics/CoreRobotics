@@ -65,8 +65,8 @@ CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd in_cov,
                                  Eigen::VectorXd in_mean,
                                  unsigned in_seed){
     this->setParameters(in_cov,in_mean);
-    this->seed = in_seed;
-    this->generator.seed(this->seed);
+    this->m_seed = in_seed;
+    this->generator.seed(this->m_seed);
 }
 CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd in_cov,
                                  Eigen::VectorXd in_mean){
@@ -96,9 +96,9 @@ CRNoiseGaussian::CRNoiseGaussian(){
 void CRNoiseGaussian::setParameters(Eigen::MatrixXd in_cov,
                                     Eigen::VectorXd in_mean)
 {
-    this->parameters.cov = in_cov;
-    this->parameters.covInv = in_cov.inverse();
-    this->parameters.mean = in_mean;
+    this->m_parameters.cov = in_cov;
+    this->m_parameters.covInv = in_cov.inverse();
+    this->m_parameters.mean = in_mean;
 }
 
 
@@ -113,13 +113,13 @@ void CRNoiseGaussian::sample(Eigen::VectorXd &out_x)
 {
     // Normal distribution
     std::normal_distribution<double> gaussian(0.0,1.0);
-    for (int i=0; i<this->parameters.mean.size(); i++){
-        out_x(i) = gaussian(this->generator);
+    for (int i=0; i<this->m_parameters.mean.size(); i++){
+        out_x(i) = gaussian(this->m_generator);
     }
     // compute the Cholesky decomposition of A
-    Eigen::LLT<Eigen::MatrixXd> lltOfCov(this->parameters.cov);
+    Eigen::LLT<Eigen::MatrixXd> lltOfCov(this->m_parameters.cov);
     Eigen::MatrixXd L = lltOfCov.matrixL();
-    out_x = L*out_x + this->parameters.mean;
+    out_x = L*out_x + this->m_parameters.mean;
 }
     
     
@@ -134,18 +134,11 @@ void CRNoiseGaussian::sample(Eigen::VectorXd &out_x)
 void CRNoiseGaussian::probability(Eigen::VectorXd in_x, double &out_p)
 {
     // out_p = 1.2;
-    Eigen::MatrixXd cov2pi = 2*CoreRobotics::PI*this->parameters.cov;
-    Eigen::VectorXd error = in_x - this->parameters.mean;
+    Eigen::MatrixXd cov2pi = 2*CoreRobotics::PI*this->m_parameters.cov;
+    Eigen::VectorXd error = in_x - this->m_parameters.mean;
     double k = 1/sqrt(cov2pi.determinant());
-    double arg = -0.5*error.transpose()*this->parameters.covInv*error;
+    double arg = -0.5*error.transpose()*this->m_parameters.covInv*error;
     out_p = k*exp(arg);
-    /*   THINK THIS IS BROKEN!!! - fix first
-    Eigen::MatrixXd cov2pi = 2*CoreRobotics::PI*this->parameters.cov;
-    Eigen::VectorXd error = in_x - this->parameters.mean;
-    double k = 1/sqrt(cov2pi.determinant());
-    double arg = -0.5*error.transpose()*this->parameters.cov.inverse()*error;
-    out_p = k*exp(arg);
-     */
 }
 
 
