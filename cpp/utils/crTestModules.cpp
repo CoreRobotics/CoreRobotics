@@ -70,6 +70,7 @@ int main(int argc, const char * argv[]) {
     
     // Test the sensor models
     test_CRSensorModel();
+    test_CRSensorProbabilistic();
     
     return 0;
 }

@@ -40,12 +40,13 @@
  */
 //=====================================================================
 
-#ifndef CRSensorModel_hpp
-#define CRSensorModel_hpp
+#ifndef CRSensorProbabilistic_hpp
+#define CRSensorProbabilistic_hpp
 
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
+#include "CRSensorModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -143,43 +144,40 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-class CRSensorModel {
+class CRSensorProbabilistic : public CRSensorModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
-                  Eigen::VectorXd in_x0);
-    CRSensorModel();
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
-public:
-    
-    //! Set the state vector (x)
-    void setState(Eigen::VectorXd in_x) {this->m_state = in_x;}
-    
-    //! Get the state vector (x)
-    Eigen::VectorXd getState(void) {return this->m_state;}
+    CRSensorProbabilistic(Eigen::VectorXd(in_predictor)(Eigen::VectorXd,
+                                                        bool),
+                          double(in_likelihood)(Eigen::VectorXd,
+                                                Eigen::VectorXd),
+                          Eigen::VectorXd in_x0);
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Simulate the measurement
-    Eigen::VectorXd measurement(void);
+    Eigen::VectorXd measurement(bool in_sampleNoise);
+    
+    //! Get the likelihood of a measurement
+    double likelihood(Eigen::VectorXd in_z);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
-    //! Underlying state of the system
-    Eigen::VectorXd m_state;
+    //! Callback to the probabilistic predictor function z = p(h(x))
+    Eigen::VectorXd(*m_predictorFcn)(Eigen::VectorXd,
+                                     bool);
     
-    //! Callback to the deterministic predictor function z = h(x)
-    Eigen::VectorXd(*m_predictorFcn)(Eigen::VectorXd);
+    //! Callback to the probabilistic likelihood function p(z|x)
+    double(*m_likelihoodFcn)(Eigen::VectorXd,
+                             Eigen::VectorXd);
     
 };
 

@@ -40,7 +40,7 @@
  */
 //=====================================================================
 
-#include "CRSensorModel.hpp"
+#include "CRSensorProbabilistic.hpp"
 
 
 //=====================================================================
@@ -90,15 +90,15 @@ namespace CoreRobotics {
  \param[in] in_x0 - the initial state.
  */
 //---------------------------------------------------------------------
-CRSensorModel::CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
-                             Eigen::VectorXd in_x0)
-{
+CRSensorProbabilistic::CRSensorProbabilistic(Eigen::VectorXd(in_predictor)(Eigen::VectorXd,
+                                                                           bool),
+                                             double(in_likelihood)(Eigen::VectorXd,
+                                                                   Eigen::VectorXd),
+                                             Eigen::VectorXd in_x0){
     this->m_predictorFcn = in_predictor;
+    this->m_likelihoodFcn = in_likelihood;
     this->setState(in_x0);
 }
-
-// overloaded constructor for initializing derived classes
-CRSensorModel::CRSensorModel() { }
 
 
 //=====================================================================
@@ -113,9 +113,29 @@ CRSensorModel::CRSensorModel() { }
  \param[out] out_z - simulated measurement.
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRSensorModel::measurement()
+Eigen::VectorXd CRSensorProbabilistic::measurement(bool in_sampleNoise)
 {
-    return (this->m_predictorFcn)(this->m_state);
+    return (this->m_predictorFcn)(this->m_state, in_sampleNoise);
+}
+    
+    
+//=====================================================================
+/*!
+ This method computes the likelihood of a measurement z from the 
+ underlying state.  This evaluates the model
+ 
+ \f$ p(z\mid x) \f$
+ 
+ If the model is deterministic, out_p will be 1 only if z is identical
+ to the estimated value.\n
+ 
+ \param[in] in_z - the measurement to be evaluated
+ \param[out] out_p - the likelihood of the measurement z
+ */
+//---------------------------------------------------------------------
+double CRSensorProbabilistic::likelihood(Eigen::VectorXd in_z)
+{
+    return (this->m_likelihoodFcn)(this->m_state, in_z);
 }
 
 

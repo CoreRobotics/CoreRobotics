@@ -175,6 +175,7 @@ Todo
 #include "CRNoiseUniform.hpp"
 #include "CRNoiseMixture.hpp"
 #include "CRSensorModel.hpp"
+#include "CRSensorProbabilistic.hpp"
 //#include "CRSensorLinear.hpp"
 //#include "CRMotionModel.hpp"
 //#include "CRMotionLinear.hpp"

@@ -49,14 +49,15 @@ void CRTestMath(void);      // Math tests
 void CRTestModels(void);    // Model tests
 
 // Noise model tests
-void test_CRNoiseModel(void);       // test CRNoiseModel
-void test_CRNoiseGaussian(void);    // test CRNoiseGaussian
-void test_CRNoiseDirac(void);       // test CRNoiseDirac
-void test_CRNoiseUniform(void);     // test CRNoiseUniform
-void test_CRNoiseMixture(void);     // test CRNoiseMixture
+void test_CRNoiseModel(void);           // test CRNoiseModel
+void test_CRNoiseGaussian(void);        // test CRNoiseGaussian
+void test_CRNoiseDirac(void);           // test CRNoiseDirac
+void test_CRNoiseUniform(void);         // test CRNoiseUniform
+void test_CRNoiseMixture(void);         // test CRNoiseMixture
 
 // Sensor model tests
-void test_CRSensorModel(void);      // test CRSensorModel
+void test_CRSensorModel(void);          // test CRSensorModel
+void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
 
 
 #endif /* CRTestModules_hpp */
