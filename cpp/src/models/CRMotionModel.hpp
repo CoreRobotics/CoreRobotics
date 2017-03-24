@@ -108,7 +108,7 @@ namespace CoreRobotics {
  
  
  // -------------------------------------------------------------
- void test_CRMotionModel(void){
+ void main(void){
  
      std::cout << "*************************************\n";
      std::cout << "Demonstration of CRMotionModel.\n";

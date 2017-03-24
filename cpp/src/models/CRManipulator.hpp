@@ -103,7 +103,7 @@ namespace CoreRobotics {
  
  using namespace CoreRobotics;
  
- main() {
+ void main(void) {
  
     CRManipulator MyRobot;
 

@@ -95,13 +95,13 @@ namespace CoreRobotics {
  
  // -------------------------------------------------------------
  // Declare a deterministic model - fcn(x,zHat)
-     Eigen::VectorXd detPredFcn(Eigen::VectorXd x){
+ Eigen::VectorXd detPredFcn(Eigen::VectorXd x){
      return x;  // observation (z = x)
  }
  
  
  // -------------------------------------------------------------
- void test_CRSensorModel(void){
+ void main(void){
  
      std::cout << "*************************************\n";
      std::cout << "Demonstration of CRSensorModel.\n";

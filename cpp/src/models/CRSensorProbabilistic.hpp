@@ -135,7 +135,7 @@ namespace CoreRobotics {
  
  
  // -------------------------------------------------------------
- void test_CRSensorProbabilistic(void){
+ void main(void){
  
      std::cout << "*************************************\n";
      std::cout << "Demonstration of CRSensorProbabilistic.\n";

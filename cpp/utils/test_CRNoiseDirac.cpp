@@ -60,9 +60,7 @@ void test_CRNoiseDirac(void){
     CRNoiseDirac diracNoise = CRNoiseDirac();
     diracNoise.setParameters(point);
     
-    // initialize a vector to sample into
-    // v(1);
-    
+    // initialize parameters for experiments
     const int nrolls=10000;  // number of experiments
     const int nstars=20;     // maximum number of stars to distribute
     int p[10]={};
@@ -74,7 +72,6 @@ void test_CRNoiseDirac(void){
     }
     
     // print out the result with stars to indicate density
-    // double prob;
     std::cout << std::fixed; std::cout.precision(1);
     for (int i=0; i<10; ++i) {
         printf("%2i - %2i | ",i,i+1);

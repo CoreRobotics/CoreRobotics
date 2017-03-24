@@ -79,6 +79,7 @@ namespace CoreRobotics {
  This example demonstrates use of the CRNoiseModel class.
  
  \code
+ 
  #include <iostream>
  #include "CoreRobotics.hpp"
  
@@ -102,9 +103,8 @@ namespace CoreRobotics {
      CRNoiseModel genericNoise = CRNoiseModel();
      genericNoise.setParameters(icdf);
      
-     // initialize a vector to sample into
-     Eigen::VectorXd v(1);
      
+     // initialize parameters for experiments
      const int nrolls=10000;  // number of experiments
      const int nstars=100;    // maximum number of stars to distribute
      const int nintervals=10; // number of intervals
@@ -112,7 +112,7 @@ namespace CoreRobotics {
      
      // sample the distribution
      for (int i=0; i<nrolls; ++i) {
-         genericNoise.sample(v);
+         Eigen::VectorXd v = genericNoise.sample();
          ++p[int(nintervals*v(0))];
      }
      
@@ -123,6 +123,7 @@ namespace CoreRobotics {
          std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
      }
  }
+ 
  \endcode
  
  \section References
