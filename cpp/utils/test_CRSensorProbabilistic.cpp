@@ -52,11 +52,11 @@ CRNoiseGaussian* noise;
 
 
 // -------------------------------------------------------------
-// Declare a probabilistic prediction model - fcn(x,sample,zHat)
+// Declare a probabilistic prediction model: zHat = fcn(x,sample)
 Eigen::VectorXd probPredFcn(Eigen::VectorXd x,
-                            bool s){
+                            bool sample){
     Eigen::VectorXd v(1);
-    if (s){
+    if (sample){
         noise->sample(v);
     } else {
         v << 0;
@@ -65,15 +65,15 @@ Eigen::VectorXd probPredFcn(Eigen::VectorXd x,
 }
 
 // -------------------------------------------------------------
-// Declare a likelihood model - fcn(x,z,p)
-double probLikFcn(Eigen::VectorXd x,
-                  Eigen::VectorXd z){
+// Declare a likelihood model: p = Pr(zObserved | zPredict)
+double probLikFcn(Eigen::VectorXd zObserved,
+                  Eigen::VectorXd zPredict){
 
     Eigen::MatrixXd cov(1,1);
     double p = 0;
     cov << 1;
-    noise->setParameters(cov, x);
-    noise->probability(z, p);
+    noise->setParameters(cov, zPredict);
+    noise->probability(zObserved, p);
 
     return p;
 }

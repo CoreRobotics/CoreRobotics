@@ -50,43 +50,54 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- The constructor creates a sensor model.  The in_fcn specifies the
- observation equation.  There are 2 options for the in_fcn:\n
+ The constructor creates a sensor model, and requires 2 callback 
+ functions to be supplied.
  
- Option 1: Deterministic Model. This function has the mathematical form:
+ Callback 1: in_predictor
  
- \f$ zPredict =  h(x) \f$
+ The in_predictor specifies the observation equation:\n
  
- Where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
- sensor observation. For this case, the function prototype is
+ \f$ zPredict =  h(x,w) \f$
+ 
+ where \f$x\f$ is the system state, \f$w\f$ is noise and \f$zPredict\f$
+ is the predicted sensor observation. The callback function prototype 
+ is thus
  \code
- void in_fcn(Eigen::VectorXd x,
-             Eigen::VectorXd& zPredict){
+ Eigen::VectorXd in_predictor(Eigen::VectorXd x,
+                              boolean sample){
     // compute zPredict from x here.
- };
- \endcode
- and the internal model type state is set to deterministic.
+    if (sample) {
+        // sample from the noise distribution to generate
+        // zPredictWithNoise
+        return zPredictWithNoise;
+    } else {
+        return zPredict;
+    }
  
- Option 2: Probabilistic Model.  This model type is more complex and a
- generalization of option 2, and has the mathematical form:
- 
- \f$p(z \mid x)\f$
- 
- For this case, the function prototype is
- \code
- void in_fcn(Eigen::VectorXd x,
-             Eigen::VectorXd z,
-             bool s,
-             Eigen::VectorXd& zPredict,
-             double& probOfZ){
-    // compute zPredict from x here.
-    // if s == true, sample zPredict from the probability density.
-    // compute probOfZ by evaluating p(z|x) = p(z|zPredict)
  };
  \endcode
  
  
- \param[in] in_fcn - a model function of the form specified above
+ Callback 2: in_likelihood
+ 
+ The in_likelihood specifies the likelihood:\n
+ 
+ \f$ p =  Pr(zObserved \mid zPredict) \f$
+ 
+ where \f$zPredict\f$ is the predicted observation, \f$zObserved\f$ is
+ an actual measurement and \f$p\f$ is the probability of observing 
+ zObserved given zPredict. The callback function prototype is thus
+ \code
+ double in_likelihood(Eigen::VectorXd zObserved,
+                      Eigen::VectorXd zPredict){
+    // compute p = Pr(zObserved | zPredict)
+    return p;
+ };
+ \endcode
+ 
+ 
+ \param[in] in_predictor - prediction callback function.
+ \param[in] in_likelihood - likelihood callback function.
  \param[in] in_x0 - the initial state.
  */
 //---------------------------------------------------------------------
@@ -105,17 +116,22 @@ CRSensorProbabilistic::CRSensorProbabilistic(Eigen::VectorXd(in_predictor)(Eigen
 /*!
  This method simulates the measurement from the value of the underlying
  state. The sampleNoise flag can be set to simulate the sensor with
- noise sampled from the internal noise model.  If the model is 
- deterministic, the sample noise flag does nothing.\n
+ noise sampled from the internal noise model.\n
  
- \param[in] in_sampleNoise - a boolean flag specifying if the noise 
-            model should be sampled to add noise to the measurement.
- \param[out] out_z - simulated measurement.
+ \param[in] in_sampleNoise - an (optional) boolean flag specifying if
+            the noise model should be sampled to add noise to the 
+            simulated measurement.
+ \return - simulated measurement.
  */
 //---------------------------------------------------------------------
 Eigen::VectorXd CRSensorProbabilistic::measurement(bool in_sampleNoise)
 {
     return (this->m_predictorFcn)(this->m_state, in_sampleNoise);
+}
+    
+Eigen::VectorXd CRSensorProbabilistic::measurement(void)
+{
+    return (this->m_predictorFcn)(this->m_state, false);
 }
     
     
@@ -124,18 +140,16 @@ Eigen::VectorXd CRSensorProbabilistic::measurement(bool in_sampleNoise)
  This method computes the likelihood of a measurement z from the 
  underlying state.  This evaluates the model
  
- \f$ p(z\mid x) \f$
+ \f$ p(zObserved \mid zPredict) \f$
  
- If the model is deterministic, out_p will be 1 only if z is identical
- to the estimated value.\n
- 
- \param[in] in_z - the measurement to be evaluated
- \param[out] out_p - the likelihood of the measurement z
+ \param[in] in_zObserved - the actual measurement to be evaluated.
+ \return - the likelihood of zObserved.
  */
 //---------------------------------------------------------------------
-double CRSensorProbabilistic::likelihood(Eigen::VectorXd in_z)
+double CRSensorProbabilistic::likelihood(Eigen::VectorXd in_zObserved)
 {
-    return (this->m_likelihoodFcn)(this->m_state, in_z);
+    Eigen::VectorXd zPredict = this->measurement(false);
+    return (this->m_likelihoodFcn)(this->m_state, in_zObserved);
 }
 
 

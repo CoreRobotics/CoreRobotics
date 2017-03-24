@@ -65,73 +65,64 @@ namespace CoreRobotics {
  
  \details
  \section Description
- CRSensorModel implements a seensor model from a supplied observation
+ CRSensorModel implements a sensor model from a supplied observation
  callback function.  Specifically, CRSensorModel sets up a container
  for the model
  
- \f$ z = h(x,u) \f$,
+ \f$ z = h(x) \f$,
  
- where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
- and \f$z\f$ is the sensor measurement vector.
+ where \f$x\f$ is the state vector, and \f$z\f$ is the sensor 
+ measurement vector.
  
- These methods are used to set up the sensor model:
- - CRSensorModel::setCallbackObsv sets the observation callback function.
+ These methods are used to access the state:
  - CRSensorModel::setState sets the underlying state vector.
- 
- These methods return states of the model:
  - CRSensorModel::getState outputs the state vector.
  
  These methods simulate sensor measurements:
- - CRSensorModel::simulateMeasurement computes the measurement vector (z)
- from the underlying state (x) for a given input (u).
+ - CRSensorModel::measurement computes a simulated measurement 
+ vector (z) from the underlying state (x).
  
  \section Example
  This example demonstrates use of the CRSensorModel class.
  \code
  
+ #include <iostream>
  #include "CoreRobotics.hpp"
- #include #include <iostream>
  
+ // Use the CoreRobotics namespace
  using namespace CoreRobotics;
  
- // declare the observation system callback (z = h(x,u))
-    Eigen::VectorXd obsEqn(Eigen::VectorXd x, Eigen::VectorXd u){
-    Eigen::Matrix<double, 1, 2> C;
-    C << 1, 0;
-    return C*x;
+ 
+ // -------------------------------------------------------------
+ // Declare a deterministic model - fcn(x,zHat)
+     Eigen::VectorXd detPredFcn(Eigen::VectorXd x){
+     return x;  // observation (z = x)
  }
  
- main() {
-     double dt = 0.1; // time step (s)
-     double t = 0;    // define the time (s)
-     Eigen::VectorXd x(2); // Define a state vector
-     x << 0, 0; // state IC
-     Eigen::VectorXd u(1); // Define an input vector
-     u << 1; // make the input constant for the demonstration
-     Eigen::VectorXd z(1); // Define a measurement vector
-     z << 0; // init value in memory
+ 
+ // -------------------------------------------------------------
+ void test_CRSensorModel(void){
+ 
+     std::cout << "*************************************\n";
+     std::cout << "Demonstration of CRSensorModel.\n";
      
-     // initialize a sensor model
-     CRSensorModel sensor = CRSensorModel(obsEqn,x);
      
-     std::cout << "\nSensor simulation:\n";
-     printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
+     // initialize a state vector
+     Eigen::VectorXd x0(1);
+     x0 << 5;
      
-     // Now perform a simulation of the system reponse over 2 seconds
-     while(t<2){
      
-         // simulate a simple dynamic system
-         double x0 = x(0)+dt*x(1);
-         double x1 = -dt*10*x(0)+(1-dt*6)*x(1)+dt*u(0);
-         x << x0, x1;
-         
-         sensor.setState(x);
-         sensor.simulateMeasurement(u, false, z);
-         printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
-         
-         t = t+dt;
-     }
+     // initialize a deterministic sensor model
+     CRSensorModel sensor = CRSensorModel(*detPredFcn,x0);
+     
+     
+     // initialize a sensor prediction vector
+     Eigen::VectorXd zPredict(1);
+     zPredict = sensor.measurement();
+     std::cout << "Predicted measurement = " << zPredict << std::endl;
+ 
  }
+ // -------------------------------------------------------------
  
  \endcode
  

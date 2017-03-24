@@ -54,85 +54,128 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRSensorModel.hpp
- \brief Implements a class that handles sensor models.
+ \file CRSensorProbabilistic.hpp
+ \brief Implements a class that handles probabilistic sensor models.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRSensorModel
+ \class CRSensorProbabilistic
  \ingroup models
  
- \brief This class implements a sensor model.
+ \brief This class implements a probabilistic sensor model.
  
  \details
  \section Description
- CRSensorModel implements a seensor model from a supplied observation
- callback function.  Specifically, CRSensorModel sets up a container
+ CRSensorProbabilistic implements a probabilistic sensor model from 
+ a supplied observation callback function and likelihood callback
+ functions.  Specifically, CRSensorProbabilistic sets up a container
  for the model
  
- \f$ z = h(x,u) \f$,
+ \f$ z = h(x,w) \f$,
  
- where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
- and \f$z\f$ is the sensor measurement vector.
+ where \f$x\f$ is the state vector, and \f$z\f$ is the sensor
+ measurement vector. and \f$w\f$ is noise.  Additionally, a probabilistic
+ model
  
- These methods are used to set up the sensor model:
- - CRSensorModel::setCallbackObsv sets the observation callback function.
- - CRSensorModel::setState sets the underlying state vector.
+ \f$ p(z \mid x) \f$
  
- These methods return states of the model:
- - CRSensorModel::getState outputs the state vector.
+ must be specified to return the probability of observing a measurement
+ \f$z\f$ given the current state \f$x\f$.
  
- These methods simulate sensor measurements:
- - CRSensorModel::simulateMeasurement computes the measurement vector (z)
- from the underlying state (x) for a given input (u).
+ These methods are used to access the state:
+ - CRSensorProbabilistic::setState sets the underlying state vector.
+ - CRSensorProbabilistic::getState outputs the state vector.
+ 
+ These methods simulate sensor measurements and probabilities:
+ - CRSensorProbabilistic::measurement computes a simulated measurement
+ vector (z) from the underlying state (x).
+ - CRSensorProbabilistic::likelihood computes the probability of 
+ observing measurement (z) for the given state (x).
  
  \section Example
- This example demonstrates use of the CRSensorModel class.
+ This example demonstrates use of the CRSensorProbabilistic class.
  \code
  
+ #include <iostream>
  #include "CoreRobotics.hpp"
- #include #include <iostream>
  
+ // Use the CoreRobotics namespace
  using namespace CoreRobotics;
  
- // declare the observation system callback (z = h(x,u))
-    Eigen::VectorXd obsEqn(Eigen::VectorXd x, Eigen::VectorXd u){
-    Eigen::Matrix<double, 1, 2> C;
-    C << 1, 0;
-    return C*x;
+ // Create a global noise model
+ CRNoiseGaussian* noise;
+ 
+ 
+ // -------------------------------------------------------------
+ // Declare a probabilistic prediction model: zHat = fcn(x,sample)
+ Eigen::VectorXd probPredFcn(Eigen::VectorXd x,
+                             bool sample){
+     Eigen::VectorXd v(1);
+     if (sample){
+         noise->sample(v);
+     } else {
+         v << 0;
+     }
+     return x + v;  // observation
  }
  
- main() {
-     double dt = 0.1; // time step (s)
-     double t = 0;    // define the time (s)
-     Eigen::VectorXd x(2); // Define a state vector
-     x << 0, 0; // state IC
-     Eigen::VectorXd u(1); // Define an input vector
-     u << 1; // make the input constant for the demonstration
-     Eigen::VectorXd z(1); // Define a measurement vector
-     z << 0; // init value in memory
+ // -------------------------------------------------------------
+ // Declare a likelihood model: p = Pr(zObserved | zPredict)
+ double probLikFcn(Eigen::VectorXd zObserved,
+                   Eigen::VectorXd zPredict){
      
-     // initialize a sensor model
-     CRSensorModel sensor = CRSensorModel(obsEqn,x);
+     Eigen::MatrixXd cov(1,1);
+     double p = 0;
+     cov << 1;
+     noise->setParameters(cov, zPredict);
+     noise->probability(zObserved, p);
      
-     std::cout << "\nSensor simulation:\n";
-     printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
+     return p;
+ }
+ 
+ 
+ // -------------------------------------------------------------
+ void test_CRSensorProbabilistic(void){
+ 
+     std::cout << "*************************************\n";
+     std::cout << "Demonstration of CRSensorProbabilistic.\n";
      
-     // Now perform a simulation of the system reponse over 2 seconds
-     while(t<2){
+     // initialize the noise model with a mean and covariance
+     Eigen::MatrixXd cov(1,1);
+     cov << 1;
+     Eigen::VectorXd mean(1);
+     mean << 0;
+     noise = new CRNoiseGaussian(cov, mean);
      
-         // simulate a simple dynamic system
-         double x0 = x(0)+dt*x(1);
-         double x1 = -dt*10*x(0)+(1-dt*6)*x(1)+dt*u(0);
-         x << x0, x1;
-         
-         sensor.setState(x);
-         sensor.simulateMeasurement(u, false, z);
-         printf("t = %3.1f, x = (%+6.4f, %+6.4f), z= (%6.4f)\n",t,x(0),x(1),z(0));
-         
-         t = t+dt;
+     
+     // initialize a state vector
+     Eigen::VectorXd x0(1);
+     x0 << 5;
+     
+     
+     // initialize a probabilistic sensor model
+     CRSensorProbabilistic sensor = CRSensorProbabilistic(*probPredFcn,*probLikFcn,x0);
+     
+     
+     // initialize a sensor prediction vector
+     Eigen::VectorXd zPredict(1);
+     zPredict = sensor.measurement(false);
+     std::cout << "Predicted measurement = " << zPredict << std::endl;
+     
+     // init variables for storing measurement and probability
+     double p;
+     Eigen::VectorXd zMeasured(1);
+     
+     // now evaluate the likelihood for several test measurements
+     std::cout << "Measurement | Likelihood\n";
+     
+     for (double i = 0; i <= 10; i=i+0.5){
+         zMeasured << i;
+         p = sensor.likelihood(zMeasured);
+         printf("  %5.2f     |   %6.4f\n",i,p);
      }
  }
+ // -------------------------------------------------------------
  
  \endcode
  
@@ -164,6 +207,8 @@ public:
     //! Simulate the measurement
     Eigen::VectorXd measurement(bool in_sampleNoise);
     
+    Eigen::VectorXd measurement(void);
+    
     //! Get the likelihood of a measurement
     double likelihood(Eigen::VectorXd in_z);
     
@@ -171,11 +216,11 @@ public:
 // Protected Members
 protected:
     
-    //! Callback to the probabilistic predictor function z = p(h(x))
+    //! Callback to the probabilistic predictor function z = h(x,v)
     Eigen::VectorXd(*m_predictorFcn)(Eigen::VectorXd,
                                      bool);
     
-    //! Callback to the probabilistic likelihood function p(z|x)
+    //! Callback to the probabilistic likelihood function p(zObserved|h(x))
     double(*m_likelihoodFcn)(Eigen::VectorXd,
                              Eigen::VectorXd);
     

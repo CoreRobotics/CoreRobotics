@@ -50,43 +50,21 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- The constructor creates a sensor model.  The in_fcn specifies the
- observation equation.  There are 2 options for the in_fcn:\n
- 
- Option 1: Deterministic Model. This function has the mathematical form:
+ The constructor creates a sensor model.  The in_predictor specifies 
+ the observation equation:\n
  
  \f$ zPredict =  h(x) \f$
  
- Where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
- sensor observation. For this case, the function prototype is
+ where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
+ sensor observation. The callback function prototype is thus
  \code
- void in_fcn(Eigen::VectorXd x,
-             Eigen::VectorXd& zPredict){
+ Eigen::VectorXd in_predictor(Eigen::VectorXd x){
     // compute zPredict from x here.
- };
- \endcode
- and the internal model type state is set to deterministic.
- 
- Option 2: Probabilistic Model.  This model type is more complex and a
- generalization of option 2, and has the mathematical form:
- 
- \f$p(z \mid x)\f$
- 
- For this case, the function prototype is
- \code
- void in_fcn(Eigen::VectorXd x,
-             Eigen::VectorXd z,
-             bool s,
-             Eigen::VectorXd& zPredict,
-             double& probOfZ){
-    // compute zPredict from x here.
-    // if s == true, sample zPredict from the probability density.
-    // compute probOfZ by evaluating p(z|x) = p(z|zPredict)
+    return zPredict;
  };
  \endcode
  
- 
- \param[in] in_fcn - a model function of the form specified above
+ \param[in] in_predictor - a model function of the form specified above
  \param[in] in_x0 - the initial state.
  */
 //---------------------------------------------------------------------
@@ -104,16 +82,12 @@ CRSensorModel::CRSensorModel() { }
 //=====================================================================
 /*!
  This method simulates the measurement from the value of the underlying
- state. The sampleNoise flag can be set to simulate the sensor with
- noise sampled from the internal noise model.  If the model is 
- deterministic, the sample noise flag does nothing.\n
+ state.\n
  
- \param[in] in_sampleNoise - a boolean flag specifying if the noise 
-            model should be sampled to add noise to the measurement.
- \param[out] out_z - simulated measurement.
+ \return - simulated measurement (z).
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRSensorModel::measurement()
+Eigen::VectorXd CRSensorModel::measurement(void)
 {
     return (this->m_predictorFcn)(this->m_state);
 }
