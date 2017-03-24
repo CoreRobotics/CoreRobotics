@@ -91,14 +91,14 @@ void CRNoiseModel::setParameters(Eigen::VectorXd(in_icd)(double))
 /*!
  This method samples the distribution and returns the sample x.\n
  
- \param[out] out_x - sampled state
+ \return - sampled state
  */
 //---------------------------------------------------------------------
-void CRNoiseModel::sample(Eigen::VectorXd &out_x)
+Eigen::VectorXd CRNoiseModel::sample(void)
 {
     // Uniform real distribution
     std::uniform_real_distribution<double> uniform(0.0,1.0);
-    out_x = (this->m_parameters.icdFunction)(uniform(this->m_generator));
+    return (this->m_parameters.icdFunction)(uniform(this->m_generator));
 }
    
 
@@ -107,17 +107,17 @@ void CRNoiseModel::sample(Eigen::VectorXd &out_x)
  This method computes the probability of x from the density.\n
  
  \param[in] in_x - random vector to be evaluated
- \param[out] out_p - probability of in_x
+ \return - probability of in_x
  */
 //---------------------------------------------------------------------
-void CRNoiseModel::probability(Eigen::VectorXd in_x, double &out_p)
+double CRNoiseModel::probability(Eigen::VectorXd in_x)
 {
     // TODO - this is gonna be tricky
     // 1.  Find the p* = F(x) (optimization)
     // 2a. Get x+ <- F^{-1}(p*+)
     // 2b. Get x- <- F^{-1}(p*-)
     // 3.  Central difference: p = (p*+ - p*-)/(x+ - x-)
-    out_p = 1.0;
+    return 1.0;
 }
 
     
@@ -126,7 +126,7 @@ void CRNoiseModel::probability(Eigen::VectorXd in_x, double &out_p)
  This method randomizes the seed of the NoiseModel using clock.\n
  */
 //---------------------------------------------------------------------
-void CRNoiseModel::randomSeed()
+void CRNoiseModel::randomSeed(void)
 {
     // get a seed
     typedef std::chrono::steady_clock clock;

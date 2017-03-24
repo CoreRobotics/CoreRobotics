@@ -93,10 +93,10 @@ void CRNoiseMixture::add(CRNoiseModel* in_model, double in_weight)
 /*!
  This method samples a random number from the mixture model.\n
  
- \param[out] out_x - sampled state.
+ \return - sampled state.
  */
 //---------------------------------------------------------------------
-void CRNoiseMixture::sample(Eigen::VectorXd &out_x)
+Eigen::VectorXd CRNoiseMixture::sample(void)
 {
     
     // return the sum of the weights
@@ -131,7 +131,7 @@ void CRNoiseMixture::sample(Eigen::VectorXd &out_x)
     }
     
     // Finally sample from the distribution specified by index
-    this->m_parameters.models[index]->sample(out_x);
+    return this->m_parameters.models[index]->sample();
     
 }
     
@@ -140,20 +140,30 @@ void CRNoiseMixture::sample(Eigen::VectorXd &out_x)
 /*!
  This method returns the probability of x.\n
  
- \param[in] in_x - state to evaluate
- \param[out] out_p - probability of in_x
+ \param[in] in_x - random number to evaluate
+ \return - probability of in_x
  */
 //---------------------------------------------------------------------
-void CRNoiseMixture::probability(Eigen::VectorXd in_x, double &out_p)
+double CRNoiseMixture::probability(Eigen::VectorXd in_x)
 {
-    out_p = 0.0;
     
+    // return the sum of the weights
+    double sum_of_weights = 0;
+    
+    for (size_t i = 0; i < m_parameters.weights.size(); i++) {
+        sum_of_weights += m_parameters.weights[i];
+    }
+    
+    // get the probability of the observation for each dist in the
+    // mixture multiplied by the dist weight
     double p = 0.0;
     
     for (size_t i = 0; i < m_parameters.weights.size(); i++) {
-        this->m_parameters.models[i]->probability(in_x, p);
-        out_p += this->m_parameters.weights[i]*p;
+        double weight = this->m_parameters.weights[i]/sum_of_weights;
+        p += weight*this->m_parameters.models[i]->probability(in_x);
     }
+    
+    return p;
 }
 
 

@@ -61,7 +61,7 @@ void test_CRNoiseDirac(void){
     diracNoise.setParameters(point);
     
     // initialize a vector to sample into
-    Eigen::VectorXd v(1);
+    // v(1);
     
     const int nrolls=10000;  // number of experiments
     const int nstars=20;     // maximum number of stars to distribute
@@ -69,18 +69,18 @@ void test_CRNoiseDirac(void){
     
     // sample the distribution
     for (int i=0; i<nrolls; ++i) {
-        diracNoise.sample(v);
+        Eigen::VectorXd v = diracNoise.sample();
         if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
     }
     
     // print out the result with stars to indicate density
-    double prob;
+    // double prob;
     std::cout << std::fixed; std::cout.precision(1);
     for (int i=0; i<10; ++i) {
         printf("%2i - %2i | ",i,i+1);
         Eigen::VectorXd point(1);
         point << double(i);
-        diracNoise.probability(point, prob);
+        double prob = diracNoise.probability(point);
         printf("%6.4f | ",prob);
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
     }

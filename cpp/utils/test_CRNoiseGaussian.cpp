@@ -63,7 +63,7 @@ void test_CRNoiseGaussian(void){
     normalNoise.setParameters(cov, mean);
     
     // initialize a vector to sample into
-    Eigen::VectorXd v(2);
+    // Eigen::VectorXd v(2);
     
     const int nrolls=10000;  // number of experiments
     const int nstars=100;    // maximum number of stars to distribute
@@ -71,18 +71,18 @@ void test_CRNoiseGaussian(void){
     
     // sample the distribution
     for (int i=0; i<nrolls; ++i) {
-        normalNoise.sample(v);
+        Eigen::VectorXd v = normalNoise.sample();
         if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
     }
     
     // print out the result with stars to indicate density
-    double prob;
+    // double prob;
     std::cout << std::fixed; std::cout.precision(1);
     for (int i=0; i<10; ++i) {
         printf("%2i - %2i | ",i,i+1);
         Eigen::VectorXd point(2);
         point << double(i), 5;
-        normalNoise.probability(point, prob);
+        double prob = normalNoise.probability(point);
         printf("%6.4f | ",prob);
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
     }

@@ -57,7 +57,7 @@ Eigen::VectorXd probPredFcn(Eigen::VectorXd x,
                             bool sample){
     Eigen::VectorXd v(1);
     if (sample){
-        noise->sample(v);
+        v = noise->sample();
     } else {
         v << 0;
     }
@@ -70,12 +70,9 @@ double probLikFcn(Eigen::VectorXd zObserved,
                   Eigen::VectorXd zPredict){
 
     Eigen::MatrixXd cov(1,1);
-    double p = 0;
     cov << 1;
     noise->setParameters(cov, zPredict);
-    noise->probability(zObserved, p);
-
-    return p;
+    return noise->probability(zObserved);
 }
 
 

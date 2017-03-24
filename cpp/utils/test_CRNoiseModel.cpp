@@ -65,7 +65,7 @@ void test_CRNoiseModel(void){
     genericNoise.setParameters(icdf);
     
     // initialize a vector to sample into
-    Eigen::VectorXd v(1);
+    // v(1);
     
     const int nrolls=10000;  // number of experiments
     const int nstars=100;    // maximum number of stars to distribute
@@ -74,7 +74,7 @@ void test_CRNoiseModel(void){
     
     // sample the distribution
     for (int i=0; i<nrolls; ++i) {
-        genericNoise.sample(v);
+        Eigen::VectorXd v = genericNoise.sample();
         ++p[int(nintervals*v(0))];
     }
     

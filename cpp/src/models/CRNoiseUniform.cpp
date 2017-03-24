@@ -114,24 +114,28 @@ void CRNoiseUniform::setParameters(Eigen::VectorXd in_a,
  This method samples a random number from the specified uniform
  distribution.\n
  
- \param[out] out_x - sampled state
+ \return - sampled state
  */
 //---------------------------------------------------------------------
-void CRNoiseUniform::sample(Eigen::VectorXd &out_x)
+Eigen::VectorXd CRNoiseUniform::sample(void)
 {
+    
+    // Initialize the sampled vector and set to zero
+    Eigen::VectorXd x = this->m_parameters.a;
+    x.setZero();
     
     // Uniform distribution
     std::uniform_real_distribution<double> uniform(0.0,1.0);
     
     for (int i=0; i<this->m_parameters.a.size(); i++){
-        out_x(i) = uniform(this->m_generator);
+        x(i) = uniform(this->m_generator);
     }
-    
     
     // linearly scale the output of the unit uniform
     Eigen::VectorXd L = m_parameters.b - m_parameters.a;
     
-    out_x = L.asDiagonal()*out_x + this->m_parameters.a;
+    // return the sampled vector
+    return L.asDiagonal()*x + this->m_parameters.a;
 }
     
     
@@ -140,21 +144,25 @@ void CRNoiseUniform::sample(Eigen::VectorXd &out_x)
  This method returns the probability of x.\n
  
  \param[in] in_x - state to evaluate
- \param[out] out_p - probability of in_x
+ \return - probability of in_x
  */
 //---------------------------------------------------------------------
-void CRNoiseUniform::probability(Eigen::VectorXd in_x, double &out_p)
+double CRNoiseUniform::probability(Eigen::VectorXd in_x)
 {
     
     Eigen::VectorXd e = (this->m_parameters.b-this->m_parameters.a);
-    out_p = 1/e.prod();
     
+    // compute the probability of sampling over the continuous domain
+    double p = 1/e.prod();
     
+    // check if x is in the domain of the distribution
     for(int i = 0; i < in_x.size(); i++){
         if ((in_x(i) > this->m_parameters.b(i)) || (in_x(i) < this->m_parameters.a(i))){
-            out_p = 0.0;
+            p = 0.0;
         }
     }
+    
+    return p;
     
 }
 

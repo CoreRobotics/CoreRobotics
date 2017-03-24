@@ -86,12 +86,12 @@ void CRNoiseDirac::setParameters(Eigen::VectorXd in_point)
  This method samples a random number from the specified Dirac
  distribution.\n
  
- \param[out] out_x - sampled state
+ \return - sampled state
  */
 //---------------------------------------------------------------------
-void CRNoiseDirac::sample(Eigen::VectorXd &out_x)
+Eigen::VectorXd CRNoiseDirac::sample(void)
 {
-    out_x = this->m_parameters.point;
+    return this->m_parameters.point;
 }
     
     
@@ -100,15 +100,15 @@ void CRNoiseDirac::sample(Eigen::VectorXd &out_x)
  This method returns the probability of x.\n
  
  \param[in] in_x - state to evaluate
- \param[out] out_p - probability of in_x
+ \return - probability of in_x
  */
 //---------------------------------------------------------------------
-void CRNoiseDirac::probability(Eigen::VectorXd in_x, double &out_p)
+double CRNoiseDirac::probability(Eigen::VectorXd in_x)
 {
     if (in_x == this->m_parameters.point){
-        out_p = 1.0;
+        return 1.0;
     } else {
-        out_p = 0.0;
+        return 0.0;
     }
 }
 

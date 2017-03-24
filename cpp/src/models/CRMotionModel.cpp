@@ -141,7 +141,7 @@ void CRMotionModel::simulateMotion(Eigen::VectorXd in_u, bool in_sampleNoise)
     // sample the noise
     Eigen::VectorXd w;
     if (this->m_usingNoise && in_sampleNoise){
-        this->m_processNoise->sample(w);
+        w = this->m_processNoise->sample();
     } else {
         w = this->m_state;
         w.setZero();

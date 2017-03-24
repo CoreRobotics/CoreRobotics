@@ -165,11 +165,11 @@ public:
     
     //! Sample a noise vector from the density
     using CRNoiseModel::sample;
-    void sample(Eigen::VectorXd &out_x);
+    Eigen::VectorXd sample(void);
     
     //! Evaluate the probability from the density
     using CRNoiseModel::probability;
-    void probability(Eigen::VectorXd in_x, double &out_p);
+    double probability(Eigen::VectorXd in_x);
     
 //---------------------------------------------------------------------
 // Protected Members

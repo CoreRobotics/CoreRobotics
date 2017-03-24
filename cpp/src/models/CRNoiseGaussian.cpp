@@ -106,20 +106,26 @@ void CRNoiseGaussian::setParameters(Eigen::MatrixXd in_cov,
 /*!
  This method samples a random number from the Gaussian distribution.\n
  
- \param[out] out_x - sampled state
+ \return - sampled state
  */
 //---------------------------------------------------------------------
-void CRNoiseGaussian::sample(Eigen::VectorXd &out_x)
+Eigen::VectorXd CRNoiseGaussian::sample(void)
 {
-    // Normal distribution
+    // initialize the sampled state and set to zero
+    Eigen::VectorXd x = this->m_parameters.mean;
+    x.setZero();
+    
+    // sample from standard normal distribution
     std::normal_distribution<double> gaussian(0.0,1.0);
     for (int i=0; i<this->m_parameters.mean.size(); i++){
-        out_x(i) = gaussian(this->m_generator);
+        x(i) = gaussian(this->m_generator);
     }
-    // compute the Cholesky decomposition of A
+    
+    // compute the Cholesky decomposition of A & project x onto
+    // the defined distribution
     Eigen::LLT<Eigen::MatrixXd> lltOfCov(this->m_parameters.cov);
     Eigen::MatrixXd L = lltOfCov.matrixL();
-    out_x = L*out_x + this->m_parameters.mean;
+    return L*x + this->m_parameters.mean;
 }
     
     
@@ -128,17 +134,21 @@ void CRNoiseGaussian::sample(Eigen::VectorXd &out_x)
  This method returns the probability of x.\n
  
  \param[in] in_x - state to evaluate
- \param[out] out_p - probability of in_x
+ \return - probability of in_x
  */
 //---------------------------------------------------------------------
-void CRNoiseGaussian::probability(Eigen::VectorXd in_x, double &out_p)
+double CRNoiseGaussian::probability(Eigen::VectorXd in_x)
 {
-    // out_p = 1.2;
+    // compute subarguments
     Eigen::MatrixXd cov2pi = 2*CoreRobotics::PI*this->m_parameters.cov;
     Eigen::VectorXd error = in_x - this->m_parameters.mean;
+    
+    // define the arguments (gain k and arg of exponent)
     double k = 1/sqrt(cov2pi.determinant());
     double arg = -0.5*error.transpose()*this->m_parameters.covInv*error;
-    out_p = k*exp(arg);
+    
+    // return the probability
+    return k*exp(arg);
 }
 
 

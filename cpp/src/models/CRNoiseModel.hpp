@@ -163,17 +163,19 @@ public:
 public:
     
     //! Sample a vector from the density
-    virtual void sample(Eigen::VectorXd &out_x);
+    // virtual void sample(Eigen::VectorXd &out_x);
+    virtual Eigen::VectorXd sample(void);
     
     //! Evaluate the probability from the density
-    virtual void probability(Eigen::VectorXd in_x, double &out_p);
+    // virtual void probability(Eigen::VectorXd in_x, double &out_p);
+    virtual double probability(Eigen::VectorXd in_x);
 
 //---------------------------------------------------------------------
 // Protected Methods
 protected:
     
     //! Random seed generator
-    void randomSeed();
+    void randomSeed(void);
     
 //---------------------------------------------------------------------
 // Protected Members
