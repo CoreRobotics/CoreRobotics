@@ -41,7 +41,6 @@
 //=====================================================================
 
 #include "CRMotionModel.hpp"
-#include "CRMath.hpp"
 
 
 //=====================================================================
@@ -51,132 +50,108 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- The constructor creates a motion model.\n
+ The constructor creates a motion model.  The in_dynamics specifies
+ one of the dynamics equation forms below:\n
  
- \param[in] dynamicFcn - a callback function for the dynamics: see
-    CRMotionModel::setDynamics() for more information.
- \param[in] x0 - the initial state
- \param[in] dt - the time step (s)
- \param[in] type - the motion model type, see: CoreRobotics::CRMotionModelType
- \param[in] noise - the process noise model, see CoreRobotics::CRNoiseModel
+ Case 1: (Continuous)
+ 
+ If in_type is set to CR_MOTION_CONTINUOUS, then the callback sets
+ 
+ \f$ \dot{x} = f(x,u,t) \f$
+ 
+ where \f$x\f$ is the system state, \f$u\f$ is the input (forcing)
+ vector, and \f$t\f$ is time.
+ 
+ 
+ Case 2: (Discrete)
+ 
+ If in_type is set to CR_MOTION_DISCRETE, then the callback sets
+ 
+ \f$ x_{k+1} = f(x_k,u_k,t_k) \f$
+ 
+ where \f$x_k\f$ is the current system state, \f$u_k\f$ is the 
+ input (forcing) vector, and \f$t_k\f$ is time at interval \f$k\f$.
+ 
+ 
+ \param[in] in_dynamics - callback to the dynamics equation
+ \param[in] in_type - indicates whether the callback is continuous or 
+                      discrete, see CoreRobotics::CRMotionModelType.
+ \param[in] in_x0 - the initial state.
+ \param[in] in_timeStep - the time step of the system
  */
 //---------------------------------------------------------------------
-CRMotionModel::CRMotionModel(Eigen::VectorXd(in_dynamicFcn)(double,
-                                                            Eigen::VectorXd,
-                                                            Eigen::VectorXd),
-                             Eigen::VectorXd in_x0,
-                             double in_dt,
+CRMotionModel::CRMotionModel(Eigen::VectorXd(in_dynamics)(Eigen::VectorXd,
+                                                          Eigen::VectorXd,
+                                                          double),
                              CRMotionModelType in_type,
-                             CRNoiseModel* in_noise) {
-    this->setDynamics(in_dynamicFcn);
-    this->setState(in_x0);
-    this->setTimeStep(in_dt);
-    this->setType(in_type);
-    this->setProcessNoise(in_noise);
-    this->m_time = 0;
-}
-CRMotionModel::CRMotionModel(Eigen::VectorXd(in_dynamicFcn)(double,
-                                                            Eigen::VectorXd,
-                                                            Eigen::VectorXd),
                              Eigen::VectorXd in_x0,
-                             double in_dt,
-                             CRMotionModelType in_type) {
-    this->setDynamics(in_dynamicFcn);
-    this->setState(in_x0);
-    this->setTimeStep(in_dt);
-    this->setType(in_type);
+                             double in_timeStep)
+{
     this->m_time = 0;
+    this->m_dynFcn = in_dynamics;
+    this->m_type = in_type;
+    this->setTimeStep(in_timeStep);
+    this->setState(in_x0);
 }
+
+// overloaded constructor for initializing derived classes
 CRMotionModel::CRMotionModel()
 {
     this->m_time = 0;
-}
-    
-    
-//=====================================================================
-/*!
- This method sets the callback to the dynamic equation function.  If 
- type is specified as CR_MODEL_DISCRETE, then this function must
- describe the difference equation:\n
- 
- \f$ x_{k+1} =  f(t_k,x_k,u_k) \f$
- 
- If the type is specified as CR_MODEL_CONTINUOUS, then this function
- must describe the differential equation:\n
- 
- \f$ \dot{x} =  f(t,x,u) \f$
- 
- \param[in] dynamicFcn - a callback function of the above form.
- */
-//---------------------------------------------------------------------
-void CRMotionModel::setDynamics(Eigen::VectorXd(in_dynamicFcn)(double,
-                                                               Eigen::VectorXd,
-                                                               Eigen::VectorXd))
-{
-    this->m_dynFcn = in_dynamicFcn;
+    this->m_dt = 0.01;
 }
 
 
 //=====================================================================
 /*!
  This method simulates the motion forward by one step from the current
- state.  If the motion model is discrete, this just evaluates the 
+ state.  If the motion model is discrete, this just evaluates the
  dynamics equation (callback) for the specified input u.  However,
- if the model is continuous, then a Runge-Kutta integration scheme is 
- used to simulate the next time step.  The sampleNoise flag can be set
- to simulate the motion with additive noise sampled from the supplied 
- noise model.  If the noise model is not defined, the flag does 
- nothing.\n
+ if the model is continuous, then a Runge-Kutta integration scheme is
+ used to simulate the next time step.\n
  
- \param[in] u - input (forcing term) vector
- \param[in] sampleNoise - a boolean flag specifying if the noise model
-                should be sampled to add noise to the simulation.
+ \param[in] in_u - input (forcing term) vector
+ \return - the new state
  */
 //---------------------------------------------------------------------
-void CRMotionModel::simulateMotion(Eigen::VectorXd in_u, bool in_sampleNoise)
+Eigen::VectorXd CRMotionModel::motion(Eigen::VectorXd in_u)
 {
     double t = this->m_time;
-    double dt = this->m_timeStep;
+    double dt = this->m_dt;
     
-    // sample the noise
-    Eigen::VectorXd w;
-    if (this->m_usingNoise && in_sampleNoise){
-        w = this->m_processNoise->sample();
-    } else {
-        w = this->m_state;
-        w.setZero();
-    }
-    
-    if (this->m_type == CR_MODEL_DISCRETE) {
+    if (this->m_type == CR_MOTION_DISCRETE) {
         // update the state
-        this->m_state = (this->m_dynFcn)(t,this->m_state,in_u) + w;
+        this->m_state = (this->m_dynFcn)(this->m_state,in_u,t);
         
-    } else if (this->m_type == CR_MODEL_CONTINUOUS) {
+    } else if (this->m_type == CR_MOTION_CONTINUOUS) {
         // update the state
-        this->m_state = this->rk4step(t,this->m_state,in_u) + w;
+        this->m_state = this->rk4step(this->m_state,in_u,t,dt);
     }
     
     // update the time
     this->m_time = t+dt;
+    
+    // return the new state
+    return this->m_state;
 }
-    
-    
+
+
 //=====================================================================
 /*!
  This method performs a Runge Kutta step on the dynFcn member.\n
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRMotionModel::rk4step(double in_t,
-                                       Eigen::VectorXd in_x,
-                                       Eigen::VectorXd in_u)
+Eigen::VectorXd CRMotionModel::rk4step(Eigen::VectorXd in_x,
+                                       Eigen::VectorXd in_u,
+                                       double in_t,
+                                       double in_dt)
 {
-    double dt = this->m_timeStep;
     // RK4 step
-    Eigen::VectorXd f1 = (this->m_dynFcn)(in_t,in_x,in_u);
-    Eigen::VectorXd f2 = (this->m_dynFcn)(in_t+dt/2,in_x+dt*f1/2,in_u);
-    Eigen::VectorXd f3 = (this->m_dynFcn)(in_t+dt/2,in_x+dt*f2/2,in_u);
-    Eigen::VectorXd f4 = (this->m_dynFcn)(in_t+dt,in_x+dt*f3,in_u);
-    return in_x + dt/6*(f1 + 2*f2 + 2*f3 + f4);
+    Eigen::VectorXd f1 = (this->m_dynFcn)(in_x,in_u,in_t);
+    Eigen::VectorXd f2 = (this->m_dynFcn)(in_x+in_dt*f1/2,in_u,in_t+in_dt/2);
+    Eigen::VectorXd f3 = (this->m_dynFcn)(in_x+in_dt*f2/2,in_u,in_t+in_dt/2);
+    Eigen::VectorXd f4 = (this->m_dynFcn)(in_x+in_dt*f3,in_u,in_t+in_dt);
+    return in_x + in_dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
 
 

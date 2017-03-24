@@ -46,8 +46,6 @@
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include <vector>
-#include "CRNoiseModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -56,7 +54,7 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  \file CRMotionModel.hpp
- \brief Implements a class that handles dynamic models.
+ \brief Implements a class that handles motion models.
  */
 //---------------------------------------------------------------------
 /*!
@@ -67,76 +65,91 @@ namespace CoreRobotics {
  
  \details
  \section Description
- CRMotionModel implements a motion model from a supplied dynamics 
+ CRMotionModel implements a motion model from a supplied dynamics
  callback function.  Specifically, CRMotionModel sets up a container
- and methods for simulating either a continuous-time set of differential
- equations as in
+ for the continuous model
  
- \f$ \dot{x} = f (t,x,u) \f$,
+ \f$ \dot{x} = f(x,u,t) \f$
  
- or a discrete-time set of difference equations as in
+ or
  
- \f$ x_{k+1} = f(t_k,x_k,u_k) \f$,
+ \f$ x_{k+1} = f(x_k,u_k,t_k) \f$
  
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
- \f$t\f$ is time, and \f$k\f$ is the discrete time index.
+ \f$t\f$ is time, and \f$k\f$ is a discrete sampling index.
  
- These methods are used to set up the motion model:
- - CRMotionModel::setDynamics sets the dynamics callback function 
- (one of the two types specified above).
- - CRMotionModel::setType sets the type of the callback function.
- - CRMotionModel::setTimeStep sets the time step (s).
+ These methods are used to access internal states:
  - CRMotionModel::setState sets the underlying state vector.
+ - CRMotionModel::getState returns the state vector.
+ - CRMotionModel::setTimeStep sets the time step (s).
+ - CRMotionModel::getTimeStep returns the time step (s).
+ - CRMotionModel::gettime returns the simulation time (s).
  
- These methods return states of the model:
- - CRMotionModel::getState outputs the state vector.
- - CRManipulator::getTime outputs the associated time (s);
- 
- These methods simulate dynamic motion:
- - CRMotionModel::simulateMotion updates the underlying state and time
- by solving the dynamic equation for the input vector and current 
- underlying state and time.
+ These methods simulate motion:
+ - CRMotionModel::motion computes a new state and updates the
+ internal value for an input (u).
  
  \section Example
  This example demonstrates use of the CRMotionModel class.
  \code
  
+ #include <iostream>
  #include "CoreRobotics.hpp"
- #include #include <iostream>
  
+ // Use the CoreRobotics namespace
  using namespace CoreRobotics;
  
- // declare the dynamic system callback (xdot = f(t,x,u))
- Eigen::VectorXd dynEqn(double t, Eigen::VectorXd x, Eigen::VectorXd u){
-    Eigen::Matrix2d A;
-    Eigen::Vector2d B;
-    A << 0.0, 1.0, -10.0, -6.0;
-    B << 0.0, 1.0;
-    return A*x + B*u;
+ 
+ // -------------------------------------------------------------
+ // Declare a continuous motion model - xdot = fcn(x,u,t)
+ Eigen::VectorXd dynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t){
+     return -x + u;  // motion
  }
  
- main() {
-    double dt = 0.1; // time step (s)
-    double t = 0; // define the time (s)
-    Eigen::VectorXd x(2); // Define a state vector
-    x << 0, 0; // state IC
-    Eigen::VectorXd u(1); // Define an input vector
-    u << 1; // make the input constant for the demonstration
  
-    // initialize a continuous dynamic model
-    CRMotionModel cModel = CRMotionModel(dynEqn,x,dt,CR_MODEL_CONTINUOUS);
+ // -------------------------------------------------------------
+ void test_CRMotionModel(void){
  
-    std::cout << "\nContinuous simulation:\n";
-    printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
+     std::cout << "*************************************\n";
+     std::cout << "Demonstration of CRMotionModel.\n";
+     
+     
+     // initialize a state vector
+     Eigen::VectorXd x(1);
+     x << 10;
+     
+     
+     // initialize a deterministic sensor model
+     CRMotionModel model = CRMotionModel(*dynFcn,CR_MOTION_CONTINUOUS,x,0.2);
+     
+     
+     // initialize an input and set it to zero
+     Eigen::VectorXd u(1);
+     u << 0;
+     
+     // Initialize a time t
+     double t = 0;
+     
+     // loop
+     printf("Time (s) | State\n");
+     while(t <= 5) {
+     
+         // output the time and state
+         printf("%5.1f    | %5.2f\n",t,x(0));
+         
+         // step at t = 2.5
+         if (t >= 2.5){
+             u << 10;
+         }
+         
+         // get next state & time
+         x = model.motion(u);
+         t = model.getTime();
+     }
+     printf("%5.1f    | %5.2f\n",t,x(0));
  
-    // Now perform a simulation of the system reponse over 2 seconds
-    while(t<2){
-        cModel.simulateMotion(u, false);
-        cModel.getState(x);
-        cModel.getTime(t);
-        printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
-    }
  }
+ // -------------------------------------------------------------
  
  \endcode
  
@@ -151,10 +164,10 @@ namespace CoreRobotics {
 //! Enumerator for specifying whether the specified dynamic model is
 //  either continuous or discrete.
 enum CRMotionModelType {
-    CR_MODEL_CONTINUOUS,
-    CR_MODEL_DISCRETE
+    CR_MOTION_CONTINUOUS,
+    CR_MOTION_DISCRETE
 };
-    
+
 //=====================================================================
 class CRMotionModel {
     
@@ -163,78 +176,61 @@ class CRMotionModel {
 public:
     
     //! Class constructor
-    CRMotionModel(Eigen::VectorXd(in_dynamicFcn)(double,
-                                                 Eigen::VectorXd,
-                                                 Eigen::VectorXd),
-                  Eigen::VectorXd in_x0,
-                  double in_dt,
+    CRMotionModel(Eigen::VectorXd(in_dynamics)(Eigen::VectorXd,
+                                               Eigen::VectorXd,
+                                               double),
                   CRMotionModelType in_type,
-                  CRNoiseModel* in_noise);
-    CRMotionModel(Eigen::VectorXd(in_dynamicFcn)(double,
-                                                 Eigen::VectorXd,
-                                                 Eigen::VectorXd),
                   Eigen::VectorXd in_x0,
-                  double in_dt,
-                  CRMotionModelType in_type);
+                  double in_timeStep);
     CRMotionModel();
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
-    //! Set the dynamics callback function.
-    virtual void setDynamics(Eigen::VectorXd(in_dynamicFcn)(double,
-                                                            Eigen::VectorXd,
-                                                            Eigen::VectorXd));
-    
-    //! Set the process noise model.
-    virtual void setProcessNoise(CRNoiseModel* in_noise) {
-        this->m_processNoise = in_noise;
-        this->m_usingNoise = true;
-    }
-    
-    //! Set the supplied dynamic function type.
-    void setType(CRMotionModelType in_type) {this->m_type = in_type;}
-    
-    //! Set the time step (s)
-    void setTimeStep(double in_dt) {this->m_timeStep = in_dt;}
-    
-    //! Set the system state vector (x)
+    //! Set the state vector (x)
     void setState(Eigen::VectorXd in_x) {this->m_state = in_x;}
     
     //! Get the state vector (x)
-    void getState(Eigen::VectorXd &out_x) {out_x = this->m_state;}
+    Eigen::VectorXd getState(void) {return this->m_state;}
+    
+    //! Set the time step (s)
+    void setTimeStep(double in_timeStep) {this->m_dt = in_timeStep;}
+    
+    //! Get the time step (s)
+    double getTimeStep(void) {return this->m_dt;}
     
     //! Get the model time (s)
-    void getTime(double &out_t) {out_t = this->m_time;}
+    double getTime(void) {return this->m_time;}
+    
+    
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
-    //! Simulate the model forward a single step
-    virtual void simulateMotion(Eigen::VectorXd in_u,
-                                bool in_sampleNoise);
+    //! Simulate the motion
+    Eigen::VectorXd motion(Eigen::VectorXd in_u);
     
-    
-//---------------------------------------------------------------------
-// Protected Methods
+    //---------------------------------------------------------------------
+    // Protected Methods
 protected:
     
     //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(double in_t,
-                            Eigen::VectorXd in_x,
-                            Eigen::VectorXd in_u);
+    Eigen::VectorXd rk4step(Eigen::VectorXd in_x,
+                            Eigen::VectorXd in_u,
+                            double in_t,
+                            double in_dt);
     
-//---------------------------------------------------------------------
-// Protected Members
+    //---------------------------------------------------------------------
+    // Protected Members
 protected:
     
     //! Dynamic model function callback type
     CRMotionModelType m_type;
     
     //! Sample rate (s)
-    double m_timeStep;
+    double m_dt;
     
     //! Current time (s)
     double m_time;
@@ -242,17 +238,11 @@ protected:
     //! Dynamic state of the system
     Eigen::VectorXd m_state;
     
-    //! Flag to use noise model
-    bool m_usingNoise = false;
-    
-    //! Pointer to the process noise model
-    CRNoiseModel *m_processNoise;
-    
-    //! Callback to the dynamic model function \dot{x} = f(t,x,u,p) or
-    //! x_kp1 = f(t_k,x_k,u_k,p) depending on what the type is set to.
-    Eigen::VectorXd(*m_dynFcn)(double,
+    //! Callback to the dynamic model function \dot{x} = f(x,u,t) or
+    //! x_kp1 = f(x_k,u_k,t_k) depending on what the type is set to.
+    Eigen::VectorXd(*m_dynFcn)(Eigen::VectorXd,
                                Eigen::VectorXd,
-                               Eigen::VectorXd);
+                               double);
     
 };
 

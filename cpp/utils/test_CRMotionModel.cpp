@@ -40,27 +40,61 @@
  */
 //=====================================================================
 
-#ifndef CRTestModules_hpp
-#define CRTestModules_hpp
+
+#include <iostream>
+#include "CoreRobotics.hpp"
+
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
 
-void CRTestCore(void);      // Core tests
-void CRTestMath(void);      // Math tests
-void CRTestModels(void);    // Model tests
-
-// Noise model tests
-void test_CRNoiseModel(void);           // test CRNoiseModel
-void test_CRNoiseGaussian(void);        // test CRNoiseGaussian
-void test_CRNoiseDirac(void);           // test CRNoiseDirac
-void test_CRNoiseUniform(void);         // test CRNoiseUniform
-void test_CRNoiseMixture(void);         // test CRNoiseMixture
-
-// Sensor model tests
-void test_CRSensorModel(void);          // test CRSensorModel
-void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
-
-// Motion model tests
-void test_CRMotionModel(void);          // test CRMotionModel
+// -------------------------------------------------------------
+// Declare a continuous motion model - xdot = fcn(x,u,t)
+Eigen::VectorXd dynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t){
+    return -x + u;  // motion
+}
 
 
-#endif /* CRTestModules_hpp */
+// -------------------------------------------------------------
+void test_CRMotionModel(void){
+    
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of CRMotionModel.\n";
+    
+    
+    // initialize a state vector
+    Eigen::VectorXd x(1);
+    x << 10;
+    
+    
+    // initialize a deterministic sensor model
+    CRMotionModel model = CRMotionModel(*dynFcn,CR_MOTION_CONTINUOUS,x,0.2);
+    
+    
+    // initialize an input and set it to zero
+    Eigen::VectorXd u(1);
+    u << 0;
+    
+    // Initialize a time t
+    double t = 0;
+    
+    // loop
+    printf("Time (s) | State\n");
+    while(t <= 5) {
+        
+        // output the time and state
+        printf("%5.1f    | %5.2f\n",t,x(0));
+        
+        // step at t = 2.5
+        if (t >= 2.5){
+            u << 10;
+        }
+        
+        // get next state & time
+        x = model.motion(u);
+        t = model.getTime();
+    }
+    printf("%5.1f    | %5.2f\n",t,x(0));
+    
+}
+// -------------------------------------------------------------

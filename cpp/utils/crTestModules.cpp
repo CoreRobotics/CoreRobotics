@@ -72,5 +72,8 @@ int main(int argc, const char * argv[]) {
     test_CRSensorModel();
     test_CRSensorProbabilistic();
     
+    // Test the motion models
+    test_CRMotionModel();
+    
     return 0;
 }
