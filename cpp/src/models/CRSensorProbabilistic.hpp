@@ -217,12 +217,12 @@ public:
 protected:
     
     //! Callback to the probabilistic predictor function z = h(x,v)
-    Eigen::VectorXd(*m_predictorFcn)(Eigen::VectorXd,
-                                     bool);
+    Eigen::VectorXd(*m_measFcn)(Eigen::VectorXd,
+                                bool);
     
     //! Callback to the probabilistic likelihood function p(zObserved|h(x))
-    double(*m_likelihoodFcn)(Eigen::VectorXd,
-                             Eigen::VectorXd);
+    double(*m_likFcn)(Eigen::VectorXd,
+                      Eigen::VectorXd);
     
 };
 

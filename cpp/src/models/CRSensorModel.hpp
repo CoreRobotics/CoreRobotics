@@ -170,7 +170,7 @@ protected:
     Eigen::VectorXd m_state;
     
     //! Callback to the deterministic predictor function z = h(x)
-    Eigen::VectorXd(*m_predictorFcn)(Eigen::VectorXd);
+    Eigen::VectorXd(*m_measFcn)(Eigen::VectorXd);
     
 };
 

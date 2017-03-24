@@ -106,8 +106,8 @@ CRSensorProbabilistic::CRSensorProbabilistic(Eigen::VectorXd(in_predictor)(Eigen
                                              double(in_likelihood)(Eigen::VectorXd,
                                                                    Eigen::VectorXd),
                                              Eigen::VectorXd in_x0){
-    this->m_predictorFcn = in_predictor;
-    this->m_likelihoodFcn = in_likelihood;
+    this->m_measFcn = in_predictor;
+    this->m_likFcn = in_likelihood;
     this->setState(in_x0);
 }
 
@@ -126,12 +126,12 @@ CRSensorProbabilistic::CRSensorProbabilistic(Eigen::VectorXd(in_predictor)(Eigen
 //---------------------------------------------------------------------
 Eigen::VectorXd CRSensorProbabilistic::measurement(bool in_sampleNoise)
 {
-    return (this->m_predictorFcn)(this->m_state, in_sampleNoise);
+    return (this->m_measFcn)(this->m_state, in_sampleNoise);
 }
     
 Eigen::VectorXd CRSensorProbabilistic::measurement(void)
 {
-    return (this->m_predictorFcn)(this->m_state, false);
+    return (this->m_measFcn)(this->m_state, false);
 }
     
     
@@ -149,7 +149,7 @@ Eigen::VectorXd CRSensorProbabilistic::measurement(void)
 double CRSensorProbabilistic::likelihood(Eigen::VectorXd in_zObserved)
 {
     Eigen::VectorXd zPredict = this->measurement(false);
-    return (this->m_likelihoodFcn)(this->m_state, in_zObserved);
+    return (this->m_likFcn)(this->m_state, in_zObserved);
 }
 
 
