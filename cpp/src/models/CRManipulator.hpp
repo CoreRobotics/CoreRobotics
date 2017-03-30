@@ -224,7 +224,7 @@ public:
     void getForwardKinematics(Eigen::MatrixXd &y);
     
     //! Get the instantaneous numerical Jacobian
-    void getJacobian(Eigen::MatrixXd &jacobian);
+	void getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::MatrixXd &jacobian);
     
     //! Get the number of links in the list
     void getNumberOfLinks(int &n);
@@ -270,6 +270,9 @@ protected:
 
 	//! List of tool parents
 	std::vector<int> listToolParents;
+
+	//! Arbitrary frame for computing tip position
+	CoreRobotics::CRFrame* m_tipFrame;
     
 };
 

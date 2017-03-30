@@ -55,6 +55,7 @@ namespace CoreRobotics {
 //---------------------------------------------------------------------
 CRManipulator::CRManipulator() {
     mode = CR_MANIPULATOR_MODE_POSITION;
+	this->m_tipFrame = new CoreRobotics::CRFrame();
 }
     
     
@@ -97,6 +98,8 @@ void CRManipulator::getConfiguration(Eigen::VectorXd &q)
 /*!
  This method gets the forward kinematics (position of each frame) of 
  the manipulator.\n
+
+ See: https://en.wikipedia.org/wiki/Forward_kinematics
  
  \param[out] y - forward kinematics
  */
@@ -119,31 +122,67 @@ void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
     
 //=====================================================================
 /*!
- This method gets the numerical Jacobian of the manipulator for the 
- current configuration.\n
+ This method gets the full pose (position and orientation) numerical 
+ Jacobian of the manipulator for the current configuration with respect
+ to the tool specified by the toolIndex.  See CRManipulator::addTool
+ for adding tools to the manipulator.\n
+
+ The size of the returned Jacobian is 6 x N where N is the number of
+ free variables in the manipulator.  The rows of the Jacobian 
+ correspond to the pose vector (x, y, z, a, b, g)^T.\n
  
- \param[out] jacobian - jacobian matrix
+ \param[in] toolIndex - index of the tool to be used to compute the Jacobian.
+ \param[in] mode - the Euler convention to be used to specify the orientation.
+ \param[out] jacobian - (6 x N) jacobian matrix.
  */
 //---------------------------------------------------------------------
-void CRManipulator::getJacobian(Eigen::MatrixXd &jacobian)
+void CRManipulator::getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::MatrixXd &jacobian)
 {
-    double delta = 1.0e-9;
-    Eigen::VectorXd q0;
-    Eigen::VectorXd qd;
-    Eigen::MatrixXd qFwd;
-    Eigen::MatrixXd qBwd;
-    jacobian.setZero(3,listDriven.size());
+
+	// pertubation size (see http://www.maths.lth.se/na/courses/FMN081/FMN081-06/lecture7.pdf)
+    double delta = 1.0e-8;		// was 1.0e-9
+
+	// set up the variables
+    Eigen::VectorXd q0;						// operating point
+    Eigen::VectorXd qd;						// perturbed vector
+    Eigen::Matrix<double, 6, 1> poseFwd;	// forward perturbation result
+	Eigen::Matrix<double, 6, 1> poseBwd;	// backward perturbation result
+
+	// initialize the jacobian
+    jacobian.setZero(6,listDriven.size());
+
+	// intialize the configuration
     this->getConfiguration(q0);
+
+	// step through each driven variable
     for (size_t k = 0; k < listDriven.size(); k++) {
+
+		// set the configuration operating point
         qd.setZero(q0.size(),1);
+
+		// define which free variable is being perturbed
         qd(k) = delta;
+
+		// perturb forward
         this->setConfiguration(q0+qd);
-        this->getForwardKinematics(qFwd);
+		this->getToolFrame(toolIndex, *this->m_tipFrame);
+		this->m_tipFrame->getPose(mode, poseFwd);
+        // this->getForwardKinematics(fkFwd);
+
+		// perturb backward
         this->setConfiguration(q0-qd);
-        this->getForwardKinematics(qBwd);
-        jacobian.col(k) = (qFwd.rightCols(1)-qBwd.rightCols(1))/(2.0*delta);
+		this->getToolFrame(toolIndex, *this->m_tipFrame);
+		this->m_tipFrame->getPose(mode, poseBwd);
+        // this->getForwardKinematics(fkBwd);
+
+		// central difference
+		jacobian.col(k) = (poseFwd - poseBwd) / (2.0*delta);
+        // jacobian.col(k) = (fkFwd.rightCols(1)- fkBwd.rightCols(1))/(2.0*delta);
     }
     this->setConfiguration(q0);
+
+	// zero out the m_tipFrame
+	this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(), Eigen::Vector3d::Zero());
 }
 
     
