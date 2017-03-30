@@ -76,7 +76,7 @@ namespace CoreRobotics {
  as of now, only serial manipulators are supported.
  - CRManipulator::addTool adds a tool to the chain relative to a link
  frame in the kinematic chain
- - CRManipulator::mode is member that sets how the manipulator is
+ - CRManipulator::m_modelType is member that sets how the manipulator is
  driven.  Available options are in CoreRobotics::CRManipulatorType.
  
  These methods operate on the configuration space (i.e. joint space) 
@@ -208,6 +208,7 @@ class CRManipulator {
 public:
     
     //! Class constructor
+	CRManipulator(CRManipulatorType type);
     CRManipulator();
     
 //---------------------------------------------------------------------
@@ -234,6 +235,9 @@ public:
 
 	//! Get tool frame for the current manipulator configuration
 	void getToolFrame(unsigned toolIndex, CRFrame &tool);
+
+	//! Set the model type
+	void setModelType(CRManipulatorType type) { this->m_modelType = type; }
     
 //---------------------------------------------------------------------
 // Add link/tool Methods
@@ -246,30 +250,26 @@ public:
 	bool addTool(unsigned parentIndex, CRFrame* tool);
     
 //---------------------------------------------------------------------
-// Public Members
-public:
-    
-    //! Define the manipulator type
-    CRManipulatorType mode;
-    
-//---------------------------------------------------------------------
 // Protected Members
 protected:
+
+	//! Define the manipulator type specifying the dynamics model
+	CRManipulatorType m_modelType;
     
     //! List of the links in the manipulator
-    std::vector<CoreRobotics::CRRigidBody*> listLinks;
+    std::vector<CoreRobotics::CRRigidBody*> m_listLinks;
     
     //! List of the link parent indices
-    std::vector<int> listParents;
+    std::vector<int> m_listParents;
     
     //! List of the driven link indices
-    std::vector<int> listDriven;
+    std::vector<int> m_listDriven;
 
 	//! List of tool frames
-	std::vector<CoreRobotics::CRFrame*> listToolFrames;
+	std::vector<CoreRobotics::CRFrame*> m_listToolFrames;
 
 	//! List of tool parents
-	std::vector<int> listToolParents;
+	std::vector<int> m_listToolParents;
 
 	//! Arbitrary frame for computing tip position
 	CoreRobotics::CRFrame* m_tipFrame;

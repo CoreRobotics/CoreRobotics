@@ -51,10 +51,17 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  The constructor creates a manipulator.\n
+
+ \param[in] - the manipulator type (default: CR_MANIPULATOR_MODE_POSITION)
  */
 //---------------------------------------------------------------------
+CRManipulator::CRManipulator(CRManipulatorType type) {
+	this->m_modelType = type;
+	this->m_tipFrame = new CoreRobotics::CRFrame();
+}
+
 CRManipulator::CRManipulator() {
-    mode = CR_MANIPULATOR_MODE_POSITION;
+    this->m_modelType = CR_MANIPULATOR_MODE_POSITION;
 	this->m_tipFrame = new CoreRobotics::CRFrame();
 }
     
@@ -70,8 +77,8 @@ CRManipulator::CRManipulator() {
 //---------------------------------------------------------------------
 void CRManipulator::setConfiguration(Eigen::VectorXd q)
 {
-    for (size_t i = 0; i < listDriven.size(); i++) {
-        listLinks.at(listDriven.at(i))->frame->setFreeValue(q(i));
+    for (size_t i = 0; i < m_listDriven.size(); i++) {
+        m_listLinks.at(m_listDriven.at(i))->frame->setFreeValue(q(i));
     }
 }
     
@@ -87,9 +94,9 @@ void CRManipulator::setConfiguration(Eigen::VectorXd q)
 //---------------------------------------------------------------------
 void CRManipulator::getConfiguration(Eigen::VectorXd &q)
 {
-    q.setZero(listDriven.size(),1);
-    for (size_t i = 0; i < listDriven.size(); i++) {
-        listLinks.at(listDriven.at(i))->frame->getFreeValue(q(i));
+    q.setZero(m_listDriven.size(),1);
+    for (size_t i = 0; i < m_listDriven.size(); i++) {
+        m_listLinks.at(m_listDriven.at(i))->frame->getFreeValue(q(i));
     }
 }
     
@@ -107,13 +114,13 @@ void CRManipulator::getConfiguration(Eigen::VectorXd &q)
 void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
 {
     Eigen::Vector3d v;
-    y.setZero(3,listParents.size()+1);
-    for (size_t k = 0; k < listParents.size(); k++) {
+    y.setZero(3,m_listParents.size()+1);
+    for (size_t k = 0; k < m_listParents.size(); k++) {
         int i = k;
         v << 0, 0, 0;
         while (i > -1) {
-            listLinks.at(i)->frame->transformToParent(v,v);
-            i = listParents.at(i);
+            m_listLinks.at(i)->frame->transformToParent(v,v);
+            i = m_listParents.at(i);
         }
         y.col(k+1) = v;
     }
@@ -149,13 +156,13 @@ void CRManipulator::getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::Mat
 	Eigen::Matrix<double, 6, 1> poseBwd;	// backward perturbation result
 
 	// initialize the jacobian
-    jacobian.setZero(6,listDriven.size());
+    jacobian.setZero(6,m_listDriven.size());
 
 	// intialize the configuration
     this->getConfiguration(q0);
 
 	// step through each driven variable
-    for (size_t k = 0; k < listDriven.size(); k++) {
+    for (size_t k = 0; k < m_listDriven.size(); k++) {
 
 		// set the configuration operating point
         qd.setZero(q0.size(),1);
@@ -195,7 +202,7 @@ void CRManipulator::getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::Mat
 //---------------------------------------------------------------------
 void CRManipulator::getNumberOfLinks(int &n)
 {
-    n = (int)listParents.size();
+    n = (int)m_listParents.size();
 }
     
     
@@ -209,7 +216,7 @@ void CRManipulator::getNumberOfLinks(int &n)
 //---------------------------------------------------------------------
 void CRManipulator::getDegreesOfFreedom(int &dof)
 {
-    dof = (int)listDriven.size();
+    dof = (int)m_listDriven.size();
 }
 
 
@@ -230,15 +237,15 @@ void CRManipulator::getToolFrame(unsigned toolIndex, CRFrame &tool)
 	Eigen::Matrix4d T, T0;
 
 	// return the transformation
-	this->listToolFrames.at(toolIndex)->getTransformToParent(T);
+	this->m_listToolFrames.at(toolIndex)->getTransformToParent(T);
 
 	// now iterate back to the base frame
-	int i = this->listToolParents.at(toolIndex);
+	int i = this->m_listToolParents.at(toolIndex);
 	while (i > -1) {
 
-		this->listLinks.at(i)->frame->getTransformToParent(T0);
+		this->m_listLinks.at(i)->frame->getTransformToParent(T0);
 		T = T0*T;
-		i = listParents.at(i);
+		i = m_listParents.at(i);
 	}
 
 	// tool.setRotationAndTranslation(rot, trans);
@@ -260,15 +267,15 @@ void CRManipulator::addLink(CoreRobotics::CRRigidBody* link)
     this->getNumberOfLinks(n);
     this->getDegreesOfFreedom(dof);
     
-    // add the link to the listLinks member
-    listLinks.push_back(link);
+    // add the link to the m_listLinks member
+    m_listLinks.push_back(link);
     
     // add the parent integer
-    listParents.push_back(n-1);
+    m_listParents.push_back(n-1);
     
     // add the driven integer (if it is driven)
     if (link->frame->isDriven()) {
-        listDriven.push_back(n);
+        m_listDriven.push_back(n);
     }
 }
 
@@ -296,8 +303,8 @@ bool CRManipulator::addTool(unsigned parentIndex, CRFrame* tool)
 	if (parentIndex > unsigned(n-1)) {
 		return false;
 	} else {
-		listToolFrames.push_back(tool);
-		listToolParents.push_back(parentIndex);
+		m_listToolFrames.push_back(tool);
+		m_listToolParents.push_back(parentIndex);
 		return true;
 	}
 }
