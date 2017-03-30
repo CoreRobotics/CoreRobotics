@@ -110,9 +110,9 @@ void CRTestFrameOffset(void){
 	// Now get the Forward Kinematics and Jacobian
 	Eigen::MatrixXd Jacobian, FwdKin;
 	MyRobot.getForwardKinematics(FwdKin);
-	MyRobot.getJacobian(Jacobian);
+	// MyRobot.getJacobian(Jacobian);
 	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
-	std::cout << "Jacobian = \n" << Jacobian << std::endl;
+	// std::cout << "Jacobian = \n" << Jacobian << std::endl;
 
 }
 
