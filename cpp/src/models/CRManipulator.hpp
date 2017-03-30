@@ -76,8 +76,8 @@ namespace CoreRobotics {
  as of now, only serial manipulators are supported.
  - CRManipulator::addTool adds a tool to the chain relative to a link
  frame in the kinematic chain
- - CRManipulator::m_modelType is member that sets how the manipulator is
- driven.  Available options are in CoreRobotics::CRManipulatorType.
+ - CRManipulator::setModelType sets how the manipulator is driven.
+ Available options are in CoreRobotics::CRManipulatorType.
  
  These methods operate on the configuration space (i.e. joint space) 
  of the robot:
@@ -92,12 +92,11 @@ namespace CoreRobotics {
  - CRManipulator::getForwardKinematics returns a matrix of the Euclidean
  poses at each frame (starting with the base frame and moving out to the
  tool frame) for the current configuration.
- - CRManipulator::getJacobian returns the tool space (last frame) 
- Jacobian matrix that maps joint velocities to tool velocities for the 
- current configuration.
+ - CRManipulator::getJacobian returns the Jacobian for a specified tool.
  
  \section Example
  This example creates a CRManipulator class.
+
  \code
  
  #include "CoreRobotics.hpp"
@@ -106,19 +105,18 @@ namespace CoreRobotics {
  using namespace CoreRobotics;
  
  main() {
- 
-    CRManipulator MyRobot;
 
-	// create a couple of rigid body links
+	// ------------------------------------------
+	// Create a new robot
+	CRManipulator MyRobot;
+
+	// create a couple of rigid body links and add them to the manipulator
 	CRFrameEuler* F0 = new CRFrameEuler();
 	CRFrameEuler* F1 = new CRFrameEuler();
 	CRFrameEuler* F2 = new CRFrameEuler();
 	CRRigidBody* Link0 = new CRRigidBody();
 	CRRigidBody* Link1 = new CRRigidBody();
 	CRRigidBody* Link2 = new CRRigidBody();
-
-	// create a tool frame
-	CRFrameEuler* Tool = new CRFrameEuler();
 
 	// Set info for Link 0 and add to MyRobot
 	F0->freeVar = CR_EULER_FREE_ANG_G;
@@ -141,13 +139,18 @@ namespace CoreRobotics {
 	Link2->frame = F2;
 	MyRobot.addLink(Link2);
 
-	// Set info for the tool frame and add to MyRobot
-	Tool->freeVar = CR_EULER_FREE_NONE;
+
+	// create a tool frame and add to MyRobot
+	CRFrameEuler* Tool = new CRFrameEuler();
 	Tool->setMode(CR_EULER_MODE_XYZ);
 	Tool->setPositionAndOrientation(0, 0, 0, 0, 0, 0);
 	MyRobot.addTool(2, Tool);
 
-	// Now get the configuration values
+
+	// ------------------------------------------
+	// Try out some of the methods available to the manipulator
+	
+	// Get the configuration values
 	int dof;
 	Eigen::VectorXd jointAngles;
 	MyRobot.getDegreesOfFreedom(dof);
@@ -158,7 +161,7 @@ namespace CoreRobotics {
 	// Now get the Forward Kinematics and Jacobian
 	Eigen::MatrixXd Jacobian, FwdKin;
 	MyRobot.getForwardKinematics(FwdKin);
-	MyRobot.getJacobian(Jacobian);
+	MyRobot.getJacobian(0, CR_EULER_MODE_XYZ, Jacobian);
 	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
 	std::cout << "Jacobian = \n" << Jacobian << std::endl;
 
@@ -168,7 +171,7 @@ namespace CoreRobotics {
 		<< jointAngles.transpose() << ") rad" << std::endl;
 	MyRobot.setConfiguration(jointAngles);
 	MyRobot.getForwardKinematics(FwdKin);
-	MyRobot.getJacobian(Jacobian);
+	MyRobot.getJacobian(0, CR_EULER_MODE_XYZ, Jacobian);
 	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
 	std::cout << "Jacobian = \n" << Jacobian << std::endl;
 

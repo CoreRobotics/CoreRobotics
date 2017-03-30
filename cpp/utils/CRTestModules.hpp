@@ -49,5 +49,8 @@ void CRTestMath(void);      // Math tests
 void CRTestFrameOffset(void); // Frame Tests
 
 
+void test_CRManipulator(void);
+
+
 
 #endif /* CRTestModules_hpp */

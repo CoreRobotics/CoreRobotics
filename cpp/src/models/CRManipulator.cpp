@@ -147,7 +147,7 @@ void CRManipulator::getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::Mat
 {
 
 	// pertubation size (see http://www.maths.lth.se/na/courses/FMN081/FMN081-06/lecture7.pdf)
-    double delta = 1.0e-8;		// was 1.0e-9
+    double delta = 1.0e-8;		// was 1.0e-9 - can improve this (adaptive?)
 
 	// set up the variables
     Eigen::VectorXd q0;						// operating point

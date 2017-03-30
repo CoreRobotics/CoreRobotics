@@ -60,7 +60,9 @@ int main(int argc, const char * argv[]) {
 
 	// Run CR Test Frame Offset
 	CRTestFrameOffset();
-    
+	
+	// Run the CRManipulator test
+	test_CRManipulator();
     
     return 0;
 }
