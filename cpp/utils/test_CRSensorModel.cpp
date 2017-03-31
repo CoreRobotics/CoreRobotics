@@ -40,31 +40,41 @@
  */
 //=====================================================================
 
-#ifndef CRTestModules_hpp
-#define CRTestModules_hpp
+
+#include <iostream>
+#include "CoreRobotics.hpp"
+
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
 
-void CRTestCore(void);      // Core tests
-void CRTestMath(void);      // Math tests
-void CRTestFrameOffset(void); // Frame Tests
+// -------------------------------------------------------------
+// Declare a deterministic model - fcn(x,zHat)
+Eigen::VectorXd detPredFcn(Eigen::VectorXd x){
+    return x;  // observation (z = x)
+}
 
 
-void test_CRManipulator(void);
-
-// Noise model tests
-void test_CRNoiseModel(void);           // test CRNoiseModel
-void test_CRNoiseGaussian(void);        // test CRNoiseGaussian
-void test_CRNoiseDirac(void);           // test CRNoiseDirac
-void test_CRNoiseUniform(void);         // test CRNoiseUniform
-void test_CRNoiseMixture(void);         // test CRNoiseMixture
-
-// Sensor model tests
-void test_CRSensorModel(void);          // test CRSensorModel
-void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
-
-// Motion model tests
-void test_CRMotionModel(void);          // test CRMotionModel
-void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
-
-
-#endif /* CRTestModules_hpp */
+// -------------------------------------------------------------
+void test_CRSensorModel(void){
+    
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of CRSensorModel.\n";
+    
+    
+    // initialize a state vector
+    Eigen::VectorXd x0(1);
+    x0 << 5;
+    
+    
+    // initialize a deterministic sensor model
+    CRSensorModel sensor = CRSensorModel(*detPredFcn,x0);
+    
+    
+    // initialize a sensor prediction vector
+    Eigen::VectorXd zPredict(1);
+    zPredict = sensor.measurement();
+    std::cout << "Predicted measurement = " << zPredict << std::endl;
+    
+}
+// -------------------------------------------------------------

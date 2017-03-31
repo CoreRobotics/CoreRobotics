@@ -40,31 +40,51 @@
  */
 //=====================================================================
 
-#ifndef CRTestModules_hpp
-#define CRTestModules_hpp
+
+#include <iostream>
+#include "CoreRobotics.hpp"
+
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
+
+void test_CRNoiseUniform(void){
+    
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of test_CRNoiseUniform.\n";
+    
+    // define the uniform properties
+    Eigen::VectorXd a(1);
+    Eigen::VectorXd b(1);
+    a << 2;
+    b << 7;
+    
+    // initialize a noise model
+    CRNoiseUniform uniformNoise = CRNoiseUniform();
+    uniformNoise.setParameters(a, b);
+    
+    // initialize parameters for experiments
+    const int nrolls=10000;  // number of experiments
+    const int nstars=100;     // maximum number of stars to distribute
+    int p[10]={};
+    
+    // sample the distribution
+    for (int i=0; i<nrolls; ++i) {
+        Eigen::VectorXd v = uniformNoise.sample();
+        if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
+    }
+    
+    // print out the result with stars to indicate density
+    std::cout << std::fixed; std::cout.precision(1);
+    for (int i=0; i<10; ++i) {
+        printf("%2i - %2i | ",i,i+1);
+        Eigen::VectorXd point(1);
+        point << double(i);
+        double prob = uniformNoise.probability(point);
+        printf("%6.4f | ",prob);
+        std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+    }
+}
 
 
-void CRTestCore(void);      // Core tests
-void CRTestMath(void);      // Math tests
-void CRTestFrameOffset(void); // Frame Tests
 
 
-void test_CRManipulator(void);
-
-// Noise model tests
-void test_CRNoiseModel(void);           // test CRNoiseModel
-void test_CRNoiseGaussian(void);        // test CRNoiseGaussian
-void test_CRNoiseDirac(void);           // test CRNoiseDirac
-void test_CRNoiseUniform(void);         // test CRNoiseUniform
-void test_CRNoiseMixture(void);         // test CRNoiseMixture
-
-// Sensor model tests
-void test_CRSensorModel(void);          // test CRSensorModel
-void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
-
-// Motion model tests
-void test_CRMotionModel(void);          // test CRMotionModel
-void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
-
-
-#endif /* CRTestModules_hpp */

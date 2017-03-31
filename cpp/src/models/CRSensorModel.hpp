@@ -1,0 +1,180 @@
+//=====================================================================
+/*
+ Software License Agreement (BSD-3-Clause License)
+ Copyright (c) 2017, CoreRobotics.
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 
+ * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+ 
+ * Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in the
+ documentation and/or other materials provided with the distribution.
+ 
+ * Neither the name of CoreRobotics nor the names of its contributors
+ may be used to endorse or promote products derived from this
+ software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+ 
+ \project CoreRobotics Project
+ \url     www.corerobotics.org
+ \author  Parker Owan
+ \version 0.0
+ 
+ */
+//=====================================================================
+
+#ifndef CRSensorModel_hpp
+#define CRSensorModel_hpp
+
+//=====================================================================
+// Includes
+#include "Eigen/Dense"
+
+//=====================================================================
+// CoreRobotics namespace
+namespace CoreRobotics {
+    
+//=====================================================================
+/*!
+ \file CRSensorModel.hpp
+ \brief Implements a class that handles sensor models.
+ */
+//---------------------------------------------------------------------
+/*!
+ \class CRSensorModel
+ \ingroup models
+ 
+ \brief This class implements a sensor model.
+ 
+ \details
+ \section Description
+ CRSensorModel implements a sensor model from a supplied observation
+ callback function.  Specifically, CRSensorModel sets up a container
+ for the model
+ 
+ \f$ z = h(x) \f$,
+ 
+ where \f$x\f$ is the state vector, and \f$z\f$ is the sensor 
+ measurement vector.
+ 
+ These methods are used to interface with the Sensor Model:
+ - CRSensorModel::setState sets the underlying state vector.
+ - CRSensorModel::getState outputs the state vector.
+ - CRSensorModel::measurement computes a simulated measurement 
+ vector (z) from the underlying state (x).
+ 
+ \section Example
+ This example demonstrates use of the CRSensorModel class.
+ \code
+ 
+ #include <iostream>
+ #include "CoreRobotics.hpp"
+ 
+ // Use the CoreRobotics namespace
+ using namespace CoreRobotics;
+ 
+ 
+ // -------------------------------------------------------------
+ // Declare a deterministic model - fcn(x)
+ Eigen::VectorXd detPredFcn(Eigen::VectorXd x){
+     return x;  // observation (z = x)
+ }
+ 
+ 
+ // -------------------------------------------------------------
+ void main(void){
+ 
+     std::cout << "*************************************\n";
+     std::cout << "Demonstration of CRSensorModel.\n";
+     
+     
+     // initialize a state vector
+     Eigen::VectorXd x0(1);
+     x0 << 5;
+     
+     
+     // initialize a deterministic sensor model
+     CRSensorModel sensor = CRSensorModel(*detPredFcn,x0);
+     
+     
+     // initialize a sensor prediction vector
+     Eigen::VectorXd zPredict(1);
+     zPredict = sensor.measurement();
+     std::cout << "Predicted measurement = " << zPredict << std::endl;
+ 
+ }
+ // -------------------------------------------------------------
+ 
+ \endcode
+ 
+ \section References
+ [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
+ Ed. 2, CRC Press, 2012. \n\n
+ 
+ [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
+ 2006. \n\n
+ */
+//=====================================================================
+class CRSensorModel {
+    
+//---------------------------------------------------------------------
+// Constructor and Destructor
+public:
+    
+    //! Class constructor
+    CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
+                  Eigen::VectorXd in_x0);
+    CRSensorModel();
+    
+//---------------------------------------------------------------------
+// Get/Set Methods
+public:
+    
+    //! Set the state vector (x)
+    void setState(Eigen::VectorXd in_x) {this->m_state = in_x;}
+    
+    //! Get the state vector (x)
+    Eigen::VectorXd getState(void) {return this->m_state;}
+    
+//---------------------------------------------------------------------
+// Public Methods
+public:
+    
+    //! Simulate the measurement
+    Eigen::VectorXd measurement(void);
+    
+//---------------------------------------------------------------------
+// Protected Members
+protected:
+    
+    //! Underlying state of the system
+    Eigen::VectorXd m_state;
+    
+    //! Callback to the deterministic predictor function z = h(x)
+    Eigen::VectorXd(*m_measPredictFcn)(Eigen::VectorXd);
+    
+};
+
+//=====================================================================
+// End namespace
+}
+
+
+#endif

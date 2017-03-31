@@ -67,20 +67,16 @@ A note on units:  All units in the library, unless specified, are in SI
 /*!
 \page install Installation
 
-The easiest way to utilize the CoreRobotics libraries is to simply include
-the CoreRobotics.hpp header file in your code and set the header search path
-to ./src/ for your compiler IDE.  Details are described below.
+The CoreRobotics Library comes with CMakeLists ready to generate the project
+for your IDE of choice.
 
 \section install_windows Windows Visual Studio
 Todo
  
 \section install_mac Mac XCode
 Todo
- 
-\section install_codeblocks Code::Blocks
-Todo
 
-\section install_make Make
+\section install_make Linux Make
 Todo
 */
 //---------------------------------------------------------------------------
@@ -139,9 +135,9 @@ Todo
 //! \details This module implements the core functionality of the library,
 //! such as timing, loop definitions and threading.
 //---------------------------------------------------------------------------
+#include "CRTypes.hpp"
 #include "CRClock.hpp"
 #include "CRThread.hpp"
-#include "CRSignalType.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -169,6 +165,15 @@ Todo
 //! \details Todo
 //---------------------------------------------------------------------------
 #include "CRManipulator.hpp"
+#include "CRNoiseModel.hpp"
+#include "CRNoiseGaussian.hpp"
+#include "CRNoiseDirac.hpp"
+#include "CRNoiseUniform.hpp"
+#include "CRNoiseMixture.hpp"
+#include "CRSensorModel.hpp"
+#include "CRSensorProbabilistic.hpp"
+#include "CRMotionModel.hpp"
+#include "CRMotionProbabilistic.hpp"
 
 
 //---------------------------------------------------------------------------

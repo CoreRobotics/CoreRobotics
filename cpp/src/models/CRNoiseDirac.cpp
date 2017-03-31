@@ -40,8 +40,8 @@
  */
 //=====================================================================
 
-#include "CRMath.hpp"
 #include "Eigen/Dense"
+#include "CRNoiseDirac.hpp"
 
 
 //=====================================================================
@@ -51,68 +51,68 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- This method performs a forward euler integration step for the dynamical
- system:\n
+ The constructor creates a noise model.\n
  
- /f$ \dot{x} = f(t,x,u,p) /f$
- 
- This equation is specified as a callback function to the integration.
- 
- \param [in] dynamicSystem - the continuous time dynamic system.
- \param [in] t - the current time in seconds
- \param [in] x - the current state vector
- \param [in] u - the current input vector
- \param [in] dt - the time step to integrate over
- \return the state vector at t+dt
- 
+ \param[in] in_point - the vector of the dirac point distribution
  */
 //---------------------------------------------------------------------
-vec CRMath::forwardEulerStep(vec(dynamicSystem)(double, vec, vec),
-                                                double t,
-                                                vec x,
-                                                vec u,
-                                                double dt){
-    // forward integration step
-    return x + dt*dynamicSystem(t,x,u);
+CRNoiseDirac::CRNoiseDirac(Eigen::VectorXd in_point) {
+    this->setParameters(in_point);
+}
+CRNoiseDirac::CRNoiseDirac() {
+    Eigen::VectorXd point(1);
+    point(0) = 0;
+    this->setParameters(point);
 }
     
     
 //=====================================================================
 /*!
- This method performs a Runge-Kutta integration step for the dynamical
- system:\n
+ This method sets the paramters of the noise model.  The Dirac is a point
+ distribution with P=1 of drawing a sample from the point.  This is an
+ effective way to model deterministic processes.
  
- /f$ \dot{x} = f(t,x,u,p) /f$
- 
- This equation is specified as a callback function to the integration.
- The Runga-Kutta integration is an accurate integration scheme at the
- expense of computational complexity over the forward Euler method.
- 
- \param [in] dynamicSystem - the continuous time dynamic system.
- \param [in] t - the current time in seconds
- \param [in] x - the current state vector
- \param [in] u - the current input vector
- \param [in] dt - the time step to integrate over
- \return the state vector at t+dt
- 
+ \param[in] in_point - point vector of the Dirac distribution
  */
 //---------------------------------------------------------------------
-vec CRMath::rungeKuttaStep(vec(dynamicSystem)(double, vec, vec),
-                           double t,
-                           vec x,
-                           vec u,
-                           double dt){
-    // RK4 step
-    Eigen::VectorXd f1 = dynamicSystem(t,x,u);
-    Eigen::VectorXd f2 = dynamicSystem(t+dt/2,x+dt*f1/2,u);
-    Eigen::VectorXd f3 = dynamicSystem(t+dt/2,x+dt*f2/2,u);
-    Eigen::VectorXd f4 = dynamicSystem(t+dt,x+dt*f3,u);
-    return x + dt/6*(f1 + 2*f2 + 2*f3 + f4);
+void CRNoiseDirac::setParameters(Eigen::VectorXd in_point)
+{
+    this->m_parameters.point = in_point;
+}
+
+
+//=====================================================================
+/*!
+ This method samples a random number from the specified Dirac
+ distribution.\n
+ 
+ \return - sampled state
+ */
+//---------------------------------------------------------------------
+Eigen::VectorXd CRNoiseDirac::sample(void)
+{
+    return this->m_parameters.point;
+}
+    
+    
+//=====================================================================
+/*!
+ This method returns the probability of x.\n
+ 
+ \param[in] in_x - state to evaluate
+ \return - probability of in_x
+ */
+//---------------------------------------------------------------------
+double CRNoiseDirac::probability(Eigen::VectorXd in_x)
+{
+    if (in_x == this->m_parameters.point){
+        return 1.0;
+    } else {
+        return 0.0;
+    }
 }
 
 
 //=====================================================================
 // End namespace
 }
-
-

@@ -34,47 +34,73 @@
  
  \project CoreRobotics Project
  \url     www.corerobotics.org
- \author  Parker Owan, Tony Piaskowy
+ \author  Parker Owan
  \version 0.0
  
  */
 //=====================================================================
 
+
 #include <iostream>
-#include "CRTestModules.hpp"
 #include "CoreRobotics.hpp"
 
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
-using namespace std;
-
-
-int main(int argc, const char * argv[]) {
+void test_CRNoiseMixture(void){
     
-    cout << "Running the CoreRobotics test suite." << endl;
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of test_CRNoiseMixture.\n";
     
-    // Run the core test
-    //CRTestCore();
+    // initialize a noise mixture model
+    CRNoiseMixture mixModel = CRNoiseMixture();
     
-    // Run the math test
-    //CRTestMath();
+    // define a Gaussian distribution & add it to the mixture model
+    Eigen::MatrixXd cov(1,1);
+    cov(0) = 1;
+    Eigen::VectorXd mean(1);
+    mean(0) = 3;
+    CRNoiseGaussian* gaussian = new CRNoiseGaussian(cov, mean);
+    mixModel.add(gaussian, 0.7);
     
-    // Run the model test
-    // CRTestModels();
+    // define a uniform distribution & add it to the mixture model
+    Eigen::VectorXd a(1);
+    a(0) = 1;
+    Eigen::VectorXd b(1);
+    b(0) = 9;
+    CRNoiseUniform* uniform = new CRNoiseUniform(a, b);
+    mixModel.add(uniform, 0.6);
     
-    // Test the noise models
-    test_CRNoiseModel();
-    test_CRNoiseGaussian();
-    test_CRNoiseDirac();
-    test_CRNoiseUniform();
-    test_CRNoiseMixture();
+    // define a point mass distribution & add it to the mixture model
+    Eigen::VectorXd c(1);
+    c(0) = 8;
+    CRNoiseDirac* dirac = new CRNoiseDirac(c);
+    mixModel.add(dirac, 0.2);
     
-    // Test the sensor models
-    test_CRSensorModel();
-    test_CRSensorProbabilistic();
     
-    // Test the motion models
-    test_CRMotionModel();
-    test_CRMotionProbabilistic();
+    // initialize parameters for experiments
+    const int nrolls=10000;  // number of experiments
+    const int nstars=100;     // maximum number of stars to distribute
+    int p[10]={};
     
-    return 0;
+    // sample the distribution
+    for (int i=0; i<nrolls; ++i) {
+        Eigen::VectorXd v = mixModel.sample();
+        if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
+    }
+    
+    // print out the result with stars to indicate density
+    std::cout << std::fixed; std::cout.precision(1);
+    for (int i=0; i<10; ++i) {
+        printf("%2i - %2i | ",i,i+1);
+        Eigen::VectorXd point(1);
+        point << double(i);
+        double prob = mixModel.probability(point);
+        printf("%6.4f | ",prob);
+        std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+    }
 }
+
+
+
+

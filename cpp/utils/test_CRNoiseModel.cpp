@@ -40,31 +40,58 @@
  */
 //=====================================================================
 
-#ifndef CRTestModules_hpp
-#define CRTestModules_hpp
 
+#include <iostream>
+#include "CoreRobotics.hpp"
 
-void CRTestCore(void);      // Core tests
-void CRTestMath(void);      // Math tests
-void CRTestFrameOffset(void); // Frame Tests
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
+// declare an inverse cumulative distribution - this is the invserse
+// CDF for a triangular distribution from [0,1].
+Eigen::VectorXd icdf(double P){
+    Eigen::VectorXd v(1);
+    v(0) = sqrt(P);
+    return v;
+}
 
-void test_CRManipulator(void);
+// declare the probability density - this is the traditional density
+// defined by a distribution
+double pdensity(Eigen::VectorXd x){
+    return 2*x(0);
+}
 
-// Noise model tests
-void test_CRNoiseModel(void);           // test CRNoiseModel
-void test_CRNoiseGaussian(void);        // test CRNoiseGaussian
-void test_CRNoiseDirac(void);           // test CRNoiseDirac
-void test_CRNoiseUniform(void);         // test CRNoiseUniform
-void test_CRNoiseMixture(void);         // test CRNoiseMixture
-
-// Sensor model tests
-void test_CRSensorModel(void);          // test CRSensorModel
-void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
-
-// Motion model tests
-void test_CRMotionModel(void);          // test CRMotionModel
-void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
-
-
-#endif /* CRTestModules_hpp */
+void test_CRNoiseModel(void){
+    
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of CRNoiseModel.\n";
+    
+    // initialize a noise model
+    CRNoiseModel genericNoise = CRNoiseModel();
+    genericNoise.setParameters(*icdf,*pdensity);
+    
+    
+    // initialize parameters for experiments
+    const int nrolls=10000;  // number of experiments
+    const int nstars=100;    // maximum number of stars to distribute
+    const int nintervals=10; // number of intervals
+    int p[10]={};
+    
+    // sample the distribution
+    for (int i=0; i<nrolls; ++i) {
+        Eigen::VectorXd v = genericNoise.sample();
+        ++p[int(nintervals*v(0))];
+    }
+    
+    // print out the result with stars to indicate density
+    std::cout << std::fixed; std::cout.precision(1);
+    for (int i=0; i<nintervals; ++i) {
+        std::cout << float(i)/nintervals << " - " << float(i+1)/nintervals << ": ";
+        printf("%2i - %2i | ",i,i+1);
+        Eigen::VectorXd point(1);
+        point << double(i);
+        double prob = genericNoise.probability(point);
+        printf("%4.1f | ",prob);
+        std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
+    }
+}

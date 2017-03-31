@@ -40,79 +40,30 @@
  */
 //=====================================================================
 
-#include "CRMath.hpp"
-#include "Eigen/Dense"
-
+#ifndef CRTypes_hpp
+#define CRTypes_hpp
 
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
     
-    
 //=====================================================================
 /*!
- This method performs a forward euler integration step for the dynamical
- system:\n
- 
- /f$ \dot{x} = f(t,x,u,p) /f$
- 
- This equation is specified as a callback function to the integration.
- 
- \param [in] dynamicSystem - the continuous time dynamic system.
- \param [in] t - the current time in seconds
- \param [in] x - the current state vector
- \param [in] u - the current input vector
- \param [in] dt - the time step to integrate over
- \return the state vector at t+dt
- 
+ \file CRSignalType.hpp
+ \brief Signal type enumerator.
  */
-//---------------------------------------------------------------------
-vec CRMath::forwardEulerStep(vec(dynamicSystem)(double, vec, vec),
-                                                double t,
-                                                vec x,
-                                                vec u,
-                                                double dt){
-    // forward integration step
-    return x + dt*dynamicSystem(t,x,u);
-}
-    
-    
 //=====================================================================
-/*!
- This method performs a Runge-Kutta integration step for the dynamical
- system:\n
- 
- /f$ \dot{x} = f(t,x,u,p) /f$
- 
- This equation is specified as a callback function to the integration.
- The Runga-Kutta integration is an accurate integration scheme at the
- expense of computational complexity over the forward Euler method.
- 
- \param [in] dynamicSystem - the continuous time dynamic system.
- \param [in] t - the current time in seconds
- \param [in] x - the current state vector
- \param [in] u - the current input vector
- \param [in] dt - the time step to integrate over
- \return the state vector at t+dt
- 
- */
-//---------------------------------------------------------------------
-vec CRMath::rungeKuttaStep(vec(dynamicSystem)(double, vec, vec),
-                           double t,
-                           vec x,
-                           vec u,
-                           double dt){
-    // RK4 step
-    Eigen::VectorXd f1 = dynamicSystem(t,x,u);
-    Eigen::VectorXd f2 = dynamicSystem(t+dt/2,x+dt*f1/2,u);
-    Eigen::VectorXd f3 = dynamicSystem(t+dt/2,x+dt*f2/2,u);
-    Eigen::VectorXd f4 = dynamicSystem(t+dt,x+dt*f3,u);
-    return x + dt/6*(f1 + 2*f2 + 2*f3 + f4);
-}
-
+//! Enumerator for signal types
+enum CRSignalType {
+    CR_SIGNAL_FORCE,
+    CR_SIGNAL_POSITION,
+    CR_SIGNAL_VELOCITY,
+    CR_SIGNAL_ACCELERATION,
+    CR_SIGNAL_GENERIC
+};
+    
 
 //=====================================================================
 // End namespace
 }
-
-
+#endif /* CRSignalType_hpp */

@@ -243,7 +243,7 @@ bool CRFrameDh::isDriven() {
 
 //=====================================================================
 // Private Methods:
-
+    
 //! sets the private rotation and translation members - Note that
 //  anytime a parameter gets set in the frame class, this method gets
 //  called to update the rotation/translation members.
