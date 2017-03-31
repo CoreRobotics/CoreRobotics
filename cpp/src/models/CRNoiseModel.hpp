@@ -75,6 +75,12 @@ namespace CoreRobotics {
  
  where \f$F^{-1}\f$ is the inverse cumulative density.
  
+ Additionally, the CRNoiseModel uses a probability density function to 
+ return the probability of a state x.  Thus the user must also specify 
+ a density function of the type
+ 
+ \f$ p = f(x) \f$.
+ 
  \section Example
  This example demonstrates use of the CRNoiseModel class.
  
@@ -94,6 +100,12 @@ namespace CoreRobotics {
      return v;
  }
  
+ // declare the probability density - this is the traditional density
+ // defined by a distribution
+ double pdensity(Eigen::VectorXd x){
+     return 2*x(0);
+ }
+ 
  void main(void){
  
      std::cout << "*************************************\n";
@@ -101,7 +113,7 @@ namespace CoreRobotics {
      
      // initialize a noise model
      CRNoiseModel genericNoise = CRNoiseModel();
-     genericNoise.setParameters(icdf);
+     genericNoise.setParameters(*icdf,*pdensity);
      
      
      // initialize parameters for experiments
@@ -120,6 +132,11 @@ namespace CoreRobotics {
      std::cout << std::fixed; std::cout.precision(1);
      for (int i=0; i<nintervals; ++i) {
          std::cout << float(i)/nintervals << " - " << float(i+1)/nintervals << ": ";
+         printf("%2i - %2i | ",i,i+1);
+         Eigen::VectorXd point(1);
+         point << double(i);
+         double prob = genericNoise.probability(point);
+         printf("%4.1f | ",prob);
          std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
      }
  }
@@ -137,8 +154,9 @@ namespace CoreRobotics {
  */
 //=====================================================================
 // ICDF Paramter structure declaration
-struct CRParamIcdf{
+struct CRParamNoiseGeneric{
     Eigen::VectorXd(*icdFunction)(double);
+    double(*probFunction)(Eigen::VectorXd);
 };
     
 //=====================================================================
@@ -157,7 +175,8 @@ public:
 public:
     
     //! Set the parameters that describe the distribution
-    virtual void setParameters(Eigen::VectorXd(*in_icd)(double));
+    virtual void setParameters(Eigen::VectorXd(*in_icd)(double),
+                               double(*in_prob)(Eigen::VectorXd));
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -181,7 +200,7 @@ protected:
 protected:
     
     //! Noise model type
-    CRParamIcdf m_parameters;
+    CRParamNoiseGeneric m_parameters;
     
     //! Seed value
     unsigned m_seed;

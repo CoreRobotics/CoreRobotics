@@ -55,6 +55,12 @@ Eigen::VectorXd icdf(double P){
     return v;
 }
 
+// declare the probability density - this is the traditional density
+// defined by a distribution
+double pdensity(Eigen::VectorXd x){
+    return 2*x(0);
+}
+
 void test_CRNoiseModel(void){
     
     std::cout << "*************************************\n";
@@ -62,7 +68,7 @@ void test_CRNoiseModel(void){
     
     // initialize a noise model
     CRNoiseModel genericNoise = CRNoiseModel();
-    genericNoise.setParameters(icdf);
+    genericNoise.setParameters(*icdf,*pdensity);
     
     
     // initialize parameters for experiments
@@ -81,6 +87,11 @@ void test_CRNoiseModel(void){
     std::cout << std::fixed; std::cout.precision(1);
     for (int i=0; i<nintervals; ++i) {
         std::cout << float(i)/nintervals << " - " << float(i+1)/nintervals << ": ";
+        printf("%2i - %2i | ",i,i+1);
+        Eigen::VectorXd point(1);
+        point << double(i);
+        double prob = genericNoise.probability(point);
+        printf("%4.1f | ",prob);
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
     }
 }

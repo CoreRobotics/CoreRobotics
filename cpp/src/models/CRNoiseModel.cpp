@@ -77,13 +77,21 @@ CRNoiseModel::CRNoiseModel() {
  [0,1].  The function must take a double between 0,1 and output a
  double.  See: https://en.wikipedia.org/wiki/Inverse_transform_sampling
  
+ The probability density function returns the probability of x for the 
+ distribution, i.e.:
+ 
+ \f$ p = f(x) \f$
+ 
  \param[in] in_icd - inverse CDF of the distribution.  This function
                    is sampled with a uniform distribution over [0,1]
+ \param[in] in_prob - probability density function that returns p(x)
  */
 //---------------------------------------------------------------------
-void CRNoiseModel::setParameters(Eigen::VectorXd(in_icd)(double))
+void CRNoiseModel::setParameters(Eigen::VectorXd(in_icd)(double),
+                                 double(*in_prob)(Eigen::VectorXd))
 {
     this->m_parameters.icdFunction = in_icd;
+    this->m_parameters.probFunction = in_prob;
 }
 
 
@@ -112,12 +120,7 @@ Eigen::VectorXd CRNoiseModel::sample(void)
 //---------------------------------------------------------------------
 double CRNoiseModel::probability(Eigen::VectorXd in_x)
 {
-    // TODO - this is gonna be tricky
-    // 1.  Find the p* = F(x) (optimization)
-    // 2a. Get x+ <- F^{-1}(p*+)
-    // 2b. Get x- <- F^{-1}(p*-)
-    // 3.  Central difference: p = (p*+ - p*-)/(x+ - x-)
-    return 1.0;
+    return (this->m_parameters.probFunction)(in_x);
 }
 
     
