@@ -143,7 +143,9 @@ void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
  \param[out] jacobian - (6 x N) jacobian matrix.
  */
 //---------------------------------------------------------------------
-void CRManipulator::getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::MatrixXd &jacobian)
+void CRManipulator::getJacobian(unsigned toolIndex,
+                                CREulerMode mode,
+                                Eigen::MatrixXd &jacobian)
 {
 
 	// pertubation size (see http://www.maths.lth.se/na/courses/FMN081/FMN081-06/lecture7.pdf)
@@ -189,7 +191,8 @@ void CRManipulator::getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::Mat
     this->setConfiguration(q0);
 
 	// zero out the m_tipFrame
-	this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(), Eigen::Vector3d::Zero());
+	this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(),
+                                                Eigen::Vector3d::Zero());
 }
 
     
@@ -250,6 +253,35 @@ void CRManipulator::getToolFrame(unsigned toolIndex, CRFrame &tool)
 
 	// tool.setRotationAndTranslation(rot, trans);
 	tool.setRotationAndTranslation(T.block(0, 0, 3, 3), T.block(0, 3, 3, 1));
+}
+    
+    
+
+//=====================================================================
+/*!
+ This method returns a pose for the specified tool frame for the current
+ robot pose.  Note that a tool must have been added to the manipulator 
+ using the CRManipulator::addTool method prior to calling this method.\n
+ 
+ \param[in] toolIndex - index of the tool to query
+ \param[in] mode - the Euler convention for computing the pose
+ \param[out] pose - the pose for the specified tool
+ robot base frame for the current manipulator configuration
+ */
+//---------------------------------------------------------------------
+void CRManipulator::getToolPose(unsigned toolIndex,
+                                CREulerMode mode,
+                                Eigen::Matrix<double, 6, 1> &pose)
+{
+    // return the frame
+    this->getToolFrame(toolIndex, *this->m_tipFrame);
+    
+    // get the pose of the frame
+    this->m_tipFrame->getPose(mode, pose);
+    
+    // zero out the m_tipFrame
+    this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(),
+                                                Eigen::Vector3d::Zero());
 }
 
     

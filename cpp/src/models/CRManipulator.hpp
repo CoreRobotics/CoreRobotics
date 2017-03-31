@@ -228,7 +228,9 @@ public:
     void getForwardKinematics(Eigen::MatrixXd &y);
     
     //! Get the instantaneous numerical Jacobian
-	void getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::MatrixXd &jacobian);
+	void getJacobian(unsigned toolIndex,
+                     CREulerMode mode,
+                     Eigen::MatrixXd &jacobian);
     
     //! Get the number of links in the list
     void getNumberOfLinks(int &n);
@@ -238,6 +240,11 @@ public:
 
 	//! Get tool frame for the current manipulator configuration
 	void getToolFrame(unsigned toolIndex, CRFrame &tool);
+    
+    //! Get the pose for the specified tool index
+    void getToolPose(unsigned toolIndex,
+                     CREulerMode mode,
+                     Eigen::Matrix<double, 6, 1> &pose);
 
 	//! Set the model type
 	void setModelType(CRManipulatorType type) { this->m_modelType = type; }
