@@ -57,21 +57,23 @@ namespace CoreRobotics {
  
  If in_type is set to CR_MOTION_CONTINUOUS, then the callback sets
  
- \f$ \dot{x} = f(x,u,t) \f$
+ \f$ \dot{x} = f(x,u,t,s) \f$
  
  where \f$x\f$ is the system state, \f$u\f$ is the input (forcing)
- vector, and \f$t\f$ is time.
+ vector, \f$t\f$ is time, and \f$s\f$ is a boolean flag that indicates
+ if noise is sampled (true = sample noise).
  
  
  Case 2: (Discrete)
  
  If in_type is set to CR_MOTION_DISCRETE, then the callback sets
  
- \f$ x_{k+1} = f(x_k,u_k,t_k) \f$
+ \f$ x_{k+1} = f(x_k,u_k,t_k,s) \f$
  
  where \f$x_k\f$ is the current system state, \f$u_k\f$ is the 
- input (forcing) vector, and \f$t_k\f$ is time at interval \f$k\f$.
- 
+ input (forcing) vector, \f$t_k\f$ is time at interval \f$k\f$, and 
+ \f$s\f$ is a boolean flag that indicates if noise is sampled 
+ (true = sample noise).
  
  \param[in] in_dynamics - callback to the dynamics equation
  \param[in] in_type - indicates whether the callback is continuous or 

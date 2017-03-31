@@ -133,7 +133,7 @@ namespace CoreRobotics {
      while(t <= 5) {
      
          // output the time and state
-         printf("%5.1f    | %5.2f\n",t,x(0));
+         printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
          
          // step at t = 2.5
          if (t >= 2.5){
@@ -144,7 +144,7 @@ namespace CoreRobotics {
          x = model.motion(u);
          t = model.getTime();
      }
-     printf("%5.1f    | %5.2f\n",t,x(0));
+     printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
  
  }
  // -------------------------------------------------------------

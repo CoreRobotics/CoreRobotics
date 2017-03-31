@@ -66,27 +66,29 @@ namespace CoreRobotics {
  
  \details
  \section Description
- CRMotionModel implements a motion model from a supplied dynamics
- callback function.  Specifically, CRMotionModel sets up a container
- for the continuous model
+ CRMotionModel implements a probabilistic motion model from a supplied
+ dynamics callback function.  Specifically, CRMotionModel sets up a 
+ container for the continuous model
  
- \f$ \dot{x} = f(x,u,t) \f$
+ \f$ \dot{x} = f(x,u,t,w) \f$
  
  or
  
- \f$ x_{k+1} = f(x_k,u_k,t_k) \f$
+ \f$ x_{k+1} = f(x_k,u_k,t_k,w_k) \f$
  
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
- \f$t\f$ is time, and \f$k\f$ is a discrete sampling index.
+ \f$t\f$ is time, \f$w\f$ is process noise, and \f$k\f$ is a discrete
+ sampling index.
  
  These methods are available for interfacing with the Motion Model:
- - CRMotionModel::setState sets the underlying state vector.
- - CRMotionModel::getState returns the state vector.
- - CRMotionModel::setTimeStep sets the time step (s).
- - CRMotionModel::getTimeStep returns the time step (s).
- - CRMotionModel::gettime returns the simulation time (s).=
- - CRMotionModel::motion computes a new state and updates the
- internal value for an input (u).
+ - CRMotionProbabilistic::setState sets the underlying state vector.
+ - CRMotionProbabilistic::getState returns the state vector.
+ - CRMotionProbabilistic::setTimeStep sets the time step (s).
+ - CRMotionProbabilistic::getTimeStep returns the time step (s).
+ - CRMotionProbabilistic::gettime returns the simulation time (s).=
+ - CRMotionProbabilistic::motion computes a new state and updates the
+ internal value for an input (u) and a flag that indicates whether noise
+ should be sampled.
  
  \section Example
  This example demonstrates use of the CRMotionModel class.
@@ -98,11 +100,18 @@ namespace CoreRobotics {
  // Use the CoreRobotics namespace
  using namespace CoreRobotics;
  
+ CRNoiseGaussian* dynNoise;
  
  // -------------------------------------------------------------
- // Declare a continuous motion model - xdot = fcn(x,u,t)
- Eigen::VectorXd dynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t){
-     return -x + u;  // motion
+ // Declare a probabilistic continuous motion model - xdot = fcn(x,u,t,s)
+ Eigen::VectorXd probDynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t, bool sample){
+     Eigen::VectorXd w(1);
+     if (sample){
+         w = dynNoise->sample();
+     } else {
+         w << 0;
+     }
+     return -x + u + w;  // motion
  }
  
  
@@ -110,7 +119,7 @@ namespace CoreRobotics {
  void main(void){
  
      std::cout << "*************************************\n";
-     std::cout << "Demonstration of CRMotionModel.\n";
+     std::cout << "Demonstration of CRMotionProbabilistic.\n";
      
      
      // initialize a state vector
@@ -118,8 +127,16 @@ namespace CoreRobotics {
      x << 10;
      
      
+     // initialize the noise model with a mean and covariance
+     Eigen::MatrixXd cov(1,1);
+     cov << 1;
+     Eigen::VectorXd mean(1);
+     mean << 0;
+     dynNoise = new CRNoiseGaussian(cov, mean);
+     
+     
      // initialize a deterministic sensor model
-     CRMotionModel model = CRMotionModel(*dynFcn,CR_MOTION_CONTINUOUS,x,0.2);
+     CRMotionProbabilistic model = CRMotionProbabilistic(*probDynFcn,CR_MOTION_CONTINUOUS,x,0.2);
      
      
      // initialize an input and set it to zero
@@ -134,18 +151,18 @@ namespace CoreRobotics {
      while(t <= 5) {
      
          // output the time and state
-         printf("%5.1f    | %5.2f\n",t,x(0));
+         printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
          
          // step at t = 2.5
          if (t >= 2.5){
              u << 10;
          }
          
-         // get next state & time
-         x = model.motion(u);
+         // get next state (with noise) & time
+         x = model.motion(u, true);
          t = model.getTime();
      }
-     printf("%5.1f    | %5.2f\n",t,x(0));
+     printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
  
  }
  // -------------------------------------------------------------
