@@ -61,9 +61,9 @@ CRRigidBody::CRRigidBody() { }
  Destructor.\n
  */
 //---------------------------------------------------------------------
-CRRigidBody::~CRRigidBody() {
-    delete frame;
-}
+//CRRigidBody::~CRRigidBody() {
+//    delete frame;
+//}
 
 
 

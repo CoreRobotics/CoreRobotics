@@ -50,10 +50,10 @@ Eigen::VectorXd linearSystem(double t, Eigen::VectorXd x, Eigen::VectorXd u);
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-void CRTestMath(void){
+void test_CRMath(void){
     
     std::cout << "**********************\n";
-    std::cout << "Running the CRTestMath\n";
+    std::cout << "Running the test_CRMath\n";
     
     
     // Define a state vector

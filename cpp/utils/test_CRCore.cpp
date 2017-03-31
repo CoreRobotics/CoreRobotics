@@ -51,10 +51,10 @@ void callback2(void);
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-void CRTestCore(void){
+void test_CRCore(void){
     
     std::cout << "**********************\n";
-    std::cout << "Running the CRTestCore\n";
+    std::cout << "Running the test_CRCore\n";
     
     double t;
     

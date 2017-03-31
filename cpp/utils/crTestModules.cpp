@@ -53,13 +53,10 @@ int main(int argc, const char * argv[]) {
     cout << "Running the CoreRobotics test suite." << endl;
     
     // Run the core test
-    //CRTestCore();
+    test_CRCore();
     
     // Run the math test
-    //CRTestMath();
-    
-    // Run the model test
-    // CRTestModels();
+    test_CRMath();
     
     // Test the noise models
     test_CRNoiseModel();

@@ -43,12 +43,16 @@
 #ifndef CRTestModules_hpp
 #define CRTestModules_hpp
 
+// Core functionality test
+void test_CRCore(void);
 
-void CRTestCore(void);      // Core tests
-void CRTestMath(void);      // Math tests
+// Math tests
+void test_CRMath(void);
+
+// Physics tests
 void CRTestFrameOffset(void); // Frame Tests
 
-
+// Manipulator test
 void test_CRManipulator(void);
 
 // Noise model tests

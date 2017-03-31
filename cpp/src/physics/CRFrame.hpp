@@ -155,7 +155,7 @@ public:
     CRFrame(Eigen::Matrix3d rot, Eigen::Vector3d trans);
     
     //! Class destructor
-    virtual ~CRFrame() = 0;
+    // virtual ~CRFrame() = 0;
     
 //---------------------------------------------------------------------
 // Get/Set Methods
