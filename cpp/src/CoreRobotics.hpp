@@ -68,14 +68,56 @@ A note on units:  All units in the library, unless specified, are in SI
 \page install Installation
 
 The CoreRobotics Library comes with CMakeLists ready to generate the project
-for your IDE of choice.
+for your IDE of choice.  CMake is a tool for generating platform-specific 
+IDE files from cross-platform source code.  We highly recommend the use of 
+CMake to build your first program.
+\n\n\n\n
 
+\section install_mac Mac XCode
+Tested on Mac OSX 10.11.6 with XCode Version 8.1.  The remaining steps assume
+you have already installed XCode on your Mac computer.
+ 
+### Step 1.
+Download the latest version of CMake from https://cmake.org/download/
+for Mac OSX (*.dmg).  Install CMake by running the *.dmg.  Once CMake has
+installed, it is accesible via GUI.  For instructions on how to set up CMake
+for command line, open the CMake application, go to Tools > How to install for
+command line use, and run one of the methods in the command line.
+ 
+### Step 2.
+Once CMake is set up for command line use, open terminal and cd into
+the root folder of CoreRobotics.  There should be subfolders named doc, src, 
+utils, etc.  Run the following commands one at a time to build the CoreRobotics
+library, test routines, and example code:
+ 
+\code 
+$ mkdir build
+$ cd build
+$ cmake -G "Xcode" ../
+$ open CoreRobotics.xcodeproj/
+\endcode
+ 
+### Step 3.
+After the project files are created, the CoreRobotics XCode project
+should open.  Go to Product >> Build (Command - B) to build the project.
+ 
+### Step 4.
+Once the project has built, you can run the test script by running the
+following terminal commands (assuming you left terminal alone from step 2)
+
+\code
+$ ../utils/bin/Debug/TestModules
+\endcode
+ 
+### Step 5.
+Check out the tutorials to begin making your first program in CoreRobotics.
+\n\n\n\n
+ 
 \section install_windows Windows Visual Studio
 Todo
- 
-\section install_mac Mac XCode
-Todo
 
+\n\n\n\n
+ 
 \section install_make Linux Make
 Todo
 */
