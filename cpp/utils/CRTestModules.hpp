@@ -46,7 +46,10 @@
 
 void CRTestCore(void);      // Core tests
 void CRTestMath(void);      // Math tests
-void CRTestModels(void);    // Model tests
+void CRTestFrameOffset(void); // Frame Tests
+
+
+void test_CRManipulator(void);
 
 // Noise model tests
 void test_CRNoiseModel(void);           // test CRNoiseModel

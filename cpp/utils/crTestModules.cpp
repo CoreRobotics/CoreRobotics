@@ -34,7 +34,7 @@
  
  \project CoreRobotics Project
  \url     www.corerobotics.org
- \author  Parker Owan
+ \author  Parker Owan, Tony Piaskowy
  \version 0.0
  
  */

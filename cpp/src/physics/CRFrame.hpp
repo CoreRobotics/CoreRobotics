@@ -193,7 +193,10 @@ public:
     virtual bool isDriven();
 
     //! Gets a vector of the Euler angles
-    void getEulerPose(CREulerMode mode, Eigen::Vector3d &pose);
+    void getOrientation(CREulerMode mode, Eigen::Vector3d &orientation);
+
+    //! Get the pose vector where the Euler orientation convention is specified by mode
+    void getPose(CREulerMode mode, Eigen::Matrix<double,6,1> &pose);
     
 //---------------------------------------------------------------------
 // Protected Members

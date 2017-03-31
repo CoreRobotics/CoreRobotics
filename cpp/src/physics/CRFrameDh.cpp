@@ -34,7 +34,7 @@
  
  \project CoreRobotics Project
  \url     www.corerobotics.org
- \author  Parker Owan
+ \author  Parker Owan, Tony Piaskowy
  \version 0.0
  
  */
@@ -60,18 +60,20 @@ namespace CoreRobotics {
  \param[in]   theta  - alpha angle of the frame [rad] (0)
  \param[in]   mode   - DH convention (CR_DH_MODE_MODIFIED)
  \param[in]   free   - free variable (CR_DH_FREE_NONE)
+ \param[in]   offset - free variable offset [m] or [rad] (0)
  */
 //=====================================================================
-CRFrameDh::CRFrameDh(double r, double alpha, double d, double theta,
-                     CRDhMode mode, CRDhFreeVariable free)
+CRFrameDh::CRFrameDh(double r, double alpha, double d, double theta, double offset,
+					CRDhMode mode, CRDhFreeVariable free)
 {
     dh_r = r;
     dh_alpha = alpha;
     dh_d = d;
     dh_theta = theta;
-    dhMode = mode;
+	dhMode = mode;
     freeVar = free;
-    setRotationAndTranslation();
+	freeVarOffset = offset;
+	setRotationAndTranslation();
 }
 CRFrameDh::CRFrameDh()
 {
@@ -81,6 +83,7 @@ CRFrameDh::CRFrameDh()
     dh_theta = 0.0;
     dhMode = CR_DH_MODE_MODIFIED;
     freeVar = CR_DH_FREE_NONE;
+	freeVarOffset = 0.0;
     setRotationAndTranslation();
 }
 
@@ -183,17 +186,18 @@ void CRFrameDh::getMode(CRDhMode &mode)
 /*!
  This method sets the DH parameter values.\n
  
- \param[in]   x   - x position of the frame
+ \param[in]    x   - x position of the frame
  \param[in]    y   - y position of the frame
  \param[in]    z   - z position of the frame
  */
 //---------------------------------------------------------------------
-void CRFrameDh::setParameters(double r, double alpha, double d, double theta)
+void CRFrameDh::setParameters(double r, double alpha, double d, double theta, double offset)
 {
     dh_r = r;
     dh_alpha = alpha;
     dh_d = d;
     dh_theta = theta;
+	freeVarOffset = offset;
     setRotationAndTranslation();
 }
 
@@ -207,12 +211,13 @@ void CRFrameDh::setParameters(double r, double alpha, double d, double theta)
  \param[out]   z   - z position of the frame
  */
 //---------------------------------------------------------------------
-void CRFrameDh::getParameters(double &r, double &alpha, double &d, double &theta)
+void CRFrameDh::getParameters(double &r, double &alpha, double &d, double &theta, double &offset)
 {
     r = dh_r;
     alpha = dh_alpha;
     d = dh_d;
     theta = dh_theta;
+	offset = freeVarOffset;
 }
     
     
@@ -244,6 +249,24 @@ bool CRFrameDh::isDriven() {
 //  called to update the rotation/translation members.
 void CRFrameDh::setRotationAndTranslation()
 {
+
+	switch (freeVar) {
+	case CR_DH_FREE_NONE:
+		break;
+	case CR_DH_FREE_R:
+		dh_r = dh_r + freeVarOffset;
+		break;
+	case CR_DH_FREE_ALPHA:
+		dh_alpha = dh_alpha + freeVarOffset;
+		break;
+	case CR_DH_FREE_D:
+		dh_d = dh_d + freeVarOffset;
+		break;
+	case CR_DH_FREE_THETA:
+		dh_theta = dh_theta + freeVarOffset;
+		break;
+	}
+	
     switch (dhMode){
         case CR_DH_MODE_CLASSIC:
             rotation << cos(dh_theta), -sin(dh_theta)*cos(dh_alpha), sin(dh_theta)*sin(dh_alpha),
@@ -258,6 +281,24 @@ void CRFrameDh::setRotationAndTranslation()
             translation << dh_r, -dh_d*sin(dh_alpha), dh_d*cos(dh_alpha);
             break;
     }
+
+	switch (freeVar) {
+	case CR_DH_FREE_NONE:
+		break;
+	case CR_DH_FREE_R:
+		dh_r = dh_r - freeVarOffset;
+		break;
+	case CR_DH_FREE_ALPHA:
+		dh_alpha = dh_alpha - freeVarOffset;
+		break;
+	case CR_DH_FREE_D:
+		dh_d = dh_d - freeVarOffset;
+		break;
+	case CR_DH_FREE_THETA:
+		dh_theta = dh_theta - freeVarOffset;
+		break;
+	}
+
 }
 
 

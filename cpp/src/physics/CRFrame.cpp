@@ -197,7 +197,7 @@ Source: https://www.geometrictools.com/Documentation/EulerAngles.pdf
 \param[out] pose - vector of Euler angles of the frame.
 */
 //---------------------------------------------------------------------
-void CRFrame::getEulerPose(CREulerMode mode, Eigen::Vector3d &pose)
+void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
 {
     double a, b, g;
 
@@ -494,7 +494,27 @@ void CRFrame::getEulerPose(CREulerMode mode, Eigen::Vector3d &pose)
         break;
     }
 
-    pose << a, b, g;
+    orientation << a, b, g;
+}
+
+
+//=====================================================================
+/*!
+This method returns a vector of the position and orientation.
+
+\param[in]  mode - the Euler mode enumerator
+\param[out] pose - vector of the pose (x, y, z, a, b, g)^T
+*/
+//---------------------------------------------------------------------
+void CRFrame::getPose(CREulerMode mode, Eigen::Matrix<double, 6, 1> &pose)
+{
+
+	Eigen::Vector3d pos = this->translation;
+	Eigen::Vector3d theta;
+	this->getOrientation(mode, theta);
+
+	pose << pos(0), pos(1), pos(2), theta(0), theta(1), theta(2);
+
 }
 
 

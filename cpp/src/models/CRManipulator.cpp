@@ -51,10 +51,18 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  The constructor creates a manipulator.\n
+
+ \param[in] - the manipulator type (default: CR_MANIPULATOR_MODE_POSITION)
  */
 //---------------------------------------------------------------------
+CRManipulator::CRManipulator(CRManipulatorType type) {
+	this->m_modelType = type;
+	this->m_tipFrame = new CoreRobotics::CRFrame();
+}
+
 CRManipulator::CRManipulator() {
-    mode = CR_MANIPULATOR_MODE_POSITION;
+    this->m_modelType = CR_MANIPULATOR_MODE_POSITION;
+	this->m_tipFrame = new CoreRobotics::CRFrame();
 }
     
     
@@ -69,8 +77,8 @@ CRManipulator::CRManipulator() {
 //---------------------------------------------------------------------
 void CRManipulator::setConfiguration(Eigen::VectorXd q)
 {
-    for (size_t i = 0; i < listDriven.size(); i++) {
-        listLinks.at(listDriven.at(i))->frame->setFreeValue(q(i));
+    for (size_t i = 0; i < m_listDriven.size(); i++) {
+        m_listLinks.at(m_listDriven.at(i))->frame->setFreeValue(q(i));
     }
 }
     
@@ -86,9 +94,9 @@ void CRManipulator::setConfiguration(Eigen::VectorXd q)
 //---------------------------------------------------------------------
 void CRManipulator::getConfiguration(Eigen::VectorXd &q)
 {
-    q.setZero(listDriven.size(),1);
-    for (size_t i = 0; i < listDriven.size(); i++) {
-        listLinks.at(listDriven.at(i))->frame->getFreeValue(q(i));
+    q.setZero(m_listDriven.size(),1);
+    for (size_t i = 0; i < m_listDriven.size(); i++) {
+        m_listLinks.at(m_listDriven.at(i))->frame->getFreeValue(q(i));
     }
 }
     
@@ -97,6 +105,8 @@ void CRManipulator::getConfiguration(Eigen::VectorXd &q)
 /*!
  This method gets the forward kinematics (position of each frame) of 
  the manipulator.\n
+
+ See: https://en.wikipedia.org/wiki/Forward_kinematics
  
  \param[out] y - forward kinematics
  */
@@ -104,13 +114,13 @@ void CRManipulator::getConfiguration(Eigen::VectorXd &q)
 void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
 {
     Eigen::Vector3d v;
-    y.setZero(3,listParents.size()+1);
-    for (size_t k = 0; k < listParents.size(); k++) {
+    y.setZero(3,m_listParents.size()+1);
+    for (size_t k = 0; k < m_listParents.size(); k++) {
         int i = k;
         v << 0, 0, 0;
         while (i > -1) {
-            listLinks.at(i)->frame->transformToParent(v,v);
-            i = listParents.at(i);
+            m_listLinks.at(i)->frame->transformToParent(v,v);
+            i = m_listParents.at(i);
         }
         y.col(k+1) = v;
     }
@@ -119,31 +129,67 @@ void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
     
 //=====================================================================
 /*!
- This method gets the numerical Jacobian of the manipulator for the 
- current configuration.\n
+ This method gets the full pose (position and orientation) numerical 
+ Jacobian of the manipulator for the current configuration with respect
+ to the tool specified by the toolIndex.  See CRManipulator::addTool
+ for adding tools to the manipulator.\n
+
+ The size of the returned Jacobian is 6 x N where N is the number of
+ free variables in the manipulator.  The rows of the Jacobian 
+ correspond to the pose vector (x, y, z, a, b, g)^T.\n
  
- \param[out] jacobian - jacobian matrix
+ \param[in] toolIndex - index of the tool to be used to compute the Jacobian.
+ \param[in] mode - the Euler convention to be used to specify the orientation.
+ \param[out] jacobian - (6 x N) jacobian matrix.
  */
 //---------------------------------------------------------------------
-void CRManipulator::getJacobian(Eigen::MatrixXd &jacobian)
+void CRManipulator::getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::MatrixXd &jacobian)
 {
-    double delta = 1.0e-9;
-    Eigen::VectorXd q0;
-    Eigen::VectorXd qd;
-    Eigen::MatrixXd qFwd;
-    Eigen::MatrixXd qBwd;
-    jacobian.setZero(3,listDriven.size());
+
+	// pertubation size (see http://www.maths.lth.se/na/courses/FMN081/FMN081-06/lecture7.pdf)
+    double delta = 1.0e-8;		// was 1.0e-9 - can improve this (adaptive?)
+
+	// set up the variables
+    Eigen::VectorXd q0;						// operating point
+    Eigen::VectorXd qd;						// perturbed vector
+    Eigen::Matrix<double, 6, 1> poseFwd;	// forward perturbation result
+	Eigen::Matrix<double, 6, 1> poseBwd;	// backward perturbation result
+
+	// initialize the jacobian
+    jacobian.setZero(6,m_listDriven.size());
+
+	// intialize the configuration
     this->getConfiguration(q0);
-    for (size_t k = 0; k < listDriven.size(); k++) {
+
+	// step through each driven variable
+    for (size_t k = 0; k < m_listDriven.size(); k++) {
+
+		// set the configuration operating point
         qd.setZero(q0.size(),1);
+
+		// define which free variable is being perturbed
         qd(k) = delta;
+
+		// perturb forward
         this->setConfiguration(q0+qd);
-        this->getForwardKinematics(qFwd);
+		this->getToolFrame(toolIndex, *this->m_tipFrame);
+		this->m_tipFrame->getPose(mode, poseFwd);
+        // this->getForwardKinematics(fkFwd);
+
+		// perturb backward
         this->setConfiguration(q0-qd);
-        this->getForwardKinematics(qBwd);
-        jacobian.col(k) = (qFwd.rightCols(1)-qBwd.rightCols(1))/(2.0*delta);
+		this->getToolFrame(toolIndex, *this->m_tipFrame);
+		this->m_tipFrame->getPose(mode, poseBwd);
+        // this->getForwardKinematics(fkBwd);
+
+		// central difference
+		jacobian.col(k) = (poseFwd - poseBwd) / (2.0*delta);
+        // jacobian.col(k) = (fkFwd.rightCols(1)- fkBwd.rightCols(1))/(2.0*delta);
     }
     this->setConfiguration(q0);
+
+	// zero out the m_tipFrame
+	this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(), Eigen::Vector3d::Zero());
 }
 
     
@@ -156,7 +202,7 @@ void CRManipulator::getJacobian(Eigen::MatrixXd &jacobian)
 //---------------------------------------------------------------------
 void CRManipulator::getNumberOfLinks(int &n)
 {
-    n = (int)listParents.size();
+    n = (int)m_listParents.size();
 }
     
     
@@ -170,7 +216,40 @@ void CRManipulator::getNumberOfLinks(int &n)
 //---------------------------------------------------------------------
 void CRManipulator::getDegreesOfFreedom(int &dof)
 {
-    dof = (int)listDriven.size();
+    dof = (int)m_listDriven.size();
+}
+
+
+
+//=====================================================================
+/*!
+This method returns a tool frame for the current robot pose.  Note that
+a tool must have been added to the manipulator using the 
+CRManipulator::addTool method prior to calling this method.\n
+
+\param[in] toolIndex - index of the tool to query
+\param[out] tool - the tool frame transformation referenced to the
+robot base frame for the current manipulator configuration
+*/
+//---------------------------------------------------------------------
+void CRManipulator::getToolFrame(unsigned toolIndex, CRFrame &tool)
+{
+	Eigen::Matrix4d T, T0;
+
+	// return the transformation
+	this->m_listToolFrames.at(toolIndex)->getTransformToParent(T);
+
+	// now iterate back to the base frame
+	int i = this->m_listToolParents.at(toolIndex);
+	while (i > -1) {
+
+		this->m_listLinks.at(i)->frame->getTransformToParent(T0);
+		T = T0*T;
+		i = m_listParents.at(i);
+	}
+
+	// tool.setRotationAndTranslation(rot, trans);
+	tool.setRotationAndTranslation(T.block(0, 0, 3, 3), T.block(0, 3, 3, 1));
 }
 
     
@@ -188,16 +267,46 @@ void CRManipulator::addLink(CoreRobotics::CRRigidBody* link)
     this->getNumberOfLinks(n);
     this->getDegreesOfFreedom(dof);
     
-    // add the link to the listLinks member
-    listLinks.push_back(link);
+    // add the link to the m_listLinks member
+    m_listLinks.push_back(link);
     
     // add the parent integer
-    listParents.push_back(n-1);
+    m_listParents.push_back(n-1);
     
     // add the driven integer (if it is driven)
     if (link->frame->isDriven()) {
-        listDriven.push_back(n);
+        m_listDriven.push_back(n);
     }
+}
+
+
+
+//=====================================================================
+/*!
+This method adds a frame to the list of tools. \n
+
+\param[in] parentIndex - the index of the parent frame to which the
+supplied tool frame is referenced.
+\param[in] tool - a CRFrame object containing the frame transformation 
+to the specified parent link.
+\return - returns true if the tool was set, returns a false if it was 
+not set due to an invalid parentIndex
+*/
+//---------------------------------------------------------------------
+bool CRManipulator::addTool(unsigned parentIndex, CRFrame* tool)
+{
+	// get the number of links
+	int n;
+	this->getNumberOfLinks(n);
+
+	// add the parent integer
+	if (parentIndex > unsigned(n-1)) {
+		return false;
+	} else {
+		m_listToolFrames.push_back(tool);
+		m_listToolParents.push_back(parentIndex);
+		return true;
+	}
 }
 
 

@@ -107,6 +107,16 @@ namespace CoreRobotics {
  \endcode
  */
 //=====================================================================
+//! Enumerator for specifying thread priority
+enum CRThreadPriority {
+	CR_PRIORITY_LOWEST,
+	CR_PRIORITY_LOW,
+	CR_PRIORITY_NORMAL,
+	CR_PRIORITY_HIGH,
+	CR_PRIORITY_HIGHEST
+};
+
+//=====================================================================
 class CRThread {
     
 //---------------------------------------------------------------------
@@ -115,6 +125,7 @@ public:
     
     //! Class constructor
     CRThread();
+	CRThread(CRThreadPriority priority);
     
     //! Class destructor
     virtual ~CRThread();
@@ -126,6 +137,9 @@ public:
     
     //! Set the thread callback function
     void setCallback(void(callbackFunction)());
+
+	//! Set the thread priority
+	void setPriority(CRThreadPriority priority);
     
     //! Start the thread
     void start();

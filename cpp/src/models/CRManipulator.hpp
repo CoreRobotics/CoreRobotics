@@ -74,13 +74,17 @@ namespace CoreRobotics {
  These methods are used to build the manipulator:
  - CRManipulator::addLink adds a link to the kinematic chain.  Note that
  as of now, only serial manipulators are supported.
- - CRManipulator::mode is member that sets how the manipulator is
- driven.  Available options are in CoreRobotics::CRManipulatorType.
+ - CRManipulator::addTool adds a tool to the chain relative to a link
+ frame in the kinematic chain
+ - CRManipulator::setModelType sets how the manipulator is driven.
+ Available options are in CoreRobotics::CRManipulatorType.
  
  These methods operate on the configuration space (i.e. joint space) 
  of the robot:
  - CRManipulator::getConfiguration outputs the vector of configuration
  values (i.e. joint angles for purely revolute joints).
+ - CRManipulator::getToolFrame returns the specified tool frame for the
+ current manipulator configuration.
  - CRManipulator::setConfiguration sets the configuration of the 
  manipulator.
  
@@ -88,80 +92,95 @@ namespace CoreRobotics {
  - CRManipulator::getForwardKinematics returns a matrix of the Euclidean
  poses at each frame (starting with the base frame and moving out to the
  tool frame) for the current configuration.
- - CRManipulator::getJacobian returns the tool space (last frame) 
- Jacobian matrix that maps joint velocities to tool velocities for the 
- current configuration.
+ - CRManipulator::getJacobian returns the Jacobian for a specified tool.
  
  \section Example
  This example creates a CRManipulator class.
+
  \code
  
  #include "CoreRobotics.hpp"
  #include <stdio>
  
- const double CR_PI = 3.1415926535897932384626433832795;
- 
  using namespace CoreRobotics;
  
- void main(void) {
- 
-    CRManipulator MyRobot;
+ main() {
 
-    // create a couple of rigid body links
-    CRFrameEuler* F0 = new CRFrameEuler();
-    CRFrameEuler* F1 = new CRFrameEuler();
-    CRFrameEuler* F2 = new CRFrameEuler();
-    CRRigidBody* Link0 = new CRRigidBody();
-    CRRigidBody* Link1 = new CRRigidBody();
-    CRRigidBody* Link2 = new CRRigidBody();
+	// ------------------------------------------
+	// Create a new robot
+	CRManipulator MyRobot;
+
+	// create a couple of rigid body links and add them to the manipulator
+	CRFrameEuler* F0 = new CRFrameEuler();
+	CRFrameEuler* F1 = new CRFrameEuler();
+	CRFrameEuler* F2 = new CRFrameEuler();
+	CRRigidBody* Link0 = new CRRigidBody();
+	CRRigidBody* Link1 = new CRRigidBody();
+	CRRigidBody* Link2 = new CRRigidBody();
+
+	// Set info for Link 0 and add to MyRobot
+	F0->freeVar = CR_EULER_FREE_ANG_G;
+	F0->setMode(CR_EULER_MODE_XYZ);
+	F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
+	Link0->frame = F0;
+	MyRobot.addLink(Link0);
+
+	// Set info for Link 1 and add to MyRobot
+	F1->freeVar = CR_EULER_FREE_ANG_G;
+	F1->setMode(CR_EULER_MODE_XYZ);
+	F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
+	Link1->frame = F1;
+	MyRobot.addLink(Link1);
+
+	// Set info for Link 2 and add to MyRobot
+	F2->freeVar = CR_EULER_FREE_NONE;
+	F2->setMode(CR_EULER_MODE_XYZ);
+	F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
+	Link2->frame = F2;
+	MyRobot.addLink(Link2);
 
 
-    // Set info for Link 0 and add to MyRobot
-    F0->freeVar = CR_EULER_FREE_ANG_G;
-    F0->setMode(CR_EULER_MODE_XYZ);
-    F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
-    Link0->frame = F0;
-    MyRobot.addLink(Link0);
-
-    // Set info for Link 1 and add to MyRobot
-    F1->freeVar = CR_EULER_FREE_ANG_G;
-    F1->setMode(CR_EULER_MODE_XYZ);
-    F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
-    Link1->frame = F1;
-    MyRobot.addLink(Link1);
-
-    // Set info for Link 2 and add to MyRobot
-    F2->freeVar = CR_EULER_FREE_NONE;
-    F2->setMode(CR_EULER_MODE_XYZ);
-    F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
-    Link2->frame = F2;
-    MyRobot.addLink(Link2);
+	// create a tool frame and add to MyRobot
+	CRFrameEuler* Tool = new CRFrameEuler();
+	Tool->setMode(CR_EULER_MODE_XYZ);
+	Tool->setPositionAndOrientation(0, 0, 0, 0, 0, 0);
+	MyRobot.addTool(2, Tool);
 
 
-    // Now get the configuration values
-    int dof;
-    Eigen::VectorXd jointAngles;
-    MyRobot.getDegreesOfFreedom(dof);
-    MyRobot.getConfiguration(jointAngles);
-    std::cout << "MyRobot has " << dof << " DOF, with joint angles = ("
-    << jointAngles.transpose() << ") rad" << std::endl;
+	// ------------------------------------------
+	// Try out some of the methods available to the manipulator
+	
+	// Get the configuration values
+	int dof;
+	Eigen::VectorXd jointAngles;
+	MyRobot.getDegreesOfFreedom(dof);
+	MyRobot.getConfiguration(jointAngles);
+	std::cout << "MyRobot has " << dof << " DOF, with joint angles = ("
+		<< jointAngles.transpose() << ") rad" << std::endl;
 
-    // Now get the Forward Kinematics and Jacobian
-    Eigen::MatrixXd Jacobian, FwdKin;
-    MyRobot.getForwardKinematics(FwdKin);
-    MyRobot.getJacobian(Jacobian);
-    std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
-    std::cout << "Jacobian = \n" << Jacobian << std::endl;
+	// Now get the Forward Kinematics and Jacobian
+	Eigen::MatrixXd Jacobian, FwdKin;
+	MyRobot.getForwardKinematics(FwdKin);
+	MyRobot.getJacobian(0, CR_EULER_MODE_XYZ, Jacobian);
+	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
+	std::cout << "Jacobian = \n" << Jacobian << std::endl;
 
-    // now set a new robot configuration and get the FK and jacobian
-    jointAngles << CR_PI/4.0, -CR_PI/4.0;
-    std::cout << "Set joint angles = ("
-    << jointAngles.transpose() << ") rad" << std::endl;
-    MyRobot.setConfiguration(jointAngles);
-    MyRobot.getForwardKinematics(FwdKin);
-    MyRobot.getJacobian(Jacobian);
-    std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
-    std::cout << "Jacobian = \n" << Jacobian << std::endl;
+	// now set a new robot configuration and get the FK and jacobian
+	jointAngles << CoreRobotics::PI / 4.0, -CoreRobotics::PI / 2.0;
+	std::cout << "Set joint angles = ("
+		<< jointAngles.transpose() << ") rad" << std::endl;
+	MyRobot.setConfiguration(jointAngles);
+	MyRobot.getForwardKinematics(FwdKin);
+	MyRobot.getJacobian(0, CR_EULER_MODE_XYZ, Jacobian);
+	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
+	std::cout << "Jacobian = \n" << Jacobian << std::endl;
+
+	// now get the transformation to the tool for the current configuration
+	Eigen::Matrix4d T;
+	CRFrame toolFrame;
+	MyRobot.getToolFrame(0, toolFrame);
+	toolFrame.getTransformToParent(T);
+	std::cout << "MyRobot tool has a transformation of \n" << T << std::endl;
  
  }
  
@@ -192,6 +211,7 @@ class CRManipulator {
 public:
     
     //! Class constructor
+	CRManipulator(CRManipulatorType type);
     CRManipulator();
     
 //---------------------------------------------------------------------
@@ -208,40 +228,54 @@ public:
     void getForwardKinematics(Eigen::MatrixXd &y);
     
     //! Get the instantaneous numerical Jacobian
-    void getJacobian(Eigen::MatrixXd &jacobian);
+	void getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::MatrixXd &jacobian);
     
     //! Get the number of links in the list
     void getNumberOfLinks(int &n);
     
     //! Get the number of driven links (degrees of freedom: DOF)
     void getDegreesOfFreedom(int &dof);
+
+	//! Get tool frame for the current manipulator configuration
+	void getToolFrame(unsigned toolIndex, CRFrame &tool);
+
+	//! Set the model type
+	void setModelType(CRManipulatorType type) { this->m_modelType = type; }
     
 //---------------------------------------------------------------------
-// Public Methods
+// Add link/tool Methods
 public:
     
     //! Add a link to the kinematic structure
     void addLink(CoreRobotics::CRRigidBody* link);
-    
-//---------------------------------------------------------------------
-// Public Members
-public:
-    
-    //! Define the manipulator type
-    CRManipulatorType mode;
+
+	//! Add a tool to the manipulator
+	bool addTool(unsigned parentIndex, CRFrame* tool);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
+
+	//! Define the manipulator type specifying the dynamics model
+	CRManipulatorType m_modelType;
     
     //! List of the links in the manipulator
-    std::vector<CoreRobotics::CRRigidBody*> listLinks;
+    std::vector<CoreRobotics::CRRigidBody*> m_listLinks;
     
     //! List of the link parent indices
-    std::vector<int> listParents;
+    std::vector<int> m_listParents;
     
     //! List of the driven link indices
-    std::vector<int> listDriven;
+    std::vector<int> m_listDriven;
+
+	//! List of tool frames
+	std::vector<CoreRobotics::CRFrame*> m_listToolFrames;
+
+	//! List of tool parents
+	std::vector<int> m_listToolParents;
+
+	//! Arbitrary frame for computing tip position
+	CoreRobotics::CRFrame* m_tipFrame;
     
 };
 

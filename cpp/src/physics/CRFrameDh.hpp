@@ -34,7 +34,7 @@
  
  \project CoreRobotics Project
  \url     www.corerobotics.org
- \author  Parker Owan
+ \author  Parker Owan, Tony Piaskowy
  \version 0.0
  
  */
@@ -72,7 +72,8 @@ namespace CoreRobotics {
  \section Description
  CRFrameDh implements a DH parameter transformation specified by 4 
  parameters (<a href="wikipedia.org/wiki/Denavit–Hartenberg_parameters">
- see Wikipedia article).</a>
+ see Wikipedia article).</a> With an additional 5th paramter for constant 
+ offsets for the driven variable.
  
  Properties of the transform can be set with methods
  - CRFrameDh::setParameters sets the DH parameter values.
@@ -92,7 +93,7 @@ namespace CoreRobotics {
  main() {
     CoreRobotics::CRFrameDh Frame;
 
-    Frame.setParameters(0.1, 0.0, 2.1, 0.7);
+    Frame.setParameters(0.1, 0.0, 2.1, 0.7, 3.1415/2.0);
 
     Eigen::Matrix4d T;
     Frame.getTransformToParent(T);
@@ -142,7 +143,7 @@ class CRFrameDh : public CRFrame  {
 public:
 
     //! Class constructor
-    CRFrameDh(double r, double alpha, double d, double theta,
+    CRFrameDh(double r, double alpha, double d, double theta, double offset,
               CRDhMode mode, CRDhFreeVariable free);
     CRFrameDh();
 
@@ -163,10 +164,10 @@ public:
     void getMode(CRDhMode &mode);
     
     //! Set the DH parameter values
-    void setParameters(double r, double alpha, double d, double theta);
+    void setParameters(double r, double alpha, double d, double theta, double offset);
     
-    //! Get the x position
-    void getParameters(double &r, double &alpha, double &d, double &theta);
+    //! Get the DH parameter values
+    void getParameters(double &r, double &alpha, double &d, double &theta, double &offset);
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -200,6 +201,9 @@ private:
     
     //! theta angle parameter [rad]
     double dh_theta;
+
+	//! free variable offset parameter [m] or [rad]
+	double freeVarOffset;
     
 //---------------------------------------------------------------------
 // Private Methods
