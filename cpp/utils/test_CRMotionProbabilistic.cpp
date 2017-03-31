@@ -40,41 +40,76 @@
  */
 //=====================================================================
 
+
 #include <iostream>
-#include "CRTestModules.hpp"
 #include "CoreRobotics.hpp"
 
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
-using namespace std;
+CRNoiseGaussian* dynNoise;
 
-
-int main(int argc, const char * argv[]) {
-    
-    cout << "Running the CoreRobotics test suite." << endl;
-    
-    // Run the core test
-    //CRTestCore();
-    
-    // Run the math test
-    //CRTestMath();
-    
-    // Run the model test
-    // CRTestModels();
-    
-    // Test the noise models
-    test_CRNoiseModel();
-    test_CRNoiseGaussian();
-    test_CRNoiseDirac();
-    test_CRNoiseUniform();
-    test_CRNoiseMixture();
-    
-    // Test the sensor models
-    test_CRSensorModel();
-    test_CRSensorProbabilistic();
-    
-    // Test the motion models
-    test_CRMotionModel();
-    test_CRMotionProbabilistic();
-    
-    return 0;
+// -------------------------------------------------------------
+// Declare a probabilistic continuous motion model - xdot = fcn(x,u,t,s)
+Eigen::VectorXd probDynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t, bool sample){
+    Eigen::VectorXd w(1);
+    if (sample){
+        w = dynNoise->sample();
+    } else {
+        w << 0;
+    }
+    return -x + u + w;  // motion
 }
+
+
+// -------------------------------------------------------------
+void test_CRMotionProbabilistic(void){
+    
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of CRMotionProbabilistic.\n";
+    
+    
+    // initialize a state vector
+    Eigen::VectorXd x(1);
+    x << 10;
+    
+    
+    // initialize the noise model with a mean and covariance
+    Eigen::MatrixXd cov(1,1);
+    cov << 1;
+    Eigen::VectorXd mean(1);
+    mean << 0;
+    dynNoise = new CRNoiseGaussian(cov, mean);
+    
+    
+    // initialize a deterministic sensor model
+    CRMotionProbabilistic model = CRMotionProbabilistic(*probDynFcn,CR_MOTION_CONTINUOUS,x,0.2);
+    
+    
+    // initialize an input and set it to zero
+    Eigen::VectorXd u(1);
+    u << 0;
+    
+    // Initialize a time t
+    double t = 0;
+    
+    // loop
+    printf("Time (s) | State\n");
+    while(t <= 5) {
+        
+        // output the time and state
+        printf("%5.1f    | %5.2f\n",t,x(0));
+        
+        // step at t = 2.5
+        if (t >= 2.5){
+            u << 10;
+        }
+        
+        // get next state (with noise) & time
+        x = model.motion(u, true);
+        t = model.getTime();
+    }
+    printf("%5.1f    | %5.2f\n",t,x(0));
+    
+}
+// -------------------------------------------------------------

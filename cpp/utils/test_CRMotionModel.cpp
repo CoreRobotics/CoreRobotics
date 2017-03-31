@@ -50,7 +50,7 @@ using namespace CoreRobotics;
 
 // -------------------------------------------------------------
 // Declare a continuous motion model - xdot = fcn(x,u,t)
-Eigen::VectorXd dynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t){
+Eigen::VectorXd detDynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t){
     return -x + u;  // motion
 }
 
@@ -68,7 +68,7 @@ void test_CRMotionModel(void){
     
     
     // initialize a deterministic sensor model
-    CRMotionModel model = CRMotionModel(*dynFcn,CR_MOTION_CONTINUOUS,x,0.2);
+    CRMotionModel model = CRMotionModel(*detDynFcn,CR_MOTION_CONTINUOUS,x,0.2);
     
     
     // initialize an input and set it to zero

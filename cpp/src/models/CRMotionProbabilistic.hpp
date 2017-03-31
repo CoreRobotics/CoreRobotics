@@ -40,12 +40,13 @@
  */
 //=====================================================================
 
-#ifndef CRSensorModel_hpp
-#define CRSensorModel_hpp
+#ifndef CRMotionProbabilistic_hpp
+#define CRMotionProbabilistic_hpp
 
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
+#include "CRMotionModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -53,35 +54,42 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRSensorModel.hpp
- \brief Implements a class that handles sensor models.
+ \file CRMotionProbabilistic.hpp
+ \brief Implements a class that handles probabilistic motion models.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRSensorModel
+ \class CRMotionProbabilistic
  \ingroup models
  
- \brief This class implements a sensor model.
+ \brief This class implements a probabilistic motion model.
  
  \details
  \section Description
- CRSensorModel implements a sensor model from a supplied observation
- callback function.  Specifically, CRSensorModel sets up a container
- for the model
+ CRMotionModel implements a motion model from a supplied dynamics
+ callback function.  Specifically, CRMotionModel sets up a container
+ for the continuous model
  
- \f$ z = h(x) \f$,
+ \f$ \dot{x} = f(x,u,t) \f$
  
- where \f$x\f$ is the state vector, and \f$z\f$ is the sensor 
- measurement vector.
+ or
  
- These methods are used to interface with the Sensor Model:
- - CRSensorModel::setState sets the underlying state vector.
- - CRSensorModel::getState outputs the state vector.
- - CRSensorModel::measurement computes a simulated measurement 
- vector (z) from the underlying state (x).
+ \f$ x_{k+1} = f(x_k,u_k,t_k) \f$
+ 
+ where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
+ \f$t\f$ is time, and \f$k\f$ is a discrete sampling index.
+ 
+ These methods are available for interfacing with the Motion Model:
+ - CRMotionModel::setState sets the underlying state vector.
+ - CRMotionModel::getState returns the state vector.
+ - CRMotionModel::setTimeStep sets the time step (s).
+ - CRMotionModel::getTimeStep returns the time step (s).
+ - CRMotionModel::gettime returns the simulation time (s).=
+ - CRMotionModel::motion computes a new state and updates the
+ internal value for an input (u).
  
  \section Example
- This example demonstrates use of the CRSensorModel class.
+ This example demonstrates use of the CRMotionModel class.
  \code
  
  #include <iostream>
@@ -92,9 +100,9 @@ namespace CoreRobotics {
  
  
  // -------------------------------------------------------------
- // Declare a deterministic model - fcn(x)
- Eigen::VectorXd detPredFcn(Eigen::VectorXd x){
-     return x;  // observation (z = x)
+ // Declare a continuous motion model - xdot = fcn(x,u,t)
+ Eigen::VectorXd dynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t){
+     return -x + u;  // motion
  }
  
  
@@ -102,22 +110,42 @@ namespace CoreRobotics {
  void main(void){
  
      std::cout << "*************************************\n";
-     std::cout << "Demonstration of CRSensorModel.\n";
+     std::cout << "Demonstration of CRMotionModel.\n";
      
      
      // initialize a state vector
-     Eigen::VectorXd x0(1);
-     x0 << 5;
+     Eigen::VectorXd x(1);
+     x << 10;
      
      
      // initialize a deterministic sensor model
-     CRSensorModel sensor = CRSensorModel(*detPredFcn,x0);
+     CRMotionModel model = CRMotionModel(*dynFcn,CR_MOTION_CONTINUOUS,x,0.2);
      
      
-     // initialize a sensor prediction vector
-     Eigen::VectorXd zPredict(1);
-     zPredict = sensor.measurement();
-     std::cout << "Predicted measurement = " << zPredict << std::endl;
+     // initialize an input and set it to zero
+     Eigen::VectorXd u(1);
+     u << 0;
+     
+     // Initialize a time t
+     double t = 0;
+     
+     // loop
+     printf("Time (s) | State\n");
+     while(t <= 5) {
+     
+         // output the time and state
+         printf("%5.1f    | %5.2f\n",t,x(0));
+         
+         // step at t = 2.5
+         if (t >= 2.5){
+             u << 10;
+         }
+         
+         // get next state & time
+         x = model.motion(u);
+         t = model.getTime();
+     }
+     printf("%5.1f    | %5.2f\n",t,x(0));
  
  }
  // -------------------------------------------------------------
@@ -132,43 +160,52 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-class CRSensorModel {
+class CRMotionProbabilistic : public CRMotionModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
-                  Eigen::VectorXd in_x0);
-    CRSensorModel();
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
-public:
-    
-    //! Set the state vector (x)
-    void setState(Eigen::VectorXd in_x) {this->m_state = in_x;}
-    
-    //! Get the state vector (x)
-    Eigen::VectorXd getState(void) {return this->m_state;}
+    CRMotionProbabilistic(Eigen::VectorXd(in_dynamics)(Eigen::VectorXd,
+                                                       Eigen::VectorXd,
+                                                       double,
+                                                       bool),
+                          CRMotionModelType in_type,
+                          Eigen::VectorXd in_x0,
+                          double in_timeStep);
+    CRMotionProbabilistic();
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
-    //! Simulate the measurement
-    Eigen::VectorXd measurement(void);
+    //! Simulate the motion
+    Eigen::VectorXd motion(Eigen::VectorXd in_u, bool sampleNoise);
+    
+    Eigen::VectorXd motion(Eigen::VectorXd in_u);
+    
+//---------------------------------------------------------------------
+// Protected Methods
+protected:
+    
+    //! A Runge-Kutta solver on the dynFcn
+    Eigen::VectorXd rk4step(Eigen::VectorXd in_x,
+                            Eigen::VectorXd in_u,
+                            double in_t,
+                            double in_dt,
+                            bool in_sample);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
-    //! Underlying state of the system
-    Eigen::VectorXd m_state;
-    
-    //! Callback to the deterministic predictor function z = h(x)
-    Eigen::VectorXd(*m_measPredictFcn)(Eigen::VectorXd);
+    //! Callback to the dynamic model function \dot{x} = f(x,u,t,w) or
+    //! x_kp1 = f(x_k,u_k,t_k,w_k) depending on what the type is set to.
+    Eigen::VectorXd(*m_dynPredictFcn)(Eigen::VectorXd,
+                                      Eigen::VectorXd,
+                                      double,
+                                      bool);
     
 };
 

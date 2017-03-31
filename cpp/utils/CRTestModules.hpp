@@ -61,6 +61,7 @@ void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
 
 // Motion model tests
 void test_CRMotionModel(void);          // test CRMotionModel
+void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
 
 
 #endif /* CRTestModules_hpp */

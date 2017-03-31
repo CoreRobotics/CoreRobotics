@@ -48,7 +48,7 @@
 using namespace CoreRobotics;
 
 // Create a global noise model
-CRNoiseGaussian* noise;
+CRNoiseGaussian* measNoise;
 
 
 // -------------------------------------------------------------
@@ -57,7 +57,7 @@ Eigen::VectorXd probPredFcn(Eigen::VectorXd x,
                             bool sample){
     Eigen::VectorXd v(1);
     if (sample){
-        v = noise->sample();
+        v = measNoise->sample();
     } else {
         v << 0;
     }
@@ -71,8 +71,8 @@ double probLikFcn(Eigen::VectorXd zObserved,
 
     Eigen::MatrixXd cov(1,1);
     cov << 1;
-    noise->setParameters(cov, zPredict);
-    return noise->probability(zObserved);
+    measNoise->setParameters(cov, zPredict);
+    return measNoise->probability(zObserved);
 }
 
 
@@ -87,7 +87,7 @@ void test_CRSensorProbabilistic(void){
     cov << 1;
     Eigen::VectorXd mean(1);
     mean << 0;
-    noise = new CRNoiseGaussian(cov, mean);
+    measNoise = new CRNoiseGaussian(cov, mean);
     
     
     // initialize a state vector
