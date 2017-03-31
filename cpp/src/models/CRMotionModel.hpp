@@ -78,14 +78,12 @@ namespace CoreRobotics {
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
  \f$t\f$ is time, and \f$k\f$ is a discrete sampling index.
  
- These methods are used to access internal states:
+ These methods are available for interfacing with the Motion Model:
  - CRMotionModel::setState sets the underlying state vector.
  - CRMotionModel::getState returns the state vector.
  - CRMotionModel::setTimeStep sets the time step (s).
  - CRMotionModel::getTimeStep returns the time step (s).
- - CRMotionModel::gettime returns the simulation time (s).
- 
- These methods simulate motion:
+ - CRMotionModel::gettime returns the simulation time (s).=
  - CRMotionModel::motion computes a new state and updates the
  internal value for an input (u).
  
@@ -212,8 +210,8 @@ public:
     //! Simulate the motion
     Eigen::VectorXd motion(Eigen::VectorXd in_u);
     
-    //---------------------------------------------------------------------
-    // Protected Methods
+//---------------------------------------------------------------------
+// Protected Methods
 protected:
     
     //! A Runge-Kutta solver on the dynFcn
@@ -222,8 +220,8 @@ protected:
                             double in_t,
                             double in_dt);
     
-    //---------------------------------------------------------------------
-    // Protected Members
+//---------------------------------------------------------------------
+// Protected Members
 protected:
     
     //! Dynamic model function callback type
@@ -240,9 +238,9 @@ protected:
     
     //! Callback to the dynamic model function \dot{x} = f(x,u,t) or
     //! x_kp1 = f(x_k,u_k,t_k) depending on what the type is set to.
-    Eigen::VectorXd(*m_dynFcn)(Eigen::VectorXd,
-                               Eigen::VectorXd,
-                               double);
+    Eigen::VectorXd(*m_dynPredictFcn)(Eigen::VectorXd,
+                                      Eigen::VectorXd,
+                                      double);
     
 };
 

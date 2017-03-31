@@ -88,7 +88,7 @@ CRMotionModel::CRMotionModel(Eigen::VectorXd(in_dynamics)(Eigen::VectorXd,
                              double in_timeStep)
 {
     this->m_time = 0;
-    this->m_dynFcn = in_dynamics;
+    this->m_dynPredictFcn = in_dynamics;
     this->m_type = in_type;
     this->setTimeStep(in_timeStep);
     this->setState(in_x0);
@@ -121,7 +121,7 @@ Eigen::VectorXd CRMotionModel::motion(Eigen::VectorXd in_u)
     
     if (this->m_type == CR_MOTION_DISCRETE) {
         // update the state
-        this->m_state = (this->m_dynFcn)(this->m_state,in_u,t);
+        this->m_state = (this->m_dynPredictFcn)(this->m_state,in_u,t);
         
     } else if (this->m_type == CR_MOTION_CONTINUOUS) {
         // update the state
@@ -139,6 +139,12 @@ Eigen::VectorXd CRMotionModel::motion(Eigen::VectorXd in_u)
 //=====================================================================
 /*!
  This method performs a Runge Kutta step on the dynFcn member.\n
+ 
+ \param[in] in_x - state x(k)
+ \param[in] in_u - input u(k)
+ \param[in] in_t - time t(k)
+ \param[in] in_dt - sample rate dt
+ \return - the next state x(k+1)
  */
 //---------------------------------------------------------------------
 Eigen::VectorXd CRMotionModel::rk4step(Eigen::VectorXd in_x,
@@ -147,10 +153,10 @@ Eigen::VectorXd CRMotionModel::rk4step(Eigen::VectorXd in_x,
                                        double in_dt)
 {
     // RK4 step
-    Eigen::VectorXd f1 = (this->m_dynFcn)(in_x,in_u,in_t);
-    Eigen::VectorXd f2 = (this->m_dynFcn)(in_x+in_dt*f1/2,in_u,in_t+in_dt/2);
-    Eigen::VectorXd f3 = (this->m_dynFcn)(in_x+in_dt*f2/2,in_u,in_t+in_dt/2);
-    Eigen::VectorXd f4 = (this->m_dynFcn)(in_x+in_dt*f3,in_u,in_t+in_dt);
+    Eigen::VectorXd f1 = (this->m_dynPredictFcn)(in_x,in_u,in_t);
+    Eigen::VectorXd f2 = (this->m_dynPredictFcn)(in_x+in_dt*f1/2,in_u,in_t+in_dt/2);
+    Eigen::VectorXd f3 = (this->m_dynPredictFcn)(in_x+in_dt*f2/2,in_u,in_t+in_dt/2);
+    Eigen::VectorXd f4 = (this->m_dynPredictFcn)(in_x+in_dt*f3,in_u,in_t+in_dt);
     return in_x + in_dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
 

@@ -74,11 +74,9 @@ namespace CoreRobotics {
  where \f$x\f$ is the state vector, and \f$z\f$ is the sensor 
  measurement vector.
  
- These methods are used to access the state:
+ These methods are used to interface with the Sensor Model:
  - CRSensorModel::setState sets the underlying state vector.
  - CRSensorModel::getState outputs the state vector.
- 
- These methods simulate sensor measurements:
  - CRSensorModel::measurement computes a simulated measurement 
  vector (z) from the underlying state (x).
  
@@ -170,7 +168,7 @@ protected:
     Eigen::VectorXd m_state;
     
     //! Callback to the deterministic predictor function z = h(x)
-    Eigen::VectorXd(*m_measFcn)(Eigen::VectorXd);
+    Eigen::VectorXd(*m_measPredictFcn)(Eigen::VectorXd);
     
 };
 

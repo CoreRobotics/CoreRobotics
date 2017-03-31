@@ -82,11 +82,9 @@ namespace CoreRobotics {
  must be specified to return the probability of observing a measurement
  \f$z\f$ given the current state \f$x\f$.
  
- These methods are used to access the state:
+ These methods are used to interface with the Probabilistic Sensor Model:
  - CRSensorProbabilistic::setState sets the underlying state vector.
  - CRSensorProbabilistic::getState outputs the state vector.
- 
- These methods simulate sensor measurements and probabilities:
  - CRSensorProbabilistic::measurement computes a simulated measurement
  vector (z) from the underlying state (x).
  - CRSensorProbabilistic::likelihood computes the probability of 
@@ -217,12 +215,12 @@ public:
 protected:
     
     //! Callback to the probabilistic predictor function z = h(x,v)
-    Eigen::VectorXd(*m_measFcn)(Eigen::VectorXd,
-                                bool);
+    Eigen::VectorXd(*m_measPredictFcn)(Eigen::VectorXd,
+                                       bool);
     
     //! Callback to the probabilistic likelihood function p(zObserved|h(x))
-    double(*m_likFcn)(Eigen::VectorXd,
-                      Eigen::VectorXd);
+    double(*m_measLikelihoodFcn)(Eigen::VectorXd,
+                                 Eigen::VectorXd);
     
 };
 

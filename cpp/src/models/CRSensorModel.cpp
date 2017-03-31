@@ -71,7 +71,7 @@ namespace CoreRobotics {
 CRSensorModel::CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
                              Eigen::VectorXd in_x0)
 {
-    this->m_measFcn = in_predictor;
+    this->m_measPredictFcn = in_predictor;
     this->setState(in_x0);
 }
 
@@ -89,7 +89,7 @@ CRSensorModel::CRSensorModel() { }
 //---------------------------------------------------------------------
 Eigen::VectorXd CRSensorModel::measurement(void)
 {
-    return (this->m_measFcn)(this->m_state);
+    return (this->m_measPredictFcn)(this->m_state);
 }
 
 
