@@ -206,29 +206,52 @@ void CRManipulator::getJacobian(unsigned toolIndex,
                                 Eigen::MatrixXd &jacobian)
 {
     
-    // Get the number of true elements in the pose vector
+    // Get the number of true elements in the pose vector & size the output
     int m = poseElements.cast<int>().sum();
-    std::cout << "m = " << m << std::endl;
     
-    // return the jacobian (using default overload)
-    Eigen::MatrixXd j;
-    this->getJacobian(toolIndex, mode, j);
+    // pertubation size (see http://www.maths.lth.se/na/courses/FMN081/FMN081-06/lecture7.pdf)
+    double delta = 1.0e-8;		// was 1.0e-9 - can improve this (adaptive?)
     
-    // use a sparse premultiplier matrix
-    Eigen::MatrixXd mult;
-    mult.setZero(m, 6);
+    // set up the variables
+    Eigen::VectorXd q0;						// operating point
+    Eigen::VectorXd qd;						// perturbed vector
+    Eigen::VectorXd poseFwd;	// forward perturbation result
+    Eigen::VectorXd poseBwd;	// backward perturbation result
     
-    // TODO: this could be faster
-    int row = 0;
-    for (int col=0; col < 6; col++){
-        if( poseElements(col) ){
-            mult(row,col) = 1;
-            row++;
-        }
+    // initialize the jacobian
+    jacobian.setZero(m,m_listDriven.size());
+    
+    // intialize the configuration
+    this->getConfiguration(q0);
+    
+    // step through each driven variable
+    for (size_t k = 0; k < m_listDriven.size(); k++) {
+        
+        // set the configuration operating point
+        qd.setZero(q0.size(),1);
+        
+        // define which free variable is being perturbed
+        qd(k) = delta;
+        
+        // perturb forward
+        this->setConfiguration(q0+qd);
+        this->getToolFrame(toolIndex, *this->m_tipFrame);
+        this->m_tipFrame->getPose(mode, poseElements, poseFwd);
+        
+        // perturb backward
+        this->setConfiguration(q0-qd);
+        this->getToolFrame(toolIndex, *this->m_tipFrame);
+        this->m_tipFrame->getPose(mode, poseElements, poseBwd);
+        
+        // central difference
+        jacobian.col(k) = (poseFwd - poseBwd) / (2.0*delta);
     }
+    this->setConfiguration(q0);
     
-    // now pre-multiply
-    jacobian = mult * j;
+    // zero out the m_tipFrame
+    this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(),
+                                                Eigen::Vector3d::Zero());
+    
 }
     
     
