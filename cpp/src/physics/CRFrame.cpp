@@ -503,10 +503,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
 This method returns a vector of the position and orientation.
 
 \param[in]  mode - the Euler mode enumerator
-\param[out] pose - vector of the pose (x, y, z, a, b, g)^T
+\param[in]  poseElements - [optional] a boolean vector indiciating which 
+                           elements of the pose vector to return
+\param[out] pose - vector of the pose (x, y, z, a, b, g)^T OR the vector
+                   specified by the poseElements
 */
 //---------------------------------------------------------------------
-void CRFrame::getPose(CREulerMode mode, Eigen::Matrix<double, 6, 1> &pose)
+void CRFrame::getPose(CREulerMode mode,
+                      Eigen::Matrix<double, 6, 1> &pose)
 {
 
 	Eigen::Vector3d pos = this->translation;
@@ -515,6 +519,29 @@ void CRFrame::getPose(CREulerMode mode, Eigen::Matrix<double, 6, 1> &pose)
 
 	pose << pos(0), pos(1), pos(2), theta(0), theta(1), theta(2);
 
+}
+    
+void CRFrame::getPose(CREulerMode mode,
+                      Eigen::Matrix<bool, 6, 1> poseElements,
+                      Eigen::VectorXd &pose)
+{
+    // TODO: this whole thing could be faster
+    // use overload above to return the full pose vector
+    Eigen::Matrix<double, 6, 1> v;
+    this->getPose(mode, v);
+    
+    // Get the number of true elements in the pose vector & size the output
+    int m = poseElements.cast<int>().sum();
+    pose.resize(m);
+    
+    // Now push into the pose vector
+    int elem = 0;
+    for (int row = 0; row < 6; row++){
+        if (poseElements(row)){
+            pose(elem) = v(row);
+            elem++;
+        };
+    }
 }
 
 
