@@ -86,7 +86,7 @@ namespace CoreRobotics {
     CoreRobotics::CRRigidBody Link;
     CoreRobotics::CRFrame* Frame = new CoreRobotics::CRFrame();
 
-    Link.frame = Frame;
+    Link.setFrame(Frame);
  }
  
  \endcode
@@ -103,17 +103,25 @@ class CRRigidBody {
 public:
     
     //! Class constructor
+    CRRigidBody(CRFrame* in_frame);
     CRRigidBody();
     
     //! Class destructor
     // virtual ~CRRigidBody() = 0;
     
 //---------------------------------------------------------------------
+// Get/Set Methods
+public:
+    
+    //! Sets the pointer to the frame class for the transformation
+    void setFrame(CRFrame* in_frame) {this->m_frame = in_frame;}
+    
+//---------------------------------------------------------------------
 // Public Members
 public:
     
     //! Pointer to the rigid body frame transformation
-    CoreRobotics::CRFrame* frame;
+    CoreRobotics::CRFrame* m_frame;
     
 };
 

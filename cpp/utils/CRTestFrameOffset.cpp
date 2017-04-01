@@ -91,8 +91,8 @@ void CRTestFrameOffset(void){
 		double  offset		-		free variable offset distance or angle
 		)*/
 
-	Link0->frame = F0;
-	Link1->frame = F1;
+	Link0->setFrame(F0);
+	Link1->setFrame(F1);
 	MyRobot.addLink(Link0);
 	MyRobot.addLink(Link1);
 

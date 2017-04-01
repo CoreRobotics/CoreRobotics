@@ -79,7 +79,7 @@ CRManipulator::CRManipulator() {
 void CRManipulator::setConfiguration(Eigen::VectorXd q)
 {
     for (size_t i = 0; i < m_listDriven.size(); i++) {
-        m_listLinks.at(m_listDriven.at(i))->frame->setFreeValue(q(i));
+        m_listLinks.at(m_listDriven.at(i))->m_frame->setFreeValue(q(i));
     }
 }
     
@@ -97,7 +97,7 @@ void CRManipulator::getConfiguration(Eigen::VectorXd &q)
 {
     q.setZero(m_listDriven.size(),1);
     for (size_t i = 0; i < m_listDriven.size(); i++) {
-        m_listLinks.at(m_listDriven.at(i))->frame->getFreeValue(q(i));
+        m_listLinks.at(m_listDriven.at(i))->m_frame->getFreeValue(q(i));
     }
 }
     
@@ -120,7 +120,7 @@ void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
         int i = k;
         v << 0, 0, 0;
         while (i > -1) {
-            m_listLinks.at(i)->frame->transformToParent(v,v);
+            m_listLinks.at(i)->m_frame->transformToParent(v,v);
             i = m_listParents.at(i);
         }
         y.col(k+1) = v;
@@ -247,7 +247,7 @@ void CRManipulator::getToolFrame(unsigned toolIndex, CRFrame &tool)
 	int i = this->m_listToolParents.at(toolIndex);
 	while (i > -1) {
 
-		this->m_listLinks.at(i)->frame->getTransformToParent(T0);
+		this->m_listLinks.at(i)->m_frame->getTransformToParent(T0);
 		T = T0*T;
 		i = m_listParents.at(i);
 	}
@@ -307,7 +307,7 @@ void CRManipulator::addLink(CoreRobotics::CRRigidBody* link)
     m_listParents.push_back(n-1);
     
     // add the driven integer (if it is driven)
-    if (link->frame->isDriven()) {
+    if (link->m_frame->isDriven()) {
         m_listDriven.push_back(n);
     }
 }
