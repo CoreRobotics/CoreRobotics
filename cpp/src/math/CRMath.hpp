@@ -115,6 +115,15 @@ namespace CoreRobotics {
                                   vec u,
                                   double dt);
         
+    //---------------------------------------------------------------------
+    // Matrix inversion routines
+    public:
+        
+        //! SVD-based matrix inverse
+        static bool svdInverse(Eigen::MatrixXd A,
+                               double tol,
+                               Eigen::MatrixXd& Ainv);
+        
         
     };
 

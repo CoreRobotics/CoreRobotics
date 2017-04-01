@@ -42,6 +42,7 @@
 
 #include "CRMath.hpp"
 #include "Eigen/Dense"
+#include "Eigen/svd"
 
 
 //=====================================================================
@@ -108,6 +109,57 @@ vec CRMath::rungeKuttaStep(vec(dynamicSystem)(double, vec, vec),
     Eigen::VectorXd f3 = dynamicSystem(t+dt/2,x+dt*f2/2,u);
     Eigen::VectorXd f4 = dynamicSystem(t+dt,x+dt*f3,u);
     return x + dt/6*(f1 + 2*f2 + 2*f3 + f4);
+}
+    
+    
+//=====================================================================
+/*!
+ This method performs generalized matrix inversion using the SVD method\n.
+ 
+ For a matrix A, the SVD yields:
+ 
+ /f$ A = U \Sigma V^* /f$
+ 
+ The generalized inverse is then:
+ 
+ /f$ A^# = V \Sigma^{-1} U^* /f$
+ 
+ The method utilizes the Jacobi SVD for the inverse.  For large matrices,
+ this will be very slow.
+ 
+ \param [in] A - the matrix to invert
+ \param [in] tol - the tolerance placed on the singular values to determine if the matrix is singular
+ \param [out] Ainv - the generalized inverse of Matrix A
+ \return - a flag indicating if the matrix is singular (according to the tolerance).
+            true = singular, false = not singular.
+ 
+ */
+//---------------------------------------------------------------------
+bool CRMath::svdInverse(Eigen::MatrixXd A, double tol, Eigen::MatrixXd& Ainv)
+{
+    bool isSingular = false;
+    
+    // Compute the SVD of A
+    Eigen::JacobiSVD<Eigen::MatrixXd> svd(A, Eigen::ComputeThinU | Eigen::ComputeThinV);
+    
+    // Take the SVD
+    Eigen::VectorXd sVals = svd.singularValues();
+    
+    // check for singular condition
+    for (int i = 0; i < sVals.size(); i++){
+        if (sVals(i) <= tol){
+            isSingular = true;
+            break;
+        }
+    }
+    
+    // Compute the generalized inverse using SVD
+    Eigen::VectorXd sValsInverse = sVals.array().inverse();
+    Eigen::MatrixXd SigmaInv = sValsInverse.asDiagonal();
+    Ainv = svd.matrixV() * SigmaInv * svd.matrixU().transpose();
+    
+    
+    return isSingular;
 }
 
 
