@@ -41,6 +41,7 @@
 //=====================================================================
 
 #include "CRManipulator.hpp"
+#include <assert.h>
 
 
 //=====================================================================
@@ -321,24 +322,24 @@ This method adds a frame to the list of tools. \n
 supplied tool frame is referenced.
 \param[in] tool - a CRFrame object containing the frame transformation 
 to the specified parent link.
-\return - returns true if the tool was set, returns a false if it was 
-not set due to an invalid parentIndex
+\return - returns the integer of the added tool
 */
 //---------------------------------------------------------------------
-bool CRManipulator::addTool(unsigned parentIndex, CRFrame* tool)
+int CRManipulator::addTool(unsigned parentIndex, CRFrame* tool)
 {
 	// get the number of links
 	int n;
 	this->getNumberOfLinks(n);
-
-	// add the parent integer
-	if (parentIndex > unsigned(n-1)) {
-		return false;
-	} else {
-		m_listToolFrames.push_back(tool);
-		m_listToolParents.push_back(parentIndex);
-		return true;
-	}
+	
+    // throw an error if the parent index is outside of the range
+    assert(parentIndex <= unsigned(n-1));
+    
+    // add the parent integer
+    m_listToolFrames.push_back(tool);
+    m_listToolParents.push_back(parentIndex);
+    
+    // return the tool index
+    return this->m_listToolFrames.size()-1;
 }
 
 

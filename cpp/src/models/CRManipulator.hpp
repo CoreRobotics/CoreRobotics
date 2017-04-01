@@ -257,7 +257,7 @@ public:
     void addLink(CoreRobotics::CRRigidBody* link);
 
 	//! Add a tool to the manipulator
-	bool addTool(unsigned parentIndex, CRFrame* tool);
+	int addTool(unsigned parentIndex, CRFrame* tool);
     
 //---------------------------------------------------------------------
 // Protected Members
