@@ -237,6 +237,7 @@ Todo
 //! \brief Implements controllers for regulating model motion.
 //! \details Todo
 //---------------------------------------------------------------------------
+#include "CRInverseKinematics.hpp"
 
 
 #endif
