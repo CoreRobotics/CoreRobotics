@@ -254,7 +254,7 @@ public:
 public:
     
     //! Add a link to the kinematic structure
-    void addLink(CoreRobotics::CRRigidBody* link);
+    int addLink(CoreRobotics::CRRigidBody* link);
 
 	//! Add a tool to the manipulator
 	int addTool(unsigned parentIndex, CRFrame* tool);

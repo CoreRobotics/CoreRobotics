@@ -292,9 +292,10 @@ void CRManipulator::getToolPose(unsigned toolIndex,
  This method adds a rigid body link the list of links. \n
  
  \param[in] link - pointer to the RigidBody link being added
+ \return - returns the integer (index) of the added link
  */
 //---------------------------------------------------------------------
-void CRManipulator::addLink(CoreRobotics::CRRigidBody* link)
+int CRManipulator::addLink(CoreRobotics::CRRigidBody* link)
 {
     int n, dof;
     this->getNumberOfLinks(n);
@@ -310,6 +311,9 @@ void CRManipulator::addLink(CoreRobotics::CRRigidBody* link)
     if (link->m_frame->isDriven()) {
         m_listDriven.push_back(n);
     }
+    
+    // return the tool index
+    return this->m_listLinks.size()-1;
 }
 
 
@@ -322,7 +326,7 @@ This method adds a frame to the list of tools. \n
 supplied tool frame is referenced.
 \param[in] tool - a CRFrame object containing the frame transformation 
 to the specified parent link.
-\return - returns the integer of the added tool
+\return - returns the integer (index) of the added tool
 */
 //---------------------------------------------------------------------
 int CRManipulator::addTool(unsigned parentIndex, CRFrame* tool)
