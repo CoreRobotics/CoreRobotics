@@ -231,6 +231,11 @@ public:
 	void getJacobian(unsigned toolIndex,
                      CREulerMode mode,
                      Eigen::MatrixXd &jacobian);
+
+    void getJacobian(unsigned toolIndex,
+                     CREulerMode mode,
+                     Eigen::Matrix<bool, 6, 1> in_poseElements,
+                     Eigen::MatrixXd &jacobian);
     
     //! Get the number of links in the list
     void getNumberOfLinks(int &n);

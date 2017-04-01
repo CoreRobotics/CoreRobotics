@@ -129,6 +129,15 @@ void test_CRManipulator(void) {
 	MyRobot.getToolFrame(toolIndex, toolFrame);
 	toolFrame.getTransformToParent(T);
 	std::cout << "MyRobot tool has a transformation of \n" << T << std::endl;
+    
+    
+    // get the jacobian for only (x, y, g)
+    Eigen::MatrixXd Jred;
+    Eigen::Matrix<bool, 6, 1> elems;
+    elems << true, true, false, false, false, true;
+    MyRobot.getJacobian(toolIndex, CR_EULER_MODE_XYZ, elems, Jred);
+    std::cout << "MyRobot Jacobian (reduced) is \n" << Jred << std::endl;
+    
 
 }
 // -------------------------------------------------------------

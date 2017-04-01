@@ -42,6 +42,7 @@
 
 #include "CRManipulator.hpp"
 #include <assert.h>
+#include <iostream>
 
 
 //=====================================================================
@@ -141,7 +142,9 @@ void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
  
  \param[in] toolIndex - index of the tool to be used to compute the Jacobian.
  \param[in] mode - the Euler convention to be used to specify the orientation.
- \param[out] jacobian - (6 x N) jacobian matrix.
+ \param[in] poseElements - [optional] a boolean vector indicating which pose elements to return
+ \param[out] jacobian - (6 x N) jacobian matrix if poseElements is not specified OR
+                        (M x N) jacobian for M true values in poseElements
  */
 //---------------------------------------------------------------------
 void CRManipulator::getJacobian(unsigned toolIndex,
@@ -196,6 +199,38 @@ void CRManipulator::getJacobian(unsigned toolIndex,
                                                 Eigen::Vector3d::Zero());
 }
 
+
+void CRManipulator::getJacobian(unsigned toolIndex,
+                                CREulerMode mode,
+                                Eigen::Matrix<bool, 6, 1> poseElements,
+                                Eigen::MatrixXd &jacobian)
+{
+    
+    // Get the number of true elements in the pose vector
+    int m = poseElements.cast<int>().sum();
+    std::cout << "m = " << m << std::endl;
+    
+    // return the jacobian (using default overload)
+    Eigen::MatrixXd j;
+    this->getJacobian(toolIndex, mode, j);
+    
+    // use a sparse premultiplier matrix
+    Eigen::MatrixXd mult;
+    mult.setZero(m, 6);
+    
+    // TODO: this could be faster
+    int row = 0;
+    for (int col=0; col < 6; col++){
+        if( poseElements(col) ){
+            mult(row,col) = 1;
+            row++;
+        }
+    }
+    
+    // now pre-multiply
+    jacobian = mult * j;
+}
+    
     
 //=====================================================================
 /*!
