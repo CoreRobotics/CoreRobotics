@@ -82,19 +82,19 @@ void test_CRInverseKinematics(void) {
     CRRigidBody* Link3 = new CRRigidBody(F3);
     
     // Create a new robot & add the links
-    CRManipulator MyRobot;
+    CRManipulator* MyRobot = new CRManipulator();
     
-	MyRobot.addLink(Link0);
-	MyRobot.addLink(Link1);
-	MyRobot.addLink(Link2);
-    int attachLink = MyRobot.addLink(Link3);
+	MyRobot->addLink(Link0);
+	MyRobot->addLink(Link1);
+	MyRobot->addLink(Link2);
+    int attachLink = MyRobot->addLink(Link3);
 
 
 	// create a tool frame and add to MyRobot
 	CRFrameEuler* Tool = new CRFrameEuler(0, 0, 0, 0, 0, 0,
                                           convention,
                                           CR_EULER_FREE_NONE);
-	int toolIndex = MyRobot.addTool(attachLink, Tool);
+	int toolIndex = MyRobot->addTool(attachLink, Tool);
     
     
     // ------------------------------------------
@@ -107,7 +107,7 @@ void test_CRInverseKinematics(void) {
 	// Solve several inverse kinematics problems
     
     // Set up an inverse kinematics object and attach the robot
-    CRInverseKinematics ikSolver = CRInverseKinematics(&MyRobot,
+    CRInverseKinematics ikSolver = CRInverseKinematics(MyRobot,
                                                        toolIndex,
                                                        convention);
     
@@ -126,7 +126,7 @@ void test_CRInverseKinematics(void) {
     
     // Set the initial configuration of the robot
     q0 << 0.1, -0.2, 0.0;
-    MyRobot.setConfiguration(q0);
+    MyRobot->setConfiguration(q0);
     
     // Define a set point pose
     p << 2.5, 0, 0, 0, 0, 0;
@@ -142,8 +142,8 @@ void test_CRInverseKinematics(void) {
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
-        MyRobot.setConfiguration(qSolved);
-        MyRobot.getForwardKinematics(fk);
+        MyRobot->setConfiguration(qSolved);
+        MyRobot->getForwardKinematics(fk);
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -163,7 +163,7 @@ void test_CRInverseKinematics(void) {
     ikSolver.setMaxIter(100);
     
     // I.C.
-    MyRobot.setConfiguration(q0);
+    MyRobot->setConfiguration(q0);
     
     // Now solve the inverse kinematics for the point
     timer.startTimer();
@@ -175,8 +175,8 @@ void test_CRInverseKinematics(void) {
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
-        MyRobot.setConfiguration(qSolved);
-        MyRobot.getForwardKinematics(fk);
+        MyRobot->setConfiguration(qSolved);
+        MyRobot->getForwardKinematics(fk);
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -198,7 +198,7 @@ void test_CRInverseKinematics(void) {
     ikSolver.setTolerance(0.0001);
     
     // I.C.
-    MyRobot.setConfiguration(q0);
+    MyRobot->setConfiguration(q0);
     
     // Now solve the inverse kinematics for the point
     timer.startTimer();
@@ -210,8 +210,8 @@ void test_CRInverseKinematics(void) {
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
-        MyRobot.setConfiguration(qSolved);
-        MyRobot.getForwardKinematics(fk);
+        MyRobot->setConfiguration(qSolved);
+        MyRobot->getForwardKinematics(fk);
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -231,7 +231,7 @@ void test_CRInverseKinematics(void) {
     p << 5, 0, 0, 0, 0, 0;
     
     // I.C.
-    MyRobot.setConfiguration(q0);
+    MyRobot->setConfiguration(q0);
     
     // Now solve the inverse kinematics for the point
     timer.startTimer();
@@ -243,8 +243,8 @@ void test_CRInverseKinematics(void) {
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
-        MyRobot.setConfiguration(qSolved);
-        MyRobot.getForwardKinematics(fk);
+        MyRobot->setConfiguration(qSolved);
+        MyRobot->getForwardKinematics(fk);
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
