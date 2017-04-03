@@ -255,6 +255,47 @@ void test_CRInverseKinematics(void) {
     }
     
     
+    // **********************
+    // CASE 5: Try 200 steps (external)
+    std::cout << "---------------------------------------------\n";
+    std::cout << "CASE 5: Single step convergence.\n";
+    
+    // Assign a set point
+    p << 2.5, 0, 0, 0, 0, 0;
+    
+    // Change parameters
+    ikSolver.setMaxIter(1);
+    ikSolver.setStepSize(1);
+    ikSolver.setTolerance(0.001);
+    
+    // I.C.
+    MyRobot->setConfiguration(q0);
+    
+    // Define a configruation
+    Eigen::VectorXd q(3);
+    q = q0;
+    
+    
+    // Now solve the inverse kinematics for the point
+    for (int i = 0; i < 100; i++){
+        timer.startTimer();
+        result = ikSolver.solve(p, q, qSolved);
+        timer.getElapsedTime(et);
+        
+        q = qSolved;
+        
+        if ( result ){
+            printf("Solution found in %8.6f s!\n",et);
+            
+            // Now push the new joints through the robot to see if it worked
+            MyRobot->setConfiguration(q);
+            MyRobot->getForwardKinematics(fk);
+            
+        } else {
+            std::cout << "No solution found! Returning original configuration.\n";
+        }
+    }
+    
     
     
 
