@@ -151,6 +151,11 @@ public:
                Eigen::VectorXd in_q0,
                Eigen::VectorXd &out_qSolved);
     
+    bool solve(Eigen::VectorXd in_setPoint,
+               Eigen::Matrix<bool, 6, 1> in_poseElements,
+               Eigen::VectorXd in_q0,
+               Eigen::VectorXd &out_qSolved);
+    
 //---------------------------------------------------------------------
 // Protected Members
 protected:

@@ -151,6 +151,83 @@ bool CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> in_setPoint,
     // return: false if the matrix was singular, true if non-singular
     return !jacIsSingular;
 }
+    
+    
+bool CRInverseKinematics::solve(Eigen::VectorXd in_setPoint,
+                                Eigen::Matrix<bool, 6, 1> in_poseElements,
+                                Eigen::VectorXd in_q0,
+                                Eigen::VectorXd &out_qSolved)
+{
+    
+    // indicator if solution is singular
+    bool jacIsSingular = false;         // break the algorithm if it is singular
+    
+    // set up variables
+    Eigen::VectorXd error;          // error (setPoint - fk(q))
+    Eigen::VectorXd pose;           // the value of the FK at iteration i
+    Eigen::MatrixXd J, Jinv;        // robot Jacobian and inverse
+    Eigen::VectorXd q;              // the configuration
+    unsigned int iter = 0;
+    
+    // set the initial configuration
+    q = in_q0;
+    
+    // set the initial robot configuration
+    this->m_robot->setConfiguration(q);
+    
+    // return the pose of the robot for the initial configuration
+    this->m_robot->getToolPose(this->m_toolIndex,
+                               this->m_eulerMode,
+                               in_poseElements,
+                               pose);
+    
+    // compute the error by comparing the pose
+    error = in_setPoint-pose;
+    
+    
+    // optimization routine
+    while ((error.norm() >= this->m_tolerance) &&
+           (iter < this->m_maxIter) &&
+           !jacIsSingular) {
+        
+        // Get the Jacobian in J
+        this->m_robot->getJacobian(this->m_toolIndex,
+                                   this->m_eulerMode,
+                                   in_poseElements,
+                                   J);
+        
+        // Invert with SVD
+        jacIsSingular = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+        
+        // Perform the iteration step
+        q += this->m_stepSize * Jinv * error;
+        
+        // Now compute the error for the new config
+        this->m_robot->setConfiguration(q);
+        this->m_robot->getToolPose(this->m_toolIndex,
+                                   this->m_eulerMode,
+                                   in_poseElements,
+                                   pose);
+        error = in_setPoint-pose;
+        
+        // update the iterator
+        iter++;
+        
+    }
+    
+    // Put the robot back in its original configuration
+    this->m_robot->setConfiguration(in_q0);
+    
+    // set the output configuration
+    if (jacIsSingular){
+        out_qSolved = in_q0;    // return the initial condition
+    } else {
+        out_qSolved = q;        // return solution
+    }
+    
+    // return: false if the matrix was singular, true if non-singular
+    return !jacIsSingular;
+}
 
 
 //=====================================================================

@@ -255,18 +255,60 @@ void test_CRInverseKinematics(void) {
     }
     
     
+    
     // **********************
     // CASE 5: Try 200 steps (external)
     std::cout << "---------------------------------------------\n";
-    std::cout << "CASE 5: Single step convergence.\n";
+    std::cout << "CASE 5: Reduced pose vector.\n";
+    
+    // Assign a set point
+    Eigen::Matrix<bool, 6, 1> elems;
+    elems << 1, 1, 0, 0, 0, 1;
+    
+    Eigen::VectorXd pRed(3);
+    pRed << 2.5, 0, 0;              // (x, y, g)
+    
+    // Change parameters
+    ikSolver.setStepSize(0.1);
+    ikSolver.setTolerance(0.001);
+    
+    // I.C.
+    MyRobot->setConfiguration(q0);
+    
+    
+    // Now solve the inverse kinematics for the point
+    timer.startTimer();
+    result = ikSolver.solve(pRed, elems, q0, qSolved);
+    timer.getElapsedTime(et);
+    
+    if ( result ){
+        printf("Non-sinular solution found in %8.6f s!\n",et);
+        std::cout << qSolved << std::endl;
+        
+        // Now push the new joints through the robot to see if it worked
+        MyRobot->setConfiguration(qSolved);
+        MyRobot->getForwardKinematics(fk);
+        
+        std::cout << "The forward kinematics for this solution are:\n";
+        std::cout << fk << std::endl;
+        
+    } else {
+        std::cout << "No solution found! Returning original configuration.\n";
+        std::cout << qSolved << std::endl;
+    }
+    
+    
+    
+    // **********************
+    // CASE 6: Try 200 steps (external)
+    std::cout << "---------------------------------------------\n";
+    std::cout << "CASE 6: Single step convergence.\n";
     
     // Assign a set point
     p << 2.5, 0, 0, 0, 0, 0;
     
     // Change parameters
     ikSolver.setMaxIter(1);
-    ikSolver.setStepSize(1);
-    ikSolver.setTolerance(0.001);
     
     // I.C.
     MyRobot->setConfiguration(q0);
