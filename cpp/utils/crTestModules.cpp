@@ -52,7 +52,6 @@ int main(int argc, const char * argv[]) {
     
     cout << "Running the CoreRobotics test suite." << endl;
     
-    /*
     // Run the core test
     test_CRCore();
     
@@ -76,7 +75,6 @@ int main(int argc, const char * argv[]) {
     // Test the motion models
     test_CRMotionModel();
     test_CRMotionProbabilistic();
-     */
     
     // Test the Manipulator
     test_CRManipulator();
