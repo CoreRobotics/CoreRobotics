@@ -42,7 +42,6 @@
 
 #include "CRManipulator.hpp"
 #include <assert.h>
-#include <iostream>
 
 
 //=====================================================================
@@ -178,19 +177,14 @@ void CRManipulator::getJacobian(unsigned toolIndex,
 
 		// perturb forward
         this->setConfiguration(q0+qd);
-		this->getToolFrame(toolIndex, *this->m_tipFrame);
-		this->m_tipFrame->getPose(mode, poseFwd);
-        // this->getForwardKinematics(fkFwd);
+        this->getToolPose(toolIndex, mode, poseFwd);
 
 		// perturb backward
         this->setConfiguration(q0-qd);
-		this->getToolFrame(toolIndex, *this->m_tipFrame);
-		this->m_tipFrame->getPose(mode, poseBwd);
-        // this->getForwardKinematics(fkBwd);
+        this->getToolPose(toolIndex, mode, poseBwd);
 
 		// central difference
 		jacobian.col(k) = (poseFwd - poseBwd) / (2.0*delta);
-        // jacobian.col(k) = (fkFwd.rightCols(1)- fkBwd.rightCols(1))/(2.0*delta);
     }
     this->setConfiguration(q0);
 
@@ -309,8 +303,7 @@ void CRManipulator::getToolFrame(unsigned toolIndex, CRFrame &tool)
 		T = T0*T;
 		i = m_listParents.at(i);
 	}
-
-	// tool.setRotationAndTranslation(rot, trans);
+    
 	tool.setRotationAndTranslation(T.block(0, 0, 3, 3), T.block(0, 3, 3, 1));
 }
     
@@ -339,8 +332,8 @@ void CRManipulator::getToolPose(unsigned toolIndex,
     this->m_tipFrame->getPose(mode, pose);
     
     // zero out the m_tipFrame
-    this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(),
-                                                Eigen::Vector3d::Zero());
+    //this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(),
+    //                                            Eigen::Vector3d::Zero());
 }
 
     

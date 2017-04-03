@@ -512,12 +512,16 @@ This method returns a vector of the position and orientation.
 void CRFrame::getPose(CREulerMode mode,
                       Eigen::Matrix<double, 6, 1> &pose)
 {
-
-	Eigen::Vector3d pos = this->translation;
+    
 	Eigen::Vector3d theta;
 	this->getOrientation(mode, theta);
 
-	pose << pos(0), pos(1), pos(2), theta(0), theta(1), theta(2);
+	pose << this->translation(0),
+            this->translation(1),
+            this->translation(2),
+            theta(0),
+            theta(1),
+            theta(2);
 
 }
     
