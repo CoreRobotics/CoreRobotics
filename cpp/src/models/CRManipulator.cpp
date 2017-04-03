@@ -229,13 +229,11 @@ void CRManipulator::getJacobian(unsigned toolIndex,
         
         // perturb forward
         this->setConfiguration(q0+qd);
-        this->getToolFrame(toolIndex, *this->m_tipFrame);
-        this->m_tipFrame->getPose(mode, poseElements, poseFwd);
+        this->getToolPose(toolIndex, mode, poseElements, poseFwd);
         
         // perturb backward
         this->setConfiguration(q0-qd);
-        this->getToolFrame(toolIndex, *this->m_tipFrame);
-        this->m_tipFrame->getPose(mode, poseElements, poseBwd);
+        this->getToolPose(toolIndex, mode, poseElements, poseBwd);
         
         // central difference
         jacobian.col(k) = (poseFwd - poseBwd) / (2.0*delta);
@@ -330,10 +328,18 @@ void CRManipulator::getToolPose(unsigned toolIndex,
     
     // get the pose of the frame
     this->m_tipFrame->getPose(mode, pose);
+}
     
-    // zero out the m_tipFrame
-    //this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(),
-    //                                            Eigen::Vector3d::Zero());
+void CRManipulator::getToolPose(unsigned toolIndex,
+                                CREulerMode mode,
+                                Eigen::Matrix<bool, 6, 1> poseElements,
+                                Eigen::VectorXd &pose)
+{
+    // return the frame
+    this->getToolFrame(toolIndex, *this->m_tipFrame);
+    
+    // get the pose of the frame
+    this->m_tipFrame->getPose(mode, poseElements, pose);
 }
 
     

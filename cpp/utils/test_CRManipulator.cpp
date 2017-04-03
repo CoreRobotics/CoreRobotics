@@ -138,6 +138,11 @@ void test_CRManipulator(void) {
     MyRobot.getJacobian(toolIndex, CR_EULER_MODE_XYZ, elems, Jred);
     std::cout << "MyRobot Jacobian (reduced) is \n" << Jred << std::endl;
     
+    // get the tool pose for only (x, y, g)
+    Eigen::VectorXd pose;
+    MyRobot.getToolPose(toolIndex, CR_EULER_MODE_XYZ, elems, pose);
+    std::cout << "MyRobot pose (reduced) is \n" << pose << std::endl;
+    
 
 }
 // -------------------------------------------------------------

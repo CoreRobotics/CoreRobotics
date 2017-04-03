@@ -250,6 +250,11 @@ public:
     void getToolPose(unsigned toolIndex,
                      CREulerMode mode,
                      Eigen::Matrix<double, 6, 1> &pose);
+    
+    void getToolPose(unsigned toolIndex,
+                     CREulerMode mode,
+                     Eigen::Matrix<bool, 6, 1> in_poseElements,
+                     Eigen::VectorXd &pose);
 
 	//! Set the model type
 	void setModelType(CRManipulatorType type) { this->m_modelType = type; }
