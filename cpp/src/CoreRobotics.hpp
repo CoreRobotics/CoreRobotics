@@ -213,8 +213,10 @@ Todo
 #include "CRNoiseUniform.hpp"
 #include "CRNoiseMixture.hpp"
 #include "CRSensorModel.hpp"
+#include "CRSensorLinear.hpp"
 #include "CRSensorProbabilistic.hpp"
 #include "CRMotionModel.hpp"
+#include "CRMotionLinear.hpp"
 #include "CRMotionProbabilistic.hpp"
 
 
