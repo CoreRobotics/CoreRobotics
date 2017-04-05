@@ -50,14 +50,14 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- The constructor creates a motion model.  The in_dynamics specifies
+ The constructor creates a motion model.  The in_A, in_B matrices specify
  one of the dynamics equation forms below:\n
  
  Case 1: (Continuous)
  
  If in_type is set to CR_MOTION_CONTINUOUS, then the callback sets
  
- \f$ \dot{x} = f(x,u,t) \f$
+ \f$ \dot{x} = A x + B u \f$
  
  where \f$x\f$ is the system state, \f$u\f$ is the input (forcing)
  vector, and \f$t\f$ is time.
@@ -67,13 +67,14 @@ namespace CoreRobotics {
  
  If in_type is set to CR_MOTION_DISCRETE, then the callback sets
  
- \f$ x_{k+1} = f(x_k,u_k,t_k) \f$
+ \f$ x_{k+1} = A x_k + B u_k \f$
  
  where \f$x_k\f$ is the current system state, \f$u_k\f$ is the 
  input (forcing) vector, and \f$t_k\f$ is time at interval \f$k\f$.
  
  
- \param[in] in_dynamics - callback to the dynamics equation
+ \param[in] in_A - the dynamics matrix
+ \param[in] in_B - the input matrix
  \param[in] in_type - indicates whether the callback is continuous or 
                       discrete, see CoreRobotics::CRMotionModelType.
  \param[in] in_x0 - the initial state.
