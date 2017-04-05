@@ -135,11 +135,26 @@ public:
     //! Set the algorithm convergence tolerance
     void setTolerance(double in_tolerance) {this->m_tolerance = in_tolerance;}
     
+    //! Get the algorithm convergence tolerance
+    double setTolerance(void) {return this->m_tolerance;}
+    
     //! Set the maximum number of iterations the algorithm can run
     void setMaxIter(unsigned int in_maxIter) {this->m_maxIter = in_maxIter;}
     
+    //! Get the algorithm convergence tolerance
+    unsigned int getMaxIter(void) {return this->m_maxIter;}
+    
     //! Set the iteration step size (i.e. the gain)
     void setStepSize(double in_stepSize) {this->m_stepSize = in_stepSize;}
+    
+    //! Get the iteration step size (i.e. the gain)
+    double getStepSize(void) {return this->m_stepSize;}
+    
+    //! Set the minimum threshold for a non-singular matrix
+    void setSingularThresh(double in_thresh) {this->m_svdTol = in_thresh;}
+    
+    //! Get the minimum threshold for a non-singular matrix
+    double getSingularThresh(void) {return this->m_svdTol;}
     
     
 //---------------------------------------------------------------------
