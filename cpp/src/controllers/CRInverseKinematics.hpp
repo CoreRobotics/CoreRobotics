@@ -55,34 +55,160 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  \file CRInverseKinematics.hpp
- \brief Implements a class that handles sensor models.
+ \brief Implements a class to solve manipulator inverse kinematics.
  */
 //---------------------------------------------------------------------
 /*!
  \class CRInverseKinematics
  \ingroup controllers
  
- \brief This class implements a sensor model.
+ \brief This class provides methods for solving the manipulator inverse
+ kinematics (IK) problem.
  
  \details
  \section Description
- CRSensorModel implements a sensor model from a supplied observation
- callback function.  Specifically, CRSensorModel sets up a container
- for the model
+ CRInverseKinematics implements the Jacobian generalized inverse 
+ technique using the SVD for finding a manipulator configuration that
+ yields a desired pose.
  
- \f$ z = h(x) \f$,
+ \f$ x = f(q) \f$,
  
- where \f$x\f$ is the state vector, and \f$z\f$ is the sensor 
- measurement vector.
+ where \f$x\f$ is the desired pose, \f$f\f$ is the forward kinematics
+ function, and \f$q\f$ is the configuration we are trying to find.  The
+ algorithm accomplishes this by iteratively updating the configuration 
+ according to
  
- These methods are used to interface with the Sensor Model:
- - CRSensorModel::setState
+ \f$ q_{k+1} = q_k + \gamma J^# (x - f(q_k)) \f$
+ 
+ These methods are used to interface with the IK controller:
+ - CRInverseKinematics::setRobot sets the manipulator IK to solve
+ - CRInverseKinematics::setToolIndex set the tool index of the 
+ associated manipulator (see CRManipulator::addTool) for which we are
+ setting a desired pose.  Note that a tool must be added in the manipulator
+ prior to using the IK solve.
+ - CRInverseKinematics::setEulerMode sets the Euler convention of the pose
+ vector
+ - CRInverseKinematics::solve solves the IK problem described above for
+ an initial configuration and a desired pose vector.  The method is overloaded
+ to allow for solving for a reduced pose vector (see CRFrame::getPose)
+ 
+ Optimization parameters can be set:
+ - CRInverseKinematics::setTolerance sets the convergence tolerance of
+ the algorithm.  The tolerance is compared to the 2-norm of the pose error.
+ (Default = 0.001)
+ - CRInverseKinematics::setMaxIter sets the maximum number of iterations the
+ solver can run prior to stopping. (Default = 1)
+ - CRInverseKinematics::setStepSize sets the convergence gain \f$\gamma\f$ 
+ in the above equation. (Default = 0.1)
+ - CRInverseKinematics::setSingularThresh sets the threshold for numerically
+ determining if the Jacobian is singular by comparing singular values of
+ the SVD to the threshold. (Default = 0.1)
+ 
  
  \section Example
- This example demonstrates use of the CRSensorModel class.
+ This example demonstrates use of the CRInverseKinematics class.
  \code
  
+ #include <iostream>
+ #include "CoreRobotics.hpp"
  
+ // Use the CoreRobotics namespace
+ using namespace CoreRobotics;
+ 
+ 
+ // -------------------------------------------------------------
+ void main(void) {
+ 
+     std::cout << "*************************************\n";
+     std::cout << "Demonstration of CRInverseKinematics.\n";
+     std::cout << std::fixed; std::cout.precision(4);
+     
+     // Set the Euler convention we will use throughout the example
+     // Although CoreRobotics offers the flexibility to choose a
+     // different convention for each method, in general it is good
+     // to adopt the same convention throughout a problem for
+     // consistency.
+     CREulerMode convention = CR_EULER_MODE_XYZ;
+     
+     // ------------------------------------------
+     // Create the robot
+     
+     // create several rigid body links
+     CRFrameEuler* F0 = new CRFrameEuler(0, 0, 0, 0, 0, 0,
+     convention,
+     CR_EULER_FREE_ANG_G);
+     CRFrameEuler* F1 = new CRFrameEuler(1, 0, 0, 0, 0, 0,
+     convention,
+     CR_EULER_FREE_ANG_G);
+     CRFrameEuler* F2 = new CRFrameEuler(2, 0, 0, 0, 0, 0,
+     convention,
+     CR_EULER_FREE_ANG_G);
+     CRFrameEuler* F3 = new CRFrameEuler(1, 0, 0, 0, 0, 0,
+     convention,
+     CR_EULER_FREE_NONE);
+     CRRigidBody* Link0 = new CRRigidBody(F0);
+     CRRigidBody* Link1 = new CRRigidBody(F1);
+     CRRigidBody* Link2 = new CRRigidBody(F2);
+     CRRigidBody* Link3 = new CRRigidBody(F3);
+     
+     // Create a new robot & add the links
+     CRManipulator* MyRobot = new CRManipulator();
+     
+     MyRobot->addLink(Link0);
+     MyRobot->addLink(Link1);
+     MyRobot->addLink(Link2);
+     int attachLink = MyRobot->addLink(Link3);
+     
+     
+     // create a tool frame and add to MyRobot
+     CRFrameEuler* Tool = new CRFrameEuler(0, 0, 0, 0, 0, 0,
+     convention,
+     CR_EULER_FREE_NONE);
+     int toolIndex = MyRobot->addTool(attachLink, Tool);
+     
+     
+     // Set up an inverse kinematics object and attach the robot
+     CRInverseKinematics ikSolver = CRInverseKinematics(MyRobot,
+                                                        toolIndex,
+                                                        convention);
+ 
+     // Change the maximum iterations
+     ikSolver.setMaxIter(100);
+ 
+     // Set up some variables we will use
+     Eigen::VectorXd q0(3);          // initial configuration
+     Eigen::VectorXd qSolved(3);     // configuration that solves p = fk(qSolved)
+     Eigen::Matrix<double, 6, 1> p;  // tool set point pose
+     Eigen::MatrixXd fk;             // forward kinematics (for testing the result)
+     
+     // Set the initial configuration of the robot
+     q0 << 0.1, -0.2, 0.0;
+     MyRobot->setConfiguration(q0);
+     
+     // Define a set point pose
+     p << 2.5, 0, 0, 0, 0, 0;
+     
+     
+     // Now solve the inverse kinematics for the point
+     bool result = ikSolver.solve(p, q0, qSolved);
+     
+     if ( result ){
+         printf("Non-sinular solution found!\n");
+         std::cout << qSolved << std::endl;
+         
+         // Now push the new joints through the robot to see if it worked
+         MyRobot->setConfiguration(qSolved);
+         MyRobot->getForwardKinematics(fk);
+         
+         std::cout << "The forward kinematics for this solution are:\n";
+         std::cout << fk << std::endl;
+     
+     } else {
+         std::cout << "No solution found! Returning original configuration.\n";
+         std::cout << qSolved << std::endl;
+     }
+ 
+ }
  
  \endcode
  
@@ -90,7 +216,7 @@ namespace CoreRobotics {
  [1] O. Khatib, Lecture Notes (CS327A): "Advanced Robotic Manipulation",
  http://www.in.tum.de/fileadmin/user_upload/Lehrstuehle/Lehrstuhl_XXIII/AdvancedRoboticManipulation.pdf 2005.\n\n
  
- [2] A. Aristidou and J. Lasenby, "Inverse Kinematics: a review of 
+ [2] A. Aristidou and J. Lasenby, "Inverse Kinematics: a review of
  existing techniques and introduction of a new fast iterative solver,"
  University of Cambridge, Technical Report, 2009.
  http://www.andreasaristidou.com/publications/CUEDF-INFENG,%20TR-632.pdf
@@ -105,10 +231,6 @@ class CRInverseKinematics {
 public:
     
     //! Class constructor
-    CRInverseKinematics(CRManipulator* in_robot,
-                        unsigned int in_toolIndex,
-                        CREulerMode in_eulerMode,
-                        Eigen::Matrix<bool, 6, 1> in_poseElements);
     CRInverseKinematics(CRManipulator* in_robot,
                         unsigned int in_toolIndex,
                         CREulerMode in_eulerMode);
@@ -127,10 +249,8 @@ public:
     //  Euler convention used to supply the set point in the solve() method.
     void setEulerMode(CREulerMode in_eulerMode) {this->m_eulerMode = in_eulerMode;}
     
-    //! Set the pose elements of interest (x, y, z, a, b, g)^T
-    void setPoseElements(Eigen::Matrix<bool, 6, 1> in_poseElements){
-        this->m_poseElements = in_poseElements;
-    }
+    //! Get the Euler convention
+    CREulerMode getEulerMode(void) {return this->m_eulerMode;}
     
     //! Set the algorithm convergence tolerance
     void setTolerance(double in_tolerance) {this->m_tolerance = in_tolerance;}
@@ -193,11 +313,8 @@ protected:
     //! Optimizer step size (gain)
     double m_stepSize;
     
-    //! Pose elements selection vector
-    Eigen::Matrix<bool, 6, 1> m_poseElements;
-    
     //! Tolerance for computing if a matrix is singular using SVD svals
-    double m_svdTol = 1.0e-1;
+    double m_svdTol;
     
     
 };

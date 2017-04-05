@@ -72,6 +72,7 @@ CRInverseKinematics::CRInverseKinematics(CRManipulator* in_robot,
     this->setTolerance(0.001);  // 1 mm (rad)
     this->setMaxIter(1);        // 1 step optimizer
     this->setStepSize(0.1);     // 0.1 step gain - this was Alexi's default
+    this->setSingularThresh(1.0e-1);
 }
 
 
@@ -82,7 +83,15 @@ CRInverseKinematics::CRInverseKinematics(CRManipulator* in_robot,
  in_q0.  The method returns a flag indicating if the pseudoinverse is
  singular and no solution can be found.\n
  
- \return - simulated measurement (z).
+ \param[in] in_setPoint - the pose vector set point.  If in_poseElements
+ is specified, then the size of this vector must be equal to the number
+ of true values in the in_poseElements.
+ \param[in] in_poseElements - [optional] a boolean vector indiciating which
+ elements of the full pose vector are used in in_setPoint.
+ \param[in] in_q0 - the intial configuration to use for the iterations.
+ \param[out] out_qSolved - the new configuration
+ \return - a flag indicating singularity (true = Jacobian not singular,
+ false = Jacobian singular)
  */
 //---------------------------------------------------------------------
 bool CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> in_setPoint,
@@ -152,7 +161,7 @@ bool CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> in_setPoint,
     return !jacIsSingular;
 }
     
-    
+
 bool CRInverseKinematics::solve(Eigen::VectorXd in_setPoint,
                                 Eigen::Matrix<bool, 6, 1> in_poseElements,
                                 Eigen::VectorXd in_q0,
