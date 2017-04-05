@@ -263,10 +263,10 @@ public:
 // Add link/tool Methods
 public:
     
-    //! Add a link to the kinematic structure
+    //! Add a link to the kinematic structure, return the index of the added link
     int addLink(CoreRobotics::CRRigidBody* link);
 
-	//! Add a tool to the manipulator
+	//! Add a tool to the manipulator, return the index of the added tool
 	int addTool(unsigned parentIndex, CRFrame* tool);
     
 //---------------------------------------------------------------------
