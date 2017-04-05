@@ -228,7 +228,14 @@ public:
     void getForwardKinematics(Eigen::MatrixXd &y);
     
     //! Get the instantaneous numerical Jacobian
-	void getJacobian(unsigned toolIndex, CREulerMode mode, Eigen::MatrixXd &jacobian);
+	void getJacobian(unsigned toolIndex,
+                     CREulerMode mode,
+                     Eigen::MatrixXd &jacobian);
+
+    void getJacobian(unsigned toolIndex,
+                     CREulerMode mode,
+                     Eigen::Matrix<bool, 6, 1> in_poseElements,
+                     Eigen::MatrixXd &jacobian);
     
     //! Get the number of links in the list
     void getNumberOfLinks(int &n);
@@ -238,6 +245,16 @@ public:
 
 	//! Get tool frame for the current manipulator configuration
 	void getToolFrame(unsigned toolIndex, CRFrame &tool);
+    
+    //! Get the pose for the specified tool index
+    void getToolPose(unsigned toolIndex,
+                     CREulerMode mode,
+                     Eigen::Matrix<double, 6, 1> &pose);
+    
+    void getToolPose(unsigned toolIndex,
+                     CREulerMode mode,
+                     Eigen::Matrix<bool, 6, 1> in_poseElements,
+                     Eigen::VectorXd &pose);
 
 	//! Set the model type
 	void setModelType(CRManipulatorType type) { this->m_modelType = type; }
@@ -246,11 +263,11 @@ public:
 // Add link/tool Methods
 public:
     
-    //! Add a link to the kinematic structure
-    void addLink(CoreRobotics::CRRigidBody* link);
+    //! Add a link to the kinematic structure, return the index of the added link
+    int addLink(CoreRobotics::CRRigidBody* link);
 
-	//! Add a tool to the manipulator
-	bool addTool(unsigned parentIndex, CRFrame* tool);
+	//! Add a tool to the manipulator, return the index of the added tool
+	int addTool(unsigned parentIndex, CRFrame* tool);
     
 //---------------------------------------------------------------------
 // Protected Members

@@ -68,21 +68,21 @@ void test_CRManipulator(void) {
 	F0->freeVar = CR_EULER_FREE_ANG_G;
 	F0->setMode(CR_EULER_MODE_XYZ);
 	F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
-	Link0->frame = F0;
+	Link0->setFrame(F0);
 	MyRobot.addLink(Link0);
 
 	// Set info for Link 1 and add to MyRobot
 	F1->freeVar = CR_EULER_FREE_ANG_G;
 	F1->setMode(CR_EULER_MODE_XYZ);
 	F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
-	Link1->frame = F1;
+	Link1->setFrame(F1);
 	MyRobot.addLink(Link1);
 
 	// Set info for Link 2 and add to MyRobot
 	F2->freeVar = CR_EULER_FREE_NONE;
 	F2->setMode(CR_EULER_MODE_XYZ);
 	F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
-	Link2->frame = F2;
+	Link2->setFrame(F2);
 	MyRobot.addLink(Link2);
 
 
@@ -90,11 +90,13 @@ void test_CRManipulator(void) {
 	CRFrameEuler* Tool = new CRFrameEuler();
 	Tool->setMode(CR_EULER_MODE_XYZ);
 	Tool->setPositionAndOrientation(0, 0, 0, 0, 0, 0);
-	MyRobot.addTool(2, Tool);
+	int toolIndex = MyRobot.addTool(2, Tool);
 
 
 	// ------------------------------------------
 	// Try out some of the methods available to the manipulator
+    
+    std::cout << std::fixed; std::cout.precision(3);
 	
 	// Get the configuration values
 	int dof;
@@ -107,7 +109,7 @@ void test_CRManipulator(void) {
 	// Now get the Forward Kinematics and Jacobian
 	Eigen::MatrixXd Jacobian, FwdKin;
 	MyRobot.getForwardKinematics(FwdKin);
-	MyRobot.getJacobian(0, CR_EULER_MODE_XYZ, Jacobian);
+	MyRobot.getJacobian(toolIndex, CR_EULER_MODE_XYZ, Jacobian);
 	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
 	std::cout << "Jacobian = \n" << Jacobian << std::endl;
 
@@ -124,9 +126,23 @@ void test_CRManipulator(void) {
 	// now get the transformation to the tool for the current configuration
 	Eigen::Matrix4d T;
 	CRFrame toolFrame;
-	MyRobot.getToolFrame(0, toolFrame);
+	MyRobot.getToolFrame(toolIndex, toolFrame);
 	toolFrame.getTransformToParent(T);
 	std::cout << "MyRobot tool has a transformation of \n" << T << std::endl;
+    
+    
+    // get the jacobian for only (x, y, g)
+    Eigen::MatrixXd Jred;
+    Eigen::Matrix<bool, 6, 1> elems;
+    elems << true, true, false, false, false, true;
+    MyRobot.getJacobian(toolIndex, CR_EULER_MODE_XYZ, elems, Jred);
+    std::cout << "MyRobot Jacobian (reduced) is \n" << Jred << std::endl;
+    
+    // get the tool pose for only (x, y, g)
+    Eigen::VectorXd pose;
+    MyRobot.getToolPose(toolIndex, CR_EULER_MODE_XYZ, elems, pose);
+    std::cout << "MyRobot pose (reduced) is \n" << pose << std::endl;
+    
 
 }
 // -------------------------------------------------------------

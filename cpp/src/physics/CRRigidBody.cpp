@@ -51,8 +51,15 @@ namespace CoreRobotics {
 //=====================================================================
 /*!
  The constructor creates a rigid body container.\n
+ 
+ \params[in] in_frame - pointer to the frame associated with the rigid
+ body transformation.
  */
 //---------------------------------------------------------------------
+CRRigidBody::CRRigidBody(CRFrame* in_frame){
+    this->m_frame = in_frame;
+}
+    
 CRRigidBody::CRRigidBody() { }
 
 

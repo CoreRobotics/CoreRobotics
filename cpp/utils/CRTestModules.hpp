@@ -70,5 +70,8 @@ void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
 void test_CRMotionModel(void);          // test CRMotionModel
 void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
 
+// Test controller modules
+void test_CRInverseKinematics(void);    // test IK
+
 
 #endif /* CRTestModules_hpp */

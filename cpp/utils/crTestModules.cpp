@@ -58,6 +58,9 @@ int main(int argc, const char * argv[]) {
     // Run the math test
     test_CRMath();
     
+    // Test the physics models
+    CRTestFrameOffset();
+    
     // Test the noise models
     test_CRNoiseModel();
     test_CRNoiseGaussian();
@@ -72,6 +75,12 @@ int main(int argc, const char * argv[]) {
     // Test the motion models
     test_CRMotionModel();
     test_CRMotionProbabilistic();
+    
+    // Test the Manipulator
+    test_CRManipulator();
+    
+    // Test controllers
+    test_CRInverseKinematics();
     
     return 0;
 }

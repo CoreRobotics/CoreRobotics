@@ -68,6 +68,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/src/math
     ${CMAKE_SOURCE_DIR}/src/models
     ${CMAKE_SOURCE_DIR}/src/physics
+    ${CMAKE_SOURCE_DIR}/src/controllers
 )
 
 # Include 3rd part library headers
@@ -76,13 +77,6 @@ include_directories(
 )
 
 # Header files
-#file(GLOB HEADERS
-#    src/*.hpp
-#    src/core/*.hpp
-#    src/math/*.hpp
-#    src/models/*.hpp
-#    src/physics/*.hpp
-#)
 file(GLOB HEADERS_CORE
     src/core/*.hpp
 )
@@ -95,14 +89,11 @@ file(GLOB HEADERS_MODELS
 file(GLOB HEADERS_PHYSICS
     src/physics/*.hpp
 )
+file(GLOB HEADERS_CONTROLLERS
+    src/controllers/*.hpp
+)
 
 # Source files
-#file(GLOB SOURCES
-#    src/core/*.cpp
-#    src/math/*.cpp
-#    src/models/*.cpp
-#    src/physics/*.cpp
-#)
 file(GLOB SOURCES_CORE
     src/core/*.cpp
 )
@@ -115,9 +106,12 @@ file(GLOB SOURCES_MODELS
 file(GLOB SOURCES_PHYSICS
     src/physics/*.cpp
 )
+file(GLOB SOURCES_CONTROLLERS
+    src/controllers/*.cpp
+)
 
 # Create static (or shared) library
-add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS})
+add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
 # Set the output directory
 set_target_properties( ${LIB_TARGET_NAME} PROPERTIES 
@@ -127,14 +121,19 @@ set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
 
 # Sort into a group structure
 source_group( "include" FILES "src/CoreRobotics.hpp")
+
 source_group( "include\\core" FILES ${HEADERS_CORE})
 source_group( "include\\math" FILES ${HEADERS_MATH})
 source_group( "include\\models" FILES ${HEADERS_MODELS})
 source_group( "include\\physics" FILES ${HEADERS_PHYSICS})
+source_group( "include\\controllers" FILES ${HEADERS_CONTROLLERS})
+
 source_group( "src\\core" FILES ${SOURCES_CORE})
 source_group( "src\\math" FILES ${SOURCES_MATH})
 source_group( "src\\models" FILES ${SOURCES_MODELS})
 source_group( "src\\physics" FILES ${SOURCES_PHYSICS})
+source_group( "src\\controllers" FILES ${SOURCES_CONTROLLERS})
+
 
 # =====================================================================
 # 2. Setup the utility target

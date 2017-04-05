@@ -196,7 +196,12 @@ public:
     void getOrientation(CREulerMode mode, Eigen::Vector3d &orientation);
 
     //! Get the pose vector where the Euler orientation convention is specified by mode
-    void getPose(CREulerMode mode, Eigen::Matrix<double,6,1> &pose);
+    void getPose(CREulerMode mode,
+                 Eigen::Matrix<double, 6, 1> &pose);
+    
+    void getPose(CREulerMode mode,
+                 Eigen::Matrix<bool, 6, 1> poseElements,
+                 Eigen::VectorXd &pose);
     
 //---------------------------------------------------------------------
 // Protected Members
