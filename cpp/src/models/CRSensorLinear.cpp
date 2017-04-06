@@ -40,40 +40,50 @@
  */
 //=====================================================================
 
-#ifndef CRTestModules_hpp
-#define CRTestModules_hpp
-
-// Core functionality test
-void test_CRCore(void);
-
-// Math tests
-void test_CRMath(void);
-
-// Physics tests
-void CRTestFrameOffset(void); // Frame Tests
-
-// Manipulator test
-void test_CRManipulator(void);
-
-// Noise model tests
-void test_CRNoiseModel(void);           // test CRNoiseModel
-void test_CRNoiseGaussian(void);        // test CRNoiseGaussian
-void test_CRNoiseDirac(void);           // test CRNoiseDirac
-void test_CRNoiseUniform(void);         // test CRNoiseUniform
-void test_CRNoiseMixture(void);         // test CRNoiseMixture
-
-// Sensor model tests
-void test_CRSensorModel(void);          // test CRSensorModel
-void test_CRSensorLinear(void);         // test CRSensorLinear
-void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
-
-// Motion model tests
-void test_CRMotionModel(void);          // test CRMotionModel
-void test_CRMotionLinear(void);         // test CRMotionLinear
-void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
-
-// Test controller modules
-void test_CRInverseKinematics(void);    // test IK
+#include "CRSensorLinear.hpp"
 
 
-#endif /* CRTestModules_hpp */
+//=====================================================================
+// CoreRobotics namespace
+namespace CoreRobotics {
+    
+    
+//=====================================================================
+/*!
+ The constructor creates a sensor model.  The in_H specifies the H matrix
+ for the observation equation:\n
+ 
+ \f$ zPredict =  H x \f$
+ 
+ where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
+ sensor observation.
+ 
+ \param[in] in_H - the observation matrix H
+ \param[in] in_x0 - the initial state.
+ */
+//---------------------------------------------------------------------
+CRSensorLinear::CRSensorLinear(Eigen::MatrixXd in_H,
+                               Eigen::VectorXd in_x0)
+{
+    this->m_H = in_H;
+    this->setState(in_x0);
+}
+    
+    
+//=====================================================================
+/*!
+ This method simulates the measurement from the value of the underlying
+ state.\n
+ 
+ \return - simulated measurement (z).
+ */
+//---------------------------------------------------------------------
+Eigen::VectorXd CRSensorLinear::measurement(void)
+{
+    return this->m_H * this->m_state;
+}
+
+
+//=====================================================================
+// End namespace
+}

@@ -40,40 +40,38 @@
  */
 //=====================================================================
 
-#ifndef CRTestModules_hpp
-#define CRTestModules_hpp
 
-// Core functionality test
-void test_CRCore(void);
+#include <iostream>
+#include "CoreRobotics.hpp"
 
-// Math tests
-void test_CRMath(void);
-
-// Physics tests
-void CRTestFrameOffset(void); // Frame Tests
-
-// Manipulator test
-void test_CRManipulator(void);
-
-// Noise model tests
-void test_CRNoiseModel(void);           // test CRNoiseModel
-void test_CRNoiseGaussian(void);        // test CRNoiseGaussian
-void test_CRNoiseDirac(void);           // test CRNoiseDirac
-void test_CRNoiseUniform(void);         // test CRNoiseUniform
-void test_CRNoiseMixture(void);         // test CRNoiseMixture
-
-// Sensor model tests
-void test_CRSensorModel(void);          // test CRSensorModel
-void test_CRSensorLinear(void);         // test CRSensorLinear
-void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
-
-// Motion model tests
-void test_CRMotionModel(void);          // test CRMotionModel
-void test_CRMotionLinear(void);         // test CRMotionLinear
-void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
-
-// Test controller modules
-void test_CRInverseKinematics(void);    // test IK
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
 
-#endif /* CRTestModules_hpp */
+// -------------------------------------------------------------
+void test_CRSensorLinear(void){
+    
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of CRSensorLinear.\n";
+    
+    
+    // initialize a state vector
+    Eigen::VectorXd x0(1);
+    x0 << 5;
+    
+    // observation matrix
+    Eigen::Matrix<double,1,1> H;
+    H << 1;
+    
+    
+    // initialize a deterministic sensor model
+    CRSensorLinear sensor = CRSensorLinear(H,x0);
+    
+    
+    // initialize a sensor prediction vector
+    Eigen::VectorXd zPredict(1);
+    zPredict = sensor.measurement();
+    std::cout << "Predicted measurement = " << zPredict << std::endl;
+    
+}
+// -------------------------------------------------------------

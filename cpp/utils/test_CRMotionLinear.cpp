@@ -40,40 +40,61 @@
  */
 //=====================================================================
 
-#ifndef CRTestModules_hpp
-#define CRTestModules_hpp
 
-// Core functionality test
-void test_CRCore(void);
+#include <iostream>
+#include "CoreRobotics.hpp"
 
-// Math tests
-void test_CRMath(void);
-
-// Physics tests
-void CRTestFrameOffset(void); // Frame Tests
-
-// Manipulator test
-void test_CRManipulator(void);
-
-// Noise model tests
-void test_CRNoiseModel(void);           // test CRNoiseModel
-void test_CRNoiseGaussian(void);        // test CRNoiseGaussian
-void test_CRNoiseDirac(void);           // test CRNoiseDirac
-void test_CRNoiseUniform(void);         // test CRNoiseUniform
-void test_CRNoiseMixture(void);         // test CRNoiseMixture
-
-// Sensor model tests
-void test_CRSensorModel(void);          // test CRSensorModel
-void test_CRSensorLinear(void);         // test CRSensorLinear
-void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
-
-// Motion model tests
-void test_CRMotionModel(void);          // test CRMotionModel
-void test_CRMotionLinear(void);         // test CRMotionLinear
-void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
-
-// Test controller modules
-void test_CRInverseKinematics(void);    // test IK
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
 
-#endif /* CRTestModules_hpp */
+// -------------------------------------------------------------
+void test_CRMotionLinear(void){
+    
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of CRMotionLinear.\n";
+    
+    
+    // initialize a state vector
+    Eigen::VectorXd x(1);
+    x << 10;
+    
+    // Dynamics Matrix
+    Eigen::Matrix<double,1,1> A;
+    A << -1;
+    
+    // Input matrix
+    Eigen::Matrix<double,1,1> B;
+    B << 1;
+    
+    // initialize a linear dynamics model
+    CRMotionLinear model = CRMotionLinear(A,B,CR_MOTION_CONTINUOUS,x,0.2);
+    
+    
+    // initialize an input and set it to zero
+    Eigen::VectorXd u(1);
+    u << 0;
+    
+    // Initialize a time t
+    double t = 0;
+    
+    // loop
+    printf("Time (s) | State\n");
+    while(t <= 5) {
+        
+        // output the time and state
+        printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
+        
+        // step at t = 2.5
+        if (t >= 2.5){
+            u << 10;
+        }
+        
+        // get next state & time
+        x = model.motion(u);
+        t = model.getTime();
+    }
+    printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
+    
+}
+// -------------------------------------------------------------
