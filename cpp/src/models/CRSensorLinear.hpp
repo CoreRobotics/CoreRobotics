@@ -93,13 +93,6 @@ namespace CoreRobotics {
  
  
  // -------------------------------------------------------------
- // Declare a deterministic model - fcn(x)
- Eigen::VectorXd detPredFcn(Eigen::VectorXd x){
-     return x;  // observation (z = x)
- }
- 
- 
- // -------------------------------------------------------------
  void main(void){
  
      std::cout << "*************************************\n";
@@ -110,9 +103,13 @@ namespace CoreRobotics {
      Eigen::VectorXd x0(1);
      x0 << 5;
      
+     // observation matrix
+     Eigen::Matrix<double,1,1> H;
+     H << 1;
+     
      
      // initialize a deterministic sensor model
-     CRSensorLinear sensor = CRSensorLinear(*detPredFcn,x0);
+     CRSensorLinear sensor = CRSensorLinear(H,x0);
      
      
      // initialize a sensor prediction vector
@@ -154,17 +151,15 @@ public:
 // Public Methods
 public:
     
+    //! Simulate the measurement
+    Eigen::VectorXd measurement(void);
+    
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
     //! Observation matrix
     Eigen::MatrixXd m_H;
-    
-    //! Callback to the deterministic predictor function z = h(x)
-    Eigen::VectorXd m_measPredictFcn(Eigen::VectorXd x){
-        return this->m_H * x;
-    }
     
 };
 

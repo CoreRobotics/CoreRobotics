@@ -64,10 +64,12 @@ void test_CRNoiseMixture(void);         // test CRNoiseMixture
 
 // Sensor model tests
 void test_CRSensorModel(void);          // test CRSensorModel
+void test_CRSensorLinear(void);         // test CRSensorLinear
 void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
 
 // Motion model tests
 void test_CRMotionModel(void);          // test CRMotionModel
+void test_CRMotionLinear(void);         // test CRMotionLinear
 void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
 
 // Test controller modules

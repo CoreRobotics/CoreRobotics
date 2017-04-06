@@ -94,6 +94,65 @@ CRMotionLinear::CRMotionLinear(Eigen::MatrixXd in_A,
     this->setTimeStep(in_timeStep);
     this->setState(in_x0);
 }
+    
+    
+//=====================================================================
+/*!
+ This method simulates the motion forward by one step from the current
+ state.  If the motion model is discrete, this just evaluates the
+ dynamics equation (callback) for the specified input u.  However,
+ if the model is continuous, then a Runge-Kutta integration scheme is
+ used to simulate the next time step.\n
+ 
+ \param[in] in_u - input (forcing term) vector
+ \return - the new state
+ */
+//---------------------------------------------------------------------
+Eigen::VectorXd CRMotionLinear::motion(Eigen::VectorXd in_u)
+{
+    double t = this->m_time;
+    double dt = this->m_dt;
+    
+    if (this->m_type == CR_MOTION_DISCRETE) {
+        // update the state
+        this->m_state = this->m_dynPredictFcn(this->m_state,in_u,t);
+        
+    } else if (this->m_type == CR_MOTION_CONTINUOUS) {
+        // update the state
+        this->m_state = this->rk4step(this->m_state,in_u,t,dt);
+    }
+    
+    // update the time
+    this->m_time = t+dt;
+    
+    // return the new state
+    return this->m_state;
+}
+
+
+//=====================================================================
+/*!
+ This method performs a Runge Kutta step on the dynFcn member.\n
+ 
+ \param[in] in_x - state x(k)
+ \param[in] in_u - input u(k)
+ \param[in] in_t - time t(k)
+ \param[in] in_dt - sample rate dt
+ \return - the next state x(k+1)
+ */
+//---------------------------------------------------------------------
+Eigen::VectorXd CRMotionLinear::rk4step(Eigen::VectorXd in_x,
+                                       Eigen::VectorXd in_u,
+                                       double in_t,
+                                       double in_dt)
+{
+    // RK4 step
+    Eigen::VectorXd f1 = this->m_dynPredictFcn(in_x,in_u,in_t);
+    Eigen::VectorXd f2 = this->m_dynPredictFcn(in_x+in_dt*f1/2,in_u,in_t+in_dt/2);
+    Eigen::VectorXd f3 = this->m_dynPredictFcn(in_x+in_dt*f2/2,in_u,in_t+in_dt/2);
+    Eigen::VectorXd f4 = this->m_dynPredictFcn(in_x+in_dt*f3,in_u,in_t+in_dt);
+    return in_x + in_dt/6*(f1 + 2*f2 + 2*f3 + f4);
+}
 
 
 //=====================================================================

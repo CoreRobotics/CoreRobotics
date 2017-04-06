@@ -70,10 +70,12 @@ int main(int argc, const char * argv[]) {
     
     // Test the sensor models
     test_CRSensorModel();
+    test_CRSensorLinear();
     test_CRSensorProbabilistic();
     
     // Test the motion models
     test_CRMotionModel();
+    test_CRMotionLinear();
     test_CRMotionProbabilistic();
     
     // Test the Manipulator

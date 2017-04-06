@@ -40,50 +40,61 @@
  */
 //=====================================================================
 
-#include "CRSensorLinear.hpp"
+
+#include <iostream>
+#include "CoreRobotics.hpp"
+
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
 
-//=====================================================================
-// CoreRobotics namespace
-namespace CoreRobotics {
+// -------------------------------------------------------------
+void test_CRMotionLinear(void){
+    
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of CRMotionLinear.\n";
     
     
-//=====================================================================
-/*!
- The constructor creates a sensor model.  The in_H specifies the H matrix
- for the observation equation:\n
- 
- \f$ zPredict =  H x \f$
- 
- where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
- sensor observation.
- 
- \param[in] in_H - the observation matrix H
- \param[in] in_x0 - the initial state.
- */
-//---------------------------------------------------------------------
-CRSensorLinear::CRSensorLinear(Eigen::MatrixXd in_H,
-                               Eigen::VectorXd in_x0)
-{
-    this->m_H = in_H;
-    this->setState(in_x0);
+    // initialize a state vector
+    Eigen::VectorXd x(1);
+    x << 10;
+    
+    // Dynamics Matrix
+    Eigen::Matrix<double,1,1> A;
+    A << -1;
+    
+    // Input matrix
+    Eigen::Matrix<double,1,1> B;
+    B << 1;
+    
+    // initialize a linear dynamics model
+    CRMotionLinear model = CRMotionLinear(A,B,CR_MOTION_CONTINUOUS,x,0.2);
+    
+    
+    // initialize an input and set it to zero
+    Eigen::VectorXd u(1);
+    u << 0;
+    
+    // Initialize a time t
+    double t = 0;
+    
+    // loop
+    printf("Time (s) | State\n");
+    while(t <= 5) {
+        
+        // output the time and state
+        printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
+        
+        // step at t = 2.5
+        if (t >= 2.5){
+            u << 10;
+        }
+        
+        // get next state & time
+        x = model.motion(u);
+        t = model.getTime();
+    }
+    printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
+    
 }
-    
-    
-//=====================================================================
-/*!
- This method simulates the measurement from the value of the underlying
- state.\n
- 
- \return - simulated measurement (z).
- */
-//---------------------------------------------------------------------
-Eigen::VectorXd CRSensorLinear::measurement(void)
-{
-    return this->m_H * this->m_state;
-}
-
-
-//=====================================================================
-// End namespace
-}
+// -------------------------------------------------------------

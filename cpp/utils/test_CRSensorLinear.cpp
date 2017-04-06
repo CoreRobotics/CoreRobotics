@@ -40,50 +40,38 @@
  */
 //=====================================================================
 
-#include "CRSensorLinear.hpp"
+
+#include <iostream>
+#include "CoreRobotics.hpp"
+
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
 
-//=====================================================================
-// CoreRobotics namespace
-namespace CoreRobotics {
+// -------------------------------------------------------------
+void test_CRSensorLinear(void){
+    
+    std::cout << "*************************************\n";
+    std::cout << "Demonstration of CRSensorLinear.\n";
     
     
-//=====================================================================
-/*!
- The constructor creates a sensor model.  The in_H specifies the H matrix
- for the observation equation:\n
- 
- \f$ zPredict =  H x \f$
- 
- where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
- sensor observation.
- 
- \param[in] in_H - the observation matrix H
- \param[in] in_x0 - the initial state.
- */
-//---------------------------------------------------------------------
-CRSensorLinear::CRSensorLinear(Eigen::MatrixXd in_H,
-                               Eigen::VectorXd in_x0)
-{
-    this->m_H = in_H;
-    this->setState(in_x0);
+    // initialize a state vector
+    Eigen::VectorXd x0(1);
+    x0 << 5;
+    
+    // observation matrix
+    Eigen::Matrix<double,1,1> H;
+    H << 1;
+    
+    
+    // initialize a deterministic sensor model
+    CRSensorLinear sensor = CRSensorLinear(H,x0);
+    
+    
+    // initialize a sensor prediction vector
+    Eigen::VectorXd zPredict(1);
+    zPredict = sensor.measurement();
+    std::cout << "Predicted measurement = " << zPredict << std::endl;
+    
 }
-    
-    
-//=====================================================================
-/*!
- This method simulates the measurement from the value of the underlying
- state.\n
- 
- \return - simulated measurement (z).
- */
-//---------------------------------------------------------------------
-Eigen::VectorXd CRSensorLinear::measurement(void)
-{
-    return this->m_H * this->m_state;
-}
-
-
-//=====================================================================
-// End namespace
-}
+// -------------------------------------------------------------

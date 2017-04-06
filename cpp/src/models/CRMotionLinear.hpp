@@ -100,13 +100,6 @@ namespace CoreRobotics {
  
  
  // -------------------------------------------------------------
- // Declare a continuous motion model - xdot = fcn(x,u,t)
- Eigen::VectorXd dynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t){
-     return -x + u;  // motion
- }
- 
- 
- // -------------------------------------------------------------
  void main(void){
  
      std::cout << "*************************************\n";
@@ -117,9 +110,16 @@ namespace CoreRobotics {
      Eigen::VectorXd x(1);
      x << 10;
      
+     // Dynamics Matrix
+     Eigen::Matrix<double,1,1> A;
+     A << -1;
      
-     // initialize a deterministic sensor model
-     CRMotionLinear model = CRMotionLinear(*dynFcn,CR_MOTION_CONTINUOUS,x,0.2);
+     // Input matrix
+     Eigen::Matrix<double,1,1> B;
+     B << 1;
+     
+     // initialize a linear dynamics model
+     CRMotionLinear model = CRMotionLinear(A,B,CR_MOTION_CONTINUOUS,x,0.2);
      
      
      // initialize an input and set it to zero
@@ -146,7 +146,7 @@ namespace CoreRobotics {
          t = model.getTime();
      }
      printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
- 
+     
  }
  // -------------------------------------------------------------
  
@@ -188,9 +188,18 @@ public:
 // Public Methods
 public:
     
+    //! Simulate the motion
+    Eigen::VectorXd motion(Eigen::VectorXd in_u);
+    
 //---------------------------------------------------------------------
 // Protected Methods
 protected:
+    
+    //! A Runge-Kutta solver on the dynFcn
+    Eigen::VectorXd rk4step(Eigen::VectorXd in_x,
+                            Eigen::VectorXd in_u,
+                            double in_t,
+                            double in_dt);
     
 //---------------------------------------------------------------------
 // Protected Members
