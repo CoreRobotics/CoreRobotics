@@ -52,7 +52,7 @@ Refer to the [Google C++ Style Guide](https://google.github.io/styleguide/cppgui
 - Method arguments should utilize the `i_` prefix to indicate an input argument, e.g.: `i_transferFunction`, and the `o_` prefix to indicate an output argument, e.g.: `o_transferFunction`
 - Pass input arguments by reference and output arguments by pointer, e.g.: `CRClass::solveProblem(double& i_argIn, double* o_argOut)`.  Use discretion when making an exception.
 - When a method returns only one output, use the return, e.g.: `double getProperty(void)`.  If the method has more than one output, pass by function argument, e.g.: `void getProperties(double* o_propOne, double* o_propTwo)`, and reserve the return for indicating a result.
-- If a result is returned, use the `CoreRobotics::CRResult` enumerator (contained in `CoreRobotics::CRCore`).
+- If a result is returned, use the `CoreRobotics::CRResult` enumerator (contained in `CoreRobotics::CRTypes`).
 
 
 ## Git commands for reference:
