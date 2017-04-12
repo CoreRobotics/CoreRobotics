@@ -105,13 +105,13 @@ void CRTestFrameOffset(void){
 	int dof;
 	Eigen::VectorXd jointAngles;
 	MyRobot.getDegreesOfFreedom(dof);
-	MyRobot.getConfiguration(jointAngles);
+	jointAngles = MyRobot.getConfiguration();
 	std::cout << "MyRobot has " << dof << " DOF, with joint angles = ("
 	<< jointAngles.transpose() << ") rad" << std::endl;
 
 	// Now get the Forward Kinematics and Jacobian
 	Eigen::MatrixXd Jacobian, FwdKin;
-	MyRobot.getForwardKinematics(FwdKin);
+	FwdKin = MyRobot.getForwardKinematics();
 	// MyRobot.getJacobian(Jacobian);
 	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
 	// std::cout << "Jacobian = \n" << Jacobian << std::endl;

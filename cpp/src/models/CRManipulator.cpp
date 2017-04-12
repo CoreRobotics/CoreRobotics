@@ -73,13 +73,13 @@ CRManipulator::CRManipulator() {
  fully defined by revolute joints, then this operation corresponds to
  setting the joint angle values.\n
  
- \param[in] q - configuration values
+ \param[in] i_q - configuration values
  */
 //---------------------------------------------------------------------
-void CRManipulator::setConfiguration(Eigen::VectorXd q)
+void CRManipulator::setConfiguration(Eigen::VectorXd i_q)
 {
     for (size_t i = 0; i < m_listDriven.size(); i++) {
-        m_listLinks.at(m_listDriven.at(i))->m_frame->setFreeValue(q(i));
+        m_listLinks.at(m_listDriven.at(i))->m_frame->setFreeValue(i_q(i));
     }
 }
     
@@ -90,15 +90,16 @@ void CRManipulator::setConfiguration(Eigen::VectorXd q)
  fully defined by revolute joints, then this operation corresponds to
  getting the joint angle values.\n
  
- \param[out] q - configuration values
+ \return - configuration values
  */
 //---------------------------------------------------------------------
-void CRManipulator::getConfiguration(Eigen::VectorXd &q)
+Eigen::VectorXd CRManipulator::getConfiguration(void)
 {
-    q.setZero(m_listDriven.size(),1);
+    Eigen::VectorXd q(m_listDriven.size());
     for (size_t i = 0; i < m_listDriven.size(); i++) {
         q(i) = m_listLinks.at(m_listDriven.at(i))->m_frame->getFreeValue();
     }
+    return q;
 }
     
     
@@ -109,13 +110,13 @@ void CRManipulator::getConfiguration(Eigen::VectorXd &q)
 
  See: https://en.wikipedia.org/wiki/Forward_kinematics
  
- \param[out] y - forward kinematics
+ \return - forward kinematics
  */
 //---------------------------------------------------------------------
-void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
+Eigen::MatrixXd CRManipulator::getForwardKinematics(void)
 {
     Eigen::Vector3d v;
-    y.setZero(3,m_listParents.size()+1);
+    Eigen::MatrixXd y(3,m_listParents.size()+1);
     for (size_t k = 0; k < m_listParents.size(); k++) {
         int i = k;
         v << 0, 0, 0;
@@ -125,12 +126,13 @@ void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
         }
         y.col(k+1) = v;
     }
+    return y;
 }
     
     
 //=====================================================================
 /*!
- This method gets the full pose (position and orientation) numerical 
+ This method computes the full pose (position and orientation) numerical
  Jacobian of the manipulator for the current configuration with respect
  to the tool specified by the toolIndex.  See CRManipulator::addTool
  for adding tools to the manipulator.\n
@@ -139,17 +141,18 @@ void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
  free variables in the manipulator.  The rows of the Jacobian 
  correspond to the pose vector (x, y, z, a, b, g)^T.\n
  
- \param[in] toolIndex - index of the tool to be used to compute the Jacobian.
- \param[in] mode - the Euler convention to be used to specify the orientation.
- \param[in] poseElements - [optional] a boolean vector indicating which pose elements to return
- \param[out] jacobian - (6 x N) jacobian matrix if poseElements is not specified OR
+ \param[in] i_toolIndex - index of the tool to be used to compute the Jacobian.
+ \param[in] i_mode - the Euler convention to be used to specify the orientation.
+ \param[in] i_poseElements - [optional] a boolean vector indicating which pose elements to return
+ \return jacobian - (6 x N) jacobian matrix if poseElements is not specified OR
                         (M x N) jacobian for M true values in poseElements
  */
 //---------------------------------------------------------------------
-void CRManipulator::getJacobian(unsigned toolIndex,
-                                CREulerMode mode,
-                                Eigen::MatrixXd &jacobian)
+Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
+                                        CREulerMode i_mode)
 {
+    // Initialize the Jacobian matrix
+    Eigen::MatrixXd J(6,m_listDriven.size());
 
 	// pertubation size (see http://www.maths.lth.se/na/courses/FMN081/FMN081-06/lecture7.pdf)
     double delta = 1.0e-8;		// was 1.0e-9 - can improve this (adaptive?)
@@ -161,10 +164,10 @@ void CRManipulator::getJacobian(unsigned toolIndex,
 	Eigen::Matrix<double, 6, 1> poseBwd;	// backward perturbation result
 
 	// initialize the jacobian
-    jacobian.setZero(6,m_listDriven.size());
+    // jacobian.setZero();
 
 	// intialize the configuration
-    this->getConfiguration(q0);
+    q0 = this->getConfiguration();
 
 	// step through each driven variable
     for (size_t k = 0; k < m_listDriven.size(); k++) {
@@ -177,31 +180,37 @@ void CRManipulator::getJacobian(unsigned toolIndex,
 
 		// perturb forward
         this->setConfiguration(q0+qd);
-        this->getToolPose(toolIndex, mode, poseFwd);
+        this->getToolPose(i_toolIndex, i_mode, poseFwd);
 
 		// perturb backward
         this->setConfiguration(q0-qd);
-        this->getToolPose(toolIndex, mode, poseBwd);
+        this->getToolPose(i_toolIndex, i_mode, poseBwd);
 
 		// central difference
-		jacobian.col(k) = (poseFwd - poseBwd) / (2.0*delta);
+		J.col(k) = (poseFwd - poseBwd) / (2.0*delta);
     }
     this->setConfiguration(q0);
 
 	// zero out the m_tipFrame
 	this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(),
                                                 Eigen::Vector3d::Zero());
+    
+    // return the jacobian matrix
+    return J;
 }
 
-
-void CRManipulator::getJacobian(unsigned toolIndex,
-                                CREulerMode mode,
-                                Eigen::Matrix<bool, 6, 1> poseElements,
-                                Eigen::MatrixXd &jacobian)
+    
+// Numerical Jacobian overload (for reduced pose vector)
+Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
+                                        CREulerMode i_mode,
+                                        Eigen::Matrix<bool, 6, 1> i_poseElements)
 {
     
     // Get the number of true elements in the pose vector & size the output
-    int m = poseElements.cast<int>().sum();
+    int m = i_poseElements.cast<int>().sum();
+    
+    // Initialize the Jacobian matrix
+    Eigen::MatrixXd J(m,m_listDriven.size());
     
     // pertubation size (see http://www.maths.lth.se/na/courses/FMN081/FMN081-06/lecture7.pdf)
     double delta = 1.0e-8;		// was 1.0e-9 - can improve this (adaptive?)
@@ -212,11 +221,8 @@ void CRManipulator::getJacobian(unsigned toolIndex,
     Eigen::VectorXd poseFwd;	// forward perturbation result
     Eigen::VectorXd poseBwd;	// backward perturbation result
     
-    // initialize the jacobian
-    jacobian.setZero(m,m_listDriven.size());
-    
     // intialize the configuration
-    this->getConfiguration(q0);
+    q0 = this->getConfiguration();
     
     // step through each driven variable
     for (size_t k = 0; k < m_listDriven.size(); k++) {
@@ -229,20 +235,23 @@ void CRManipulator::getJacobian(unsigned toolIndex,
         
         // perturb forward
         this->setConfiguration(q0+qd);
-        this->getToolPose(toolIndex, mode, poseElements, poseFwd);
+        this->getToolPose(i_toolIndex, i_mode, i_poseElements, poseFwd);
         
         // perturb backward
         this->setConfiguration(q0-qd);
-        this->getToolPose(toolIndex, mode, poseElements, poseBwd);
+        this->getToolPose(i_toolIndex, i_mode, i_poseElements, poseBwd);
         
         // central difference
-        jacobian.col(k) = (poseFwd - poseBwd) / (2.0*delta);
+        J.col(k) = (poseFwd - poseBwd) / (2.0*delta);
     }
     this->setConfiguration(q0);
     
     // zero out the m_tipFrame
     this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(),
                                                 Eigen::Vector3d::Zero());
+    
+    // return the jacobian matrix
+    return J;
     
 }
     

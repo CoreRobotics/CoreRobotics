@@ -127,9 +127,8 @@ CRResult CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> i_setPoint,
            (result != CR_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
-        this->m_robot->getJacobian(this->m_toolIndex,
-                                   this->m_eulerMode,
-                                   J);
+        J = this->m_robot->jacobian(this->m_toolIndex,
+                                    this->m_eulerMode);
         
         // Invert with SVD
         result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
@@ -200,10 +199,9 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd i_setPoint,
            (result != CR_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
-        this->m_robot->getJacobian(this->m_toolIndex,
-                                   this->m_eulerMode,
-                                   i_poseElements,
-                                   J);
+        J = this->m_robot->jacobian(this->m_toolIndex,
+                                    this->m_eulerMode,
+                                    i_poseElements);
         
         // Invert with SVD
         result = CRMath::svdInverse(J, this->m_svdTol, Jinv);

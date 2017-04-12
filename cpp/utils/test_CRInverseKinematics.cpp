@@ -143,7 +143,7 @@ void test_CRInverseKinematics(void) {
         
         // Now push the new joints through the robot to see if it worked
         MyRobot->setConfiguration(qSolved);
-        MyRobot->getForwardKinematics(fk);
+        fk = MyRobot->getForwardKinematics();
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -176,7 +176,7 @@ void test_CRInverseKinematics(void) {
         
         // Now push the new joints through the robot to see if it worked
         MyRobot->setConfiguration(qSolved);
-        MyRobot->getForwardKinematics(fk);
+        fk = MyRobot->getForwardKinematics();
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -211,7 +211,7 @@ void test_CRInverseKinematics(void) {
         
         // Now push the new joints through the robot to see if it worked
         MyRobot->setConfiguration(qSolved);
-        MyRobot->getForwardKinematics(fk);
+        fk = MyRobot->getForwardKinematics();
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -244,7 +244,7 @@ void test_CRInverseKinematics(void) {
         
         // Now push the new joints through the robot to see if it worked
         MyRobot->setConfiguration(qSolved);
-        MyRobot->getForwardKinematics(fk);
+        fk = MyRobot->getForwardKinematics();
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -287,7 +287,7 @@ void test_CRInverseKinematics(void) {
         
         // Now push the new joints through the robot to see if it worked
         MyRobot->setConfiguration(qSolved);
-        MyRobot->getForwardKinematics(fk);
+        fk = MyRobot->getForwardKinematics();
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -331,7 +331,7 @@ void test_CRInverseKinematics(void) {
             
             // Now push the new joints through the robot to see if it worked
             MyRobot->setConfiguration(q);
-            MyRobot->getForwardKinematics(fk);
+            fk = MyRobot->getForwardKinematics();
             
         } else {
             std::cout << "No solution found! Returning original configuration.\n";

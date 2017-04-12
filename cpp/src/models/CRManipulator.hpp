@@ -219,23 +219,13 @@ public:
 public:
     
     //! Set the configuration (joint) space positions
-    void setConfiguration(Eigen::VectorXd q);
+    void setConfiguration(Eigen::VectorXd i_q);
     
     //! Get the configuration (joint) space positions
-    void getConfiguration(Eigen::VectorXd &q);
+    Eigen::VectorXd getConfiguration(void);
     
     //! Get the instantaneous forward kinematics
-    void getForwardKinematics(Eigen::MatrixXd &y);
-    
-    //! Get the instantaneous numerical Jacobian
-	void getJacobian(unsigned toolIndex,
-                     CREulerMode mode,
-                     Eigen::MatrixXd &jacobian);
-
-    void getJacobian(unsigned toolIndex,
-                     CREulerMode mode,
-                     Eigen::Matrix<bool, 6, 1> i_poseElements,
-                     Eigen::MatrixXd &jacobian);
+    Eigen::MatrixXd getForwardKinematics(void);
     
     //! Get the number of links in the list
     void getNumberOfLinks(int &n);
@@ -258,6 +248,18 @@ public:
 
 	//! Set the model type
 	void setModelType(CRManipulatorType type) { this->m_modelType = type; }
+    
+//---------------------------------------------------------------------
+// Jacobian
+public:
+    
+    //! Compute the instantaneous numerical Jacobian
+    Eigen::MatrixXd jacobian(unsigned i_toolIndex,
+                             CREulerMode i_mode);
+    
+    Eigen::MatrixXd jacobian(unsigned i_toolIndex,
+                             CREulerMode i_mode,
+                             Eigen::Matrix<bool, 6, 1> i_poseElements);
     
 //---------------------------------------------------------------------
 // Add link/tool Methods
