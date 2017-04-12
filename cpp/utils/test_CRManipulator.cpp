@@ -114,7 +114,7 @@ void test_CRManipulator(void) {
 	std::cout << "Jacobian = \n" << Jacobian << std::endl;
 
 	// now set a new robot configuration and get the FK and jacobian
-	jointAngles << CoreRobotics::PI / 4.0, -CoreRobotics::PI / 2.0;
+	jointAngles << CoreRobotics::CR_PI / 4.0, -CoreRobotics::CR_PI / 2.0;
 	std::cout << "Set joint angles = ("
 		<< jointAngles.transpose() << ") rad" << std::endl;
 	MyRobot.setConfiguration(jointAngles);

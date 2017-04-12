@@ -140,7 +140,7 @@ Eigen::VectorXd CRNoiseGaussian::sample(void)
 double CRNoiseGaussian::probability(Eigen::VectorXd in_x)
 {
     // compute subarguments
-    Eigen::MatrixXd cov2pi = 2*CoreRobotics::PI*this->m_parameters.cov;
+    Eigen::MatrixXd cov2pi = 2*CoreRobotics::CR_PI*this->m_parameters.cov;
     Eigen::VectorXd error = in_x - this->m_parameters.mean;
     
     // define the arguments (gain k and arg of exponent)

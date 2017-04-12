@@ -224,7 +224,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(-r01, r00);
                 g = 0;
             }
@@ -247,7 +247,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(-r12, r11);
                 g = 0;
             }
@@ -270,7 +270,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(-r20, r22);
                 g = 0;
             }
@@ -293,7 +293,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(r10, r11);
                 g = 0;
             }
@@ -316,7 +316,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(r21, r22);
                 g = 0;
             }
@@ -339,7 +339,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(r02, r00);
                 g = 0;
             }
@@ -363,14 +363,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = -CoreRobotics::PI / 2;
+                b = -CoreRobotics::CR_PI / 2;
                 a = -atan2(r10, r11);
                 g = 0;
             }
         } 
         else 
         {
-            b = CoreRobotics::PI / 2;
+            b = CoreRobotics::CR_PI / 2;
             a = atan2(r10, r11);
             g = 0;
         }
@@ -386,14 +386,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI / 2;
+                b = CoreRobotics::CR_PI / 2;
                 a = -atan2(r21, r22);
                 g = 0;
             }
         }
         else
         {
-            b = CoreRobotics::PI / 2;
+            b = CoreRobotics::CR_PI / 2;
             a = atan2(r21, r22);
             g = 0;
         }
@@ -409,14 +409,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI / 2;
+                b = CoreRobotics::CR_PI / 2;
                 a = -atan2(r02, r00);
                 g = 0;
             }
         }
         else
         {
-            b = CoreRobotics::PI / 2;
+            b = CoreRobotics::CR_PI / 2;
             a = atan2(r02, r00);
             g = 0;
         }
@@ -432,14 +432,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI / 2;
+                b = CoreRobotics::CR_PI / 2;
                 a = -atan2(-r20, r22);
                 g = 0;
             }
         }
         else
         {
-            b = CoreRobotics::PI / 2;
+            b = CoreRobotics::CR_PI / 2;
             a = atan2(-r20, r22);
             g = 0;
         }
@@ -455,14 +455,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI / 2;
+                b = CoreRobotics::CR_PI / 2;
                 a = -atan2(-r12, r11);
                 g = 0;
             }
         }
         else
         {
-            b = -CoreRobotics::PI / 2;
+            b = -CoreRobotics::CR_PI / 2;
             a = atan2(-r12, r11);
             g = 0;
         }
@@ -478,14 +478,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI / 2;
+                b = CoreRobotics::CR_PI / 2;
                 a = -atan2(-r01, r00);
                 g = 0;
             }
         }
         else
         {
-            b = CoreRobotics::PI / 2;
+            b = CoreRobotics::CR_PI / 2;
             a = atan2(-r01, r00);
             g = 0;
         }
