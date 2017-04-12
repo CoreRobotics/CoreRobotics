@@ -97,7 +97,7 @@ void CRManipulator::getConfiguration(Eigen::VectorXd &q)
 {
     q.setZero(m_listDriven.size(),1);
     for (size_t i = 0; i < m_listDriven.size(); i++) {
-        m_listLinks.at(m_listDriven.at(i))->m_frame->getFreeValue(q(i));
+        q(i) = m_listLinks.at(m_listDriven.at(i))->m_frame->getFreeValue();
     }
 }
     
@@ -120,7 +120,7 @@ void CRManipulator::getForwardKinematics(Eigen::MatrixXd &y)
         int i = k;
         v << 0, 0, 0;
         while (i > -1) {
-            m_listLinks.at(i)->m_frame->transformToParent(v,v);
+            v = m_listLinks.at(i)->m_frame->transformToParent(v);
             i = m_listParents.at(i);
         }
         y.col(k+1) = v;
@@ -291,13 +291,13 @@ void CRManipulator::getToolFrame(unsigned toolIndex, CRFrame &tool)
 	Eigen::Matrix4d T, T0;
 
 	// return the transformation
-	this->m_listToolFrames.at(toolIndex)->getTransformToParent(T);
+	T = this->m_listToolFrames.at(toolIndex)->getTransformToParent();
 
 	// now iterate back to the base frame
 	int i = this->m_listToolParents.at(toolIndex);
 	while (i > -1) {
 
-		this->m_listLinks.at(i)->m_frame->getTransformToParent(T0);
+		T0 = this->m_listLinks.at(i)->m_frame->getTransformToParent();
 		T = T0*T;
 		i = m_listParents.at(i);
 	}
@@ -327,7 +327,7 @@ void CRManipulator::getToolPose(unsigned toolIndex,
     this->getToolFrame(toolIndex, *this->m_tipFrame);
     
     // get the pose of the frame
-    this->m_tipFrame->getPose(mode, pose);
+    pose = this->m_tipFrame->getPose(mode);
 }
     
 void CRManipulator::getToolPose(unsigned toolIndex,
@@ -339,7 +339,7 @@ void CRManipulator::getToolPose(unsigned toolIndex,
     this->getToolFrame(toolIndex, *this->m_tipFrame);
     
     // get the pose of the frame
-    this->m_tipFrame->getPose(mode, poseElements, pose);
+    pose = this->m_tipFrame->getPose(mode, poseElements);
 }
 
     

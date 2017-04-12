@@ -67,7 +67,8 @@ enum CRSignalType {
 //! Result enumerator
 enum CRResult {
     CR_RESULT_SUCCESS,
-    CR_RESULT_SINGULAR
+    CR_RESULT_SINGULAR,
+    CR_RESULT_UNWRITABLE,
 };
 
     

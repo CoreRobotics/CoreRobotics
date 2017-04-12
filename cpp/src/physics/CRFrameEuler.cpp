@@ -54,39 +54,45 @@ namespace CoreRobotics {
  The constructor sets the rotation and translation parameters upon
  construction, with defaults listed in parenthesis.\n
  
- \param[in]   x      - x position of the frame (0)
- \param[in]   y      - y position of the frame (0)
- \param[in]   z      - z position of the frame (0)
- \param[in]   a      - alpha angle of the frame [rad] (0)
- \param[in]   b      - beta angle of the frame [rad] (0)
- \param[in]   g      - gamma angle of the frame [rad] (0)
- \param[in]   mode   - Euler angle convention (CR_EULER_MODE_ZXZ)
- \param[in]   free   - free variable (CR_EULER_FREE_NONE)
+ \param[in]   i_x      - x position of the frame (0)
+ \param[in]   i_y      - y position of the frame (0)
+ \param[in]   i_z      - z position of the frame (0)
+ \param[in]   i_a      - alpha angle of the frame [rad] (0)
+ \param[in]   i_b      - beta angle of the frame [rad] (0)
+ \param[in]   i_g      - gamma angle of the frame [rad] (0)
+ \param[in]   i_mode   - Euler angle convention (CR_EULER_MODE_ZXZ)
+ \param[in]   i_free   - free variable (CR_EULER_FREE_NONE)
  */
 //---------------------------------------------------------------------
-CRFrameEuler::CRFrameEuler(double x, double y, double z, double a, double b, double g,
-                           CREulerMode mode, CREulerFreeVariable free)
+CRFrameEuler::CRFrameEuler(double i_x,
+                           double i_y,
+                           double i_z,
+                           double i_a,
+                           double i_b,
+                           double i_g,
+                           CREulerMode i_mode,
+                           CREulerFreeVariable i_free)
 {
-    pos_x = x;
-    pos_y = y;
-    pos_z = z;
-    ang_a = a;
-    ang_b = b;
-    ang_g = g;
-    eulerMode = mode;
-    freeVar = free;
+    m_posX = i_x;
+    m_posY = i_y;
+    m_posZ = i_z;
+    m_angA = i_a;
+    m_angB = i_b;
+    m_angG = i_g;
+    m_eulerMode = i_mode;
+    m_freeVar = i_free;
     setRotationAndTranslation();
 }
 CRFrameEuler::CRFrameEuler()
 {
-    pos_x = 0.0;
-    pos_y = 0.0;
-    pos_z = 0.0;
-    ang_a = 0.0;
-    ang_b = 0.0;
-    ang_g = 0.0;
-    eulerMode = CR_EULER_MODE_ZXZ;
-    freeVar = CR_EULER_FREE_NONE;
+    m_posX = 0.0;
+    m_posY = 0.0;
+    m_posZ = 0.0;
+    m_angA = 0.0;
+    m_angB = 0.0;
+    m_angG = 0.0;
+    m_eulerMode = CR_EULER_MODE_ZXZ;
+    m_freeVar = CR_EULER_FREE_NONE;
     setRotationAndTranslation();
 }
 
@@ -95,40 +101,41 @@ CRFrameEuler::CRFrameEuler()
 //=====================================================================
 /*!
  This method sets the value of the free variable.  The method returns
- a true if the value was written and a false if freeVar is set to 
+ a true if the value was written and a false if m_freeVar is set to 
  CR_EULER_FREE_NONE.\n
  
- \param[in]   q   - value of the variable to be set
+ \param[in]   i_q   - value of the variable to be set
+ \return - CRResult flag indicating if the parameter is writable
  */
 //---------------------------------------------------------------------
-bool CRFrameEuler::setFreeValue(double q)
+CRResult CRFrameEuler::setFreeValue(double i_q)
 {
-    bool isWritable = true;
-    switch (freeVar){
+    CRResult result = CR_RESULT_SUCCESS;
+    switch (m_freeVar){
         case CR_EULER_FREE_NONE:
-            isWritable = false;
+            result = CR_RESULT_UNWRITABLE;
             break;
         case CR_EULER_FREE_POS_X:
-            pos_x = q;
+            m_posX = i_q;
             break;
         case CR_EULER_FREE_POS_Y:
-            pos_y = q;
+            m_posY = i_q;
             break;
         case CR_EULER_FREE_POS_Z:
-            pos_z = q;
+            m_posZ = i_q;
             break;
         case CR_EULER_FREE_ANG_A:
-            ang_a = q;
+            m_angA = i_q;
             break;
         case CR_EULER_FREE_ANG_B:
-            ang_b = q;
+            m_angB = i_q;
             break;
         case CR_EULER_FREE_ANG_G:
-            ang_g= q;
+            m_angG = i_q;
             break;
     }
     setRotationAndTranslation();
-    return isWritable;
+    return result;
 }
 
 
@@ -136,34 +143,34 @@ bool CRFrameEuler::setFreeValue(double q)
 //=====================================================================
 /*!
  This method get the value of the free variable.  The method returns 
- q = NULL if freeVar is set to CR_EULER_FREE_NONE.\n
+ q = NULL if m_freeVar is set to CR_EULER_FREE_NONE.\n
  
- \param[out]   q   - value of the free variable.
+ \return - value of the free variable.
  */
 //---------------------------------------------------------------------
-void CRFrameEuler::getFreeValue(double &q)
+double CRFrameEuler::getFreeValue(void)
 {
-    switch (freeVar){
+    switch (m_freeVar){
         case CR_EULER_FREE_NONE:
-            q = 0.0;
+            return 0.0;
             break;
         case CR_EULER_FREE_POS_X:
-            q = pos_x;
+            return m_posX;
             break;
         case CR_EULER_FREE_POS_Y:
-            q = pos_y;
+            return m_posY;
             break;
         case CR_EULER_FREE_POS_Z:
-            q = pos_z;
+            return m_posZ;
             break;
         case CR_EULER_FREE_ANG_A:
-            q = ang_a;
+            return m_angA;
             break;
         case CR_EULER_FREE_ANG_B:
-            q = ang_b;
+            return m_angB;
             break;
         case CR_EULER_FREE_ANG_G:
-            q = ang_g;
+            return m_angG;
             break;
     }
 }
@@ -174,12 +181,12 @@ void CRFrameEuler::getFreeValue(double &q)
 /*!
  This method sets the value of the Euler convention.\n
  
- \param[in]   mode   - Euler convention
+ \param[in]   i_mode   - Euler convention
  */
 //---------------------------------------------------------------------
-void CRFrameEuler::setMode(CREulerMode mode)
+void CRFrameEuler::setMode(CREulerMode i_mode)
 {
-    eulerMode = mode;
+    m_eulerMode = i_mode;
     setRotationAndTranslation();
 }
 
@@ -189,12 +196,12 @@ void CRFrameEuler::setMode(CREulerMode mode)
 /*!
  This method gets the value of the Euler convention.\n
  
- \param[out]   mode   - Euler convention.
+ \return - Euler convention.
  */
 //---------------------------------------------------------------------
-void CRFrameEuler::getMode(CREulerMode &mode)
+CREulerMode CRFrameEuler::getMode(void)
 {
-    mode = eulerMode;
+    return m_eulerMode;
 }
 
 
@@ -203,16 +210,16 @@ void CRFrameEuler::getMode(CREulerMode &mode)
 /*!
  This method sets the position values of the frame transformation.\n
  
- \param[in]   x   - x position of the frame
- \param[in]   y   - y position of the frame
- \param[in]   z   - z position of the frame
+ \param[in]   i_x   - x position of the frame
+ \param[in]   i_y   - y position of the frame
+ \param[in]   i_z   - z position of the frame
  */
 //---------------------------------------------------------------------
-void CRFrameEuler::setPosition(double x, double y, double z)
+void CRFrameEuler::setPosition(double i_x, double i_y, double i_z)
 {
-    pos_x = x;
-    pos_y = y;
-    pos_z = z;
+    m_posX = i_x;
+    m_posY = i_y;
+    m_posZ = i_z;
     setRotationAndTranslation();
 }
 
@@ -221,16 +228,16 @@ void CRFrameEuler::setPosition(double x, double y, double z)
 /*!
  This method gets the position values of the frame transformation.\n
  
- \param[out]   x   x position of the frame
- \param[out]   y   y position of the frame
- \param[out]   z   z position of the frame
+ \param[out]   o_x   x position of the frame
+ \param[out]   o_y   y position of the frame
+ \param[out]   o_z   z position of the frame
  */
 //---------------------------------------------------------------------
-void CRFrameEuler::getPosition(double &x, double &y, double &z)
+void CRFrameEuler::getPosition(double& o_x, double& o_y, double& o_z)
 {
-    x = pos_x;
-    y = pos_y;
-    z = pos_z;
+    o_x = m_posX;
+    o_y = m_posY;
+    o_z = m_posZ;
 }
 
 
@@ -239,16 +246,16 @@ void CRFrameEuler::getPosition(double &x, double &y, double &z)
 /*!
  This method sets the orientation values of the frame transformation.\n
  
- \param[in]   a   - alpha angle of the frame [rad]
- \param[in]   b   - beta angle of the frame [rad]
- \param[in]   g   - gamma angle of the frame [rad]
+ \param[in]   i_a   - alpha angle of the frame [rad]
+ \param[in]   i_b   - beta angle of the frame [rad]
+ \param[in]   i_g   - gamma angle of the frame [rad]
  */
 //---------------------------------------------------------------------
-void CRFrameEuler::setOrientation(double a, double b, double g)
+void CRFrameEuler::setOrientation(double i_a, double i_b, double i_g)
 {
-    ang_a = a;
-    ang_b = b;
-    ang_g = g;
+    m_angA = i_a;
+    m_angB = i_b;
+    m_angG = i_g;
     setRotationAndTranslation();
 }
 
@@ -257,16 +264,16 @@ void CRFrameEuler::setOrientation(double a, double b, double g)
 /*!
  This method gets the orientation values of the frame transformation.\n
  
- \param[out]   a   - alpha angle of the frame [rad]
- \param[out]   b   - beta angle of the frame [rad]
- \param[out]   g   - gamma angle of the frame [rad]
+ \param[out]   o_a   - alpha angle of the frame [rad]
+ \param[out]   o_b   - beta angle of the frame [rad]
+ \param[out]   o_g   - gamma angle of the frame [rad]
  */
 //---------------------------------------------------------------------
-void CRFrameEuler::getOrientation(double &a, double &b, double &g)
+void CRFrameEuler::getOrientation(double& o_a, double& o_b, double& o_g)
 {
-    a = ang_a;
-    b = ang_b;
-    g = ang_g;
+    o_a = m_angA;
+    o_b = m_angB;
+    o_g = m_angG;
 }
 
 
@@ -276,18 +283,22 @@ void CRFrameEuler::getOrientation(double &a, double &b, double &g)
  This method sets the position and orientation values of the frame 
  transformation.\n
  
- \param[in]   x   - x position of the frame
- \param[in]   y   - y position of the frame
- \param[in]   z   - z position of the frame
- \param[in]   a   - alpha angle of the frame [rad]
- \param[in]   b   - beta angle of the frame [rad]
- \param[in]   g   - gamma angle of the frame [rad]
+ \param[in]   i_x   - x position of the frame
+ \param[in]   i_y   - y position of the frame
+ \param[in]   i_z   - z position of the frame
+ \param[in]   i_a   - alpha angle of the frame [rad]
+ \param[in]   i_b   - beta angle of the frame [rad]
+ \param[in]   i_g   - gamma angle of the frame [rad]
  */
 //---------------------------------------------------------------------
-void CRFrameEuler::setPositionAndOrientation(double x, double y, double z, double a, double b, double g)
-{
-    setPosition(x,y,z);
-    setOrientation(a,b,g);
+void CRFrameEuler::setPositionAndOrientation(double i_x,
+                                             double i_y,
+                                             double i_z,
+                                             double i_a,
+                                             double i_b,
+                                             double i_g){
+    setPosition(i_x,i_y,i_z);
+    setOrientation(i_a,i_b,i_g);
 }
 
 
@@ -296,18 +307,23 @@ void CRFrameEuler::setPositionAndOrientation(double x, double y, double z, doubl
  TThis method gets the position and orientation values of the frame 
  transformation.\n
  
- \param[out]   x   - x position of the frame
- \param[out]   y   - y position of the frame
- \param[out]   z   - z position of the frame
- \param[out]   a   - alpha angle of the frame [rad]
- \param[out]   b   - beta angle of the frame [rad]
- \param [out]  g   - gamma angle of the frame [rad]
+ \param[out]   o_x   - x position of the frame
+ \param[out]   o_y   - y position of the frame
+ \param[out]   o_z   - z position of the frame
+ \param[out]   o_a   - alpha angle of the frame [rad]
+ \param[out]   o_b   - beta angle of the frame [rad]
+ \param [out]  o_g   - gamma angle of the frame [rad]
  */
 //---------------------------------------------------------------------
-void CRFrameEuler::getPositionAndOrientation(double &x, double &y, double &z, double &a, double &b, double &g)
+void CRFrameEuler::getPositionAndOrientation(double& o_x,
+                                             double& o_y,
+                                             double& o_z,
+                                             double& o_a,
+                                             double& o_b,
+                                             double& o_g)
 {
-    getPosition(x,y,z);
-    getOrientation(a,b,g);
+    getPosition(o_x,o_y,o_z);
+    getOrientation(o_a,o_b,o_g);
 }
     
     
@@ -321,8 +337,8 @@ void CRFrameEuler::getPositionAndOrientation(double &x, double &y, double &z, do
  
  */
 //---------------------------------------------------------------------
-bool CRFrameEuler::isDriven() {
-    if (freeVar == CR_EULER_FREE_NONE) {
+bool CRFrameEuler::isDriven(void) {
+    if (m_freeVar == CR_EULER_FREE_NONE) {
         return false;
     } else {
         return true;
@@ -344,88 +360,88 @@ void CRFrameEuler::setRotationAndTranslation()
     Eigen::Matrix3d r2 = Eigen::Matrix3d::Identity();
     Eigen::Matrix3d r3 = Eigen::Matrix3d::Identity();
     
-    switch (eulerMode){
+    switch (m_eulerMode){
         case CR_EULER_MODE_ZXZ:
-            rotAboutZ(ang_a, r1);
-            rotAboutX(ang_b, r2);
-            rotAboutZ(ang_g, r3);
+            rotAboutZ(m_angA, r1);
+            rotAboutX(m_angB, r2);
+            rotAboutZ(m_angG, r3);
             break;
         case CR_EULER_MODE_XYX:
-            rotAboutX(ang_a, r1);
-            rotAboutY(ang_b, r2);
-            rotAboutX(ang_g, r3);
+            rotAboutX(m_angA, r1);
+            rotAboutY(m_angB, r2);
+            rotAboutX(m_angG, r3);
             break;
         case CR_EULER_MODE_YZY:
-            rotAboutY(ang_a, r1);
-            rotAboutZ(ang_b, r2);
-            rotAboutY(ang_g, r3);
+            rotAboutY(m_angA, r1);
+            rotAboutZ(m_angB, r2);
+            rotAboutY(m_angG, r3);
             break;
         case CR_EULER_MODE_ZYZ:
-            rotAboutZ(ang_a, r1);
-            rotAboutY(ang_b, r2);
-            rotAboutZ(ang_g, r3);
+            rotAboutZ(m_angA, r1);
+            rotAboutY(m_angB, r2);
+            rotAboutZ(m_angG, r3);
             break;
         case CR_EULER_MODE_XZX:
-            rotAboutX(ang_a, r1);
-            rotAboutZ(ang_b, r2);
-            rotAboutX(ang_g, r3);
+            rotAboutX(m_angA, r1);
+            rotAboutZ(m_angB, r2);
+            rotAboutX(m_angG, r3);
             break;
         case CR_EULER_MODE_YXY:
-            rotAboutY(ang_a, r1);
-            rotAboutX(ang_b, r2);
-            rotAboutY(ang_g, r3);
+            rotAboutY(m_angA, r1);
+            rotAboutX(m_angB, r2);
+            rotAboutY(m_angG, r3);
             break;
         case CR_EULER_MODE_XYZ:
-            rotAboutX(ang_a, r1);
-            rotAboutY(ang_b, r2);
-            rotAboutZ(ang_g, r3);
+            rotAboutX(m_angA, r1);
+            rotAboutY(m_angB, r2);
+            rotAboutZ(m_angG, r3);
             break;
         case CR_EULER_MODE_YZX:
-            rotAboutY(ang_a, r1);
-            rotAboutZ(ang_b, r2);
-            rotAboutX(ang_g, r3);
+            rotAboutY(m_angA, r1);
+            rotAboutZ(m_angB, r2);
+            rotAboutX(m_angG, r3);
             break;
         case CR_EULER_MODE_ZXY:
-            rotAboutZ(ang_a, r1);
-            rotAboutX(ang_b, r2);
-            rotAboutY(ang_g, r3);
+            rotAboutZ(m_angA, r1);
+            rotAboutX(m_angB, r2);
+            rotAboutY(m_angG, r3);
             break;
         case CR_EULER_MODE_XZY:
-            rotAboutX(ang_a, r1);
-            rotAboutZ(ang_b, r2);
-            rotAboutY(ang_g, r3);
+            rotAboutX(m_angA, r1);
+            rotAboutZ(m_angB, r2);
+            rotAboutY(m_angG, r3);
             break;
         case CR_EULER_MODE_ZYX:
-            rotAboutZ(ang_a, r1);
-            rotAboutY(ang_b, r2);
-            rotAboutX(ang_g, r3);
+            rotAboutZ(m_angA, r1);
+            rotAboutY(m_angB, r2);
+            rotAboutX(m_angG, r3);
             break;
         case CR_EULER_MODE_YXZ:
-            rotAboutY(ang_a, r1);
-            rotAboutX(ang_b, r2);
-            rotAboutZ(ang_g, r3);
+            rotAboutY(m_angA, r1);
+            rotAboutX(m_angB, r2);
+            rotAboutZ(m_angG, r3);
             break;
     }
-    rotation = r1*r2*r3;
-    translation << pos_x, pos_y, pos_z;
+    m_rotation = r1*r2*r3;
+    m_translation << m_posX, m_posY, m_posZ;
 }
 
 //! standard rotation about the x axis
-void CRFrameEuler::rotAboutX(double ang, Eigen::Matrix3d &rot)
+void CRFrameEuler::rotAboutX(double i_ang, Eigen::Matrix3d& o_rot)
 {
-    rot << 1, 0, 0, 0, cos(ang), -sin(ang), 0, sin(ang),  cos(ang);
+    o_rot << 1, 0, 0, 0, cos(i_ang), -sin(i_ang), 0, sin(i_ang),  cos(i_ang);
 }
 
 //! standard rotation about the y axis
-void CRFrameEuler::rotAboutY(double ang, Eigen::Matrix3d &rot)
+void CRFrameEuler::rotAboutY(double i_ang, Eigen::Matrix3d& o_rot)
 {
-    rot << cos(ang), 0, sin(ang), 0, 1, 0, -sin(ang), 0, cos(ang);
+    o_rot << cos(i_ang), 0, sin(i_ang), 0, 1, 0, -sin(i_ang), 0, cos(i_ang);
 }
 
 //! standard rotation about the z axis
-void CRFrameEuler::rotAboutZ(double ang, Eigen::Matrix3d &rot)
+void CRFrameEuler::rotAboutZ(double i_ang, Eigen::Matrix3d& o_rot)
 {
-    rot << cos(ang), -sin(ang), 0, sin(ang), cos(ang), 0, 0, 0, 1;
+    o_rot << cos(i_ang), -sin(i_ang), 0, sin(i_ang), cos(i_ang), 0, 0, 0, 1;
 }
 
 

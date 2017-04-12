@@ -63,8 +63,10 @@ void CRTestFrameOffset(void){
 	CRRigidBody* Link1 = new CRRigidBody();
 	
 	// Set info for Link 0 and add to MyRobot
-	F0->freeVar = CR_DH_FREE_THETA;
-	F1->freeVar = CR_DH_FREE_NONE;
+    F0->setFreeVariable(CR_DH_FREE_THETA);
+    F1->setFreeVariable(CR_DH_FREE_NONE);
+	// F0->m_freeVar = CR_DH_FREE_THETA;
+	// F1->m_freeVar = CR_DH_FREE_NONE;
 	// DH free variables
 		/*CR_DH_FREE_NONE
 		CR_DH_FREE_R

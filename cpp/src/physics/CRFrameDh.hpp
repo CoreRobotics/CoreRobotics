@@ -80,7 +80,7 @@ namespace CoreRobotics {
  - CRFrameDh::setMode sets the DH convention (options are in
  CoreRobotics::CRDhMode).
  
- The free variable can be specified by the CRFrameDh::freeVar member
+ The free variable can be specified by the CRFrameDh::m_freeVar member
  (options are in CoreRobotics::CRDhFreeVariable).
  
  \section Example
@@ -143,8 +143,13 @@ class CRFrameDh : public CRFrame  {
 public:
 
     //! Class constructor
-    CRFrameDh(double r, double alpha, double d, double theta, double offset,
-              CRDhMode mode, CRDhFreeVariable free);
+    CRFrameDh(double i_r,
+              double i_alpha,
+              double i_d,
+              double i_theta,
+              double i_offset,
+              CRDhMode i_mode,
+              CRDhFreeVariable i_free);
     CRFrameDh();
 
 //---------------------------------------------------------------------
@@ -152,58 +157,69 @@ public:
 public:
     
     //! Set the value of the free variable
-    bool setFreeValue(double q);
+    CRResult setFreeValue(double i_q);
     
     //! Get the value of the free variable
-    void getFreeValue(double &q);
+    double getFreeValue(void);
+    
+    //! Set the free variable
+    void setFreeVariable(CRDhFreeVariable i_free) {m_freeVar = i_free;}
+    
+    //! Get the free variable
+    CRDhFreeVariable getFreeVariable(void) {return m_freeVar;}
     
     //! Set the DH convention
-    void setMode(CRDhMode mode);
+    void setMode(CRDhMode i_mode);
     
     //! Get the DH convention
-    void getMode(CRDhMode &mode);
+    CRDhMode getMode(void);
     
     //! Set the DH parameter values
-    void setParameters(double r, double alpha, double d, double theta, double offset);
+    void setParameters(double i_r,
+                       double i_alpha,
+                       double i_d,
+                       double i_theta,
+                       double i_offset);
     
     //! Get the DH parameter values
-    void getParameters(double &r, double &alpha, double &d, double &theta, double &offset);
+    void getParameters(double& o_r,
+                       double& o_alpha,
+                       double& o_d,
+                       double& o_theta,
+                       double& o_offset);
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Query if the frame is driven, i.e. has a free variable
-    bool isDriven();
-    
-//---------------------------------------------------------------------
-// Public Members
-public:
-    
-    //! free variable indicator
-    CRDhFreeVariable freeVar;
+    bool isDriven(void);
+
     
 //---------------------------------------------------------------------
 // Private Members
 private:
     
+    //! free variable indicator
+    CRDhFreeVariable m_freeVar;
+    
     //! DH convention mode
-    CRDhMode dhMode;
+    CRDhMode m_dhMode;
 
     //! r parameter
-    double dh_r;
+    double m_dhR;
     
     //! d parameter
-    double dh_d;
+    double m_dhD;
     
     //! alpha angle parameter [rad]
-    double dh_alpha;
+    double m_dhAlpha;
     
     //! theta angle parameter [rad]
-    double dh_theta;
+    double m_dhTheta;
 
 	//! free variable offset parameter [m] or [rad]
-	double freeVarOffset;
+	double m_freeVarOffset;
     
 //---------------------------------------------------------------------
 // Private Methods
@@ -212,7 +228,7 @@ private:
     //! Overload the inhereted method to set the rotation and
     //  translation explicitly for DH parameters
     using CRFrame::setRotationAndTranslation;
-    void setRotationAndTranslation();
+    void setRotationAndTranslation(void);
 
 };
 

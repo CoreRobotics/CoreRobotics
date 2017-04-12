@@ -65,21 +65,21 @@ void test_CRManipulator(void) {
 	CRRigidBody* Link2 = new CRRigidBody();
 
 	// Set info for Link 0 and add to MyRobot
-	F0->freeVar = CR_EULER_FREE_ANG_G;
+	F0->setFreeVariable(CR_EULER_FREE_ANG_G);
 	F0->setMode(CR_EULER_MODE_XYZ);
 	F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
 	Link0->setFrame(F0);
 	MyRobot.addLink(Link0);
 
 	// Set info for Link 1 and add to MyRobot
-	F1->freeVar = CR_EULER_FREE_ANG_G;
+	F1->setFreeVariable(CR_EULER_FREE_ANG_G);
 	F1->setMode(CR_EULER_MODE_XYZ);
 	F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
 	Link1->setFrame(F1);
 	MyRobot.addLink(Link1);
 
 	// Set info for Link 2 and add to MyRobot
-	F2->freeVar = CR_EULER_FREE_NONE;
+	F2->setFreeVariable(CR_EULER_FREE_NONE);
 	F2->setMode(CR_EULER_MODE_XYZ);
 	F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
 	Link2->setFrame(F2);
@@ -127,7 +127,7 @@ void test_CRManipulator(void) {
 	Eigen::Matrix4d T;
 	CRFrame toolFrame;
 	MyRobot.getToolFrame(toolIndex, toolFrame);
-	toolFrame.getTransformToParent(T);
+	T = toolFrame.getTransformToParent();
 	std::cout << "MyRobot tool has a transformation of \n" << T << std::endl;
     
     

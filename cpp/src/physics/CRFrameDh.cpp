@@ -54,36 +54,41 @@ namespace CoreRobotics {
  The constructor sets the rotation and translation parameters upon 
  construction, with defaults listed in parenthesis.\n
  
- \param[in]   r      - x position of the frame (0)
- \param[in]   alpha  - y position of the frame (0)
- \param[in]   d      - z position of the frame (0)
- \param[in]   theta  - alpha angle of the frame [rad] (0)
- \param[in]   mode   - DH convention (CR_DH_MODE_MODIFIED)
- \param[in]   free   - free variable (CR_DH_FREE_NONE)
- \param[in]   offset - free variable offset [m] or [rad] (0)
+ \param[in]   i_r      - x position of the frame (0)
+ \param[in]   i_alpha  - y position of the frame (0)
+ \param[in]   i_d      - z position of the frame (0)
+ \param[in]   i_theta  - alpha angle of the frame [rad] (0)
+ \param[in]   i_mode   - DH convention (CR_DH_MODE_MODIFIED)
+ \param[in]   i_free   - free variable (CR_DH_FREE_NONE)
+ \param[in]   i_offset - free variable offset [m] or [rad] (0)
  */
 //=====================================================================
-CRFrameDh::CRFrameDh(double r, double alpha, double d, double theta, double offset,
-					CRDhMode mode, CRDhFreeVariable free)
+CRFrameDh::CRFrameDh(double i_r,
+                     double i_alpha,
+                     double i_d,
+                     double i_theta,
+                     double i_offset,
+                     CRDhMode i_mode,
+                     CRDhFreeVariable i_free)
 {
-    dh_r = r;
-    dh_alpha = alpha;
-    dh_d = d;
-    dh_theta = theta;
-	dhMode = mode;
-    freeVar = free;
-	freeVarOffset = offset;
+    m_dhR = i_r;
+    m_dhAlpha = i_alpha;
+    m_dhD = i_d;
+    m_dhTheta = i_theta;
+	m_dhMode = i_mode;
+    m_freeVar = i_free;
+	m_freeVarOffset = i_offset;
 	setRotationAndTranslation();
 }
 CRFrameDh::CRFrameDh()
 {
-    dh_r = 0.0;
-    dh_alpha = 0.0;
-    dh_d = 0.0;
-    dh_theta = 0.0;
-    dhMode = CR_DH_MODE_MODIFIED;
-    freeVar = CR_DH_FREE_NONE;
-	freeVarOffset = 0.0;
+    m_dhR = 0.0;
+    m_dhAlpha = 0.0;
+    m_dhD = 0.0;
+    m_dhTheta = 0.0;
+    m_dhMode = CR_DH_MODE_MODIFIED;
+    m_freeVar = CR_DH_FREE_NONE;
+	m_freeVarOffset = 0.0;
     setRotationAndTranslation();
 }
 
@@ -92,34 +97,35 @@ CRFrameDh::CRFrameDh()
 //=====================================================================
 /*!
  This method sets the value of the free variable.  The method returns a
- true if the value was written and a false if freeVar is set to 
+ true if the value was written and a false if m_freeVar is set to 
  CR_DH_FREE_NONE.\n
  
- \param[in] q - value of the variable to be set
+ \param[in] i_q - value of the variable to be set
+ \return - CRResult flag indicating if the parameter is writable
  */
 //---------------------------------------------------------------------
-bool CRFrameDh::setFreeValue(double q)
+CRResult CRFrameDh::setFreeValue(double i_q)
 {
-    bool isWritable = true;
-    switch (freeVar){
+    CRResult result = CR_RESULT_SUCCESS;
+    switch (m_freeVar){
         case CR_DH_FREE_NONE:
-            isWritable = false;
+            result = CR_RESULT_UNWRITABLE;
             break;
         case CR_DH_FREE_R:
-            dh_r = q;
+            m_dhR = i_q;
             break;
         case CR_DH_FREE_ALPHA:
-            dh_alpha = q;
+            m_dhAlpha = i_q;
             break;
         case CR_DH_FREE_D:
-            dh_d = q;
+            m_dhD = i_q;
             break;
         case CR_DH_FREE_THETA:
-            dh_theta = q;
+            m_dhTheta = i_q;
         break;
     }
     setRotationAndTranslation();
-    return isWritable;
+    return result;
 }
 
 
@@ -127,28 +133,28 @@ bool CRFrameDh::setFreeValue(double q)
 //=====================================================================
 /*!
  This method get the value of the free variable.  The method returns 
- q = NULL if freeVar is set to CR_DH_FREE_NONE.\n
+ q = NULL if m_freeVar is set to CR_DH_FREE_NONE.\n
  
- \param[out] q - value of the free variable.
+ \return - value of the free variable.
  */
 //---------------------------------------------------------------------
-void CRFrameDh::getFreeValue(double &q)
+double CRFrameDh::getFreeValue()
 {
-    switch (freeVar){
+    switch (m_freeVar){
         case CR_DH_FREE_NONE:
-            q = 0.0;
+            return 0.0;
             break;
         case CR_DH_FREE_R:
-            q = dh_r;
+            return m_dhR;
             break;
         case CR_DH_FREE_ALPHA:
-            q = dh_alpha;
+            return m_dhAlpha;
             break;
         case CR_DH_FREE_D:
-            q = dh_d;
+            return m_dhD;
             break;
         case CR_DH_FREE_THETA:
-            q = dh_theta;
+            return m_dhTheta;
             break;
     }
 }
@@ -158,12 +164,12 @@ void CRFrameDh::getFreeValue(double &q)
 /*!
  This method sets the the DH convention.\n
  
- \param[in] mode - DH convention
+ \param[in] i_mode - DH convention
  */
 //---------------------------------------------------------------------
-void CRFrameDh::setMode(CRDhMode mode)
+void CRFrameDh::setMode(CRDhMode i_mode)
 {
-    dhMode = mode;
+    m_dhMode = i_mode;
     setRotationAndTranslation();
 }
 
@@ -173,12 +179,12 @@ void CRFrameDh::setMode(CRDhMode mode)
 /*!
  This method gets the DH convention.\n
  
- \param[out] mode - DH convention.
+ \return - DH convention.
  */
 //---------------------------------------------------------------------
-void CRFrameDh::getMode(CRDhMode &mode)
+CRDhMode CRFrameDh::getMode(void)
 {
-    mode = dhMode;
+    return m_dhMode;
 }
 
 
@@ -186,18 +192,24 @@ void CRFrameDh::getMode(CRDhMode &mode)
 /*!
  This method sets the DH parameter values.\n
  
- \param[in]    x   - x position of the frame
- \param[in]    y   - y position of the frame
- \param[in]    z   - z position of the frame
+ \param[in] i_r - the r value in the DH parameter transformation
+ \param[in] i_alpha - the alpha value in the DH parameter transformation
+ \param[in] i_d - the d value in the DH parameter transformation
+ \param[in] i_theta - the theta value in the DH parameter transformation
+ \param[in] i_offset - the offset value for the driven variable
  */
 //---------------------------------------------------------------------
-void CRFrameDh::setParameters(double r, double alpha, double d, double theta, double offset)
+void CRFrameDh::setParameters(double i_r,
+                              double i_alpha,
+                              double i_d,
+                              double i_theta,
+                              double i_offset)
 {
-    dh_r = r;
-    dh_alpha = alpha;
-    dh_d = d;
-    dh_theta = theta;
-	freeVarOffset = offset;
+    m_dhR = i_r;
+    m_dhAlpha = i_alpha;
+    m_dhD = i_d;
+    m_dhTheta = i_theta;
+	m_freeVarOffset = i_offset;
     setRotationAndTranslation();
 }
 
@@ -206,18 +218,23 @@ void CRFrameDh::setParameters(double r, double alpha, double d, double theta, do
 /*!
  This method gets the DH parameter values.\n
  
- \param[out]   x   - x position of the frame
- \param[out]   y   - y position of the frame
- \param[out]   z   - z position of the frame
+ \param[out] o_r - the r value in the DH parameter transformation
+ \param[out] o_alpha - the alpha value in the DH parameter transformation
+ \param[out] o_d - the d value in the DH parameter transformation
+ \param[out] o_theta - the theta value in the DH parameter transformation
+ \param[out] o_offset - the offset value for the driven variable
  */
 //---------------------------------------------------------------------
-void CRFrameDh::getParameters(double &r, double &alpha, double &d, double &theta, double &offset)
-{
-    r = dh_r;
-    alpha = dh_alpha;
-    d = dh_d;
-    theta = dh_theta;
-	offset = freeVarOffset;
+void CRFrameDh::getParameters(double& o_r,
+                              double& o_alpha,
+                              double& o_d,
+                              double& o_theta,
+                              double& o_offset){
+    o_r = m_dhR;
+    o_alpha = m_dhAlpha;
+    o_d = m_dhD;
+    o_theta = m_dhTheta;
+	o_offset = m_freeVarOffset;
 }
     
     
@@ -231,8 +248,8 @@ void CRFrameDh::getParameters(double &r, double &alpha, double &d, double &theta
  
  */
 //---------------------------------------------------------------------
-bool CRFrameDh::isDriven() {
-    if (freeVar == CR_DH_FREE_NONE) {
+bool CRFrameDh::isDriven(void) {
+    if (m_freeVar == CR_DH_FREE_NONE) {
         return false;
     } else {
         return true;
@@ -247,55 +264,55 @@ bool CRFrameDh::isDriven() {
 //! sets the private rotation and translation members - Note that
 //  anytime a parameter gets set in the frame class, this method gets
 //  called to update the rotation/translation members.
-void CRFrameDh::setRotationAndTranslation()
+void CRFrameDh::setRotationAndTranslation(void)
 {
 
-	switch (freeVar) {
+	switch (m_freeVar) {
 	case CR_DH_FREE_NONE:
 		break;
 	case CR_DH_FREE_R:
-		dh_r = dh_r + freeVarOffset;
+		m_dhR = m_dhR + m_freeVarOffset;
 		break;
 	case CR_DH_FREE_ALPHA:
-		dh_alpha = dh_alpha + freeVarOffset;
+		m_dhAlpha = m_dhAlpha + m_freeVarOffset;
 		break;
 	case CR_DH_FREE_D:
-		dh_d = dh_d + freeVarOffset;
+		m_dhD = m_dhD + m_freeVarOffset;
 		break;
 	case CR_DH_FREE_THETA:
-		dh_theta = dh_theta + freeVarOffset;
+		m_dhTheta = m_dhTheta + m_freeVarOffset;
 		break;
 	}
 	
-    switch (dhMode){
+    switch (m_dhMode){
         case CR_DH_MODE_CLASSIC:
-            rotation << cos(dh_theta), -sin(dh_theta)*cos(dh_alpha), sin(dh_theta)*sin(dh_alpha),
-            sin(dh_theta), cos(dh_theta)*cos(dh_alpha), -cos(dh_theta)*sin(dh_alpha),
-            0, sin(dh_alpha), cos(dh_alpha);
-            translation << dh_r*cos(dh_theta), dh_r*sin(dh_theta), dh_d;
+            m_rotation << cos(m_dhTheta), -sin(m_dhTheta)*cos(m_dhAlpha), sin(m_dhTheta)*sin(m_dhAlpha),
+            sin(m_dhTheta), cos(m_dhTheta)*cos(m_dhAlpha), -cos(m_dhTheta)*sin(m_dhAlpha),
+            0, sin(m_dhAlpha), cos(m_dhAlpha);
+            m_translation << m_dhR*cos(m_dhTheta), m_dhR*sin(m_dhTheta), m_dhD;
             break;
         case CR_DH_MODE_MODIFIED:
-            rotation << cos(dh_theta), -sin(dh_theta), 0,
-            sin(dh_theta)*cos(dh_alpha), cos(dh_theta)*cos(dh_alpha), -sin(dh_alpha),
-            sin(dh_theta)*sin(dh_alpha), cos(dh_theta)*sin(dh_alpha), cos(dh_alpha);
-            translation << dh_r, -dh_d*sin(dh_alpha), dh_d*cos(dh_alpha);
+            m_rotation << cos(m_dhTheta), -sin(m_dhTheta), 0,
+            sin(m_dhTheta)*cos(m_dhAlpha), cos(m_dhTheta)*cos(m_dhAlpha), -sin(m_dhAlpha),
+            sin(m_dhTheta)*sin(m_dhAlpha), cos(m_dhTheta)*sin(m_dhAlpha), cos(m_dhAlpha);
+            m_translation << m_dhR, -m_dhD*sin(m_dhAlpha), m_dhD*cos(m_dhAlpha);
             break;
     }
 
-	switch (freeVar) {
+	switch (m_freeVar) {
 	case CR_DH_FREE_NONE:
 		break;
 	case CR_DH_FREE_R:
-		dh_r = dh_r - freeVarOffset;
+		m_dhR = m_dhR - m_freeVarOffset;
 		break;
 	case CR_DH_FREE_ALPHA:
-		dh_alpha = dh_alpha - freeVarOffset;
+		m_dhAlpha = m_dhAlpha - m_freeVarOffset;
 		break;
 	case CR_DH_FREE_D:
-		dh_d = dh_d - freeVarOffset;
+		m_dhD = m_dhD - m_freeVarOffset;
 		break;
 	case CR_DH_FREE_THETA:
-		dh_theta = dh_theta - freeVarOffset;
+		m_dhTheta = m_dhTheta - m_freeVarOffset;
 		break;
 	}
 
