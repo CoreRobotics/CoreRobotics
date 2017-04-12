@@ -134,10 +134,10 @@ void test_CRInverseKinematics(void) {
     
     // Now solve the inverse kinematics for the point
     timer.startTimer();
-    bool result = ikSolver.solve(p, q0, qSolved);
+    CRResult result = ikSolver.solve(p, q0, qSolved);
     et = timer.getElapsedTime();
     
-    if ( result ){
+    if ( result == CR_RESULT_SUCCESS ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
@@ -170,7 +170,7 @@ void test_CRInverseKinematics(void) {
     result = ikSolver.solve(p, q0, qSolved);
     et = timer.getElapsedTime();
     
-    if ( result ){
+    if ( result == CR_RESULT_SUCCESS ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
@@ -205,7 +205,7 @@ void test_CRInverseKinematics(void) {
     result = ikSolver.solve(p, q0, qSolved);
     et = timer.getElapsedTime();
     
-    if ( result ){
+    if ( result == CR_RESULT_SUCCESS ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
@@ -238,7 +238,7 @@ void test_CRInverseKinematics(void) {
     result = ikSolver.solve(p, q0, qSolved);
     et = timer.getElapsedTime();
     
-    if ( result ){
+    if ( result == CR_RESULT_SUCCESS ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
@@ -281,7 +281,7 @@ void test_CRInverseKinematics(void) {
     result = ikSolver.solve(pRed, elems, q0, qSolved);
     et = timer.getElapsedTime();
     
-    if ( result ){
+    if ( result == CR_RESULT_SUCCESS ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
@@ -326,7 +326,7 @@ void test_CRInverseKinematics(void) {
         
         q = qSolved;
         
-        if ( result ){
+        if ( result == CR_RESULT_SUCCESS ){
             printf("Solution found in %8.6f s!\n",et);
             
             // Now push the new joints through the robot to see if it worked
