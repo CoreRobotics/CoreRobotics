@@ -103,7 +103,7 @@ class CRRigidBody {
 public:
     
     //! Class constructor
-    CRRigidBody(CRFrame* in_frame);
+    CRRigidBody(CRFrame* i_frame);
     CRRigidBody();
     
     //! Class destructor
@@ -114,7 +114,7 @@ public:
 public:
     
     //! Sets the pointer to the frame class for the transformation
-    void setFrame(CRFrame* in_frame) {this->m_frame = in_frame;}
+    void setFrame(CRFrame* i_frame) {this->m_frame = i_frame;}
     
 //---------------------------------------------------------------------
 // Public Members
