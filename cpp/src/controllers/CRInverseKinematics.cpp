@@ -116,7 +116,7 @@ CRResult CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> i_setPoint,
     this->m_robot->setConfiguration(q);
     
     // return the pose of the robot for the initial configuration
-    this->m_robot->getToolPose(this->m_toolIndex, this->m_eulerMode, pose);
+    pose = this->m_robot->getToolPose(this->m_toolIndex, this->m_eulerMode);
     
     // compute the error by comparing the pose
     error = i_setPoint-pose;
@@ -138,7 +138,7 @@ CRResult CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> i_setPoint,
         
         // Now compute the error for the new config
         this->m_robot->setConfiguration(q);
-        this->m_robot->getToolPose(this->m_toolIndex, this->m_eulerMode, pose);
+        pose = this->m_robot->getToolPose(this->m_toolIndex, this->m_eulerMode);
         error = i_setPoint-pose;
         
         // update the iterator
@@ -184,10 +184,9 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd i_setPoint,
     this->m_robot->setConfiguration(q);
     
     // return the pose of the robot for the initial configuration
-    this->m_robot->getToolPose(this->m_toolIndex,
-                               this->m_eulerMode,
-                               i_poseElements,
-                               pose);
+    pose = this->m_robot->getToolPose(this->m_toolIndex,
+                                      this->m_eulerMode,
+                                      i_poseElements);
     
     // compute the error by comparing the pose
     error = i_setPoint-pose;
@@ -211,10 +210,9 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd i_setPoint,
         
         // Now compute the error for the new config
         this->m_robot->setConfiguration(q);
-        this->m_robot->getToolPose(this->m_toolIndex,
-                                   this->m_eulerMode,
-                                   i_poseElements,
-                                   pose);
+        pose = this->m_robot->getToolPose(this->m_toolIndex,
+                                          this->m_eulerMode,
+                                          i_poseElements);
         error = i_setPoint-pose;
         
         // update the iterator

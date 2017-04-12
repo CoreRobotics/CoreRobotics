@@ -101,7 +101,7 @@ void test_CRManipulator(void) {
 	// Get the configuration values
 	int dof;
 	Eigen::VectorXd jointAngles;
-	MyRobot.getDegreesOfFreedom(dof);
+	dof = MyRobot.getDegreesOfFreedom();
 	jointAngles = MyRobot.getConfiguration();
 	std::cout << "MyRobot has " << dof << " DOF, with joint angles = ("
 		<< jointAngles.transpose() << ") rad" << std::endl;
@@ -140,7 +140,7 @@ void test_CRManipulator(void) {
     
     // get the tool pose for only (x, y, g)
     Eigen::VectorXd pose;
-    MyRobot.getToolPose(toolIndex, CR_EULER_MODE_XYZ, elems, pose);
+    pose = MyRobot.getToolPose(toolIndex, CR_EULER_MODE_XYZ, elems);
     std::cout << "MyRobot pose (reduced) is \n" << pose << std::endl;
     
 

@@ -104,7 +104,7 @@ void CRTestFrameOffset(void){
 	// Now get the configuration values
 	int dof;
 	Eigen::VectorXd jointAngles;
-	MyRobot.getDegreesOfFreedom(dof);
+	dof = MyRobot.getDegreesOfFreedom();
 	jointAngles = MyRobot.getConfiguration();
 	std::cout << "MyRobot has " << dof << " DOF, with joint angles = ("
 	<< jointAngles.transpose() << ") rad" << std::endl;

@@ -211,7 +211,7 @@ class CRManipulator {
 public:
     
     //! Class constructor
-	CRManipulator(CRManipulatorType type);
+	CRManipulator(CRManipulatorType i_type);
     CRManipulator();
     
 //---------------------------------------------------------------------
@@ -228,23 +228,21 @@ public:
     Eigen::MatrixXd getForwardKinematics(void);
     
     //! Get the number of links in the list
-    void getNumberOfLinks(int &n);
+    int getNumberOfLinks(void);
     
     //! Get the number of driven links (degrees of freedom: DOF)
-    void getDegreesOfFreedom(int &dof);
+    int getDegreesOfFreedom(void);
 
 	//! Get tool frame for the current manipulator configuration
-	void getToolFrame(unsigned toolIndex, CRFrame &tool);
+	void getToolFrame(unsigned i_toolIndex, CRFrame& o_tool);
     
     //! Get the pose for the specified tool index
-    void getToolPose(unsigned toolIndex,
-                     CREulerMode mode,
-                     Eigen::Matrix<double, 6, 1> &pose);
+    Eigen::Matrix<double, 6, 1> getToolPose(unsigned i_toolIndex,
+                                            CREulerMode i_mode);
     
-    void getToolPose(unsigned toolIndex,
-                     CREulerMode mode,
-                     Eigen::Matrix<bool, 6, 1> i_poseElements,
-                     Eigen::VectorXd &pose);
+    Eigen::VectorXd getToolPose(unsigned i_toolIndex,
+                                CREulerMode i_mode,
+                                Eigen::Matrix<bool, 6, 1> i_poseElements);
 
 	//! Set the model type
 	void setModelType(CRManipulatorType type) { this->m_modelType = type; }
@@ -266,10 +264,10 @@ public:
 public:
     
     //! Add a link to the kinematic structure, return the index of the added link
-    int addLink(CoreRobotics::CRRigidBody* link);
+    int addLink(CoreRobotics::CRRigidBody* i_link);
 
 	//! Add a tool to the manipulator, return the index of the added tool
-	int addTool(unsigned parentIndex, CRFrame* tool);
+	int addTool(unsigned i_parentIndex, CRFrame* i_tool);
     
 //---------------------------------------------------------------------
 // Protected Members
