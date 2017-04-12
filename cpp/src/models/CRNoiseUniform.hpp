@@ -147,11 +147,11 @@ class CRNoiseUniform : public CRNoiseModel {
 public:
     
     //! Class constructor
-    CRNoiseUniform(Eigen::VectorXd in_a,
-                   Eigen::VectorXd in_b,
-                    unsigned in_seed);
-    CRNoiseUniform(Eigen::VectorXd in_a,
-                   Eigen::VectorXd in_b);
+    CRNoiseUniform(Eigen::VectorXd i_a,
+                   Eigen::VectorXd i_b,
+                    unsigned i_seed);
+    CRNoiseUniform(Eigen::VectorXd i_a,
+                   Eigen::VectorXd i_b);
     CRNoiseUniform();
     
 //---------------------------------------------------------------------
@@ -160,8 +160,8 @@ public:
     
     //! Set the parameters that describe the distribution
     using CRNoiseModel::setParameters;
-    void setParameters(Eigen::VectorXd in_a,
-                       Eigen::VectorXd in_b);
+    void setParameters(Eigen::VectorXd i_a,
+                       Eigen::VectorXd i_b);
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -173,7 +173,7 @@ public:
     
     //! Evaluate the probability from the density
     using CRNoiseModel::probability;
-    double probability(Eigen::VectorXd in_x);
+    double probability(Eigen::VectorXd i_x);
     
 //---------------------------------------------------------------------
 // Protected Members

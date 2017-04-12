@@ -137,15 +137,15 @@ class CRSensorLinear : public CRSensorModel {
 public:
     
     //! Class constructor
-    CRSensorLinear(Eigen::MatrixXd in_H,
-                   Eigen::VectorXd in_x0);
+    CRSensorLinear(Eigen::MatrixXd i_H,
+                   Eigen::VectorXd i_x0);
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
     //! Set the dynamics and input matrices
-    void setObservation(Eigen::MatrixXd in_H){ this->m_H = in_H;}
+    void setObservation(Eigen::MatrixXd i_H){ this->m_H = i_H;}
     
 //---------------------------------------------------------------------
 // Public Methods

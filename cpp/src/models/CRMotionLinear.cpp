@@ -50,12 +50,12 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- The constructor creates a motion model.  The in_A, in_B matrices specify
+ The constructor creates a motion model.  The i_A, i_B matrices specify
  one of the dynamics equation forms below:\n
  
  Case 1: (Continuous)
  
- If in_type is set to CR_MOTION_CONTINUOUS, then the callback sets
+ If i_type is set to CR_MOTION_CONTINUOUS, then the callback sets
  
  \f$ \dot{x} = A x + B u \f$
  
@@ -65,7 +65,7 @@ namespace CoreRobotics {
  
  Case 2: (Discrete)
  
- If in_type is set to CR_MOTION_DISCRETE, then the callback sets
+ If i_type is set to CR_MOTION_DISCRETE, then the callback sets
  
  \f$ x_{k+1} = A x_k + B u_k \f$
  
@@ -73,26 +73,26 @@ namespace CoreRobotics {
  input (forcing) vector, and \f$t_k\f$ is time at interval \f$k\f$.
  
  
- \param[in] in_A - the dynamics matrix
- \param[in] in_B - the input matrix
- \param[in] in_type - indicates whether the callback is continuous or 
+ \param[in] i_A - the dynamics matrix
+ \param[in] i_B - the input matrix
+ \param[in] i_type - indicates whether the callback is continuous or 
                       discrete, see CoreRobotics::CRMotionModelType.
- \param[in] in_x0 - the initial state.
- \param[in] in_timeStep - the time step of the system
+ \param[in] i_x0 - the initial state.
+ \param[in] i_timeStep - the time step of the system
  */
 //---------------------------------------------------------------------
-CRMotionLinear::CRMotionLinear(Eigen::MatrixXd in_A,
-                               Eigen::MatrixXd in_B,
-                               CRMotionModelType in_type,
-                               Eigen::VectorXd in_x0,
-                               double in_timeStep)
+CRMotionLinear::CRMotionLinear(Eigen::MatrixXd i_A,
+                               Eigen::MatrixXd i_B,
+                               CRMotionModelType i_type,
+                               Eigen::VectorXd i_x0,
+                               double i_timeStep)
 {
     this->m_time = 0;
-    this->m_A = in_A;
-    this->m_B = in_B;
-    this->m_type = in_type;
-    this->setTimeStep(in_timeStep);
-    this->setState(in_x0);
+    this->m_A = i_A;
+    this->m_B = i_B;
+    this->m_type = i_type;
+    this->setTimeStep(i_timeStep);
+    this->setState(i_x0);
 }
     
     
@@ -104,22 +104,22 @@ CRMotionLinear::CRMotionLinear(Eigen::MatrixXd in_A,
  if the model is continuous, then a Runge-Kutta integration scheme is
  used to simulate the next time step.\n
  
- \param[in] in_u - input (forcing term) vector
+ \param[in] i_u - input (forcing term) vector
  \return - the new state
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRMotionLinear::motion(Eigen::VectorXd in_u)
+Eigen::VectorXd CRMotionLinear::motion(Eigen::VectorXd i_u)
 {
     double t = this->m_time;
     double dt = this->m_dt;
     
     if (this->m_type == CR_MOTION_DISCRETE) {
         // update the state
-        this->m_state = this->m_dynPredictFcn(this->m_state,in_u,t);
+        this->m_state = this->m_dynPredictFcn(this->m_state,i_u,t);
         
     } else if (this->m_type == CR_MOTION_CONTINUOUS) {
         // update the state
-        this->m_state = this->rk4step(this->m_state,in_u,t,dt);
+        this->m_state = this->rk4step(this->m_state,i_u,t,dt);
     }
     
     // update the time
@@ -134,24 +134,24 @@ Eigen::VectorXd CRMotionLinear::motion(Eigen::VectorXd in_u)
 /*!
  This method performs a Runge Kutta step on the dynFcn member.\n
  
- \param[in] in_x - state x(k)
- \param[in] in_u - input u(k)
- \param[in] in_t - time t(k)
- \param[in] in_dt - sample rate dt
+ \param[in] i_x - state x(k)
+ \param[in] i_u - input u(k)
+ \param[in] i_t - time t(k)
+ \param[in] i_dt - sample rate dt
  \return - the next state x(k+1)
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRMotionLinear::rk4step(Eigen::VectorXd in_x,
-                                       Eigen::VectorXd in_u,
-                                       double in_t,
-                                       double in_dt)
+Eigen::VectorXd CRMotionLinear::rk4step(Eigen::VectorXd i_x,
+                                       Eigen::VectorXd i_u,
+                                       double i_t,
+                                       double i_dt)
 {
     // RK4 step
-    Eigen::VectorXd f1 = this->m_dynPredictFcn(in_x,in_u,in_t);
-    Eigen::VectorXd f2 = this->m_dynPredictFcn(in_x+in_dt*f1/2,in_u,in_t+in_dt/2);
-    Eigen::VectorXd f3 = this->m_dynPredictFcn(in_x+in_dt*f2/2,in_u,in_t+in_dt/2);
-    Eigen::VectorXd f4 = this->m_dynPredictFcn(in_x+in_dt*f3,in_u,in_t+in_dt);
-    return in_x + in_dt/6*(f1 + 2*f2 + 2*f3 + f4);
+    Eigen::VectorXd f1 = this->m_dynPredictFcn(i_x,i_u,i_t);
+    Eigen::VectorXd f2 = this->m_dynPredictFcn(i_x+i_dt*f1/2,i_u,i_t+i_dt/2);
+    Eigen::VectorXd f3 = this->m_dynPredictFcn(i_x+i_dt*f2/2,i_u,i_t+i_dt/2);
+    Eigen::VectorXd f4 = this->m_dynPredictFcn(i_x+i_dt*f3,i_u,i_t+i_dt);
+    return i_x + i_dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
 
 

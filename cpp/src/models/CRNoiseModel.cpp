@@ -54,11 +54,11 @@ namespace CoreRobotics {
 /*!
  The constructor creates a noise model.\n
  
- \param[in] in_seed - seed for the random generator
+ \param[in] i_seed - seed for the random generator
  */
 //---------------------------------------------------------------------
-CRNoiseModel::CRNoiseModel(unsigned in_seed) {
-    this->m_seed = in_seed;
+CRNoiseModel::CRNoiseModel(unsigned i_seed) {
+    this->m_seed = i_seed;
     this->m_generator.seed(this->m_seed);
 }
 CRNoiseModel::CRNoiseModel() {
@@ -82,16 +82,16 @@ CRNoiseModel::CRNoiseModel() {
  
  \f$ p = f(x) \f$
  
- \param[in] in_icd - inverse CDF of the distribution.  This function
+ \param[in] i_icd - inverse CDF of the distribution.  This function
                    is sampled with a uniform distribution over [0,1]
- \param[in] in_prob - probability density function that returns p(x)
+ \param[in] i_prob - probability density function that returns p(x)
  */
 //---------------------------------------------------------------------
-void CRNoiseModel::setParameters(Eigen::VectorXd(in_icd)(double),
-                                 double(*in_prob)(Eigen::VectorXd))
+void CRNoiseModel::setParameters(Eigen::VectorXd(i_icd)(double),
+                                 double(*i_prob)(Eigen::VectorXd))
 {
-    this->m_parameters.icdFunction = in_icd;
-    this->m_parameters.probFunction = in_prob;
+    this->m_parameters.icdFunction = i_icd;
+    this->m_parameters.probFunction = i_prob;
 }
 
 
@@ -114,13 +114,13 @@ Eigen::VectorXd CRNoiseModel::sample(void)
 /*!
  This method computes the probability of x from the density.\n
  
- \param[in] in_x - random vector to be evaluated
- \return - probability of in_x
+ \param[in] i_x - random vector to be evaluated
+ \return - probability of i_x
  */
 //---------------------------------------------------------------------
-double CRNoiseModel::probability(Eigen::VectorXd in_x)
+double CRNoiseModel::probability(Eigen::VectorXd i_x)
 {
-    return (this->m_parameters.probFunction)(in_x);
+    return (this->m_parameters.probFunction)(i_x);
 }
 
     

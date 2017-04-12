@@ -54,12 +54,12 @@ namespace CoreRobotics {
 /*!
  The constructor creates a noise model.\n
  
- \param[in] in_seed - seed for the random generator.
+ \param[in] i_seed - seed for the random generator.
  */
 //---------------------------------------------------------------------
-CRNoiseMixture::CRNoiseMixture(unsigned in_seed) {
+CRNoiseMixture::CRNoiseMixture(unsigned i_seed) {
     
-    this->m_seed = in_seed;
+    this->m_seed = i_seed;
     this->m_generator.seed(this->m_seed);
     
 }
@@ -76,15 +76,15 @@ CRNoiseMixture::CRNoiseMixture() {
 /*!
  This method adds a distribution to the mixture model.
  
- \param[in] in_model - a CRNoiseModel distribution.
- \param[in] in_weight - the corresponding weight of the added distribution.
+ \param[in] i_model - a CRNoiseModel distribution.
+ \param[in] i_weight - the corresponding weight of the added distribution.
  */
 //---------------------------------------------------------------------
-void CRNoiseMixture::add(CRNoiseModel* in_model, double in_weight)
+void CRNoiseMixture::add(CRNoiseModel* i_model, double i_weight)
 {
     
-    this->m_parameters.models.push_back(in_model);
-    this->m_parameters.weights.push_back(in_weight);
+    this->m_parameters.models.push_back(i_model);
+    this->m_parameters.weights.push_back(i_weight);
     
 }
 
@@ -140,11 +140,11 @@ Eigen::VectorXd CRNoiseMixture::sample(void)
 /*!
  This method returns the probability of x.\n
  
- \param[in] in_x - random number to evaluate
- \return - probability of in_x
+ \param[in] i_x - random number to evaluate
+ \return - probability of i_x
  */
 //---------------------------------------------------------------------
-double CRNoiseMixture::probability(Eigen::VectorXd in_x)
+double CRNoiseMixture::probability(Eigen::VectorXd i_x)
 {
     
     // return the sum of the weights
@@ -160,7 +160,7 @@ double CRNoiseMixture::probability(Eigen::VectorXd in_x)
     
     for (size_t i = 0; i < m_parameters.weights.size(); i++) {
         double weight = this->m_parameters.weights[i]/sum_of_weights;
-        p += weight*this->m_parameters.models[i]->probability(in_x);
+        p += weight*this->m_parameters.models[i]->probability(i_x);
     }
     
     return p;

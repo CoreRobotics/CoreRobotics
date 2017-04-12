@@ -234,7 +234,7 @@ public:
 
     void getJacobian(unsigned toolIndex,
                      CREulerMode mode,
-                     Eigen::Matrix<bool, 6, 1> in_poseElements,
+                     Eigen::Matrix<bool, 6, 1> i_poseElements,
                      Eigen::MatrixXd &jacobian);
     
     //! Get the number of links in the list
@@ -253,7 +253,7 @@ public:
     
     void getToolPose(unsigned toolIndex,
                      CREulerMode mode,
-                     Eigen::Matrix<bool, 6, 1> in_poseElements,
+                     Eigen::Matrix<bool, 6, 1> i_poseElements,
                      Eigen::VectorXd &pose);
 
 	//! Set the model type

@@ -164,7 +164,7 @@ class CRNoiseMixture : public CRNoiseModel {
 public:
     
     //! Class constructor
-    CRNoiseMixture(unsigned in_seed);
+    CRNoiseMixture(unsigned i_seed);
     CRNoiseMixture();
     
 //---------------------------------------------------------------------
@@ -172,7 +172,7 @@ public:
 public:
     
     //! Add a distribution to the mixture model
-    void add(CRNoiseModel* in_model, double in_weight);
+    void add(CRNoiseModel* i_model, double i_weight);
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -184,7 +184,7 @@ public:
     
     //! Evaluate the probability from the density
     using CRNoiseModel::probability;
-    double probability(Eigen::VectorXd in_x);
+    double probability(Eigen::VectorXd i_x);
     
 //---------------------------------------------------------------------
 // Protected Members

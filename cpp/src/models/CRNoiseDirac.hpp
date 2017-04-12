@@ -143,7 +143,7 @@ class CRNoiseDirac : public CRNoiseModel {
 public:
     
     //! Class constructor
-    CRNoiseDirac(Eigen::VectorXd in_point);
+    CRNoiseDirac(Eigen::VectorXd i_point);
     CRNoiseDirac();
     
 //---------------------------------------------------------------------
@@ -152,7 +152,7 @@ public:
     
     //! Set the parameters that describe the distribution
     using CRNoiseModel::setParameters;
-    void setParameters(Eigen::VectorXd in_point);
+    void setParameters(Eigen::VectorXd i_point);
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -164,7 +164,7 @@ public:
     
     //! Evaluate the probability from the density
     using CRNoiseModel::probability;
-    double probability(Eigen::VectorXd in_x);
+    double probability(Eigen::VectorXd i_x);
     
 //---------------------------------------------------------------------
 // Protected Members

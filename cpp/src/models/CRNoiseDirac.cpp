@@ -53,11 +53,11 @@ namespace CoreRobotics {
 /*!
  The constructor creates a noise model.\n
  
- \param[in] in_point - the vector of the dirac point distribution
+ \param[in] i_point - the vector of the dirac point distribution
  */
 //---------------------------------------------------------------------
-CRNoiseDirac::CRNoiseDirac(Eigen::VectorXd in_point) {
-    this->setParameters(in_point);
+CRNoiseDirac::CRNoiseDirac(Eigen::VectorXd i_point) {
+    this->setParameters(i_point);
 }
 CRNoiseDirac::CRNoiseDirac() {
     Eigen::VectorXd point(1);
@@ -72,12 +72,12 @@ CRNoiseDirac::CRNoiseDirac() {
  distribution with P=1 of drawing a sample from the point.  This is an
  effective way to model deterministic processes.
  
- \param[in] in_point - point vector of the Dirac distribution
+ \param[in] i_point - point vector of the Dirac distribution
  */
 //---------------------------------------------------------------------
-void CRNoiseDirac::setParameters(Eigen::VectorXd in_point)
+void CRNoiseDirac::setParameters(Eigen::VectorXd i_point)
 {
-    this->m_parameters.point = in_point;
+    this->m_parameters.point = i_point;
 }
 
 
@@ -99,13 +99,13 @@ Eigen::VectorXd CRNoiseDirac::sample(void)
 /*!
  This method returns the probability of x.\n
  
- \param[in] in_x - state to evaluate
- \return - probability of in_x
+ \param[in] i_x - state to evaluate
+ \return - probability of i_x
  */
 //---------------------------------------------------------------------
-double CRNoiseDirac::probability(Eigen::VectorXd in_x)
+double CRNoiseDirac::probability(Eigen::VectorXd i_x)
 {
-    if (in_x == this->m_parameters.point){
+    if (i_x == this->m_parameters.point){
         return 1.0;
     } else {
         return 0.0;

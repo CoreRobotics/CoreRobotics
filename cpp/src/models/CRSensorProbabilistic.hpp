@@ -192,23 +192,23 @@ class CRSensorProbabilistic : public CRSensorModel {
 public:
     
     //! Class constructor
-    CRSensorProbabilistic(Eigen::VectorXd(in_predictor)(Eigen::VectorXd,
+    CRSensorProbabilistic(Eigen::VectorXd(i_predictor)(Eigen::VectorXd,
                                                         bool),
-                          double(in_likelihood)(Eigen::VectorXd,
+                          double(i_likelihood)(Eigen::VectorXd,
                                                 Eigen::VectorXd),
-                          Eigen::VectorXd in_x0);
+                          Eigen::VectorXd i_x0);
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Simulate the measurement
-    Eigen::VectorXd measurement(bool in_sampleNoise);
+    Eigen::VectorXd measurement(bool i_sampleNoise);
     
     Eigen::VectorXd measurement(void);
     
     //! Get the likelihood of a measurement
-    double likelihood(Eigen::VectorXd in_z);
+    double likelihood(Eigen::VectorXd i_z);
     
 //---------------------------------------------------------------------
 // Protected Members

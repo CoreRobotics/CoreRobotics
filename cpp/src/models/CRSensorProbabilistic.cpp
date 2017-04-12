@@ -53,9 +53,9 @@ namespace CoreRobotics {
  The constructor creates a sensor model, and requires 2 callback 
  functions to be supplied.
  
- Callback 1: in_predictor
+ Callback 1: i_predictor
  
- The in_predictor specifies the observation equation:\n
+ The i_predictor specifies the observation equation:\n
  
  \f$ zPredict =  h(x,w) \f$
  
@@ -63,7 +63,7 @@ namespace CoreRobotics {
  is the predicted sensor observation. The callback function prototype 
  is thus
  \code
- Eigen::VectorXd in_predictor(Eigen::VectorXd x,
+ Eigen::VectorXd i_predictor(Eigen::VectorXd x,
                               boolean sample){
     // compute zPredict from x here.
     if (sample) {
@@ -78,9 +78,9 @@ namespace CoreRobotics {
  \endcode
  
  
- Callback 2: in_likelihood
+ Callback 2: i_likelihood
  
- The in_likelihood specifies the likelihood:\n
+ The i_likelihood specifies the likelihood:\n
  
  \f$ p =  Pr(zObserved \mid zPredict) \f$
  
@@ -88,7 +88,7 @@ namespace CoreRobotics {
  an actual measurement and \f$p\f$ is the probability of observing 
  zObserved given zPredict. The callback function prototype is thus
  \code
- double in_likelihood(Eigen::VectorXd zObserved,
+ double i_likelihood(Eigen::VectorXd zObserved,
                       Eigen::VectorXd zPredict){
     // compute p = Pr(zObserved | zPredict)
     return p;
@@ -96,19 +96,19 @@ namespace CoreRobotics {
  \endcode
  
  
- \param[in] in_predictor - prediction callback function.
- \param[in] in_likelihood - likelihood callback function.
- \param[in] in_x0 - the initial state.
+ \param[in] i_predictor - prediction callback function.
+ \param[in] i_likelihood - likelihood callback function.
+ \param[in] i_x0 - the initial state.
  */
 //---------------------------------------------------------------------
-CRSensorProbabilistic::CRSensorProbabilistic(Eigen::VectorXd(in_predictor)(Eigen::VectorXd,
+CRSensorProbabilistic::CRSensorProbabilistic(Eigen::VectorXd(i_predictor)(Eigen::VectorXd,
                                                                            bool),
-                                             double(in_likelihood)(Eigen::VectorXd,
+                                             double(i_likelihood)(Eigen::VectorXd,
                                                                    Eigen::VectorXd),
-                                             Eigen::VectorXd in_x0){
-    this->m_measPredictFcn = in_predictor;
-    this->m_measLikelihoodFcn = in_likelihood;
-    this->setState(in_x0);
+                                             Eigen::VectorXd i_x0){
+    this->m_measPredictFcn = i_predictor;
+    this->m_measLikelihoodFcn = i_likelihood;
+    this->setState(i_x0);
 }
 
 
@@ -118,15 +118,15 @@ CRSensorProbabilistic::CRSensorProbabilistic(Eigen::VectorXd(in_predictor)(Eigen
  state. The sampleNoise flag can be set to simulate the sensor with
  noise sampled from the internal noise model.\n
  
- \param[in] in_sampleNoise - an (optional) boolean flag specifying if
+ \param[in] i_sampleNoise - an (optional) boolean flag specifying if
             the noise model should be sampled to add noise to the 
             simulated measurement.
  \return - simulated measurement.
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRSensorProbabilistic::measurement(bool in_sampleNoise)
+Eigen::VectorXd CRSensorProbabilistic::measurement(bool i_sampleNoise)
 {
-    return (this->m_measPredictFcn)(this->m_state, in_sampleNoise);
+    return (this->m_measPredictFcn)(this->m_state, i_sampleNoise);
 }
     
 Eigen::VectorXd CRSensorProbabilistic::measurement(void)
@@ -142,14 +142,14 @@ Eigen::VectorXd CRSensorProbabilistic::measurement(void)
  
  \f$ p(zObserved \mid zPredict) \f$
  
- \param[in] in_zObserved - the actual measurement to be evaluated.
+ \param[in] i_zObserved - the actual measurement to be evaluated.
  \return - the likelihood of zObserved.
  */
 //---------------------------------------------------------------------
-double CRSensorProbabilistic::likelihood(Eigen::VectorXd in_zObserved)
+double CRSensorProbabilistic::likelihood(Eigen::VectorXd i_zObserved)
 {
     Eigen::VectorXd zPredict = this->measurement(false);
-    return (this->m_measLikelihoodFcn)(this->m_state, in_zObserved);
+    return (this->m_measLikelihoodFcn)(this->m_state, i_zObserved);
 }
 
 
