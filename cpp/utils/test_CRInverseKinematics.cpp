@@ -135,7 +135,7 @@ void test_CRInverseKinematics(void) {
     // Now solve the inverse kinematics for the point
     timer.startTimer();
     bool result = ikSolver.solve(p, q0, qSolved);
-    timer.getElapsedTime(et);
+    et = timer.getElapsedTime();
     
     if ( result ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
@@ -168,7 +168,7 @@ void test_CRInverseKinematics(void) {
     // Now solve the inverse kinematics for the point
     timer.startTimer();
     result = ikSolver.solve(p, q0, qSolved);
-    timer.getElapsedTime(et);
+    et = timer.getElapsedTime();
     
     if ( result ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
@@ -203,7 +203,7 @@ void test_CRInverseKinematics(void) {
     // Now solve the inverse kinematics for the point
     timer.startTimer();
     result = ikSolver.solve(p, q0, qSolved);
-    timer.getElapsedTime(et);
+    et = timer.getElapsedTime();
     
     if ( result ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
@@ -236,7 +236,7 @@ void test_CRInverseKinematics(void) {
     // Now solve the inverse kinematics for the point
     timer.startTimer();
     result = ikSolver.solve(p, q0, qSolved);
-    timer.getElapsedTime(et);
+    et = timer.getElapsedTime();
     
     if ( result ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
@@ -279,7 +279,7 @@ void test_CRInverseKinematics(void) {
     // Now solve the inverse kinematics for the point
     timer.startTimer();
     result = ikSolver.solve(pRed, elems, q0, qSolved);
-    timer.getElapsedTime(et);
+    et = timer.getElapsedTime();
     
     if ( result ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
@@ -322,7 +322,7 @@ void test_CRInverseKinematics(void) {
     for (int i = 0; i < 100; i++){
         timer.startTimer();
         result = ikSolver.solve(p, q, qSolved);
-        timer.getElapsedTime(et);
+        et = timer.getElapsedTime();
         
         q = qSolved;
         

@@ -64,12 +64,12 @@ namespace CoreRobotics {
  \param[in] priority - the thread priority, see CoreRobotics::CRThreadPriority
  */
 //---------------------------------------------------------------------
-CRThread::CRThread(CRThreadPriority priority) {
-	this->loop = new std::thread;
-	this->setPriority(priority);
+CRThread::CRThread(CRThreadPriority i_priority) {
+	this->m_loop = new std::thread;
+	this->setPriority(i_priority);
 }
 CRThread::CRThread() {
-    this->loop = new std::thread;
+    this->m_loop = new std::thread;
 	this->setPriority(CR_PRIORITY_NORMAL);
 }
 
@@ -91,8 +91,8 @@ CRThread::~CRThread() { }
                                 by the thread
  */
 //---------------------------------------------------------------------
-void CRThread::setCallback(void(callbackFunction)()) {
-    *loop = std::thread(callbackFunction);
+void CRThread::setCallback(void(callbackFunction)(void)) {
+    *m_loop = std::thread(callbackFunction);
 }
 
 
@@ -104,20 +104,20 @@ This method sets the thread priority.
 \param[in] priority - the thread priority, see CoreRobotics::CRThreadPriority
 */
 //---------------------------------------------------------------------
-void CRThread::setPriority(CRThreadPriority priority) {
+void CRThread::setPriority(CRThreadPriority i_priority) {
 
 	// Windows
 	#if defined(WIN32) || defined(WIN64)
 
 		// get the thread handle
-		HANDLE hThread = this->loop->native_handle();
+		HANDLE hThread = this->m_loop->native_handle();
 
 		// get the process
 		HANDLE process = GetCurrentProcess();
 		SetPriorityClass(process, HIGH_PRIORITY_CLASS);
 
 		int tPriority = THREAD_PRIORITY_NORMAL;
-		switch (priority) {
+		switch (i_priority) {
 			case CR_PRIORITY_LOWEST:	// 11
 				tPriority = THREAD_PRIORITY_LOWEST;
 				break;
@@ -142,14 +142,14 @@ void CRThread::setPriority(CRThreadPriority priority) {
 	#if defined(__linux__) || defined(__APPLE__)
     
         // get the thread handle
-        pthread_t hThread = this->loop->native_handle();
+        pthread_t hThread = this->m_loop->native_handle();
     
         // return the policy and params for the thread
         struct sched_param sch;
         int tPolicy;
         pthread_getschedparam(hThread, &tPolicy, &sch);
     
-        switch (priority) {
+        switch (i_priority) {
             case CR_PRIORITY_LOWEST:
                 sch.sched_priority = 1;
                 break;
@@ -179,7 +179,7 @@ void CRThread::setPriority(CRThreadPriority priority) {
  */
 //---------------------------------------------------------------------
 void CRThread::start() {
-    loop->join();
+    m_loop->join();
 }
     
     
@@ -189,7 +189,7 @@ void CRThread::start() {
  */
 //---------------------------------------------------------------------
 void CRThread::stop() {
-    loop->detach();
+    m_loop->detach();
 }
 
 

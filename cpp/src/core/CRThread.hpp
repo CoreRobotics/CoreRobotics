@@ -125,7 +125,7 @@ public:
     
     //! Class constructor
     CRThread();
-	CRThread(CRThreadPriority priority);
+	CRThread(CRThreadPriority i_priority);
     
     //! Class destructor
     virtual ~CRThread();
@@ -136,10 +136,10 @@ public:
 public:
     
     //! Set the thread callback function
-    void setCallback(void(callbackFunction)());
+    void setCallback(void(i_callbackFunction)(void));
 
 	//! Set the thread priority
-	void setPriority(CRThreadPriority priority);
+	void setPriority(CRThreadPriority i_priority);
     
     //! Start the thread
     void start();
@@ -153,7 +153,7 @@ public:
 private:
 
 	//! thread pointer
-    std::thread* loop;
+    std::thread* m_loop;
     
     
 };

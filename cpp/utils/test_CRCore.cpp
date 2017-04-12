@@ -64,7 +64,7 @@ void test_CRCore(void){
     
     MyClock.startTimer();
     MyClock.sleep(0.1);
-    MyClock.getElapsedTime(t);
+    t = MyClock.getElapsedTime();
     
     std::cout << "t = " << t << std::endl;
     
@@ -100,7 +100,7 @@ void callback1(void){
         c.startTimer();
         i++;
         printf("Thread 1: i = %i \n",i);
-        c.getElapsedTime(t);
+        t = c.getElapsedTime();
         c.sleep(dt-t);
     }
 }
@@ -121,7 +121,7 @@ void callback2(void){
         c.startTimer();
         i++;
         printf("Thread 2: i = %i \n",i);
-        c.getElapsedTime(t);
+        t = c.getElapsedTime();
         c.sleep(dt-t);
     }
 }
