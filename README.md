@@ -50,9 +50,9 @@ Refer to the [Google C++ Style Guide](https://google.github.io/styleguide/cppgui
 - Class members should be protected, and setting/getting the member value should be defined explicitly.  The exception is when a class member is a type associated with a 3rd party library (this is so one can access the property without having to modify the containing CoreRobotics class)
 - All class members should have the `m_` prefix for readibility, e.g.: `m_classProperty`
 - Method arguments should utilize the `i_` prefix to indicate an input argument, e.g.: `i_transferFunction`, and the `o_` prefix to indicate an output argument, e.g.: `o_transferFunction`
-- Pass input arguments by reference and output arguments by pointer, e.g.: `CRClass::solveProblem(double& i_argIn, double* o_argOut)`.  Use discretion when making an exception.
-- When a method returns only one output, use the return, e.g.: `double getProperty(void)`.  If the method has more than one output, pass by function argument, e.g.: `void getProperties(double* o_propOne, double* o_propTwo)`, and reserve the return for indicating a result.
-- If a result is returned, use the `CoreRobotics::CRResult` enumerator (contained in `CoreRobotics::CRTypes`).
+- Consider passing input arguments by value or pointer and output arguments by reference, e.g.: `CRClass::solveProblem(double i_argInOne, double* i_argInTwo, double& o_argOut)`.  Use discretion when making exceptions.
+- When a method returns only one output, use the return, e.g.: `double getProperty(void)`.  If the method has more than one output, pass by function argument, e.g.: `void getProperties(double& o_propOne, double& o_propTwo)`, and reserve the return for indicating a result.
+- If a result is returned, use the `CoreRobotics::CRResult` enumerator (contained in `CoreRobotics::CRTypes`).  Add result types as needed and comment which results can be expected by a particular method.
 
 
 ## Git commands for reference:
