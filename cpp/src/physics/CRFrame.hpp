@@ -80,7 +80,7 @@ namespace CoreRobotics {
  transforms a point \f$^i p\f$ in the child frame (i) to a point
  \f$^{i-1} p\f$ in the parent frame (i-1) by the operation
  \f[
- {^{i-1} p} = ^{i-1}^{i}T {^i p}.
+ {^{i-1} p} = ^{i-1}_{i}T {^i p}.
  \f]
  
  These methods return the transformation \f$T\f$ and inverse 

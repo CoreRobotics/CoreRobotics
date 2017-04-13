@@ -79,7 +79,7 @@ namespace CoreRobotics {
  algorithm accomplishes this by iteratively updating the configuration 
  according to
  
- \f$ q_{k+1} = q_k + \gamma J^# (x - f(q_k)) \f$
+ \f$ q_{k+1} = q_k + \gamma J^\dagger (x - f(q_k)) \f$
  
  These methods are used to interface with the IK controller:
  - CRInverseKinematics::setRobot sets the manipulator IK to solve
