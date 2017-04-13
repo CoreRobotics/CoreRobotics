@@ -67,7 +67,7 @@ namespace CoreRobotics {
  kinematics (IK) problem.
  
  \details
- \section Description
+ ## Description
  CRInverseKinematics implements the Jacobian generalized inverse 
  technique using the SVD for finding a manipulator configuration that
  yields a desired pose.
@@ -106,7 +106,7 @@ namespace CoreRobotics {
  the SVD to the threshold. (Default = 0.1)
  
  
- \section Example
+ ## Example
  This example demonstrates use of the CRInverseKinematics class.
  \code
  
@@ -213,7 +213,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] O. Khatib, Lecture Notes (CS327A): "Advanced Robotic Manipulation",
  http://www.in.tum.de/fileadmin/user_upload/Lehrstuehle/Lehrstuhl_XXIII/AdvancedRoboticManipulation.pdf 2005.\n\n
  

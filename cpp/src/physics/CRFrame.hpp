@@ -68,7 +68,7 @@ namespace CoreRobotics {
  up of rotations and translations.
  
  \details
- \section Description
+ ## Description
  CRFrame implements a homogeneous transformation specified by a 
  rotation matrix \f$r\f$ and a translation vector \f$t\f$.  The
  transformation matrix
@@ -92,7 +92,7 @@ namespace CoreRobotics {
  - CRFrame::transformToParent performs \f$y = ^{i-1}_{i}T p\f$
  - CRFrame::transformToChild performs \f$y = _{i-1}^{i}T p\f$
  
- \section Example
+ ## Example
  This example creates a frame class.
  \code
  
@@ -122,7 +122,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
  Pearson, 2004.
  

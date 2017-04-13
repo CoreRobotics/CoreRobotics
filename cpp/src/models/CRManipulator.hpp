@@ -66,7 +66,7 @@ namespace CoreRobotics {
  series of rigid bodies.  Currently only supports serial manipulators.
  
  \details
- \section Description
+ ## Description
  CRManipulator implements a robot manipulator as a series of rigid body
  links.  The free variables of the frames contained in the rigid bodies
  determine the degrees of freedom of the robot.
@@ -94,7 +94,7 @@ namespace CoreRobotics {
  tool frame) for the current configuration.
  - CRManipulator::getJacobian returns the Jacobian for a specified tool.
  
- \section Example
+ ## Example
  This example creates a CRManipulator class.
 
  \code
@@ -186,7 +186,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
  Pearson, 2004.
  

@@ -65,16 +65,20 @@ namespace CoreRobotics {
  \brief This class implements a probabilistic motion model.
  
  \details
- \section Description
+ ## Description
  CRMotionModel implements a probabilistic motion model from a supplied
  dynamics callback function.  Specifically, CRMotionModel sets up a 
  container for the continuous model
  
- \f$ \dot{x} = f(x,u,t,w) \f$
+ \f[
+ \dot{x} = f(x,u,t,w)
+ \f]
  
  or
  
- \f$ x_{k+1} = f(x_k,u_k,t_k,w_k) \f$
+ \f[
+ x_{k+1} = f(x_k,u_k,t_k,w_k)
+ \f]
  
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
  \f$t\f$ is time, \f$w\f$ is process noise, and \f$k\f$ is a discrete
@@ -90,7 +94,7 @@ namespace CoreRobotics {
  internal value for an input (u) and a flag that indicates whether noise
  should be sampled.
  
- \section Example
+ ## Example
  This example demonstrates use of the CRMotionModel class.
  \code
  
@@ -102,7 +106,7 @@ namespace CoreRobotics {
  
  CRNoiseGaussian* dynNoise;
  
- // -------------------------------------------------------------
+ 
  // Declare a probabilistic continuous motion model - xdot = fcn(x,u,t,s)
  Eigen::VectorXd probDynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t, bool sample){
      Eigen::VectorXd w(1);
@@ -115,7 +119,6 @@ namespace CoreRobotics {
  }
  
  
- // -------------------------------------------------------------
  void main(void){
  
      std::cout << "*************************************\n";
@@ -165,11 +168,10 @@ namespace CoreRobotics {
      printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
  
  }
- // -------------------------------------------------------------
  
  \endcode
  
- \section References
+ ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
  
@@ -218,7 +220,7 @@ protected:
 protected:
     
     //! Callback to the dynamic model function \dot{x} = f(x,u,t,w) or
-    //! x_kp1 = f(x_k,u_k,t_k,w_k) depending on what the type is set to.
+    //  x_kp1 = f(x_k,u_k,t_k,w_k) depending on what the type is set to.
     Eigen::VectorXd(*m_dynPredictFcn)(Eigen::VectorXd,
                                       Eigen::VectorXd,
                                       double,
@@ -228,7 +230,7 @@ protected:
 
 //=====================================================================
 // End namespace
-}
+};
 
 
 #endif

@@ -49,8 +49,8 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRSignalType.hpp
- \brief Signal type enumerator.
+ \file CRTypes.hpp
+ \brief Enumerator types.
  */
 //=====================================================================
 //! Enumerator for signal types
@@ -64,7 +64,7 @@ enum CRSignalType {
     
     
 //=====================================================================
-//! Result enumerator
+//! Result enumerator for consistent operation result flags.
 enum CRResult {
     CR_RESULT_SUCCESS,
     CR_RESULT_SINGULAR,

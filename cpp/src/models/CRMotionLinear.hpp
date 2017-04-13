@@ -65,16 +65,20 @@ namespace CoreRobotics {
  \brief This class implements a linear motion model.
  
  \details
- \section Description
+ ## Description
  CRMotionLinear implements a motion model from a supplied dynamics
  callback function.  Specifically, CRMotionLinear sets up a container
  for the continuous model
  
- \f$ \dot{x} = Ax + Bu \f$
+ \f[
+ \dot{x} = Ax + Bu
+ \f]
  
  or
  
- \f$ x_{k+1} = A x_k + B u_k \f$
+ \f[
+ x_{k+1} = A x_k + B u_k
+ \f]
  
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
  and \f$k\f$ is a discrete sampling index.
@@ -88,7 +92,7 @@ namespace CoreRobotics {
  - CRMotionLinear::motion computes a new state and updates the
  internal value for an input (u).
  
- \section Example
+ ## Example
  This example demonstrates use of the CRMotionLinear class.
  \code
  
@@ -99,7 +103,6 @@ namespace CoreRobotics {
  using namespace CoreRobotics;
  
  
- // -------------------------------------------------------------
  void main(void){
  
      std::cout << "*************************************\n";
@@ -148,16 +151,15 @@ namespace CoreRobotics {
      printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
      
  }
- // -------------------------------------------------------------
  
  \endcode
  
- \section References
+ ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
  
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
- 2006. \n\n
+ [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press, 2006.
+ \n\n
  */
 //=====================================================================
 class CRMotionLinear : public CRMotionModel {
@@ -212,18 +214,17 @@ protected:
     Eigen::MatrixXd m_B;
     
     //! Callback to the dynamic model function \dot{x} = f(x,u,t) or
-    //! x_kp1 = f(x_k,u_k,t_k) depending on what the type is set to.
+    //  x_kp1 = f(x_k,u_k,t_k) depending on what the type is set to.
     Eigen::VectorXd m_dynPredictFcn(Eigen::VectorXd x,
                                     Eigen::VectorXd u,
-                                    double t)
-    {
+                                    double t){
         return this->m_A*x + this->m_B*u;
-    };
+    }
 };
 
 //=====================================================================
 // End namespace
-}
+};
 
 
 #endif

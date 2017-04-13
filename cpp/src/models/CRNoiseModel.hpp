@@ -65,7 +65,7 @@ namespace CoreRobotics {
  \brief This class implements a noise model.
  
  \details
- \section Description
+ ## Description
  CRNoiseModel implements methods for sampling from a distribution and
  serves as a base class to specfic distributions.  CRNoiseModel uses
  inverse transform sampling [3] to generate a state.  This requires the
@@ -81,7 +81,7 @@ namespace CoreRobotics {
  
  \f$ p = f(x) \f$.
  
- \section Example
+ ## Example
  This example demonstrates use of the CRNoiseModel class.
  
  \code
@@ -143,7 +143,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
  
