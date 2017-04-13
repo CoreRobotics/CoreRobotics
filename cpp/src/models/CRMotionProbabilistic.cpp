@@ -50,12 +50,12 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- The constructor creates a motion model.  The in_dynamics specifies
+ The constructor creates a motion model.  The i_dynamics specifies
  one of the dynamics equation forms below:\n
  
  Case 1: (Continuous)
  
- If in_type is set to CR_MOTION_CONTINUOUS, then the callback sets
+ If i_type is set to CR_MOTION_CONTINUOUS, then the callback sets
  
  \f$ \dot{x} = f(x,u,t,s) \f$
  
@@ -66,7 +66,7 @@ namespace CoreRobotics {
  
  Case 2: (Discrete)
  
- If in_type is set to CR_MOTION_DISCRETE, then the callback sets
+ If i_type is set to CR_MOTION_DISCRETE, then the callback sets
  
  \f$ x_{k+1} = f(x_k,u_k,t_k,s) \f$
  
@@ -75,26 +75,26 @@ namespace CoreRobotics {
  \f$s\f$ is a boolean flag that indicates if noise is sampled 
  (true = sample noise).
  
- \param[in] in_dynamics - callback to the dynamics equation
- \param[in] in_type - indicates whether the callback is continuous or 
+ \param[in] i_dynamics - callback to the dynamics equation
+ \param[in] i_type - indicates whether the callback is continuous or 
                       discrete, see CoreRobotics::CRMotionModelType.
- \param[in] in_x0 - the initial state.
- \param[in] in_timeStep - the time step of the system
+ \param[in] i_x0 - the initial state.
+ \param[in] i_timeStep - the time step of the system
  */
 //---------------------------------------------------------------------
-CRMotionProbabilistic::CRMotionProbabilistic(Eigen::VectorXd(in_dynamics)(Eigen::VectorXd,
+CRMotionProbabilistic::CRMotionProbabilistic(Eigen::VectorXd(i_dynamics)(Eigen::VectorXd,
                                                                           Eigen::VectorXd,
                                                                           double,
                                                                           bool),
-                                             CRMotionModelType in_type,
-                                             Eigen::VectorXd in_x0,
-                                             double in_timeStep)
+                                             CRMotionModelType i_type,
+                                             Eigen::VectorXd i_x0,
+                                             double i_timeStep)
 {
     this->m_time = 0;
-    this->m_dynPredictFcn = in_dynamics;
-    this->m_type = in_type;
-    this->setTimeStep(in_timeStep);
-    this->setState(in_x0);
+    this->m_dynPredictFcn = i_dynamics;
+    this->m_type = i_type;
+    this->setTimeStep(i_timeStep);
+    this->setState(i_x0);
 }
 
 // overloaded constructor for initializing derived classes
@@ -113,23 +113,23 @@ CRMotionProbabilistic::CRMotionProbabilistic()
  if the model is continuous, then a Runge-Kutta integration scheme is
  used to simulate the next time step.\n
  
- \param[in] in_u - input (forcing term) vector
- \param[in] in_sampleNoise - flag for sampling noise (default = false)
+ \param[in] i_u - input (forcing term) vector
+ \param[in] i_sampleNoise - flag for sampling noise (default = false)
  \return - the new state
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRMotionProbabilistic::motion(Eigen::VectorXd in_u, bool in_sampleNoise)
+Eigen::VectorXd CRMotionProbabilistic::motion(Eigen::VectorXd i_u, bool i_sampleNoise)
 {
     double t = this->m_time;
     double dt = this->m_dt;
     
     if (this->m_type == CR_MOTION_DISCRETE) {
         // update the state
-        this->m_state = (this->m_dynPredictFcn)(this->m_state,in_u,t,in_sampleNoise);
+        this->m_state = (this->m_dynPredictFcn)(this->m_state,i_u,t,i_sampleNoise);
         
     } else if (this->m_type == CR_MOTION_CONTINUOUS) {
         // update the state
-        this->m_state = this->rk4step(this->m_state,in_u,t,dt,in_sampleNoise);
+        this->m_state = this->rk4step(this->m_state,i_u,t,dt,i_sampleNoise);
     }
     
     // update the time
@@ -139,18 +139,18 @@ Eigen::VectorXd CRMotionProbabilistic::motion(Eigen::VectorXd in_u, bool in_samp
     return this->m_state;
 }
 
-Eigen::VectorXd CRMotionProbabilistic::motion(Eigen::VectorXd in_u)
+Eigen::VectorXd CRMotionProbabilistic::motion(Eigen::VectorXd i_u)
 {
     double t = this->m_time;
     double dt = this->m_dt;
     
     if (this->m_type == CR_MOTION_DISCRETE) {
         // update the state
-        this->m_state = (this->m_dynPredictFcn)(this->m_state,in_u,t,false);
+        this->m_state = (this->m_dynPredictFcn)(this->m_state,i_u,t,false);
         
     } else if (this->m_type == CR_MOTION_CONTINUOUS) {
         // update the state
-        this->m_state = this->rk4step(this->m_state,in_u,t,dt,false);
+        this->m_state = this->rk4step(this->m_state,i_u,t,dt,false);
     }
     
     // update the time
@@ -165,25 +165,25 @@ Eigen::VectorXd CRMotionProbabilistic::motion(Eigen::VectorXd in_u)
 /*!
  This method performs a Runge Kutta step on the dynFcn member.\n
  
- \param[in] in_x - state x(k)
- \param[in] in_u - input u(k)
- \param[in] in_t - time t(k)
- \param[in] in_dt - sample rate dt
+ \param[in] i_x - state x(k)
+ \param[in] i_u - input u(k)
+ \param[in] i_t - time t(k)
+ \param[in] i_dt - sample rate dt
  \return - the next state x(k+1)
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRMotionProbabilistic::rk4step(Eigen::VectorXd in_x,
-                                               Eigen::VectorXd in_u,
-                                               double in_t,
-                                               double in_dt,
-                                               bool in_sample)
+Eigen::VectorXd CRMotionProbabilistic::rk4step(Eigen::VectorXd i_x,
+                                               Eigen::VectorXd i_u,
+                                               double i_t,
+                                               double i_dt,
+                                               bool i_sample)
 {
     // RK4 step
-    Eigen::VectorXd f1 = (this->m_dynPredictFcn)(in_x,in_u,in_t,in_sample);
-    Eigen::VectorXd f2 = (this->m_dynPredictFcn)(in_x+in_dt*f1/2,in_u,in_t+in_dt/2,in_sample);
-    Eigen::VectorXd f3 = (this->m_dynPredictFcn)(in_x+in_dt*f2/2,in_u,in_t+in_dt/2,in_sample);
-    Eigen::VectorXd f4 = (this->m_dynPredictFcn)(in_x+in_dt*f3,in_u,in_t+in_dt,in_sample);
-    return in_x + in_dt/6*(f1 + 2*f2 + 2*f3 + f4);
+    Eigen::VectorXd f1 = (this->m_dynPredictFcn)(i_x,i_u,i_t,i_sample);
+    Eigen::VectorXd f2 = (this->m_dynPredictFcn)(i_x+i_dt*f1/2,i_u,i_t+i_dt/2,i_sample);
+    Eigen::VectorXd f3 = (this->m_dynPredictFcn)(i_x+i_dt*f2/2,i_u,i_t+i_dt/2,i_sample);
+    Eigen::VectorXd f4 = (this->m_dynPredictFcn)(i_x+i_dt*f3,i_u,i_t+i_dt,i_sample);
+    return i_x + i_dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
 
 

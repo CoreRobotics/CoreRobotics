@@ -50,7 +50,7 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- The constructor creates a sensor model.  The in_H specifies the H matrix
+ The constructor creates a sensor model.  The i_H specifies the H matrix
  for the observation equation:\n
  
  \f$ zPredict =  H x \f$
@@ -58,15 +58,15 @@ namespace CoreRobotics {
  where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
  sensor observation.
  
- \param[in] in_H - the observation matrix H
- \param[in] in_x0 - the initial state.
+ \param[in] i_H - the observation matrix H
+ \param[in] i_x0 - the initial state.
  */
 //---------------------------------------------------------------------
-CRSensorLinear::CRSensorLinear(Eigen::MatrixXd in_H,
-                               Eigen::VectorXd in_x0)
+CRSensorLinear::CRSensorLinear(Eigen::MatrixXd i_H,
+                               Eigen::VectorXd i_x0)
 {
-    this->m_H = in_H;
-    this->setState(in_x0);
+    this->m_H = i_H;
+    this->setState(i_x0);
 }
     
     

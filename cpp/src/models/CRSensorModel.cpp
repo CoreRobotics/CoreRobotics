@@ -50,7 +50,7 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- The constructor creates a sensor model.  The in_predictor specifies 
+ The constructor creates a sensor model.  The i_predictor specifies 
  the observation equation:\n
  
  \f$ zPredict =  h(x) \f$
@@ -58,21 +58,21 @@ namespace CoreRobotics {
  where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
  sensor observation. The callback function prototype is thus
  \code
- Eigen::VectorXd in_predictor(Eigen::VectorXd x){
+ Eigen::VectorXd i_predictor(Eigen::VectorXd x){
     // compute zPredict from x here.
     return zPredict;
  };
  \endcode
  
- \param[in] in_predictor - a model function of the form specified above
- \param[in] in_x0 - the initial state.
+ \param[in] i_predictor - a model function of the form specified above
+ \param[in] i_x0 - the initial state.
  */
 //---------------------------------------------------------------------
-CRSensorModel::CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
-                             Eigen::VectorXd in_x0)
+CRSensorModel::CRSensorModel(Eigen::VectorXd(i_predictor)(Eigen::VectorXd),
+                             Eigen::VectorXd i_x0)
 {
-    this->m_measPredictFcn = in_predictor;
-    this->setState(in_x0);
+    this->m_measPredictFcn = i_predictor;
+    this->setState(i_x0);
 }
 
 // overloaded constructor for initializing derived classes

@@ -119,21 +119,21 @@ namespace CoreRobotics {
 	CRRigidBody* Link2 = new CRRigidBody();
 
 	// Set info for Link 0 and add to MyRobot
-	F0->freeVar = CR_EULER_FREE_ANG_G;
+	F0->m_freeVar = CR_EULER_FREE_ANG_G;
 	F0->setMode(CR_EULER_MODE_XYZ);
 	F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
 	Link0->frame = F0;
 	MyRobot.addLink(Link0);
 
 	// Set info for Link 1 and add to MyRobot
-	F1->freeVar = CR_EULER_FREE_ANG_G;
+	F1->m_freeVar = CR_EULER_FREE_ANG_G;
 	F1->setMode(CR_EULER_MODE_XYZ);
 	F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
 	Link1->frame = F1;
 	MyRobot.addLink(Link1);
 
 	// Set info for Link 2 and add to MyRobot
-	F2->freeVar = CR_EULER_FREE_NONE;
+	F2->m_freeVar = CR_EULER_FREE_NONE;
 	F2->setMode(CR_EULER_MODE_XYZ);
 	F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
 	Link2->frame = F2;
@@ -166,7 +166,7 @@ namespace CoreRobotics {
 	std::cout << "Jacobian = \n" << Jacobian << std::endl;
 
 	// now set a new robot configuration and get the FK and jacobian
-	jointAngles << CoreRobotics::PI / 4.0, -CoreRobotics::PI / 2.0;
+	jointAngles << CoreRobotics::CR_PI / 4.0, -CoreRobotics::CR_PI / 2.0;
 	std::cout << "Set joint angles = ("
 		<< jointAngles.transpose() << ") rad" << std::endl;
 	MyRobot.setConfiguration(jointAngles);
@@ -211,7 +211,7 @@ class CRManipulator {
 public:
     
     //! Class constructor
-	CRManipulator(CRManipulatorType type);
+	CRManipulator(CRManipulatorType i_type);
     CRManipulator();
     
 //---------------------------------------------------------------------
@@ -219,55 +219,55 @@ public:
 public:
     
     //! Set the configuration (joint) space positions
-    void setConfiguration(Eigen::VectorXd q);
+    void setConfiguration(Eigen::VectorXd i_q);
     
     //! Get the configuration (joint) space positions
-    void getConfiguration(Eigen::VectorXd &q);
+    Eigen::VectorXd getConfiguration(void);
     
     //! Get the instantaneous forward kinematics
-    void getForwardKinematics(Eigen::MatrixXd &y);
-    
-    //! Get the instantaneous numerical Jacobian
-	void getJacobian(unsigned toolIndex,
-                     CREulerMode mode,
-                     Eigen::MatrixXd &jacobian);
-
-    void getJacobian(unsigned toolIndex,
-                     CREulerMode mode,
-                     Eigen::Matrix<bool, 6, 1> in_poseElements,
-                     Eigen::MatrixXd &jacobian);
+    Eigen::MatrixXd getForwardKinematics(void);
     
     //! Get the number of links in the list
-    void getNumberOfLinks(int &n);
+    int getNumberOfLinks(void);
     
     //! Get the number of driven links (degrees of freedom: DOF)
-    void getDegreesOfFreedom(int &dof);
+    int getDegreesOfFreedom(void);
 
 	//! Get tool frame for the current manipulator configuration
-	void getToolFrame(unsigned toolIndex, CRFrame &tool);
+	void getToolFrame(unsigned i_toolIndex, CRFrame& o_tool);
     
     //! Get the pose for the specified tool index
-    void getToolPose(unsigned toolIndex,
-                     CREulerMode mode,
-                     Eigen::Matrix<double, 6, 1> &pose);
+    Eigen::Matrix<double, 6, 1> getToolPose(unsigned i_toolIndex,
+                                            CREulerMode i_mode);
     
-    void getToolPose(unsigned toolIndex,
-                     CREulerMode mode,
-                     Eigen::Matrix<bool, 6, 1> in_poseElements,
-                     Eigen::VectorXd &pose);
+    Eigen::VectorXd getToolPose(unsigned i_toolIndex,
+                                CREulerMode i_mode,
+                                Eigen::Matrix<bool, 6, 1> i_poseElements);
 
 	//! Set the model type
 	void setModelType(CRManipulatorType type) { this->m_modelType = type; }
+    
+//---------------------------------------------------------------------
+// Jacobian
+public:
+    
+    //! Compute the instantaneous numerical Jacobian
+    Eigen::MatrixXd jacobian(unsigned i_toolIndex,
+                             CREulerMode i_mode);
+    
+    Eigen::MatrixXd jacobian(unsigned i_toolIndex,
+                             CREulerMode i_mode,
+                             Eigen::Matrix<bool, 6, 1> i_poseElements);
     
 //---------------------------------------------------------------------
 // Add link/tool Methods
 public:
     
     //! Add a link to the kinematic structure, return the index of the added link
-    int addLink(CoreRobotics::CRRigidBody* link);
+    int addLink(CoreRobotics::CRRigidBody* i_link);
 
 	//! Add a tool to the manipulator, return the index of the added tool
-	int addTool(unsigned parentIndex, CRFrame* tool);
+	int addTool(unsigned i_parentIndex, CRFrame* i_tool);
     
 //---------------------------------------------------------------------
 // Protected Members

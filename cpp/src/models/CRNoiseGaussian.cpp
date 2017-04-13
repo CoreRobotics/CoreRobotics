@@ -56,21 +56,21 @@ namespace CoreRobotics {
 /*!
  The constructor creates a noise model.\n
  
- \param[in] in_cov - covariance
- \param[in] in_mean - mean
- \param[in] in_seed - seed for the random generator
+ \param[in] i_cov - covariance
+ \param[in] i_mean - mean
+ \param[in] i_seed - seed for the random generator
  */
 //---------------------------------------------------------------------
-CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd in_cov,
-                                 Eigen::VectorXd in_mean,
-                                 unsigned in_seed){
-    this->setParameters(in_cov,in_mean);
-    this->m_seed = in_seed;
+CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd i_cov,
+                                 Eigen::VectorXd i_mean,
+                                 unsigned i_seed){
+    this->setParameters(i_cov,i_mean);
+    this->m_seed = i_seed;
     this->m_generator.seed(this->m_seed);
 }
-CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd in_cov,
-                                 Eigen::VectorXd in_mean){
-    this->setParameters(in_cov,in_mean);
+CRNoiseGaussian::CRNoiseGaussian(Eigen::MatrixXd i_cov,
+                                 Eigen::VectorXd i_mean){
+    this->setParameters(i_cov,i_mean);
     this->randomSeed();
 }
 CRNoiseGaussian::CRNoiseGaussian(){
@@ -89,16 +89,16 @@ CRNoiseGaussian::CRNoiseGaussian(){
  multivariate standard normal distribution with mean and covariance, as
  in http://en.wikipedia.org/wiki/Normal_distribution
  
- \param[in] in_cov - covariance matrix of the Gaussian distribution
- \param[in] in_mean - mean vector of the Gaussian distribution
+ \param[in] i_cov - covariance matrix of the Gaussian distribution
+ \param[in] i_mean - mean vector of the Gaussian distribution
  */
 //---------------------------------------------------------------------
-void CRNoiseGaussian::setParameters(Eigen::MatrixXd in_cov,
-                                    Eigen::VectorXd in_mean)
+void CRNoiseGaussian::setParameters(Eigen::MatrixXd i_cov,
+                                    Eigen::VectorXd i_mean)
 {
-    this->m_parameters.cov = in_cov;
-    this->m_parameters.covInv = in_cov.inverse();
-    this->m_parameters.mean = in_mean;
+    this->m_parameters.cov = i_cov;
+    this->m_parameters.covInv = i_cov.inverse();
+    this->m_parameters.mean = i_mean;
 }
 
 
@@ -133,15 +133,15 @@ Eigen::VectorXd CRNoiseGaussian::sample(void)
 /*!
  This method returns the probability of x.\n
  
- \param[in] in_x - state to evaluate
- \return - probability of in_x
+ \param[in] i_x - state to evaluate
+ \return - probability of i_x
  */
 //---------------------------------------------------------------------
-double CRNoiseGaussian::probability(Eigen::VectorXd in_x)
+double CRNoiseGaussian::probability(Eigen::VectorXd i_x)
 {
     // compute subarguments
-    Eigen::MatrixXd cov2pi = 2*CoreRobotics::PI*this->m_parameters.cov;
-    Eigen::VectorXd error = in_x - this->m_parameters.mean;
+    Eigen::MatrixXd cov2pi = 2*CoreRobotics::CR_PI*this->m_parameters.cov;
+    Eigen::VectorXd error = i_x - this->m_parameters.mean;
     
     // define the arguments (gain k and arg of exponent)
     double k = 1/sqrt(cov2pi.determinant());

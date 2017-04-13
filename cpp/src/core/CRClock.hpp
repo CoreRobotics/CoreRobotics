@@ -120,13 +120,13 @@ public:
 public:
     
     //! Start the timer
-    void startTimer();
+    void startTimer(void);
     
     //! Get the elapsed time [s] since startTimer() was called
-    void getElapsedTime(double &t);
+    double getElapsedTime(void);
     
     //! Sleep the current thread
-    void sleep(double t);
+    void sleep(double i_time);
     
     
 //---------------------------------------------------------------------
@@ -134,10 +134,10 @@ public:
 private:
 
 	//! steady_clock object
-	std::chrono::steady_clock clock;
+	std::chrono::steady_clock m_clock;
     
     //! steady_clock timepoints
-	std::chrono::steady_clock::time_point t0, t1;
+	std::chrono::steady_clock::time_point m_t0, m_t1;
     
     
 };

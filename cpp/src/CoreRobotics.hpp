@@ -93,7 +93,7 @@ library, test routines, and example code:
 \code 
 $ mkdir build
 $ cd build
-$ cmake -G "Xcode" ../
+$ cmake -DCMAKE_BUILD_TYPE=Release -G "Xcode" ../
 $ open CoreRobotics.xcodeproj/
 \endcode
  
@@ -131,7 +131,11 @@ Todo
 \page gettingstarted Getting Started
 Todo
 
+\section transformations Transformations
 \section kinematics Kinematics
+\section inversekinematics Inverse Kinematics
+\section motion Motion Modeling
+\section estimation State Estimation
 Todo
 */
 //---------------------------------------------------------------------------

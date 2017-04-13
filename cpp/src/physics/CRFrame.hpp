@@ -46,6 +46,7 @@
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
+#include "CRTypes.hpp"
 
 
 //=====================================================================
@@ -79,7 +80,7 @@ namespace CoreRobotics {
  transforms a point \f$^i p\f$ in the child frame (i) to a point
  \f$^{i-1} p\f$ in the parent frame (i-1) by the operation
  \f[
- {^{i-1} p} = ^{i-1}^{i}T {^i p}.
+ {^{i-1} p} = ^{i-1}_{i}T {^i p}.
  \f]
  
  These methods return the transformation \f$T\f$ and inverse 
@@ -152,7 +153,7 @@ public:
 
     //! Class constructor
     CRFrame();
-    CRFrame(Eigen::Matrix3d rot, Eigen::Vector3d trans);
+    CRFrame(Eigen::Matrix3d i_rot, Eigen::Vector3d i_trans);
     
     //! Class destructor
     // virtual ~CRFrame() = 0;
@@ -162,56 +163,59 @@ public:
 public:
 
     //! Set the value of the free variable
-    virtual bool setFreeValue(double q);
+    virtual CRResult setFreeValue(double i_q);
     
     //! Get the value of the free variable
-    virtual void getFreeValue(double &q);
+    virtual double getFreeValue(void);
     
     //! Set the rotation and translation
-    virtual void setRotationAndTranslation(Eigen::Matrix3d rot, Eigen::Vector3d trans) {rotation = rot; translation = trans;}
+    virtual void setRotationAndTranslation(Eigen::Matrix3d i_rot,
+                                           Eigen::Vector3d i_trans){
+        this->m_rotation = i_rot; this->m_translation = i_trans;
+    }
 
     //! Return the rotation and translation
-    void getRotationAndTranslation(Eigen::Matrix3d &rot, Eigen::Vector3d &trans) {rot = rotation; trans = translation;}
+    void getRotationAndTranslation(Eigen::Matrix3d &o_rot,
+                                   Eigen::Vector3d &o_trans){
+        o_rot = this->m_rotation; o_trans = this->m_translation;
+    }
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Get the transformation to the parent frame
-    void getTransformToParent(Eigen::Matrix4d &transform);
+    Eigen::Matrix4d getTransformToParent(void);
     
     //! Get the transformation to the child frame
-    void getTransformToChild(Eigen::Matrix4d &transform);
+    Eigen::Matrix4d getTransformToChild(void);
     
-    //! Transform points p in the child frame to points y in the parent frame
-    void transformToParent(Eigen::Vector3d p, Eigen::Vector3d &y);
+    //! Transform a point p in the child frame to a point y in the parent frame
+    Eigen::Vector3d transformToParent(Eigen::Vector3d i_point);
     
-    //! Transform points p in the parent frame to points y in the child frame
-    void transformToChild(Eigen::Vector3d p, Eigen::Vector3d &y);
+    //! Transform a point p in the parent frame to a point y in the child frame
+    Eigen::Vector3d transformToChild(Eigen::Vector3d i_point);
     
     //! Query if the frame is driven, i.e. has a free variable
-    virtual bool isDriven();
+    virtual bool isDriven(void);
 
     //! Gets a vector of the Euler angles
-    void getOrientation(CREulerMode mode, Eigen::Vector3d &orientation);
+    Eigen::Vector3d getOrientation(CREulerMode i_mode);
 
     //! Get the pose vector where the Euler orientation convention is specified by mode
-    void getPose(CREulerMode mode,
-                 Eigen::Matrix<double, 6, 1> &pose);
-    
-    void getPose(CREulerMode mode,
-                 Eigen::Matrix<bool, 6, 1> poseElements,
-                 Eigen::VectorXd &pose);
+    Eigen::Matrix<double, 6, 1> getPose(CREulerMode i_mode);
+    Eigen::VectorXd getPose(CREulerMode i_mode,
+                            Eigen::Matrix<bool, 6, 1> i_poseElements);
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
     
     //! Rotation matrix data
-    Eigen::Matrix3d rotation;
+    Eigen::Matrix3d m_rotation;
 
     //! Translation vector data
-    Eigen::Vector3d translation;
+    Eigen::Vector3d m_translation;
 
 };
     

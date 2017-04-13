@@ -65,21 +65,21 @@ void test_CRManipulator(void) {
 	CRRigidBody* Link2 = new CRRigidBody();
 
 	// Set info for Link 0 and add to MyRobot
-	F0->freeVar = CR_EULER_FREE_ANG_G;
+	F0->setFreeVariable(CR_EULER_FREE_ANG_G);
 	F0->setMode(CR_EULER_MODE_XYZ);
 	F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
 	Link0->setFrame(F0);
 	MyRobot.addLink(Link0);
 
 	// Set info for Link 1 and add to MyRobot
-	F1->freeVar = CR_EULER_FREE_ANG_G;
+	F1->setFreeVariable(CR_EULER_FREE_ANG_G);
 	F1->setMode(CR_EULER_MODE_XYZ);
 	F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
 	Link1->setFrame(F1);
 	MyRobot.addLink(Link1);
 
 	// Set info for Link 2 and add to MyRobot
-	F2->freeVar = CR_EULER_FREE_NONE;
+	F2->setFreeVariable(CR_EULER_FREE_NONE);
 	F2->setMode(CR_EULER_MODE_XYZ);
 	F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
 	Link2->setFrame(F2);
@@ -101,25 +101,25 @@ void test_CRManipulator(void) {
 	// Get the configuration values
 	int dof;
 	Eigen::VectorXd jointAngles;
-	MyRobot.getDegreesOfFreedom(dof);
-	MyRobot.getConfiguration(jointAngles);
+	dof = MyRobot.getDegreesOfFreedom();
+	jointAngles = MyRobot.getConfiguration();
 	std::cout << "MyRobot has " << dof << " DOF, with joint angles = ("
 		<< jointAngles.transpose() << ") rad" << std::endl;
 
 	// Now get the Forward Kinematics and Jacobian
 	Eigen::MatrixXd Jacobian, FwdKin;
-	MyRobot.getForwardKinematics(FwdKin);
-	MyRobot.getJacobian(toolIndex, CR_EULER_MODE_XYZ, Jacobian);
+	FwdKin = MyRobot.getForwardKinematics();
+	Jacobian = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ);
 	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
 	std::cout << "Jacobian = \n" << Jacobian << std::endl;
 
 	// now set a new robot configuration and get the FK and jacobian
-	jointAngles << CoreRobotics::PI / 4.0, -CoreRobotics::PI / 2.0;
+	jointAngles << CoreRobotics::CR_PI / 4.0, -CoreRobotics::CR_PI / 2.0;
 	std::cout << "Set joint angles = ("
 		<< jointAngles.transpose() << ") rad" << std::endl;
 	MyRobot.setConfiguration(jointAngles);
-	MyRobot.getForwardKinematics(FwdKin);
-	MyRobot.getJacobian(0, CR_EULER_MODE_XYZ, Jacobian);
+	FwdKin = MyRobot.getForwardKinematics();
+	Jacobian = MyRobot.jacobian(0, CR_EULER_MODE_XYZ);
 	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
 	std::cout << "Jacobian = \n" << Jacobian << std::endl;
 
@@ -127,7 +127,7 @@ void test_CRManipulator(void) {
 	Eigen::Matrix4d T;
 	CRFrame toolFrame;
 	MyRobot.getToolFrame(toolIndex, toolFrame);
-	toolFrame.getTransformToParent(T);
+	T = toolFrame.getTransformToParent();
 	std::cout << "MyRobot tool has a transformation of \n" << T << std::endl;
     
     
@@ -135,12 +135,12 @@ void test_CRManipulator(void) {
     Eigen::MatrixXd Jred;
     Eigen::Matrix<bool, 6, 1> elems;
     elems << true, true, false, false, false, true;
-    MyRobot.getJacobian(toolIndex, CR_EULER_MODE_XYZ, elems, Jred);
+    Jred = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ, elems);
     std::cout << "MyRobot Jacobian (reduced) is \n" << Jred << std::endl;
     
     // get the tool pose for only (x, y, g)
     Eigen::VectorXd pose;
-    MyRobot.getToolPose(toolIndex, CR_EULER_MODE_XYZ, elems, pose);
+    pose = MyRobot.getToolPose(toolIndex, CR_EULER_MODE_XYZ, elems);
     std::cout << "MyRobot pose (reduced) is \n" << pose << std::endl;
     
 

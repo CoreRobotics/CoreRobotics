@@ -62,6 +62,16 @@ enum CRSignalType {
     CR_SIGNAL_GENERIC
 };
     
+    
+//=====================================================================
+//! Result enumerator
+enum CRResult {
+    CR_RESULT_SUCCESS,
+    CR_RESULT_SINGULAR,
+    CR_RESULT_UNWRITABLE,
+};
+
+    
 
 //=====================================================================
 // End namespace

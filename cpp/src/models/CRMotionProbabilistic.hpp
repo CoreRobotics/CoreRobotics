@@ -184,13 +184,13 @@ class CRMotionProbabilistic : public CRMotionModel {
 public:
     
     //! Class constructor
-    CRMotionProbabilistic(Eigen::VectorXd(in_dynamics)(Eigen::VectorXd,
+    CRMotionProbabilistic(Eigen::VectorXd(i_dynamics)(Eigen::VectorXd,
                                                        Eigen::VectorXd,
                                                        double,
                                                        bool),
-                          CRMotionModelType in_type,
-                          Eigen::VectorXd in_x0,
-                          double in_timeStep);
+                          CRMotionModelType i_type,
+                          Eigen::VectorXd i_x0,
+                          double i_timeStep);
     CRMotionProbabilistic();
     
 //---------------------------------------------------------------------
@@ -198,20 +198,20 @@ public:
 public:
     
     //! Simulate the motion
-    Eigen::VectorXd motion(Eigen::VectorXd in_u, bool sampleNoise);
+    Eigen::VectorXd motion(Eigen::VectorXd i_u, bool sampleNoise);
     
-    Eigen::VectorXd motion(Eigen::VectorXd in_u);
+    Eigen::VectorXd motion(Eigen::VectorXd i_u);
     
 //---------------------------------------------------------------------
 // Protected Methods
 protected:
     
     //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(Eigen::VectorXd in_x,
-                            Eigen::VectorXd in_u,
-                            double in_t,
-                            double in_dt,
-                            bool in_sample);
+    Eigen::VectorXd rk4step(Eigen::VectorXd i_x,
+                            Eigen::VectorXd i_u,
+                            double i_t,
+                            double i_dt,
+                            bool i_sample);
     
 //---------------------------------------------------------------------
 // Protected Members

@@ -139,8 +139,8 @@ class CRSensorModel {
 public:
     
     //! Class constructor
-    CRSensorModel(Eigen::VectorXd(in_predictor)(Eigen::VectorXd),
-                  Eigen::VectorXd in_x0);
+    CRSensorModel(Eigen::VectorXd(i_predictor)(Eigen::VectorXd),
+                  Eigen::VectorXd i_x0);
     CRSensorModel();
     
 //---------------------------------------------------------------------
@@ -148,7 +148,7 @@ public:
 public:
     
     //! Set the state vector (x)
-    void setState(Eigen::VectorXd in_x) {this->m_state = in_x;}
+    void setState(Eigen::VectorXd i_x) {this->m_state = i_x;}
     
     //! Get the state vector (x)
     Eigen::VectorXd getState(void) {return this->m_state;}

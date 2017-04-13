@@ -46,6 +46,7 @@
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
+#include "CRTypes.hpp"
 
 
 //=====================================================================
@@ -57,7 +58,7 @@ typedef Eigen::VectorXd (vec);
 // CoreRobotics namespace
 namespace CoreRobotics {
 
-    const double PI = 3.1415926535897932384626433832795;
+    const double CR_PI = 3.1415926535897932384626433832795;
 
     //=====================================================================
     /*!
@@ -91,10 +92,10 @@ namespace CoreRobotics {
     public:
         
         //! Convert angles in degrees to radians
-        static double deg2rad(double deg) { return PI * deg / 180.0; }
+        static double deg2rad(const double i_deg) { return CR_PI * i_deg / 180.0; }
         
         //! Convert angles in radians to degrees
-        static double rad2deg(double rad) { return 180.0 * rad / PI; }
+        static double rad2deg(const double i_rad) { return 180.0 * i_rad / CR_PI; }
         
         
     //---------------------------------------------------------------------
@@ -102,27 +103,27 @@ namespace CoreRobotics {
     public:
         
         //! Forward euler integration
-        static vec forwardEulerStep(vec(dyanmicSystem)(double, vec, vec),
-                                    double t,
-                                    vec x,
-                                    vec u,
-                                    double dt);
+        static vec forwardEulerStep(vec(i_dyanmicSystem)(double, vec, vec),
+                                    double i_t,
+                                    vec i_x,
+                                    vec i_u,
+                                    double i_dt);
         
         //! Runge-Kutta 4th order integration
-        static vec rungeKuttaStep(vec(dynamicSystem)(double, vec, vec),
-                                  double t,
-                                  vec x,
-                                  vec u,
-                                  double dt);
+        static vec rungeKuttaStep(vec(i_dynamicSystem)(double, vec, vec),
+                                  double i_t,
+                                  vec i_x,
+                                  vec i_u,
+                                  double i_dt);
         
     //---------------------------------------------------------------------
     // Matrix inversion routines
     public:
         
         //! SVD-based matrix inverse
-        static bool svdInverse(Eigen::MatrixXd A,
-                               double tol,
-                               Eigen::MatrixXd& Ainv);
+        static CRResult svdInverse(Eigen::MatrixXd i_A,
+                                   double i_tol,
+                                   Eigen::MatrixXd& o_Ainv);
         
         
     };

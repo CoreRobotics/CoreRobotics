@@ -167,20 +167,20 @@ class CRMotionLinear : public CRMotionModel {
 public:
     
     //! Class constructor
-    CRMotionLinear(Eigen::MatrixXd in_A,
-                   Eigen::MatrixXd in_B,
-                   CRMotionModelType in_type,
-                   Eigen::VectorXd in_x0,
-                   double in_timeStep);
+    CRMotionLinear(Eigen::MatrixXd i_A,
+                   Eigen::MatrixXd i_B,
+                   CRMotionModelType i_type,
+                   Eigen::VectorXd i_x0,
+                   double i_timeStep);
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
     //! Set the dynamics and input matrices
-    void setDynamics(Eigen::MatrixXd in_A, Eigen::MatrixXd in_B){
-        this->m_A = in_A;
-        this->m_B = in_B;
+    void setDynamics(Eigen::MatrixXd i_A, Eigen::MatrixXd i_B){
+        this->m_A = i_A;
+        this->m_B = i_B;
     }
     
     
@@ -189,17 +189,17 @@ public:
 public:
     
     //! Simulate the motion
-    Eigen::VectorXd motion(Eigen::VectorXd in_u);
+    Eigen::VectorXd motion(Eigen::VectorXd i_u);
     
 //---------------------------------------------------------------------
 // Protected Methods
 protected:
     
     //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(Eigen::VectorXd in_x,
-                            Eigen::VectorXd in_u,
-                            double in_t,
-                            double in_dt);
+    Eigen::VectorXd rk4step(Eigen::VectorXd i_x,
+                            Eigen::VectorXd i_u,
+                            double i_t,
+                            double i_dt);
     
 //---------------------------------------------------------------------
 // Protected Members

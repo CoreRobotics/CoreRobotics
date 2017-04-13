@@ -54,26 +54,26 @@ namespace CoreRobotics {
 /*!
  The constructor creates a noise model.\n
  
- \param[in] in_a - lower bound of the uniform distribution domain
- \param[in] in_b - upper bound of the uniform distribution domain
- \param[in] in_seed - seed for the random generator
+ \param[in] i_a - lower bound of the uniform distribution domain
+ \param[in] i_b - upper bound of the uniform distribution domain
+ \param[in] i_seed - seed for the random generator
  */
 //---------------------------------------------------------------------
-CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd in_a,
-                               Eigen::VectorXd in_b,
-                               unsigned in_seed){
+CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd i_a,
+                               Eigen::VectorXd i_b,
+                               unsigned i_seed){
     
-    this->setParameters(in_a,in_b);
-    this->m_seed = in_seed;
+    this->setParameters(i_a,i_b);
+    this->m_seed = i_seed;
     this->m_generator.seed(this->m_seed);
     
 }
     
     
-CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd in_a,
-                               Eigen::VectorXd in_b){
+CRNoiseUniform::CRNoiseUniform(Eigen::VectorXd i_a,
+                               Eigen::VectorXd i_b){
     
-    this->setParameters(in_a,in_b);
+    this->setParameters(i_a,i_b);
     this->randomSeed();
     
 }
@@ -97,15 +97,15 @@ CRNoiseUniform::CRNoiseUniform(){
  multivariate standard normal distribution with mean and covariance, as
  in http://en.wikipedia.org/wiki/Normal_distribution
  
- \param[in] in_a - lower bound of the uniform distribution domain
- \param[in] in_b - upper bound of the uniform distribution domain
+ \param[in] i_a - lower bound of the uniform distribution domain
+ \param[in] i_b - upper bound of the uniform distribution domain
  */
 //---------------------------------------------------------------------
-void CRNoiseUniform::setParameters(Eigen::VectorXd in_a,
-                                   Eigen::VectorXd in_b)
+void CRNoiseUniform::setParameters(Eigen::VectorXd i_a,
+                                   Eigen::VectorXd i_b)
 {
-    this->m_parameters.a = in_a;
-    this->m_parameters.b = in_b;
+    this->m_parameters.a = i_a;
+    this->m_parameters.b = i_b;
 }
 
 
@@ -143,11 +143,11 @@ Eigen::VectorXd CRNoiseUniform::sample(void)
 /*!
  This method returns the probability of x.\n
  
- \param[in] in_x - state to evaluate
- \return - probability of in_x
+ \param[in] i_x - state to evaluate
+ \return - probability of i_x
  */
 //---------------------------------------------------------------------
-double CRNoiseUniform::probability(Eigen::VectorXd in_x)
+double CRNoiseUniform::probability(Eigen::VectorXd i_x)
 {
     
     Eigen::VectorXd e = (this->m_parameters.b-this->m_parameters.a);
@@ -156,8 +156,8 @@ double CRNoiseUniform::probability(Eigen::VectorXd in_x)
     double p = 1/e.prod();
     
     // check if x is in the domain of the distribution
-    for(int i = 0; i < in_x.size(); i++){
-        if ((in_x(i) > this->m_parameters.b(i)) || (in_x(i) < this->m_parameters.a(i))){
+    for(int i = 0; i < i_x.size(); i++){
+        if ((i_x(i) > this->m_parameters.b(i)) || (i_x(i) < this->m_parameters.a(i))){
             p = 0.0;
         }
     }

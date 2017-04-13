@@ -134,16 +134,16 @@ void test_CRInverseKinematics(void) {
     
     // Now solve the inverse kinematics for the point
     timer.startTimer();
-    bool result = ikSolver.solve(p, q0, qSolved);
-    timer.getElapsedTime(et);
+    CRResult result = ikSolver.solve(p, q0, qSolved);
+    et = timer.getElapsedTime();
     
-    if ( result ){
+    if ( result == CR_RESULT_SUCCESS ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
         MyRobot->setConfiguration(qSolved);
-        MyRobot->getForwardKinematics(fk);
+        fk = MyRobot->getForwardKinematics();
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -168,15 +168,15 @@ void test_CRInverseKinematics(void) {
     // Now solve the inverse kinematics for the point
     timer.startTimer();
     result = ikSolver.solve(p, q0, qSolved);
-    timer.getElapsedTime(et);
+    et = timer.getElapsedTime();
     
-    if ( result ){
+    if ( result == CR_RESULT_SUCCESS ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
         MyRobot->setConfiguration(qSolved);
-        MyRobot->getForwardKinematics(fk);
+        fk = MyRobot->getForwardKinematics();
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -203,15 +203,15 @@ void test_CRInverseKinematics(void) {
     // Now solve the inverse kinematics for the point
     timer.startTimer();
     result = ikSolver.solve(p, q0, qSolved);
-    timer.getElapsedTime(et);
+    et = timer.getElapsedTime();
     
-    if ( result ){
+    if ( result == CR_RESULT_SUCCESS ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
         MyRobot->setConfiguration(qSolved);
-        MyRobot->getForwardKinematics(fk);
+        fk = MyRobot->getForwardKinematics();
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -236,15 +236,15 @@ void test_CRInverseKinematics(void) {
     // Now solve the inverse kinematics for the point
     timer.startTimer();
     result = ikSolver.solve(p, q0, qSolved);
-    timer.getElapsedTime(et);
+    et = timer.getElapsedTime();
     
-    if ( result ){
+    if ( result == CR_RESULT_SUCCESS ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
         MyRobot->setConfiguration(qSolved);
-        MyRobot->getForwardKinematics(fk);
+        fk = MyRobot->getForwardKinematics();
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -279,15 +279,15 @@ void test_CRInverseKinematics(void) {
     // Now solve the inverse kinematics for the point
     timer.startTimer();
     result = ikSolver.solve(pRed, elems, q0, qSolved);
-    timer.getElapsedTime(et);
+    et = timer.getElapsedTime();
     
-    if ( result ){
+    if ( result == CR_RESULT_SUCCESS ){
         printf("Non-sinular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
         MyRobot->setConfiguration(qSolved);
-        MyRobot->getForwardKinematics(fk);
+        fk = MyRobot->getForwardKinematics();
         
         std::cout << "The forward kinematics for this solution are:\n";
         std::cout << fk << std::endl;
@@ -322,16 +322,16 @@ void test_CRInverseKinematics(void) {
     for (int i = 0; i < 100; i++){
         timer.startTimer();
         result = ikSolver.solve(p, q, qSolved);
-        timer.getElapsedTime(et);
+        et = timer.getElapsedTime();
         
         q = qSolved;
         
-        if ( result ){
+        if ( result == CR_RESULT_SUCCESS ){
             printf("Solution found in %8.6f s!\n",et);
             
             // Now push the new joints through the robot to see if it worked
             MyRobot->setConfiguration(q);
-            MyRobot->getForwardKinematics(fk);
+            fk = MyRobot->getForwardKinematics();
             
         } else {
             std::cout << "No solution found! Returning original configuration.\n";

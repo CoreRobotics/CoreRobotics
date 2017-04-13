@@ -55,19 +55,19 @@ namespace CoreRobotics {
  The constructor sets the rotation and translation parameters upon
  construction, with defaults listed in parenthesis.\n
  
- \param[in]  rot   - the 3x3 rotation matrix (identity)
- \param[in]  trans - the 3x1 translation vector (zeros)
+ \param[in]  i_rot   - the 3x3 rotation matrix (identity)
+ \param[in]  i_trans - the 3x1 translation vector (zeros)
  */
 //---------------------------------------------------------------------
-CRFrame::CRFrame(Eigen::Matrix3d rot, Eigen::Vector3d trans)
+CRFrame::CRFrame(Eigen::Matrix3d i_rot, Eigen::Vector3d i_trans)
 {
-    rotation = rot;
-    translation = trans;
+    this->m_rotation = i_rot;
+    this->m_translation = i_trans;
 }
 CRFrame::CRFrame()
 {
-    rotation << 1, 0, 0, 0, 1, 0, 0, 0, 1;
-    translation << 0, 0, 0;
+    this->m_rotation << 1, 0, 0, 0, 1, 0, 0, 0, 1;
+    this->m_translation << 0, 0, 0;
 }
     
     
@@ -85,12 +85,13 @@ CRFrame::CRFrame()
  This method sets the value of the free variable.  The method returns a
  false if there is no free variable.\n
  
- \param[in] q - value of the variable to be set
+ \param[in] i_q - value of the variable to be set
+ \return - CRResult flag indicating if there is a free value to write
  */
 //---------------------------------------------------------------------
-bool CRFrame::setFreeValue(double q)
+CRResult CRFrame::setFreeValue(double i_q)
 {
-    return false;
+    return CR_RESULT_UNWRITABLE;
 }
 
 
@@ -100,12 +101,12 @@ bool CRFrame::setFreeValue(double q)
  This method gets the value of the free variable.  The method returns
  q = NULL if there is no free variable.\n
  
- \param[out] q - value of the free variable.
+ \return - value of the free variable.
  */
 //---------------------------------------------------------------------
-void CRFrame::getFreeValue(double &q)
+double CRFrame::getFreeValue(void)
 {
-    q = NULL;
+    return NULL;
 }
 
 
@@ -114,16 +115,23 @@ void CRFrame::getFreeValue(double &q)
  This method returns a 4x4 homogeneous matrix of the frame 
  transformation to the parent frame (i-1). \n
  
- \param[out] transform - the 4x4 homogeneous transformation matrix
+ \return - the 4x4 homogeneous transformation matrix
  */
 //---------------------------------------------------------------------
-void CRFrame::getTransformToParent(Eigen::Matrix4d &transform) {
-    Eigen::Matrix3d r = rotation;
-    Eigen::Vector3d t = translation;
+Eigen::Matrix4d CRFrame::getTransformToParent(void) {
+    
+    // get the rotation and translations
+    Eigen::Matrix3d r = m_rotation;
+    Eigen::Vector3d t = m_translation;
+    
+    // define the transform
+    Eigen::Matrix4d transform;
     transform << r(0,0), r(0,1), r(0,2), t(0,0),
     r(1,0), r(1,1), r(1,2), t(1,0),
     r(2,0), r(2,1), r(2,2), t(2,0),
     0.0, 0.0, 0.0, 1.0;
+    
+    return transform;
 }
 
 
@@ -132,16 +140,23 @@ void CRFrame::getTransformToParent(Eigen::Matrix4d &transform) {
  This method returns a 4x4 homogeneous matrix of the frame 
  transformation to the child frame (i). \n
  
- \param[out] transform - the 4x4 homogeneous transformation matrix
+ \return - the 4x4 homogeneous transformation matrix
  */
 //---------------------------------------------------------------------
-void CRFrame::getTransformToChild(Eigen::Matrix4d &transform) {
-    Eigen::Matrix3d r = rotation.transpose();
-    Eigen::Vector3d t = -r*translation;
+Eigen::Matrix4d CRFrame::getTransformToChild(void) {
+    
+    // get the rotation and translations
+    Eigen::Matrix3d r = m_rotation.transpose();
+    Eigen::Vector3d t = -r*m_translation;
+    
+    // define the transform
+    Eigen::Matrix4d transform;
     transform << r(0,0), r(0,1), r(0,2), t(0,0),
     r(1,0), r(1,1), r(1,2), t(1,0),
     r(2,0), r(2,1), r(2,2), t(2,0),
     0.0, 0.0, 0.0, 1.0;
+    
+    return transform;
 }
 
 
@@ -150,12 +165,12 @@ void CRFrame::getTransformToChild(Eigen::Matrix4d &transform) {
  This method transforms points \f$p\f$ in the child frame to points 
  \f$y\f$ in the parent frame.\n
  
- \param[in]  p - points in the child frame
- \param[out] y - the points transformed into the parent frame
+ \param[in]  i_points - points in the child frame (p)
+ \return - the points transformed into the parent frame (y)
  */
 //---------------------------------------------------------------------
-void CRFrame::transformToParent(Eigen::Vector3d p, Eigen::Vector3d &y) {
-    y = rotation*p + translation;
+Eigen::Vector3d CRFrame::transformToParent(Eigen::Vector3d i_point) {
+    return m_rotation*i_point + m_translation;
 }
 
 
@@ -164,12 +179,12 @@ void CRFrame::transformToParent(Eigen::Vector3d p, Eigen::Vector3d &y) {
  This method transforms points \f$p\f$ in the parent frame to points 
  \f$y\f$ in the child frame.\n
  
- \param[in]  p - points in the parent frame
- \param[out] y - the points transformed into the child frame
+ \param[in]  i_points - points in the parent frame (p)
+ \return - the points transformed into the child frame (y)
  */
 //---------------------------------------------------------------------
-void CRFrame::transformToChild(Eigen::Vector3d p, Eigen::Vector3d &y) {
-    y = rotation.transpose()*p - rotation.transpose()*translation;
+Eigen::Vector3d CRFrame::transformToChild(Eigen::Vector3d i_point) {
+    return m_rotation.transpose()*i_point - m_rotation.transpose()*m_translation;
 }
     
     
@@ -178,11 +193,11 @@ void CRFrame::transformToChild(Eigen::Vector3d p, Eigen::Vector3d &y) {
  This method returns a true if the frame is driven (i.e. has a free
  variable) or a false if the frame is not driven.\n
  
- \return result - T/F indicator for the frame having a free variable.
+ \return - T/F indicator for the frame having a free variable.
  
  */
 //---------------------------------------------------------------------
-bool CRFrame::isDriven() {
+bool CRFrame::isDriven(void) {
     return false;
 }
 
@@ -193,25 +208,26 @@ This method gets a vector of Euler angles from the frame.
 
 Source: https://www.geometrictools.com/Documentation/EulerAngles.pdf
 
-\param[in]  mode - the Euler mode enumerator
-\param[out] pose - vector of Euler angles of the frame.
+\param[in]  i_mode - the Euler mode enumerator
+\return - vector of Euler angles of the frame.
 */
 //---------------------------------------------------------------------
-void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
+Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
 {
     double a, b, g;
+    Eigen::Vector3d orientation;
 
-    double r00 = this->rotation(0, 0);
-    double r01 = this->rotation(0, 1);
-    double r02 = this->rotation(0, 2);
-    double r10 = this->rotation(1, 0);
-    double r11 = this->rotation(1, 1);
-    double r12 = this->rotation(1, 2);
-    double r20 = this->rotation(2, 0);
-    double r21 = this->rotation(2, 1);
-    double r22 = this->rotation(2, 2);
+    double r00 = this->m_rotation(0, 0);
+    double r01 = this->m_rotation(0, 1);
+    double r02 = this->m_rotation(0, 2);
+    double r10 = this->m_rotation(1, 0);
+    double r11 = this->m_rotation(1, 1);
+    double r12 = this->m_rotation(1, 2);
+    double r20 = this->m_rotation(2, 0);
+    double r21 = this->m_rotation(2, 1);
+    double r22 = this->m_rotation(2, 2);
 
-    switch (mode)
+    switch (i_mode)
     {
     case CR_EULER_MODE_ZXZ:
         if (r22 < 1)
@@ -224,7 +240,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(-r01, r00);
                 g = 0;
             }
@@ -247,7 +263,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(-r12, r11);
                 g = 0;
             }
@@ -270,7 +286,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(-r20, r22);
                 g = 0;
             }
@@ -293,7 +309,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(r10, r11);
                 g = 0;
             }
@@ -316,7 +332,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(r21, r22);
                 g = 0;
             }
@@ -339,7 +355,7 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI;
+                b = CoreRobotics::CR_PI;
                 a = -atan2(r02, r00);
                 g = 0;
             }
@@ -363,14 +379,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = -CoreRobotics::PI / 2;
+                b = -CoreRobotics::CR_PI / 2;
                 a = -atan2(r10, r11);
                 g = 0;
             }
         } 
         else 
         {
-            b = CoreRobotics::PI / 2;
+            b = CoreRobotics::CR_PI / 2;
             a = atan2(r10, r11);
             g = 0;
         }
@@ -386,14 +402,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI / 2;
+                b = CoreRobotics::CR_PI / 2;
                 a = -atan2(r21, r22);
                 g = 0;
             }
         }
         else
         {
-            b = CoreRobotics::PI / 2;
+            b = CoreRobotics::CR_PI / 2;
             a = atan2(r21, r22);
             g = 0;
         }
@@ -409,14 +425,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI / 2;
+                b = CoreRobotics::CR_PI / 2;
                 a = -atan2(r02, r00);
                 g = 0;
             }
         }
         else
         {
-            b = CoreRobotics::PI / 2;
+            b = CoreRobotics::CR_PI / 2;
             a = atan2(r02, r00);
             g = 0;
         }
@@ -432,14 +448,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI / 2;
+                b = CoreRobotics::CR_PI / 2;
                 a = -atan2(-r20, r22);
                 g = 0;
             }
         }
         else
         {
-            b = CoreRobotics::PI / 2;
+            b = CoreRobotics::CR_PI / 2;
             a = atan2(-r20, r22);
             g = 0;
         }
@@ -455,14 +471,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI / 2;
+                b = CoreRobotics::CR_PI / 2;
                 a = -atan2(-r12, r11);
                 g = 0;
             }
         }
         else
         {
-            b = -CoreRobotics::PI / 2;
+            b = -CoreRobotics::CR_PI / 2;
             a = atan2(-r12, r11);
             g = 0;
         }
@@ -478,14 +494,14 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
             }
             else
             {
-                b = CoreRobotics::PI / 2;
+                b = CoreRobotics::CR_PI / 2;
                 a = -atan2(-r01, r00);
                 g = 0;
             }
         }
         else
         {
-            b = CoreRobotics::PI / 2;
+            b = CoreRobotics::CR_PI / 2;
             a = atan2(-r01, r00);
             g = 0;
         }
@@ -494,7 +510,11 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
         break;
     }
 
+    // push to vector
     orientation << a, b, g;
+    
+    // return
+    return orientation;
 }
 
 
@@ -502,50 +522,54 @@ void CRFrame::getOrientation(CREulerMode mode, Eigen::Vector3d &orientation)
 /*!
 This method returns a vector of the position and orientation.
 
-\param[in]  mode - the Euler mode enumerator
-\param[in]  poseElements - [optional] a boolean vector indiciating which 
+\param[in]  i_mode - the Euler mode enumerator
+\param[in]  i_poseElements - [optional] a boolean vector indiciating which
                            elements of the pose vector to return
-\param[out] pose - vector of the pose (x, y, z, a, b, g)^T OR the vector
-                   specified by the poseElements
+\return - vector of the pose (x, y, z, a, b, g)^T OR the reduced vector
+                   specified by the true elements in poseElements
 */
 //---------------------------------------------------------------------
-void CRFrame::getPose(CREulerMode mode,
-                      Eigen::Matrix<double, 6, 1> &pose)
+Eigen::Matrix<double, 6, 1> CRFrame::getPose(CREulerMode i_mode)
 {
     
-	Eigen::Vector3d theta;
-	this->getOrientation(mode, theta);
+    Eigen::Matrix<double, 6, 1> pose;
+    
+	Eigen::Vector3d theta = this->getOrientation(i_mode);
 
-	pose << this->translation(0),
-            this->translation(1),
-            this->translation(2),
+	pose << this->m_translation(0),
+            this->m_translation(1),
+            this->m_translation(2),
             theta(0),
             theta(1),
             theta(2);
 
+    return pose;
 }
     
-void CRFrame::getPose(CREulerMode mode,
-                      Eigen::Matrix<bool, 6, 1> poseElements,
-                      Eigen::VectorXd &pose)
+Eigen::VectorXd CRFrame::getPose(CREulerMode i_mode,
+                                 Eigen::Matrix<bool, 6, 1> i_poseElements)
 {
+    
     // TODO: this whole thing could be faster
     // use overload above to return the full pose vector
-    Eigen::Matrix<double, 6, 1> v;
-    this->getPose(mode, v);
+    Eigen::Matrix<double, 6, 1> v = this->getPose(i_mode);
     
     // Get the number of true elements in the pose vector & size the output
-    int m = poseElements.cast<int>().sum();
-    pose.resize(m);
+    int m = i_poseElements.cast<int>().sum();
+    
+    // initialize a pose vector to return
+    Eigen::VectorXd pose(m);
     
     // Now push into the pose vector
     int elem = 0;
     for (int row = 0; row < 6; row++){
-        if (poseElements(row)){
+        if (i_poseElements(row)){
             pose(elem) = v(row);
             elem++;
         };
     }
+    
+    return pose;
 }
 
 

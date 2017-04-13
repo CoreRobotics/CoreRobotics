@@ -80,7 +80,7 @@ namespace CoreRobotics {
  - CRFrameEuler::setMode sets the Euler angle convention (options are in
  CoreRobotics::CREulerMode).
  
- The free variable can be specified by the CRFrameEuler::freeVar member
+ The free variable can be specified by the CRFrameEuler::m_freeVar member
  (options are in CoreRobotics::CREulerFreeVariable).
  
  \section Example
@@ -135,8 +135,14 @@ class CRFrameEuler : public CRFrame  {
 public:
 
     //! Class constructor
-    CRFrameEuler(double x, double y, double z, double a, double b,
-                 double g, CREulerMode mode, CREulerFreeVariable free);
+    CRFrameEuler(double i_x,
+                 double i_y,
+                 double i_z,
+                 double i_a,
+                 double i_b,
+                 double i_g,
+                 CREulerMode i_mode,
+                 CREulerFreeVariable i_free);
     CRFrameEuler();
 
 //---------------------------------------------------------------------
@@ -144,73 +150,85 @@ public:
 public:
     
     //! Set the value of the free variable
-    bool setFreeValue(double q);
+    CRResult setFreeValue(double i_q);
     
     //! Get the value of the free variable
-    void getFreeValue(double &q);
+    double getFreeValue(void);
+    
+    //! Set the free variable
+    void setFreeVariable(CREulerFreeVariable i_free) {m_freeVar = i_free;}
+    
+    //! Get the free variable
+    CREulerFreeVariable getFreeVariable(void) {return m_freeVar;}
     
     //! Set the Euler convention
-    void setMode(CREulerMode mode);
+    void setMode(CREulerMode i_mode);
     
     //! Get the Euler convention
-    void getMode(CREulerMode &mode);
+    CREulerMode getMode(void);
     
     //! Set the position values
-    void setPosition(double x, double y, double z);
+    void setPosition(double i_x, double i_y, double i_z);
     
     //! Get the x position
-    void getPosition(double &x, double &y, double &z);
+    void getPosition(double& o_x, double& o_y, double& o_z);
     
     //! Set the angle values
-    void setOrientation(double a, double b, double g);
+    void setOrientation(double i_a, double i_b, double i_g);
     
     //! Get the angle values
-    void getOrientation(double &a, double &b, double &g);
+    void getOrientation(double& o_a, double& o_b, double& o_g);
     
     //! Set the position and angle values
-    void setPositionAndOrientation(double x, double y, double z, double a, double b, double g);
+    void setPositionAndOrientation(double i_x,
+                                   double i_y,
+                                   double i_z,
+                                   double i_a,
+                                   double i_b,
+                                   double i_g);
     
     //! Get the position and angle values
-    void getPositionAndOrientation(double &x, double &y, double &z, double &a, double &b, double &g);
+    void getPositionAndOrientation(double& o_x,
+                                   double& o_y,
+                                   double& o_z,
+                                   double& o_a,
+                                   double& o_b,
+                                   double& o_g);
 
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Query if the frame is driven, i.e. has a free variable
-    bool isDriven();
+    bool isDriven(void);
 
-//---------------------------------------------------------------------
-// Public Members
-public:
-    
-    //! free variable indicator
-    CREulerFreeVariable freeVar;
-    
 //---------------------------------------------------------------------
 // Private Members
 private:
     
+    //! free variable indicator
+    CREulerFreeVariable m_freeVar;
+    
     //! Euler convention
-    CREulerMode eulerMode;
+    CREulerMode m_eulerMode;
 
     //! x position
-    double pos_x;
+    double m_posX;
     
     //! y position
-    double pos_y;
+    double m_posY;
     
     //! z position
-    double pos_z;
+    double m_posZ;
     
     //! alpha angle [rad]
-    double ang_a;
+    double m_angA;
     
     //! beta angle [rad]
-    double ang_b;
+    double m_angB;
     
     //! gamma angle [rad]
-    double ang_g;
+    double m_angG;
     
 //---------------------------------------------------------------------
 // Private Methods
@@ -222,13 +240,13 @@ private:
     void setRotationAndTranslation();
     
     //! standard rotation about the x axis
-    void rotAboutX(double ang, Eigen::Matrix3d &rot);
+    void rotAboutX(double i_ang, Eigen::Matrix3d& o_rot);
     
     //! standard rotation about the y axis
-    void rotAboutY(double ang, Eigen::Matrix3d &rot);
+    void rotAboutY(double i_ang, Eigen::Matrix3d& o_rot);
     
     //! standard rotation about the z axis
-    void rotAboutZ(double ang, Eigen::Matrix3d &rot);
+    void rotAboutZ(double i_ang, Eigen::Matrix3d& o_rot);
 
 };
 

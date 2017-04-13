@@ -47,6 +47,7 @@
 // Includes
 #include "Eigen/Dense"
 #include "CRManipulator.hpp"
+#include "CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -78,7 +79,7 @@ namespace CoreRobotics {
  algorithm accomplishes this by iteratively updating the configuration 
  according to
  
- \f$ q_{k+1} = q_k + \gamma J^# (x - f(q_k)) \f$
+ \f$ q_{k+1} = q_k + \gamma J^\dagger (x - f(q_k)) \f$
  
  These methods are used to interface with the IK controller:
  - CRInverseKinematics::setRobot sets the manipulator IK to solve
@@ -231,47 +232,47 @@ class CRInverseKinematics {
 public:
     
     //! Class constructor
-    CRInverseKinematics(CRManipulator* in_robot,
-                        unsigned int in_toolIndex,
-                        CREulerMode in_eulerMode);
+    CRInverseKinematics(CRManipulator* i_robot,
+                        unsigned int i_toolIndex,
+                        CREulerMode i_eulerMode);
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
     //! Set the robot to be used
-    void setRobot(CRManipulator* in_robot) {this->m_robot = in_robot;}
+    void setRobot(CRManipulator* i_robot) {this->m_robot = i_robot;}
     
     //! Set robot tool index to use to compute the IK.  Note that a tool must be specified in the robot.
-    void setToolIndex(unsigned int in_toolIndex) {this->m_toolIndex = in_toolIndex;}
+    void setToolIndex(unsigned int i_toolIndex) {this->m_toolIndex = i_toolIndex;}
     
     //! Set the Euler angle convention of the IK solver.  This must match the
     //  Euler convention used to supply the set point in the solve() method.
-    void setEulerMode(CREulerMode in_eulerMode) {this->m_eulerMode = in_eulerMode;}
+    void setEulerMode(CREulerMode i_eulerMode) {this->m_eulerMode = i_eulerMode;}
     
     //! Get the Euler convention
     CREulerMode getEulerMode(void) {return this->m_eulerMode;}
     
     //! Set the algorithm convergence tolerance
-    void setTolerance(double in_tolerance) {this->m_tolerance = in_tolerance;}
+    void setTolerance(double i_tolerance) {this->m_tolerance = i_tolerance;}
     
     //! Get the algorithm convergence tolerance
     double setTolerance(void) {return this->m_tolerance;}
     
     //! Set the maximum number of iterations the algorithm can run
-    void setMaxIter(unsigned int in_maxIter) {this->m_maxIter = in_maxIter;}
+    void setMaxIter(unsigned int i_maxIter) {this->m_maxIter = i_maxIter;}
     
     //! Get the algorithm convergence tolerance
     unsigned int getMaxIter(void) {return this->m_maxIter;}
     
     //! Set the iteration step size (i.e. the gain)
-    void setStepSize(double in_stepSize) {this->m_stepSize = in_stepSize;}
+    void setStepSize(double i_stepSize) {this->m_stepSize = i_stepSize;}
     
     //! Get the iteration step size (i.e. the gain)
     double getStepSize(void) {return this->m_stepSize;}
     
     //! Set the minimum threshold for a non-singular matrix
-    void setSingularThresh(double in_thresh) {this->m_svdTol = in_thresh;}
+    void setSingularThresh(double i_thresh) {this->m_svdTol = i_thresh;}
     
     //! Get the minimum threshold for a non-singular matrix
     double getSingularThresh(void) {return this->m_svdTol;}
@@ -282,14 +283,14 @@ public:
 public:
     
     //! Solve for the joint angles (q) that yield the desired setPoint
-    bool solve(Eigen::Matrix<double, 6, 1> in_setPoint,
-               Eigen::VectorXd in_q0,
-               Eigen::VectorXd &out_qSolved);
+    CRResult solve(Eigen::Matrix<double, 6, 1> i_setPoint,
+               Eigen::VectorXd i_q0,
+               Eigen::VectorXd &o_qSolved);
     
-    bool solve(Eigen::VectorXd in_setPoint,
-               Eigen::Matrix<bool, 6, 1> in_poseElements,
-               Eigen::VectorXd in_q0,
-               Eigen::VectorXd &out_qSolved);
+    CRResult solve(Eigen::VectorXd i_setPoint,
+               Eigen::Matrix<bool, 6, 1> i_poseElements,
+               Eigen::VectorXd i_q0,
+               Eigen::VectorXd &o_qSolved);
     
 //---------------------------------------------------------------------
 // Protected Members

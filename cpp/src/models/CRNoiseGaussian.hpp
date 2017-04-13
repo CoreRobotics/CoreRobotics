@@ -147,11 +147,11 @@ class CRNoiseGaussian : public CRNoiseModel {
 public:
     
     //! Class constructor
-    CRNoiseGaussian(Eigen::MatrixXd in_cov,
-                    Eigen::VectorXd in_mean,
-                    unsigned in_seed);
-    CRNoiseGaussian(Eigen::MatrixXd in_cov,
-                    Eigen::VectorXd in_mean);
+    CRNoiseGaussian(Eigen::MatrixXd i_cov,
+                    Eigen::VectorXd i_mean,
+                    unsigned i_seed);
+    CRNoiseGaussian(Eigen::MatrixXd i_cov,
+                    Eigen::VectorXd i_mean);
     CRNoiseGaussian();
     
 //---------------------------------------------------------------------
@@ -160,8 +160,8 @@ public:
     
     //! Set the parameters that describe the distribution
     using CRNoiseModel::setParameters;
-    void setParameters(Eigen::MatrixXd in_cov,
-                       Eigen::VectorXd in_mean);
+    void setParameters(Eigen::MatrixXd i_cov,
+                       Eigen::VectorXd i_mean);
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -173,7 +173,7 @@ public:
     
     //! Evaluate the probability from the density
     using CRNoiseModel::probability;
-    double probability(Eigen::VectorXd in_x);
+    double probability(Eigen::VectorXd i_x);
     
 //---------------------------------------------------------------------
 // Protected Members

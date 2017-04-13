@@ -55,20 +55,20 @@ namespace CoreRobotics {
  the algorithm uses the Jacobian pseudoinverse approach.  The SVD is
  used to compute the Jacobian inverse.\n
  
- \param[in] in_robot - the CoreRobotics::CRManipulator object to be
+ \param[in] i_robot - the CoreRobotics::CRManipulator object to be
  used for solving the inverse kinematics
- \param[in] in_toolIndex - the index of the robot tool for which the IK
+ \param[in] i_toolIndex - the index of the robot tool for which the IK
  is being solved, see CoreRobotics::CRManipulator::addTool()
- \param[in] in_eulerMode - the Euler convention of the pose vector
+ \param[in] i_eulerMode - the Euler convention of the pose vector
  */
 //---------------------------------------------------------------------
-CRInverseKinematics::CRInverseKinematics(CRManipulator* in_robot,
-                                         unsigned int in_toolIndex,
-                                         CREulerMode in_eulerMode)
+CRInverseKinematics::CRInverseKinematics(CRManipulator* i_robot,
+                                         unsigned int i_toolIndex,
+                                         CREulerMode i_eulerMode)
 {
-    this->setRobot(in_robot);
-    this->setToolIndex(in_toolIndex);
-    this->setEulerMode(in_eulerMode);
+    this->setRobot(i_robot);
+    this->setToolIndex(i_toolIndex);
+    this->setEulerMode(i_eulerMode);
     this->setTolerance(0.001);  // 1 mm (rad)
     this->setMaxIter(1);        // 1 step optimizer
     this->setStepSize(0.1);     // 0.1 step gain - this was Alexi's default
@@ -80,27 +80,27 @@ CRInverseKinematics::CRInverseKinematics(CRManipulator* in_robot,
 /*!
  This method computes the joint angles that solve the specified set 
  point.  An initial condition for the joint angles is specified via 
- in_q0.  The method returns a flag indicating if the pseudoinverse is
+ i_q0.  The method returns a flag indicating if the pseudoinverse is
  singular and no solution can be found.\n
  
- \param[in] in_setPoint - the pose vector set point.  If in_poseElements
+ \param[in] i_setPoint - the pose vector set point.  If i_poseElements
  is specified, then the size of this vector must be equal to the number
- of true values in the in_poseElements.
- \param[in] in_poseElements - [optional] a boolean vector indiciating which
- elements of the full pose vector are used in in_setPoint.
- \param[in] in_q0 - the intial configuration to use for the iterations.
- \param[out] out_qSolved - the new configuration
- \return - a flag indicating singularity (true = Jacobian not singular,
- false = Jacobian singular)
+ of true values in the i_poseElements.
+ \param[in] i_poseElements - [optional] a boolean vector indiciating which
+ elements of the full pose vector are used in i_setPoint.
+ \param[in] i_q0 - the intial configuration to use for the iterations.
+ \param[out] o_qSolved - the new configuration
+ \return - a CRResult flag indicating if the operation encountered a
+ singularity
  */
 //---------------------------------------------------------------------
-bool CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> in_setPoint,
-                                Eigen::VectorXd in_q0,
-                                Eigen::VectorXd &out_qSolved)
+CRResult CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> i_setPoint,
+                                    Eigen::VectorXd i_q0,
+                                    Eigen::VectorXd &o_qSolved)
 {
     
     // indicator if solution is singular
-    bool jacIsSingular = false;         // break the algorithm if it is singular
+    CRResult result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
     
     // set up variables
     Eigen::Matrix<double, 6, 1> error;  // error (setPoint - fk(q))
@@ -110,37 +110,36 @@ bool CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> in_setPoint,
     unsigned int iter = 0;
     
     // set the initial configuration
-    q = in_q0;
+    q = i_q0;
     
     // set the initial robot configuration
     this->m_robot->setConfiguration(q);
     
     // return the pose of the robot for the initial configuration
-    this->m_robot->getToolPose(this->m_toolIndex, this->m_eulerMode, pose);
+    pose = this->m_robot->getToolPose(this->m_toolIndex, this->m_eulerMode);
     
     // compute the error by comparing the pose
-    error = in_setPoint-pose;
+    error = i_setPoint-pose;
     
     // optimization routine
     while ((error.norm() >= this->m_tolerance) &&
            (iter < this->m_maxIter) &&
-           !jacIsSingular) {
+           (result != CR_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
-        this->m_robot->getJacobian(this->m_toolIndex,
-                                   this->m_eulerMode,
-                                   J);
+        J = this->m_robot->jacobian(this->m_toolIndex,
+                                    this->m_eulerMode);
         
         // Invert with SVD
-        jacIsSingular = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+        result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
         
         // Perform the iteration step
         q += this->m_stepSize * Jinv * error;
         
         // Now compute the error for the new config
         this->m_robot->setConfiguration(q);
-        this->m_robot->getToolPose(this->m_toolIndex, this->m_eulerMode, pose);
-        error = in_setPoint-pose;
+        pose = this->m_robot->getToolPose(this->m_toolIndex, this->m_eulerMode);
+        error = i_setPoint-pose;
         
         // update the iterator
         iter++;
@@ -148,28 +147,28 @@ bool CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> in_setPoint,
     }
     
     // Put the robot back in its original configuration
-    this->m_robot->setConfiguration(in_q0);
+    this->m_robot->setConfiguration(i_q0);
     
     // set the output configuration
-    if (jacIsSingular){
-        out_qSolved = in_q0;    // return the initial condition
+    if (result == CR_RESULT_SINGULAR){
+        o_qSolved = i_q0;    // return the initial condition
     } else {
-        out_qSolved = q;        // return solution
+        o_qSolved = q;        // return solution
     }
     
-    // return: false if the matrix was singular, true if non-singular
-    return !jacIsSingular;
+    // return result
+    return result;
 }
     
 
-bool CRInverseKinematics::solve(Eigen::VectorXd in_setPoint,
-                                Eigen::Matrix<bool, 6, 1> in_poseElements,
-                                Eigen::VectorXd in_q0,
-                                Eigen::VectorXd &out_qSolved)
+CRResult CRInverseKinematics::solve(Eigen::VectorXd i_setPoint,
+                                    Eigen::Matrix<bool, 6, 1> i_poseElements,
+                                    Eigen::VectorXd i_q0,
+                                    Eigen::VectorXd &o_qSolved)
 {
     
     // indicator if solution is singular
-    bool jacIsSingular = false;         // break the algorithm if it is singular
+    CRResult result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
     
     // set up variables
     Eigen::VectorXd error;          // error (setPoint - fk(q))
@@ -179,45 +178,42 @@ bool CRInverseKinematics::solve(Eigen::VectorXd in_setPoint,
     unsigned int iter = 0;
     
     // set the initial configuration
-    q = in_q0;
+    q = i_q0;
     
     // set the initial robot configuration
     this->m_robot->setConfiguration(q);
     
     // return the pose of the robot for the initial configuration
-    this->m_robot->getToolPose(this->m_toolIndex,
-                               this->m_eulerMode,
-                               in_poseElements,
-                               pose);
+    pose = this->m_robot->getToolPose(this->m_toolIndex,
+                                      this->m_eulerMode,
+                                      i_poseElements);
     
     // compute the error by comparing the pose
-    error = in_setPoint-pose;
+    error = i_setPoint-pose;
     
     
     // optimization routine
     while ((error.norm() >= this->m_tolerance) &&
            (iter < this->m_maxIter) &&
-           !jacIsSingular) {
+           (result != CR_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
-        this->m_robot->getJacobian(this->m_toolIndex,
-                                   this->m_eulerMode,
-                                   in_poseElements,
-                                   J);
+        J = this->m_robot->jacobian(this->m_toolIndex,
+                                    this->m_eulerMode,
+                                    i_poseElements);
         
         // Invert with SVD
-        jacIsSingular = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+        result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
         
         // Perform the iteration step
         q += this->m_stepSize * Jinv * error;
         
         // Now compute the error for the new config
         this->m_robot->setConfiguration(q);
-        this->m_robot->getToolPose(this->m_toolIndex,
-                                   this->m_eulerMode,
-                                   in_poseElements,
-                                   pose);
-        error = in_setPoint-pose;
+        pose = this->m_robot->getToolPose(this->m_toolIndex,
+                                          this->m_eulerMode,
+                                          i_poseElements);
+        error = i_setPoint-pose;
         
         // update the iterator
         iter++;
@@ -225,17 +221,17 @@ bool CRInverseKinematics::solve(Eigen::VectorXd in_setPoint,
     }
     
     // Put the robot back in its original configuration
-    this->m_robot->setConfiguration(in_q0);
+    this->m_robot->setConfiguration(i_q0);
     
     // set the output configuration
-    if (jacIsSingular){
-        out_qSolved = in_q0;    // return the initial condition
+    if (result == CR_RESULT_SINGULAR){
+        o_qSolved = i_q0;    // return the initial condition
     } else {
-        out_qSolved = q;        // return solution
+        o_qSolved = q;        // return solution
     }
     
-    // return: false if the matrix was singular, true if non-singular
-    return !jacIsSingular;
+    // return result
+    return result;
 }
 
 

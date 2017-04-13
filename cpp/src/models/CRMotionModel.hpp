@@ -174,12 +174,12 @@ class CRMotionModel {
 public:
     
     //! Class constructor
-    CRMotionModel(Eigen::VectorXd(in_dynamics)(Eigen::VectorXd,
-                                               Eigen::VectorXd,
-                                               double),
-                  CRMotionModelType in_type,
-                  Eigen::VectorXd in_x0,
-                  double in_timeStep);
+    CRMotionModel(Eigen::VectorXd(i_dynamics)(Eigen::VectorXd,
+                                              Eigen::VectorXd,
+                                              double),
+                  CRMotionModelType i_type,
+                  Eigen::VectorXd i_x0,
+                  double i_timeStep);
     CRMotionModel();
     
 //---------------------------------------------------------------------
@@ -187,13 +187,13 @@ public:
 public:
     
     //! Set the state vector (x)
-    void setState(Eigen::VectorXd in_x) {this->m_state = in_x;}
+    void setState(Eigen::VectorXd i_x) {this->m_state = i_x;}
     
     //! Get the state vector (x)
     Eigen::VectorXd getState(void) {return this->m_state;}
     
     //! Set the time step (s)
-    void setTimeStep(double in_timeStep) {this->m_dt = in_timeStep;}
+    void setTimeStep(double i_timeStep) {this->m_dt = i_timeStep;}
     
     //! Get the time step (s)
     double getTimeStep(void) {return this->m_dt;}
@@ -208,17 +208,17 @@ public:
 public:
     
     //! Simulate the motion
-    Eigen::VectorXd motion(Eigen::VectorXd in_u);
+    Eigen::VectorXd motion(Eigen::VectorXd i_u);
     
 //---------------------------------------------------------------------
 // Protected Methods
 protected:
     
     //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(Eigen::VectorXd in_x,
-                            Eigen::VectorXd in_u,
-                            double in_t,
-                            double in_dt);
+    Eigen::VectorXd rk4step(Eigen::VectorXd i_x,
+                            Eigen::VectorXd i_u,
+                            double i_t,
+                            double i_dt);
     
 //---------------------------------------------------------------------
 // Protected Members

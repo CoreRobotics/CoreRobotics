@@ -167,7 +167,7 @@ class CRNoiseModel {
 public:
     
     //! Class constructor
-    CRNoiseModel(unsigned in_seed);
+    CRNoiseModel(unsigned i_seed);
     CRNoiseModel();
     
 //---------------------------------------------------------------------
@@ -175,8 +175,8 @@ public:
 public:
     
     //! Set the parameters that describe the distribution
-    virtual void setParameters(Eigen::VectorXd(*in_icd)(double),
-                               double(*in_prob)(Eigen::VectorXd));
+    virtual void setParameters(Eigen::VectorXd(*i_icd)(double),
+                               double(*i_prob)(Eigen::VectorXd));
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -186,7 +186,7 @@ public:
     virtual Eigen::VectorXd sample(void);
     
     //! Evaluate the probability from the density
-    virtual double probability(Eigen::VectorXd in_x);
+    virtual double probability(Eigen::VectorXd i_x);
 
 //---------------------------------------------------------------------
 // Protected Methods

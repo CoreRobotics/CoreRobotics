@@ -59,22 +59,22 @@ namespace CoreRobotics {
  
  This equation is specified as a callback function to the integration.
  
- \param [in] dynamicSystem - the continuous time dynamic system.
- \param [in] t - the current time in seconds
- \param [in] x - the current state vector
- \param [in] u - the current input vector
- \param [in] dt - the time step to integrate over
+ \param [in] i_dynamicSystem - the continuous time dynamic system.
+ \param [in] i_t - the current time in seconds
+ \param [in] i_x - the current state vector
+ \param [in] i_u - the current input vector
+ \param [in] i_dt - the time step to integrate over
  \return the state vector at t+dt
  
  */
 //---------------------------------------------------------------------
-vec CRMath::forwardEulerStep(vec(dynamicSystem)(double, vec, vec),
-                                                double t,
-                                                vec x,
-                                                vec u,
-                                                double dt){
+vec CRMath::forwardEulerStep(vec(i_dynamicSystem)(double, vec, vec),
+                             double i_t,
+                             vec i_x,
+                             vec i_u,
+                             double i_dt){
     // forward integration step
-    return x + dt*dynamicSystem(t,x,u);
+    return i_x + i_dt*i_dynamicSystem(i_t,i_x,i_u);
 }
     
     
@@ -89,26 +89,26 @@ vec CRMath::forwardEulerStep(vec(dynamicSystem)(double, vec, vec),
  The Runga-Kutta integration is an accurate integration scheme at the
  expense of computational complexity over the forward Euler method.
  
- \param [in] dynamicSystem - the continuous time dynamic system.
- \param [in] t - the current time in seconds
- \param [in] x - the current state vector
- \param [in] u - the current input vector
- \param [in] dt - the time step to integrate over
+ \param [in] i_dynamicSystem - the continuous time dynamic system.
+ \param [in] i_t - the current time in seconds
+ \param [in] i_x - the current state vector
+ \param [in] i_u - the current input vector
+ \param [in] i_dt - the time step to integrate over
  \return the state vector at t+dt
  
  */
 //---------------------------------------------------------------------
-vec CRMath::rungeKuttaStep(vec(dynamicSystem)(double, vec, vec),
-                           double t,
-                           vec x,
-                           vec u,
-                           double dt){
+vec CRMath::rungeKuttaStep(vec(i_dynamicSystem)(double, vec, vec),
+                           double i_t,
+                           vec i_x,
+                           vec i_u,
+                           double i_dt){
     // RK4 step
-    Eigen::VectorXd f1 = dynamicSystem(t,x,u);
-    Eigen::VectorXd f2 = dynamicSystem(t+dt/2,x+dt*f1/2,u);
-    Eigen::VectorXd f3 = dynamicSystem(t+dt/2,x+dt*f2/2,u);
-    Eigen::VectorXd f4 = dynamicSystem(t+dt,x+dt*f3,u);
-    return x + dt/6*(f1 + 2*f2 + 2*f3 + f4);
+    Eigen::VectorXd f1 = i_dynamicSystem(i_t,i_x,i_u);
+    Eigen::VectorXd f2 = i_dynamicSystem(i_t+i_dt/2,i_x+i_dt*f1/2,i_u);
+    Eigen::VectorXd f3 = i_dynamicSystem(i_t+i_dt/2,i_x+i_dt*f2/2,i_u);
+    Eigen::VectorXd f4 = i_dynamicSystem(i_t+i_dt,i_x+i_dt*f3,i_u);
+    return i_x + i_dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
     
     
@@ -127,28 +127,28 @@ vec CRMath::rungeKuttaStep(vec(dynamicSystem)(double, vec, vec),
  The method utilizes the Jacobi SVD for the inverse.  For large matrices,
  this will be very slow.
  
- \param [in] A - the matrix to invert
- \param [in] tol - the tolerance placed on the singular values to determine if the matrix is singular
- \param [out] Ainv - the generalized inverse of Matrix A
- \return - a flag indicating if the matrix is singular (according to the tolerance).
-            true = singular, false = not singular.
+ \param [in] i_A - the matrix to invert
+ \param [in] i_tol - the tolerance placed on the singular values to determine if the matrix is singular
+ \param [out] o_Ainv - the generalized inverse of Matrix A
+ \return - a result flag (see: CRTypes::CRResult) indicating if the operation was successful
+ or if a singularity was encountered in the operation.
  
  */
 //---------------------------------------------------------------------
-bool CRMath::svdInverse(Eigen::MatrixXd A, double tol, Eigen::MatrixXd& Ainv)
+CRResult CRMath::svdInverse(Eigen::MatrixXd i_A, double i_tol, Eigen::MatrixXd& o_Ainv)
 {
-    bool isSingular = false;
+    CRResult result = CR_RESULT_SUCCESS;
     
     // Compute the SVD of A
-    Eigen::JacobiSVD<Eigen::MatrixXd> svd(A, Eigen::ComputeThinU | Eigen::ComputeThinV);
+    Eigen::JacobiSVD<Eigen::MatrixXd> svd(i_A, Eigen::ComputeThinU | Eigen::ComputeThinV);
     
     // Take the SVD
     Eigen::VectorXd sVals = svd.singularValues();
     
     // check for singular condition
     for (int i = 0; i < sVals.size(); i++){
-        if (sVals(i) <= tol){
-            isSingular = true;
+        if (sVals(i) <= i_tol){
+            result = CR_RESULT_SINGULAR;
             break;
         }
     }
@@ -156,10 +156,10 @@ bool CRMath::svdInverse(Eigen::MatrixXd A, double tol, Eigen::MatrixXd& Ainv)
     // Compute the generalized inverse using SVD
     Eigen::VectorXd sValsInverse = sVals.array().inverse();
     Eigen::MatrixXd SigmaInv = sValsInverse.asDiagonal();
-    Ainv = svd.matrixV() * SigmaInv * svd.matrixU().transpose();
+    o_Ainv = svd.matrixV() * SigmaInv * svd.matrixU().transpose();
     
-    
-    return isSingular;
+    // return the result
+    return result;
 }
 
 

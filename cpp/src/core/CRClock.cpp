@@ -56,8 +56,8 @@ namespace CoreRobotics {
  */
 //---------------------------------------------------------------------
 CRClock::CRClock() {
-	this->t0 = this->clock.now();
-	this->t1 = this->clock.now();
+	this->m_t0 = this->m_clock.now();
+	this->m_t1 = this->m_clock.now();
 }
 
 
@@ -74,8 +74,8 @@ CRClock::~CRClock() { }
  This method starts the timer.
  */
 //---------------------------------------------------------------------
-void CRClock::startTimer() {
-	this->t0 = this->clock.now();
+void CRClock::startTimer(void) {
+	this->m_t0 = this->m_clock.now();
 }
 
 
@@ -84,39 +84,39 @@ void CRClock::startTimer() {
  This method returns the elapsed time since the last call of 
  the startTimer() method.
  
- \param[out] t - the time [s] since the last call of startTimer()
+ \return - the time [s] since the last call of startTimer()
  */
 //---------------------------------------------------------------------
-void CRClock::getElapsedTime(double &t) {
-    t1 = this->clock.now();
-    std::chrono::duration<double> elapsed = this->t1-this->t0;
-    t = elapsed.count();
+double CRClock::getElapsedTime(void) {
+    m_t1 = this->m_clock.now();
+    std::chrono::duration<double> elapsed = this->m_t1-this->m_t0;
+    return elapsed.count();
 }
     
     
 //=====================================================================
 /*!
- This method sleeps the current thread for t seconds.  Note that for 
+ This method sleeps the current thread for i_time (s).  Note that for
  short sleep durations (i.e. < 50 ms), this method will spinlock the
  current thread (maintaining full thread utilization), while for higher
  sleep durations, the method will sleep the thread to free up process.
  
- \param[in] t - the time [s] to sleep
+ \param[in] i_time - the time [s] to sleep
  */
 //---------------------------------------------------------------------
-void CRClock::sleep(double t) {
-	if (t < 0.05) {
+void CRClock::sleep(double i_time) {
+	if (i_time < 0.05) {
 		// spinlock the thread
-		std::chrono::steady_clock::time_point tNow0 = this->clock.now();
-		std::chrono::steady_clock::time_point tNow1 = this->clock.now();
+		std::chrono::steady_clock::time_point tNow0 = this->m_clock.now();
+		std::chrono::steady_clock::time_point tNow1 = this->m_clock.now();
 		std::chrono::duration<double> et = tNow1 - tNow0;
-		while (et.count() < t) {
-			tNow1 = this->clock.now();
+		while (et.count() < i_time) {
+			tNow1 = this->m_clock.now();
 			et = tNow1 - tNow0;
 		}
 	} else {
 		// sleep the thread to free up processor
-		std::this_thread::sleep_for(std::chrono::duration<double>(t));
+		std::this_thread::sleep_for(std::chrono::duration<double>(i_time));
 	}
 }
 
