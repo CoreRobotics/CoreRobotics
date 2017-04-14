@@ -219,8 +219,8 @@ protected:
 // Protected Members
 protected:
     
-    //! Callback to the dynamic model function \dot{x} = f(x,u,t,w) or
-    //  x_kp1 = f(x_k,u_k,t_k,w_k) depending on what the type is set to.
+    //! Callback to the dynamic model function \f$\dot{x} = f(x,u,t,w)\f$
+    //  or \f$x_kp1 = f(x_k,u_k,t_k,w_k)\f$ depending on what the type is set to.
     Eigen::VectorXd(*m_dynPredictFcn)(Eigen::VectorXd,
                                       Eigen::VectorXd,
                                       double,

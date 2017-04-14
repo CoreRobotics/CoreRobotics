@@ -55,8 +55,8 @@ namespace CoreRobotics {
  The constructor sets the rotation and translation parameters upon
  construction, with defaults listed in parenthesis.\n
  
- \param[in]  i_rot   - the 3x3 rotation matrix (identity)
- \param[in]  i_trans - the 3x1 translation vector (zeros)
+ \param[in]     i_rot       the 3x3 rotation matrix (identity)
+ \param[in]     i_trans     the 3x1 translation vector (zeros)
  */
 //---------------------------------------------------------------------
 CRFrame::CRFrame(Eigen::Matrix3d i_rot, Eigen::Vector3d i_trans)
@@ -85,8 +85,9 @@ CRFrame::CRFrame()
  This method sets the value of the free variable.  The method returns a
  false if there is no free variable.\n
  
- \param[in] i_q - value of the variable to be set
- \return - CRResult flag indicating if there is a free value to write
+ \param[in]     i_q     value of the variable to be set
+ \return                CRResult flag indicating if there is a free 
+                        value to write
  */
 //---------------------------------------------------------------------
 CRResult CRFrame::setFreeValue(double i_q)
@@ -99,9 +100,9 @@ CRResult CRFrame::setFreeValue(double i_q)
 //=====================================================================
 /*!
  This method gets the value of the free variable.  The method returns
- q = NULL if there is no free variable.\n
+ NULL if there is no free variable.\n
  
- \return - value of the free variable.
+ \return        value of the free variable.
  */
 //---------------------------------------------------------------------
 double CRFrame::getFreeValue(void)
@@ -115,7 +116,7 @@ double CRFrame::getFreeValue(void)
  This method returns a 4x4 homogeneous matrix of the frame 
  transformation to the parent frame (i-1). \n
  
- \return - the 4x4 homogeneous transformation matrix
+ \return        the 4x4 homogeneous transformation matrix
  */
 //---------------------------------------------------------------------
 Eigen::Matrix4d CRFrame::getTransformToParent(void) {
@@ -140,7 +141,7 @@ Eigen::Matrix4d CRFrame::getTransformToParent(void) {
  This method returns a 4x4 homogeneous matrix of the frame 
  transformation to the child frame (i). \n
  
- \return - the 4x4 homogeneous transformation matrix
+ \return        the 4x4 homogeneous transformation matrix
  */
 //---------------------------------------------------------------------
 Eigen::Matrix4d CRFrame::getTransformToChild(void) {
@@ -165,8 +166,9 @@ Eigen::Matrix4d CRFrame::getTransformToChild(void) {
  This method transforms points \f$p\f$ in the child frame to points 
  \f$y\f$ in the parent frame.\n
  
- \param[in]  i_points - points in the child frame (p)
- \return - the points transformed into the parent frame (y)
+ \param[in]     i_point         point in the child frame (p)
+ \return                        the points transformed into the parent
+                                frame (y)
  */
 //---------------------------------------------------------------------
 Eigen::Vector3d CRFrame::transformToParent(Eigen::Vector3d i_point) {
@@ -179,8 +181,9 @@ Eigen::Vector3d CRFrame::transformToParent(Eigen::Vector3d i_point) {
  This method transforms points \f$p\f$ in the parent frame to points 
  \f$y\f$ in the child frame.\n
  
- \param[in]  i_points - points in the parent frame (p)
- \return - the points transformed into the child frame (y)
+ \param[in]     i_point         points in the parent frame (p)
+ \return                        the points transformed into the child 
+                                frame (y)
  */
 //---------------------------------------------------------------------
 Eigen::Vector3d CRFrame::transformToChild(Eigen::Vector3d i_point) {
@@ -193,7 +196,7 @@ Eigen::Vector3d CRFrame::transformToChild(Eigen::Vector3d i_point) {
  This method returns a true if the frame is driven (i.e. has a free
  variable) or a false if the frame is not driven.\n
  
- \return - T/F indicator for the frame having a free variable.
+ \return        boolean indicator for the frame having a free variable.
  
  */
 //---------------------------------------------------------------------
@@ -208,8 +211,8 @@ This method gets a vector of Euler angles from the frame.
 
 Source: https://www.geometrictools.com/Documentation/EulerAngles.pdf
 
-\param[in]  i_mode - the Euler mode enumerator
-\return - vector of Euler angles of the frame.
+\param[in]      i_mode      the Euler mode enumerator
+\return                     vector of Euler angles of the frame.
 */
 //---------------------------------------------------------------------
 Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
@@ -522,11 +525,8 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
 /*!
 This method returns a vector of the position and orientation.
 
-\param[in]  i_mode - the Euler mode enumerator
-\param[in]  i_poseElements - [optional] a boolean vector indiciating which
-                           elements of the pose vector to return
-\return - vector of the pose (x, y, z, a, b, g)^T OR the reduced vector
-                   specified by the true elements in poseElements
+\param[in]      i_mode      the Euler mode enumerator
+\return                     pose vector (x, y, z, a, b, g)^T
 */
 //---------------------------------------------------------------------
 Eigen::Matrix<double, 6, 1> CRFrame::getPose(CREulerMode i_mode)
@@ -545,7 +545,18 @@ Eigen::Matrix<double, 6, 1> CRFrame::getPose(CREulerMode i_mode)
 
     return pose;
 }
-    
+
+//=====================================================================
+/*!
+ This method returns a vector of the position and orientation.
+ 
+ \param[in]     i_mode          the Euler mode enumerator
+ \param[in]     i_poseElements  a boolean vector indiciating which
+                                elements of the pose vector to return
+ \return                        reduced pose vector specified by the 
+                                true elements in poseElements
+ */
+//---------------------------------------------------------------------
 Eigen::VectorXd CRFrame::getPose(CREulerMode i_mode,
                                  Eigen::Matrix<bool, 6, 1> i_poseElements)
 {

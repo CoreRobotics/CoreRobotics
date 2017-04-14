@@ -55,11 +55,13 @@ namespace CoreRobotics {
  the algorithm uses the Jacobian pseudoinverse approach.  The SVD is
  used to compute the Jacobian inverse.\n
  
- \param[in] i_robot - the CoreRobotics::CRManipulator object to be
- used for solving the inverse kinematics
- \param[in] i_toolIndex - the index of the robot tool for which the IK
- is being solved, see CoreRobotics::CRManipulator::addTool()
- \param[in] i_eulerMode - the Euler convention of the pose vector
+ \param[in]     i_robot         the CoreRobotics::CRManipulator object 
+                                to be used for solving the inverse 
+                                kinematics
+ \param[in]     i_toolIndex     the index of the robot tool for which 
+                                the IK is being solved, see 
+                                CoreRobotics::CRManipulator::addTool()
+ \param[in]     i_eulerMode     the Euler convention of the pose vector
  */
 //---------------------------------------------------------------------
 CRInverseKinematics::CRInverseKinematics(CRManipulator* i_robot,
@@ -83,15 +85,12 @@ CRInverseKinematics::CRInverseKinematics(CRManipulator* i_robot,
  i_q0.  The method returns a flag indicating if the pseudoinverse is
  singular and no solution can be found.\n
  
- \param[in] i_setPoint - the pose vector set point.  If i_poseElements
- is specified, then the size of this vector must be equal to the number
- of true values in the i_poseElements.
- \param[in] i_poseElements - [optional] a boolean vector indiciating which
- elements of the full pose vector are used in i_setPoint.
- \param[in] i_q0 - the intial configuration to use for the iterations.
- \param[out] o_qSolved - the new configuration
- \return - a CRResult flag indicating if the operation encountered a
- singularity
+ \param[in]     i_setPoint      the pose vector set point.
+ \param[in]     i_q0            the intial configuration to use for 
+                                the iterations.
+ \param[out]    o_qSolved       the new configuration
+ \return                        a CRResult flag indicating if the 
+                                operation encountered a singularity
  */
 //---------------------------------------------------------------------
 CRResult CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> i_setPoint,
@@ -160,7 +159,26 @@ CRResult CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> i_setPoint,
     return result;
 }
     
-
+//=====================================================================
+/*!
+ This method computes the joint angles that solve the specified set
+ point.  An initial condition for the joint angles is specified via
+ i_q0.  The method returns a flag indicating if the pseudoinverse is
+ singular and no solution can be found.\n
+ 
+ \param[in]     i_setPoint      the pose vector set point. The size of
+                                this vector must be equal to the number
+                                of true values in the i_poseElements.
+ \param[in]     i_poseElements  a boolean vector indiciating which
+                                elements of the full pose vector are
+                                used in i_setPoint.
+ \param[in]     i_q0            the intial configuration to use for
+                                the iterations.
+ \param[out]    o_qSolved       the new configuration
+ \return                        a CRResult flag indicating if the
+                                operation encountered a singularity
+ */
+//---------------------------------------------------------------------
 CRResult CRInverseKinematics::solve(Eigen::VectorXd i_setPoint,
                                     Eigen::Matrix<bool, 6, 1> i_poseElements,
                                     Eigen::VectorXd i_q0,

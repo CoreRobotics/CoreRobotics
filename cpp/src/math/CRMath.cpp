@@ -70,11 +70,13 @@ namespace CoreRobotics {
  
  */
 //---------------------------------------------------------------------
-vec CRMath::forwardEulerStep(vec(i_dynamicSystem)(double, vec, vec),
-                             double i_t,
-                             vec i_x,
-                             vec i_u,
-                             double i_dt){
+Eigen::VectorXd CRMath::forwardEulerStep(Eigen::VectorXd(i_dynamicSystem)(double,
+                                                                          Eigen::VectorXd,
+                                                                          Eigen::VectorXd),
+                                         double i_t,
+                                         Eigen::VectorXd i_x,
+                                         Eigen::VectorXd i_u,
+                                         double i_dt){
     // forward integration step
     return i_x + i_dt*i_dynamicSystem(i_t,i_x,i_u);
 }
@@ -102,11 +104,13 @@ vec CRMath::forwardEulerStep(vec(i_dynamicSystem)(double, vec, vec),
  
  */
 //---------------------------------------------------------------------
-vec CRMath::rungeKuttaStep(vec(i_dynamicSystem)(double, vec, vec),
-                           double i_t,
-                           vec i_x,
-                           vec i_u,
-                           double i_dt){
+Eigen::VectorXd CRMath::rungeKuttaStep(Eigen::VectorXd(i_dynamicSystem)(double,
+                                                                        Eigen::VectorXd,
+                                                                        Eigen::VectorXd),
+                                       double i_t,
+                                       Eigen::VectorXd i_x,
+                                       Eigen::VectorXd i_u,
+                                       double i_dt){
     // RK4 step
     Eigen::VectorXd f1 = i_dynamicSystem(i_t,i_x,i_u);
     Eigen::VectorXd f2 = i_dynamicSystem(i_t+i_dt/2,i_x+i_dt*f1/2,i_u);
