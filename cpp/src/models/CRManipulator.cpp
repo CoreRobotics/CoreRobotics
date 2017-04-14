@@ -53,7 +53,7 @@ namespace CoreRobotics {
 /*!
  The constructor creates a manipulator.\n
 
- \param[in] i_type - the manipulator type (default: CR_MANIPULATOR_MODE_POSITION)
+ \param[in]     i_type      the manipulator type (default: CR_MANIPULATOR_MODE_POSITION)
  */
 //---------------------------------------------------------------------
 CRManipulator::CRManipulator(CRManipulatorType i_type) {
@@ -73,7 +73,7 @@ CRManipulator::CRManipulator() {
  fully defined by revolute joints, then this operation corresponds to
  setting the joint angle values.\n
  
- \param[in] i_q - vector of configuration values
+ \param[in]     i_q         vector of configuration values
  */
 //---------------------------------------------------------------------
 void CRManipulator::setConfiguration(Eigen::VectorXd i_q)
@@ -90,7 +90,7 @@ void CRManipulator::setConfiguration(Eigen::VectorXd i_q)
  fully defined by revolute joints, then this operation corresponds to
  getting the joint angle values.\n
  
- \return - vector of configuration values
+ \return    vector of configuration values
  */
 //---------------------------------------------------------------------
 Eigen::VectorXd CRManipulator::getConfiguration(void)
@@ -110,7 +110,7 @@ Eigen::VectorXd CRManipulator::getConfiguration(void)
 
  See: https://en.wikipedia.org/wiki/Forward_kinematics
  
- \return - matrix of forward kinematics (position of each frame in the manipulator)
+ \return    matrix of forward kinematics (position of each frame in the manipulator)
  */
 //---------------------------------------------------------------------
 Eigen::MatrixXd CRManipulator::getForwardKinematics(void)
@@ -142,11 +142,9 @@ Eigen::MatrixXd CRManipulator::getForwardKinematics(void)
  free variables in the manipulator.  The rows of the Jacobian 
  correspond to the pose vector (x, y, z, a, b, g)^T.\n
  
- \param[in] i_toolIndex - index of the tool to be used to compute the Jacobian.
- \param[in] i_mode - the Euler convention to be used to specify the orientation.
- \param[in] i_poseElements - [optional] a boolean vector indicating which pose elements to return
- \return jacobian - (6 x N) jacobian matrix if poseElements is not specified OR
-                        (M x N) jacobian for M true values in poseElements
+ \param[in]     i_toolIndex     index of the tool to be used to compute the Jacobian.
+ \param[in]     i_mode          the Euler convention to be used to specify the orientation.
+ \return                        (6 x N) jacobian matrix
  */
 //---------------------------------------------------------------------
 Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
@@ -197,8 +195,24 @@ Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
     return J;
 }
 
-    
-// Numerical Jacobian overload (for reduced pose vector)
+
+//=====================================================================
+/*!
+ This method computes the full pose (position and orientation) numerical
+ Jacobian of the manipulator for the current configuration with respect
+ to the tool specified by the toolIndex.  See CRManipulator::addTool
+ for adding tools to the manipulator.\n
+ 
+ The size of the returned Jacobian is N x N where N is the number of
+ free variables in the manipulator and M is the number of pose elements
+ defined by true elements of i_poseElements.\n
+ 
+ \param[in]     i_toolIndex     index of the tool to be used to compute the Jacobian.
+ \param[in]     i_mode          the Euler convention to be used to specify the orientation.
+ \param[in]     i_poseElements  a boolean vector indicating which pose elements to return
+ \return                        (M x N) jacobian matrix for M true values in poseElements
+ */
+//---------------------------------------------------------------------
 Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
                                         CREulerMode i_mode,
                                         Eigen::Matrix<bool, 6, 1> i_poseElements)
@@ -258,7 +272,7 @@ Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
 /*!
  This method returns the number of rigid body links in the list. \n
  
- \return - number of rigid body links in the manipulator
+ \return    number of rigid body links in the manipulator
  */
 //---------------------------------------------------------------------
 int CRManipulator::getNumberOfLinks(void)
@@ -272,7 +286,7 @@ int CRManipulator::getNumberOfLinks(void)
  This method returns the number of driven rigid body links, i.e. the
  degrees of freedom (DOF). \n
  
- \return - degrees of freedom (DOF)
+ \return    degrees of freedom (DOF)
  */
 //---------------------------------------------------------------------
 int CRManipulator::getDegreesOfFreedom(void)
@@ -288,9 +302,10 @@ This method returns a tool frame for the current robot pose.  Note that
 a tool must have been added to the manipulator using the 
 CRManipulator::addTool method prior to calling this method.\n
 
-\param[in] i_toolIndex - index of the tool to query
-\param[out] o_tool - the tool frame transformation referenced to the
-robot base frame for the current manipulator configuration
+\param[in]      i_toolIndex     index of the tool to query
+\param[out]     o_tool          the tool frame transformation referenced
+                                to the robot base frame for the current
+                                manipulator configuration
 */
 //---------------------------------------------------------------------
 void CRManipulator::getToolFrame(unsigned i_toolIndex, CRFrame& o_tool)
@@ -320,10 +335,11 @@ void CRManipulator::getToolFrame(unsigned i_toolIndex, CRFrame& o_tool)
  robot pose.  Note that a tool must have been added to the manipulator 
  using the CRManipulator::addTool method prior to calling this method.\n
  
- \param[in] i_toolIndex - index of the tool to query
- \param[in] i_mode - the Euler convention for computing the pose
- \return - the pose for the specified tool
- robot base frame for the current manipulator configuration
+ \param[in]     i_toolIndex     index of the tool to query
+ \param[in]     i_mode          the Euler convention for computing the pose
+ \return                        the pose for the specified tool
+                                robot base frame for the current 
+                                manipulator configuration
  */
 //---------------------------------------------------------------------
 Eigen::Matrix<double, 6, 1> CRManipulator::getToolPose(unsigned i_toolIndex,
@@ -353,8 +369,8 @@ Eigen::VectorXd CRManipulator::getToolPose(unsigned i_toolIndex,
 /*!
  This method adds a rigid body link the list of links. \n
  
- \param[in] i_link - pointer to the RigidBody link being added
- \return - returns the integer (index) of the added link
+ \param[in]     i_link          pointer to the RigidBody link being added
+ \return                        returns the integer (index) of the added link
  */
 //---------------------------------------------------------------------
 int CRManipulator::addLink(CoreRobotics::CRRigidBody* i_link)
@@ -382,11 +398,12 @@ int CRManipulator::addLink(CoreRobotics::CRRigidBody* i_link)
 /*!
 This method adds a frame to the list of tools. \n
 
-\param[in] parentIndex - the index of the parent frame to which the
-supplied tool frame is referenced.
-\param[in] tool - a CRFrame object containing the frame transformation 
-to the specified parent link.
-\return - returns the integer (index) of the added tool
+\param[in]      i_parentIndex       the index of the parent frame to which the
+                                    supplied tool frame is referenced.
+\param[in]      i_tool              a CRFrame object containing the 
+                                    frame transformation to the specified
+                                    parent link.
+\return                             returns the integer (index) of the added tool
 */
 //---------------------------------------------------------------------
 int CRManipulator::addTool(unsigned i_parentIndex, CRFrame* i_tool)
