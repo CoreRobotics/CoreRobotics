@@ -283,14 +283,14 @@ public:
 public:
     
     //! Solve for the joint angles (q) that yield the desired setPoint
-    CRResult solve(Eigen::Matrix<double, 6, 1> i_setPoint,
-               Eigen::VectorXd i_q0,
-               Eigen::VectorXd &o_qSolved);
+    CRResult solve(const Eigen::Matrix<double, 6, 1>& i_setPoint,
+				   Eigen::VectorXd i_q0,
+				   Eigen::VectorXd &o_qSolved);
     
-    CRResult solve(Eigen::VectorXd i_setPoint,
-               Eigen::Matrix<bool, 6, 1> i_poseElements,
-               Eigen::VectorXd i_q0,
-               Eigen::VectorXd &o_qSolved);
+    CRResult solve(Eigen::VectorXd& i_setPoint,
+				   Eigen::Matrix<bool, 6, 1> i_poseElements,
+				   Eigen::VectorXd i_q0,
+				   Eigen::VectorXd &o_qSolved);
     
 //---------------------------------------------------------------------
 // Protected Members

@@ -94,7 +94,7 @@ CRInverseKinematics::CRInverseKinematics(CRManipulator* i_robot,
  singularity
  */
 //---------------------------------------------------------------------
-CRResult CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> i_setPoint,
+CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoint,
                                     Eigen::VectorXd i_q0,
                                     Eigen::VectorXd &o_qSolved)
 {
@@ -161,7 +161,7 @@ CRResult CRInverseKinematics::solve(Eigen::Matrix<double, 6, 1> i_setPoint,
 }
     
 
-CRResult CRInverseKinematics::solve(Eigen::VectorXd i_setPoint,
+CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
                                     Eigen::Matrix<bool, 6, 1> i_poseElements,
                                     Eigen::VectorXd i_q0,
                                     Eigen::VectorXd &o_qSolved)
