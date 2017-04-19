@@ -185,7 +185,7 @@ void CRThread::start() {
     
 //=====================================================================
 /*!
- This method stops the thread execution.
+ This method stops the thread execution by detaching it from the main.
  */
 //---------------------------------------------------------------------
 void CRThread::stop() {
