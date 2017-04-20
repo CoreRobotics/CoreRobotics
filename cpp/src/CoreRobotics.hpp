@@ -203,6 +203,27 @@ classifications of robotics literature and implementation.  The intention is
 for each module to solve different problems in robotics applications.  Here
 we present a light overview of the modules and briefly describe the use for
 each class.
+ 
+- \subpage module_math implements static methods for performing mathematical 
+ operations.
+- \subpage module_core implements core classes (such as timing and multi-
+ threading) for implementation.
+- \subpage module_physics implements physics models such as frame transformations
+ and rigid body representations for kinematics and dynamics
+- \subpage module_models implements models such as dynamics, sensor, and noise
+ models, as well as a class for handling manupulators.
+- \subpage module_controllers implements controllers and planners
+- \subpage module_estimators implements state estimtion and perceptions
+- \subpage module_world implements scene graph world and child representations.
+
+\section module_math Math
+\section module_core Core
+\section module_physics Physics
+\section module_models Modeling
+\section module_controllers Controller
+\section module_estimators Estimator
+\section module_world World
+ 
  */
 //---------------------------------------------------------------------------
 /*!
