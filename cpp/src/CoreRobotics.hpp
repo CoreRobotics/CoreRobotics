@@ -60,7 +60,6 @@ This introduction is broken down into the following sections.
 - \subpage install
 - \subpage overview
 - \subpage gettingstarted
-- \subpage nextsteps
 - \subpage references
 
 A note on units:  All units in the library, unless specified, are in SI
@@ -237,11 +236,6 @@ section prior to tackling some of the examples presented here.
 \section inversekinematics Inverse Kinematics
 \section motion Motion Modeling
 \section estimation State Estimation
-Todo
-*/
-//---------------------------------------------------------------------------
-/*!
-\page nextsteps Next Steps
 Todo
 */
 //---------------------------------------------------------------------------
