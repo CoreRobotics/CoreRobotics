@@ -115,7 +115,6 @@ CMake to build your first program.  Instructions for how to build CoreRobotics
 for your specific platform using CMake are presented below.
 - \subpage install_mac
 - \subpage install_windows
-- \subpage install_unix
 \n\n
 
 \section install_mac Mac XCode
@@ -189,10 +188,6 @@ following terminal commands (assuming you left terminal alone from step 2)
 > ..\utils\bin\Release\TestModules.exe
 \endcode
 \n\n\n\n
-
- 
-\section install_unix Unix Makefiles
-Todo
 */
 //---------------------------------------------------------------------------
 /*!
@@ -203,25 +198,17 @@ for each module to solve different problems in robotics applications.  Here
 we present a light overview of the modules and briefly describe the use for
 each class.
  
-- \subpage module_math implements static methods for performing mathematical 
+- \subpage math implements static methods for performing mathematical
  operations.
-- \subpage module_core implements core classes (such as timing and multi-
+- \subpage core implements core classes (such as timing and multi-
  threading) for implementation.
-- \subpage module_physics implements physics models such as frame transformations
+- \subpage physics implements physics models such as frame transformations
  and rigid body representations for kinematics and dynamics
-- \subpage module_models implements models such as dynamics, sensor, and noise
+- \subpage models implements models such as dynamics, sensor, and noise
  models, as well as a class for handling manupulators.
-- \subpage module_controllers implements controllers and planners
-- \subpage module_estimators implements state estimtion and perceptions
-- \subpage module_world implements scene graph world and child representations.
-
-\section module_math Math
-\section module_core Core
-\section module_physics Physics
-\section module_models Modeling
-\section module_controllers Controller
-\section module_estimators Estimator
-\section module_world World
+- \subpage controllers implements controllers and planners
+- \subpage estimators implements state estimtion and perceptions
+- \subpage world implements scene graph world and child representations.
  
  */
 //---------------------------------------------------------------------------
