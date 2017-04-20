@@ -48,14 +48,16 @@
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
-    
+
     
 //=====================================================================
 /*!
  This method performs a forward euler integration step for the dynamical
  system:\n
  
- /f$ \dot{x} = f(t,x,u,p) /f$
+ \f[
+ \dot{x} = f(t,x,u)
+ \f]
  
  This equation is specified as a callback function to the integration.
  
@@ -68,11 +70,13 @@ namespace CoreRobotics {
  
  */
 //---------------------------------------------------------------------
-vec CRMath::forwardEulerStep(vec(i_dynamicSystem)(double, vec, vec),
-                             double i_t,
-                             vec i_x,
-                             vec i_u,
-                             double i_dt){
+Eigen::VectorXd CRMath::forwardEulerStep(Eigen::VectorXd(i_dynamicSystem)(double,
+                                                                          Eigen::VectorXd,
+                                                                          Eigen::VectorXd),
+                                         double i_t,
+                                         Eigen::VectorXd i_x,
+                                         Eigen::VectorXd i_u,
+                                         double i_dt){
     // forward integration step
     return i_x + i_dt*i_dynamicSystem(i_t,i_x,i_u);
 }
@@ -83,7 +87,9 @@ vec CRMath::forwardEulerStep(vec(i_dynamicSystem)(double, vec, vec),
  This method performs a Runge-Kutta integration step for the dynamical
  system:\n
  
- /f$ \dot{x} = f(t,x,u,p) /f$
+ \f[
+ \dot{x} = f(t,x,u)
+ \f]
  
  This equation is specified as a callback function to the integration.
  The Runga-Kutta integration is an accurate integration scheme at the
@@ -98,11 +104,13 @@ vec CRMath::forwardEulerStep(vec(i_dynamicSystem)(double, vec, vec),
  
  */
 //---------------------------------------------------------------------
-vec CRMath::rungeKuttaStep(vec(i_dynamicSystem)(double, vec, vec),
-                           double i_t,
-                           vec i_x,
-                           vec i_u,
-                           double i_dt){
+Eigen::VectorXd CRMath::rungeKuttaStep(Eigen::VectorXd(i_dynamicSystem)(double,
+                                                                        Eigen::VectorXd,
+                                                                        Eigen::VectorXd),
+                                       double i_t,
+                                       Eigen::VectorXd i_x,
+                                       Eigen::VectorXd i_u,
+                                       double i_dt){
     // RK4 step
     Eigen::VectorXd f1 = i_dynamicSystem(i_t,i_x,i_u);
     Eigen::VectorXd f2 = i_dynamicSystem(i_t+i_dt/2,i_x+i_dt*f1/2,i_u);
@@ -118,18 +126,22 @@ vec CRMath::rungeKuttaStep(vec(i_dynamicSystem)(double, vec, vec),
  
  For a matrix A, the SVD yields:
  
- /f$ A = U \Sigma V^* /f$
+ \f[
+ A = U \Sigma V^*
+ \f]
  
  The generalized inverse is then:
  
- /f$ A^# = V \Sigma^{-1} U^* /f$
+ \f[
+ A^\dagger = V \Sigma^{-1} U^*
+ \f]
  
  The method utilizes the Jacobi SVD for the inverse.  For large matrices,
  this will be very slow.
  
  \param [in] i_A - the matrix to invert
  \param [in] i_tol - the tolerance placed on the singular values to determine if the matrix is singular
- \param [out] o_Ainv - the generalized inverse of Matrix A
+ \param [out] o_Ainv - the generalized inverse of Matrix A (\f$A^\dagger\f$)
  \return - a result flag (see: CRTypes::CRResult) indicating if the operation was successful
  or if a singularity was encountered in the operation.
  

@@ -66,13 +66,13 @@ namespace CoreRobotics {
  \brief Implements a class for modeling uniform noise.
  
  \details
- \section Description
+ ## Description
  CRNoiseUniform implements methods for modeling and sampling uniform
  noise.  The uniform distribution is defined by a lower bound \f$a\f$
- and upper bound \f$b\f on the range of the sampled state [3].  Every
+ and upper bound \f$b\f$ on the range of the sampled state [3].  Every
  state in this range has equal probability of being sampled.
  
- \section Example
+ ## Example
  This example demonstrates use of the CRNoiseUniform class.
  
  \code
@@ -123,14 +123,15 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
  
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
- 2006. \n\n
+ [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press, 2006.
+ \n\n
  
  [3] en.wikipedia.org/wiki/Uniform_distribution_(continuous)
+ \n\n
  */
 //=====================================================================
 // Paramter structure declaration

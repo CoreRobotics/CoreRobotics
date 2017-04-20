@@ -61,7 +61,7 @@ namespace CoreRobotics {
 /*!
  The constructor defines a thread.\n
 
- \param[in] priority - the thread priority, see CoreRobotics::CRThreadPriority
+ \param[in] i_priority - the thread priority, see CoreRobotics::CRThreadPriority
  */
 //---------------------------------------------------------------------
 CRThread::CRThread(CRThreadPriority i_priority) {
@@ -87,12 +87,12 @@ CRThread::~CRThread() { }
 /*!
  This method sets the thread callback function.
  
- \param [in] callbackFunction - the callback function to be executed 
+ \param [in] i_callbackFunction - the callback function to be executed
                                 by the thread
  */
 //---------------------------------------------------------------------
-void CRThread::setCallback(void(callbackFunction)(void)) {
-    *m_loop = std::thread(callbackFunction);
+void CRThread::setCallback(void(i_callbackFunction)(void)) {
+    *m_loop = std::thread(i_callbackFunction);
 }
 
 
@@ -101,7 +101,7 @@ void CRThread::setCallback(void(callbackFunction)(void)) {
 /*!
 This method sets the thread priority.
 
-\param[in] priority - the thread priority, see CoreRobotics::CRThreadPriority
+\param[in] i_priority - the thread priority, see CoreRobotics::CRThreadPriority
 */
 //---------------------------------------------------------------------
 void CRThread::setPriority(CRThreadPriority i_priority) {
@@ -185,7 +185,7 @@ void CRThread::start() {
     
 //=====================================================================
 /*!
- This method stops the thread execution.
+ This method stops the thread execution by detaching it from the main.
  */
 //---------------------------------------------------------------------
 void CRThread::stop() {

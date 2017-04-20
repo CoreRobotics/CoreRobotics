@@ -67,13 +67,13 @@ namespace CoreRobotics {
  \brief Implements a class for modeling noise as a mixture of distributions.
  
  \details
- \section Description
+ ## Description
  CRNoiseMixture implements methods for sampling and modeling noise as a
  mixture of probability distributions [2-3].  Each specified noise model
  is also accompanied by a weight, indicating the probability of that
  distribution being selected for sampling of the noise.
  
- \section Example
+ ## Example
  This example demonstrates use of the CRNoiseMixture class.
  
  \code
@@ -140,7 +140,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
  

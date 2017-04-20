@@ -69,7 +69,7 @@ namespace CoreRobotics {
  the rotations are defined by Euler angles.
  
  \details
- \section Description
+ ## Description
  CRFrameEuler implements an transformation where the rotation is 
  specified by three Euler angles (<a href="wikipedia.org/wiki/Euler_angles">
  see Wikipedia article).</a>
@@ -83,7 +83,7 @@ namespace CoreRobotics {
  The free variable can be specified by the CRFrameEuler::m_freeVar member
  (options are in CoreRobotics::CREulerFreeVariable).
  
- \section Example
+ ## Example
  This example creates an Euler frame class.
  \code
  
@@ -109,7 +109,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
  Pearson, 2004.
  

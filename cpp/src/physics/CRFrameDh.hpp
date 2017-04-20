@@ -69,7 +69,7 @@ namespace CoreRobotics {
  the rotations and translations are defined by DH parameters.
  
  \details
- \section Description
+ ## Description
  CRFrameDh implements a DH parameter transformation specified by 4 
  parameters (<a href="wikipedia.org/wiki/Denavit–Hartenberg_parameters">
  see Wikipedia article).</a> With an additional 5th paramter for constant 
@@ -83,7 +83,7 @@ namespace CoreRobotics {
  The free variable can be specified by the CRFrameDh::m_freeVar member
  (options are in CoreRobotics::CRDhFreeVariable).
  
- \section Example
+ ## Example
  This example creates a DH parameter frame class.
  \code
  
@@ -108,7 +108,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Denavit and R. Hartenberg, "A kinematic notation for lower-pair
  mechanisms based on matrices". Trans ASME J. Appl. Mech. 23, pp. 215-221, 1955.
  

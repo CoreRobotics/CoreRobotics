@@ -50,83 +50,84 @@
 
 
 //=====================================================================
-// Type definitions
-typedef Eigen::VectorXd (vec);
-
-
-//=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
 
-    const double CR_PI = 3.1415926535897932384626433832795;
+//=====================================================================
+/*!
+\file CRMath.hpp
+\brief Implements utility math functions.
+*/
+//---------------------------------------------------------------------
+/*!
+\class CRMath
+\ingroup math
 
-    //=====================================================================
-    /*!
-    \file CRMath.hpp
-    \brief Implements utility math functions.
-    */
-    //---------------------------------------------------------------------
-    /*!
-    \class CRMath
-    \ingroup math
+\brief This class implements various math related helper functions.
 
-    \brief This class implements various math related helper functions.
+\details
+## Description
+CRMath implements math static helper functions.
+ 
+ 
+## References
+[1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,
+John Wiley & Sons, 2011.
 
-    \details
-    \section Description
-    CRMath implements math static helper functions.
-     
-     
-    References:
+*/
+
+//=====================================================================
+
+//! CoreRobotics value for PI
+const double CR_PI = 3.1415926535897932384626433832795;
+
+//=====================================================================
+class CRMath {
+
+//---------------------------------------------------------------------
+// Static conversion methods
+public:
     
-    [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,
-    John Wiley & Sons, 2011.
-
-    */
-
-    //=====================================================================
-    class CRMath {
-
-    //---------------------------------------------------------------------
-    // Static conversion methods
-    public:
-        
-        //! Convert angles in degrees to radians
-        static double deg2rad(const double i_deg) { return CR_PI * i_deg / 180.0; }
-        
-        //! Convert angles in radians to degrees
-        static double rad2deg(const double i_rad) { return 180.0 * i_rad / CR_PI; }
-        
-        
-    //---------------------------------------------------------------------
-    // Numerical integration routines
-    public:
-        
-        //! Forward euler integration
-        static vec forwardEulerStep(vec(i_dyanmicSystem)(double, vec, vec),
-                                    double i_t,
-                                    vec i_x,
-                                    vec i_u,
-                                    double i_dt);
-        
-        //! Runge-Kutta 4th order integration
-        static vec rungeKuttaStep(vec(i_dynamicSystem)(double, vec, vec),
-                                  double i_t,
-                                  vec i_x,
-                                  vec i_u,
-                                  double i_dt);
-        
-    //---------------------------------------------------------------------
-    // Matrix inversion routines
-    public:
-        
-        //! SVD-based matrix inverse
-        static CRResult svdInverse(Eigen::MatrixXd i_A,
-                                   double i_tol,
-                                   Eigen::MatrixXd& o_Ainv);
-        
-        
-    };
+    //! Convert angles in degrees to radians
+    static double deg2rad(const double i_deg) { return CR_PI * i_deg / 180.0; }
+    
+    //! Convert angles in radians to degrees
+    static double rad2deg(const double i_rad) { return 180.0 * i_rad / CR_PI; }
+    
+    
+//---------------------------------------------------------------------
+// Numerical integration routines
+public:
+    
+    //! Forward euler integration
+    static Eigen::VectorXd forwardEulerStep(Eigen::VectorXd(i_dyanmicSystem)(double,
+                                                                             Eigen::VectorXd,
+                                                                             Eigen::VectorXd),
+                                            double i_t,
+                                            Eigen::VectorXd i_x,
+                                            Eigen::VectorXd i_u,
+                                            double i_dt);
+    
+    //! Runge-Kutta 4th order integration
+    static Eigen::VectorXd rungeKuttaStep(Eigen::VectorXd(i_dynamicSystem)(double,
+                                                                           Eigen::VectorXd,
+                                                                           Eigen::VectorXd),
+                                          double i_t,
+                                          Eigen::VectorXd i_x,
+                                          Eigen::VectorXd i_u,
+                                          double i_dt);
+    
+//---------------------------------------------------------------------
+// Matrix inversion routines
+public:
+    
+    //! SVD-based matrix inverse
+    static CRResult svdInverse(Eigen::MatrixXd i_A,
+                               double i_tol,
+                               Eigen::MatrixXd& o_Ainv);
+    
+    
+};
 
 
 //=====================================================================

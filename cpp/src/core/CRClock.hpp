@@ -32,9 +32,9 @@
  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- \author CoreRobotics Project
- \author www.corerobotics.org
- \author Parker Owan
+ \project CoreRobotics Project
+ \url     www.corerobotics.org
+ \author  Parker Owan
  \version 0.0
  
  */
@@ -66,7 +66,7 @@ namespace CoreRobotics {
  control loop rates.
  
  \details
- \section Description
+ ## Description
  CRClock implements a simple clock interface for timing the 
  execution of code.
  
@@ -74,7 +74,7 @@ namespace CoreRobotics {
  - CRClock::getElapsedTime returns the elapsed time (in seconds) 
  since the most recent call of startTimer().
  
- \section Example
+ ## Example
  This example creates a CRClock. Note: because of the call to
  usleep(), this example does not work on Windows platforms.
  \code

@@ -66,12 +66,12 @@ namespace CoreRobotics {
  \brief Implements a class for modeling Gaussian noise.
  
  \details
- \section Description
+ ## Description
  CRNoiseGaussian implements methods for sampling from and modeling 
  multivariate Gaussian noise (see [1-3]). The Gaussian is completely
  defined by a mean \f$\mu\f$ and covariance \f$\Sigma\f$.
  
- \section Example
+ ## Example
  This example demonstrates use of the CRNoiseGaussian class.
  
  \code
@@ -122,7 +122,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
  

@@ -65,12 +65,12 @@ namespace CoreRobotics {
  \brief Implements a class for modeling deterministic processes.
  
  \details
- \section Description
+ ## Description
  CRNoiseDirac implements a deterministic noise model - a point mass at
  a specific point, where the probability of sampling that point is 1,
  see [3].
  
- \section Example
+ ## Example
  This example demonstrates use of the CRNoiseDirac class.
  
  \code
@@ -120,7 +120,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
  

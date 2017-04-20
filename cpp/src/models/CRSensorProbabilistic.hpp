@@ -65,7 +65,7 @@ namespace CoreRobotics {
  \brief This class implements a probabilistic sensor model.
  
  \details
- \section Description
+ ## Description
  CRSensorProbabilistic implements a probabilistic sensor model from 
  a supplied observation callback function and likelihood callback
  functions.  Specifically, CRSensorProbabilistic sets up a container
@@ -90,7 +90,7 @@ namespace CoreRobotics {
  - CRSensorProbabilistic::likelihood computes the probability of 
  observing measurement (z) for the given state (x).
  
- \section Example
+ ## Example
  This example demonstrates use of the CRSensorProbabilistic class.
  \code
  
@@ -177,7 +177,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
  

@@ -65,7 +65,7 @@ namespace CoreRobotics {
  \brief This class implements a sensor model.
  
  \details
- \section Description
+ ## Description
  CRSensorLinear implements a sensor model from a supplied observation
  callback function.  Specifically, CRSensorLinear sets up a container
  for the linear observation model
@@ -81,7 +81,7 @@ namespace CoreRobotics {
  - CRSensorLinear::measurement computes a simulated measurement 
  vector (z) from the underlying state (x).
  
- \section Example
+ ## Example
  This example demonstrates use of the CRSensorLinear class.
  \code
  
@@ -122,7 +122,7 @@ namespace CoreRobotics {
  
  \endcode
  
- \section References
+ ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
  

@@ -52,7 +52,7 @@ namespace CoreRobotics {
 /*!
  The constructor creates a rigid body container.\n
  
- \params[in] i_frame - pointer to the frame associated with the rigid
+ \param[in] i_frame - pointer to the frame associated with the rigid
  body transformation.
  */
 //---------------------------------------------------------------------
