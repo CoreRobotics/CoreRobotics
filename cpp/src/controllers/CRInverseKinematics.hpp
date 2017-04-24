@@ -101,6 +101,8 @@ namespace CoreRobotics {
  solver can run prior to stopping. (Default = 1)
  - CRInverseKinematics::setStepSize sets the convergence gain \f$\gamma\f$ 
  in the above equation. (Default = 0.1)
+ - CRInverseKinematics::setDampingFactor sets the damping factor in the
+ approximation of Jinv.  High damping is more immune to singularities (Default = 0)
  - CRInverseKinematics::setSingularThresh sets the threshold for numerically
  determining if the Jacobian is singular by comparing singular values of
  the SVD to the threshold. (Default = 0.1)

@@ -139,6 +139,7 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
 		// result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
 
 		// compute the Damped singular values (E)
+		// See http://www.andreasaristidou.com/publications/CUEDF-INFENG,%20TR-632.pdf (DLS)
 		Eigen::VectorXd e = Sigma.array() / (Sigma.array().square() + pow(this->m_dampingFactor, 2));
 		E = e.asDiagonal();
 
@@ -237,6 +238,7 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
         // result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
 
 		// compute the Damped singular values (E)
+		// See http://www.andreasaristidou.com/publications/CUEDF-INFENG,%20TR-632.pdf (DLS)
 		Eigen::VectorXd e = Sigma.array() / (Sigma.array().square() + pow(this->m_dampingFactor, 2));
 		E = e.asDiagonal();
 
