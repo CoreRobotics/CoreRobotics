@@ -149,7 +149,7 @@ void test_CRInverseKinematics(void) {
         std::cout << fk << std::endl;
         
     } else {
-        std::cout << "No solution found! Returning original configuration.\n";
+        std::cout << "The solution is singular.\n";
         std::cout << qSolved << std::endl;
     }
     
@@ -182,7 +182,7 @@ void test_CRInverseKinematics(void) {
         std::cout << fk << std::endl;
         
     } else {
-        std::cout << "No solution found! Returning original configuration.\n";
+		std::cout << "The solution is singular.\n";
         std::cout << qSolved << std::endl;
     }
     
@@ -217,7 +217,7 @@ void test_CRInverseKinematics(void) {
         std::cout << fk << std::endl;
         
     } else {
-        std::cout << "No solution found! Returning original configuration.\n";
+		std::cout << "The solution is singular.\n";
         std::cout << qSolved << std::endl;
     }
     
@@ -250,7 +250,7 @@ void test_CRInverseKinematics(void) {
         std::cout << fk << std::endl;
         
     } else {
-        std::cout << "No solution found! Returning original configuration.\n";
+		std::cout << "The solution is singular.\n";
         std::cout << qSolved << std::endl;
     }
     
@@ -293,7 +293,7 @@ void test_CRInverseKinematics(void) {
         std::cout << fk << std::endl;
         
     } else {
-        std::cout << "No solution found! Returning original configuration.\n";
+		std::cout << "The solution is singular.\n";
         std::cout << qSolved << std::endl;
     }
     
@@ -334,7 +334,7 @@ void test_CRInverseKinematics(void) {
             fk = MyRobot->getForwardKinematics();
             
         } else {
-            std::cout << "No solution found! Returning original configuration.\n";
+			std::cout << "The solution is singular.\n";
         }
     }
     

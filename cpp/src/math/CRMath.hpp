@@ -116,6 +116,18 @@ public:
                                           Eigen::VectorXd i_x,
                                           Eigen::VectorXd i_u,
                                           double i_dt);
+
+//---------------------------------------------------------------------
+// Matrix factorization
+public:
+
+	//! Singular Value decomposition (SVD)
+	static CRResult svd(Eigen::MatrixXd i_A,
+						double i_tol,
+						Eigen::MatrixXd& o_U,
+						Eigen::VectorXd& o_Sigma,
+						Eigen::MatrixXd& o_V);
+
     
 //---------------------------------------------------------------------
 // Matrix inversion routines

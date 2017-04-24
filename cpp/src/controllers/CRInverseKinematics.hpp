@@ -205,7 +205,7 @@ namespace CoreRobotics {
          std::cout << fk << std::endl;
      
      } else {
-         std::cout << "No solution found! Returning original configuration.\n";
+         std::cout << "The solution is singular.\n";
          std::cout << qSolved << std::endl;
      }
  
@@ -270,6 +270,12 @@ public:
     
     //! Get the iteration step size (i.e. the gain)
     double getStepSize(void) {return this->m_stepSize;}
+
+	//! Set the damping factor (for damped least squares solvers)
+	void setDampingFactor(double i_dampingFactor) { this->m_dampingFactor = i_dampingFactor; }
+
+	//!  Get the damping factor (for damped least squares solvers)
+	double getDampingFactor(void) { return this->m_dampingFactor; }
     
     //! Set the minimum threshold for a non-singular matrix
     void setSingularThresh(double i_thresh) {this->m_svdTol = i_thresh;}
@@ -313,6 +319,9 @@ protected:
     
     //! Optimizer step size (gain)
     double m_stepSize;
+
+	//! Damping term (DLS)
+	double m_dampingFactor;
     
     //! Tolerance for computing if a matrix is singular using SVD svals
     double m_svdTol;
