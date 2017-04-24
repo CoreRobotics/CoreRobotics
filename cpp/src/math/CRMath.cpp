@@ -118,6 +118,62 @@ Eigen::VectorXd CRMath::rungeKuttaStep(Eigen::VectorXd(i_dynamicSystem)(double,
     Eigen::VectorXd f4 = i_dynamicSystem(i_t+i_dt,i_x+i_dt*f3,i_u);
     return i_x + i_dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
+
+
+
+//=====================================================================
+/*!
+This method returns the SVD of a matrix\n.
+
+For a matrix A, the SVD yields:
+
+\f[
+A = U \Sigma V^*
+\f]
+
+The method utilizes the Jacobi SVD.  For large matrices, this will be very slow.
+
+\param [in] i_A - the matrix to be decomposed
+\param [out] i_tol - the tolerance placed on the singular values to determine if the matrix is singular
+\param [out] o_U - the U matrix in the factorization
+\param [out] o_Sigma - the vector of singular values
+\param [out] o_V - the V matrix in the factorization
+\return - a result flag (see: CRTypes::CRResult) indicating if any of the
+singular values were below the specified tolerance (i.e. singular)
+
+*/
+//---------------------------------------------------------------------
+CRResult CRMath::svd(Eigen::MatrixXd i_A,
+					 double i_tol,
+					 Eigen::MatrixXd& o_U,
+					 Eigen::VectorXd& o_Sigma,
+					 Eigen::MatrixXd& o_V)
+{
+	CRResult result = CR_RESULT_SUCCESS;
+
+	// Compute the SVD of A
+	Eigen::JacobiSVD<Eigen::MatrixXd> svd(i_A, Eigen::ComputeThinU | Eigen::ComputeThinV);
+
+	// Take the SVD
+	Eigen::VectorXd sVals = svd.singularValues();
+
+	// check for singular condition
+	for (int i = 0; i < sVals.size(); i++) {
+		if (sVals(i) <= i_tol) {
+			result = CR_RESULT_SINGULAR;
+			break;
+		}
+	}
+
+	// Return SVD matrices
+	o_U = svd.matrixU();
+	o_Sigma = sVals.array();
+	o_V = svd.matrixV();
+
+	// return the result
+	return result;
+}
+
     
     
 //=====================================================================

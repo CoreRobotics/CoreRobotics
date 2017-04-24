@@ -75,6 +75,7 @@ CRInverseKinematics::CRInverseKinematics(CRManipulator* i_robot,
     this->setMaxIter(1);        // 1 step optimizer
     this->setStepSize(0.1);     // 0.1 step gain - this was Alexi's default
     this->setSingularThresh(1.0e-1);
+	this->setDampingFactor(0);	// traditional least squares
 }
 
 
@@ -107,6 +108,10 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
     Eigen::MatrixXd J, Jinv;            // robot Jacobian and inverse
     Eigen::VectorXd q;                  // the configuration
     unsigned int iter = 0;
+
+	// SVD matrices
+	Eigen::MatrixXd U, V, E;
+	Eigen::VectorXd Sigma;
     
     // set the initial configuration
     q = i_q0;
@@ -129,8 +134,16 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
         J = this->m_robot->jacobian(this->m_toolIndex,
                                     this->m_eulerMode);
         
-        // Invert with SVD
-        result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+		// Compute the SVD
+		result = CRMath::svd(J, this->m_svdTol, U, Sigma, V);
+		// result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+
+		// compute the Damped singular values (E)
+		Eigen::VectorXd e = Sigma.array() / (Sigma.array().square() + pow(this->m_dampingFactor, 2));
+		E = e.asDiagonal();
+
+		// compute the generalized inverse jacobian
+		Jinv = V * E * U.transpose();
         
         // Perform the iteration step
         q += this->m_stepSize * Jinv * error;
@@ -145,18 +158,14 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
         
     }
     
-    // Put the robot back in its original configuration
-    this->m_robot->setConfiguration(i_q0);
-    
-    // set the output configuration
-    if (result == CR_RESULT_SINGULAR){
-        o_qSolved = i_q0;    // return the initial condition
-    } else {
-        o_qSolved = q;        // return solution
-    }
-    
-    // return result
-    return result;
+	// Put the robot back in its original configuration
+	this->m_robot->setConfiguration(i_q0);
+
+	// output the solution
+	o_qSolved = q;
+
+	// return result
+	return result;
 }
     
 
@@ -175,6 +184,10 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     Eigen::MatrixXd J, Jinv;        // robot Jacobian and inverse
     Eigen::VectorXd q;              // the configuration
     unsigned int iter = 0;
+
+	// SVD matrices
+	Eigen::MatrixXd U, V, E;
+	Eigen::VectorXd Sigma;
     
     // set the initial configuration
     q = i_q0;
@@ -201,8 +214,16 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
                                     this->m_eulerMode,
                                     i_poseElements);
         
-        // Invert with SVD
-        result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+		// Compute the SVD
+		result = CRMath::svd(J, this->m_svdTol, U, Sigma, V);
+        // result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+
+		// compute the Damped singular values (E)
+		Eigen::VectorXd e = Sigma.array() / (Sigma.array().square() + pow(this->m_dampingFactor, 2));
+		E = e.asDiagonal();
+
+		// compute the generalized inverse jacobian
+		Jinv = V * E * U.transpose();
         
         // Perform the iteration step
         q += this->m_stepSize * Jinv * error;
@@ -222,13 +243,9 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     // Put the robot back in its original configuration
     this->m_robot->setConfiguration(i_q0);
     
-    // set the output configuration
-    if (result == CR_RESULT_SINGULAR){
-        o_qSolved = i_q0;    // return the initial condition
-    } else {
-        o_qSolved = q;        // return solution
-    }
-    
+    // output the solution
+    o_qSolved = q;
+
     // return result
     return result;
 }
