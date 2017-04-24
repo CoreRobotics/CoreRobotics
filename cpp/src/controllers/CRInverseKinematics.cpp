@@ -169,6 +169,24 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
 }
     
 
+//=====================================================================
+/*!
+This method computes the joint angles that solve the specified set
+point.  An initial condition for the joint angles is specified via
+i_q0.  The method returns a flag indicating if the pseudoinverse is
+singular and no solution can be found.\n
+
+\param[in]     i_setPoint      the pose vector set point.
+\param[in]     i_poseElements  a boolean vector indiciating which
+                               elements of the pose vector are specified
+							   in i_setPoint (see CRFrame::getPose)
+\param[in]     i_q0            the intial configuration to use for
+							   the iterations.
+\param[out]    o_qSolved       the new configuration
+\return                        a CRResult flag indicating if the
+operation encountered a singularity
+*/
+//---------------------------------------------------------------------
 CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
                                     Eigen::Matrix<bool, 6, 1> i_poseElements,
                                     Eigen::VectorXd i_q0,
