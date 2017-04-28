@@ -163,6 +163,29 @@ public:
 		o_rot << cos(i_ang), -sin(i_ang), 0, sin(i_ang), cos(i_ang), 0, 0, 0, 1;
 		return o_rot;
 	}
+
+//---------------------------------------------------------------------
+// Vector norms
+public:
+
+	//! L-1 vector norm
+	// http://mathworld.wolfram.com/L1-Norm.html
+	static double normL1(Eigen::VectorXd x) {
+		return x.array().abs().sum();
+	};
+
+	//! L-2 vector norm
+	// http://mathworld.wolfram.com/L2-Norm.html
+	static double normL2(Eigen::VectorXd x) {
+		return sqrt(x.array().square().sum());
+	};
+
+	//! L-infinity vector norm
+	// http://mathworld.wolfram.com/L-Infinity-Norm.html
+	static double normLinf(Eigen::VectorXd x) {
+		return x.array().abs().maxCoeff();
+	};
+
     
     
 };
