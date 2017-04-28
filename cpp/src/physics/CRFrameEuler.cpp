@@ -41,6 +41,7 @@
 //=====================================================================
 
 #include "CRFrameEuler.hpp"
+#include "CRMath.hpp"
 #include "Eigen/Dense"
 
 
@@ -362,86 +363,68 @@ void CRFrameEuler::setRotationAndTranslation()
     
     switch (m_eulerMode){
         case CR_EULER_MODE_ZXZ:
-            rotAboutZ(m_angA, r1);
-            rotAboutX(m_angB, r2);
-            rotAboutZ(m_angG, r3);
+			r1 = CRMath::rotAboutZ(m_angA);
+			r2 = CRMath::rotAboutX(m_angB);
+			r3 = CRMath::rotAboutZ(m_angG);
             break;
         case CR_EULER_MODE_XYX:
-            rotAboutX(m_angA, r1);
-            rotAboutY(m_angB, r2);
-            rotAboutX(m_angG, r3);
+			r1 = CRMath::rotAboutX(m_angA);
+			r2 = CRMath::rotAboutY(m_angB);
+			r3 = CRMath::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_YZY:
-            rotAboutY(m_angA, r1);
-            rotAboutZ(m_angB, r2);
-            rotAboutY(m_angG, r3);
+			r1 = CRMath::rotAboutY(m_angA);
+			r2 = CRMath::rotAboutZ(m_angB);
+			r3 = CRMath::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_ZYZ:
-            rotAboutZ(m_angA, r1);
-            rotAboutY(m_angB, r2);
-            rotAboutZ(m_angG, r3);
+			r1 = CRMath::rotAboutZ(m_angA);
+			r2 = CRMath::rotAboutY(m_angB);
+			r3 = CRMath::rotAboutZ(m_angG);
             break;
         case CR_EULER_MODE_XZX:
-            rotAboutX(m_angA, r1);
-            rotAboutZ(m_angB, r2);
-            rotAboutX(m_angG, r3);
+			r1 = CRMath::rotAboutX(m_angA);
+			r2 = CRMath::rotAboutZ(m_angB);
+			r3 = CRMath::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_YXY:
-            rotAboutY(m_angA, r1);
-            rotAboutX(m_angB, r2);
-            rotAboutY(m_angG, r3);
+			r1 = CRMath::rotAboutY(m_angA);
+			r2 = CRMath::rotAboutX(m_angB);
+			r3 = CRMath::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_XYZ:
-            rotAboutX(m_angA, r1);
-            rotAboutY(m_angB, r2);
-            rotAboutZ(m_angG, r3);
+			r1 = CRMath::rotAboutX(m_angA);
+			r2 = CRMath::rotAboutY(m_angB);
+			r3 = CRMath::rotAboutZ(m_angG);
             break;
         case CR_EULER_MODE_YZX:
-            rotAboutY(m_angA, r1);
-            rotAboutZ(m_angB, r2);
-            rotAboutX(m_angG, r3);
+			r1 = CRMath::rotAboutY(m_angA);
+			r2 = CRMath::rotAboutZ(m_angB);
+			r3 = CRMath::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_ZXY:
-            rotAboutZ(m_angA, r1);
-            rotAboutX(m_angB, r2);
-            rotAboutY(m_angG, r3);
+			r1 = CRMath::rotAboutZ(m_angA);
+			r2 = CRMath::rotAboutX(m_angB);
+			r3 = CRMath::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_XZY:
-            rotAboutX(m_angA, r1);
-            rotAboutZ(m_angB, r2);
-            rotAboutY(m_angG, r3);
+			r1 = CRMath::rotAboutX(m_angA);
+			r2 = CRMath::rotAboutZ(m_angB);
+			r3 = CRMath::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_ZYX:
-            rotAboutZ(m_angA, r1);
-            rotAboutY(m_angB, r2);
-            rotAboutX(m_angG, r3);
+			r1 = CRMath::rotAboutZ(m_angA);
+			r2 = CRMath::rotAboutY(m_angB);
+			r3 = CRMath::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_YXZ:
-            rotAboutY(m_angA, r1);
-            rotAboutX(m_angB, r2);
-            rotAboutZ(m_angG, r3);
+			r1 = CRMath::rotAboutY(m_angA);
+			r2 = CRMath::rotAboutX(m_angB);
+			r3 = CRMath::rotAboutZ(m_angG);
             break;
     }
     m_rotation = r1*r2*r3;
     m_translation << m_posX, m_posY, m_posZ;
-}
-
-//! standard rotation about the x axis
-void CRFrameEuler::rotAboutX(double i_ang, Eigen::Matrix3d& o_rot)
-{
-    o_rot << 1, 0, 0, 0, cos(i_ang), -sin(i_ang), 0, sin(i_ang),  cos(i_ang);
-}
-
-//! standard rotation about the y axis
-void CRFrameEuler::rotAboutY(double i_ang, Eigen::Matrix3d& o_rot)
-{
-    o_rot << cos(i_ang), 0, sin(i_ang), 0, 1, 0, -sin(i_ang), 0, cos(i_ang);
-}
-
-//! standard rotation about the z axis
-void CRFrameEuler::rotAboutZ(double i_ang, Eigen::Matrix3d& o_rot)
-{
-    o_rot << cos(i_ang), -sin(i_ang), 0, sin(i_ang), cos(i_ang), 0, 0, 0, 1;
 }
 
 

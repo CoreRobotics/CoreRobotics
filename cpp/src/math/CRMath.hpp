@@ -137,6 +137,32 @@ public:
     static CRResult svdInverse(Eigen::MatrixXd i_A,
                                double i_tol,
                                Eigen::MatrixXd& o_Ainv);
+
+
+//---------------------------------------------------------------------
+// Rotation matrices
+public:
+
+	//! standard rotation about the x axis
+	static Eigen::Matrix3d rotAboutX(double i_ang) {
+		Eigen::Matrix3d o_rot;
+		o_rot << 1, 0, 0, 0, cos(i_ang), -sin(i_ang), 0, sin(i_ang), cos(i_ang);
+		return o_rot;
+	}
+
+	//! standard rotation about the y axis
+	static Eigen::Matrix3d rotAboutY(double i_ang) {
+		Eigen::Matrix3d o_rot;
+		o_rot << cos(i_ang), 0, sin(i_ang), 0, 1, 0, -sin(i_ang), 0, cos(i_ang);
+		return o_rot;
+	}
+
+	//! standard rotation about the z axis
+	static Eigen::Matrix3d rotAboutZ(double i_ang) {
+		Eigen::Matrix3d o_rot;
+		o_rot << cos(i_ang), -sin(i_ang), 0, sin(i_ang), cos(i_ang), 0, 0, 0, 1;
+		return o_rot;
+	}
     
     
 };

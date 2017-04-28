@@ -238,15 +238,6 @@ private:
     //  translation explicitly for Euler angles
     using CRFrame::setRotationAndTranslation;
     void setRotationAndTranslation();
-    
-    //! standard rotation about the x axis
-    void rotAboutX(double i_ang, Eigen::Matrix3d& o_rot);
-    
-    //! standard rotation about the y axis
-    void rotAboutY(double i_ang, Eigen::Matrix3d& o_rot);
-    
-    //! standard rotation about the z axis
-    void rotAboutZ(double i_ang, Eigen::Matrix3d& o_rot);
 
 };
 
