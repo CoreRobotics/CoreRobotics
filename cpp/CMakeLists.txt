@@ -158,4 +158,5 @@ add_dependencies(${UTIL_TARGET_NAME} ${LIB_TARGET_NAME})
 # Link the library binary
 target_link_libraries( ${UTIL_TARGET_NAME} 
     ${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
+	pthread
 )
