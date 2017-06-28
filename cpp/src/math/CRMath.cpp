@@ -42,7 +42,7 @@
 
 #include "CRMath.hpp"
 #include "Eigen/Dense"
-#include "Eigen/svd"
+#include "Eigen/SVD"
 
 
 //=====================================================================
