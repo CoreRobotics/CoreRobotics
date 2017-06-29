@@ -70,9 +70,9 @@ namespace CoreRobotics {
  CRThread implements a simple thread interface for setting a callback
  and starting and stopping thread execution.
  
- - CRClock::setCallback sets the callback function.
- - CRClock::start starts the thread execution.
- - CRClock::stop stops the thread execution.
+ - CRThread::setCallback sets the callback function.
+ - CRThread::start starts the thread execution.
+ - CRThread::stop stops the thread execution.
  
  ## Example
  This example creates and runs a simple CRThread.
