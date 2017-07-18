@@ -44,3 +44,7 @@ bin
 *.exe
 *.out
 *.app
+
+# Python Libraries
+*.pyc
+CoreRobotics.py
