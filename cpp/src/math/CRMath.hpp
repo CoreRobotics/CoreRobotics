@@ -95,6 +95,7 @@ public:
     static double rad2deg(const double i_rad) { return 180.0 * i_rad / CR_PI; }
     
     
+#ifndef SWIG
 //---------------------------------------------------------------------
 // Numerical integration routines
 public:
@@ -116,6 +117,7 @@ public:
                                           Eigen::VectorXd i_x,
                                           Eigen::VectorXd i_u,
                                           double i_dt);
+#endif
 
 //---------------------------------------------------------------------
 // Matrix factorization
