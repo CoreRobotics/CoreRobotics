@@ -266,6 +266,15 @@ Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
     return J;
     
 }
+
+
+Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
+                                        CREulerMode i_mode,
+                                        Eigen::Matrix<int, 6, 1> i_poseElementsInt)
+{
+	Eigen::Matrix<bool, 6, 1> i_poseElements = i_poseElementsInt.cast<bool>();
+	return CRManipulator::jacobian(i_toolIndex, i_mode, i_poseElements);
+}
     
     
 //=====================================================================
@@ -363,6 +372,13 @@ Eigen::VectorXd CRManipulator::getToolPose(unsigned i_toolIndex,
     return this->m_tipFrame->getPose(i_mode, i_poseElements);
 }
 
+Eigen::VectorXd CRManipulator::getToolPose(unsigned i_toolIndex,
+                                           CREulerMode i_mode,
+                                           Eigen::Matrix<int, 6, 1> i_poseElementsInt)
+{
+	Eigen::Matrix<bool, 6, 1> i_poseElements = i_poseElementsInt.cast<bool>();
+	return CRManipulator::getToolPose(i_toolIndex, i_mode, i_poseElements);
+}
     
     
 //=====================================================================

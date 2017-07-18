@@ -36,6 +36,9 @@
 %eigen_typemaps(Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic>)
 
 %eigen_typemaps(Eigen::Matrix<double, 6, 1>)
+%eigen_typemaps(Eigen::Vector3d)
+%eigen_typemaps(Eigen::Matrix4d)
+%eigen_typemaps(Eigen::Matrix<int, 6, 1>)
 
 %init %{
 import_array();
