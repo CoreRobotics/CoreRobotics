@@ -174,6 +174,15 @@ if (NOT python OR all)
 endif()
 if(python OR all)
 
+	if(WIN32)
+		find_package(PythonInterp)
+		execute_process(COMMAND
+			"${PYTHON_EXECUTABLE}" -c
+			"import numpy; print numpy.get_include()"
+			OUTPUT_VARIABLE NUMPY_DIR)
+		include_directories(${NUMPY_DIR})
+	endif()
+
 	find_package(SWIG REQUIRED)
 	include(${SWIG_USE_FILE})
 
@@ -188,6 +197,8 @@ if(python OR all)
 		${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
 	set_target_properties(_${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/python/lib)
+	set_target_properties(_${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/python/lib)
+	set_target_properties(_${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/python/lib)
 
 	swig_link_libraries(${PROJECT_NAME} ${PYTHON_LIBRARIES})
 
