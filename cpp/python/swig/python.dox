@@ -1,0 +1,42 @@
+/*!
+\page python Python Wrapper
+
+A Python wrapper for a portion of the CoreRobotics library has been
+generated with SWIG. The CoreRobotics modules included in the wrapper
+are:
+
+* - CRClock
+* - CRTypes
+* - CRMath
+* - CRFrame
+* - CRFrameEuler
+* - CRFrameDh
+* - CRRigidBody
+* - CRManipulator
+* - CRNoiseModel
+* - CRNoiseGaussian
+* - CRNoiseDirac
+* - CRNoiseUniform
+* - CRNoiseMixture
+* - CRSensorLinear
+* - CRInverseKinematics
+
+The Python wrappers can be built by running CMake with `-Dpython=true` to
+build the Python wrappers which are located at `python/lib`. To build both
+the C++ and Python libraries run `cmake ../ -Dall=true`.
+
+Examples of how to use the Python wrapper can be found in the examples provided
+in the `python/examples` directory.
+
+\warning
+* - The CRClock module does not work as expected.
+* - The CRMath module has had the Forward Euler and 4th order Runge-Kutta integrators
+removed for compatability.
+* - The following modules have not been tested:
+	* - CRNoiseModel
+	* - CRNoiseGaussian
+	* - CRNoiseDirac
+	* - CRNoiseUniform
+	* - CRNoiseMixture
+	* - CRSensorLinear
+*/
