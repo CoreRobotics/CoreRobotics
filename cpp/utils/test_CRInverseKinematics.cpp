@@ -138,7 +138,7 @@ void test_CRInverseKinematics(void) {
     et = timer.getElapsedTime();
     
     if ( result == CR_RESULT_SUCCESS ){
-        printf("Non-sinular solution found in %8.6f s!\n",et);
+        printf("Non-singular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
@@ -171,7 +171,7 @@ void test_CRInverseKinematics(void) {
     et = timer.getElapsedTime();
     
     if ( result == CR_RESULT_SUCCESS ){
-        printf("Non-sinular solution found in %8.6f s!\n",et);
+        printf("Non-singular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
@@ -206,7 +206,7 @@ void test_CRInverseKinematics(void) {
     et = timer.getElapsedTime();
     
     if ( result == CR_RESULT_SUCCESS ){
-        printf("Non-sinular solution found in %8.6f s!\n",et);
+        printf("Non-singular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
@@ -239,7 +239,7 @@ void test_CRInverseKinematics(void) {
     et = timer.getElapsedTime();
     
     if ( result == CR_RESULT_SUCCESS ){
-        printf("Non-sinular solution found in %8.6f s!\n",et);
+        printf("Non-singular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
@@ -282,7 +282,7 @@ void test_CRInverseKinematics(void) {
     et = timer.getElapsedTime();
     
     if ( result == CR_RESULT_SUCCESS ){
-        printf("Non-sinular solution found in %8.6f s!\n",et);
+        printf("Non-singular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
         // Now push the new joints through the robot to see if it worked
