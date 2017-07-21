@@ -76,69 +76,7 @@ namespace CoreRobotics {
  ## Example
  This example demonstrates use of the CRNoiseMixture class.
  
- \code
- 
- #include <iostream>
- #include "CoreRobotics.hpp"
- 
- // Use the CoreRobotics namespace
- using namespace CoreRobotics;
- 
- void main(void){
- 
-     std::cout << "*************************************\n";
-     std::cout << "Demonstration of test_CRNoiseMixture.\n";
-     
-     // initialize a noise mixture model
-     CRNoiseMixture mixModel = CRNoiseMixture();
-     
-     // define a Gaussian distribution & add it to the mixture model
-     Eigen::MatrixXd cov(1,1);
-     cov(0) = 1;
-     Eigen::VectorXd mean(1);
-     mean(0) = 3;
-     CRNoiseGaussian* gaussian = new CRNoiseGaussian(cov, mean);
-     mixModel.add(gaussian, 0.7);
-     
-     // define a uniform distribution & add it to the mixture model
-     Eigen::VectorXd a(1);
-     a(0) = 1;
-     Eigen::VectorXd b(1);
-     b(0) = 9;
-     CRNoiseUniform* uniform = new CRNoiseUniform(a, b);
-     mixModel.add(uniform, 0.6);
-     
-     // define a point mass distribution & add it to the mixture model
-     Eigen::VectorXd c(1);
-     c(0) = 8;
-     CRNoiseDirac* dirac = new CRNoiseDirac(c);
-     mixModel.add(dirac, 0.2);
-     
-     
-     // initialize parameters for experiments
-     const int nrolls=10000;  // number of experiments
-     const int nstars=100;     // maximum number of stars to distribute
-     int p[10]={};
-     
-     // sample the distribution
-     for (int i=0; i<nrolls; ++i) {
-         Eigen::VectorXd v = mixModel.sample();
-         if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
-     }
-     
-     // print out the result with stars to indicate density
-     std::cout << std::fixed; std::cout.precision(1);
-     for (int i=0; i<10; ++i) {
-         printf("%2i - %2i | ",i,i+1);
-         Eigen::VectorXd point(1);
-         point << double(i);
-         double prob = mixModel.probability(point);
-         printf("%6.4f | ",prob);
-         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
-     }
- }
- 
- \endcode
+ \include test_CRNoiseMixture.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

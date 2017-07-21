@@ -84,64 +84,7 @@ namespace CoreRobotics {
  ## Example
  This example demonstrates use of the CRNoiseModel class.
  
- \code
- 
- #include <iostream>
- #include "CoreRobotics.hpp"
- 
- // Use the CoreRobotics namespace
- using namespace CoreRobotics;
- 
- // declare an inverse cumulative distribution - this is the invserse
- // CDF for a triangular distribution from [0,1].
- Eigen::VectorXd icdf(double P){
-     Eigen::VectorXd v(1);
-     v(0) = sqrt(P);
-     return v;
- }
- 
- // declare the probability density - this is the traditional density
- // defined by a distribution
- double pdensity(Eigen::VectorXd x){
-     return 2*x(0);
- }
- 
- void main(void){
- 
-     std::cout << "*************************************\n";
-     std::cout << "Demonstration of CRNoiseModel.\n";
-     
-     // initialize a noise model
-     CRNoiseModel genericNoise = CRNoiseModel();
-     genericNoise.setParameters(*icdf,*pdensity);
-     
-     
-     // initialize parameters for experiments
-     const int nrolls=10000;  // number of experiments
-     const int nstars=100;    // maximum number of stars to distribute
-     const int nintervals=10; // number of intervals
-     int p[10]={};
-     
-     // sample the distribution
-     for (int i=0; i<nrolls; ++i) {
-         Eigen::VectorXd v = genericNoise.sample();
-         ++p[int(nintervals*v(0))];
-     }
-     
-     // print out the result with stars to indicate density
-     std::cout << std::fixed; std::cout.precision(1);
-     for (int i=0; i<nintervals; ++i) {
-         std::cout << float(i)/nintervals << " - " << float(i+1)/nintervals << ": ";
-         printf("%2i - %2i | ",i,i+1);
-         Eigen::VectorXd point(1);
-         point << double(i);
-         double prob = genericNoise.probability(point);
-         printf("%4.1f | ",prob);
-         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
-     }
- }
- 
- \endcode
+ \include test_CRNoiseModel.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

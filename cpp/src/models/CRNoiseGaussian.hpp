@@ -74,53 +74,7 @@ namespace CoreRobotics {
  ## Example
  This example demonstrates use of the CRNoiseGaussian class.
  
- \code
- 
- #include <iostream>
- #include "CoreRobotics.hpp"
- 
- // Use the CoreRobotics namespace
- using namespace CoreRobotics;
- 
- void main(void){
- 
-     std::cout << "*************************************\n";
-     std::cout << "Demonstration of CRNoiseGaussian.\n";
-     
-     // define the Gaussian properties
-     Eigen::Vector2d mean;
-     mean << 5, 5;
-     Eigen::Matrix2d cov;
-     cov << 3, 0, 0, 3;
-     
-     // initialize a noise model
-     CRNoiseGaussian normalNoise = CRNoiseGaussian();
-     normalNoise.setParameters(cov, mean);
-     
-     // initialize parameters for experiments
-     const int nrolls=10000;  // number of experiments
-     const int nstars=100;    // maximum number of stars to distribute
-     int p[10]={};
-     
-     // sample the distribution
-     for (int i=0; i<nrolls; ++i) {
-         Eigen::VectorXd v = normalNoise.sample();
-         if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
-     }
-     
-     // print out the result with stars to indicate density
-     std::cout << std::fixed; std::cout.precision(1);
-     for (int i=0; i<10; ++i) {
-         printf("%2i - %2i | ",i,i+1);
-         Eigen::VectorXd point(2);
-         point << double(i), 5;
-         double prob = normalNoise.probability(point);
-         printf("%6.4f | ",prob);
-         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
-     }
- }
- 
- \endcode
+ \include test_CRNoiseGaussian.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

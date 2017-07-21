@@ -73,52 +73,7 @@ namespace CoreRobotics {
  ## Example
  This example demonstrates use of the CRNoiseDirac class.
  
- \code
- 
- #include <iostream>
- #include "CoreRobotics.hpp"
- 
- // Use the CoreRobotics namespace
- using namespace CoreRobotics;
- 
- void main(void){
- 
-     std::cout << "*************************************\n";
-     std::cout << "Demonstration of CRNoiseDirac.\n";
-     
-     // define the Dirac properties
-     Eigen::VectorXd point(1);
-     point << 5;
-     
-     // initialize a noise model
-     CRNoiseDirac diracNoise = CRNoiseDirac();
-     diracNoise.setParameters(point);
-     
-     // initialize parameters for experiments
-     const int nrolls=10000;  // number of experiments
-     const int nstars=20;     // maximum number of stars to distribute
-     int p[10]={};
-     
-     // sample the distribution
-     for (int i=0; i<nrolls; ++i) {
-         Eigen::VectorXd v = diracNoise.sample();
-         if ((v(0)>=0.0)&&(v(0)<10.0)) ++p[int(v(0))];
-     }
-     
-     // print out the result with stars to indicate density
-     std::cout << std::fixed; std::cout.precision(1);
-     for (int i=0; i<10; ++i) {
-         printf("%2i - %2i | ",i,i+1);
-         Eigen::VectorXd point(1);
-         point << double(i);
-         double prob = diracNoise.probability(point);
-         printf("%6.4f | ",prob);
-         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
-     }
- 
- }
- 
- \endcode
+ \include test_CRNoiseDirac.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
