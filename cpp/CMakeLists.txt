@@ -110,61 +110,105 @@ file(GLOB SOURCES_CONTROLLERS
     src/controllers/*.cpp
 )
 
-# Create static (or shared) library
-add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+if (NOT python OR all)
 
-# Set the output directory
-set_target_properties( ${LIB_TARGET_NAME} PROPERTIES 
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-)
+	# Create static (or shared) library
+	add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
-# Sort into a group structure
-source_group( "include" FILES "src/CoreRobotics.hpp")
-
-source_group( "include\\core" FILES ${HEADERS_CORE})
-source_group( "include\\math" FILES ${HEADERS_MATH})
-source_group( "include\\models" FILES ${HEADERS_MODELS})
-source_group( "include\\physics" FILES ${HEADERS_PHYSICS})
-source_group( "include\\controllers" FILES ${HEADERS_CONTROLLERS})
-
-source_group( "src\\core" FILES ${SOURCES_CORE})
-source_group( "src\\math" FILES ${SOURCES_MATH})
-source_group( "src\\models" FILES ${SOURCES_MODELS})
-source_group( "src\\physics" FILES ${SOURCES_PHYSICS})
-source_group( "src\\controllers" FILES ${SOURCES_CONTROLLERS})
-
-
-# =====================================================================
-# 2. Setup the utility target
-#
-# Source files
-file(GLOB UTILITIES
-    utils/*.cpp
-    utils/*.hpp
-)
-
-# Add an executable for the utilities
-add_executable( ${UTIL_TARGET_NAME} ${UTILITIES} )
-
-# Set the output directory
-set_target_properties( ${UTIL_TARGET_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/utils/bin
-)
-
-# Add the library as a build dependency
-add_dependencies(${UTIL_TARGET_NAME} ${LIB_TARGET_NAME})
-
-# Link the library binary
-if(UNIX AND NOT APPLE) # This may be useful for apple too
-	set(UTIL_LINK_FILES
-		${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
-		pthread
+	# Set the output directory
+	set_target_properties( ${LIB_TARGET_NAME} PROPERTIES 
+		LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+		ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
 	)
-else()
-	set(UTIL_LINK_FILES
-		${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
+
+	# Sort into a group structure
+	source_group( "include" FILES "src/CoreRobotics.hpp")
+
+	source_group( "include\\core" FILES ${HEADERS_CORE})
+	source_group( "include\\math" FILES ${HEADERS_MATH})
+	source_group( "include\\models" FILES ${HEADERS_MODELS})
+	source_group( "include\\physics" FILES ${HEADERS_PHYSICS})
+	source_group( "include\\controllers" FILES ${HEADERS_CONTROLLERS})
+
+	source_group( "src\\core" FILES ${SOURCES_CORE})
+	source_group( "src\\math" FILES ${SOURCES_MATH})
+	source_group( "src\\models" FILES ${SOURCES_MODELS})
+	source_group( "src\\physics" FILES ${SOURCES_PHYSICS})
+	source_group( "src\\controllers" FILES ${SOURCES_CONTROLLERS})
+
+
+	# =====================================================================
+	# 2. Setup the utility target
+	#
+	# Source files
+	file(GLOB UTILITIES
+		utils/*.cpp
+		utils/*.hpp
 	)
+
+	# Add an executable for the utilities
+	add_executable( ${UTIL_TARGET_NAME} ${UTILITIES} )
+
+	# Set the output directory
+	set_target_properties( ${UTIL_TARGET_NAME} PROPERTIES
+		RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/utils/bin
+	)
+
+	# Add the library as a build dependency
+	add_dependencies(${UTIL_TARGET_NAME} ${LIB_TARGET_NAME})
+
+	# Link the library binary
+	if(UNIX AND NOT APPLE) # This may be useful for apple too
+		set(UTIL_LINK_FILES
+			${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
+			pthread
+		)
+	else()
+		set(UTIL_LINK_FILES
+			${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
+		)
+	endif()
+
+	target_link_libraries( ${UTIL_TARGET_NAME} ${UTIL_LINK_FILES})
+
 endif()
+if(python OR all)
 
-target_link_libraries( ${UTIL_TARGET_NAME} ${UTIL_LINK_FILES})
+	if(WIN32)
+		find_package(PythonInterp)
+		execute_process(COMMAND
+			"${PYTHON_EXECUTABLE}" -c
+			"import numpy; print numpy.get_include()"
+			OUTPUT_VARIABLE NUMPY_DIR)
+		include_directories(${NUMPY_DIR})
+	endif()
+
+	find_package(SWIG REQUIRED)
+	include(${SWIG_USE_FILE})
+
+	find_package(PythonLibs 2.7 EXACT REQUIRED)
+	include_directories(${PYTHON_INCLUDE_PATH})
+
+	set(CMAKE_SWIG_FLAGS "")
+	set_source_files_properties(${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i PROPERTIES CPLUSPLUS ON)
+
+	swig_add_module(${PROJECT_NAME} python
+		${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i
+		${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+
+	set_target_properties(_${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/python/lib)
+	set_target_properties(_${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/python/lib)
+	set_target_properties(_${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/python/lib)
+
+	swig_link_libraries(${PROJECT_NAME} ${PYTHON_LIBRARIES})
+
+	add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy
+			${CMAKE_BINARY_DIR}/${PROJECT_NAME}.py
+			${CMAKE_SOURCE_DIR}/python/lib/)
+	add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${CMAKE_SOURCE_DIR}/python/lib
+			${CMAKE_SOURCE_DIR}/python/util)
+
+endif()

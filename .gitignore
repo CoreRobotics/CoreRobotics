@@ -8,6 +8,7 @@
 Debug
 x64
 x86
+Win32
 
 # temp & build folders
 DerivedData
@@ -15,6 +16,8 @@ obj
 build
 html
 bin
+lib
+*.dir
 
 # Mac files
 .DS_Store
@@ -33,6 +36,7 @@ bin
 *.so
 *.dylib
 *.dll
+*.pyd
 
 # Static libraries
 *.lai
@@ -44,3 +48,7 @@ bin
 *.exe
 *.out
 *.app
+
+# Python Libraries
+*.pyc
+CoreRobotics.py

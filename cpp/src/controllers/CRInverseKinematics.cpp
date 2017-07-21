@@ -270,6 +270,14 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     return result;
 }
 
+CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
+                                    Eigen::Matrix<int, 6, 1> i_poseElementsInt,
+                                    Eigen::VectorXd i_q0,
+                                    Eigen::VectorXd &o_qSolved)
+{
+	Eigen::Matrix<bool, 6, 1> i_poseElements = i_poseElementsInt.cast<bool>();
+	return CRInverseKinematics::solve(i_setPoint, i_poseElements, i_q0, o_qSolved);
+}
 
 //=====================================================================
 // End namespace
