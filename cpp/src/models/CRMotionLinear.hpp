@@ -94,65 +94,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRMotionLinear class.
- \code
- 
- #include <iostream>
- #include "CoreRobotics.hpp"
- 
- // Use the CoreRobotics namespace
- using namespace CoreRobotics;
- 
- 
- void main(void){
- 
-     std::cout << "*************************************\n";
-     std::cout << "Demonstration of CRMotionLinear.\n";
-     
-     
-     // initialize a state vector
-     Eigen::VectorXd x(1);
-     x << 10;
-     
-     // Dynamics Matrix
-     Eigen::Matrix<double,1,1> A;
-     A << -1;
-     
-     // Input matrix
-     Eigen::Matrix<double,1,1> B;
-     B << 1;
-     
-     // initialize a linear dynamics model
-     CRMotionLinear model = CRMotionLinear(A,B,CR_MOTION_CONTINUOUS,x,0.2);
-     
-     
-     // initialize an input and set it to zero
-     Eigen::VectorXd u(1);
-     u << 0;
-     
-     // Initialize a time t
-     double t = 0;
-     
-     // loop
-     printf("Time (s) | State\n");
-     while(t <= 5) {
-     
-         // output the time and state
-         printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
-         
-         // step at t = 2.5
-         if (t >= 2.5){
-             u << 10;
-         }
-         
-         // get next state & time
-         x = model.motion(u);
-         t = model.getTime();
-     }
-     printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
-     
- }
- 
- \endcode
+ \include test_CRMotionLinear.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

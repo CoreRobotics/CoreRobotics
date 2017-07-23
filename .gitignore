@@ -18,6 +18,7 @@ html
 bin
 lib
 *.dir
+*.tmp
 
 # Mac files
 .DS_Store

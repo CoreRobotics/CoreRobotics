@@ -76,35 +76,7 @@ namespace CoreRobotics {
  
  ## Example
  This example creates and runs a simple CRThread.
- \code
- 
- #include "CoreRobotics.hpp"
- 
- using namespace CoreRobotics;
- 
- void callback(void);
- 
- main() {
-    CRThread MyThread;
-    MyThread.setCallback(*callback);
-    MyThread.start();
- }
- 
- // define a callback function for the thread
- void callback(void){
-    CRClock clock;
-    int i = 0;
-    double et = 0.0;
-    clock.startTimer();
-    while(et < 10.0){
-        printf("i = %i, et = %4.2f s\n",i,et);
-        i++;                        // increment the counter
-        clock.sleep(1.0);           // sleep for 1 second
-        clock.getElapsedTime(et);   // return the elapsed time
-    }
- }
- 
- \endcode
+ \include test_CRCore.cpp
  */
 //=====================================================================
 //! Enumerator for specifying thread priority

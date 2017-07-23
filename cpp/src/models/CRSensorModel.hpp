@@ -82,47 +82,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRSensorModel class.
- \code
- 
- #include <iostream>
- #include "CoreRobotics.hpp"
- 
- // Use the CoreRobotics namespace
- using namespace CoreRobotics;
- 
- 
- // -------------------------------------------------------------
- // Declare a deterministic model - fcn(x)
- Eigen::VectorXd detPredFcn(Eigen::VectorXd x){
-     return x;  // observation (z = x)
- }
- 
- 
- // -------------------------------------------------------------
- void main(void){
- 
-     std::cout << "*************************************\n";
-     std::cout << "Demonstration of CRSensorModel.\n";
-     
-     
-     // initialize a state vector
-     Eigen::VectorXd x0(1);
-     x0 << 5;
-     
-     
-     // initialize a deterministic sensor model
-     CRSensorModel sensor = CRSensorModel(*detPredFcn,x0);
-     
-     
-     // initialize a sensor prediction vector
-     Eigen::VectorXd zPredict(1);
-     zPredict = sensor.measurement();
-     std::cout << "Predicted measurement = " << zPredict << std::endl;
- 
- }
- // -------------------------------------------------------------
- 
- \endcode
+ \include test_CRSensorModel.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

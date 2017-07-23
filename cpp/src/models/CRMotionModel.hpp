@@ -93,64 +93,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRMotionModel class.
- \code
- 
- #include <iostream>
- #include "CoreRobotics.hpp"
- 
- // Use the CoreRobotics namespace
- using namespace CoreRobotics;
- 
- 
- // Declare a continuous motion model - xdot = fcn(x,u,t)
- Eigen::VectorXd dynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t){
-     return -x + u;  // motion
- }
- 
- 
- void main(void){
- 
-     std::cout << "*************************************\n";
-     std::cout << "Demonstration of CRMotionModel.\n";
-     
-     
-     // initialize a state vector
-     Eigen::VectorXd x(1);
-     x << 10;
-     
-     
-     // initialize a deterministic sensor model
-     CRMotionModel model = CRMotionModel(*dynFcn,CR_MOTION_CONTINUOUS,x,0.2);
-     
-     
-     // initialize an input and set it to zero
-     Eigen::VectorXd u(1);
-     u << 0;
-     
-     // Initialize a time t
-     double t = 0;
-     
-     // loop
-     printf("Time (s) | State\n");
-     while(t <= 5) {
-     
-         // output the time and state
-         printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
-         
-         // step at t = 2.5
-         if (t >= 2.5){
-             u << 10;
-         }
-         
-         // get next state & time
-         x = model.motion(u);
-         t = model.getTime();
-     }
-     printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
- 
- }
- 
- \endcode
+ \include test_CRMotionModel.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

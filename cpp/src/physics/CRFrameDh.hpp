@@ -85,28 +85,7 @@ namespace CoreRobotics {
  
  ## Example
  This example creates a DH parameter frame class.
- \code
- 
- #include "CoreRobotics.hpp"
- #include <stdio>
- 
- main() {
-    CoreRobotics::CRFrameDh Frame;
-
-    Frame.setParameters(0.1, 0.0, 2.1, 0.7, 3.1415/2.0);
-
-    Eigen::Matrix4d T;
-    Frame.getTransformToParent(T);
-    std::cout << "Transformation to parent\n" << T << std::endl;
-
-    Eigen::Vector3d p, y;
-    p << 5, 6, 7;
-    Frame.transformToParent(p, y);
-    std::cout << "Point " << p.transpose() << " transformed to "
-    << y.transpose() << std::endl;
- }
- 
- \endcode
+ \include CRTestFrameOffset.cpp
  
  ## References
  [1] J. Denavit and R. Hartenberg, "A kinematic notation for lower-pair
