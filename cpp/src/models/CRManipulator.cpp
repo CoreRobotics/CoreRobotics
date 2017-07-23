@@ -203,7 +203,7 @@ Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
  to the tool specified by the toolIndex.  See CRManipulator::addTool
  for adding tools to the manipulator.\n
  
- The size of the returned Jacobian is N x N where N is the number of
+ The size of the returned Jacobian is M x N where N is the number of
  free variables in the manipulator and M is the number of pose elements
  defined by true elements of i_poseElements.\n
  
@@ -267,7 +267,23 @@ Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
     
 }
 
-
+//=====================================================================
+/*!
+ This method computes the full pose (position and orientation) numerical
+ Jacobian of the manipulator for the current configuration with respect
+ to the tool specified by the toolIndex.  See CRManipulator::addTool
+ for adding tools to the manipulator.\n
+ 
+ The size of the returned Jacobian is M x N where N is the number of
+ free variables in the manipulator and M is the number of pose elements
+ defined by nonzero elements of i_poseElementsInt.\n
+ 
+ \param[in]     i_toolIndex     index of the tool to be used to compute the Jacobian.
+ \param[in]     i_mode          the Euler convention to be used to specify the orientation.
+ \param[in]     i_poseElementsInt  a integer vector indicating which pose elements to return
+ \return                        (M x N) jacobian matrix for M true values in poseElements
+ */
+//---------------------------------------------------------------------
 Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
                                         CREulerMode i_mode,
                                         Eigen::Matrix<int, 6, 1> i_poseElementsInt)

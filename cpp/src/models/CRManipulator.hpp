@@ -263,7 +263,9 @@ public:
                              CREulerMode i_mode,
                              Eigen::Matrix<bool, 6, 1> i_poseElements);
 
-	Eigen::MatrixXd jacobian(unsigned i_toolIndex, CREulerMode i_mode, Eigen::Matrix<int, 6, 1> i_poseElementsInt);
+	Eigen::MatrixXd jacobian(unsigned i_toolIndex,
+                             CREulerMode i_mode,
+                             Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
 //---------------------------------------------------------------------
 // Add link/tool Methods
