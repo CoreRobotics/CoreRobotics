@@ -43,6 +43,9 @@
 # CMAKE Flags and variables
 cmake_minimum_required(VERSION 3.0)
 
+# Set CMAKE policy
+cmake_policy(SET CMP0054 NEW)
+
 # Require C++11
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -186,7 +189,11 @@ if(python OR all)
 	find_package(SWIG REQUIRED)
 	include(${SWIG_USE_FILE})
 
-	find_package(PythonLibs 2.7 EXACT REQUIRED)
+	if(NOT ${python} STREQUAL true)
+		find_package(PythonLibs ${python} EXACT REQUIRED)
+	else()
+		find_package(PythonLibs)
+	endif()
 	include_directories(${PYTHON_INCLUDE_PATH})
 
 	set(CMAKE_SWIG_FLAGS "")
