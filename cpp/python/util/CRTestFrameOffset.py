@@ -40,12 +40,15 @@
 #
 #=====================================================================
 
+# Import the future print function for Python 2/3 compatability
+from __future__ import print_function
+
 # Import CoreRobotics and Numpy
 from CoreRobotics import *
 import numpy as np
 
-print "**********************"
-print "Running the CRTestFrameOffset"
+print("**********************")
+print("Running the CRTestFrameOffset")
 
 # Create a new robot
 MyRobot = CRManipulator()
@@ -81,9 +84,9 @@ MyRobot.addLink(Link1)
 # Now get the configuration values
 dof = MyRobot.getDegreesOfFreedom()
 jointAngles = MyRobot.getConfiguration()
-print "MyRobot has", dof, "DOF, with joint angles =", jointAngles.T, "rad"
+print("MyRobot has", dof, "DOF, with joint angles =", jointAngles.T, "rad")
 
 # Now get the Forward Kinematics
 FwdKin = MyRobot.getForwardKinematics()
-print "Forward Kinematics ="
-print FwdKin
+print("Forward Kinematics =")
+print(FwdKin)
