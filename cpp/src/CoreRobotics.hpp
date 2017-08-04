@@ -327,7 +327,6 @@ Todo
 //! \details Todo
 //---------------------------------------------------------------------------
 #include "CRInverseKinematics.hpp"
-#include "CRNullSpace.hpp"
 
 
 #endif
