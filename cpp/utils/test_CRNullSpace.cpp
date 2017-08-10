@@ -152,7 +152,7 @@ void test_CRNullSpace(void) {
 
 	// Find a nullspace movement
 	Eigen::VectorXd jointVel(6);
-	jointVel << 1, 0, 0, 1, 0, 0;
+	jointVel << 0.005, 0, 0, 0, 0, 0;
 	Eigen::VectorXd qNull = nullSpaceSolver.solve(jointVel, InitJoints);
 	std::cout << "NullSpace joint velocities\n" << qNull << std::endl;
 
