@@ -42,6 +42,7 @@
 
 #include "CRNullSpace.hpp"
 #include "CRMath.hpp"
+#include "CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -70,6 +71,9 @@ CRNullSpace::CRNullSpace(CRManipulator* i_robot,
 	this->setToolIndex(i_toolIndex);
 	this->setEulerMode(i_eulerMode);
 	this->setSingularThresh(1.0e-1);
+	this->setMinStepSize(0.005);
+	this->setMaxIter(100);
+	this->setTrivialTolerance(0.0002);
 }
 
 
@@ -87,15 +91,37 @@ CRNullSpace::CRNullSpace(CRManipulator* i_robot,
                                 robot jacobian
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRNullSpace::solve(Eigen::VectorXd i_velocities,
-                                   Eigen::VectorXd i_q0)
+CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
+                            Eigen::VectorXd i_q0,
+                            Eigen::VectorXd &o_nullSpaceJointMotion)
 {
-	this->m_robot->setConfiguration(i_q0);
+	double maxVal = i_jointMotion.maxCoeff();
+	int iter;
+	if(maxVal / this->m_stepSize < this->m_maxIter)	{iter = (int) maxVal / this->m_maxIter;}
+	else {iter = m_maxIter;}
+	Eigen::VectorXd step = i_jointMotion / iter;
+
+	Eigen::VectorXd q = i_q0;
 	Eigen::MatrixXd J, Jinv;
-	J = this->m_robot->jacobian(this->m_toolIndex,
-                                this->m_eulerMode);
-	CRMath::svdInverse(J, this->m_svdTol, Jinv);
-	return (Eigen::MatrixXd::Identity(this->m_robot->getDegreesOfFreedom(), this->m_robot->getDegreesOfFreedom()) - (Jinv * J)) * i_velocities;
+	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot->getDegreesOfFreedom(),
+                                                  this->m_robot->getDegreesOfFreedom());
+	CRResult result = CR_RESULT_SUCCESS;
+	for(int i = 0; i < iter; i++)
+	{
+		this->m_robot->setConfiguration(q);
+		J = this->m_robot->jacobian(this->m_toolIndex,
+                                    this->m_eulerMode);
+		result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+		q += (I - Jinv * J) * step;
+		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < m_trivTol)
+		{
+			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot->getDegreesOfFreedom());
+			return result;
+		}
+	}
+	this->m_robot->setConfiguration(i_q0);
+	o_nullSpaceJointMotion = q - i_q0;	
+	return result;
 }
 
 //=====================================================================
@@ -116,17 +142,39 @@ Eigen::VectorXd CRNullSpace::solve(Eigen::VectorXd i_velocities,
                                 robot jacobian
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRNullSpace::solve(Eigen::VectorXd i_velocities,
-                                   Eigen::Matrix<bool, 6, 1> i_poseElements,
-                                   Eigen::VectorXd i_q0)
+CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
+                            Eigen::VectorXd i_q0,
+                            Eigen::Matrix<bool, 6, 1> i_poseElements,
+                            Eigen::VectorXd &o_nullSpaceJointMotion)
 {
-	this->m_robot->setConfiguration(i_q0);
+	double maxVal = i_jointMotion.maxCoeff();
+	int iter;
+	if(maxVal / this->m_stepSize < this->m_maxIter)	{iter = (int) maxVal / this->m_maxIter;}
+	else {iter = m_maxIter;}
+	Eigen::VectorXd step = i_jointMotion / iter;
+
+	Eigen::VectorXd q = i_q0;
 	Eigen::MatrixXd J, Jinv;
-	J = this->m_robot->jacobian(this->m_toolIndex,
-                                this->m_eulerMode,
-								i_poseElements);
-	CRMath::svdInverse(J, this->m_svdTol, Jinv);
-	return (Eigen::MatrixXd::Identity(this->m_robot->getDegreesOfFreedom(), this->m_robot->getDegreesOfFreedom()) - (Jinv * J)) * i_velocities;
+	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot->getDegreesOfFreedom(),
+                                                  this->m_robot->getDegreesOfFreedom());
+	CRResult result = CR_RESULT_SUCCESS;
+	for(int i = 0; i < iter; i++)
+	{
+		this->m_robot->setConfiguration(q);
+		J = this->m_robot->jacobian(this->m_toolIndex,
+                                    this->m_eulerMode,
+                                    i_poseElements);
+		result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+		q += (I - Jinv * J) * step;
+		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < m_trivTol)
+		{
+			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot->getDegreesOfFreedom());
+			return result;
+		}
+	}
+	this->m_robot->setConfiguration(i_q0);
+	o_nullSpaceJointMotion = q - i_q0;	
+	return result;
 }
 
 //=====================================================================
@@ -147,12 +195,13 @@ Eigen::VectorXd CRNullSpace::solve(Eigen::VectorXd i_velocities,
                                 robot jacobian
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRNullSpace::solve(Eigen::VectorXd i_velocities,
-                                   Eigen::Matrix<int, 6, 1> i_poseElementsInt,
-                                   Eigen::VectorXd i_q0)
+CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
+                            Eigen::VectorXd i_q0,
+                            Eigen::Matrix<int, 6, 1> i_poseElementsInt,
+                            Eigen::VectorXd &o_nullSpaceJointMotion)
 {
 	Eigen::Matrix<bool, 6, 1> i_poseElements = i_poseElementsInt.cast<bool>();
-	return CRNullSpace::solve(i_velocities, i_poseElements, i_q0);
+	return CRNullSpace::solve(i_jointMotion, i_q0, i_poseElements, o_nullSpaceJointMotion);
 }
 
 //=====================================================================

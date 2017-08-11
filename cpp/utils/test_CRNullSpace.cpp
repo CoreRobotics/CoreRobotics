@@ -138,7 +138,7 @@ void test_CRNullSpace(void) {
 	int toolIndex = MyRobot->addTool(linkIndex6, Tool);
 
 	// Initialize the solver
-	CRNullSpace nullSpaceSolver = CRNullSpace(MyRobot, 0, CR_EULER_MODE_XYZ);
+	CRNullSpace nullSpaceSolver = CRNullSpace(MyRobot, toolIndex, CR_EULER_MODE_XYZ);
 
 	// Set the robot orientation
 	Eigen::VectorXd InitJoints(6);
@@ -148,29 +148,32 @@ void test_CRNullSpace(void) {
 	// Compute the initial tool pose
 	Eigen::VectorXd toolPose;
 	toolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
-	std::cout << "Initial Tool Pose\n" << toolPose << std::endl;
+	std::cout << "Initial Tool Pose\n" << toolPose.transpose() << std::endl;
 
 	// Find a nullspace movement
-	Eigen::VectorXd jointVel(6);
-	jointVel << 0.005, 0, 0, 0, 0, 0;
-	Eigen::VectorXd qNull = nullSpaceSolver.solve(jointVel, InitJoints);
-	std::cout << "NullSpace joint velocities\n" << qNull << std::endl;
+	Eigen::VectorXd jointMotion(6);
+	jointMotion << 1, 0, 0, 0, 0, 0;
+	Eigen::VectorXd nullJointMotion(6);
+	CRResult result = nullSpaceSolver.solve(jointMotion, InitJoints, nullJointMotion);
+	if(result != CR_RESULT_SUCCESS) {std::cout << "Singular Jacobian" << std::endl;}
+	std::cout << "NullSpace joint movements\n" << nullJointMotion.transpose() << std::endl;
 
 	// Compute the final tool pose
-	MyRobot->setConfiguration(InitJoints + qNull);
+	MyRobot->setConfiguration(InitJoints + nullJointMotion);
 	toolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
-	std::cout << "Final Tool Pose\n" << toolPose << std::endl;
+	std::cout << "Final Tool Pose\n" << toolPose.transpose() << std::endl;
 
 	// Set pose elements
 	Eigen::Matrix<bool, 6, 1> poseElements;
 	poseElements << 1, 1, 1, 1, 1, 0;
 
 	// Find a nullspace movement with pose elements
-	qNull = nullSpaceSolver.solve(jointVel, poseElements, InitJoints);
-	std::cout << "Reduced NullSpace joint velocities\n" << qNull << std::endl;
+	result = nullSpaceSolver.solve(jointMotion, InitJoints, poseElements, nullJointMotion);
+	if(result != CR_RESULT_SUCCESS) {std::cout << "Singular Jacobian" << std::endl;}
+	std::cout << "Reduced NullSpace joint movements\n" << nullJointMotion.transpose() << std::endl;
 
 	// Compute the final tool pose
-	MyRobot->setConfiguration(InitJoints + qNull);
+	MyRobot->setConfiguration(InitJoints + nullJointMotion);
 	toolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
-	std::cout << "Final Tool Pose\n" << toolPose << std::endl;
+	std::cout << "Final Tool Pose\n" << toolPose.transpose() << std::endl;
 }

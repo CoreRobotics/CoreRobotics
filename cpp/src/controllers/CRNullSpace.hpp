@@ -142,21 +142,42 @@ public:
 	//! Get the minimum threshold for a non-singular matrix
 	double getSingularThresh(void) {return this->m_svdTol;}
 
+	//! Set the minimum step size
+	void setMinStepSize(double i_stepSize) {this->m_stepSize = i_stepSize;}
+
+	//! Get the minimum step size
+	double getMinStepSize(void) {return this->m_stepSize;}
+
+	//! Set the maximum number of iterations
+	void setMaxIter(double i_maxIter) {this->m_maxIter = i_maxIter;}
+
+	//! Get the maximum number of iterations
+	double getMaxIter(void) {return this->m_maxIter;}
+
+	//! Set the tolerance for checking if the nullspace is trivial
+	void setTrivialTolerance(double i_trivialTolerance) {this->m_trivTol = i_trivialTolerance;}
+
+	//! Get the tolerance for checking if the nullspace is trivial
+	double getTrivialTolerance(void) {return this->m_trivTol;}
+
 //---------------------------------------------------------------------
 // Public Methods
 public:
 
 	//! Solve for the joint velocities that yield no tool motion, or tool motion only in the degrees of freedom specified in i_poseElements
-	Eigen::VectorXd solve(Eigen::VectorXd i_velocities,
-                          Eigen::VectorXd i_q0);
+	CRResult solve(Eigen::VectorXd i_jointMotion,
+                   Eigen::VectorXd i_q0,
+                   Eigen::VectorXd &o_nullSpaceJointMotion);
 
-	Eigen::VectorXd solve(Eigen::VectorXd i_velocities,
-                          Eigen::Matrix<bool, 6, 1> i_poseElements,
-                          Eigen::VectorXd i_q0);
+	CRResult solve(Eigen::VectorXd i_jointMotion,
+                   Eigen::VectorXd i_q0,
+                   Eigen::Matrix<bool, 6, 1> i_poseElements,
+                   Eigen::VectorXd &o_nullSpaceJointMotion);
 
-	Eigen::VectorXd solve(Eigen::VectorXd i_velocities,
-                          Eigen::Matrix<int, 6, 1> i_poseElementsInt,
-                          Eigen::VectorXd i_q0);
+	CRResult solve(Eigen::VectorXd i_jointMotion,
+                   Eigen::VectorXd i_q0,
+                   Eigen::Matrix<int, 6, 1> i_poseElementsInt,
+                   Eigen::VectorXd &o_nullSpaceJointMotion);
 
 //---------------------------------------------------------------------
 // Protected Members
@@ -173,6 +194,15 @@ protected:
 
 	//! Tolerance for computing if a matrix is singular using SVD svals
 	double m_svdTol;
+
+	//! The minimum step size to use when computing the nullspace
+	double m_stepSize;
+
+	//! The maximum number of iterations to compute when finding the null space
+	double m_maxIter;
+
+	//! The tolerance used for checking if the nullspace is trivial
+	double m_trivTol;
 
 };
 
