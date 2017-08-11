@@ -53,3 +53,4 @@ import test_CRManipulator
 
 # Test controllers
 import test_CRInverseKinematics
+import test_CRNullSpace
