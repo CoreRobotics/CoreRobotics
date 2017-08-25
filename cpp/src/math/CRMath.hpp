@@ -188,7 +188,21 @@ public:
 		return x.array().abs().maxCoeff();
 	};
 
-    
+	//! Wrap angle (rad) to +/- pi
+	static Eigen::VectorXd wrapToPi(Eigen::VectorXd angle) {
+		for (int i = 0; i < angle.size(); i++) {
+			angle(i) = wrapToPi(angle(i));
+		}
+	}
+
+	//! Wrap angle (rad) to +/- pi
+	static double wrapToPi(double angle) {
+		angle = fmod(angle + CR_PI, 2 * CR_PI);
+		if (angle < 0) {
+			angle += 2 * CR_PI;
+		}
+		return angle - CR_PI;
+	}
     
 };
 
