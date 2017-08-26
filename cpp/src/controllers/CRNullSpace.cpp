@@ -85,10 +85,12 @@ CRNullSpace::CRNullSpace(CRManipulator* i_robot,
  condition for the joint angles is specified via i_q0. The method returns
  a vector of joint velocities in the nullspace of the jacobian.\n
  
- \param[in]     i_velcities     the desired joint velocities
- \param[in]     i_q0            the intial configuration of the robot
- \return                        the joint velcities in the nullspace of
-                                robot jacobian
+ \param[in]     i_jointMotion            the desired joint motion
+ \param[in]     i_q0                     the intial configuration of the robot
+ \param[out]    o_nullSpaceJointMotion   the porition of the desired joint motion
+                                         in the nullspace
+ \return                                 a CRResult flag indicating if a nullspace
+                                         motion was sucessfully found
  */
 //---------------------------------------------------------------------
 CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
@@ -133,13 +135,15 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
  angles is specified via i_q0. The method returns a vector of joint velocities
  in the nullspace of the jacobian.\n
  
- \param[in]     i_velcities     the desired joint velocities
- \param[in]     i_poseElements  a boolean vector indiciating which
-                                elements of the pose vector are specified
-							    in i_setPoint (see CRFrame::getPose)
- \param[in]     i_q0            the intial configuration of the robot
- \return                        the joint velcities in the nullspace of
-                                robot jacobian
+ \param[in]     i_jointMotion            the desired joint motion
+ \param[in]     i_q0                     the intial configuration of the robot
+ \param[in]     i_poseElements           a boolean vector indiciating which
+                                         elements of the pose vector are specified
+							             in i_setPoint (see CRFrame::getPose)
+ \param[out]    o_nullSpaceJointMotion   the porition of the desired joint motion
+                                         in the nullspace
+ \return                                 a CRResult flag indicating if a nullspace
+                                         motion was sucessfully found
  */
 //---------------------------------------------------------------------
 CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
@@ -166,7 +170,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
                                     i_poseElements);
 		result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
-		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < m_trivTol)
+		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
 		{
 			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot->getDegreesOfFreedom());
 			return result;
@@ -185,14 +189,16 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
  are specified via i_velocities, and an initial condition for the joint
  angles is specified via i_q0. The method returns a vector of joint velocities
  in the nullspace of the jacobian.\n
- 
- \param[in]     i_velcities     the desired joint velocities
- \param[in]     i_poseElements  a integer vector indiciating which
-                                elements of the pose vector are specified
-							    in i_setPoint (see CRManipulator::jacobian)
- \param[in]     i_q0            the intial configuration of the robot
- \return                        the joint velcities in the nullspace of
-                                robot jacobian
+
+ \param[in]     i_jointMotion            the desired joint motion
+ \param[in]     i_q0                     the intial configuration of the robot
+ \param[in]     i_poseElementsInt        a integer vector indiciating which
+                                         elements of the pose vector are specified
+							             in i_setPoint (see CRFrame::getPose)
+ \param[out]    o_nullSpaceJointMotion   the porition of the desired joint motion
+                                         in the nullspace
+ \return                                 a CRResult flag indicating if a nullspace
+                                         motion was sucessfully found
  */
 //---------------------------------------------------------------------
 CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
