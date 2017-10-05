@@ -85,6 +85,8 @@ namespace CoreRobotics {
  values (i.e. joint angles for purely revolute joints).
  - CRManipulator::getToolFrame returns the specified tool frame for the
  current manipulator configuration.
+ - CRManipulator::getLinkFrame returns the specified link frame for the
+ current manipulator configuration.
  - CRManipulator::setConfiguration sets the configuration of the 
  manipulator.
  
@@ -111,6 +113,7 @@ namespace CoreRobotics {
 //=====================================================================
 //! Enumerator for specifying how the manipulator is driven
 enum CRManipulatorType {
+	// TODO: add several modes of control for the driving values
     CR_MANIPULATOR_MODE_POSITION,
     // CR_MANIPULATOR_MODE_VELOCITY,
     // CR_MANIPULATOR_MODE_TORQUE,
@@ -148,6 +151,9 @@ public:
 
 	//! Get tool frame for the current manipulator configuration
 	void getToolFrame(unsigned i_toolIndex, CRFrame& o_tool);
+
+	//! Get a link frame for the current manipulator configuration
+	void getLinkFrame(unsigned i_linkIndex, CRFrame& o_link);
     
     //! Get the pose for the specified tool index
     Eigen::Matrix<double, 6, 1> getToolPose(unsigned i_toolIndex,
