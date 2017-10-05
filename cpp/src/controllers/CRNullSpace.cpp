@@ -97,7 +97,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
                             Eigen::VectorXd i_q0,
                             Eigen::VectorXd &o_nullSpaceJointMotion)
 {
-	double maxVal = i_jointMotion.maxCoeff();
+	double maxVal = i_jointMotion.lpNorm<Eigen::Infinity>();
 	int iter;
 	if(maxVal / this->m_stepSize < this->m_maxIter)	{iter = (int) maxVal / this->m_maxIter;}
 	else {iter = m_maxIter;}
@@ -151,7 +151,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
                             Eigen::Matrix<bool, 6, 1> i_poseElements,
                             Eigen::VectorXd &o_nullSpaceJointMotion)
 {
-	double maxVal = i_jointMotion.maxCoeff();
+	double maxVal = i_jointMotion.lpNorm<Eigen::Infinity>();
 	int iter;
 	if(maxVal / this->m_stepSize < this->m_maxIter)	{iter = (int) maxVal / this->m_maxIter;}
 	else {iter = m_maxIter;}
