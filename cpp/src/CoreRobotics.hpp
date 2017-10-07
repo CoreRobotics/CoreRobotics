@@ -323,10 +323,11 @@ Todo
 
 //---------------------------------------------------------------------------
 //! \defgroup controllers Controllers
-//! \brief Implements controllers for regulating model motion.
+//! \brief Implements controllers and policies for regulating model motion.
 //! \details Todo
 //---------------------------------------------------------------------------
 #include "CRInverseKinematics.hpp"
+#include "CRTrajectoryGenerator.hpp"
 
 
 #endif
