@@ -57,6 +57,9 @@ void test_CRTrajectoryGenerator(void) {
     // Define a trajectory generator
     CRTrajectoryGenerator trajGen;
     
+    // intialize a structure for reading the outhput of trajGen
+    CRWaypoint wp;
+    
     
     // ------------------------------------------
     // Initialize a clock to time the solver
@@ -83,25 +86,20 @@ void test_CRTrajectoryGenerator(void) {
     // Compute the trajectory
     trajGen.solve(x0, v0, a0, xf, vf, af, tf);
     timer.startTimer();
+
     // ------------------------------------------
-    // Solve for several times
-    Eigen::VectorXd x;
-    Eigen::VectorXd v;
-    Eigen::VectorXd a;
-    Eigen::VectorXd j;
-    
     // loop
     printf("t (s) | Position | Velocity | Acceleration\n");
     double t = 0;
     while(t <= 1.2) {
         
-        trajGen.step(t, x, v, a, j);
+        wp = trajGen.step(t);
         
         // output the time and state
         printf("%.1f | %+.3f, %+.3f | %+.3f, %+.3f | %+.3f, %+.3f \n", t,
-              x(0), x(1), v(0), v(1), a(0), a(1));
-        
-        // timer.sleep(0.1);
+              wp.position(0), wp.position(1),
+              wp.velocity(0), wp.velocity(1),
+              wp.acceleration(0), wp.acceleration(1));
         
         t += 0.1;
     }
