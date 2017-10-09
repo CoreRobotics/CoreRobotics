@@ -122,23 +122,20 @@ CRResult CRTrajectoryGenerator::solve(Eigen::VectorXd i_x0,
  This method computes the values of the trajectory at time i_t (s).\n
  
  \param[in]     i_t - the time at which to evaluate.
- \param[out]    o_x - the output at time t
- \param[out]    o_v - the 1st derivatrive at time t
- \param[out]    o_a - the 2nd derivatrive at time t
- \param[out]    o_j - the 3rd derivatrive at time t
+ \return        CRWaypoint trajectory structure.
  */
 //---------------------------------------------------------------------
-void CRTrajectoryGenerator::step(double i_t,
-                                 Eigen::VectorXd& o_x,
-                                 Eigen::VectorXd& o_v,
-                                 Eigen::VectorXd& o_a,
-                                 Eigen::VectorXd& o_j)
+CRWaypoint CRTrajectoryGenerator::step(double i_t)
 {
     // Limit the defined time
     double t = i_t;
     if (t >= this->m_tf) {
         t = this->m_tf;
     }
+    
+    // Define a waypoint
+    CRWaypoint wp;
+    wp.time = t;
     
     //! Velocity Coefficients
     Eigen::Matrix<double, 1, 5> vCoeff;
@@ -158,10 +155,10 @@ void CRTrajectoryGenerator::step(double i_t,
     
     // Initialize the output values to zero
     int n = this->m_X.cols();
-    o_x.setZero(n,1);
-    o_v.setZero(n,1);
-    o_a.setZero(n,1);
-    o_j.setZero(n,1);
+    wp.position.setZero(n,1);
+    wp.velocity.setZero(n,1);
+    wp.acceleration.setZero(n,1);
+    wp.jerk.setZero(n,1);
     
     // Now compute the output for each element
     for (int i=0; i<n; i++){
@@ -172,11 +169,14 @@ void CRTrajectoryGenerator::step(double i_t,
         
         // std::cout << "t = " << t << "\n\n" << "X = " << X << "\n\n" << "T = " << T << "\n\n";
         
-        o_x(i) = X * T; // pos
-        o_v(i) = vCoeff.cwiseProduct(X.tail(5)) * T.head(5); // vel
-        o_a(i) = aCoeff.cwiseProduct(X.tail(4)) * T.head(4); // accel
-        o_j(i) = jCoeff.cwiseProduct(X.tail(3)) * T.head(3); // jerk
+        wp.position(i) = X * T; // pos
+        wp.velocity(i) = vCoeff.cwiseProduct(X.tail(5)) * T.head(5); // vel
+        wp.acceleration(i) = aCoeff.cwiseProduct(X.tail(4)) * T.head(4); // accel
+        wp.jerk(i) = jCoeff.cwiseProduct(X.tail(3)) * T.head(3); // jerk
     }
+    
+    // return the struct
+    return wp;
 }
     
     
@@ -186,22 +186,19 @@ void CRTrajectoryGenerator::step(double i_t,
  since the internal clock was started on the CRTrajectoryGenerator::solve
  call.\n
  
- \param[out]    o_x - the output at time t
- \param[out]    o_v - the 1st derivatrive at time t
- \param[out]    o_a - the 2nd derivatrive at time t
- \param[out]    o_j - the 3rd derivatrive at time t
+\return        CRWaypoint trajectory structure.
  */
 //---------------------------------------------------------------------
-void CRTrajectoryGenerator::step(Eigen::VectorXd& o_x,
-                                 Eigen::VectorXd& o_v,
-                                 Eigen::VectorXd& o_a,
-                                 Eigen::VectorXd& o_j)
+CRWaypoint CRTrajectoryGenerator::step(void)
 {
     // Get the elapsed time since the solver was called
     double t = this->m_timer.getElapsedTime();
     
     // Compute the trajectory at the internal clock time
-    CRTrajectoryGenerator::step(t, o_x, o_v, o_a, o_j);
+    CRWaypoint wp = CRTrajectoryGenerator::step(t);
+    
+    // return the struct
+    return wp;
 }
 
 

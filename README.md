@@ -13,8 +13,8 @@ This git project hosts code for the CoreRobotics open source robotic control lib
 
 ## General Structure:
 - *doc/* contains the doxygen Doxyfile for generating html documentation.  Please install [doxygen](http://www.stack.nl/~dimitri/doxygen/) and run the doxyfile to generate.  The main documentation page will be *doc/html/index.html*
-- *examples/* contains source code for application examples.
 - *external/* contains source for external libraries that are needed.  For example, *cpp/external/* should include the Eigen library for matrix math.
+- *python/* contains code for the python wrapper.
 - *src/* contains the library source and headers.  "CoreRobotics.hpp" is the main header for the project.  Classes and functions are organized into sub folders.
 - *utils/* contains code for testing library functionality.  Tests for each class are broken out into test_<classname> and should test functionality of each method.  The binary gets written to *utils/bin/*
 

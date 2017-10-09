@@ -46,7 +46,6 @@
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include "CRManipulator.hpp"
 #include "CRTypes.hpp"
 #include "CRClock.hpp"
 
@@ -93,6 +92,16 @@ namespace CoreRobotics {
  
  */
 //=====================================================================
+//! Structure defining a waypoint (i.e. the output)
+struct CRWaypoint {
+    double time;
+    Eigen::VectorXd position;
+    Eigen::VectorXd velocity;
+    Eigen::VectorXd acceleration;
+    Eigen::VectorXd jerk;
+};
+
+//=====================================================================
 class CRTrajectoryGenerator {
     
 //---------------------------------------------------------------------
@@ -117,17 +126,10 @@ public:
                    double i_tf);
     
     //! Get the trajectory at time t
-    void step(double i_t,
-              Eigen::VectorXd &o_x,
-              Eigen::VectorXd &o_v,
-              Eigen::VectorXd &o_a,
-              Eigen::VectorXd &o_j);
+    CRWaypoint step(double i_t);
     
     //! Step the next trajectory reference
-    void step(Eigen::VectorXd &o_x,
-              Eigen::VectorXd &o_v,
-              Eigen::VectorXd &o_a,
-              Eigen::VectorXd &o_j);
+    CRWaypoint step(void);
     
 //---------------------------------------------------------------------
 // Protected Members
