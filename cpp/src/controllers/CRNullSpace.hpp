@@ -49,6 +49,10 @@
 #include "CRTypes.hpp"
 
 //=====================================================================
+// CoreRobotics namespace
+namespace CoreRobotics {
+
+//=====================================================================
 /*!
  \file CRNullSpace.hpp
  \brief Implements a class to solve manipulator nullspace movements.
@@ -106,12 +110,10 @@
  
  */
 //=====================================================================
-namespace CoreRobotics {
+class CRNullSpace {
 
 //---------------------------------------------------------------------
 // Constructor and Destructor
-class CRNullSpace {
-
 public:
 
 	//! Class constructor
