@@ -74,7 +74,7 @@ void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
 
 // Test controller modules
 void test_CRInverseKinematics(void);    // test IK
-void test_CRNullSpace(void);			// test Null Space
+void test_CRTrajectoryGenerator(void);  // test TG
 
 
 #endif /* CRTestModules_hpp */

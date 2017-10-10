@@ -40,7 +40,10 @@
 #
 #=====================================================================
 
-print "Running the CoreRobotics Python test suite."
+# Import the future print function for Python 2/3 compatability
+from __future__ import print_function
+
+print("Running the CoreRobotics Python test suite.")
 
 # Run the core test
 import test_CRCore

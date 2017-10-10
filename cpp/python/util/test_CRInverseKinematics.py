@@ -40,13 +40,16 @@
 #
 #=====================================================================
 
+# Import the future print function for Python 2/3 compatability
+from __future__ import print_function
+
 # Import CoreRobotics Numpy and time
 from CoreRobotics import *
 import numpy as np
 import time
 
-print "*************************************"
-print "Demonstration of CRInverseKinematics."
+print("*************************************")
+print("Demonstration of CRInverseKinematics.")
 
 # Set the Euler convention we will use throughout the example
 # Although CoreRobotics offers the flexibility to choose a
@@ -90,8 +93,8 @@ ikSolver = CRInverseKinematics(MyRobot, toolIndex, convention)
 # **********************
 # CASE 1 : Solver should find a solution within default tolerance (1 mm),
 # step size (1), and gain (0.1)
-print "---------------------------------------------"
-print "CASE 1: Use the default solver parameters."
+print("---------------------------------------------")
+print("CASE 1: Use the default solver parameters.")
 
 # Set the initial configuration of the robot
 q0 = np.array([0.1, -0.2, 0])
@@ -109,23 +112,23 @@ result = ikSolver.solve(p, q0, qSolved)
 et = time.time() - timer
 
 if result == CR_RESULT_SUCCESS:
-	print "Non-singular solution found in", et, "s!"
-	print qSolved
+	print("Non-singular solution found in", et, "s!")
+	print(qSolved)
 
 	# Now push the new joints through the robot to see if it worked
 	MyRobot.setConfiguration(qSolved)
 	fk = MyRobot.getForwardKinematics()
 
-	print "The forward kinematics for this solution are:"
-	print fk
+	print("The forward kinematics for this solution are:")
+	print(fk)
 else:
-	print "The solution is singular."
-	print qSolved
+	print("The solution is singular.")
+	print(qSolved)
 
 # **********************
 # CASE 2:
-print "---------------------------------------------"
-print "CASE 2: Change the default maximum iteration."
+print("---------------------------------------------")
+print("CASE 2: Change the default maximum iteration.")
 
 # Change the maximum iterations
 ikSolver.setMaxIter(100)
@@ -139,23 +142,23 @@ result = ikSolver.solve(p, q0, qSolved)
 et = time.time() - timer
 
 if result == CR_RESULT_SUCCESS:
-	print "Non-singular solution found in", et, "s!"
-	print qSolved
+	print("Non-singular solution found in", et, "s!")
+	print(qSolved)
 
 	# Now push the new joints through the robot to see if it worked
 	MyRobot.setConfiguration(qSolved)
 	fk = MyRobot.getForwardKinematics()
 
-	print "The forward kinematics for this solution are:"
-	print fk
+	print("The forward kinematics for this solution are:")
+	print(fk)
 else:
-	print "The solution is singular."
-	print qSolved
+	print("The solution is singular.")
+	print(qSolved)
 
 # **********************
 # CASE 3: Change the tolerance and gain
-print "---------------------------------------------"
-print "CASE 3: Change the parameters."
+print("---------------------------------------------")
+print("CASE 3: Change the parameters.")
 
 # Change the solver parameters
 ikSolver.setMaxIter(100)
@@ -171,23 +174,23 @@ result = ikSolver.solve(p, q0, qSolved)
 et = time.time() - timer
 
 if result == CR_RESULT_SUCCESS:
-	print "Non-singular solution found in", et, "s!"
-	print qSolved
+	print("Non-singular solution found in", et, "s!")
+	print(qSolved)
 
 	# Now push the new joints through the robot to see if it worked
 	MyRobot.setConfiguration(qSolved)
 	fk = MyRobot.getForwardKinematics()
 
-	print "The forward kinematics for this solution are:"
-	print fk
+	print("The forward kinematics for this solution are:")
+	print(fk)
 else:
-	print "The solution is singular."
-	print qSolved
+	print("The solution is singular.")
+	print(qSolved)
 
 # **********************
 # CASE 4: Assign a set point that is not reachable (singularity test)
-print "---------------------------------------------"
-print "CASE 4: Test a singular solution."
+print("---------------------------------------------")
+print("CASE 4: Test a singular solution.")
 
 # Assign a set point outside the robot reach
 p = np.array([5, 0, 0, 0, 0, 0], dtype = np.float)
@@ -201,23 +204,23 @@ result = ikSolver.solve(p, q0, qSolved)
 et = time.time() - timer
 
 if result == CR_RESULT_SUCCESS:
-	print "Non-singular solution found in", et, "s!"
-	print qSolved
+	print("Non-singular solution found in", et, "s!")
+	print(qSolved)
 
 	# Now push the new joints through the robot to see if it worked
 	MyRobot.setConfiguration(qSolved)
 	fk = MyRobot.getForwardKinematics()
 
-	print "The forward kinematics for this solution are:"
-	print fk
+	print("The forward kinematics for this solution are:")
+	print(fk)
 else:
-	print "The solution is singular."
-	print qSolved
+	print("The solution is singular.")
+	print(qSolved)
 
 # **********************
 # CASE 5: Reduced pose vector
-print "---------------------------------------------"
-print "CASE 5: Reduced pose vector."
+print("---------------------------------------------")
+print("CASE 5: Reduced pose vector.")
 
 # Assign a reduced set point
 elems = np.array([1, 1, 0, 0, 0, 1], dtype = np.intc)
@@ -237,23 +240,23 @@ result = ikSolver.solve(pRed, elems, q0, qSolved)
 et = time.time() - timer
 
 if result == CR_RESULT_SUCCESS:
-	print "Non-singular solution found in", et, "s!"
-	print qSolved
+	print("Non-singular solution found in", et, "s!")
+	print(qSolved)
 
 	# Now push the new joint through the robot to see if it worked
 	MyRobot.setConfiguration(qSolved)
 	fk = MyRobot.getForwardKinematics()
 
-	print "The forward kinematics for this solution are:"
-	print fk
+	print("The forward kinematics for this solution are:")
+	print(fk)
 else:
-	print "The solution is singular."
-	print qSolved
+	print("The solution is singular.")
+	print(qSolved)
 
 # **********************
 # CASE 6: Single step convergance
-print "---------------------------------------------"
-print "CASE 6: Single step convergance."
+print("---------------------------------------------")
+print("CASE 6: Single step convergance.")
 
 # Assign a set point
 p = np.array([2.5, 0, 0, 0, 0, 0])
@@ -276,12 +279,12 @@ for i in range(100):
 	q = qSolved
 
 	if result == CR_RESULT_SUCCESS:
-		print "Solution found in", et, "s!"
+		print("Solution found in", et, "s!")
 
 		# Now push the new joints through the robot to see if it worked
 		MyRobot.setConfiguration(q)
 		fk = MyRobot.getForwardKinematics()
 	else:
-		print "The solution is singular."
+		print("The solution is singular.")
 
 # -------------------------------------------------------------

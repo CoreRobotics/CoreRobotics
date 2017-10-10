@@ -40,12 +40,15 @@
 #
 #=====================================================================
 
+# Import the future print function for Python 2/3 compatability
+from __future__ import print_function
+
 # Import CoreRobotics and Numpy
 from CoreRobotics import *
 import numpy as np
 
-print "*************************************"
-print "Demonstration of CRManipulator."
+print("*************************************")
+print("Demonstration of CRManipulator.")
 
 # Create a new robot
 MyRobot = CRManipulator()
@@ -91,43 +94,43 @@ toolIndex = MyRobot.addTool(2, Tool)
 # Get the configuration values
 dof = MyRobot.getDegreesOfFreedom()
 jointAngles = MyRobot.getConfiguration()
-print "MyRobot has", dof, "DOF , with joint angles =", jointAngles.T, "rad"
+print("MyRobot has", dof, "DOF , with joint angles =", jointAngles.T, "rad")
 
 # Now get the Forward Kinematics and Jacobian
 FwdKin = MyRobot.getForwardKinematics()
 Jacobian = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ)
-print "Forward Kinematics ="
-print FwdKin
-print "Jacobian ="
-print Jacobian
+print("Forward Kinematics =")
+print(FwdKin)
+print("Jacobian =")
+print(Jacobian)
 
 # Now set a new robot configuration and get the FK and jacobian
 jointAngles = np.array([CR_PI / 4, -CR_PI / 2])
-print "Set joint angles =", jointAngles.T, "rad"
+print("Set joint angles =", jointAngles.T, "rad")
 MyRobot.setConfiguration(jointAngles)
 FwdKin = MyRobot.getForwardKinematics()
 Jacobian = MyRobot.jacobian(0, CR_EULER_MODE_XYZ)
-print "Forward Kinematics ="
-print FwdKin
-print "Jacobian ="
-print Jacobian
+print("Forward Kinematics =")
+print(FwdKin)
+print("Jacobian =")
+print(Jacobian)
 
 # Now get the transformation to the tool for the current configuration
 toolFrame = CRFrame()
 MyRobot.getToolFrame(toolIndex, toolFrame)
 T = toolFrame.getTransformToParent()
-print "MyRobot tool has a transformation of"
-print T
+print("MyRobot tool has a transformation of")
+print(T)
 
 # Get the jacobian for only (x, y, g)
 elems = np.array([1, 1, 0, 0, 0, 1], dtype = np.intc)
 Jred = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ, elems)
-print "MyRobot Jacobian (reduced) is"
-print Jred
+print("MyRobot Jacobian (reduced) is")
+print(Jred)
 
 # Get the tool pose for only (x, y, g)
 pose = MyRobot.getToolPose(toolIndex, CR_EULER_MODE_XYZ, elems)
-print "MyRobot pose (reduced) is"
-print pose
+print("MyRobot pose (reduced) is")
+print(pose)
 
 # ------------------------------------------

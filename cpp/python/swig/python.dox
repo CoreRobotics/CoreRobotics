@@ -23,7 +23,7 @@ are:
 
 The Python wrappers can be built by running CMake with `-Dpython=true` to
 build the Python wrappers which are located at `python/lib`. To build both
-the C++ and Python libraries run `cmake ../ -Dall=true`.
+the C++ and Python libraries run `cmake ../ -Dall=true`. These commands use the latest version of Python available on your system. To compile with a specific version use `cmake ../ -Dpython=2` to compile with Python 2 etc. This option can also be used with the `all` flag to compile both the C++ library and the Python library with a specified version, for example `cmake ../ -Dall=true -Dpython=2`.
 
 Examples of how to use the Python wrapper can be found in the examples provided
 in the `python/examples` directory.

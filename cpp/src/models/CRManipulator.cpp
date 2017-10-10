@@ -346,10 +346,44 @@ void CRManipulator::getToolFrame(unsigned i_toolIndex, CRFrame& o_tool)
 
 		T0 = this->m_listLinks.at(i)->m_frame->getTransformToParent();
 		T = T0*T;
-		i = m_listParents.at(i);
+		i = this->m_listParents.at(i);
 	}
     
 	o_tool.setRotationAndTranslation(T.block(0, 0, 3, 3), T.block(0, 3, 3, 1));
+}
+
+
+
+//=====================================================================
+/*!
+This method returns a link frame for the current robot pose.  Note that
+a link must have been added to the manipulator using the
+CRManipulator::addLink method prior to calling this method.\n
+
+\param[in]      i_linkIndex     index of the link to query
+\param[out]     o_link          the link frame transformation referenced
+to the robot base frame for the current manipulator configuration
+*/
+//---------------------------------------------------------------------
+void CRManipulator::getLinkFrame(unsigned i_linkIndex, CRFrame& o_link)
+{
+	Eigen::Matrix4d T, T0;
+
+	// return the transformation
+	// T = this->m_listLinks.at(i_linkIndex)->m_frame->getTransformToParent();
+	T.setIdentity();
+
+	// now iterate back to the base frame
+	// int i = this->m_listParents.at(i_linkIndex);
+	int i = i_linkIndex;
+	while (i > -1) {
+
+		T0 = this->m_listLinks.at(i)->m_frame->getTransformToParent();
+		T = T0*T;
+		i = this->m_listParents.at(i);
+	}
+
+	o_link.setRotationAndTranslation(T.block(0, 0, 3, 3), T.block(0, 3, 3, 1));
 }
     
     

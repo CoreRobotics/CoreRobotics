@@ -40,6 +40,9 @@
 #
 #=====================================================================
 
+# Import the future print function for Python 2/3 compatability
+from __future__ import print_function
+
 # This script is an example of how to use the built in python libraries
 # to emulate the functionality of CRCore
 
@@ -47,21 +50,21 @@
 import time
 from threading import Thread
 
-print "**********************"
-print "Running the test_CRCore";
+print("**********************")
+print("Running the test_CRCore")
 
 MyClock = time.time()
 time.sleep(0.1)
 t = time.time() - MyClock
 
-print "t =", t
+print("t =", t)
 
 # Callback for the first thread
 def callback1():
 	dt = 0.1
 	for i in range(10):
 		c = time.time()
-		print "Thread 1: i = {}".format(i + 1)
+		print("Thread 1: i = {}".format(i + 1))
 		t = time.time() - c
 		time.sleep(dt - t)
 
@@ -70,7 +73,7 @@ def callback2():
 	dt = 0.25
 	for i in range(4):
 		c = time.time()
-		print "Thread 2: i = {}".format(i + 1)
+		print("Thread 2: i = {}".format(i + 1))
 		t = time.time() - c
 		time.sleep(dt - t)
 
