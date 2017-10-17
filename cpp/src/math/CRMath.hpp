@@ -193,6 +193,7 @@ public:
 		for (int i = 0; i < angle.size(); i++) {
 			angle(i) = wrapToPi(angle(i));
 		}
+		return angle;
 	}
 
 	//! Wrap angle (rad) to +/- pi
