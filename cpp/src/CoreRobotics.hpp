@@ -327,6 +327,8 @@ Todo
 //! \details Todo
 //---------------------------------------------------------------------------
 #include "CRInverseKinematics.hpp"
+#include "CRNullSpace.hpp"
+#include "CRHardLimits.hpp"
 #include "CRTrajectoryGenerator.hpp"
 
 

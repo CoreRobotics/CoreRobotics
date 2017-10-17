@@ -70,6 +70,7 @@
 //#include "CRMotionProbabilistic.hpp"
 #include "CRInverseKinematics.hpp"
 #include "CRNullSpace.hpp"
+#include "CRHardLimits.hpp"
 %}
 
 %include <typemaps.i>
@@ -112,3 +113,4 @@ import_array();
 //%include "CRMotionProbabilistic.hpp"
 %include "CRInverseKinematics.hpp"
 %include "CRNullSpace.hpp"
+%include "CRHardLimits.hpp"

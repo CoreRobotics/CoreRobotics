@@ -43,7 +43,6 @@
 #include "CRInverseKinematics.hpp"
 #include "CRMath.hpp"
 
-
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
@@ -232,6 +231,113 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
         J = this->m_robot->jacobian(this->m_toolIndex,
                                     this->m_eulerMode,
                                     i_poseElements);
+        
+		// Compute the SVD
+		result = CRMath::svd(J, this->m_svdTol, U, Sigma, V);
+        // result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+
+		// compute the Damped singular values (E)
+		// See http://www.andreasaristidou.com/publications/CUEDF-INFENG,%20TR-632.pdf (DLS)
+		Eigen::VectorXd e = Sigma.array() / (Sigma.array().square() + pow(this->m_dampingFactor, 2));
+		E = e.asDiagonal();
+
+		// compute the generalized inverse jacobian
+		Jinv = V * E * U.transpose();
+        
+        // Perform the iteration step
+        q += this->m_stepSize * Jinv * error;
+        
+        // Now compute the error for the new config
+        this->m_robot->setConfiguration(q);
+        pose = this->m_robot->getToolPose(this->m_toolIndex,
+                                          this->m_eulerMode,
+                                          i_poseElements);
+        error = i_setPoint-pose;
+        
+        // update the iterator
+        iter++;
+        
+    }
+    
+    // Put the robot back in its original configuration
+    this->m_robot->setConfiguration(i_q0);
+    
+    // output the solution
+    o_qSolved = q;
+
+    // return result
+    return result;
+}
+
+
+//=====================================================================
+/*!
+This method computes the joint angles that solve the specified set
+point.  An initial condition for the joint angles is specified via
+i_q0.  The method returns a flag indicating if the pseudoinverse is
+singular and no solution can be found.\n
+
+\param[in]     i_setPoint      the pose vector set point.
+\param[in]     i_poseElements  a boolean vector indiciating which
+                               elements of the pose vector are specified
+							   in i_setPoint (see CRFrame::getPose)
+\param[in]     i_q0            the intial configuration to use for
+							   the iterations.
+\param[in]     i_w             a matrix which will be multiplied by the
+                               robot jacobian for the purpose of hard limits
+\param[out]    o_qSolved       the new configuration
+\return                        a CRResult flag indicating if the
+operation encountered a singularity
+*/
+//---------------------------------------------------------------------
+CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
+                                    Eigen::Matrix<bool, 6, 1> i_poseElements,
+                                    Eigen::VectorXd i_q0,
+                                    Eigen::MatrixXd i_w,
+                                    Eigen::VectorXd &o_qSolved)
+{
+    
+    // indicator if solution is singular
+    CRResult result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
+    
+    // set up variables
+    Eigen::VectorXd error;          // error (setPoint - fk(q))
+    Eigen::VectorXd pose;           // the value of the FK at iteration i
+    Eigen::MatrixXd J, Jinv;        // robot Jacobian and inverse
+    Eigen::VectorXd q;              // the configuration
+    unsigned int iter = 0;
+
+	// SVD matrices
+	Eigen::MatrixXd U, V, E;
+	Eigen::VectorXd Sigma;
+    
+    // set the initial configuration
+    q = i_q0;
+    
+    // set the initial robot configuration
+    this->m_robot->setConfiguration(q);
+    
+    // return the pose of the robot for the initial configuration
+    pose = this->m_robot->getToolPose(this->m_toolIndex,
+                                      this->m_eulerMode,
+                                      i_poseElements);
+    
+    // compute the error by comparing the pose
+    error = i_setPoint-pose;
+    
+    
+    // optimization routine
+    while ((error.norm() >= this->m_tolerance) &&
+           (iter < this->m_maxIter) &&
+           (result != CR_RESULT_SINGULAR)) {
+        
+        // Get the Jacobian in J
+        J = this->m_robot->jacobian(this->m_toolIndex,
+                                    this->m_eulerMode,
+                                    i_poseElements);
+
+		// Multiply by W for hard limits
+		J = J * i_w;
         
 		// Compute the SVD
 		result = CRMath::svd(J, this->m_svdTol, U, Sigma, V);
