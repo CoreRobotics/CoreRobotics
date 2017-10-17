@@ -125,6 +125,8 @@ CRResult CRHardLimits::solve(Eigen::VectorXd &o_qSolved) {
 	Eigen::VectorXd q(this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
 	Eigen::VectorXd qNull(this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
 	Eigen::VectorXd qSolved(this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
+	Eigen::MatrixXd limits(this->m_IKSolver->getManipulator()->getDegreesOfFreedom(), 2);
+	Eigen::Index row_index, col_index;
 	bool limits_broken = true;
 	while (limits_broken) {
 		result = this->m_IKSolver->solve(this->m_setPoint,
@@ -140,18 +142,15 @@ CRResult CRHardLimits::solve(Eigen::VectorXd &o_qSolved) {
 		                                            qNull);
 			qSolved += qNull;
 		}
+		if (result == CR_RESULT_SINGULAR) {
+			o_qSolved = this->m_q0;
+			return result;
+		}
 		limits_broken = false;
-		for (int i = 0; i < this->m_IKSolver->getManipulator()->getDegreesOfFreedom(); i++) {
-			if (qSolved(i) > this->m_upperLimits(i)) {
-				W(i, i) = 0;
-				limits_broken = true;
-				break;
-			}
-			if (qSolved(i) < this->m_lowerLimits(i)) {
-				W(i, i) = 0;
-				limits_broken = true;
-				break;
-			}
+		limits << (qSolved - this->m_upperLimits), (this->m_lowerLimits - qSolved);
+		if (0 < limits.maxCoeff(&row_index, &col_index)) {
+			limits_broken = true;
+			W(row_index, row_index) = 0;
 		}
 	}
 	o_qSolved = qSolved;

@@ -72,53 +72,58 @@ namespace CoreRobotics {
  \details
  ## Description
 
- ### ToDo
+ CRHardLimits implaments a class which uses the existing inverse kinematics
+ and nullspace controllers and applies hard limits to these operations.
 
- CRNullSpace implements the orthogonal projection matrix to find a vector
- in the nullspace of the Jacobian given an arbetrary vector of joint space
- velocities.  The SVD based generalized inverse function in CRMath is used
- to find the sudoinverse of the Jacobian.
+ CRHardLimits finds a solution in joint space using,
 
- CRNullSpace find the orthogonal projection of the arbetrary joint space
- vector usingthe following equation,
+ \f$\dot{q} = (JW)^\dagger\dot{x}+(I-(JW)^\dagger J)\dot{q}_N\f$,
+
+ where \f$J\f$ is the robot jacobian, \f$W\f$ is a matrix starting off at
+ identity, \f$\dot{x}\f$ is the desired tool velocity, \f$\dot{q}_N\f$ is the
+ desired nullspace joint motion, and \f$\dot{q}\f$ is the resulting joint space
+ velocities.
  
- \f$ \dot{q}_{null} = (I - J^\dagger J) \dot{q}_0 \f$,
- 
- where \f$\dot{q}_0\f$ is the desired joint velocities, \f$J\f$ is the robot
- jacobian, and \f$\dot{q}_{null}\f$ is a set of joint velocities in the nullspace
- of the robot jacobian.
- 
- These methods are used to interface with the nullspace controller:
- - CRNullSpace::setRobot sets the manipulator nullspace to solve
- - CRNullSpace::setToolIndex set the tool index of the 
- associated manipulator (see CRManipulator::addTool) for which we are
- setting a desired nullspace command.  Note that a tool must be added in the manipulator
- prior to using the nullspace solver.
- - CRNullSpace::setEulerMode sets the Euler convention of the pose
- vector
- - CRNullSpace::solve solves the nullspace control problem described above for
- an initial configuration and a desired set of joint velocities.  The method is
- overloaded to allow for solving for a reduced pose vector (see CRFrame::getPose)
- 
- Optimization parameters can be set:
- - CRNullSpace::setSingularThresh sets the threshold for numerically
- determining if the Jacobian is singular by comparing singular values of
- the SVD to the threshold. (Default = 0.1)
+ The method works by starting with an identity matrix \f$W\f$ and removing entries
+ for the most saturated joint and rerunning the solvers until the result meets the
+ joint limits, or an inversion of a singular matrix is attempted where the initial
+ condition is returned as the result.
+
+ These methods are used to add solvers to the hard limits solver:
+ - CRHardLimits::setIKSolver set the ik solver to use
+ - CRHardLimits::setNullSpaceSolver set the nullspace solver to use
+
+ Pose Elements can be set using the functions:
+ - CRHardLimits::setPoseElements
+
+ Joint limits can be set using the functions:
+ - CRHardLimits::setJointLimits set the upper and lower joint limits for a single
+ joint, or set all limits by passing an upper and lower limit vector
+ - CRHardLimits::setJointUpperLimit set the upper limit on a given joint
+ - CRHardLimits::setJointLowerLimit set the lower limit on a given joint
+ - CRHardLimits::setJointUpperLimits set all upper limits with a vector
+ - CRHardLimits::setJointLowerLimits set all lower limits with a vector
+
+ To a limit the limit can be set to CRMaxJointRotation or CRMinJointRotation for
+ upper and lower limits respectively.
+
+ Solver inputs can be set using the function:
+ - CRHardLimits::setQ0 sets the robot initial condition
+ - CRHardLimits::setToolPose sets the desired tool pose for the ik solver
+ - CRHardLimits::setJointMotion sets the desired robot nullspace joint motion
+
+ Finally the solver can be run using
+ - CRHardLimits::solve
  
  
  ## Example
 
- ### ToDo
-
- This example demonstrates use of the CRNullSpace class.
- \include test_CRNullSpace.cpp
+ This example demonstrates use of the CRHardLimits class.
+ \include test_CRHardLimits.cpp
  
  ## References
 
- ### ToDo
-
- [3] B. Siciliano and O. Khatib, "Springer Handbook of Robotics",
- Springer, 2016.\n\n 
+ [1] F. Flacco, A. De Luca, and O. Khatib, "Control of Redundant Robots Under Hard Joint Constraints: Saturation in the Null Space", IEEE Transactions on Robotics, 2015.\n\n
  
  */
 //=====================================================================
