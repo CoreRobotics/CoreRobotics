@@ -104,7 +104,7 @@ namespace CoreRobotics {
  - CRHardLimits::setJointUpperLimits set all upper limits with a vector
  - CRHardLimits::setJointLowerLimits set all lower limits with a vector
 
- To a limit the limit can be set to CRMaxJointRotation or CRMinJointRotation for
+ To a remove a limit it can be set to CRMaxJointRotation or CRMinJointRotation for
  upper and lower limits respectively.
 
  Solver inputs can be set using the function:
