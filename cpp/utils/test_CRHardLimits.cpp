@@ -77,15 +77,11 @@ void test_CRHardLimits(void) {
 	CRFrameEuler* Tool = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_NONE);
 	int toolIndex = MyRobot->addTool(linkIndex, Tool);
 
-	// Initialize an ik solver
-	CRInverseKinematics* ikSolver = new CRInverseKinematics(MyRobot, toolIndex, convention);
-	ikSolver->setMaxIter(20);
+	// Initialize a Hard Limits solver
+	CRHardLimits solver = CRHardLimits(MyRobot, toolIndex, convention, true);
 
-	// Initialize a nullspace solver
-	CRNullSpace* NullSpaceSolver = new CRNullSpace(MyRobot, toolIndex, convention);
-
-	// Initialize a Hard Limits solver with the ik solver and the nullspace solver
-	CRHardLimits solver = CRHardLimits(ikSolver, NullSpaceSolver);
+	// Change IK solver maximum iterations
+	solver.getIKSolver()->setMaxIter(20);
 
 	// Disable the nullspace solver for now
 	solver.useNullSpace(false);

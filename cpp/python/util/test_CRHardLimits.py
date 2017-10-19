@@ -78,15 +78,11 @@ linkIndex = MyRobot.addLink(Link3)
 Tool = CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_NONE)
 toolIndex = MyRobot.addTool(linkIndex, Tool)
 
-# Initialize an ik solver
-ikSolver = CRInverseKinematics(MyRobot, toolIndex, convention)
-ikSolver.setMaxIter(20)
-
-# Initialize a nullspace solver
-NullSpaceSolver = CRNullSpace(MyRobot, toolIndex, convention)
-
 # Initialize a Hard Limits solver with the ik solver and the nullspace solver
-solver = CRHardLimits(ikSolver, NullSpaceSolver);
+solver = CRHardLimits(MyRobot, toolIndex, convention, True);
+
+# Change IK solver maximum iterations
+solver.getIKSolver().setMaxIter(20)
 
 # Disable the nullspace solver for now
 solver.useNullSpace(False)
@@ -118,7 +114,6 @@ MyRobot.setConfiguration(q)
 print("Resulting tool pose ", MyRobot.getToolPose(toolIndex, convention, poseElements).T[0])
 
 # Set joint limits
-
 solver.setJointLimits(2, -1, 1)
 
 # Run the solver

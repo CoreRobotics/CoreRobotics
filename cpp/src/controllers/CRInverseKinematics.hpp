@@ -182,9 +182,6 @@ public:
     //! Get the minimum threshold for a non-singular matrix
     double getSingularThresh(void) {return this->m_svdTol;}
 
-	//! Get the CoreRobotics::CRManipulator object
-	CRManipulator* getManipulator(void) {return this->m_robot;}
-    
     
 //---------------------------------------------------------------------
 // Public Methods

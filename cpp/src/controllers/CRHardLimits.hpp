@@ -72,8 +72,8 @@ namespace CoreRobotics {
  \details
  ## Description
 
- CRHardLimits implaments a class which uses the existing inverse kinematics
- and nullspace controllers and applies hard limits to these operations.
+ CRHardLimits implaments a class which creates existing inverse kinematics
+ and nullspace controller objects and applies hard limits to these classes.
 
  CRHardLimits finds a solution in joint space using,
 
@@ -89,9 +89,10 @@ namespace CoreRobotics {
  joint limits, or an inversion of a singular matrix is attempted where the initial
  condition is returned as the result.
 
- These methods are used to add solvers to the hard limits solver:
- - CRHardLimits::setIKSolver set the ik solver to use
- - CRHardLimits::setNullSpaceSolver set the nullspace solver to use
+ The solvers can be retrieved for the purposes of editing solver parameters using
+ the following methods:
+ - CRHardLimits::getIKSolver
+ - CRHardLimits::getNullSpaceSolver
 
  Pose Elements can be set using the functions:
  - CRHardLimits::setPoseElements
@@ -134,25 +135,21 @@ class CRHardLimits {
 public:
 
 	//! Class constructor
-	CRHardLimits(CRInverseKinematics* i_IKSolver);
+	CRHardLimits(CRManipulator* i_robot,
+	             unsigned int i_toolIndex,
+	             CREulerMode i_eulerMode);
 
-	CRHardLimits(CRInverseKinematics* i_IKSolver,
-                 CRNullSpace* i_NullSpaceSolver);
+	CRHardLimits(CRManipulator* i_robot,
+	             unsigned int i_toolIndex,
+	             CREulerMode i_eulerMode,
+	             bool i_useNullSpace);
 
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
 
-	//! Set the IK solver to use
-	void setIKSolver(CRInverseKinematics* i_solver) {this->m_IKSolver = i_solver;}
-
 	//! Get the IK solver
 	CRInverseKinematics* getIKSolver(void) {return this->m_IKSolver;}
-
-	//! Set the NullSpace solver to use
-	void setNullSpaceSolver(CRNullSpace* i_solver) {
-		this->m_NullSpaceSolver = i_solver;
-		this->m_useNullSpace = true;}
 
 	//! Get the NullSpace solver
 	CRNullSpace* getNullSpaceSolver(void) {return this->m_NullSpaceSolver;}
@@ -172,8 +169,6 @@ public:
 	//! Get pose elements
 	Eigen::Matrix<bool, 6, 1> getPoseElements(void)
 		{return this->m_poseElements;}
-	//Eigen::Matrix<int, 6, 1> getPoseElements(void)
-	//	{return this->m_poseElements.cast<int>();}
 
 //---------------------------------------------------------------------
 // Limits Methods
@@ -250,6 +245,9 @@ public:
 //---------------------------------------------------------------------
 // Protected Members
 protected:
+
+	//! The CRManipulator object
+	CRManipulator* m_robot;
 
 	//! The IK Solver to use
 	CRInverseKinematics* m_IKSolver;

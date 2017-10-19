@@ -56,54 +56,65 @@ double CRMaxJointRotation = std::numeric_limits<double>::max();
 //! Minimum value of a double, used for removing lower joint limits
 double CRMinJointRotation = -std::numeric_limits<double>::max();
 
-//=====================================================================
-/*!
- The constructor creates a hard limits solver. This solver uses an
- inverse kinematics solver to solve the inverse kinematics problem
- with hard joint limits.\n
- 
- \param[in]     i_IKSolver      the CoreRobotics::CRInverseKinematics
-                                object to use to solve the inverse
-                                kinematics problem
- */
-//---------------------------------------------------------------------
-CRHardLimits::CRHardLimits(CRInverseKinematics* i_IKSolver) {
-	this->m_IKSolver = i_IKSolver;
-	this->m_upperLimits.resize(this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
-	this->m_lowerLimits.resize(this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
-	for (int i = 0; i < this->m_IKSolver->getManipulator()->getDegreesOfFreedom(); i++) {
-		this->m_upperLimits(i) = CRMaxJointRotation;
-		this->m_lowerLimits(i) = CRMinJointRotation;
-	}
-	this->m_useNullSpace = false;
-	this->m_poseElements << 1, 1, 1, 1, 1, 1;
-}
 
 //=====================================================================
 /*!
- The constructor creates a hard limits solver. This solver uses an
- inverse kinematics solver and a nullspace solver to solve the inverse
+ The constructor creates a hard limits solver. This solver creates an
+ inverse kinematics and, if desired, a nullspace solver to solve the inverse
  kinematics problem with hard joint limits.\n
  
- \param[in]     i_IKSolver               the CoreRobotics::CRInverseKinematics
-                                         object to use to solve the inverse
-                                         kinematics problem
- \param[in]     i_NullSpaceSolver        the CoreRobotics::CRNullSpace
-                                         object to use to solve the null space
-                                         control problem
+ \param[in]     i_robot           the CoreRobotics::CRManipulator object 
+                                  to be used for solving the inverse 
+                                  kinematics
+ \param[in]     i_toolIndex       the tool index to use for solving the
+                                  inverse kinematics problem
+ \param[in]     i_eulerMode       the Euler convention of the pose vector
+ \param[in]     i_useNullSpace    A boolean flag to indicate whether a
+                                  nullspace solver should be created
  */
 //---------------------------------------------------------------------
-CRHardLimits::CRHardLimits(CRInverseKinematics* i_IKSolver,
-                           CRNullSpace* i_NullSpaceSolver) {
-	this->m_IKSolver = i_IKSolver;
-	this->m_NullSpaceSolver = i_NullSpaceSolver;
-	this->m_upperLimits.resize(this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
-	this->m_lowerLimits.resize(this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
-	for (int i = 0; i < this->m_IKSolver->getManipulator()->getDegreesOfFreedom(); i++) {
-		this->m_upperLimits(i) = CRMaxJointRotation;
-		this->m_lowerLimits(i) = CRMinJointRotation;
+CRHardLimits::CRHardLimits(CRManipulator* i_robot,
+                           unsigned int i_toolIndex,
+                           CREulerMode i_eulerMode,
+                           bool i_useNullSpace) {
+	this->m_robot = i_robot;
+	this->m_IKSolver = new CRInverseKinematics(this->m_robot, i_toolIndex, i_eulerMode);
+	this->m_useNullSpace = i_useNullSpace;
+	if (this->m_useNullSpace) {
+		this->m_NullSpaceSolver = new CRNullSpace(this->m_robot, i_toolIndex, i_eulerMode);
 	}
-	this->m_useNullSpace = true;
+	this->m_upperLimits = Eigen::VectorXd::Constant(this->m_robot->getDegreesOfFreedom(),
+	                                                CRMaxJointRotation);
+	this->m_lowerLimits = Eigen::VectorXd::Constant(this->m_robot->getDegreesOfFreedom(),
+	                                                CRMinJointRotation);
+	this->m_poseElements << 1, 1, 1, 1, 1, 1;
+}
+
+
+//=====================================================================
+/*!
+ The constructor creates a hard limits solver. This solver creates an
+ inverse kinematics solver to solve the inverse kinematics problem with
+ hard joint limits.\n
+ 
+ \param[in]     i_robot           the CoreRobotics::CRManipulator object 
+                                  to be used for solving the inverse 
+                                  kinematics
+ \param[in]     i_toolIndex       the tool index to use for solving the
+                                  inverse kinematics problem
+ \param[in]     i_eulerMode       the Euler convention of the pose vector
+ */
+//---------------------------------------------------------------------
+CRHardLimits::CRHardLimits(CRManipulator* i_robot,
+                           unsigned int i_toolIndex,
+                           CREulerMode i_eulerMode) {
+	this->m_robot = i_robot;
+	this->m_IKSolver = new CRInverseKinematics(this->m_robot, i_toolIndex, i_eulerMode);
+	this->m_useNullSpace = false;
+	this->m_upperLimits = Eigen::VectorXd::Constant(this->m_robot->getDegreesOfFreedom(),
+                                                    CRMaxJointRotation);
+	this->m_lowerLimits = Eigen::VectorXd::Constant(this->m_robot->getDegreesOfFreedom(),
+	                                                CRMinJointRotation);
 	this->m_poseElements << 1, 1, 1, 1, 1, 1;
 }
 
@@ -120,12 +131,12 @@ CRHardLimits::CRHardLimits(CRInverseKinematics* i_IKSolver,
 //---------------------------------------------------------------------
 CRResult CRHardLimits::solve(Eigen::VectorXd &o_qSolved) {
 	CRResult result = CR_RESULT_SUCCESS;
-	Eigen::MatrixXd W = Eigen::MatrixXd::Identity(this->m_IKSolver->getManipulator()->getDegreesOfFreedom(),
-                                                  this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
-	Eigen::VectorXd q(this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
-	Eigen::VectorXd qNull(this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
-	Eigen::VectorXd qSolved(this->m_IKSolver->getManipulator()->getDegreesOfFreedom());
-	Eigen::MatrixXd limits(this->m_IKSolver->getManipulator()->getDegreesOfFreedom(), 2);
+	Eigen::MatrixXd W = Eigen::MatrixXd::Identity(this->m_robot->getDegreesOfFreedom(),
+                                                  this->m_robot->getDegreesOfFreedom());
+	Eigen::VectorXd q(this->m_robot->getDegreesOfFreedom());
+	Eigen::VectorXd qNull(this->m_robot->getDegreesOfFreedom());
+	Eigen::VectorXd qSolved(this->m_robot->getDegreesOfFreedom());
+	Eigen::MatrixXd limits(this->m_robot->getDegreesOfFreedom(), 2);
 	Eigen::Index row_index, col_index;
 	bool limits_broken = true;
 	while (limits_broken) {
