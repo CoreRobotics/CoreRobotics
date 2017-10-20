@@ -32,9 +32,8 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-# \author CoreRobotics Project
-# \author www.corerobotics.org
-# \version 0.0
+# \project CoreRobotics Project
+# \url     www.corerobotics.org
 #
 #
 # =====================================================================

@@ -35,7 +35,6 @@ POSSIBILITY OF SUCH DAMAGE.
 \project CoreRobotics Project
 \url     www.corerobotics.org
 \author  Parker Owan
-\version 0.0
 
 */
 //=====================================================================
