@@ -34,12 +34,9 @@ CoreRobotics relies on CMake to compile cross-platform source to platform-specif
 
 ## Using the library
 When built using your CMake-generated project, the CoreRobotics creates a ./bin folder which contains the binary test scripts.  You should make sure this executes.  To use the library in your own project, you need to do the following (example using CMake):
-1. Set the path to your CoreRobotics installation using the CMake `set` command.
-
+1. Set the path to your CoreRobotics installation using the CMake `set` command.  
 `set (CR_DIR "path/to/corerobotics/root")`
-
-2. Add the following directories to the header search paths.
-
+2. Add the following directories to the header search paths.  
 `include_directories(
     ${CR_DIR}/src
     ${CR_DIR}/src/core
@@ -49,13 +46,9 @@ When built using your CMake-generated project, the CoreRobotics creates a ./bin 
     ${CR_DIR}/src/controllers
     ${CR_DIR}/external/eigen
 )`
-
-3. Include the following folder in your linker directory (note if the library is built in debug, the path must be updated accordingly to reflect).  By default, the compiler builds a static library.
-
+3. Include the following folder in your linker directory (note if the library is built in debug, the path must be updated accordingly to reflect).  By default, the compiler builds a static library.  
 `link_directories(${CR_DIR}/lib/Release)`
-
-4. Lastly, you must link the corerobotics library after you add your executable (example is shown for Unix, Windows will be CoreRobotics.lib)
-
+4. Lastly, you must link the corerobotics library after you add your executable (example is shown for Unix, Windows will be CoreRobotics.lib)  
 `target_link_libraries("exec_name" ${CR_DIR}/lib/Release/libCoreRobotics.a)`
 
 
