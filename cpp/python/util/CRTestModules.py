@@ -49,7 +49,7 @@ print("Running the CoreRobotics Python test suite.")
 import test_CRCore
 
 # Test the physics models
-import CRTestFrameOffset
+import test_CRFrameDh
 
 # Test the Manipulator
 import test_CRManipulator
@@ -57,3 +57,4 @@ import test_CRManipulator
 # Test controllers
 import test_CRInverseKinematics
 import test_CRNullSpace
+import test_CRHardLimits

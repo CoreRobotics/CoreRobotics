@@ -189,6 +189,64 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
  are specified via i_velocities, and an initial condition for the joint
  angles is specified via i_q0. The method returns a vector of joint velocities
  in the nullspace of the jacobian.\n
+ 
+ \param[in]     i_jointMotion            the desired joint motion
+ \param[in]     i_q0                     the intial configuration of the robot
+ \param[in]     i_poseElements           a boolean vector indiciating which
+                                         elements of the pose vector are specified
+							             in i_setPoint (see CRFrame::getPose)
+ \param[in]     i_w                      a matrix multiplied by the jacobian to be
+                                         used for hard limits computation
+ \param[out]    o_nullSpaceJointMotion   the porition of the desired joint motion
+                                         in the nullspace
+ \return                                 a CRResult flag indicating if a nullspace
+                                         motion was sucessfully found
+ */
+//---------------------------------------------------------------------
+CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
+                            Eigen::VectorXd i_q0,
+                            Eigen::Matrix<bool, 6, 1> i_poseElements,
+                            Eigen::MatrixXd i_w,
+                            Eigen::VectorXd &o_nullSpaceJointMotion)
+{
+	double maxVal = i_jointMotion.lpNorm<Eigen::Infinity>();
+	int iter;
+	if(maxVal / this->m_stepSize < this->m_maxIter)	{iter = (int) maxVal / this->m_maxIter;}
+	else {iter = m_maxIter;}
+	Eigen::VectorXd step = i_jointMotion / iter;
+
+	Eigen::VectorXd q = i_q0;
+	Eigen::MatrixXd J, Jinv;
+	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot->getDegreesOfFreedom(),
+                                                  this->m_robot->getDegreesOfFreedom());
+	CRResult result = CR_RESULT_SUCCESS;
+	for(int i = 0; i < iter; i++)
+	{
+		this->m_robot->setConfiguration(q);
+		J = this->m_robot->jacobian(this->m_toolIndex,
+                                    this->m_eulerMode,
+                                    i_poseElements);
+		result = CRMath::svdInverse(J * i_w, this->m_svdTol, Jinv);
+		q += (I - Jinv * J) * step;
+		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
+		{
+			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot->getDegreesOfFreedom());
+			return result;
+		}
+	}
+	this->m_robot->setConfiguration(i_q0);
+	o_nullSpaceJointMotion = q - i_q0;	
+	return result;
+}
+
+//=====================================================================
+/*!
+
+ This method computes the joint velocities that produce no tool movement
+ in the directions specified by i_poseElements.  Desired joint valocities
+ are specified via i_velocities, and an initial condition for the joint
+ angles is specified via i_q0. The method returns a vector of joint velocities
+ in the nullspace of the jacobian.\n
 
  \param[in]     i_jointMotion            the desired joint motion
  \param[in]     i_q0                     the intial configuration of the robot

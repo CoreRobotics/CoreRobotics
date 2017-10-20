@@ -181,7 +181,7 @@ public:
     
     //! Get the minimum threshold for a non-singular matrix
     double getSingularThresh(void) {return this->m_svdTol;}
-    
+
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -196,6 +196,12 @@ public:
 				   Eigen::Matrix<bool, 6, 1> i_poseElements,
 				   Eigen::VectorXd i_q0,
 				   Eigen::VectorXd &o_qSolved);
+
+	CRResult solve(Eigen::VectorXd& i_setPoint,
+                   Eigen::Matrix<bool, 6, 1> i_poseElements,
+                   Eigen::VectorXd i_q0,
+                   Eigen::MatrixXd i_w,
+                   Eigen::VectorXd &o_qSolved);
 
 	CRResult solve(Eigen::VectorXd& i_setPoint,
 				   Eigen::Matrix<int, 6, 1> i_poseElementsInt,

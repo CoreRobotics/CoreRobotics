@@ -83,6 +83,8 @@ int main(int argc, const char * argv[]) {
     
     // Test controllers
     test_CRInverseKinematics();
+	test_CRNullSpace();
+	test_CRHardLimits();
     test_CRTrajectoryGenerator();
     
     return 0;
