@@ -153,7 +153,7 @@ if (NOT python OR all)
 
 	# Set the output directory
 	set_target_properties( ${UTIL_TARGET_NAME} PROPERTIES
-		RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/utils/bin
+		RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
 	)
 
 	# Add the library as a build dependency
