@@ -1,9 +1,12 @@
 # CoreRobotics Project
 #### University of Washington
 #### College of Engineering
+#### Department of Mechanical Engineering
 Created: January 14, 2016
 
-Currently in v0.0.
+\last updated October 20, 2017
+\version 0.0
+
 - C++ Platforms: Windows 8.1/10, Mac OS X 10, and Linux.
 - MATLAB Version (not active): R2016a (Windows, Mac, Linux)
 
@@ -27,6 +30,26 @@ CoreRobotics relies on CMake to compile cross-platform source to platform-specif
 4. Change directories `cd build`.
 5. Run CMake `cmake -G "<compiler>" ../`  To get a list of compilers available to configure with CMake, type `cmake --help`.
 6. Open the project in the *build\* directory and build accordingly. (e.g.: For visual studio, a CoreRobotics.sln will be created.  Open this solution and build all.  The library and binaries will be compiled by the Visual Studio IDE.)
+
+
+## Using the library
+When built using your CMake-generated project, the CoreRobotics creates a ./bin folder which contains the binary test scripts.  You should make sure this executes.  To use the library in your own project, you need to do the following (example using CMake):
+1. Set the path to your CoreRobotics installation using the CMake `set` command.
+`set (CR_DIR "path/to/corerobotics/root")`
+2. Add the following directories to the header search paths.
+`include_directories(
+    ${CR_DIR}/src
+    ${CR_DIR}/src/core
+    ${CR_DIR}/src/math
+    ${CR_DIR}/src/models
+    ${CR_DIR}/src/physics
+    ${CR_DIR}/src/controllers
+    ${CR_DIR}/external/eigen
+)`
+3. Include the following folder in your linker directory (note if the library is built in debug, the path must be updated accordingly to reflect).  By default, the compiler builds a static library.
+`link_directories(${CR_DIR}/lib/Release)`
+4. Lastly, you must link the corerobotics library after you add your executable (example is shown for Unix, Windows will be CoreRobotics.lib)
+`target_link_libraries("exec_name" ${CR_DIR}/lib/Release/libCoreRobotics.a)`
 
 
 ## Developer Guidelines:
