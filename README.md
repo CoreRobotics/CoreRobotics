@@ -1,11 +1,11 @@
 # CoreRobotics Project
+#### Copyright (c) 2017
 #### University of Washington
 #### College of Engineering
-#### Department of Mechanical Engineering
-Created: January 14, 2016
 
-\last updated October 20, 2017
-\version 0.0
+Created: 2016  
+Last Updated: October 20, 2017  
+Version: 0.0
 
 - C++ Platforms: Windows 8.1/10, Mac OS X 10, and Linux.
 - MATLAB Version (not active): R2016a (Windows, Mac, Linux)
