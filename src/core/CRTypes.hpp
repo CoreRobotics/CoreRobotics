@@ -68,6 +68,7 @@ enum CRResult {
     CR_RESULT_SUCCESS,
     CR_RESULT_SINGULAR,
     CR_RESULT_UNWRITABLE,
+	CR_RESULT_BAD_IC,
 };
 
     
