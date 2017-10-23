@@ -137,6 +137,11 @@ CRResult CRHardLimits::solve(Eigen::VectorXd &o_qSolved) {
 	Eigen::VectorXd qSolved(this->m_robot->getDegreesOfFreedom());
 	Eigen::MatrixXd limits(this->m_robot->getDegreesOfFreedom(), 2);
 	Eigen::Index row_index, col_index;
+	limits << (this->m_q0 - this->m_upperLimits), (this->m_lowerLimits - this->m_q0);
+	if (0 < limits.maxCoeff()) {
+		o_qSolved = this->m_q0;
+		return CR_RESULT_BAD_IC;
+	}
 	bool limits_broken = true;
 	while (limits_broken) {
 		result = this->m_IKSolver->solve(this->m_setPoint,

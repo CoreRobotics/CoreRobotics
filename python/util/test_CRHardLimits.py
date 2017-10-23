@@ -149,3 +149,21 @@ print("Calculated joint configuration woth joint limits and nullspace control ",
 
 MyRobot.setConfiguration(q)
 print("Resulting tool pose ", MyRobot.getToolPose(toolIndex, convention, poseElements).T[0])
+
+# Set the initial condition to a point outside the limits
+q =np.array([0, 0.1, CR_PI, 0.3])
+print("Setting initial condition outisde the limits, ", q)
+solver.setQ0(q)
+
+# Run the solver
+result = solver.solve(q)
+
+# Display the results
+print("Recieved the result", end = " ")
+if result == CR_RESULT_SUCCESS:
+	print("CR_RESULT_SUCCESS (success)", end = " ")
+elif result == CR_RESULT_SINGULAR:
+	print("CR_RESULT_SINGULAR (singular jacobian)", end = " ")
+elif result == CR_RESULT_BAD_IC:
+	print("CR_RESULT_BAD_IC (bad initial conditions)", end = " ")
+print("with joint configuration ", q)

@@ -155,4 +155,22 @@ void test_CRHardLimits(void) {
 	MyRobot->setConfiguration(q);
 	std::cout << "Resulting tool pose (" <<  MyRobot->getToolPose(toolIndex, convention, poseElements).transpose() << ")" << std::endl;
 
+	// Set the initial condition to a point outside the limits
+	q << 0, 0.1, CR_PI, 0.3;
+	std::cout << "Setting initial condition outisde the limits, (" << q.transpose() << ")" << std::endl;
+	solver.setQ0(q);
+
+	// Run the solver
+	CRResult result = solver.solve(q);
+
+	// Display the results
+	std::cout << "Recieved the result ";
+	if (result == CR_RESULT_SUCCESS) {
+		std::cout << "CR_RESULT_SUCCESS (success)";
+	} else if (result == CR_RESULT_SINGULAR) {
+		std::cout << "CR_RESULT_SINGULAR (singular jacobian)";
+	} else if (result == CR_RESULT_BAD_IC) {
+		std::cout << "CR_RESULT_BAD_IC (bad initial conditions)";
+	}
+	std::cout << " with joint configuration (" << q.transpose() << ")" << std::endl;
 }
