@@ -220,6 +220,7 @@ if(python OR all)
 endif()
 
 if(matlab OR all)
+	include_directories(${CMAKE_SOURCE_DIR}/matlab/src)
 	set(Matlab_PROJECT_NAME ${PROJECT_NAME}Matlab)
 	find_package(Matlab REQUIRED)
 	matlab_get_mex_suffix(${Matlab_ROOT_DIR} mex_extension)
@@ -232,9 +233,9 @@ if(matlab OR all)
 		${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i
 		${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 	swig_link_libraries(${Matlab_PROJECT_NAME} ${MATLAB_LIBRARIES})
-	set_target_properties(${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-	set_target_properties(${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR})
-	set_target_properties(${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR})
+	set_target_properties(${Matlab_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+	set_target_properties(${Matlab_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR})
+	set_target_properties(${Matlab_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR})
 	add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy
 			${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:${Matlab_PROJECT_NAME}>

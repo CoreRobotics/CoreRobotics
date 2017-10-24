@@ -68,6 +68,8 @@
 #include "CRInverseKinematics.hpp"
 #include "CRNullSpace.hpp"
 #include "CRHardLimits.hpp"
+
+#include "matlabHelpers.hpp"
 %}
 
 %include <typemaps.i>
@@ -107,3 +109,5 @@
 %include "CRInverseKinematics.hpp"
 %include "CRNullSpace.hpp"
 %include "CRHardLimits.hpp"
+
+%include "matlabHelpers.hpp"
