@@ -112,7 +112,7 @@ file(GLOB SOURCES_CONTROLLERS
     src/controllers/*.cpp
 )
 
-if (NOT python OR all)
+if ((NOT python AND NOT matlab) OR all)
 
 	# Create static (or shared) library
 	add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
@@ -217,4 +217,41 @@ if(python OR all)
 			${CMAKE_SOURCE_DIR}/python/lib
 			${CMAKE_SOURCE_DIR}/python/util)
 
+endif()
+
+if(matlab OR all)
+	set(Matlab_PROJECT_NAME ${PROJECT_NAME}Matlab)
+	find_package(Matlab REQUIRED)
+	matlab_get_mex_suffix(${Matlab_ROOT_DIR} mex_extension)
+	include_directories(${Matlab_INCLUDE_DIRS})
+	find_package(SWIG REQUIRED)
+	include(${SWIG_USE_FILE})
+	set(CMAKE_SWIG_FLAGS "")
+	set_source_files_properties(${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i PROPERTIES CPLUSPLUS ON)
+	swig_add_module(${Matlab_PROJECT_NAME} matlab
+		${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i
+		${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+	swig_link_libraries(${Matlab_PROJECT_NAME} ${MATLAB_LIBRARIES})
+	set_target_properties(${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+	set_target_properties(${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR})
+	set_target_properties(${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR})
+	add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy
+			${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:${Matlab_PROJECT_NAME}>
+			${CMAKE_SOURCE_DIR}/matlab/lib/${PROJECT_NAME}MEX.${mex_extension})
+	set(matlab_files SwigGet.m SwigMem.m SwigRef.m)
+	foreach(matlab_file ${matlab_files})
+		add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy
+				${CMAKE_BINARY_DIR}/${matlab_file}
+				${CMAKE_SOURCE_DIR}/matlab/lib)
+	endforeach()
+	add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${CMAKE_BINARY_DIR}/+${PROJECT_NAME}
+			${CMAKE_SOURCE_DIR}/matlab/lib/+${PROJECT_NAME})
+	add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${CMAKE_SOURCE_DIR}/matlab/lib
+			${CMAKE_SOURCE_DIR}/matlab/util)
 endif()
