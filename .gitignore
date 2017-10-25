@@ -16,7 +16,6 @@ obj
 build
 html
 bin
-lib
 *.dir
 *.tmp
 
@@ -52,4 +51,16 @@ lib
 
 # Python Libraries
 *.pyc
-CoreRobotics.py
+
+# MEX libraries
+*.mexa32
+*.mexmaci32
+*.mexw32
+*.mexa64
+*.mexmaci64
+*.mexw64
+
+# Python and Matlab util libraries
+python/util/CoreRobotics.py
+matlab/util/+CoreRobotics
+matlab/util/Swig*
