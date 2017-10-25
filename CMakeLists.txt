@@ -115,7 +115,7 @@ file(GLOB SOURCES_CONTROLLERS
 # If "all" build c++ static library
 # If "python" or "matlab" do not build c++ library
 # If "all" and python version specified build c++ library
-if ((NOT python AND NOT matlab) OR all)
+if ((NOT python AND NOT matlab) OR all OR cpp)
 
 	# Create static (or shared) library
 	add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
