@@ -275,7 +275,7 @@ endif()
 if(matlab OR all)
 
 	# Find Matlab
-	find_package(Matlab)
+	find_package(Matlab OPTIONAL_COMPONENTS MX_LIBRARY)
 
 	# If Matlab was found
 	if(Matlab_FOUND)
@@ -285,9 +285,6 @@ if(matlab OR all)
 
 		# Set the Matlab project name
 		set(Matlab_PROJECT_NAME ${PROJECT_NAME}Matlab)
-
-		# Get the Matlab MEX file suffix
-		matlab_get_mex_suffix(${Matlab_ROOT_DIR} mex_extension)
 
 		# Attempt to find SWIG
 		find_package(SWIG)
@@ -312,7 +309,7 @@ if(matlab OR all)
 				${CMAKE_SOURCE_DIR}/matlab/swig/${PROJECT_NAME}MATLAB_wrap.cxx)
 
 			# Link with Matlab
-			target_link_libraries(${Matlab_PROJECT_NAME} ${MATLAB_LIBRARIES})
+			target_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES})
 
 		# If using SWIG
 		else()
@@ -330,7 +327,7 @@ if(matlab OR all)
 				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
 			# Link Module with Matlab
-			swig_link_libraries(${Matlab_PROJECT_NAME} ${MATLAB_LIBRARIES})
+			swig_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES})
 
 			# Set a list of files to copy to the Matlab lib directory
 			set(matlab_files SwigGet.m SwigMem.m SwigRef.m)
@@ -367,7 +364,7 @@ if(matlab OR all)
 		add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy
 				${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:${Matlab_PROJECT_NAME}>
-				${CMAKE_SOURCE_DIR}/matlab/lib/${PROJECT_NAME}MEX.${mex_extension})
+				${CMAKE_SOURCE_DIR}/matlab/lib/${PROJECT_NAME}MEX.${Matlab_MEX_EXTENSION})
 
 		# Copy the lib folder to the util folder
 		add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
