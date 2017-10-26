@@ -61,6 +61,7 @@ This introduction is broken down into the following sections.
 - \subpage gettingstarted
 - \subpage references
 - \subpage python
+- \subpage matlab
 
 A note on units:  All units in the library, unless specified, are in SI
 (international standard), i.e.: radians, meters, kilograms, etc...

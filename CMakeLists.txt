@@ -112,7 +112,10 @@ file(GLOB SOURCES_CONTROLLERS
     src/controllers/*.cpp
 )
 
-if (NOT python OR all)
+# If "all" build c++ static library
+# If "python" or "matlab" do not build c++ library
+# If "all" and python version specified build c++ library
+if ((NOT python AND NOT matlab) OR all OR cpp)
 
 	# Create static (or shared) library
 	add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
@@ -159,62 +162,217 @@ if (NOT python OR all)
 	# Add the library as a build dependency
 	add_dependencies(${UTIL_TARGET_NAME} ${LIB_TARGET_NAME})
 
-	# Link the library binary
+	# Set libraries to link
+	set(UTIL_LINK_FILES
+		${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
+	)
+
+	# If building on linux add pthread
 	if(UNIX AND NOT APPLE) # This may be useful for apple too
-		set(UTIL_LINK_FILES
-			${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
-			pthread
-		)
-	else()
-		set(UTIL_LINK_FILES
-			${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
-		)
+		list(APPEND UTIL_LINK_FILES pthread)
 	endif()
 
+	# Link the library binary
 	target_link_libraries( ${UTIL_TARGET_NAME} ${UTIL_LINK_FILES})
 
 endif()
+
+# If "python" or "all" build the Python library
 if(python OR all)
 
-	if(WIN32)
-		find_package(PythonInterp)
-		execute_process(COMMAND
-			"${PYTHON_EXECUTABLE}" -c
-			"import numpy; print numpy.get_include()"
-			OUTPUT_VARIABLE NUMPY_DIR)
-		include_directories(${NUMPY_DIR})
-	endif()
-
-	find_package(SWIG REQUIRED)
-	include(${SWIG_USE_FILE})
-
+	# If "python" is not "true" consider it as a version number
+	# and find that Python version
 	if(NOT ${python} STREQUAL true)
-		find_package(PythonLibs ${python} EXACT REQUIRED)
+		find_package(PythonLibs ${python} EXACT)
+	# Otherwise find the latest Python version installed
 	else()
-		find_package(PythonLibs)
+		find_package(PythonLibs REQUIRED)
 	endif()
-	include_directories(${PYTHON_INCLUDE_PATH})
 
-	set(CMAKE_SWIG_FLAGS "")
-	set_source_files_properties(${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i PROPERTIES CPLUSPLUS ON)
+	# Check if Python was found and skip if not found
+	if(PythonLibs_FOUND)
 
-	swig_add_module(${PROJECT_NAME} python
-		${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i
-		${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+		# Add Python's include path
+		include_directories(${PYTHON_INCLUDE_PATH})
+		
+		# If on Windows use Python to get the Numpy include directory
+		if(WIN32)
+			find_package(PythonInterp)
+			execute_process(COMMAND
+				"${PYTHON_EXECUTABLE}" -c
+				"import numpy; print numpy.get_include()"
+				OUTPUT_VARIABLE NUMPY_DIR)
+			include_directories(${NUMPY_DIR})
+		endif()
 
-	set_target_properties(_${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/python/lib)
-	set_target_properties(_${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/python/lib)
-	set_target_properties(_${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/python/lib)
+		# Attempt to find SWIG
+		find_package(SWIG)
 
-	swig_link_libraries(${PROJECT_NAME} ${PYTHON_LIBRARIES})
+		# If SWIG not found or noswig set
+		if(NOT SWIG_FOUND OR noswig)
 
-	add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy
-			${CMAKE_BINARY_DIR}/${PROJECT_NAME}.py
-			${CMAKE_SOURCE_DIR}/python/lib/)
-	add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-			${CMAKE_SOURCE_DIR}/python/lib
-			${CMAKE_SOURCE_DIR}/python/util)
+			# Compile a shared library with the exsisting wrapper C++ file
+			add_library(_${PROJECT_NAME} SHARED
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS}
+				${CMAKE_SOURCE_DIR}/python/swig/${PROJECT_NAME}PYTHON_wrap.cxx)
 
+			# Link with Python
+			target_link_libraries(_${PROJECT_NAME} ${PYTHON_LIBRARIES})
+
+			# Rename to remove the lib prefix
+			add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
+				COMMAND ${CMAKE_COMMAND} -E rename
+					${CMAKE_SOURCE_DIR}/python/lib/$<TARGET_FILE_NAME:_${PROJECT_NAME}>
+					${CMAKE_SOURCE_DIR}/python/lib/_${PROJECT_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX})
+
+		# If using SWIG
+		else()
+
+			# Include SWIG
+			include(${SWIG_USE_FILE})
+
+			# Set SWIG to use C++
+			set(CMAKE_SWIG_FLAGS "")
+			set_source_files_properties(${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i PROPERTIES CPLUSPLUS ON)
+
+			# Create SWIG Module
+			swig_add_module(${PROJECT_NAME} python
+				${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+
+			# Link Module with Python
+			swig_link_libraries(${PROJECT_NAME} ${PYTHON_LIBRARIES})
+
+			# Copy Python file to the Python lib folder
+			add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
+				COMMAND ${CMAKE_COMMAND} -E copy
+					${CMAKE_BINARY_DIR}/${PROJECT_NAME}.py
+					${CMAKE_SOURCE_DIR}/python/lib/)
+
+			# Copy C++ wrapper file to the Python swig folder
+			add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
+				COMMAND ${CMAKE_COMMAND} -E copy
+					${CMAKE_BINARY_DIR}/${PROJECT_NAME}PYTHON_wrap.cxx
+					${CMAKE_SOURCE_DIR}/python/swig/)
+
+		endif()
+
+		# Set the shared library output directory
+		set_target_properties(_${PROJECT_NAME} PROPERTIES
+			LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/python/lib
+			LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/python/lib
+			LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/python/lib)
+
+		# Copy the contents of the Python lib folder to the Python util folder
+		add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy_directory
+				${CMAKE_SOURCE_DIR}/python/lib
+				${CMAKE_SOURCE_DIR}/python/util)
+	endif()
+endif()
+
+# If "matlab" or "all" build the Matlab library
+if(matlab OR all)
+
+	# Find Matlab
+	find_package(Matlab)
+
+	# If Matlab was found
+	if(Matlab_FOUND)
+
+		# Include the Matlab directories
+		include_directories(${CMAKE_SOURCE_DIR}/matlab/src ${Matlab_INCLUDE_DIRS})
+
+		# Set the Matlab project name
+		set(Matlab_PROJECT_NAME ${PROJECT_NAME}Matlab)
+
+		# Get the Matlab MEX file suffix
+		matlab_get_mex_suffix(${Matlab_ROOT_DIR} mex_extension)
+
+		# Attempt to find SWIG
+		find_package(SWIG)
+
+		# If SWIG was found test for Matlab support
+		if(SWIG_FOUND)
+			# Read the SWIG help output
+			execute_process(COMMAND ${SWIG_EXECUTABLE} -help
+				OUTPUT_VARIABLE swig_help)
+			# Check if includes the word matlab
+			if(${swig_help} MATCHES matlab)
+				set(SWIG_Matlab_FOUND true)
+			endif()
+		endif()
+
+		# If no Matlab support or noswig defined
+		if(noswig OR NOT SWIG_Matlab_FOUND)
+
+			# Compile a shared library with the existing C++ wrapper files
+			add_library(${Matlab_PROJECT_NAME} SHARED
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS}
+				${CMAKE_SOURCE_DIR}/matlab/swig/${PROJECT_NAME}MATLAB_wrap.cxx)
+
+			# Link with Matlab
+			target_link_libraries(${Matlab_PROJECT_NAME} ${MATLAB_LIBRARIES})
+
+		# If using SWIG
+		else()
+
+			# Include SWIG
+			include(${SWIG_USE_FILE})
+
+			# Set SWIG to use C++
+			set(CMAKE_SWIG_FLAGS "")
+			set_source_files_properties(${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i PROPERTIES CPLUSPLUS ON)
+
+			# Create SWIG Module
+			swig_add_module(${Matlab_PROJECT_NAME} matlab
+				${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+
+			# Link Module with Matlab
+			swig_link_libraries(${Matlab_PROJECT_NAME} ${MATLAB_LIBRARIES})
+
+			# Set a list of files to copy to the Matlab lib directory
+			set(matlab_files SwigGet.m SwigMem.m SwigRef.m)
+
+			# Copy each file to the lib directory
+			foreach(matlab_file ${matlab_files})
+				add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
+					COMMAND ${CMAKE_COMMAND} -E copy
+						${CMAKE_BINARY_DIR}/${matlab_file}
+						${CMAKE_SOURCE_DIR}/matlab/lib)
+			endforeach()
+
+			# Copy the Matlab package folder to the lib directory
+			add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
+				COMMAND ${CMAKE_COMMAND} -E copy_directory
+					${CMAKE_BINARY_DIR}/+${PROJECT_NAME}
+					${CMAKE_SOURCE_DIR}/matlab/lib/+${PROJECT_NAME})
+
+			# Copy the C++ wrapper code to the Matlab swig folder for compiling without SWIG
+			add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
+				COMMAND ${CMAKE_COMMAND} -E copy
+					${CMAKE_BINARY_DIR}/${PROJECT_NAME}MATLAB_wrap.cxx
+					${CMAKE_SOURCE_DIR}/matlab/swig)
+
+		endif()
+
+		# Set the library output directory
+		set_target_properties(${Matlab_PROJECT_NAME} PROPERTIES
+			LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
+			LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}
+			LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR})
+
+		# Copy the shared library to the lib directory and rename
+		add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy
+				${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:${Matlab_PROJECT_NAME}>
+				${CMAKE_SOURCE_DIR}/matlab/lib/${PROJECT_NAME}MEX.${mex_extension})
+
+		# Copy the lib folder to the util folder
+		add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy_directory
+				${CMAKE_SOURCE_DIR}/matlab/lib
+				${CMAKE_SOURCE_DIR}/matlab/util)
+	endif()
 endif()
