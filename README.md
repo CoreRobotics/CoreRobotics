@@ -25,7 +25,7 @@ This git project hosts code for the CoreRobotics open source robotic control lib
 ## Building and compiling
 CoreRobotics relies on CMake to compile cross-platform source to platform-specific libraries and binaries.  To build and compile CoreRobotics for development, follow these steps:
 1. Download CMake for your platform at [https://cmake.org/](https://cmake.org/).  Make sure you have installed for command line use. (See CMake UI: Tools>How to Install for Command Line Use)
-2. Open terminal (or emulator) and change directory (`cd <CoreRoboticsRoot>/cpp/`) (replace <CoreRoboticsRoot> for your specific setup with the root directory of the project.)
+2. Open terminal (or emulator) and change directory (`cd <CoreRoboticsRoot>/`) (replace <CoreRoboticsRoot> for your specific setup with the root directory of the project.)
 3. Create a folder `mkdir build`.
 4. Change directories `cd build`.
 5. Run CMake `cmake -G "<compiler>" ../`  To get a list of compilers available to configure with CMake, type `cmake --help`.
