@@ -291,7 +291,181 @@ Eigen::MatrixXd CRManipulator::jacobian(unsigned i_toolIndex,
 	return CRManipulator::jacobian(i_toolIndex, i_mode, i_poseElements);
 }
     
-    
+
+//=====================================================================
+//=====================================================================
+/*!
+This method computes the full pose (position and orientation) numerical
+Hessian of the manipulator for the current configuration with respect
+to the tool specified by the toolIndex.  See CRManipulator::addTool
+for adding tools to the manipulator.\n
+
+The size of the returned Hessian is 6 x N where N is the number of
+free variables in the manipulator.  The rows of the Hessian
+correspond to the pose vector (x, y, z, a, b, g)^T.\n
+
+\param[in]     i_toolIndex     index of the tool to be used to compute the Hessian.
+\param[in]     i_mode          the Euler convention to be used to specify the orientation.
+\return                        (6 x N) Hessian matrix
+*/
+//---------------------------------------------------------------------
+Eigen::MatrixXd CRManipulator::hessian(unsigned i_toolIndex,
+										CREulerMode i_mode)
+{
+	// Initialize the Hessian matrix
+	Eigen::MatrixXd H(6, m_listDriven.size());
+
+	// pertubation size (see http://www.maths.lth.se/na/courses/FMN081/FMN081-06/lecture7.pdf)
+	double delta = 1.0e-6;		// was 1.0e-9 - can improve this (adaptive?)
+
+								// set up the variables
+	Eigen::VectorXd q0;						// operating point
+	Eigen::VectorXd qd;						// perturbed vector
+	Eigen::Matrix<double, 6, 1> poseFwd;	// forward perturbation result
+	Eigen::Matrix<double, 6, 1> poseNow;	// current location result
+	Eigen::Matrix<double, 6, 1> poseBwd;	// backward perturbation result
+
+											// intialize the configuration
+	q0 = this->getConfiguration();
+
+	// step through each driven variable
+	for (size_t k = 0; k < m_listDriven.size(); k++) {
+
+		// set the configuration operating point
+		qd.setZero(q0.size(), 1);
+
+		// define which free variable is being perturbed
+		qd(k) = delta;
+
+		// perturb forward
+		this->setConfiguration(q0 + qd*2.0);
+		poseFwd = this->getToolPose(i_toolIndex, i_mode);
+
+		// get current
+		this->setConfiguration(q0);
+		poseNow = this->getToolPose(i_toolIndex, i_mode);
+
+		// perturb backward
+		this->setConfiguration(q0 - qd*2.0);
+		poseBwd = this->getToolPose(i_toolIndex, i_mode);
+
+		// central difference
+		H.col(k) = (poseFwd + poseBwd - 2.0*poseNow) / (4.0*delta*delta);
+	}
+	this->setConfiguration(q0);
+
+	// zero out the m_tipFrame
+	this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(),
+		Eigen::Vector3d::Zero());
+
+	// return the hessian matrix
+	return H;
+}
+
+
+//=====================================================================
+/*!
+This method computes the full pose (position and orientation) numerical
+Hessian of the manipulator for the current configuration with respect
+to the tool specified by the toolIndex.  See CRManipulator::addTool
+for adding tools to the manipulator.\n
+
+The size of the returned Hessian is M x N where N is the number of
+free variables in the manipulator and M is the number of pose elements
+defined by true elements of i_poseElements.\n
+
+\param[in]     i_toolIndex     index of the tool to be used to compute the hessian.
+\param[in]     i_mode          the Euler convention to be used to specify the orientation.
+\param[in]     i_poseElements  a boolean vector indicating which pose elements to return
+\return                        (M x N) hessian matrix for M true values in poseElements
+*/
+//---------------------------------------------------------------------
+Eigen::MatrixXd CRManipulator::hessian(unsigned i_toolIndex,
+										CREulerMode i_mode,
+										Eigen::Matrix<bool, 6, 1> i_poseElements)
+{
+
+	// Get the number of true elements in the pose vector & size the output
+	int m = i_poseElements.cast<int>().sum();
+
+	// Initialize the hessian matrix
+	Eigen::MatrixXd H(m, m_listDriven.size());
+
+	// pertubation size (see http://www.maths.lth.se/na/courses/FMN081/FMN081-06/lecture7.pdf)
+	double delta = 1.0e-6;		// was 1.0e-9 - can improve this (adaptive?)
+
+								// set up the variables
+	Eigen::VectorXd q0;						// operating point
+	Eigen::VectorXd qd;						// perturbed vector
+	Eigen::VectorXd poseFwd;	// forward perturbation result
+	Eigen::VectorXd poseNow;	// current location result
+	Eigen::VectorXd poseBwd;	// backward perturbation result
+
+								// intialize the configuration
+	q0 = this->getConfiguration();
+
+	// step through each driven variable
+	for (size_t k = 0; k < m_listDriven.size(); k++) {
+
+		// set the configuration operating point
+		qd.setZero(q0.size(), 1);
+
+		// define which free variable is being perturbed
+		qd(k) = delta;
+
+		// perturb forward
+		this->setConfiguration(q0 + 2.0*qd);
+		poseFwd = this->getToolPose(i_toolIndex, i_mode, i_poseElements);
+
+		// current pose
+		this->setConfiguration(q0);
+		poseNow = this->getToolPose(i_toolIndex, i_mode, i_poseElements);
+
+		// perturb backward
+		this->setConfiguration(q0 - 2.0*qd);
+		poseBwd = this->getToolPose(i_toolIndex, i_mode, i_poseElements);
+
+		// central difference
+		H.col(k) = (poseFwd + poseBwd - 2.0*poseNow) / (4.0*delta*delta);
+	}
+	this->setConfiguration(q0);
+
+	// zero out the m_tipFrame
+	this->m_tipFrame->setRotationAndTranslation(Eigen::Matrix3d::Zero(),
+		Eigen::Vector3d::Zero());
+
+	// return the hessian matrix
+	return H;
+
+}
+
+//=====================================================================
+/*!
+This method computes the full pose (position and orientation) numerical
+Hessian of the manipulator for the current configuration with respect
+to the tool specified by the toolIndex.  See CRManipulator::addTool
+for adding tools to the manipulator.\n
+
+The size of the returned Hessian is M x N where N is the number of
+free variables in the manipulator and M is the number of pose elements
+defined by nonzero elements of i_poseElementsInt.\n
+
+\param[in]     i_toolIndex     index of the tool to be used to compute the Hessian.
+\param[in]     i_mode          the Euler convention to be used to specify the orientation.
+\param[in]     i_poseElementsInt  a integer vector indicating which pose elements to return
+\return                        (M x N) hessian matrix for M true values in poseElements
+*/
+//---------------------------------------------------------------------
+Eigen::MatrixXd CRManipulator::hessian(unsigned i_toolIndex,
+	CREulerMode i_mode,
+	Eigen::Matrix<int, 6, 1> i_poseElementsInt)
+{
+	Eigen::Matrix<bool, 6, 1> i_poseElements = i_poseElementsInt.cast<bool>();
+	return CRManipulator::hessian(i_toolIndex, i_mode, i_poseElements);
+}
+
+
+
 //=====================================================================
 /*!
  This method returns the number of rigid body links in the list. \n
