@@ -112,6 +112,11 @@ void test_CRManipulator(void) {
 	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
 	std::cout << "Jacobian = \n" << Jacobian << std::endl;
 
+	// Now get the Hessian
+	Eigen::MatrixXd Hessian;
+	Hessian = MyRobot.hessian(toolIndex, CR_EULER_MODE_XYZ);
+	std::cout << "Hessian = \n" << Hessian << std::endl;
+
 	// now set a new robot configuration and get the FK and jacobian
 	jointAngles << CoreRobotics::CR_PI / 4.0, -CoreRobotics::CR_PI / 2.0;
 	std::cout << "Set joint angles = ("
@@ -119,8 +124,10 @@ void test_CRManipulator(void) {
 	MyRobot.setConfiguration(jointAngles);
 	FwdKin = MyRobot.getForwardKinematics();
 	Jacobian = MyRobot.jacobian(0, CR_EULER_MODE_XYZ);
+	Hessian = MyRobot.hessian(0, CR_EULER_MODE_XYZ);
 	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
 	std::cout << "Jacobian = \n" << Jacobian << std::endl;
+	std::cout << "Hessian = \n" << Hessian << std::endl;
 
 	// now get the transformation to the tool for the current configuration
 	Eigen::Matrix4d T;
@@ -137,6 +144,12 @@ void test_CRManipulator(void) {
     Jred = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ, elems);
     std::cout << "MyRobot Jacobian (reduced) is \n" << Jred << std::endl;
     
+	// get the Hessian for only (x, y, g)
+	Eigen::MatrixXd Hred;
+	elems << true, true, false, false, false, true;
+	Hred = MyRobot.hessian(toolIndex, CR_EULER_MODE_XYZ, elems);
+	std::cout << "MyRobot Hessian (reduced) is \n" << Hred << std::endl;
+
     // get the tool pose for only (x, y, g)
     Eigen::VectorXd pose;
     pose = MyRobot.getToolPose(toolIndex, CR_EULER_MODE_XYZ, elems);

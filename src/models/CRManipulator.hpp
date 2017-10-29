@@ -113,6 +113,12 @@ namespace CoreRobotics {
  Manipulation", Ed. 1, CRC Press, 1993.
  <a href="http://www.cds.caltech.edu/~murray/mlswiki/index.php/Main_Page">
  Available online.</a> \n\n
+
+ [3] A. Hourtash, "The Kinematic Hessian and Higher Derivatives", IEEE 
+ International Symposium on Computational Intelligence in Robotics and 
+ Automation, 169-174, 2005. 
+ <a href="http://doi.org/10.1109/CIRA.2005.1554272">
+
  */
 //=====================================================================
 //! Enumerator for specifying how the manipulator is driven
@@ -189,6 +195,23 @@ public:
 	Eigen::MatrixXd jacobian(unsigned i_toolIndex,
                              CREulerMode i_mode,
                              Eigen::Matrix<int, 6, 1> i_poseElementsInt);
+
+//---------------------------------------------------------------------
+// Hessian
+public:
+
+	//! Compute the instantaneous numerical Jacobian
+	Eigen::MatrixXd hessian(unsigned i_toolIndex,
+		CREulerMode i_mode);
+
+	Eigen::MatrixXd hessian(unsigned i_toolIndex,
+		CREulerMode i_mode,
+		Eigen::Matrix<bool, 6, 1> i_poseElements);
+
+	Eigen::MatrixXd hessian(unsigned i_toolIndex,
+		CREulerMode i_mode,
+		Eigen::Matrix<int, 6, 1> i_poseElementsInt);
+
 
 //---------------------------------------------------------------------
 // Add link/tool Methods
