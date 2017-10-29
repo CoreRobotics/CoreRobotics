@@ -137,6 +137,17 @@ public:
     
     
 //---------------------------------------------------------------------
+// Protected Methods
+protected:
+    
+    //! A Runge-Kutta solver on the dynFcn
+    Eigen::VectorXd rk4step(double i_t,
+                            Eigen::VectorXd i_x,
+                            Eigen::VectorXd i_u,
+                            double i_dt);
+    
+    
+//---------------------------------------------------------------------
 // Protected Members
 protected:
     

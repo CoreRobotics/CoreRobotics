@@ -49,71 +49,12 @@ using namespace CoreRobotics;
 void CRTestFrameOffset(void){
     
     std::cout << "**********************\n";
-    std::cout << "Running the CRTestFrameOffset\n";
+    std::cout << "Running the test_CRFrameDh\n";
 
-	CRManipulator MyRobot;
-
-	CRFrameDh* F0 = new CRFrameDh();
-	// pointer to the CRFrameDh Class, F0 will now reference the CRFrameDh not copy the structure
-	CRFrameDh* F1 = new CRFrameDh();
-
-
-	CRRigidBody* Link0 = new CRRigidBody();
-	CRRigidBody* Link1 = new CRRigidBody();
-	
-	// Set info for Link 0 and add to MyRobot
-    F0->setFreeVariable(CR_DH_FREE_THETA);
-    F1->setFreeVariable(CR_DH_FREE_NONE);
-	// F0->m_freeVar = CR_DH_FREE_THETA;
-	// F1->m_freeVar = CR_DH_FREE_NONE;
-	// DH free variables
-		/*CR_DH_FREE_NONE
-		CR_DH_FREE_R
-		CR_DH_FREE_ALPHA
-		CR_DH_FREE_D
-		CR_DH_FREE_THETA */
-
-	F0->setMode(CR_DH_MODE_MODIFIED);
-	F1->setMode(CR_DH_MODE_MODIFIED);
-	// DH modes
-	/*	CR_DH_MODE_CLASSIC
-		CR_DH_MODE_MODIFIED */
-
-	/*double drvienangle;
-	F0->getFreeValue(drvienangle); */
-
-	F0->setParameters(0, 0, 0.2, 0, 3.1415/2.0);
-	F1->setParameters(0.1, 0, 0, 0, 0);
-	// Set Parameters
-	/*(double 	r,
-		double 	alpha,
-		double 	d,
-		double 	theta,
-		double  offset		-		free variable offset distance or angle
-		)*/
-
-	Link0->setFrame(F0);
-	Link1->setFrame(F1);
-	MyRobot.addLink(Link0);
-	MyRobot.addLink(Link1);
-
-		
-	F0->setFreeValue(0);
-
-	// Now get the configuration values
-	int dof;
-	Eigen::VectorXd jointAngles;
-	dof = MyRobot.getDegreesOfFreedom();
-	jointAngles = MyRobot.getConfiguration();
-	std::cout << "MyRobot has " << dof << " DOF, with joint angles = ("
-	<< jointAngles.transpose() << ") rad" << std::endl;
-
-	// Now get the Forward Kinematics and Jacobian
-	Eigen::MatrixXd Jacobian, FwdKin;
-	FwdKin = MyRobot.getForwardKinematics();
-	// MyRobot.getJacobian(Jacobian);
-	std::cout << "Forward Kinematics = \n" << FwdKin << std::endl;
-	// std::cout << "Jacobian = \n" << Jacobian << std::endl;
+	CRFrameDh* F = new CRFrameDh();
+    F->setParameters(1.0, CR_PI/2.0, 1.0, 0.0);
+    
+    std::cout << F->getPose(CR_EULER_MODE_XYZ) << std::endl;
 
 }
 

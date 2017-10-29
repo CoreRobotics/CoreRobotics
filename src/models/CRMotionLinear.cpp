@@ -127,6 +127,32 @@ Eigen::VectorXd CRMotionLinear::motion(Eigen::VectorXd i_u)
     // return the new state
     return this->m_state;
 }
+    
+    
+//=====================================================================
+/*!
+ This method performs a Runge Kutta step on the dynFcn member.\n
+ 
+ \param[in] i_t - time t(k)
+ \param[in] i_x - state x(k)
+ \param[in] i_u - input u(k)
+ \param[in] i_dt - sample rate dt
+ \return - the next state x(k+1)
+ */
+//---------------------------------------------------------------------
+Eigen::VectorXd CRMotionLinear::rk4step(double i_t,
+                                        Eigen::VectorXd i_x,
+                                        Eigen::VectorXd i_u,
+                                        double i_dt)
+{
+    // RK4 step
+    Eigen::VectorXd f1 = (this->m_dynPredictFcn)(i_t, i_x, i_u);
+    Eigen::VectorXd f2 = (this->m_dynPredictFcn)(i_t+i_dt/2,i_x+i_dt*f1/2,i_u);
+    Eigen::VectorXd f3 = (this->m_dynPredictFcn)(i_t+i_dt/2,i_x+i_dt*f2/2,i_u);
+    Eigen::VectorXd f4 = (this->m_dynPredictFcn)(i_t+i_dt,i_x+i_dt*f3,i_u);
+    return i_x + i_dt/6*(f1 + 2*f2 + 2*f3 + f4);
+}
+    
 
 //=====================================================================
 // End namespace

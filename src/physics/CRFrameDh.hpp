@@ -125,7 +125,6 @@ public:
               double i_alpha,
               double i_d,
               double i_theta,
-              double i_offset,
               CRDhMode i_mode,
               CRDhFreeVariable i_free);
     CRFrameDh();
@@ -156,15 +155,13 @@ public:
     void setParameters(double i_r,
                        double i_alpha,
                        double i_d,
-                       double i_theta,
-                       double i_offset);
+                       double i_theta);
     
     //! Get the DH parameter values
     void getParameters(double& o_r,
                        double& o_alpha,
                        double& o_d,
-                       double& o_theta,
-                       double& o_offset);
+                       double& o_theta);
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -197,7 +194,7 @@ private:
     double m_dhTheta;
 
 	//! free variable offset parameter [m] or [rad]
-	double m_freeVarOffset;
+    // double m_freeVarOffset;
     
 //---------------------------------------------------------------------
 // Private Methods
