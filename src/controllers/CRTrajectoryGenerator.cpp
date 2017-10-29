@@ -65,10 +65,10 @@ CRTrajectoryGenerator::CRTrajectoryGenerator()
  this method is called, the internal clock is reset to time = 0.\n
  
  \param[in]     i_x0 - initial state vector (position)
- \param[in]     i_x0 - initial state 1st derivative (velocity)
+ \param[in]     i_v0 - initial state 1st derivative (velocity)
  \param[in]     i_a0 - initial state 2nd derivative (acceleration)
  \param[in]     i_xf - final state vector (position)
- \param[in]     i_xf - final state 1st derivative (velocity)
+ \param[in]     i_vf - final state 1st derivative (velocity)
  \param[in]     i_af - final state 2nd derivative (acceleration)
  \param[in]     i_tf - final time
  \return        CoreRobotics::CRResult indicator

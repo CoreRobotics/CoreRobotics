@@ -94,7 +94,7 @@ Eigen::VectorXd CRMath::forwardEulerStep(Eigen::VectorXd(i_dynamicSystem)(double
  The Runga-Kutta integration is an accurate integration scheme at the
  expense of computational complexity over the forward Euler method.
  
- \param [in] i_dynamicSystem - the continuous time dynamic system.
+ \param [in] i_dynamicSystem - the continuous time dynamic system
  \param [in] i_t - the current time in seconds
  \param [in] i_x - the current state vector
  \param [in] i_u - the current input vector

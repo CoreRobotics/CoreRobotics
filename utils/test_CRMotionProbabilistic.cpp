@@ -49,8 +49,8 @@ using namespace CoreRobotics;
 CRNoiseGaussian* dynNoise;
 
 // -------------------------------------------------------------
-// Declare a probabilistic continuous motion model - xdot = fcn(x,u,t,s)
-Eigen::VectorXd probDynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t, bool sample){
+// Declare a probabilistic continuous motion model - xdot = fcn(t,x,u,s)
+Eigen::VectorXd probDynFcn(double t, Eigen::VectorXd x, Eigen::VectorXd u, bool sample){
     Eigen::VectorXd w(1);
     if (sample){
         w = dynNoise->sample();

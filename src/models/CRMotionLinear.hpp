@@ -82,12 +82,13 @@ namespace CoreRobotics {
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
  and \f$k\f$ is a discrete sampling index.
  
- These methods are available for interfacing with the Motion Model:
+ These methods are available for interfacing with the linear motion model:
  - CRMotionLinear::setState sets the underlying state vector.
  - CRMotionLinear::getState returns the state vector.
  - CRMotionLinear::setTimeStep sets the time step (s).
  - CRMotionLinear::getTimeStep returns the time step (s).
- - CRMotionLinear::gettime returns the simulation time (s).=
+ - CRMotionLinear::getTime returns the simulation time (s).
+ - CRMotionLinear::setDynamics sets the dynamics matrices (A, B).
  - CRMotionLinear::motion computes a new state and updates the
  internal value for an input (u).
  
@@ -134,15 +135,17 @@ public:
     //! Simulate the motion
     Eigen::VectorXd motion(Eigen::VectorXd i_u);
     
+    
 //---------------------------------------------------------------------
 // Protected Methods
 protected:
     
     //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(Eigen::VectorXd i_x,
+    Eigen::VectorXd rk4step(double i_t,
+                            Eigen::VectorXd i_x,
                             Eigen::VectorXd i_u,
-                            double i_t,
                             double i_dt);
+    
     
 //---------------------------------------------------------------------
 // Protected Members
@@ -154,11 +157,10 @@ protected:
     //! Input Matrix
     Eigen::MatrixXd m_B;
     
-    //! Callback to the dynamic model function \f$\dot{x} = f(x,u,t)\f$
-    //  or \f$x_kp1 = f(x_k,u_k,t_k)\f$ depending on what the type is set to.
-    Eigen::VectorXd m_dynPredictFcn(Eigen::VectorXd x,
-                                    Eigen::VectorXd u,
-                                    double t){
+    //! Callback to the dynamic model function
+    Eigen::VectorXd m_dynPredictFcn(double t,
+                                    Eigen::VectorXd x,
+                                    Eigen::VectorXd u){
         return this->m_A*x + this->m_B*u;
     }
 };

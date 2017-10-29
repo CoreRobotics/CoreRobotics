@@ -59,14 +59,12 @@ namespace CoreRobotics {
  \param[in]   i_theta  - alpha angle of the frame [rad] (0)
  \param[in]   i_mode   - DH convention (CR_DH_MODE_MODIFIED)
  \param[in]   i_free   - free variable (CR_DH_FREE_NONE)
- \param[in]   i_offset - free variable offset [m] or [rad] (0)
  */
 //=====================================================================
 CRFrameDh::CRFrameDh(double i_r,
                      double i_alpha,
                      double i_d,
                      double i_theta,
-                     double i_offset,
                      CRDhMode i_mode,
                      CRDhFreeVariable i_free)
 {
@@ -76,7 +74,7 @@ CRFrameDh::CRFrameDh(double i_r,
     m_dhTheta = i_theta;
 	m_dhMode = i_mode;
     m_freeVar = i_free;
-	m_freeVarOffset = i_offset;
+	// m_freeVarOffset = i_offset;
 	setRotationAndTranslation();
 }
 CRFrameDh::CRFrameDh()
@@ -87,7 +85,7 @@ CRFrameDh::CRFrameDh()
     m_dhTheta = 0.0;
     m_dhMode = CR_DH_MODE_MODIFIED;
     m_freeVar = CR_DH_FREE_NONE;
-	m_freeVarOffset = 0.0;
+	// m_freeVarOffset = 0.0;
     setRotationAndTranslation();
 }
 
@@ -195,20 +193,18 @@ CRDhMode CRFrameDh::getMode(void)
  \param[in] i_alpha - the alpha value in the DH parameter transformation
  \param[in] i_d - the d value in the DH parameter transformation
  \param[in] i_theta - the theta value in the DH parameter transformation
- \param[in] i_offset - the offset value for the driven variable
  */
 //---------------------------------------------------------------------
 void CRFrameDh::setParameters(double i_r,
                               double i_alpha,
                               double i_d,
-                              double i_theta,
-                              double i_offset)
+                              double i_theta)
 {
     m_dhR = i_r;
     m_dhAlpha = i_alpha;
     m_dhD = i_d;
     m_dhTheta = i_theta;
-	m_freeVarOffset = i_offset;
+	// m_freeVarOffset = i_offset;
     setRotationAndTranslation();
 }
 
@@ -221,19 +217,17 @@ void CRFrameDh::setParameters(double i_r,
  \param[out] o_alpha - the alpha value in the DH parameter transformation
  \param[out] o_d - the d value in the DH parameter transformation
  \param[out] o_theta - the theta value in the DH parameter transformation
- \param[out] o_offset - the offset value for the driven variable
  */
 //---------------------------------------------------------------------
 void CRFrameDh::getParameters(double& o_r,
                               double& o_alpha,
                               double& o_d,
-                              double& o_theta,
-                              double& o_offset){
+                              double& o_theta){
     o_r = m_dhR;
     o_alpha = m_dhAlpha;
     o_d = m_dhD;
     o_theta = m_dhTheta;
-	o_offset = m_freeVarOffset;
+	// o_offset = m_freeVarOffset;
 }
     
     
@@ -266,6 +260,8 @@ bool CRFrameDh::isDriven(void) {
 void CRFrameDh::setRotationAndTranslation(void)
 {
 
+    // Todo: add a variable offset to make handling offsets easier on real robots.
+    /*
 	switch (m_freeVar) {
 	case CR_DH_FREE_NONE:
 		break;
@@ -282,6 +278,7 @@ void CRFrameDh::setRotationAndTranslation(void)
 		m_dhTheta = m_dhTheta + m_freeVarOffset;
 		break;
 	}
+     */
 	
     switch (m_dhMode){
         case CR_DH_MODE_CLASSIC:
@@ -298,6 +295,7 @@ void CRFrameDh::setRotationAndTranslation(void)
             break;
     }
 
+    /*
 	switch (m_freeVar) {
 	case CR_DH_FREE_NONE:
 		break;
@@ -314,6 +312,7 @@ void CRFrameDh::setRotationAndTranslation(void)
 		m_dhTheta = m_dhTheta - m_freeVarOffset;
 		break;
 	}
+     */
 
 }
 

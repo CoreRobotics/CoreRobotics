@@ -56,7 +56,7 @@ namespace CoreRobotics {
  
  If i_type is set to CR_MOTION_CONTINUOUS, then the callback sets
  
- \f$ \dot{x} = f(x,u,t,s) \f$
+ \f$ \dot{x} = f(t,x,u,s) \f$
  
  where \f$x\f$ is the system state, \f$u\f$ is the input (forcing)
  vector, \f$t\f$ is time, and \f$s\f$ is a boolean flag that indicates
@@ -67,7 +67,7 @@ namespace CoreRobotics {
  
  If i_type is set to CR_MOTION_DISCRETE, then the callback sets
  
- \f$ x_{k+1} = f(x_k,u_k,t_k,s) \f$
+ \f$ x_{k+1} = f(t_k,x_k,u_k,s) \f$
  
  where \f$x_k\f$ is the current system state, \f$u_k\f$ is the 
  input (forcing) vector, \f$t_k\f$ is time at interval \f$k\f$, and 
@@ -81,10 +81,10 @@ namespace CoreRobotics {
  \param[in] i_timeStep - the time step of the system
  */
 //---------------------------------------------------------------------
-CRMotionProbabilistic::CRMotionProbabilistic(Eigen::VectorXd(i_dynamics)(Eigen::VectorXd,
-                                                                          Eigen::VectorXd,
-                                                                          double,
-                                                                          bool),
+CRMotionProbabilistic::CRMotionProbabilistic(Eigen::VectorXd(i_dynamics)(double,
+                                                                         Eigen::VectorXd,
+                                                                         Eigen::VectorXd,
+                                                                         bool),
                                              CRMotionModelType i_type,
                                              Eigen::VectorXd i_x0,
                                              double i_timeStep)
@@ -124,11 +124,11 @@ Eigen::VectorXd CRMotionProbabilistic::motion(Eigen::VectorXd i_u, bool i_sample
     
     if (this->m_type == CR_MOTION_DISCRETE) {
         // update the state
-        this->m_state = (this->m_dynPredictFcn)(this->m_state,i_u,t,i_sampleNoise);
+        m_state = (this->m_dynPredictFcn)(t, m_state, i_u, i_sampleNoise);
         
     } else if (this->m_type == CR_MOTION_CONTINUOUS) {
         // update the state
-        this->m_state = this->rk4step(this->m_state,i_u,t,dt,i_sampleNoise);
+        m_state = this->rk4step(t, m_state, i_u, dt, i_sampleNoise);
     }
     
     // update the time
@@ -140,23 +140,7 @@ Eigen::VectorXd CRMotionProbabilistic::motion(Eigen::VectorXd i_u, bool i_sample
 
 Eigen::VectorXd CRMotionProbabilistic::motion(Eigen::VectorXd i_u)
 {
-    double t = this->m_time;
-    double dt = this->m_dt;
-    
-    if (this->m_type == CR_MOTION_DISCRETE) {
-        // update the state
-        this->m_state = (this->m_dynPredictFcn)(this->m_state,i_u,t,false);
-        
-    } else if (this->m_type == CR_MOTION_CONTINUOUS) {
-        // update the state
-        this->m_state = this->rk4step(this->m_state,i_u,t,dt,false);
-    }
-    
-    // update the time
-    this->m_time = t+dt;
-    
-    // return the new state
-    return this->m_state;
+    return this->motion(i_u, false);
 }
     
     
@@ -164,24 +148,25 @@ Eigen::VectorXd CRMotionProbabilistic::motion(Eigen::VectorXd i_u)
 /*!
  This method performs a Runge Kutta step on the dynFcn member.\n
  
+ \param[in] i_t - time t(k)
  \param[in] i_x - state x(k)
  \param[in] i_u - input u(k)
- \param[in] i_t - time t(k)
  \param[in] i_dt - sample rate dt
+ \param[in] i_sample - boolean indicating whether to sample noise
  \return - the next state x(k+1)
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRMotionProbabilistic::rk4step(Eigen::VectorXd i_x,
+Eigen::VectorXd CRMotionProbabilistic::rk4step(double i_t,
+                                               Eigen::VectorXd i_x,
                                                Eigen::VectorXd i_u,
-                                               double i_t,
                                                double i_dt,
                                                bool i_sample)
 {
     // RK4 step
-    Eigen::VectorXd f1 = (this->m_dynPredictFcn)(i_x,i_u,i_t,i_sample);
-    Eigen::VectorXd f2 = (this->m_dynPredictFcn)(i_x+i_dt*f1/2,i_u,i_t+i_dt/2,i_sample);
-    Eigen::VectorXd f3 = (this->m_dynPredictFcn)(i_x+i_dt*f2/2,i_u,i_t+i_dt/2,i_sample);
-    Eigen::VectorXd f4 = (this->m_dynPredictFcn)(i_x+i_dt*f3,i_u,i_t+i_dt,i_sample);
+    Eigen::VectorXd f1 = (this->m_dynPredictFcn)(i_t, i_x, i_u, i_sample);
+    Eigen::VectorXd f2 = (this->m_dynPredictFcn)(i_t+i_dt/2,i_x+i_dt*f1/2,i_u,i_sample);
+    Eigen::VectorXd f3 = (this->m_dynPredictFcn)(i_t+i_dt/2,i_x+i_dt*f2/2,i_u,i_sample);
+    Eigen::VectorXd f4 = (this->m_dynPredictFcn)(i_t+i_dt,i_x+i_dt*f3,i_u,i_sample);
     return i_x + i_dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
 

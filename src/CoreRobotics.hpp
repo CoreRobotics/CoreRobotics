@@ -46,12 +46,12 @@ POSSIBILITY OF SUCH DAMAGE.
 /*! \mainpage Introduction
 
 The CoreRobotics libraries provide basic modules for real-time robot control
-including kinematics, estimation, perception, modeling and representations of
-items in the world. The libraries are written in C++ and are intended to be
-cross-platform, although they have currently only been tested on Windows 
+including kinematics, inverse kinematics, trajectory shaping, control,
+estimation, modeling, multi-threading and timing. The libraries are written
+in C++ and are intended to be cross-platform, currently tested on Windows
 8.1/10, Mac OS X, and Ubuntu platforms.  The code is distributed under the
 BSD 3-clause license for flexibility of use.  By using this software, you are
-agreeing to the license.  Please read the license prior to installing the
+agreeing to the license.  Please read the license prior to using the
 CoreRobotics library.
  
 This introduction is broken down into the following sections.
@@ -59,9 +59,10 @@ This introduction is broken down into the following sections.
 - \subpage install
 - \subpage overview
 - \subpage gettingstarted
-- \subpage references
+- \subpage examplecmake
 - \subpage python
 - \subpage matlab
+- \subpage references
 
 A note on units:  All units in the library, unless specified, are in SI
 (international standard), i.e.: radians, meters, kilograms, etc...
@@ -114,9 +115,47 @@ for your IDE of choice.  CMake is a tool for generating platform-specific
 IDE files from cross-platform source code.  We highly recommend the use of 
 CMake to build your first program.  Instructions for how to build CoreRobotics
 for your specific platform using CMake are presented below.
+- \subpage install_linux
 - \subpage install_mac
 - \subpage install_windows
 \n\n
+ 
+\section install_linux Linux Make
+Tested on Ubuntu 16.04.
+
+### Step 1.
+Download the latest version of CMake for Linux.
+\code
+sudo apt-get install cmake
+\endcode
+
+### Step 2.
+After CMake is installed, use the terminal to cd into the root folder of
+CoreRobotics.  There should be subfolders named doc, src, utils, etc.
+Run the following commands one at a time to build the CoreRobotics
+library, test routines, and example code:
+
+\code
+$ mkdir build
+$ cd build
+$ cmake -G "Unix Makefiles" ../
+\endcode
+
+### Step 3.
+After the project files are created, you can build the library with:
+\code
+$ make
+\endcode
+
+### Step 4.
+Once the project has built, you can run the test script by running the
+following terminal commands (assuming you left terminal alone from step 2)
+
+\code
+$ cd ../bin/Release
+$ ./TestModules
+\endcode
+\n\n\n\n
 
 \section install_mac Mac XCode
 Tested on Mac OSX 10.11.6 with XCode Version 8.1.  The remaining steps assume
@@ -138,20 +177,22 @@ library, test routines, and example code:
 \code 
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_BUILD_TYPE=Release -G "Xcode" ../
+$ cmake "Xcode" ../
 $ open CoreRobotics.xcodeproj/
 \endcode
  
 ### Step 3.
 After the project files are created, the CoreRobotics XCode project
-should open.  Go to Product >> Build (Command - B) to build the project.
+should open.  To change the build type, under "Edit Scheme", select the "Build
+Configuration".  Then, go to Product >> Build (Command - B) to build the project.
  
 ### Step 4.
 Once the project has built, you can run the test script by running the
 following terminal commands (assuming you left terminal alone from step 2)
 
 \code
-$ ../utils/bin/Debug/TestModules
+$ cd ../bin/Release
+$ ./TestModules
 \endcode
 \n\n\n\n
  
@@ -186,7 +227,8 @@ Once the project has built, you can run the test script by running the
 following terminal commands (assuming you left terminal alone from step 2)
 
 \code
-> ..\utils\bin\Release\TestModules.exe
+>> cd ..\bin\Release
+>> TestModules.exe
 \endcode
 \n\n\n\n
 */
@@ -204,28 +246,49 @@ each class.
 - \subpage core implements core classes (such as timing and multi-
  threading) for implementation.
 - \subpage physics implements physics models such as frame transformations
- and rigid body representations for kinematics and dynamics
+ and rigid body representations for kinematics and dynamics.
 - \subpage models implements models such as dynamics, sensor, and noise
  models, as well as a class for handling manupulators.
-- \subpage controllers implements controllers and planners
-- \subpage estimators implements state estimtion and perceptions
-- \subpage world implements scene graph world and child representations.
+- \subpage controllers implements controllers and planners.
+- \subpage estimators implements state estimtion.
  
  */
 //---------------------------------------------------------------------------
 /*!
 \page gettingstarted Getting Started
-This section assumes you have properly installed CoreRobotics for your 
-platform.  It is also recommended that you've read through the Overview
-section prior to tackling some of the examples presented here.
+Once you have succesfully built CoreRobotics, it's time to check out some of
+the examples.  Each class in the library has an associated script in the utils
+folder that tests the functionality of the class.  Examining these examples is
+the best way to get started with CoreRobotics.  The examples are conveniently
+included in the class descriptions.
 
-\section transformations Transformations
-\section kinematics Kinematics
-\section inversekinematics Inverse Kinematics
-\section motion Motion Modeling
-\section estimation State Estimation
-Todo
 */
+//---------------------------------------------------------------------------
+/*!
+ \page examplecmake CMake Example
+ To include CoreRobotics in your own project, we rccomend use of CMake.
+ Add the following commands to your CMakeLists.txt  Be sure to replace items
+ in brackets with specific names for your setup.
+ 
+ \code
+ set (CR_DIR <path/to/corerobotics/root>)
+ 
+ include_directories(
+     ${CR_DIR}/src
+     ${CR_DIR}/src/core
+     ${CR_DIR}/src/math
+     ${CR_DIR}/src/models
+     ${CR_DIR}/src/estimators
+     ${CR_DIR}/src/physics
+     ${CR_DIR}/src/controllers
+     ${CR_DIR}/external/eigen
+ )
+ 
+ link_directories(${CR_DIR}/lib/Release)
+ 
+ target_link_libraries(<target_name> ${CR_DIR}/lib/Release/<lib name>)
+ \endcode
+ */
 //---------------------------------------------------------------------------
 /*!
 \page references References
@@ -252,16 +315,15 @@ Todo
 //===========================================================================
 /*!
 \file CoreRobotics.hpp
-\brief CoreRobotics header.
-//! \details Todo
+\brief This is the CoreRobotics header file.  Including this file in your
+project includes all the CoreRobotics modules.
 */
 //===========================================================================
 
 
 //---------------------------------------------------------------------------
 //! \defgroup core Core
-//! \brief Implements core functionality.
-//! \details This module implements the core functionality of the library,
+//! \brief This module implements the core functionality of the library,
 //! such as timing, loop definitions and threading.
 //---------------------------------------------------------------------------
 #include "CRTypes.hpp"
@@ -272,7 +334,6 @@ Todo
 //---------------------------------------------------------------------------
 //! \defgroup math Math
 //! \brief Implements math components.
-//! \details Todo
 //---------------------------------------------------------------------------
 #include "CRMath.hpp"
 
@@ -280,7 +341,6 @@ Todo
 //---------------------------------------------------------------------------
 //! \defgroup physics Physics
 //! \brief Implements physics (kinematics and dynamics) representations.
-//! \details Todo
 //---------------------------------------------------------------------------
 #include "CRFrame.hpp"
 #include "CRFrameEuler.hpp"
@@ -291,7 +351,6 @@ Todo
 //---------------------------------------------------------------------------
 //! \defgroup models Models
 //! \brief Implements model (sensor, motion, and noise) representations.
-//! \details Todo
 //---------------------------------------------------------------------------
 #include "CRManipulator.hpp"
 #include "CRNoiseModel.hpp"
@@ -308,23 +367,14 @@ Todo
 
 
 //---------------------------------------------------------------------------
-//! \defgroup world World
-//! \brief Implements the world for interacting with multiple objects.
-//! \details Todo
-//---------------------------------------------------------------------------
-
-
-//---------------------------------------------------------------------------
 //! \defgroup estimators Estimators
 //! \brief Implements estimators for recovering model states.
-//! \details Todo
 //---------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------
 //! \defgroup controllers Controllers
 //! \brief Implements controllers and policies for regulating motion and actions.
-//! \details Todo
 //---------------------------------------------------------------------------
 #include "CRInverseKinematics.hpp"
 #include "CRNullSpace.hpp"

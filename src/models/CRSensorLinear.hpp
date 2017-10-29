@@ -79,6 +79,7 @@ namespace CoreRobotics {
  - CRSensorLinear::getState outputs the state vector.
  - CRSensorLinear::measurement computes a simulated measurement 
  vector (z) from the underlying state (x).
+ - CRSensorLinear::setObservation sets the observation matrix (H).
  
  ## Example
  This example demonstrates use of the CRSensorLinear class.

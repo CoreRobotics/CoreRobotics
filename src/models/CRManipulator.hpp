@@ -76,27 +76,32 @@ namespace CoreRobotics {
  - CRManipulator::addTool adds a tool to the chain relative to a link
  frame in the kinematic chain
  - CRManipulator::setModelType sets how the manipulator is driven.
- Available options are in CoreRobotics::CRManipulatorType.
+ Available options are defined in CoreRobotics::CRManipulatorType.
  
  These methods operate on the configuration space (i.e. joint space) 
  of the robot:
  - CRManipulator::getConfiguration outputs the vector of configuration
  values (i.e. joint angles for purely revolute joints).
- - CRManipulator::getToolFrame returns the specified tool frame for the
- current manipulator configuration.
+ - CRManipulator::setConfiguration sets the configuration of the
+ manipulator.
  - CRManipulator::getLinkFrame returns the specified link frame for the
  current manipulator configuration.
- - CRManipulator::setConfiguration sets the configuration of the 
- manipulator.
+ - CRManipulator::getToolFrame returns the specified tool frame for the
+ current manipulator configuration.
+ - CRManipulator::getToolPose returns the pose of the specified tool.
+ - CRManipulator::getDegreesOfFreedom returns the number of free
+ configuration variables.
+ - CRManipulator::getNumberOfLinks returns the number of frames in the
+ tree.
  
  These methods return useful information for control:
  - CRManipulator::getForwardKinematics returns a matrix of the Euclidean
  poses at each frame (starting with the base frame and moving out to the
  tool frame) for the current configuration.
- - CRManipulator::getJacobian returns the Jacobian for a specified tool.
+ - CRManipulator::jacobian returns the Jacobian for a specified tool.
  
  ## Example
- This example creates a CRManipulator class.
+ This example shows use of CRManipulator.
 
  \include test_CRManipulator.cpp
  

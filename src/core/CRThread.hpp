@@ -70,6 +70,7 @@ namespace CoreRobotics {
  and starting and stopping thread execution.
  
  - CRThread::setCallback sets the callback function.
+ - CRThread::setPriority sets the priority of the thread.
  - CRThread::start starts the thread execution.
  - CRThread::stop stops the thread execution.
  

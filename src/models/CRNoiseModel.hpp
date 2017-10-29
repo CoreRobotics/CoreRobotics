@@ -80,6 +80,10 @@ namespace CoreRobotics {
  
  \f$ p = f(x) \f$.
  
+ - CRNoiseModel::setParameters sets the noise model callback
+ - CRNoiseModel::sample samples from the noise model
+ - CRNoiseModel::probability evaluates the probability
+ 
  ## Example
  This example demonstrates use of the CRNoiseModel class.
  

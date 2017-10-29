@@ -71,6 +71,10 @@ namespace CoreRobotics {
  and upper bound \f$b\f$ on the range of the sampled state [3].  Every
  state in this range has equal probability of being sampled.
  
+ - CRNoiseUniform::setParameters sets the parameters of the noise model
+ - CRNoiseUniform::sample samples from the noise model
+ - CRNoiseUniform::probability evaluates the probability
+ 
  ## Example
  This example demonstrates use of the CRNoiseUniform class.
  
