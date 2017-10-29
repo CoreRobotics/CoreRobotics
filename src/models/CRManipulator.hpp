@@ -200,7 +200,7 @@ public:
 // Hessian
 public:
 
-	//! Compute the instantaneous numerical Jacobian
+	//! Compute the instantaneous numerical Hessian
 	Eigen::MatrixXd hessian(unsigned i_toolIndex,
 		CREulerMode i_mode);
 
