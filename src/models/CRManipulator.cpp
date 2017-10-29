@@ -474,10 +474,10 @@ This method adds a frame to the list of tools. \n
 int CRManipulator::addTool(unsigned i_parentIndex, CRFrame* i_tool)
 {
 	// get the number of links
-	int n = this->getNumberOfLinks();
+	// int n = this->getNumberOfLinks();
 	
     // throw an error if the parent index is outside of the range
-    assert(i_parentIndex <= unsigned(n-1));
+    assert(i_parentIndex <= unsigned(this->getNumberOfLinks()-1));
     
     // add the parent integer
     m_listToolFrames.push_back(i_tool);

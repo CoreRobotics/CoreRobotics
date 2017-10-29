@@ -134,15 +134,6 @@ public:
     //! Simulate the motion
     Eigen::VectorXd motion(Eigen::VectorXd i_u);
     
-//---------------------------------------------------------------------
-// Protected Methods
-protected:
-    
-    //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(Eigen::VectorXd i_x,
-                            Eigen::VectorXd i_u,
-                            double i_t,
-                            double i_dt);
     
 //---------------------------------------------------------------------
 // Protected Members
@@ -154,11 +145,10 @@ protected:
     //! Input Matrix
     Eigen::MatrixXd m_B;
     
-    //! Callback to the dynamic model function \f$\dot{x} = f(x,u,t)\f$
-    //  or \f$x_kp1 = f(x_k,u_k,t_k)\f$ depending on what the type is set to.
-    Eigen::VectorXd m_dynPredictFcn(Eigen::VectorXd x,
-                                    Eigen::VectorXd u,
-                                    double t){
+    //! Callback to the dynamic model function
+    Eigen::VectorXd m_dynPredictFcn(double t,
+                                    Eigen::VectorXd x,
+                                    Eigen::VectorXd u){
         return this->m_A*x + this->m_B*u;
     }
 };

@@ -70,13 +70,13 @@ namespace CoreRobotics {
  container for the continuous model
  
  \f[
- \dot{x} = f(x,u,t,w)
+ \dot{x} = f(t,x,u,w)
  \f]
  
  or
  
  \f[
- x_{k+1} = f(x_k,u_k,t_k,w_k)
+ x_{k+1} = f(t_k,x_k,u_k,w_k)
  \f]
  
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
@@ -112,10 +112,10 @@ class CRMotionProbabilistic : public CRMotionModel {
 public:
     
     //! Class constructor
-    CRMotionProbabilistic(Eigen::VectorXd(i_dynamics)(Eigen::VectorXd,
-                                                       Eigen::VectorXd,
-                                                       double,
-                                                       bool),
+    CRMotionProbabilistic(Eigen::VectorXd(i_dynamics)(double,
+                                                      Eigen::VectorXd,
+                                                      Eigen::VectorXd,
+                                                      bool),
                           CRMotionModelType i_type,
                           Eigen::VectorXd i_x0,
                           double i_timeStep);
@@ -135,9 +135,9 @@ public:
 protected:
     
     //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(Eigen::VectorXd i_x,
+    Eigen::VectorXd rk4step(double i_t,
+                            Eigen::VectorXd i_x,
                             Eigen::VectorXd i_u,
-                            double i_t,
                             double i_dt,
                             bool i_sample);
     
@@ -145,11 +145,10 @@ protected:
 // Protected Members
 protected:
     
-    //! Callback to the dynamic model function \f$\dot{x} = f(x,u,t,w)\f$
-    //  or \f$x_kp1 = f(x_k,u_k,t_k,w_k)\f$ depending on what the type is set to.
-    Eigen::VectorXd(*m_dynPredictFcn)(Eigen::VectorXd,
+    //! Callback to the dynamic model function
+    Eigen::VectorXd(*m_dynPredictFcn)(double,
                                       Eigen::VectorXd,
-                                      double,
+                                      Eigen::VectorXd,
                                       bool);
     
 };

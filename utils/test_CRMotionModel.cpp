@@ -48,8 +48,8 @@ using namespace CoreRobotics;
 
 
 // -------------------------------------------------------------
-// Declare a continuous motion model - xdot = fcn(x,u,t)
-Eigen::VectorXd detDynFcn(Eigen::VectorXd x, Eigen::VectorXd u, double t){
+// Declare a continuous motion model - xdot = fcn(t,x,u)
+Eigen::VectorXd detDynFcn(double t, Eigen::VectorXd x, Eigen::VectorXd u){
     return -x + u;  // motion
 }
 

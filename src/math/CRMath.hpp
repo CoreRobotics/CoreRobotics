@@ -100,7 +100,7 @@ public:
 public:
     
     //! Forward euler integration
-    static Eigen::VectorXd forwardEulerStep(Eigen::VectorXd(i_dyanmicSystem)(double,
+    static Eigen::VectorXd forwardEulerStep(Eigen::VectorXd(i_dynamicSystem)(double,
                                                                              Eigen::VectorXd,
                                                                              Eigen::VectorXd),
                                             double i_t,
