@@ -86,7 +86,7 @@ namespace CoreRobotics {
  - CRMotionModel::getState returns the state vector.
  - CRMotionModel::setTimeStep sets the time step (s).
  - CRMotionModel::getTimeStep returns the time step (s).
- - CRMotionModel::gettime returns the simulation time (s).=
+ - CRMotionModel::getTime returns the simulation time (s).=
  - CRMotionModel::motion computes a new state and updates the
  internal value for an input (u).
  

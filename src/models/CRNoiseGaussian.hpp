@@ -70,6 +70,10 @@ namespace CoreRobotics {
  multivariate Gaussian noise (see [1-3]). The Gaussian is completely
  defined by a mean \f$\mu\f$ and covariance \f$\Sigma\f$.
  
+ - CRNoiseGaussian::setParameters sets the parameters of the noise model
+ - CRNoiseGaussian::sample samples from the noise model
+ - CRNoiseGaussian::probability evaluates the probability
+ 
  ## Example
  This example demonstrates use of the CRNoiseGaussian class.
  

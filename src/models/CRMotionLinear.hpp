@@ -82,12 +82,13 @@ namespace CoreRobotics {
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
  and \f$k\f$ is a discrete sampling index.
  
- These methods are available for interfacing with the Motion Model:
+ These methods are available for interfacing with the linear motion model:
  - CRMotionLinear::setState sets the underlying state vector.
  - CRMotionLinear::getState returns the state vector.
  - CRMotionLinear::setTimeStep sets the time step (s).
  - CRMotionLinear::getTimeStep returns the time step (s).
- - CRMotionLinear::gettime returns the simulation time (s).=
+ - CRMotionLinear::getTime returns the simulation time (s).
+ - CRMotionLinear::setDynamics sets the dynamics matrices (A, B).
  - CRMotionLinear::motion computes a new state and updates the
  internal value for an input (u).
  

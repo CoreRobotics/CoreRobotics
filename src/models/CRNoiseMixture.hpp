@@ -72,6 +72,10 @@ namespace CoreRobotics {
  is also accompanied by a weight, indicating the probability of that
  distribution being selected for sampling of the noise.
  
+ - CRNoiseMixture::add adds a noise model to the mixture
+ - CRNoiseMixture::sample samples from the noise model
+ - CRNoiseMixture::probability evaluates the probability
+ 
  ## Example
  This example demonstrates use of the CRNoiseMixture class.
  

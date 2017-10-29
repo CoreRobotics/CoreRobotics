@@ -69,6 +69,10 @@ namespace CoreRobotics {
  a specific point, where the probability of sampling that point is 1,
  see [3].
  
+ - CRNoiseDirac::setParameters sets the parameters of the noise model
+ - CRNoiseDirac::sample samples from the noise model
+ - CRNoiseDirac::probability evaluates the probability
+ 
  ## Example
  This example demonstrates use of the CRNoiseDirac class.
  

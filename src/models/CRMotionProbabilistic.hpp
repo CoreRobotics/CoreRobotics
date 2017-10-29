@@ -88,7 +88,7 @@ namespace CoreRobotics {
  - CRMotionProbabilistic::getState returns the state vector.
  - CRMotionProbabilistic::setTimeStep sets the time step (s).
  - CRMotionProbabilistic::getTimeStep returns the time step (s).
- - CRMotionProbabilistic::gettime returns the simulation time (s).=
+ - CRMotionProbabilistic::getTime returns the simulation time (s).=
  - CRMotionProbabilistic::motion computes a new state and updates the
  internal value for an input (u) and a flag that indicates whether noise
  should be sampled.
