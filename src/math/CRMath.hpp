@@ -66,8 +66,25 @@ namespace CoreRobotics {
 
 \details
 ## Description
-CRMath implements math static helper functions.
+This class implements various math related helper functions.
  
+- CRMath::deg2rad converts degress to radians
+- CRMath::rad2deg converts radians to degrees.
+- CRMath::forwardEulerStep performs forward Euler integration.
+- CRMath::rungeKuttaStep performs 4th order Runga-Kutta integration.
+- CRMath::svd performs singular value decomposition.
+- CRMath::svdInverse performs matrix inverse using SVD.
+- CRMath::rotAboutX constructs a rotation matrix for rotation about x axis.
+- CRMath::rotAboutY constructs a rotation matrix for rotation about y axis.
+- CRMath::rotAboutZ constructs a rotation matrix for rotation about z axis.
+- CRMath::normL1 takes the L1 norm of a vector.
+- CRMath::normL2 takes the L2 norm of a vector.
+- CRMath::normLinf takes the L-infinity norm of a vector.
+- CRMath::wrapToPi wraps angles to +/- $\pi$ radians.
+ 
+## Example
+This example shows usage of the math functions.
+\include test_CRMath.cpp
  
 ## References
 [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,
