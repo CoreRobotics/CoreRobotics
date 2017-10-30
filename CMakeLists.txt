@@ -76,6 +76,7 @@ include_directories(
 # Include 3rd part library headers
 include_directories(
     ${CMAKE_SOURCE_DIR}/external/eigen/
+    ${CMAKE_SOURCE_DIR}/external/boost/
 )
 
 # Header files
