@@ -111,14 +111,14 @@ public:
     
     //! Add a signal to the shared memory
     void addSignal(const char* i_signalName,
-                          Eigen::VectorXd i_data);
+                   Eigen::VectorXd i_data);
     
     //! Remove a signal from the shared memory
     void removeSignal(const char* i_signalName);
     
     //! Set the signal value in shared memory
     void set(const char* i_signalName,
-                    Eigen::VectorXd i_data);
+             Eigen::VectorXd i_data);
     
     //! Set the signal value in shared memory
     Eigen::VectorXd get(const char* i_signalName);
@@ -135,6 +135,9 @@ private:
     
     //! shared memory type
     CRManagerRole m_role;
+    
+    //! remover
+    struct m_remover;
     
     //! Vector of signals in the shared memory
     // std::vector<const char*> m_signals;

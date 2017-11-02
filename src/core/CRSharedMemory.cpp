@@ -67,8 +67,9 @@ CRSharedMemory::CRSharedMemory(const char* i_memoryName,
         {
             shm_remove() { shared_memory_object::remove(name); }
             ~shm_remove(){ shared_memory_object::remove(name); }
-        } remover;
+        } m_remover;
         
+        //! Create the managed shared memory
         m_segment = new managed_shared_memory(create_only,
                                               name,
                                               65536);
