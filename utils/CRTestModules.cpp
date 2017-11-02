@@ -54,6 +54,7 @@ int main(int argc, const char * argv[]) {
     // Run the core test
     test_CRCore();
     
+    /*
     // Run the math test
     test_CRMath();
     
@@ -85,6 +86,6 @@ int main(int argc, const char * argv[]) {
 	test_CRNullSpace();
 	test_CRHardLimits();
     test_CRTrajectoryGenerator();
-    
+    */
     return 0;
 }
