@@ -83,7 +83,7 @@ void test_CRCore(void){
     
     std::cout << "t = " << t << std::endl;
     
-    /*
+    
     // init a point to shared memory
     managed_shared_memory* segment;
     
@@ -103,22 +103,22 @@ void test_CRCore(void){
     
     // Initialize shared memory STL-compatible allocator
     alloc_inst = new ShmemAllocator(segment->get_segment_manager());
-    */
+    
      
     // Open a shared memory object
-    CRSharedMemory mem(memoryName, CR_MANAGER_SERVER);
+    // CRSharedMemory mem(memoryName, CR_MANAGER_SERVER);
     // printf("test_CRCore, Line 72\n");
     
     // create 2 vectors of data
     Eigen::VectorXd v(2);
     v << 0.0, 0.8;
     
-    mem.addSignal("signal_1", v);
-    // Signal *myvector = segment->construct<Signal>("signal_1")(*alloc_inst);
+    // mem.addSignal("signal_1", v);
+    Signal *myvector = segment->construct<Signal>("signal_1")(*alloc_inst);
     
     //Insert data in the vector
-    // for(int i = 0; i < v.size(); ++i)
-    //    myvector->push_back(v(i));
+    for(int i = 0; i < v.size(); ++i)
+        myvector->push_back(v(i));
     
     
 
@@ -135,8 +135,8 @@ void test_CRCore(void){
     myThread2.start();
     
     // remove the signal
-    mem.removeSignal("signal_1");
-    // segment->destroy<Signal>("signal_1");
+    // mem.removeSignal("signal_1");
+    segment->destroy<Signal>("signal_1");
     
 }
 
@@ -146,7 +146,7 @@ void test_CRCore(void){
 void callback1(void){
 
     // Open some shared memory
-    // CRSharedMemory mem(memoryName, CR_MANAGER_CLIENT);
+    CRSharedMemory mem(memoryName, CR_MANAGER_CLIENT);
     /*
     // init a point to shared memory
     managed_shared_memory* segment;
@@ -159,6 +159,7 @@ void callback1(void){
     segment = new managed_shared_memory(open_only,
                                         memoryName);
      */
+    
      
     // create 2 vectors of data
     Eigen::VectorXd v(2);
@@ -187,7 +188,7 @@ void callback1(void){
     
     while(i<10){
         
-        // v = mem.get("signal_1");
+        v = mem.get("signal_1");
         /*
         for (int i = 0; i < n; i++){
             v(i) = myvector->at(i);
@@ -209,7 +210,7 @@ void callback2(void){
     
     
     // Open some shared memory
-    // CRSharedMemory mem(memoryName, CR_MANAGER_CLIENT);
+    CRSharedMemory mem(memoryName, CR_MANAGER_CLIENT);
     /*
     // init a point to shared memory
     managed_shared_memory* segment;
@@ -248,7 +249,7 @@ void callback2(void){
         }
          */
         
-        // mem.set("signal_1", v);
+        mem.set("signal_1", v);
         c.startTimer();
         i++;
         printf("Thread 2: i = %i, signal = %+.4f, %+.4f\n",i,v(0),v(1));

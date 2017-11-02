@@ -71,8 +71,8 @@ CRSharedMemory::CRSharedMemory(const char* i_memoryName,
         
         m_segment = new managed_shared_memory(create_only,
                                               name,
-                                              1024);
-        
+                                              65536);
+
         // Initialize shared memory STL-compatible allocator
         m_alloc_inst = new ShmemAllocator(m_segment->get_segment_manager());
         
@@ -97,7 +97,9 @@ CRSharedMemory::~CRSharedMemory() {
     // Todo: delete the signal when it's done (this means we need to keep
     // track of all the signals that were added.
     // m_segment->destroy<Signal>(signalName);
-    delete m_alloc_inst;
+    if (m_role == CR_MANAGER_SERVER){
+        delete m_alloc_inst;
+    }
     delete m_segment;
 }
     
