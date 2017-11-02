@@ -85,13 +85,11 @@ enum CRManagerRole {
     CR_MANAGER_CLIENT,
 };
 //=====================================================================
-//! Enumerator for specifying thread priority
-struct CRSignal {
-    double time;
-    Eigen::VectorXd data;
-};
-//=====================================================================
 using namespace boost::interprocess;
+//=====================================================================
+//! A couple type definitions
+typedef allocator<double, managed_shared_memory::segment_manager>  ShmemAllocator;
+typedef vector<double, ShmemAllocator> Signal;
 //=====================================================================
 class CRSharedMemory {
     
@@ -100,7 +98,8 @@ class CRSharedMemory {
 public:
     
     //! Class constructor
-    CRSharedMemory(const char* i_memoryName, CRManagerRole i_role);
+    CRSharedMemory(const char* i_memoryName,
+                   CRManagerRole i_role);
     
     //! Class destructor
     virtual ~CRSharedMemory();
@@ -111,17 +110,18 @@ public:
 public:
     
     //! Add a signal to the shared memory
-    void addSignal(const char* i_signalName, CRSignal i_data);
+    void addSignal(const char* i_signalName,
+                          Eigen::VectorXd i_data);
     
     //! Remove a signal from the shared memory
     void removeSignal(const char* i_signalName);
     
     //! Set the signal value in shared memory
-    void set(const char* i_signalName, CRSignal i_data);
+    void set(const char* i_signalName,
+                    Eigen::VectorXd i_data);
     
     //! Set the signal value in shared memory
-    CRSignal get(const char* i_signalName);
-    
+    Eigen::VectorXd get(const char* i_signalName);
     
 //---------------------------------------------------------------------
 // Protected Members
@@ -129,6 +129,15 @@ private:
 
 	//! shared memory segment manager
     managed_shared_memory* m_segment;
+    
+    //! shared memory allocator
+    const ShmemAllocator* m_alloc_inst;
+    
+    //! shared memory type
+    CRManagerRole m_role;
+    
+    //! Vector of signals in the shared memory
+    // std::vector<const char*> m_signals;
     
 };
 //=====================================================================

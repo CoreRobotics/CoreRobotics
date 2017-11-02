@@ -40,16 +40,11 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "CRSharedMemory.hpp"
+#include <iostream>
 
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
-
-//=====================================================================
-//! A couple type definitions
-typedef allocator<double, managed_shared_memory::segment_manager>  ShmemAllocator;
-typedef vector<double, ShmemAllocator> Signal;
-    
 
 //=====================================================================
 /*!
@@ -62,21 +57,35 @@ typedef vector<double, ShmemAllocator> Signal;
 CRSharedMemory::CRSharedMemory(const char* i_memoryName,
                                CRManagerRole i_role)
 {
-    // Remove shared memory on construction and destruction
-    struct shm_remove
-    {
-        shm_remove() { shared_memory_object::remove("i_memoryName"); }
-        ~shm_remove(){ shared_memory_object::remove("i_memoryName"); }
-    } remover;
+    static const char* name = i_memoryName;
     
     // Create a new segment with given name and size
     if (i_role == CR_MANAGER_SERVER){
-        managed_shared_memory* m_segment = new managed_shared_memory(create_only, i_memoryName, 65536);
-    } else if (i_role == CR_MANAGER_CLIENT){
-        managed_shared_memory* m_segment = new managed_shared_memory(open_only, i_memoryName);
+        
+        // Remove shared memory on construction and destruction
+        struct shm_remove
+        {
+            shm_remove() { shared_memory_object::remove(name); }
+            ~shm_remove(){ shared_memory_object::remove(name); }
+        } remover;
+        
+        m_segment = new managed_shared_memory(create_only,
+                                              name,
+                                              1024);
+        
+        // Initialize shared memory STL-compatible allocator
+        m_alloc_inst = new ShmemAllocator(m_segment->get_segment_manager());
+        
+    } else {
+        
+        // Open shared memory
+        m_segment = new managed_shared_memory(open_only,
+                                              name);
     }
+    
+    // push the role
+    m_role = i_role;
 }
-
 
 //=====================================================================
 /*!
@@ -85,10 +94,12 @@ CRSharedMemory::CRSharedMemory(const char* i_memoryName,
 //---------------------------------------------------------------------
 CRSharedMemory::~CRSharedMemory() {
     
+    // Todo: delete the signal when it's done (this means we need to keep
+    // track of all the signals that were added.
+    // m_segment->destroy<Signal>(signalName);
+    delete m_alloc_inst;
     delete m_segment;
-    
 }
-
     
 
 //=====================================================================
@@ -96,23 +107,26 @@ CRSharedMemory::~CRSharedMemory() {
  This method adds a signal to the shared memory.
  
  \param [in] i_signalName - name of the signal to add.
- \param [in] i_data - intial data to add to vector.
+ \param [in] i_data - intial data vector to add to memory.
  */
 //---------------------------------------------------------------------
-void CRSharedMemory::addSignal(const char* i_signalName, CRSignal i_data) {
+void CRSharedMemory::addSignal(const char* i_signalName,
+                               Eigen::VectorXd i_data) {
     
-    // Initialize shared memory STL-compatible allocator
-    const ShmemAllocator alloc_inst (m_segment->get_segment_manager());
+    // Todo: query the signals existing in the local vector
+    // find i_signalName in m_signals
+    // if does not exist then create and add
+    // if does exist, return a CRResult that indicates the variable wasn't created
     
-    //Construct a vector named "MyVector" in shared memory with argument alloc_inst
-    Signal *myvector = m_segment->construct<Signal>(i_signalName)(alloc_inst);
-    
-    // add time
-    myvector->push_back(i_data.time);
+    // Construct a vector named "MyVector" in shared memory with argument alloc_inst
+    // THIS LINE BREAKS:
+    // libc++abi.dylib: terminating with uncaught exception of type boost::interprocess::lock_exception: boost::interprocess::lock_exception
+    //  Abort trap: 6
+    Signal *myvector = m_segment->construct<Signal>(i_signalName)(*m_alloc_inst);
     
     //Insert data in the vector
-    for(int i = 0; i < i_data.data.size(); ++i)
-        myvector->push_back(i_data.data(i));
+    for(int i = 0; i < i_data.size(); ++i)
+        myvector->push_back(i_data(i));
 }
     
 
@@ -138,17 +152,15 @@ void CRSharedMemory::removeSignal(const char* i_signalName) {
  \param [in] i_data - data to set to vector.
  */
 //---------------------------------------------------------------------
-void CRSharedMemory::set(const char* i_signalName, CRSignal i_data) {
+void CRSharedMemory::set(const char* i_signalName,
+                         Eigen::VectorXd i_data) {
     
     // find
     Signal *myvector = m_segment->find<Signal>(i_signalName).first;
     
-    // add time
-    myvector->at(0) = i_data.time;
-    
     //Insert data in the vector
-    for(int i = 0; i < i_data.data.size(); ++i)
-        myvector->at(i+1) = i_data.data(i);
+    for(int i = 0; i < i_data.size(); ++i)
+        myvector->at(i) = i_data(i);
 }
     
     
@@ -158,29 +170,25 @@ void CRSharedMemory::set(const char* i_signalName, CRSignal i_data) {
  This method sets signal values in the shared memory.
  
  \param [in] i_signalName - name of the signal
- \return - value of the memory
+ \return - vector value of the memory
  */
 //---------------------------------------------------------------------
-CRSignal CRSharedMemory::get(const char* i_signalName) {
-    CRSignal sig;
+Eigen::VectorXd CRSharedMemory::get(const char* i_signalName) {
+    
+    // initialize output
+    Eigen::VectorXd data;
     
     // find
     Signal *myvector = m_segment->find<Signal>(i_signalName).first;
     int n = myvector->size();
     
-    // time
-    sig.time = myvector->at(0);
-    sig.data.setZero(n-1);
-    
     // data
-    for (int k = 0; k < n; k++){
-        sig.data(k) = myvector->at(k+1);
+    data.setZero(n);
+    for (int i = 0; i < n; i++){
+        data(i) = myvector->at(i);
     }
-    
-    return sig;
+    return data;
 }
-
-
 
 
 
