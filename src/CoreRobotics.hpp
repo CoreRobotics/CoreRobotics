@@ -329,6 +329,7 @@ project includes all the CoreRobotics modules.
 #include "CRTypes.hpp"
 #include "CRClock.hpp"
 #include "CRThread.hpp"
+#include "CRSharedMemory.hpp"
 
 
 //---------------------------------------------------------------------------

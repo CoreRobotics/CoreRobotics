@@ -85,6 +85,5 @@ int main(int argc, const char * argv[]) {
 	test_CRNullSpace();
 	test_CRHardLimits();
     test_CRTrajectoryGenerator();
-    
     return 0;
 }

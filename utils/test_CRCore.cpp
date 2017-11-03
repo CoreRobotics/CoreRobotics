@@ -50,6 +50,11 @@ void callback2(void);
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
+// define shared memory name
+const char* memoryName = "MyMemory";
+
+
+
 void test_CRCore(void){
     
     std::cout << "**********************\n";
@@ -60,14 +65,24 @@ void test_CRCore(void){
     // Create a clock
     CRClock MyClock;
     
-    
+    // Start a timer
     MyClock.startTimer();
     MyClock.sleep(0.1);
     t = MyClock.getElapsedTime();
     
+    // output result of timer
     std::cout << "t = " << t << std::endl;
+     
+    // Open a shared memory object
+    CRSharedMemory mem(memoryName, CR_MANAGER_SERVER);
     
+    // create a vector of data
+    Eigen::VectorXd v(2);
+    v << 0.0, 0.8;
     
+    // Add a signal
+    mem.addSignal("signal_1", v);
+
     // Create a thread
     CRThread myThread1 = CRThread(CR_PRIORITY_HIGH);
     myThread1.setCallback(*callback1);
@@ -76,10 +91,12 @@ void test_CRCore(void){
     CRThread myThread2;
     myThread2.setCallback(*callback2);
     
-    
     // start the threads
     myThread1.start();
     myThread2.start();
+    
+    // remove the signal
+    mem.removeSignal("signal_1");
     
 }
 
@@ -87,7 +104,15 @@ void test_CRCore(void){
 
 // Callback for the first thread
 void callback1(void){
+
+    // Open some shared memory as client
+    CRSharedMemory mem(memoryName, CR_MANAGER_CLIENT);
+     
+    // create a vector of data
+    Eigen::VectorXd v(2);
+    v << 0.1, 0.4;
     
+    // clock
     CRClock c;
     
     int i = 0;
@@ -96,9 +121,16 @@ void callback1(void){
     double t  = 0.0;
     
     while(i<10){
+        
+        // start the timer
         c.startTimer();
+        
+        // get the value of the signal
+        v = mem.get("signal_1");
+        
+        // iterate the thread count
         i++;
-        printf("Thread 1: i = %i \n",i);
+        printf("Thread 1: i = %2i, signal = %+.1f, %+.1f\n",i,v(0),v(1));
         t = c.getElapsedTime();
         c.sleep(dt-t);
     }
@@ -109,6 +141,14 @@ void callback1(void){
 // Callback for the second thread
 void callback2(void){
     
+    // Open some shared memory as client
+    CRSharedMemory mem(memoryName, CR_MANAGER_CLIENT);
+
+    // create a vector of data
+    Eigen::VectorXd v(2);
+    v << 0.1, 0.4;
+    
+    // clock
     CRClock c;
     
     int i = 0;
@@ -117,9 +157,19 @@ void callback2(void){
     double t  = 0.0;
     
     while(i<4){
+        
+        // start the timer
         c.startTimer();
+        
+        // update the vector
+        v = double(i) * v + v;
+        
+        // push the update to the signal
+        mem.set("signal_1", v);
+        
+        // iterate the thread count
         i++;
-        printf("Thread 2: i = %i \n",i);
+        printf("Thread 2: i = %2i, signal = %+.1f, %+.1f\n",i,v(0),v(1));
         t = c.getElapsedTime();
         c.sleep(dt-t);
     }
