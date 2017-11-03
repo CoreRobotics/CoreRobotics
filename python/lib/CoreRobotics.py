@@ -709,11 +709,11 @@ class CRFrameDh(CRFrame):
     def getMode(self):
         return _CoreRobotics.CRFrameDh_getMode(self)
 
-    def setParameters(self, i_r, i_alpha, i_d, i_theta, i_offset):
-        return _CoreRobotics.CRFrameDh_setParameters(self, i_r, i_alpha, i_d, i_theta, i_offset)
+    def setParameters(self, i_r, i_alpha, i_d, i_theta):
+        return _CoreRobotics.CRFrameDh_setParameters(self, i_r, i_alpha, i_d, i_theta)
 
-    def getParameters(self, o_r, o_alpha, o_d, o_theta, o_offset):
-        return _CoreRobotics.CRFrameDh_getParameters(self, o_r, o_alpha, o_d, o_theta, o_offset)
+    def getParameters(self, o_r, o_alpha, o_d, o_theta):
+        return _CoreRobotics.CRFrameDh_getParameters(self, o_r, o_alpha, o_d, o_theta)
 
     def isDriven(self):
         return _CoreRobotics.CRFrameDh_isDriven(self)
@@ -791,6 +791,9 @@ class CRManipulator(_object):
 
     def jacobian(self, *args):
         return _CoreRobotics.CRManipulator_jacobian(self, *args)
+
+    def hessian(self, *args):
+        return _CoreRobotics.CRManipulator_hessian(self, *args)
 
     def addLink(self, i_link):
         return _CoreRobotics.CRManipulator_addLink(self, i_link)
