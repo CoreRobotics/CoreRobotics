@@ -197,7 +197,7 @@ if(python OR all)
 		include_directories(${PYTHON_INCLUDE_PATH})
 		
 		# If on Windows use Python to get the Numpy include directory
-		if(WIN32)
+		if(WIN32 OR APPLE)
 			find_package(PythonInterp)
 			execute_process(COMMAND
 				"${PYTHON_EXECUTABLE}" -c
