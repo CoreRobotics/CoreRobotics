@@ -12366,9 +12366,8 @@ SWIGINTERN PyObject *_wrap_new_CRFrameDh__SWIG_0(PyObject *SWIGUNUSEDPARM(self),
   double arg2 ;
   double arg3 ;
   double arg4 ;
-  double arg5 ;
-  CoreRobotics::CRDhMode arg6 ;
-  CoreRobotics::CRDhFreeVariable arg7 ;
+  CoreRobotics::CRDhMode arg5 ;
+  CoreRobotics::CRDhFreeVariable arg6 ;
   double val1 ;
   int ecode1 = 0 ;
   double val2 ;
@@ -12377,22 +12376,19 @@ SWIGINTERN PyObject *_wrap_new_CRFrameDh__SWIG_0(PyObject *SWIGUNUSEDPARM(self),
   int ecode3 = 0 ;
   double val4 ;
   int ecode4 = 0 ;
-  double val5 ;
+  int val5 ;
   int ecode5 = 0 ;
   int val6 ;
   int ecode6 = 0 ;
-  int val7 ;
-  int ecode7 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
   PyObject * obj4 = 0 ;
   PyObject * obj5 = 0 ;
-  PyObject * obj6 = 0 ;
   CoreRobotics::CRFrameDh *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOOOOO:new_CRFrameDh",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOO:new_CRFrameDh",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_CRFrameDh" "', argument " "1"" of type '" "double""'");
@@ -12413,22 +12409,17 @@ SWIGINTERN PyObject *_wrap_new_CRFrameDh__SWIG_0(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CRFrameDh" "', argument " "4"" of type '" "double""'");
   } 
   arg4 = static_cast< double >(val4);
-  ecode5 = SWIG_AsVal_double(obj4, &val5);
+  ecode5 = SWIG_AsVal_int(obj4, &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CRFrameDh" "', argument " "5"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_CRFrameDh" "', argument " "5"" of type '" "CoreRobotics::CRDhMode""'");
   } 
-  arg5 = static_cast< double >(val5);
+  arg5 = static_cast< CoreRobotics::CRDhMode >(val5);
   ecode6 = SWIG_AsVal_int(obj5, &val6);
   if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_CRFrameDh" "', argument " "6"" of type '" "CoreRobotics::CRDhMode""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_CRFrameDh" "', argument " "6"" of type '" "CoreRobotics::CRDhFreeVariable""'");
   } 
-  arg6 = static_cast< CoreRobotics::CRDhMode >(val6);
-  ecode7 = SWIG_AsVal_int(obj6, &val7);
-  if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_CRFrameDh" "', argument " "7"" of type '" "CoreRobotics::CRDhFreeVariable""'");
-  } 
-  arg7 = static_cast< CoreRobotics::CRDhFreeVariable >(val7);
-  result = (CoreRobotics::CRFrameDh *)new CoreRobotics::CRFrameDh(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
+  arg6 = static_cast< CoreRobotics::CRDhFreeVariable >(val6);
+  result = (CoreRobotics::CRFrameDh *)new CoreRobotics::CRFrameDh(arg1,arg2,arg3,arg4,arg5,arg6);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRFrameDh, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -12451,20 +12442,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_CRFrameDh(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[8] = {
+  PyObject *argv[7] = {
     0
   };
   Py_ssize_t ii;
   
   if (!PyTuple_Check(args)) SWIG_fail;
   argc = args ? PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 7) && (ii < argc); ii++) {
+  for (ii = 0; (ii < 6) && (ii < argc); ii++) {
     argv[ii] = PyTuple_GET_ITEM(args,ii);
   }
   if (argc == 0) {
     return _wrap_new_CRFrameDh__SWIG_1(self, args);
   }
-  if (argc == 7) {
+  if (argc == 6) {
     int _v;
     {
       int res = SWIG_AsVal_double(argv[0], NULL);
@@ -12487,7 +12478,7 @@ SWIGINTERN PyObject *_wrap_new_CRFrameDh(PyObject *self, PyObject *args) {
           }
           if (_v) {
             {
-              int res = SWIG_AsVal_double(argv[4], NULL);
+              int res = SWIG_AsVal_int(argv[4], NULL);
               _v = SWIG_CheckState(res);
             }
             if (_v) {
@@ -12496,13 +12487,7 @@ SWIGINTERN PyObject *_wrap_new_CRFrameDh(PyObject *self, PyObject *args) {
                 _v = SWIG_CheckState(res);
               }
               if (_v) {
-                {
-                  int res = SWIG_AsVal_int(argv[6], NULL);
-                  _v = SWIG_CheckState(res);
-                }
-                if (_v) {
-                  return _wrap_new_CRFrameDh__SWIG_0(self, args);
-                }
+                return _wrap_new_CRFrameDh__SWIG_0(self, args);
               }
             }
           }
@@ -12514,7 +12499,7 @@ SWIGINTERN PyObject *_wrap_new_CRFrameDh(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_CRFrameDh'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    CoreRobotics::CRFrameDh::CRFrameDh(double,double,double,double,double,CoreRobotics::CRDhMode,CoreRobotics::CRDhFreeVariable)\n"
+    "    CoreRobotics::CRFrameDh::CRFrameDh(double,double,double,double,CoreRobotics::CRDhMode,CoreRobotics::CRDhFreeVariable)\n"
     "    CoreRobotics::CRFrameDh::CRFrameDh()\n");
   return 0;
 }
@@ -12684,7 +12669,6 @@ SWIGINTERN PyObject *_wrap_CRFrameDh_setParameters(PyObject *SWIGUNUSEDPARM(self
   double arg3 ;
   double arg4 ;
   double arg5 ;
-  double arg6 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   double val2 ;
@@ -12695,16 +12679,13 @@ SWIGINTERN PyObject *_wrap_CRFrameDh_setParameters(PyObject *SWIGUNUSEDPARM(self
   int ecode4 = 0 ;
   double val5 ;
   int ecode5 = 0 ;
-  double val6 ;
-  int ecode6 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
   PyObject * obj4 = 0 ;
-  PyObject * obj5 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOOOO:CRFrameDh_setParameters",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOOO:CRFrameDh_setParameters",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRFrameDh, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRFrameDh_setParameters" "', argument " "1"" of type '" "CoreRobotics::CRFrameDh *""'"); 
@@ -12730,12 +12711,7 @@ SWIGINTERN PyObject *_wrap_CRFrameDh_setParameters(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "CRFrameDh_setParameters" "', argument " "5"" of type '" "double""'");
   } 
   arg5 = static_cast< double >(val5);
-  ecode6 = SWIG_AsVal_double(obj5, &val6);
-  if (!SWIG_IsOK(ecode6)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "CRFrameDh_setParameters" "', argument " "6"" of type '" "double""'");
-  } 
-  arg6 = static_cast< double >(val6);
-  (arg1)->setParameters(arg2,arg3,arg4,arg5,arg6);
+  (arg1)->setParameters(arg2,arg3,arg4,arg5);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12750,7 +12726,6 @@ SWIGINTERN PyObject *_wrap_CRFrameDh_getParameters(PyObject *SWIGUNUSEDPARM(self
   double *arg3 = 0 ;
   double *arg4 = 0 ;
   double *arg5 = 0 ;
-  double *arg6 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -12761,16 +12736,13 @@ SWIGINTERN PyObject *_wrap_CRFrameDh_getParameters(PyObject *SWIGUNUSEDPARM(self
   int res4 = 0 ;
   void *argp5 = 0 ;
   int res5 = 0 ;
-  void *argp6 = 0 ;
-  int res6 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
   PyObject * obj4 = 0 ;
-  PyObject * obj5 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOOOO:CRFrameDh_getParameters",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOOO:CRFrameDh_getParameters",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRFrameDh, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRFrameDh_getParameters" "', argument " "1"" of type '" "CoreRobotics::CRFrameDh *""'"); 
@@ -12808,15 +12780,7 @@ SWIGINTERN PyObject *_wrap_CRFrameDh_getParameters(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRFrameDh_getParameters" "', argument " "5"" of type '" "double &""'"); 
   }
   arg5 = reinterpret_cast< double * >(argp5);
-  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_double,  0 );
-  if (!SWIG_IsOK(res6)) {
-    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "CRFrameDh_getParameters" "', argument " "6"" of type '" "double &""'"); 
-  }
-  if (!argp6) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRFrameDh_getParameters" "', argument " "6"" of type '" "double &""'"); 
-  }
-  arg6 = reinterpret_cast< double * >(argp6);
-  (arg1)->getParameters(*arg2,*arg3,*arg4,*arg5,*arg6);
+  (arg1)->getParameters(*arg2,*arg3,*arg4,*arg5);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13854,6 +13818,255 @@ fail:
     "    CoreRobotics::CRManipulator::jacobian(unsigned int,CoreRobotics::CREulerMode)\n"
     "    CoreRobotics::CRManipulator::jacobian(unsigned int,CoreRobotics::CREulerMode,Eigen::Matrix< bool,6,1 >)\n"
     "    CoreRobotics::CRManipulator::jacobian(unsigned int,CoreRobotics::CREulerMode,Eigen::Matrix< int,6,1 >)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRManipulator_hessian__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRManipulator *arg1 = (CoreRobotics::CRManipulator *) 0 ;
+  unsigned int arg2 ;
+  CoreRobotics::CREulerMode arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  Eigen::MatrixXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CRManipulator_hessian",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRManipulator_hessian" "', argument " "1"" of type '" "CoreRobotics::CRManipulator *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRManipulator * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRManipulator_hessian" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CRManipulator_hessian" "', argument " "3"" of type '" "CoreRobotics::CREulerMode""'");
+  } 
+  arg3 = static_cast< CoreRobotics::CREulerMode >(val3);
+  result = (arg1)->hessian(arg2,arg3);
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRManipulator_hessian__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRManipulator *arg1 = (CoreRobotics::CRManipulator *) 0 ;
+  unsigned int arg2 ;
+  CoreRobotics::CREulerMode arg3 ;
+  Eigen::Matrix< bool,6,1 > arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 ;
+  int res4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  Eigen::MatrixXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:CRManipulator_hessian",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRManipulator_hessian" "', argument " "1"" of type '" "CoreRobotics::CRManipulator *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRManipulator * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRManipulator_hessian" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CRManipulator_hessian" "', argument " "3"" of type '" "CoreRobotics::CREulerMode""'");
+  } 
+  arg3 = static_cast< CoreRobotics::CREulerMode >(val3);
+  {
+    res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t,  0  | 0);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "CRManipulator_hessian" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'"); 
+    }  
+    if (!argp4) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRManipulator_hessian" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'");
+    } else {
+      Eigen::Matrix< bool,6,1 > * temp = reinterpret_cast< Eigen::Matrix< bool,6,1 > * >(argp4);
+      arg4 = *temp;
+      if (SWIG_IsNewObj(res4)) delete temp;
+    }
+  }
+  result = (arg1)->hessian(arg2,arg3,arg4);
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRManipulator_hessian__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRManipulator *arg1 = (CoreRobotics::CRManipulator *) 0 ;
+  unsigned int arg2 ;
+  CoreRobotics::CREulerMode arg3 ;
+  Eigen::Matrix< int,6,1 > arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  Eigen::Matrix< int,6,1 > temp4 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  Eigen::MatrixXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:CRManipulator_hessian",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRManipulator_hessian" "', argument " "1"" of type '" "CoreRobotics::CRManipulator *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRManipulator * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRManipulator_hessian" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "CRManipulator_hessian" "', argument " "3"" of type '" "CoreRobotics::CREulerMode""'");
+  } 
+  arg3 = static_cast< CoreRobotics::CREulerMode >(val3);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::Matrix<int,6,1> >(&temp4, obj3))
+    SWIG_fail;
+    arg4 = temp4;
+  }
+  result = (arg1)->hessian(arg2,arg3,arg4);
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRManipulator_hessian(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[5] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 4) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CoreRobotics__CRManipulator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_CRManipulator_hessian__SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CoreRobotics__CRManipulator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_CRManipulator_hessian__SWIG_1(self, args);
+          }
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CoreRobotics__CRManipulator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_int(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          {
+            _v = is_array(argv[3]);
+          }
+          if (_v) {
+            return _wrap_CRManipulator_hessian__SWIG_2(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'CRManipulator_hessian'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    CoreRobotics::CRManipulator::hessian(unsigned int,CoreRobotics::CREulerMode)\n"
+    "    CoreRobotics::CRManipulator::hessian(unsigned int,CoreRobotics::CREulerMode,Eigen::Matrix< bool,6,1 >)\n"
+    "    CoreRobotics::CRManipulator::hessian(unsigned int,CoreRobotics::CREulerMode,Eigen::Matrix< int,6,1 >)\n");
   return 0;
 }
 
@@ -19057,6 +19270,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CRManipulator_getToolPose", _wrap_CRManipulator_getToolPose, METH_VARARGS, NULL},
 	 { (char *)"CRManipulator_setModelType", _wrap_CRManipulator_setModelType, METH_VARARGS, NULL},
 	 { (char *)"CRManipulator_jacobian", _wrap_CRManipulator_jacobian, METH_VARARGS, NULL},
+	 { (char *)"CRManipulator_hessian", _wrap_CRManipulator_hessian, METH_VARARGS, NULL},
 	 { (char *)"CRManipulator_addLink", _wrap_CRManipulator_addLink, METH_VARARGS, NULL},
 	 { (char *)"CRManipulator_addTool", _wrap_CRManipulator_addTool, METH_VARARGS, NULL},
 	 { (char *)"delete_CRManipulator", _wrap_delete_CRManipulator, METH_VARARGS, NULL},

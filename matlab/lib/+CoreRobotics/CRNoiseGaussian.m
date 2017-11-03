@@ -7,23 +7,23 @@ classdef CRNoiseGaussian < CoreRobotics.CRNoiseModel
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(168, varargin{:});
+        tmp = CoreRoboticsMEX(169, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = setParameters(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(169, self, varargin{:});
-    end
-    function varargout = sample(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(170, self, varargin{:});
     end
-    function varargout = probability(self,varargin)
+    function varargout = sample(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(171, self, varargin{:});
+    end
+    function varargout = probability(self,varargin)
+      [varargout{1:nargout}] = CoreRoboticsMEX(172, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(172, self);
+        CoreRoboticsMEX(173, self);
         self.swigPtr=[];
       end
     end
