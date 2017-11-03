@@ -44,15 +44,18 @@ classdef CRManipulator < SwigRef
     function varargout = jacobian(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(145, self, varargin{:});
     end
-    function varargout = addLink(self,varargin)
+    function varargout = hessian(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(146, self, varargin{:});
     end
-    function varargout = addTool(self,varargin)
+    function varargout = addLink(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(147, self, varargin{:});
+    end
+    function varargout = addTool(self,varargin)
+      [varargout{1:nargout}] = CoreRoboticsMEX(148, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(148, self);
+        CoreRoboticsMEX(149, self);
         self.swigPtr=[];
       end
     end
