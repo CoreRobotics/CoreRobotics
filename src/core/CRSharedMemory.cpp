@@ -66,15 +66,6 @@ CRSharedMemory::CRSharedMemory(const char* i_memoryName,
     // Create a new segment with given name and size
     if (m_role == CR_MANAGER_SERVER){
         
-        // Remove shared memory on construction and destruction
-        /*
-        struct shm_remove
-        {
-            shm_remove() { shared_memory_object::remove(name); }
-            ~shm_remove(){ shared_memory_object::remove(name); }
-        } m_remover;
-        */
-        
         // Remove shared memory on construction
         shared_memory_object::remove(m_name);
         
@@ -104,10 +95,6 @@ CRSharedMemory::~CRSharedMemory() {
     // Remove shared memory on destruction
     shared_memory_object::remove(m_name);
     
-    // Todo: delete the signal when it's done (this means we need to keep
-    // track of all the signals that were added.
-    // m_segment->destroy<Signal>(signalName);
-    
     // Remove the allocator
     if (m_role == CR_MANAGER_SERVER){
         delete m_alloc_inst;
@@ -135,9 +122,6 @@ void CRSharedMemory::addSignal(const char* i_signalName,
     // if does exist, return a CRResult that indicates the variable wasn't created
     
     // Construct a vector named "MyVector" in shared memory with argument alloc_inst
-    // THIS LINE BREAKS:
-    // libc++abi.dylib: terminating with uncaught exception of type boost::interprocess::lock_exception: boost::interprocess::lock_exception
-    //  Abort trap: 6
     Signal *myvector = m_segment->construct<Signal>(i_signalName)(*m_alloc_inst);
     
     //Insert data in the vector
@@ -155,6 +139,7 @@ void CRSharedMemory::addSignal(const char* i_signalName,
 //---------------------------------------------------------------------
 void CRSharedMemory::removeSignal(const char* i_signalName) {
     
+    // destroy the signal
     m_segment->destroy<Signal>(i_signalName);
 }
     

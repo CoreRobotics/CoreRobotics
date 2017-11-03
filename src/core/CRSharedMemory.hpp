@@ -141,9 +141,6 @@ private:
     //! shared memory type
     CRManagerRole m_role;
     
-    //! remover
-    // struct m_remover;
-    
     //! name of the memory
     const char* m_name;
     
