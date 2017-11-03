@@ -65,18 +65,23 @@ namespace CoreRobotics {
  \class CRSharedMemory
  \ingroup core
  
- \brief This class implements
+ \brief This class implements interprocess shared memory to easily write
+ and read data across processes.  This is a simple method for
+ communicating between sensors and different programming languages.
  
  \details
  ## Description
- CRThread implements a simple thread interface for setting a callback
- and starting and stopping thread execution.
+ CRSharedMemory implements a simple shared memory interface with the
+ following methods available.
  
- - CRSharedMemory::setCallback
+ - CRSharedMemory::addSignal adds a signal to the memory
+ - CRSharedMemory::removeSignal removes a signal from the memory
+ - CRSharedMemory::set sets the value in shared memory
+ - CRSharedMemory::get returns the value from shared memory
  
  ## Example
  This example shows use of the CRSharedMemory class.
- \include test_CRSharedMemory.cpp
+ \include test_CRCore.cpp
  */
 //=====================================================================
 //! Enumerator for specifying thread priority
