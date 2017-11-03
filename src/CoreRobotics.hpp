@@ -42,8 +42,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef corerobotics_hpp
 #define corerobotics_hpp
 
-#define BOOST_DATE_TIME_NO_LIB
-
 //===========================================================================
 /*! \mainpage Introduction
 
