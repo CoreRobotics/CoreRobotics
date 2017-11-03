@@ -137,7 +137,10 @@ private:
     CRManagerRole m_role;
     
     //! remover
-    struct m_remover;
+    // struct m_remover;
+    
+    //! name of the memory
+    const char* m_name;
     
     //! Vector of signals in the shared memory
     // std::vector<const char*> m_signals;

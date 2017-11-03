@@ -57,23 +57,32 @@ namespace CoreRobotics {
 CRSharedMemory::CRSharedMemory(const char* i_memoryName,
                                CRManagerRole i_role)
 {
-    static const char* name = i_memoryName;
+    // static const char* name = i_memoryName;
+    m_name = i_memoryName;
+    
+    // push the role
+    m_role = i_role;
     
     // Create a new segment with given name and size
-    if (i_role == CR_MANAGER_SERVER){
+    if (m_role == CR_MANAGER_SERVER){
         
         // Remove shared memory on construction and destruction
+        /*
         struct shm_remove
         {
             shm_remove() { shared_memory_object::remove(name); }
             ~shm_remove(){ shared_memory_object::remove(name); }
         } m_remover;
+        */
+        
+        // Remove shared memory on construction
+        shared_memory_object::remove(m_name);
         
         //! Create the managed shared memory
         m_segment = new managed_shared_memory(create_only,
-                                              name,
+                                              m_name,
                                               65536);
-
+        
         // Initialize shared memory STL-compatible allocator
         m_alloc_inst = new ShmemAllocator(m_segment->get_segment_manager());
         
@@ -81,11 +90,8 @@ CRSharedMemory::CRSharedMemory(const char* i_memoryName,
         
         // Open shared memory
         m_segment = new managed_shared_memory(open_only,
-                                              name);
+                                              m_name);
     }
-    
-    // push the role
-    m_role = i_role;
 }
 
 //=====================================================================
@@ -95,12 +101,19 @@ CRSharedMemory::CRSharedMemory(const char* i_memoryName,
 //---------------------------------------------------------------------
 CRSharedMemory::~CRSharedMemory() {
     
+    // Remove shared memory on destruction
+    shared_memory_object::remove(m_name);
+    
     // Todo: delete the signal when it's done (this means we need to keep
     // track of all the signals that were added.
     // m_segment->destroy<Signal>(signalName);
+    
+    // Remove the allocator
     if (m_role == CR_MANAGER_SERVER){
         delete m_alloc_inst;
     }
+    
+    // remove the segment
     delete m_segment;
 }
     
