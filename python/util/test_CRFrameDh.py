@@ -48,45 +48,15 @@ from CoreRobotics import *
 import numpy as np
 
 print("**********************")
-print("Running the CRTestFrameOffset")
+print("Running the test_CRFrameDh")
 
 # Create a new robot
 MyRobot = CRManipulator()
 
-# Create a couple Dh frames
-F0 = CRFrameDh()
-F1 = CRFrameDh()
-
-# Create a couple of rigid body links
-Link0 = CRRigidBody()
-Link1 = CRRigidBody()
-
-# Set the free variables
-F0.setFreeVariable(CR_DH_FREE_THETA)
-F1.setFreeVariable(CR_DH_FREE_NONE)
-
-# Set the mode of the Dh frames
-F0.setMode(CR_DH_MODE_MODIFIED)
-F1.setMode(CR_DH_MODE_MODIFIED)
+# Create a Dh frame
+F = CRFrameDh()
 
 # Set the parameters of the Dh frames
-F0.setParameters(0, 0, 0.2, 0, CR_PI / 2)
-F1.setParameters(0.1, 0, 0, 0, 0);
+F.setParameters(1.0, CR_PI/2.0, 1.0, 0.0)
 
-# Add the frames to the links
-Link0.setFrame(F0)
-Link1.setFrame(F1)
-
-# Add the links to MyRobot
-MyRobot.addLink(Link0)
-MyRobot.addLink(Link1)
-
-# Now get the configuration values
-dof = MyRobot.getDegreesOfFreedom()
-jointAngles = MyRobot.getConfiguration()
-print("MyRobot has", dof, "DOF, with joint angles =", jointAngles.T, "rad")
-
-# Now get the Forward Kinematics
-FwdKin = MyRobot.getForwardKinematics()
-print("Forward Kinematics =")
-print(FwdKin)
+print(F.getPose(CR_EULER_MODE_XYZ))
