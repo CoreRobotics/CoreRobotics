@@ -41,6 +41,9 @@
 
 disp('Running the CoreRobotics Matlab test suite.')
 
+% Run the core test
+test_CRCore
+
 % Test the Manipulator
 test_CRManipulator
 
