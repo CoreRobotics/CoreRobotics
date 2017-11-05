@@ -3024,33 +3024,36 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[14]
 #define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[15]
 #define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[16]
-#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[17]
-#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[18]
-#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[19]
-#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[20]
-#define SWIGTYPE_p_Eigen__Matrix3d swig_types[21]
-#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[22]
-#define SWIGTYPE_p_Eigen__MatrixXd swig_types[23]
-#define SWIGTYPE_p_Eigen__VectorXd swig_types[24]
-#define SWIGTYPE_p_allocator_type swig_types[25]
-#define SWIGTYPE_p_char swig_types[26]
-#define SWIGTYPE_p_difference_type swig_types[27]
-#define SWIGTYPE_p_double swig_types[28]
-#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[29]
-#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[30]
-#define SWIGTYPE_p_p_PyObject swig_types[31]
-#define SWIGTYPE_p_size_type swig_types[32]
-#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[33]
-#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[34]
-#define SWIGTYPE_p_std__invalid_argument swig_types[35]
-#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[36]
-#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[37]
-#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[38]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[39]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[40]
-#define SWIGTYPE_p_value_type swig_types[41]
-static swig_type_info *swig_types[43];
-static swig_module_info swig_module = {swig_types, 42, 0, 0, 0, 0};
+#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[17]
+#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[18]
+#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[19]
+#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[20]
+#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[21]
+#define SWIGTYPE_p_Eigen__Matrix3d swig_types[22]
+#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[23]
+#define SWIGTYPE_p_Eigen__MatrixXd swig_types[24]
+#define SWIGTYPE_p_Eigen__VectorXd swig_types[25]
+#define SWIGTYPE_p_allocator_type swig_types[26]
+#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[27]
+#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[28]
+#define SWIGTYPE_p_char swig_types[29]
+#define SWIGTYPE_p_difference_type swig_types[30]
+#define SWIGTYPE_p_double swig_types[31]
+#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[32]
+#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[33]
+#define SWIGTYPE_p_p_PyObject swig_types[34]
+#define SWIGTYPE_p_size_type swig_types[35]
+#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[36]
+#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[37]
+#define SWIGTYPE_p_std__invalid_argument swig_types[38]
+#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[39]
+#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[40]
+#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[41]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[42]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[43]
+#define SWIGTYPE_p_value_type swig_types[44]
+static swig_type_info *swig_types[46];
+static swig_module_info swig_module = {swig_types, 45, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3197,6 +3200,7 @@ namespace swig {
 #include "CRInverseKinematics.hpp"
 #include "CRNullSpace.hpp"
 #include "CRHardLimits.hpp"
+#include "CRSharedMemory.hpp"
 
 
 #include <iostream>
@@ -5763,6 +5767,135 @@ SWIG_AsVal_bool (PyObject *obj, bool *val)
   if (val) *val = r ? true : false;
   return SWIG_OK;
 }
+
+
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERN int
+SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
+{
+#if PY_VERSION_HEX>=0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+  if (PyBytes_Check(obj))
+#else
+  if (PyUnicode_Check(obj))
+#endif
+#else  
+  if (PyString_Check(obj))
+#endif
+  {
+    char *cstr; Py_ssize_t len;
+#if PY_VERSION_HEX>=0x03000000
+#if !defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+    if (!alloc && cptr) {
+        /* We can't allow converting without allocation, since the internal
+           representation of string in Python 3 is UCS-2/UCS-4 but we require
+           a UTF-8 representation.
+           TODO(bhy) More detailed explanation */
+        return SWIG_RuntimeError;
+    }
+    obj = PyUnicode_AsUTF8String(obj);
+    if(alloc) *alloc = SWIG_NEWOBJ;
+#endif
+    PyBytes_AsStringAndSize(obj, &cstr, &len);
+#else
+    PyString_AsStringAndSize(obj, &cstr, &len);
+#endif
+    if (cptr) {
+      if (alloc) {
+	/* 
+	   In python the user should not be able to modify the inner
+	   string representation. To warranty that, if you define
+	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
+	   buffer is always returned.
+
+	   The default behavior is just to return the pointer value,
+	   so, be careful.
+	*/ 
+#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
+	if (*alloc != SWIG_OLDOBJ) 
+#else
+	if (*alloc == SWIG_NEWOBJ) 
+#endif
+	{
+	  *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), cstr, sizeof(char)*(len + 1)));
+	  *alloc = SWIG_NEWOBJ;
+	} else {
+	  *cptr = cstr;
+	  *alloc = SWIG_OLDOBJ;
+	}
+      } else {
+#if PY_VERSION_HEX>=0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+	*cptr = PyBytes_AsString(obj);
+#else
+	assert(0); /* Should never reach here with Unicode strings in Python 3 */
+#endif
+#else
+	*cptr = SWIG_Python_str_AsChar(obj);
+#endif
+      }
+    }
+    if (psize) *psize = len + 1;
+#if PY_VERSION_HEX>=0x03000000 && !defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+    Py_XDECREF(obj);
+#endif
+    return SWIG_OK;
+  } else {
+#if defined(SWIG_PYTHON_2_UNICODE)
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+#error "Cannot use both SWIG_PYTHON_2_UNICODE and SWIG_PYTHON_STRICT_BYTE_CHAR at once"
+#endif
+#if PY_VERSION_HEX<0x03000000
+    if (PyUnicode_Check(obj)) {
+      char *cstr; Py_ssize_t len;
+      if (!alloc && cptr) {
+        return SWIG_RuntimeError;
+      }
+      obj = PyUnicode_AsUTF8String(obj);
+      if (PyString_AsStringAndSize(obj, &cstr, &len) != -1) {
+        if (cptr) {
+          if (alloc) *alloc = SWIG_NEWOBJ;
+          *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), cstr, sizeof(char)*(len + 1)));
+        }
+        if (psize) *psize = len + 1;
+
+        Py_XDECREF(obj);
+        return SWIG_OK;
+      } else {
+        Py_XDECREF(obj);
+      }
+    }
+#endif
+#endif
+
+    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+    if (pchar_descriptor) {
+      void* vptr = 0;
+      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
+	if (cptr) *cptr = (char *) vptr;
+	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
+	if (alloc) *alloc = SWIG_OLDOBJ;
+	return SWIG_OK;
+      }
+    }
+  }
+  return SWIG_TypeError;
+}
+
+
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -19102,6 +19235,220 @@ SWIGINTERN PyObject *CRHardLimits_swigregister(PyObject *SWIGUNUSEDPARM(self), P
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_CRSharedMemory(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  char *arg1 = (char *) 0 ;
+  CoreRobotics::CRManagerRole arg2 ;
+  int res1 ;
+  char *buf1 = 0 ;
+  int alloc1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  CoreRobotics::CRSharedMemory *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_CRSharedMemory",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_AsCharPtrAndSize(obj0, &buf1, NULL, &alloc1);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CRSharedMemory" "', argument " "1"" of type '" "char const *""'");
+  }
+  arg1 = reinterpret_cast< char * >(buf1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CRSharedMemory" "', argument " "2"" of type '" "CoreRobotics::CRManagerRole""'");
+  } 
+  arg2 = static_cast< CoreRobotics::CRManagerRole >(val2);
+  result = (CoreRobotics::CRSharedMemory *)new CoreRobotics::CRSharedMemory((char const *)arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRSharedMemory, SWIG_POINTER_NEW |  0 );
+  if (alloc1 == SWIG_NEWOBJ) delete[] buf1;
+  return resultobj;
+fail:
+  if (alloc1 == SWIG_NEWOBJ) delete[] buf1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_CRSharedMemory(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRSharedMemory *arg1 = (CoreRobotics::CRSharedMemory *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CRSharedMemory",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRSharedMemory, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRSharedMemory" "', argument " "1"" of type '" "CoreRobotics::CRSharedMemory *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRSharedMemory * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRSharedMemory_addSignal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRSharedMemory *arg1 = (CoreRobotics::CRSharedMemory *) 0 ;
+  char *arg2 = (char *) 0 ;
+  Eigen::VectorXd arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  Eigen::VectorXd temp3 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CRSharedMemory_addSignal",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRSharedMemory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRSharedMemory_addSignal" "', argument " "1"" of type '" "CoreRobotics::CRSharedMemory *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRSharedMemory * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(obj1, &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRSharedMemory_addSignal" "', argument " "2"" of type '" "char const *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp3, obj2))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  (arg1)->addSignal((char const *)arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return resultobj;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRSharedMemory_removeSignal(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRSharedMemory *arg1 = (CoreRobotics::CRSharedMemory *) 0 ;
+  char *arg2 = (char *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRSharedMemory_removeSignal",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRSharedMemory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRSharedMemory_removeSignal" "', argument " "1"" of type '" "CoreRobotics::CRSharedMemory *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRSharedMemory * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(obj1, &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRSharedMemory_removeSignal" "', argument " "2"" of type '" "char const *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  (arg1)->removeSignal((char const *)arg2);
+  resultobj = SWIG_Py_Void();
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return resultobj;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRSharedMemory_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRSharedMemory *arg1 = (CoreRobotics::CRSharedMemory *) 0 ;
+  char *arg2 = (char *) 0 ;
+  Eigen::VectorXd arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  Eigen::VectorXd temp3 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CRSharedMemory_set",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRSharedMemory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRSharedMemory_set" "', argument " "1"" of type '" "CoreRobotics::CRSharedMemory *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRSharedMemory * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(obj1, &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRSharedMemory_set" "', argument " "2"" of type '" "char const *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp3, obj2))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  (arg1)->set((char const *)arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return resultobj;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRSharedMemory_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRSharedMemory *arg1 = (CoreRobotics::CRSharedMemory *) 0 ;
+  char *arg2 = (char *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Eigen::VectorXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRSharedMemory_get",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRSharedMemory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRSharedMemory_get" "', argument " "1"" of type '" "CoreRobotics::CRSharedMemory *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRSharedMemory * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(obj1, &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRSharedMemory_get" "', argument " "2"" of type '" "char const *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  result = (arg1)->get((char const *)arg2);
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::VectorXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return resultobj;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *CRSharedMemory_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__CRSharedMemory, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_VARARGS, NULL},
@@ -19403,6 +19750,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CRHardLimits_solve", _wrap_CRHardLimits_solve, METH_VARARGS, NULL},
 	 { (char *)"delete_CRHardLimits", _wrap_delete_CRHardLimits, METH_VARARGS, NULL},
 	 { (char *)"CRHardLimits_swigregister", CRHardLimits_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_CRSharedMemory", _wrap_new_CRSharedMemory, METH_VARARGS, NULL},
+	 { (char *)"delete_CRSharedMemory", _wrap_delete_CRSharedMemory, METH_VARARGS, NULL},
+	 { (char *)"CRSharedMemory_addSignal", _wrap_CRSharedMemory_addSignal, METH_VARARGS, NULL},
+	 { (char *)"CRSharedMemory_removeSignal", _wrap_CRSharedMemory_removeSignal, METH_VARARGS, NULL},
+	 { (char *)"CRSharedMemory_set", _wrap_CRSharedMemory_set, METH_VARARGS, NULL},
+	 { (char *)"CRSharedMemory_get", _wrap_CRSharedMemory_get, METH_VARARGS, NULL},
+	 { (char *)"CRSharedMemory_swigregister", CRSharedMemory_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -19444,6 +19798,7 @@ static swig_type_info _swigt__p_CoreRobotics__CRNullSpace = {"_p_CoreRobotics__C
 static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseGeneric = {"_p_CoreRobotics__CRParamNoiseGeneric", "CoreRobotics::CRParamNoiseGeneric *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRRigidBody = {"_p_CoreRobotics__CRRigidBody", "CoreRobotics::CRRigidBody *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRSensorLinear = {"_p_CoreRobotics__CRSensorLinear", "CoreRobotics::CRSensorLinear *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CoreRobotics__CRSharedMemory = {"_p_CoreRobotics__CRSharedMemory", "CoreRobotics::CRSharedMemory *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__diracParam = {"_p_CoreRobotics__diracParam", "CoreRobotics::diracParam *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__gaussianParam = {"_p_CoreRobotics__gaussianParam", "CoreRobotics::gaussianParam *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__mixtureParam = {"_p_CoreRobotics__mixtureParam", "CoreRobotics::mixtureParam *", 0, 0, (void*)0, 0};
@@ -19453,6 +19808,8 @@ static swig_type_info _swigt__p_Eigen__MatrixT_bool_6_1_t = {"_p_Eigen__MatrixT_
 static swig_type_info _swigt__p_Eigen__MatrixXd = {"_p_Eigen__MatrixXd", "std::vector< Eigen::MatrixXd >::value_type *|Eigen::MatrixXd *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__VectorXd = {"_p_Eigen__VectorXd", "Eigen::VectorXd *|std::vector< Eigen::VectorXd >::value_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t = {"_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t", "CoreRobotics::ShmemAllocator *|boost::interprocess::allocator< double,boost::interprocess::managed_shared_memory::segment_manager > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t = {"_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t", "boost::interprocess::vector< double,CoreRobotics::ShmemAllocator > *|CoreRobotics::Signal *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
@@ -19488,6 +19845,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_CoreRobotics__CRParamNoiseGeneric,
   &_swigt__p_CoreRobotics__CRRigidBody,
   &_swigt__p_CoreRobotics__CRSensorLinear,
+  &_swigt__p_CoreRobotics__CRSharedMemory,
   &_swigt__p_CoreRobotics__diracParam,
   &_swigt__p_CoreRobotics__gaussianParam,
   &_swigt__p_CoreRobotics__mixtureParam,
@@ -19497,6 +19855,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Eigen__MatrixXd,
   &_swigt__p_Eigen__VectorXd,
   &_swigt__p_allocator_type,
+  &_swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t,
+  &_swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t,
   &_swigt__p_char,
   &_swigt__p_difference_type,
   &_swigt__p_double,
@@ -19532,6 +19892,7 @@ static swig_cast_info _swigc__p_CoreRobotics__CRNullSpace[] = {  {&_swigt__p_Cor
 static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseGeneric[] = {  {&_swigt__p_CoreRobotics__CRParamNoiseGeneric, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRRigidBody[] = {  {&_swigt__p_CoreRobotics__CRRigidBody, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRSensorLinear[] = {  {&_swigt__p_CoreRobotics__CRSensorLinear, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRSharedMemory[] = {  {&_swigt__p_CoreRobotics__CRSharedMemory, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__diracParam[] = {  {&_swigt__p_CoreRobotics__diracParam, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__gaussianParam[] = {  {&_swigt__p_CoreRobotics__gaussianParam, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__mixtureParam[] = {  {&_swigt__p_CoreRobotics__mixtureParam, 0, 0, 0},{0, 0, 0, 0}};
@@ -19541,6 +19902,8 @@ static swig_cast_info _swigc__p_Eigen__MatrixT_bool_6_1_t[] = {  {&_swigt__p_Eig
 static swig_cast_info _swigc__p_Eigen__MatrixXd[] = {  {&_swigt__p_Eigen__MatrixXd, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__VectorXd[] = {  {&_swigt__p_Eigen__VectorXd, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t[] = {  {&_swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t[] = {  {&_swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
@@ -19576,6 +19939,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_CoreRobotics__CRParamNoiseGeneric,
   _swigc__p_CoreRobotics__CRRigidBody,
   _swigc__p_CoreRobotics__CRSensorLinear,
+  _swigc__p_CoreRobotics__CRSharedMemory,
   _swigc__p_CoreRobotics__diracParam,
   _swigc__p_CoreRobotics__gaussianParam,
   _swigc__p_CoreRobotics__mixtureParam,
@@ -19585,6 +19949,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Eigen__MatrixXd,
   _swigc__p_Eigen__VectorXd,
   _swigc__p_allocator_type,
+  _swigc__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t,
+  _swigc__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t,
   _swigc__p_char,
   _swigc__p_difference_type,
   _swigc__p_double,
@@ -20339,6 +20705,8 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "CR_DH_MODE_CLASSIC",SWIG_From_int(static_cast< int >(CoreRobotics::CR_DH_MODE_CLASSIC)));
   SWIG_Python_SetConstant(d, "CR_DH_MODE_MODIFIED",SWIG_From_int(static_cast< int >(CoreRobotics::CR_DH_MODE_MODIFIED)));
   SWIG_Python_SetConstant(d, "CR_MANIPULATOR_MODE_POSITION",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANIPULATOR_MODE_POSITION)));
+  SWIG_Python_SetConstant(d, "CR_MANAGER_SERVER",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANAGER_SERVER)));
+  SWIG_Python_SetConstant(d, "CR_MANAGER_CLIENT",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANAGER_CLIENT)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

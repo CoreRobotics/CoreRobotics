@@ -1226,31 +1226,34 @@ namespace swig {
 #define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[14]
 #define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[15]
 #define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[16]
-#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[17]
-#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[18]
-#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[19]
-#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[20]
-#define SWIGTYPE_p_Eigen__Matrix3d swig_types[21]
-#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[22]
-#define SWIGTYPE_p_Eigen__MatrixXd swig_types[23]
-#define SWIGTYPE_p_Eigen__VectorXd swig_types[24]
-#define SWIGTYPE_p_allocator_type swig_types[25]
-#define SWIGTYPE_p_char swig_types[26]
-#define SWIGTYPE_p_difference_type swig_types[27]
-#define SWIGTYPE_p_double swig_types[28]
-#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[29]
-#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[30]
-#define SWIGTYPE_p_size_type swig_types[31]
-#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[32]
-#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[33]
-#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[34]
-#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[35]
-#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[36]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[37]
-#define SWIGTYPE_p_swig__MatlabSwigIterator swig_types[38]
-#define SWIGTYPE_p_value_type swig_types[39]
-static swig_type_info *swig_types[41];
-static swig_module_info swig_module = {swig_types, 40, 0, 0, 0, 0};
+#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[17]
+#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[18]
+#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[19]
+#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[20]
+#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[21]
+#define SWIGTYPE_p_Eigen__Matrix3d swig_types[22]
+#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[23]
+#define SWIGTYPE_p_Eigen__MatrixXd swig_types[24]
+#define SWIGTYPE_p_Eigen__VectorXd swig_types[25]
+#define SWIGTYPE_p_allocator_type swig_types[26]
+#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[27]
+#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[28]
+#define SWIGTYPE_p_char swig_types[29]
+#define SWIGTYPE_p_difference_type swig_types[30]
+#define SWIGTYPE_p_double swig_types[31]
+#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[32]
+#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[33]
+#define SWIGTYPE_p_size_type swig_types[34]
+#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[35]
+#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[36]
+#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[37]
+#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[38]
+#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[39]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[40]
+#define SWIGTYPE_p_swig__MatlabSwigIterator swig_types[41]
+#define SWIGTYPE_p_value_type swig_types[42]
+static swig_type_info *swig_types[44];
+static swig_module_info swig_module = {swig_types, 43, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1295,6 +1298,7 @@ static swig_module_info swig_module = {swig_types, 40, 0, 0, 0, 0};
 #include "CRInverseKinematics.hpp"
 #include "CRNullSpace.hpp"
 #include "CRHardLimits.hpp"
+#include "CRSharedMemory.hpp"
 
 #include "matlabHelpers.hpp"
 
@@ -2886,6 +2890,29 @@ SWIG_AsVal_bool (mxArray* pm, bool *val)
    if (val) *val = mxIsLogicalScalarTrue(pm);
    return SWIG_OK;
 }
+
+
+SWIGINTERN int
+SWIG_AsCharPtrAndSize(mxArray* pm, char** cptr, size_t* psize, int *alloc)
+{
+  if(!mxIsChar(pm) || (mxGetNumberOfElements(pm) != 0 && mxGetM(pm)!=1)) return SWIG_TypeError;
+  size_t len=mxGetN(pm);
+  static char buf[256];
+  int flag = mxGetString(pm,buf,(mwSize)sizeof(buf));
+  if(flag) return SWIG_TypeError;
+
+  if (alloc) {
+    *cptr = reinterpret_cast< char* >(memcpy((new char[len + 1]), buf, sizeof(char)*(len + 1)));
+    *alloc = SWIG_NEWOBJ;
+  } else if (cptr)
+    *cptr = buf;
+  if (psize)
+    *psize = len + 1;
+  return SWIG_OK;
+}
+
+
+
 
 int _wrap_delete_MatlabSwigIterator (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   swig::MatlabSwigIterator *arg1 = (swig::MatlabSwigIterator *) 0 ;
@@ -14550,6 +14577,222 @@ fail:
 }
 
 
+int _wrap_new_CRSharedMemory (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  char *arg1 = (char *) 0 ;
+  CoreRobotics::CRManagerRole arg2 ;
+  int res1 ;
+  char *buf1 = 0 ;
+  int alloc1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  CoreRobotics::CRSharedMemory *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_CRSharedMemory",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_AsCharPtrAndSize(argv[0], &buf1, NULL, &alloc1);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CRSharedMemory" "', argument " "1"" of type '" "char const *""'");
+  }
+  arg1 = reinterpret_cast< char * >(buf1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_CRSharedMemory" "', argument " "2"" of type '" "CoreRobotics::CRManagerRole""'");
+  } 
+  arg2 = static_cast< CoreRobotics::CRManagerRole >(val2);
+  result = (CoreRobotics::CRSharedMemory *)new CoreRobotics::CRSharedMemory((char const *)arg1,arg2);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRSharedMemory, 1 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  if (alloc1 == SWIG_NEWOBJ) delete[] buf1;
+  return 0;
+fail:
+  if (alloc1 == SWIG_NEWOBJ) delete[] buf1;
+  return 1;
+}
+
+
+int _wrap_delete_CRSharedMemory (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRSharedMemory *arg1 = (CoreRobotics::CRSharedMemory *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  int is_owned;
+  if (!SWIG_check_num_args("delete_CRSharedMemory",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  is_owned = SWIG_Matlab_isOwned(argv[0]);
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRSharedMemory, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRSharedMemory" "', argument " "1"" of type '" "CoreRobotics::CRSharedMemory *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRSharedMemory * >(argp1);
+  if (is_owned) {
+    delete arg1;
+  }
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRSharedMemory_addSignal (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRSharedMemory *arg1 = (CoreRobotics::CRSharedMemory *) 0 ;
+  char *arg2 = (char *) 0 ;
+  Eigen::VectorXd arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  Eigen::VectorXd temp3 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRSharedMemory_addSignal",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRSharedMemory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRSharedMemory_addSignal" "', argument " "1"" of type '" "CoreRobotics::CRSharedMemory *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRSharedMemory * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(argv[1], &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRSharedMemory_addSignal" "', argument " "2"" of type '" "char const *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  (arg1)->addSignal((char const *)arg2,arg3);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return 0;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return 1;
+}
+
+
+int _wrap_CRSharedMemory_removeSignal (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRSharedMemory *arg1 = (CoreRobotics::CRSharedMemory *) 0 ;
+  char *arg2 = (char *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRSharedMemory_removeSignal",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRSharedMemory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRSharedMemory_removeSignal" "', argument " "1"" of type '" "CoreRobotics::CRSharedMemory *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRSharedMemory * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(argv[1], &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRSharedMemory_removeSignal" "', argument " "2"" of type '" "char const *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  (arg1)->removeSignal((char const *)arg2);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return 0;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return 1;
+}
+
+
+int _wrap_CRSharedMemory_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRSharedMemory *arg1 = (CoreRobotics::CRSharedMemory *) 0 ;
+  char *arg2 = (char *) 0 ;
+  Eigen::VectorXd arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  Eigen::VectorXd temp3 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRSharedMemory_set",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRSharedMemory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRSharedMemory_set" "', argument " "1"" of type '" "CoreRobotics::CRSharedMemory *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRSharedMemory * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(argv[1], &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRSharedMemory_set" "', argument " "2"" of type '" "char const *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  (arg1)->set((char const *)arg2,arg3);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return 0;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return 1;
+}
+
+
+int _wrap_CRSharedMemory_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRSharedMemory *arg1 = (CoreRobotics::CRSharedMemory *) 0 ;
+  char *arg2 = (char *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 ;
+  char *buf2 = 0 ;
+  int alloc2 = 0 ;
+  mxArray * _out;
+  Eigen::VectorXd result;
+  
+  if (!SWIG_check_num_args("CRSharedMemory_get",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRSharedMemory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRSharedMemory_get" "', argument " "1"" of type '" "CoreRobotics::CRSharedMemory *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRSharedMemory * >(argp1);
+  res2 = SWIG_AsCharPtrAndSize(argv[1], &buf2, NULL, &alloc2);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRSharedMemory_get" "', argument " "2"" of type '" "char const *""'");
+  }
+  arg2 = reinterpret_cast< char * >(buf2);
+  result = (arg1)->get((char const *)arg2);
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return 0;
+fail:
+  if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
+  return 1;
+}
+
+
 int _wrap_poseElements (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   bool arg1 ;
   bool arg2 ;
@@ -14652,6 +14895,7 @@ static swig_type_info _swigt__p_CoreRobotics__CRNullSpace = {"_p_CoreRobotics__C
 static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseGeneric = {"_p_CoreRobotics__CRParamNoiseGeneric", "CoreRobotics::CRParamNoiseGeneric *", 0, 0, (void*)"CoreRobotics.CRParamNoiseGeneric", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRRigidBody = {"_p_CoreRobotics__CRRigidBody", "CoreRobotics::CRRigidBody *", 0, 0, (void*)"CoreRobotics.CRRigidBody", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRSensorLinear = {"_p_CoreRobotics__CRSensorLinear", "CoreRobotics::CRSensorLinear *", 0, 0, (void*)"CoreRobotics.CRSensorLinear", 0};
+static swig_type_info _swigt__p_CoreRobotics__CRSharedMemory = {"_p_CoreRobotics__CRSharedMemory", "CoreRobotics::CRSharedMemory *", 0, 0, (void*)"CoreRobotics.CRSharedMemory", 0};
 static swig_type_info _swigt__p_CoreRobotics__diracParam = {"_p_CoreRobotics__diracParam", "CoreRobotics::diracParam *", 0, 0, (void*)"CoreRobotics.diracParam", 0};
 static swig_type_info _swigt__p_CoreRobotics__gaussianParam = {"_p_CoreRobotics__gaussianParam", "CoreRobotics::gaussianParam *", 0, 0, (void*)"CoreRobotics.gaussianParam", 0};
 static swig_type_info _swigt__p_CoreRobotics__mixtureParam = {"_p_CoreRobotics__mixtureParam", "CoreRobotics::mixtureParam *", 0, 0, (void*)"CoreRobotics.mixtureParam", 0};
@@ -14661,6 +14905,8 @@ static swig_type_info _swigt__p_Eigen__MatrixT_bool_6_1_t = {"_p_Eigen__MatrixT_
 static swig_type_info _swigt__p_Eigen__MatrixXd = {"_p_Eigen__MatrixXd", "std::vector< Eigen::MatrixXd >::value_type *|Eigen::MatrixXd *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__VectorXd = {"_p_Eigen__VectorXd", "Eigen::VectorXd *|std::vector< Eigen::VectorXd >::value_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t = {"_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t", "CoreRobotics::ShmemAllocator *|boost::interprocess::allocator< double,boost::interprocess::managed_shared_memory::segment_manager > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t = {"_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t", "boost::interprocess::vector< double,CoreRobotics::ShmemAllocator > *|CoreRobotics::Signal *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
@@ -14694,6 +14940,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_CoreRobotics__CRParamNoiseGeneric,
   &_swigt__p_CoreRobotics__CRRigidBody,
   &_swigt__p_CoreRobotics__CRSensorLinear,
+  &_swigt__p_CoreRobotics__CRSharedMemory,
   &_swigt__p_CoreRobotics__diracParam,
   &_swigt__p_CoreRobotics__gaussianParam,
   &_swigt__p_CoreRobotics__mixtureParam,
@@ -14703,6 +14950,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Eigen__MatrixXd,
   &_swigt__p_Eigen__VectorXd,
   &_swigt__p_allocator_type,
+  &_swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t,
+  &_swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t,
   &_swigt__p_char,
   &_swigt__p_difference_type,
   &_swigt__p_double,
@@ -14736,6 +14985,7 @@ static swig_cast_info _swigc__p_CoreRobotics__CRNullSpace[] = {  {&_swigt__p_Cor
 static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseGeneric[] = {  {&_swigt__p_CoreRobotics__CRParamNoiseGeneric, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRRigidBody[] = {  {&_swigt__p_CoreRobotics__CRRigidBody, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRSensorLinear[] = {  {&_swigt__p_CoreRobotics__CRSensorLinear, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRSharedMemory[] = {  {&_swigt__p_CoreRobotics__CRSharedMemory, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__diracParam[] = {  {&_swigt__p_CoreRobotics__diracParam, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__gaussianParam[] = {  {&_swigt__p_CoreRobotics__gaussianParam, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__mixtureParam[] = {  {&_swigt__p_CoreRobotics__mixtureParam, 0, 0, 0},{0, 0, 0, 0}};
@@ -14745,6 +14995,8 @@ static swig_cast_info _swigc__p_Eigen__MatrixT_bool_6_1_t[] = {  {&_swigt__p_Eig
 static swig_cast_info _swigc__p_Eigen__MatrixXd[] = {  {&_swigt__p_Eigen__MatrixXd, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__VectorXd[] = {  {&_swigt__p_Eigen__VectorXd, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t[] = {  {&_swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t[] = {  {&_swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
@@ -14778,6 +15030,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_CoreRobotics__CRParamNoiseGeneric,
   _swigc__p_CoreRobotics__CRRigidBody,
   _swigc__p_CoreRobotics__CRSensorLinear,
+  _swigc__p_CoreRobotics__CRSharedMemory,
   _swigc__p_CoreRobotics__diracParam,
   _swigc__p_CoreRobotics__gaussianParam,
   _swigc__p_CoreRobotics__mixtureParam,
@@ -14787,6 +15040,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Eigen__MatrixXd,
   _swigc__p_Eigen__VectorXd,
   _swigc__p_allocator_type,
+  _swigc__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t,
+  _swigc__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t,
   _swigc__p_char,
   _swigc__p_difference_type,
   _swigc__p_double,
@@ -15095,6 +15350,8 @@ const char* swigConstantName_(int con_id) {
   case 33: return "CR_DH_MODE_CLASSIC";
   case 34: return "CR_DH_MODE_MODIFIED";
   case 35: return "CR_MANIPULATOR_MODE_POSITION";
+  case 36: return "CR_MANAGER_SERVER";
+  case 37: return "CR_MANAGER_CLIENT";
   default: return 0;
   }
 }
@@ -15162,6 +15419,8 @@ int swigConstant(int /*resc*/, mxArray *resv[], int argc, mxArray *argv[]) {
   case 33: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_DH_MODE_CLASSIC",SWIG_From_int(static_cast< int >(CoreRobotics::CR_DH_MODE_CLASSIC)));; break;
   case 34: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_DH_MODE_MODIFIED",SWIG_From_int(static_cast< int >(CoreRobotics::CR_DH_MODE_MODIFIED)));; break;
   case 35: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_MANIPULATOR_MODE_POSITION",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANIPULATOR_MODE_POSITION)));; break;
+  case 36: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_MANAGER_SERVER",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANAGER_SERVER)));; break;
+  case 37: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_MANAGER_CLIENT",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANAGER_CLIENT)));; break;
   default:
     SWIG_Error(SWIG_RuntimeError, "No such constant.");
     return 1;
@@ -15435,7 +15694,13 @@ const char* swigFunctionName_(int fcn_id) {
   case 261: return "CRHardLimits_getJointMotion";
   case 262: return "CRHardLimits_solve";
   case 263: return "delete_CRHardLimits";
-  case 264: return "_wrap_poseElements";
+  case 264: return "new_CRSharedMemory";
+  case 265: return "delete_CRSharedMemory";
+  case 266: return "CRSharedMemory_addSignal";
+  case 267: return "CRSharedMemory_removeSignal";
+  case 268: return "CRSharedMemory_set";
+  case 269: return "CRSharedMemory_get";
+  case 270: return "_wrap_poseElements";
   default: return 0;
   }
 }
@@ -15756,7 +16021,13 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 261: flag=_wrap_CRHardLimits_getJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
   case 262: flag=_wrap_CRHardLimits_solve(resc,resv,argc,(mxArray**)(argv)); break;
   case 263: flag=_wrap_delete_CRHardLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 264: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 264: flag=_wrap_new_CRSharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
+  case 265: flag=_wrap_delete_CRSharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
+  case 266: flag=_wrap_CRSharedMemory_addSignal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 267: flag=_wrap_CRSharedMemory_removeSignal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 268: flag=_wrap_CRSharedMemory_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 269: flag=_wrap_CRSharedMemory_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 270: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
   default: flag=1, SWIG_Error(SWIG_RuntimeError, "No function id %d.", fcn_id);
   }
   if (flag) {

@@ -113,6 +113,13 @@ file(GLOB SOURCES_CONTROLLERS
     src/controllers/*.cpp
 )
 
+# If building on linux add pthread and rt
+if(UNIX AND NOT APPLE) # This may be useful for apple too
+	set(LINK_FLAGS pthread rt)
+else()
+	set(LINK_FLAGS "")
+endif()
+
 # If "all" build c++ static library
 # If "python" or "matlab" do not build c++ library
 # If "all" and python version specified build c++ library
@@ -168,13 +175,8 @@ if ((NOT python AND NOT matlab) OR all OR cpp)
 		${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
 	)
 
-	# If building on linux add pthread
-	if(UNIX AND NOT APPLE) # This may be useful for apple too
-		list(APPEND UTIL_LINK_FILES pthread)
-	endif()
-
 	# Link the library binary
-	target_link_libraries( ${UTIL_TARGET_NAME} ${UTIL_LINK_FILES})
+	target_link_libraries( ${UTIL_TARGET_NAME} ${UTIL_LINK_FILES} ${LINK_FLAGS})
 
 endif()
 
@@ -218,7 +220,7 @@ if(python OR all)
 				${CMAKE_SOURCE_DIR}/python/swig/${PROJECT_NAME}PYTHON_wrap.cxx)
 
 			# Link with Python
-			target_link_libraries(_${PROJECT_NAME} ${PYTHON_LIBRARIES})
+			target_link_libraries(_${PROJECT_NAME} ${PYTHON_LIBRARIES} ${LINK_FLAGS})
 
 			# Rename to remove the lib prefix
 			add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
@@ -242,7 +244,7 @@ if(python OR all)
 				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
 			# Link Module with Python
-			swig_link_libraries(${PROJECT_NAME} ${PYTHON_LIBRARIES})
+			swig_link_libraries(${PROJECT_NAME} ${PYTHON_LIBRARIES} ${LINK_FLAGS})
 
 			# Copy Python file to the Python lib folder
 			add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
@@ -310,7 +312,7 @@ if(matlab OR all)
 				${CMAKE_SOURCE_DIR}/matlab/swig/${PROJECT_NAME}MATLAB_wrap.cxx)
 
 			# Link with Matlab
-			target_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES})
+			target_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES} ${LINK_FLAGS})
 
 		# If using SWIG
 		else()
@@ -328,7 +330,7 @@ if(matlab OR all)
 				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
 			# Link Module with Matlab
-			swig_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES})
+			swig_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES} ${LINK_FLAGS})
 
 			# Set a list of files to copy to the Matlab lib directory
 			set(matlab_files SwigGet.m SwigMem.m SwigRef.m)

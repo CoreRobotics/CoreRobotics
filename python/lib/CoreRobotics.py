@@ -1311,6 +1311,38 @@ class CRHardLimits(_object):
 CRHardLimits_swigregister = _CoreRobotics.CRHardLimits_swigregister
 CRHardLimits_swigregister(CRHardLimits)
 
+CR_MANAGER_SERVER = _CoreRobotics.CR_MANAGER_SERVER
+CR_MANAGER_CLIENT = _CoreRobotics.CR_MANAGER_CLIENT
+class CRSharedMemory(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CRSharedMemory, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, CRSharedMemory, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, i_memoryName, i_role):
+        this = _CoreRobotics.new_CRSharedMemory(i_memoryName, i_role)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _CoreRobotics.delete_CRSharedMemory
+    __del__ = lambda self: None
+
+    def addSignal(self, i_signalName, i_data):
+        return _CoreRobotics.CRSharedMemory_addSignal(self, i_signalName, i_data)
+
+    def removeSignal(self, i_signalName):
+        return _CoreRobotics.CRSharedMemory_removeSignal(self, i_signalName)
+
+    def set(self, i_signalName, i_data):
+        return _CoreRobotics.CRSharedMemory_set(self, i_signalName, i_data)
+
+    def get(self, i_signalName):
+        return _CoreRobotics.CRSharedMemory_get(self, i_signalName)
+CRSharedMemory_swigregister = _CoreRobotics.CRSharedMemory_swigregister
+CRSharedMemory_swigregister(CRSharedMemory)
+
 # This file is compatible with both classic and new-style classes.
 
 

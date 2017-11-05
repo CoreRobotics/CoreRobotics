@@ -71,6 +71,7 @@
 #include "CRInverseKinematics.hpp"
 #include "CRNullSpace.hpp"
 #include "CRHardLimits.hpp"
+#include "CRSharedMemory.hpp"
 %}
 
 %include <typemaps.i>
@@ -114,3 +115,4 @@ import_array();
 %include "CRInverseKinematics.hpp"
 %include "CRNullSpace.hpp"
 %include "CRHardLimits.hpp"
+%include "CRSharedMemory.hpp"
