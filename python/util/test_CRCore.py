@@ -49,6 +49,10 @@ from __future__ import print_function
 # Use the built in time and threading libraries
 import time
 from threading import Thread
+from CoreRobotics import *
+import numpy as np
+
+memoryName = "MyMemory"
 
 print("**********************")
 print("Running the test_CRCore")
@@ -59,21 +63,40 @@ t = time.time() - MyClock
 
 print("t =", t)
 
+# Open a shared memory object
+mem = CRSharedMemory(memoryName, CR_MANAGER_SERVER)
+
+# Create a vector of data
+v = np.array([[0.0, 0.8]]).T
+
+# Add a signal
+mem.addSignal("signal_1", v)
+
 # Callback for the first thread
 def callback1():
+	# Open some shared memory as client
+	mem = CRSharedMemory(memoryName, CR_MANAGER_CLIENT)
 	dt = 0.1
 	for i in range(10):
 		c = time.time()
-		print("Thread 1: i = {}".format(i + 1))
+		v = mem.get("signal_1")
+		print("Thread 1: i = {}, signal = {}, {}".format(i + 1, v[0], v[1]))
 		t = time.time() - c
 		time.sleep(dt - t)
 
 # Callback for the second thread
 def callback2():
+	# Open some shared memory as client
+	mem = CRSharedMemory(memoryName, CR_MANAGER_CLIENT)
+	# Create a vector of data
+	v = np.array([[0.1, 0.4]]).T
+
 	dt = 0.25
 	for i in range(4):
 		c = time.time()
-		print("Thread 2: i = {}".format(i + 1))
+		v = i * v + v
+		mem.set("signal_1", v)
+		print("Thread 2: i = {}, signal = {}, {}".format(i + 1, v[0], v[1]))
 		t = time.time() - c
 		time.sleep(dt - t)
 
@@ -87,3 +110,6 @@ myThread2.start()
 
 # Wait for the threads to complete
 time.sleep(1)
+
+# Remove the signal
+mem.removeSignal("Signal_1")

@@ -39,13 +39,46 @@
 %
 %=====================================================================
 
-disp('Running the CoreRobotics Matlab test suite.')
+% Import CoreRobotics
+import CoreRobotics.*
 
-% Run the core test
-test_CRCore
+memoryName = 'MyMemory';
 
-% Test the Manipulator
-test_CRManipulator
+disp('*************************************');
+disp('Running the test_CRCore');
 
-% Test controllers
-test_CRInverseKinematics
+% Start a timer
+tic;
+pause(0.1);
+t = toc;
+
+% Output result of timer
+fprintf('t = %f\n', t);
+
+% Open a shared memory object
+mem = CRSharedMemory(memoryName, CR_MANAGER_SERVER);
+
+% Create a vector of data
+v = [0.1 0.4]';
+
+% Add a signal
+mem.addSignal('signal_1', v);
+
+% Open a shared memory object as client
+mem2 = CRSharedMemory(memoryName, CR_MANAGER_CLIENT);
+	
+dt = 0.1;
+i = 0;
+while i < 10
+	tic;
+	v = mem2.get('signal_1');
+    v = v * 2;
+    mem.set('signal_1', v);
+	i = i + 1;
+	fprintf('i = %i, signal = %f, %f\n', i, v(1), v(2));
+	t = toc;
+	pause(dt - t);
+end
+
+% Remove the signal
+mem.removeSignal('signal_1');

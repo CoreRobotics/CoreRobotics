@@ -22,6 +22,7 @@ are:
 * - CRInverseKinematics
 * - CRNullSpace
 * - CRHardLimits
+* - CRSharedMemory
 
 The Python wrappers can be built by running CMake with `-Dpython=true` to
 build the Python wrappers which are located at `python/lib`. To build all libraries
