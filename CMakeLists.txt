@@ -220,7 +220,7 @@ if(python OR all)
 				${CMAKE_SOURCE_DIR}/python/swig/${PROJECT_NAME}PYTHON_wrap.cxx)
 
 			# Link with Python
-			target_link_libraries(_${PROJECT_NAME} ${PYTHON_LIBRARIES})
+			target_link_libraries(_${PROJECT_NAME} ${PYTHON_LIBRARIES} ${LINK_FLAGS})
 
 			# Rename to remove the lib prefix
 			add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
@@ -312,7 +312,7 @@ if(matlab OR all)
 				${CMAKE_SOURCE_DIR}/matlab/swig/${PROJECT_NAME}MATLAB_wrap.cxx)
 
 			# Link with Matlab
-			target_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES})
+			target_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES} ${LINK_FLAGS})
 
 		# If using SWIG
 		else()
@@ -330,7 +330,7 @@ if(matlab OR all)
 				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
 			# Link Module with Matlab
-			swig_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES})
+			swig_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES} ${LINK_FLAGS})
 
 			# Set a list of files to copy to the Matlab lib directory
 			set(matlab_files SwigGet.m SwigMem.m SwigRef.m)

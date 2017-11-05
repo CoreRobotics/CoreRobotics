@@ -46,9 +46,9 @@ POSSIBILITY OF SUCH DAMAGE.
 // Includes
 #include "CRTypes.hpp"
 #include "Eigen/Dense"
-#include <boost/interprocess/managed_shared_memory.hpp>
-#include <boost/interprocess/containers/vector.hpp>
-#include <boost/interprocess/allocators/allocator.hpp>
+#include "boost/interprocess/managed_shared_memory.hpp"
+#include "boost/interprocess/containers/vector.hpp"
+#include "boost/interprocess/allocators/allocator.hpp"
 
 
 //=====================================================================
@@ -90,11 +90,9 @@ enum CRManagerRole {
     CR_MANAGER_CLIENT,
 };
 //=====================================================================
-using namespace boost::interprocess;
-//=====================================================================
 //! A couple type definitions
-typedef allocator<double, managed_shared_memory::segment_manager>  ShmemAllocator;
-typedef vector<double, ShmemAllocator> Signal;
+typedef boost::interprocess::allocator<double, boost::interprocess::managed_shared_memory::segment_manager>  ShmemAllocator;
+typedef boost::interprocess::vector<double, ShmemAllocator> Signal;
 //=====================================================================
 class CRSharedMemory {
     
@@ -133,7 +131,7 @@ public:
 private:
 
 	//! shared memory segment manager
-    managed_shared_memory* m_segment;
+    boost::interprocess::managed_shared_memory* m_segment;
     
     //! shared memory allocator
     const ShmemAllocator* m_alloc_inst;

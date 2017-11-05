@@ -67,12 +67,12 @@ CRSharedMemory::CRSharedMemory(const char* i_memoryName,
     if (m_role == CR_MANAGER_SERVER){
         
         // Remove shared memory on construction
-        shared_memory_object::remove(m_name);
+        boost::interprocess::shared_memory_object::remove(m_name);
         
         //! Create the managed shared memory
-        m_segment = new managed_shared_memory(create_only,
-                                              m_name,
-                                              65536);
+        m_segment = new boost::interprocess::managed_shared_memory(boost::interprocess::create_only,
+                                                                   m_name,
+                                                                   65536);
         
         // Initialize shared memory STL-compatible allocator
         m_alloc_inst = new ShmemAllocator(m_segment->get_segment_manager());
@@ -80,8 +80,8 @@ CRSharedMemory::CRSharedMemory(const char* i_memoryName,
     } else {
         
         // Open shared memory
-        m_segment = new managed_shared_memory(open_only,
-                                              m_name);
+        m_segment = new boost::interprocess::managed_shared_memory(boost::interprocess::open_only,
+                                                                   m_name);
     }
 }
 
@@ -93,7 +93,7 @@ CRSharedMemory::CRSharedMemory(const char* i_memoryName,
 CRSharedMemory::~CRSharedMemory() {
     
     // Remove shared memory on destruction
-    shared_memory_object::remove(m_name);
+    boost::interprocess::shared_memory_object::remove(m_name);
     
     // Remove the allocator
     if (m_role == CR_MANAGER_SERVER){
