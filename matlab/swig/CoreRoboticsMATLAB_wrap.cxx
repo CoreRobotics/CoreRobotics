@@ -1227,33 +1227,35 @@ namespace swig {
 #define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[15]
 #define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[16]
 #define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[17]
-#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[18]
-#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[19]
-#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[20]
-#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[21]
-#define SWIGTYPE_p_Eigen__Matrix3d swig_types[22]
-#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[23]
-#define SWIGTYPE_p_Eigen__MatrixXd swig_types[24]
-#define SWIGTYPE_p_Eigen__VectorXd swig_types[25]
-#define SWIGTYPE_p_allocator_type swig_types[26]
-#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[27]
-#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[28]
-#define SWIGTYPE_p_char swig_types[29]
-#define SWIGTYPE_p_difference_type swig_types[30]
-#define SWIGTYPE_p_double swig_types[31]
-#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[32]
-#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[33]
-#define SWIGTYPE_p_size_type swig_types[34]
-#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[35]
-#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[36]
-#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[37]
-#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[38]
-#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[39]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[40]
-#define SWIGTYPE_p_swig__MatlabSwigIterator swig_types[41]
-#define SWIGTYPE_p_value_type swig_types[42]
-static swig_type_info *swig_types[44];
-static swig_module_info swig_module = {swig_types, 43, 0, 0, 0, 0};
+#define SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator swig_types[18]
+#define SWIGTYPE_p_CoreRobotics__CRWaypoint swig_types[19]
+#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[20]
+#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[21]
+#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[22]
+#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[23]
+#define SWIGTYPE_p_Eigen__Matrix3d swig_types[24]
+#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[25]
+#define SWIGTYPE_p_Eigen__MatrixXd swig_types[26]
+#define SWIGTYPE_p_Eigen__VectorXd swig_types[27]
+#define SWIGTYPE_p_allocator_type swig_types[28]
+#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[29]
+#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[30]
+#define SWIGTYPE_p_char swig_types[31]
+#define SWIGTYPE_p_difference_type swig_types[32]
+#define SWIGTYPE_p_double swig_types[33]
+#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[34]
+#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[35]
+#define SWIGTYPE_p_size_type swig_types[36]
+#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[37]
+#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[38]
+#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[39]
+#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[40]
+#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[41]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[42]
+#define SWIGTYPE_p_swig__MatlabSwigIterator swig_types[43]
+#define SWIGTYPE_p_value_type swig_types[44]
+static swig_type_info *swig_types[46];
+static swig_module_info swig_module = {swig_types, 45, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1299,6 +1301,7 @@ static swig_module_info swig_module = {swig_types, 43, 0, 0, 0, 0};
 #include "CRNullSpace.hpp"
 #include "CRHardLimits.hpp"
 #include "CRSharedMemory.hpp"
+#include "CRTrajectoryGenerator.hpp"
 
 #include "matlabHelpers.hpp"
 
@@ -14793,6 +14796,541 @@ fail:
 }
 
 
+int _wrap_CRWaypoint_time_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRWaypoint_time_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_time_set" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  ecode2 = SWIG_AsVal_double(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRWaypoint_time_set" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  if (arg1) (arg1)->time = arg2;
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRWaypoint_time_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  double result;
+  
+  if (!SWIG_check_num_args("CRWaypoint_time_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_time_get" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  result = (double) ((arg1)->time);
+  _out = SWIG_From_double(static_cast< double >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRWaypoint_position_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  Eigen::VectorXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::VectorXd temp2 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRWaypoint_position_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_position_set" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  if (arg1) (arg1)->position = arg2;
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRWaypoint_position_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::VectorXd result;
+  
+  if (!SWIG_check_num_args("CRWaypoint_position_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_position_get" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  result =  ((arg1)->position);
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRWaypoint_velocity_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  Eigen::VectorXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::VectorXd temp2 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRWaypoint_velocity_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_velocity_set" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  if (arg1) (arg1)->velocity = arg2;
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRWaypoint_velocity_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::VectorXd result;
+  
+  if (!SWIG_check_num_args("CRWaypoint_velocity_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_velocity_get" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  result =  ((arg1)->velocity);
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRWaypoint_acceleration_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  Eigen::VectorXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::VectorXd temp2 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRWaypoint_acceleration_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_acceleration_set" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  if (arg1) (arg1)->acceleration = arg2;
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRWaypoint_acceleration_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::VectorXd result;
+  
+  if (!SWIG_check_num_args("CRWaypoint_acceleration_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_acceleration_get" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  result =  ((arg1)->acceleration);
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRWaypoint_jerk_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  Eigen::VectorXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::VectorXd temp2 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRWaypoint_jerk_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_jerk_set" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  if (arg1) (arg1)->jerk = arg2;
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRWaypoint_jerk_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::VectorXd result;
+  
+  if (!SWIG_check_num_args("CRWaypoint_jerk_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_jerk_get" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  result =  ((arg1)->jerk);
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_new_CRWaypoint (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  CoreRobotics::CRWaypoint *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_CRWaypoint",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  (void)argv; // Unused variable
+  result = (CoreRobotics::CRWaypoint *)new CoreRobotics::CRWaypoint();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRWaypoint, 1 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_delete_CRWaypoint (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRWaypoint *arg1 = (CoreRobotics::CRWaypoint *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  int is_owned;
+  if (!SWIG_check_num_args("delete_CRWaypoint",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  is_owned = SWIG_Matlab_isOwned(argv[0]);
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRWaypoint, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRWaypoint" "', argument " "1"" of type '" "CoreRobotics::CRWaypoint *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp1);
+  if (is_owned) {
+    delete arg1;
+  }
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_new_CRTrajectoryGenerator (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  mxArray * _out;
+  CoreRobotics::CRTrajectoryGenerator *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_CRTrajectoryGenerator",argc,0,0,0)) {
+    SWIG_fail;
+  }
+  (void)argv; // Unused variable
+  result = (CoreRobotics::CRTrajectoryGenerator *)new CoreRobotics::CRTrajectoryGenerator();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator, 1 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRTrajectoryGenerator_solve (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRTrajectoryGenerator *arg1 = (CoreRobotics::CRTrajectoryGenerator *) 0 ;
+  Eigen::VectorXd arg2 ;
+  Eigen::VectorXd arg3 ;
+  Eigen::VectorXd arg4 ;
+  Eigen::VectorXd arg5 ;
+  Eigen::VectorXd arg6 ;
+  Eigen::VectorXd arg7 ;
+  double arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::VectorXd temp2 ;
+  Eigen::VectorXd temp3 ;
+  Eigen::VectorXd temp4 ;
+  Eigen::VectorXd temp5 ;
+  Eigen::VectorXd temp6 ;
+  Eigen::VectorXd temp7 ;
+  double val8 ;
+  int ecode8 = 0 ;
+  mxArray * _out;
+  CoreRobotics::CRResult result;
+  
+  if (!SWIG_check_num_args("CRTrajectoryGenerator_solve",argc,8,8,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRTrajectoryGenerator_solve" "', argument " "1"" of type '" "CoreRobotics::CRTrajectoryGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRTrajectoryGenerator * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp4, argv[3]))
+    SWIG_fail;
+    arg4 = temp4;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp5, argv[4]))
+    SWIG_fail;
+    arg5 = temp5;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp6, argv[5]))
+    SWIG_fail;
+    arg6 = temp6;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp7, argv[6]))
+    SWIG_fail;
+    arg7 = temp7;
+  }
+  ecode8 = SWIG_AsVal_double(argv[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "CRTrajectoryGenerator_solve" "', argument " "8"" of type '" "double""'");
+  } 
+  arg8 = static_cast< double >(val8);
+  result = (CoreRobotics::CRResult)(arg1)->solve(arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRTrajectoryGenerator_step__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRTrajectoryGenerator *arg1 = (CoreRobotics::CRTrajectoryGenerator *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  CoreRobotics::CRWaypoint result;
+  
+  if (!SWIG_check_num_args("CRTrajectoryGenerator_step",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRTrajectoryGenerator_step" "', argument " "1"" of type '" "CoreRobotics::CRTrajectoryGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRTrajectoryGenerator * >(argp1);
+  ecode2 = SWIG_AsVal_double(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRTrajectoryGenerator_step" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = (arg1)->step(arg2);
+  _out = SWIG_NewPointerObj((new CoreRobotics::CRWaypoint(static_cast< const CoreRobotics::CRWaypoint& >(result))), SWIGTYPE_p_CoreRobotics__CRWaypoint, SWIG_POINTER_OWN |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRTrajectoryGenerator_step__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRTrajectoryGenerator *arg1 = (CoreRobotics::CRTrajectoryGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  CoreRobotics::CRWaypoint result;
+  
+  if (!SWIG_check_num_args("CRTrajectoryGenerator_step",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRTrajectoryGenerator_step" "', argument " "1"" of type '" "CoreRobotics::CRTrajectoryGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRTrajectoryGenerator * >(argp1);
+  result = (arg1)->step();
+  _out = SWIG_NewPointerObj((new CoreRobotics::CRWaypoint(static_cast< const CoreRobotics::CRWaypoint& >(result))), SWIGTYPE_p_CoreRobotics__CRWaypoint, SWIG_POINTER_OWN |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRTrajectoryGenerator_step (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_CRTrajectoryGenerator_step__SWIG_1(resc,resv,argc,argv);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_CRTrajectoryGenerator_step__SWIG_0(resc,resv,argc,argv);
+      }
+    }
+  }
+  
+  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'CRTrajectoryGenerator_step'."
+    "  Possible C/C++ prototypes are:\n"
+    "    CoreRobotics::CRTrajectoryGenerator::step(double)\n"
+    "    CoreRobotics::CRTrajectoryGenerator::step()\n");
+  return 1;
+}
+
+
+int _wrap_delete_CRTrajectoryGenerator (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRTrajectoryGenerator *arg1 = (CoreRobotics::CRTrajectoryGenerator *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  int is_owned;
+  if (!SWIG_check_num_args("delete_CRTrajectoryGenerator",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  is_owned = SWIG_Matlab_isOwned(argv[0]);
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRTrajectoryGenerator" "', argument " "1"" of type '" "CoreRobotics::CRTrajectoryGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRTrajectoryGenerator * >(argp1);
+  if (is_owned) {
+    delete arg1;
+  }
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_poseElements (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   bool arg1 ;
   bool arg2 ;
@@ -14896,6 +15434,8 @@ static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseGeneric = {"_p_CoreRob
 static swig_type_info _swigt__p_CoreRobotics__CRRigidBody = {"_p_CoreRobotics__CRRigidBody", "CoreRobotics::CRRigidBody *", 0, 0, (void*)"CoreRobotics.CRRigidBody", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRSensorLinear = {"_p_CoreRobotics__CRSensorLinear", "CoreRobotics::CRSensorLinear *", 0, 0, (void*)"CoreRobotics.CRSensorLinear", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRSharedMemory = {"_p_CoreRobotics__CRSharedMemory", "CoreRobotics::CRSharedMemory *", 0, 0, (void*)"CoreRobotics.CRSharedMemory", 0};
+static swig_type_info _swigt__p_CoreRobotics__CRTrajectoryGenerator = {"_p_CoreRobotics__CRTrajectoryGenerator", "CoreRobotics::CRTrajectoryGenerator *", 0, 0, (void*)"CoreRobotics.CRTrajectoryGenerator", 0};
+static swig_type_info _swigt__p_CoreRobotics__CRWaypoint = {"_p_CoreRobotics__CRWaypoint", "CoreRobotics::CRWaypoint *", 0, 0, (void*)"CoreRobotics.CRWaypoint", 0};
 static swig_type_info _swigt__p_CoreRobotics__diracParam = {"_p_CoreRobotics__diracParam", "CoreRobotics::diracParam *", 0, 0, (void*)"CoreRobotics.diracParam", 0};
 static swig_type_info _swigt__p_CoreRobotics__gaussianParam = {"_p_CoreRobotics__gaussianParam", "CoreRobotics::gaussianParam *", 0, 0, (void*)"CoreRobotics.gaussianParam", 0};
 static swig_type_info _swigt__p_CoreRobotics__mixtureParam = {"_p_CoreRobotics__mixtureParam", "CoreRobotics::mixtureParam *", 0, 0, (void*)"CoreRobotics.mixtureParam", 0};
@@ -14941,6 +15481,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_CoreRobotics__CRRigidBody,
   &_swigt__p_CoreRobotics__CRSensorLinear,
   &_swigt__p_CoreRobotics__CRSharedMemory,
+  &_swigt__p_CoreRobotics__CRTrajectoryGenerator,
+  &_swigt__p_CoreRobotics__CRWaypoint,
   &_swigt__p_CoreRobotics__diracParam,
   &_swigt__p_CoreRobotics__gaussianParam,
   &_swigt__p_CoreRobotics__mixtureParam,
@@ -14986,6 +15528,8 @@ static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseGeneric[] = {  {&_swig
 static swig_cast_info _swigc__p_CoreRobotics__CRRigidBody[] = {  {&_swigt__p_CoreRobotics__CRRigidBody, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRSensorLinear[] = {  {&_swigt__p_CoreRobotics__CRSensorLinear, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRSharedMemory[] = {  {&_swigt__p_CoreRobotics__CRSharedMemory, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRTrajectoryGenerator[] = {  {&_swigt__p_CoreRobotics__CRTrajectoryGenerator, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRWaypoint[] = {  {&_swigt__p_CoreRobotics__CRWaypoint, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__diracParam[] = {  {&_swigt__p_CoreRobotics__diracParam, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__gaussianParam[] = {  {&_swigt__p_CoreRobotics__gaussianParam, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__mixtureParam[] = {  {&_swigt__p_CoreRobotics__mixtureParam, 0, 0, 0},{0, 0, 0, 0}};
@@ -15031,6 +15575,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_CoreRobotics__CRRigidBody,
   _swigc__p_CoreRobotics__CRSensorLinear,
   _swigc__p_CoreRobotics__CRSharedMemory,
+  _swigc__p_CoreRobotics__CRTrajectoryGenerator,
+  _swigc__p_CoreRobotics__CRWaypoint,
   _swigc__p_CoreRobotics__diracParam,
   _swigc__p_CoreRobotics__gaussianParam,
   _swigc__p_CoreRobotics__mixtureParam,
@@ -15700,7 +16246,23 @@ const char* swigFunctionName_(int fcn_id) {
   case 267: return "CRSharedMemory_removeSignal";
   case 268: return "CRSharedMemory_set";
   case 269: return "CRSharedMemory_get";
-  case 270: return "_wrap_poseElements";
+  case 270: return "CRWaypoint_time_get";
+  case 271: return "CRWaypoint_time_set";
+  case 272: return "CRWaypoint_position_get";
+  case 273: return "CRWaypoint_position_set";
+  case 274: return "CRWaypoint_velocity_get";
+  case 275: return "CRWaypoint_velocity_set";
+  case 276: return "CRWaypoint_acceleration_get";
+  case 277: return "CRWaypoint_acceleration_set";
+  case 278: return "CRWaypoint_jerk_get";
+  case 279: return "CRWaypoint_jerk_set";
+  case 280: return "new_CRWaypoint";
+  case 281: return "delete_CRWaypoint";
+  case 282: return "new_CRTrajectoryGenerator";
+  case 283: return "CRTrajectoryGenerator_solve";
+  case 284: return "CRTrajectoryGenerator_step";
+  case 285: return "delete_CRTrajectoryGenerator";
+  case 286: return "_wrap_poseElements";
   default: return 0;
   }
 }
@@ -16027,7 +16589,23 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 267: flag=_wrap_CRSharedMemory_removeSignal(resc,resv,argc,(mxArray**)(argv)); break;
   case 268: flag=_wrap_CRSharedMemory_set(resc,resv,argc,(mxArray**)(argv)); break;
   case 269: flag=_wrap_CRSharedMemory_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 270: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 270: flag=_wrap_CRWaypoint_time_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 271: flag=_wrap_CRWaypoint_time_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 272: flag=_wrap_CRWaypoint_position_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 273: flag=_wrap_CRWaypoint_position_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 274: flag=_wrap_CRWaypoint_velocity_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 275: flag=_wrap_CRWaypoint_velocity_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 276: flag=_wrap_CRWaypoint_acceleration_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 277: flag=_wrap_CRWaypoint_acceleration_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 278: flag=_wrap_CRWaypoint_jerk_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 279: flag=_wrap_CRWaypoint_jerk_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 280: flag=_wrap_new_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 281: flag=_wrap_delete_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 282: flag=_wrap_new_CRTrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 283: flag=_wrap_CRTrajectoryGenerator_solve(resc,resv,argc,(mxArray**)(argv)); break;
+  case 284: flag=_wrap_CRTrajectoryGenerator_step(resc,resv,argc,(mxArray**)(argv)); break;
+  case 285: flag=_wrap_delete_CRTrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 286: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
   default: flag=1, SWIG_Error(SWIG_RuntimeError, "No function id %d.", fcn_id);
   }
   if (flag) {

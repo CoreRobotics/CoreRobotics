@@ -1343,6 +1343,68 @@ class CRSharedMemory(_object):
 CRSharedMemory_swigregister = _CoreRobotics.CRSharedMemory_swigregister
 CRSharedMemory_swigregister(CRSharedMemory)
 
+class CRWaypoint(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CRWaypoint, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, CRWaypoint, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["time"] = _CoreRobotics.CRWaypoint_time_set
+    __swig_getmethods__["time"] = _CoreRobotics.CRWaypoint_time_get
+    if _newclass:
+        time = _swig_property(_CoreRobotics.CRWaypoint_time_get, _CoreRobotics.CRWaypoint_time_set)
+    __swig_setmethods__["position"] = _CoreRobotics.CRWaypoint_position_set
+    __swig_getmethods__["position"] = _CoreRobotics.CRWaypoint_position_get
+    if _newclass:
+        position = _swig_property(_CoreRobotics.CRWaypoint_position_get, _CoreRobotics.CRWaypoint_position_set)
+    __swig_setmethods__["velocity"] = _CoreRobotics.CRWaypoint_velocity_set
+    __swig_getmethods__["velocity"] = _CoreRobotics.CRWaypoint_velocity_get
+    if _newclass:
+        velocity = _swig_property(_CoreRobotics.CRWaypoint_velocity_get, _CoreRobotics.CRWaypoint_velocity_set)
+    __swig_setmethods__["acceleration"] = _CoreRobotics.CRWaypoint_acceleration_set
+    __swig_getmethods__["acceleration"] = _CoreRobotics.CRWaypoint_acceleration_get
+    if _newclass:
+        acceleration = _swig_property(_CoreRobotics.CRWaypoint_acceleration_get, _CoreRobotics.CRWaypoint_acceleration_set)
+    __swig_setmethods__["jerk"] = _CoreRobotics.CRWaypoint_jerk_set
+    __swig_getmethods__["jerk"] = _CoreRobotics.CRWaypoint_jerk_get
+    if _newclass:
+        jerk = _swig_property(_CoreRobotics.CRWaypoint_jerk_get, _CoreRobotics.CRWaypoint_jerk_set)
+
+    def __init__(self):
+        this = _CoreRobotics.new_CRWaypoint()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _CoreRobotics.delete_CRWaypoint
+    __del__ = lambda self: None
+CRWaypoint_swigregister = _CoreRobotics.CRWaypoint_swigregister
+CRWaypoint_swigregister(CRWaypoint)
+
+class CRTrajectoryGenerator(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CRTrajectoryGenerator, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, CRTrajectoryGenerator, name)
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        this = _CoreRobotics.new_CRTrajectoryGenerator()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def solve(self, i_x0, i_v0, m_a0, m_xf, m_vf, m_af, i_tf):
+        return _CoreRobotics.CRTrajectoryGenerator_solve(self, i_x0, i_v0, m_a0, m_xf, m_vf, m_af, i_tf)
+
+    def step(self, *args):
+        return _CoreRobotics.CRTrajectoryGenerator_step(self, *args)
+    __swig_destroy__ = _CoreRobotics.delete_CRTrajectoryGenerator
+    __del__ = lambda self: None
+CRTrajectoryGenerator_swigregister = _CoreRobotics.CRTrajectoryGenerator_swigregister
+CRTrajectoryGenerator_swigregister(CRTrajectoryGenerator)
+
 # This file is compatible with both classic and new-style classes.
 
 

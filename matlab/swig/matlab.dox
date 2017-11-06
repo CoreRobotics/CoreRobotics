@@ -23,6 +23,7 @@ are:
 * - CRNullSpace
 * - CRHardLimits
 * - CRSharedMemory
+* - CRTrajectoryGenerator
 
 The Matlab wrappers can be built by running CMake with `-Dmatlab=true` to
 build the Matlab wrappers which are located at `matlab/lib`. To build all libraries

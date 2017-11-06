@@ -68,6 +68,7 @@
 #include "CRNullSpace.hpp"
 #include "CRHardLimits.hpp"
 #include "CRSharedMemory.hpp"
+#include "CRTrajectoryGenerator.hpp"
 
 #include "matlabHelpers.hpp"
 %}
@@ -110,5 +111,6 @@
 %include "CRNullSpace.hpp"
 %include "CRHardLimits.hpp"
 %include "CRSharedMemory.hpp"
+%include "CRTrajectoryGenerator.hpp"
 
 %include "matlabHelpers.hpp"
