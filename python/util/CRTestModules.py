@@ -46,7 +46,7 @@ from __future__ import print_function
 print("Running the CoreRobotics Python test suite.")
 
 # Run the core test
-import test_CRCore
+execfile('test_CRCore.py') # This line is different because "import test_CRCore" was not working correctly.
 
 # Test the physics models
 import test_CRFrameDh

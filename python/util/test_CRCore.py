@@ -76,13 +76,14 @@ mem.addSignal("signal_1", v)
 def callback1():
 	# Open some shared memory as client
 	mem = CRSharedMemory(memoryName, CR_MANAGER_CLIENT)
+
 	dt = 0.1
 	for i in range(10):
 		c = time.time()
 		v = mem.get("signal_1")
-		print("Thread 1: i = {}, signal = {}, {}".format(i + 1, v[0], v[1]))
+		print("Thread 1: i = {}, signal = {}, {}".format(i + 1, v[0,0], v[1,0]))
 		t = time.time() - c
-		time.sleep(dt - t)
+		time.sleep(max(dt - t, 0))
 
 # Callback for the second thread
 def callback2():
@@ -96,9 +97,9 @@ def callback2():
 		c = time.time()
 		v = i * v + v
 		mem.set("signal_1", v)
-		print("Thread 2: i = {}, signal = {}, {}".format(i + 1, v[0], v[1]))
+		print("Thread 2: i = {}, signal = {}, {}".format(i + 1, v[0,0], v[1,0]))
 		t = time.time() - c
-		time.sleep(dt - t)
+		time.sleep(max(dt - t, 0))
 
 # Create the threads
 myThread1 = Thread(target = callback1)
@@ -109,7 +110,8 @@ myThread1.start()
 myThread2.start()
 
 # Wait for the threads to complete
-time.sleep(1)
+while myThread1.isAlive() and myThread2.isAlive():
+	pass
 
 # Remove the signal
 mem.removeSignal("Signal_1")
