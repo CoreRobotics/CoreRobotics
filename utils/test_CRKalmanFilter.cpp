@@ -75,6 +75,9 @@ void test_CRKalmanFilter(void) {
 	Eigen::VectorXd u(1);
 	u << -9.81;
 
+	std::cout << "---------------------------------------------\n";
+    std::cout << "CASE 1: Discrete time Kalman filter.\n";
+
 	// Initialize the Kalman filter
 	CRKalmanFilter kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0);
 
@@ -92,9 +95,35 @@ void test_CRKalmanFilter(void) {
 		kalman.step(u, measurement);
 		// Print the result
 		std::cout << "At i = " << i << std::endl;
-		std::cout << "The true stats is " << x.transpose() << std::endl;
+		std::cout << "The true state is " << x.transpose() << std::endl;
 		std::cout << "And the estimated state is " << kalman.getState().transpose() << std::endl;
 		std::cout << "With covariance\n" << kalman.getCovariance() << std::endl;
 	}
-	std::cout << kalman.getStepSize() << std::endl;
+
+	std::cout << "---------------------------------------------\n";
+    std::cout << "CASE 1: Continuous time Kalman filter.\n";
+
+	// Test the system as continuous
+	x << 500, 0;
+	double dt = 0.1;
+
+	kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0, dt);
+
+	for(int i = 0; i < 10; i++) {
+		// Create a noisy measurement
+		measurement = C * x + R * (Eigen::VectorXd(1) << distribution(generator)).finished();
+		// Create process noise
+		Eigen::VectorXd w = Q * (Eigen::VectorXd(2) << distribution(generator), distribution(generator)).finished();
+		// Step the system forward
+		std::function<Eigen::VectorXd(double, Eigen::VectorXd, Eigen::VectorXd)> stateEq =
+			[A, B, w] (double t, Eigen::VectorXd x, Eigen::VectorXd u) {
+				return A * x + B * u + w; };
+		x = CRMath::rungeKuttaStep(stateEq, i * dt, x, u, dt);
+		kalman.step(u, measurement);
+		// Display the result
+		std::cout << "At t = " << i * dt << std::endl;
+		std::cout << "The true state is " << x.transpose() << std::endl;
+		std::cout << "And the estimated state is " << kalman.getState().transpose() << std::endl;
+		std::cout << "With covariance\n" << kalman.getCovariance() << std::endl;
+	}
 }
