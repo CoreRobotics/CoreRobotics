@@ -117,21 +117,37 @@ public:
 public:
     
     //! Forward euler integration
-    static Eigen::VectorXd forwardEulerStep(Eigen::VectorXd(i_dynamicSystem)(double,
-                                                                             Eigen::VectorXd,
-                                                                             Eigen::VectorXd),
+	static Eigen::VectorXd forwardEulerStep(std::function<Eigen::VectorXd(double,
+                                                                          Eigen::VectorXd,
+                                                                          Eigen::VectorXd)> i_dynamicSystem,
                                             double i_t,
                                             Eigen::VectorXd i_x,
                                             Eigen::VectorXd i_u,
                                             double i_dt);
+
+	static Eigen::MatrixXd forwardEulerStep(std::function<Eigen::MatrixXd(double,
+                                                                          Eigen::MatrixXd,
+                                                                          Eigen::MatrixXd)> i_dynamicSystem,
+                                            double i_t,
+                                            Eigen::MatrixXd i_x,
+                                            Eigen::MatrixXd i_u,
+                                            double i_dt);
     
     //! Runge-Kutta 4th order integration
-    static Eigen::VectorXd rungeKuttaStep(Eigen::VectorXd(i_dynamicSystem)(double,
-                                                                           Eigen::VectorXd,
-                                                                           Eigen::VectorXd),
+	static Eigen::VectorXd rungeKuttaStep(std::function<Eigen::VectorXd(double,
+                                                                        Eigen::VectorXd,
+                                                                        Eigen::VectorXd)> i_dynamicSystem,
                                           double i_t,
                                           Eigen::VectorXd i_x,
                                           Eigen::VectorXd i_u,
+                                          double i_dt);
+
+	static Eigen::MatrixXd rungeKuttaStep(std::function<Eigen::MatrixXd(double,
+                                                                        Eigen::MatrixXd,
+                                                                        Eigen::MatrixXd)> i_dynamicSystem,
+                                          double i_t,
+                                          Eigen::MatrixXd i_x,
+                                          Eigen::MatrixXd i_u,
                                           double i_dt);
 #endif
 

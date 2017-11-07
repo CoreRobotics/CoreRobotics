@@ -34,51 +34,67 @@ POSSIBILITY OF SUCH DAMAGE.
 
 \project CoreRobotics Project
 \url     www.corerobotics.org
-\author  Parker Owan
+\author  Cameron Devine
 
 */
 //=====================================================================
 
-#ifndef CRTestModules_hpp
-#define CRTestModules_hpp
+#include <iostream>
+#include "CoreRobotics.hpp"
+#include <random>
 
-// Core functionality test
-void test_CRCore(void);
+using namespace CoreRobotics;
 
-// Math tests
-void test_CRMath(void);
+void test_CRKalmanFilter(void) {
 
-// Physics tests
-void CRTestFrameOffset(void); // Frame Tests
+	std::cout << "*************************************\n";
+	std::cout << "Demonstration of CRKalmanFilter.\n";
 
-// Manipulator test
-void test_CRManipulator(void);
+	// Initialize matricies
+	Eigen::MatrixXd A(2, 2);
+	A << 1, 1, 0, 1;
 
-// Noise model tests
-void test_CRNoiseModel(void);           // test CRNoiseModel
-void test_CRNoiseGaussian(void);        // test CRNoiseGaussian
-void test_CRNoiseDirac(void);           // test CRNoiseDirac
-void test_CRNoiseUniform(void);         // test CRNoiseUniform
-void test_CRNoiseMixture(void);         // test CRNoiseMixture
+	Eigen::MatrixXd B(2, 1);
+	B << 0.5, 1;
 
-// Sensor model tests
-void test_CRSensorModel(void);          // test CRSensorModel
-void test_CRSensorLinear(void);         // test CRSensorLinear
-void test_CRSensorProbabilistic(void);  // test CRSensorProbabilistic
+	Eigen::MatrixXd C(1, 2);
+	C << 1, 0;
 
-// Motion model tests
-void test_CRMotionModel(void);          // test CRMotionModel
-void test_CRMotionLinear(void);         // test CRMotionLinear
-void test_CRMotionProbabilistic(void);  // test CRMotionProbabilistic
+	Eigen::MatrixXd Q(2, 2);
+	Q << 0.1, 0, 0, 0.1;
 
-// Test controller modules
-void test_CRInverseKinematics(void);    // test IK
-void test_CRNullSpace(void);            // test CRNullSpace
-void test_CRHardLimits(void);           // test Hard Limits
-void test_CRTrajectoryGenerator(void);  // test TG
+	Eigen::MatrixXd R(1, 1);
+	R << 0.3;
 
-// Test estimator modules
-void test_CRKalmanFilter(void);         // Test KF
+	Eigen::VectorXd x(2);
+	x << 500, 0;
 
+	Eigen::VectorXd Sigma0(2, 2);
+	Sigma0 << 0.01, 0, 0, 0.01;
 
-#endif /* CRTestModules_hpp */
+	Eigen::VectorXd u(1);
+	u << -9.81;
+
+	// Initialize the Kalman filter
+	CRKalmanFilter kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0);
+
+	Eigen::VectorXd measurement(2);
+
+	// Initialize a random number generator
+	std::default_random_engine generator;
+	std::normal_distribution<double> distribution(0, 1);
+	
+	for(int i = 0; i < 10; i++) {
+		// Take a noisy measurement
+		measurement = C * x + R * (Eigen::VectorXd(1) << distribution(generator)).finished();
+		// Step the system forward
+		x = A * x + B * u + Q * (Eigen::VectorXd(2) << distribution(generator), distribution(generator)).finished();
+		kalman.step(u, measurement);
+		// Print the result
+		std::cout << "At i = " << i << std::endl;
+		std::cout << "The true stats is " << x.transpose() << std::endl;
+		std::cout << "And the estimated state is " << kalman.getState().transpose() << std::endl;
+		std::cout << "With covariance\n" << kalman.getCovariance() << std::endl;
+	}
+	std::cout << kalman.getStepSize() << std::endl;
+}

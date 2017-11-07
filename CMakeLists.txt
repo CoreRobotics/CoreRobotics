@@ -71,6 +71,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/src/models
     ${CMAKE_SOURCE_DIR}/src/physics
     ${CMAKE_SOURCE_DIR}/src/controllers
+	${CMAKE_SOURCE_DIR}/src/estimators
 )
 
 # Include 3rd part library headers
@@ -95,6 +96,9 @@ file(GLOB HEADERS_PHYSICS
 file(GLOB HEADERS_CONTROLLERS
     src/controllers/*.hpp
 )
+file(GLOB HEADERS_ESTIMATORS
+	src/estimators/*.hpp
+)
 
 # Source files
 file(GLOB SOURCES_CORE
@@ -112,6 +116,9 @@ file(GLOB SOURCES_PHYSICS
 file(GLOB SOURCES_CONTROLLERS
     src/controllers/*.cpp
 )
+file(GLOB SOURCES_ESTIMATORS
+	src/estimators/*.cpp
+)
 
 # If building on linux add pthread and rt
 if(UNIX AND NOT APPLE) # This may be useful for apple too
@@ -126,7 +133,7 @@ endif()
 if ((NOT python AND NOT matlab) OR all OR cpp)
 
 	# Create static (or shared) library
-	add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+	add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${HEADERS_ESTIMATORS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_ESTIMATORS})
 
 	# Set the output directory
 	set_target_properties( ${LIB_TARGET_NAME} PROPERTIES 
@@ -142,12 +149,14 @@ if ((NOT python AND NOT matlab) OR all OR cpp)
 	source_group( "include\\models" FILES ${HEADERS_MODELS})
 	source_group( "include\\physics" FILES ${HEADERS_PHYSICS})
 	source_group( "include\\controllers" FILES ${HEADERS_CONTROLLERS})
+	source_group( "include\\estimators" FILES ${HEADERS_ESTIMATORS})
 
 	source_group( "src\\core" FILES ${SOURCES_CORE})
 	source_group( "src\\math" FILES ${SOURCES_MATH})
 	source_group( "src\\models" FILES ${SOURCES_MODELS})
 	source_group( "src\\physics" FILES ${SOURCES_PHYSICS})
 	source_group( "src\\controllers" FILES ${SOURCES_CONTROLLERS})
+	source_group( "src\\estimators" FILES ${SOURCES_ESTIMATORS})
 
 
 	# =====================================================================
@@ -216,7 +225,7 @@ if(python OR all)
 
 			# Compile a shared library with the exsisting wrapper C++ file
 			add_library(_${PROJECT_NAME} SHARED
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS}
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_ESTIMATORS}
 				${CMAKE_SOURCE_DIR}/python/swig/${PROJECT_NAME}PYTHON_wrap.cxx)
 
 			# Link with Python
@@ -241,7 +250,7 @@ if(python OR all)
 			# Create SWIG Module
 			swig_add_module(${PROJECT_NAME} python
 				${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_ESTIMATORS})
 
 			# Link Module with Python
 			swig_link_libraries(${PROJECT_NAME} ${PYTHON_LIBRARIES} ${LINK_FLAGS})
@@ -308,7 +317,7 @@ if(matlab OR all)
 
 			# Compile a shared library with the existing C++ wrapper files
 			add_library(${Matlab_PROJECT_NAME} SHARED
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS}
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_ESTIMATORS}
 				${CMAKE_SOURCE_DIR}/matlab/swig/${PROJECT_NAME}MATLAB_wrap.cxx)
 
 			# Link with Matlab
@@ -327,7 +336,7 @@ if(matlab OR all)
 			# Create SWIG Module
 			swig_add_module(${Matlab_PROJECT_NAME} matlab
 				${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_ESTIMATORS})
 
 			# Link Module with Matlab
 			swig_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES} ${LINK_FLAGS})
