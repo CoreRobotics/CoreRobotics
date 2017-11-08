@@ -1215,45 +1215,46 @@ namespace swig {
 #define SWIGTYPE_p_CoreRobotics__CRFrameEuler swig_types[3]
 #define SWIGTYPE_p_CoreRobotics__CRHardLimits swig_types[4]
 #define SWIGTYPE_p_CoreRobotics__CRInverseKinematics swig_types[5]
-#define SWIGTYPE_p_CoreRobotics__CRManipulator swig_types[6]
-#define SWIGTYPE_p_CoreRobotics__CRMath swig_types[7]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseDirac swig_types[8]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseGaussian swig_types[9]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseMixture swig_types[10]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseModel swig_types[11]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseUniform swig_types[12]
-#define SWIGTYPE_p_CoreRobotics__CRNullSpace swig_types[13]
-#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[14]
-#define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[15]
-#define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[16]
-#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[17]
-#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[18]
-#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[19]
-#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[20]
-#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[21]
-#define SWIGTYPE_p_Eigen__Matrix3d swig_types[22]
-#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[23]
-#define SWIGTYPE_p_Eigen__MatrixXd swig_types[24]
-#define SWIGTYPE_p_Eigen__VectorXd swig_types[25]
-#define SWIGTYPE_p_allocator_type swig_types[26]
-#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[27]
-#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[28]
-#define SWIGTYPE_p_char swig_types[29]
-#define SWIGTYPE_p_difference_type swig_types[30]
-#define SWIGTYPE_p_double swig_types[31]
-#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[32]
-#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[33]
-#define SWIGTYPE_p_size_type swig_types[34]
-#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[35]
-#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[36]
-#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[37]
-#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[38]
-#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[39]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[40]
-#define SWIGTYPE_p_swig__MatlabSwigIterator swig_types[41]
-#define SWIGTYPE_p_value_type swig_types[42]
-static swig_type_info *swig_types[44];
-static swig_module_info swig_module = {swig_types, 43, 0, 0, 0, 0};
+#define SWIGTYPE_p_CoreRobotics__CRKalmanFilter swig_types[6]
+#define SWIGTYPE_p_CoreRobotics__CRManipulator swig_types[7]
+#define SWIGTYPE_p_CoreRobotics__CRMath swig_types[8]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseDirac swig_types[9]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseGaussian swig_types[10]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseMixture swig_types[11]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseModel swig_types[12]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseUniform swig_types[13]
+#define SWIGTYPE_p_CoreRobotics__CRNullSpace swig_types[14]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[15]
+#define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[16]
+#define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[17]
+#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[18]
+#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[19]
+#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[20]
+#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[21]
+#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[22]
+#define SWIGTYPE_p_Eigen__Matrix3d swig_types[23]
+#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[24]
+#define SWIGTYPE_p_Eigen__MatrixXd swig_types[25]
+#define SWIGTYPE_p_Eigen__VectorXd swig_types[26]
+#define SWIGTYPE_p_allocator_type swig_types[27]
+#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[28]
+#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[29]
+#define SWIGTYPE_p_char swig_types[30]
+#define SWIGTYPE_p_difference_type swig_types[31]
+#define SWIGTYPE_p_double swig_types[32]
+#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[33]
+#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[34]
+#define SWIGTYPE_p_size_type swig_types[35]
+#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[36]
+#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[37]
+#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[38]
+#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[39]
+#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[40]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[41]
+#define SWIGTYPE_p_swig__MatlabSwigIterator swig_types[42]
+#define SWIGTYPE_p_value_type swig_types[43]
+static swig_type_info *swig_types[45];
+static swig_module_info swig_module = {swig_types, 44, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1299,6 +1300,7 @@ static swig_module_info swig_module = {swig_types, 43, 0, 0, 0, 0};
 #include "CRNullSpace.hpp"
 #include "CRHardLimits.hpp"
 #include "CRSharedMemory.hpp"
+#include "CRKalmanFilter.hpp"
 
 #include "matlabHelpers.hpp"
 
@@ -14793,6 +14795,808 @@ fail:
 }
 
 
+int _wrap_new_CRKalmanFilter__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  Eigen::MatrixXd arg1 ;
+  Eigen::MatrixXd arg2 ;
+  Eigen::MatrixXd arg3 ;
+  Eigen::MatrixXd arg4 ;
+  Eigen::MatrixXd arg5 ;
+  Eigen::VectorXd arg6 ;
+  Eigen::MatrixXd arg7 ;
+  Eigen::MatrixXd temp1 ;
+  Eigen::MatrixXd temp2 ;
+  Eigen::MatrixXd temp3 ;
+  Eigen::MatrixXd temp4 ;
+  Eigen::MatrixXd temp5 ;
+  Eigen::VectorXd temp6 ;
+  Eigen::MatrixXd temp7 ;
+  mxArray * _out;
+  CoreRobotics::CRKalmanFilter *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_CRKalmanFilter",argc,7,7,0)) {
+    SWIG_fail;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp1, argv[0]))
+    SWIG_fail;
+    arg1 = temp1;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp3, argv[2]))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp4, argv[3]))
+    SWIG_fail;
+    arg4 = temp4;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp5, argv[4]))
+    SWIG_fail;
+    arg5 = temp5;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp6, argv[5]))
+    SWIG_fail;
+    arg6 = temp6;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp7, argv[6]))
+    SWIG_fail;
+    arg7 = temp7;
+  }
+  result = (CoreRobotics::CRKalmanFilter *)new CoreRobotics::CRKalmanFilter(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 1 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_new_CRKalmanFilter__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  Eigen::MatrixXd arg1 ;
+  Eigen::MatrixXd arg2 ;
+  Eigen::MatrixXd arg3 ;
+  Eigen::MatrixXd arg4 ;
+  Eigen::MatrixXd arg5 ;
+  Eigen::VectorXd arg6 ;
+  Eigen::MatrixXd arg7 ;
+  double arg8 ;
+  Eigen::MatrixXd temp1 ;
+  Eigen::MatrixXd temp2 ;
+  Eigen::MatrixXd temp3 ;
+  Eigen::MatrixXd temp4 ;
+  Eigen::MatrixXd temp5 ;
+  Eigen::VectorXd temp6 ;
+  Eigen::MatrixXd temp7 ;
+  double val8 ;
+  int ecode8 = 0 ;
+  mxArray * _out;
+  CoreRobotics::CRKalmanFilter *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_CRKalmanFilter",argc,8,8,0)) {
+    SWIG_fail;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp1, argv[0]))
+    SWIG_fail;
+    arg1 = temp1;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp3, argv[2]))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp4, argv[3]))
+    SWIG_fail;
+    arg4 = temp4;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp5, argv[4]))
+    SWIG_fail;
+    arg5 = temp5;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp6, argv[5]))
+    SWIG_fail;
+    arg6 = temp6;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp7, argv[6]))
+    SWIG_fail;
+    arg7 = temp7;
+  }
+  ecode8 = SWIG_AsVal_double(argv[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_CRKalmanFilter" "', argument " "8"" of type '" "double""'");
+  } 
+  arg8 = static_cast< double >(val8);
+  result = (CoreRobotics::CRKalmanFilter *)new CoreRobotics::CRKalmanFilter(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 1 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_new_CRKalmanFilter (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  if (argc == 7) {
+    int _v;
+    {
+      _v = mxIsNumeric(argv[0]);
+    }
+    if (_v) {
+      {
+        _v = mxIsNumeric(argv[1]);
+      }
+      if (_v) {
+        {
+          _v = mxIsNumeric(argv[2]);
+        }
+        if (_v) {
+          {
+            _v = mxIsNumeric(argv[3]);
+          }
+          if (_v) {
+            {
+              _v = mxIsNumeric(argv[4]);
+            }
+            if (_v) {
+              {
+                _v = mxIsNumeric(argv[5]);
+              }
+              if (_v) {
+                {
+                  _v = mxIsNumeric(argv[6]);
+                }
+                if (_v) {
+                  return _wrap_new_CRKalmanFilter__SWIG_0(resc,resv,argc,argv);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  if (argc == 8) {
+    int _v;
+    {
+      _v = mxIsNumeric(argv[0]);
+    }
+    if (_v) {
+      {
+        _v = mxIsNumeric(argv[1]);
+      }
+      if (_v) {
+        {
+          _v = mxIsNumeric(argv[2]);
+        }
+        if (_v) {
+          {
+            _v = mxIsNumeric(argv[3]);
+          }
+          if (_v) {
+            {
+              _v = mxIsNumeric(argv[4]);
+            }
+            if (_v) {
+              {
+                _v = mxIsNumeric(argv[5]);
+              }
+              if (_v) {
+                {
+                  _v = mxIsNumeric(argv[6]);
+                }
+                if (_v) {
+                  {
+                    int res = SWIG_AsVal_double(argv[7], NULL);
+                    _v = SWIG_CheckState(res);
+                  }
+                  if (_v) {
+                    return _wrap_new_CRKalmanFilter__SWIG_1(resc,resv,argc,argv);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'new_CRKalmanFilter'."
+    "  Possible C/C++ prototypes are:\n"
+    "    CoreRobotics::CRKalmanFilter::CRKalmanFilter(Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::VectorXd,Eigen::MatrixXd)\n"
+    "    CoreRobotics::CRKalmanFilter::CRKalmanFilter(Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::VectorXd,Eigen::MatrixXd,double)\n");
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_getA (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::MatrixXd result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_getA",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getA" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getA();
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_setA (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_setA",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setA" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  (arg1)->setA(arg2);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_getB (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::MatrixXd result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_getB",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getB" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getB();
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_setB (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_setB",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setB" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  (arg1)->setB(arg2);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_getC (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::MatrixXd result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_getC",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getC" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getC();
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_setC (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_setC",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setC" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  (arg1)->setC(arg2);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_getQ (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::MatrixXd result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_getQ",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getQ" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getQ();
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_setQ (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_setQ",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setQ" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  (arg1)->setQ(arg2);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_getR (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::MatrixXd result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_getR",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getR" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getR();
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_setR (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  mxArray * _out;
+  CoreRobotics::CRResult result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_setR",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setR" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  result = (CoreRobotics::CRResult)(arg1)->setR(arg2);
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_getState (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::VectorXd result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_getState",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getState" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getState();
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_getCovariance (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  Eigen::MatrixXd result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_getCovariance",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getCovariance" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getCovariance();
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_getTolerance (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  double result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_getTolerance",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getTolerance" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (double)(arg1)->getTolerance();
+  _out = SWIG_From_double(static_cast< double >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_setTolerance (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_setTolerance",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setTolerance" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  ecode2 = SWIG_AsVal_double(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRKalmanFilter_setTolerance" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  (arg1)->setTolerance(arg2);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_getStepSize (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  double result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_getStepSize",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getStepSize" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (double)(arg1)->getStepSize();
+  _out = SWIG_From_double(static_cast< double >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_setStepSize (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_setStepSize",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setStepSize" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  ecode2 = SWIG_AsVal_double(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRKalmanFilter_setStepSize" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  (arg1)->setStepSize(arg2);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_getIntegrationMethod (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  CoreRobotics::CRIntegrationMethod result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_getIntegrationMethod",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getIntegrationMethod" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (CoreRobotics::CRIntegrationMethod)(arg1)->getIntegrationMethod();
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_setIntegrationMethod (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  CoreRobotics::CRIntegrationMethod arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_setIntegrationMethod",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setIntegrationMethod" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  ecode2 = SWIG_AsVal_int(argv[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRKalmanFilter_setIntegrationMethod" "', argument " "2"" of type '" "CoreRobotics::CRIntegrationMethod""'");
+  } 
+  arg2 = static_cast< CoreRobotics::CRIntegrationMethod >(val2);
+  (arg1)->setIntegrationMethod(arg2);
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRKalmanFilter_step (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::VectorXd arg2 ;
+  Eigen::VectorXd arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::VectorXd temp2 ;
+  Eigen::VectorXd temp3 ;
+  mxArray * _out;
+  CoreRobotics::CRResult result;
+  
+  if (!SWIG_check_num_args("CRKalmanFilter_step",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_step" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  result = (CoreRobotics::CRResult)(arg1)->step(arg2,arg3);
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_delete_CRKalmanFilter (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  
+  int is_owned;
+  if (!SWIG_check_num_args("delete_CRKalmanFilter",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  is_owned = SWIG_Matlab_isOwned(argv[0]);
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRKalmanFilter" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  if (is_owned) {
+    delete arg1;
+  }
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_poseElements (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   bool arg1 ;
   bool arg2 ;
@@ -14884,6 +15688,7 @@ static swig_type_info _swigt__p_CoreRobotics__CRFrameDh = {"_p_CoreRobotics__CRF
 static swig_type_info _swigt__p_CoreRobotics__CRFrameEuler = {"_p_CoreRobotics__CRFrameEuler", "CoreRobotics::CRFrameEuler *", 0, 0, (void*)"CoreRobotics.CRFrameEuler", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRHardLimits = {"_p_CoreRobotics__CRHardLimits", "CoreRobotics::CRHardLimits *", 0, 0, (void*)"CoreRobotics.CRHardLimits", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRInverseKinematics = {"_p_CoreRobotics__CRInverseKinematics", "CoreRobotics::CRInverseKinematics *", 0, 0, (void*)"CoreRobotics.CRInverseKinematics", 0};
+static swig_type_info _swigt__p_CoreRobotics__CRKalmanFilter = {"_p_CoreRobotics__CRKalmanFilter", "CoreRobotics::CRKalmanFilter *", 0, 0, (void*)"CoreRobotics.CRKalmanFilter", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRManipulator = {"_p_CoreRobotics__CRManipulator", "CoreRobotics::CRManipulator *", 0, 0, (void*)"CoreRobotics.CRManipulator", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRMath = {"_p_CoreRobotics__CRMath", "CoreRobotics::CRMath *", 0, 0, (void*)"CoreRobotics.CRMath", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRNoiseDirac = {"_p_CoreRobotics__CRNoiseDirac", "CoreRobotics::CRNoiseDirac *", 0, 0, (void*)"CoreRobotics.CRNoiseDirac", 0};
@@ -14929,6 +15734,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_CoreRobotics__CRFrameEuler,
   &_swigt__p_CoreRobotics__CRHardLimits,
   &_swigt__p_CoreRobotics__CRInverseKinematics,
+  &_swigt__p_CoreRobotics__CRKalmanFilter,
   &_swigt__p_CoreRobotics__CRManipulator,
   &_swigt__p_CoreRobotics__CRMath,
   &_swigt__p_CoreRobotics__CRNoiseDirac,
@@ -14974,6 +15780,7 @@ static swig_cast_info _swigc__p_CoreRobotics__CRFrameDh[] = {  {&_swigt__p_CoreR
 static swig_cast_info _swigc__p_CoreRobotics__CRFrameEuler[] = {  {&_swigt__p_CoreRobotics__CRFrameEuler, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRHardLimits[] = {  {&_swigt__p_CoreRobotics__CRHardLimits, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRInverseKinematics[] = {  {&_swigt__p_CoreRobotics__CRInverseKinematics, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRKalmanFilter[] = {  {&_swigt__p_CoreRobotics__CRKalmanFilter, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRManipulator[] = {  {&_swigt__p_CoreRobotics__CRManipulator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRMath[] = {  {&_swigt__p_CoreRobotics__CRMath, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRNoiseDirac[] = {  {&_swigt__p_CoreRobotics__CRNoiseDirac, 0, 0, 0},{0, 0, 0, 0}};
@@ -15019,6 +15826,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_CoreRobotics__CRFrameEuler,
   _swigc__p_CoreRobotics__CRHardLimits,
   _swigc__p_CoreRobotics__CRInverseKinematics,
+  _swigc__p_CoreRobotics__CRKalmanFilter,
   _swigc__p_CoreRobotics__CRManipulator,
   _swigc__p_CoreRobotics__CRMath,
   _swigc__p_CoreRobotics__CRNoiseDirac,
@@ -15352,6 +16160,8 @@ const char* swigConstantName_(int con_id) {
   case 35: return "CR_MANIPULATOR_MODE_POSITION";
   case 36: return "CR_MANAGER_SERVER";
   case 37: return "CR_MANAGER_CLIENT";
+  case 38: return "CR_INTEGRATION_FORWARD_EULER";
+  case 39: return "CR_INTEGRATION_RK4";
   default: return 0;
   }
 }
@@ -15421,6 +16231,8 @@ int swigConstant(int /*resc*/, mxArray *resv[], int argc, mxArray *argv[]) {
   case 35: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_MANIPULATOR_MODE_POSITION",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANIPULATOR_MODE_POSITION)));; break;
   case 36: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_MANAGER_SERVER",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANAGER_SERVER)));; break;
   case 37: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_MANAGER_CLIENT",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANAGER_CLIENT)));; break;
+  case 38: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_INTEGRATION_FORWARD_EULER",SWIG_From_int(static_cast< int >(CoreRobotics::CR_INTEGRATION_FORWARD_EULER)));; break;
+  case 39: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_INTEGRATION_RK4",SWIG_From_int(static_cast< int >(CoreRobotics::CR_INTEGRATION_RK4)));; break;
   default:
     SWIG_Error(SWIG_RuntimeError, "No such constant.");
     return 1;
@@ -15700,7 +16512,28 @@ const char* swigFunctionName_(int fcn_id) {
   case 267: return "CRSharedMemory_removeSignal";
   case 268: return "CRSharedMemory_set";
   case 269: return "CRSharedMemory_get";
-  case 270: return "_wrap_poseElements";
+  case 270: return "new_CRKalmanFilter";
+  case 271: return "CRKalmanFilter_getA";
+  case 272: return "CRKalmanFilter_setA";
+  case 273: return "CRKalmanFilter_getB";
+  case 274: return "CRKalmanFilter_setB";
+  case 275: return "CRKalmanFilter_getC";
+  case 276: return "CRKalmanFilter_setC";
+  case 277: return "CRKalmanFilter_getQ";
+  case 278: return "CRKalmanFilter_setQ";
+  case 279: return "CRKalmanFilter_getR";
+  case 280: return "CRKalmanFilter_setR";
+  case 281: return "CRKalmanFilter_getState";
+  case 282: return "CRKalmanFilter_getCovariance";
+  case 283: return "CRKalmanFilter_getTolerance";
+  case 284: return "CRKalmanFilter_setTolerance";
+  case 285: return "CRKalmanFilter_getStepSize";
+  case 286: return "CRKalmanFilter_setStepSize";
+  case 287: return "CRKalmanFilter_getIntegrationMethod";
+  case 288: return "CRKalmanFilter_setIntegrationMethod";
+  case 289: return "CRKalmanFilter_step";
+  case 290: return "delete_CRKalmanFilter";
+  case 291: return "_wrap_poseElements";
   default: return 0;
   }
 }
@@ -16027,7 +16860,28 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 267: flag=_wrap_CRSharedMemory_removeSignal(resc,resv,argc,(mxArray**)(argv)); break;
   case 268: flag=_wrap_CRSharedMemory_set(resc,resv,argc,(mxArray**)(argv)); break;
   case 269: flag=_wrap_CRSharedMemory_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 270: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 270: flag=_wrap_new_CRKalmanFilter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 271: flag=_wrap_CRKalmanFilter_getA(resc,resv,argc,(mxArray**)(argv)); break;
+  case 272: flag=_wrap_CRKalmanFilter_setA(resc,resv,argc,(mxArray**)(argv)); break;
+  case 273: flag=_wrap_CRKalmanFilter_getB(resc,resv,argc,(mxArray**)(argv)); break;
+  case 274: flag=_wrap_CRKalmanFilter_setB(resc,resv,argc,(mxArray**)(argv)); break;
+  case 275: flag=_wrap_CRKalmanFilter_getC(resc,resv,argc,(mxArray**)(argv)); break;
+  case 276: flag=_wrap_CRKalmanFilter_setC(resc,resv,argc,(mxArray**)(argv)); break;
+  case 277: flag=_wrap_CRKalmanFilter_getQ(resc,resv,argc,(mxArray**)(argv)); break;
+  case 278: flag=_wrap_CRKalmanFilter_setQ(resc,resv,argc,(mxArray**)(argv)); break;
+  case 279: flag=_wrap_CRKalmanFilter_getR(resc,resv,argc,(mxArray**)(argv)); break;
+  case 280: flag=_wrap_CRKalmanFilter_setR(resc,resv,argc,(mxArray**)(argv)); break;
+  case 281: flag=_wrap_CRKalmanFilter_getState(resc,resv,argc,(mxArray**)(argv)); break;
+  case 282: flag=_wrap_CRKalmanFilter_getCovariance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 283: flag=_wrap_CRKalmanFilter_getTolerance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 284: flag=_wrap_CRKalmanFilter_setTolerance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 285: flag=_wrap_CRKalmanFilter_getStepSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 286: flag=_wrap_CRKalmanFilter_setStepSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 287: flag=_wrap_CRKalmanFilter_getIntegrationMethod(resc,resv,argc,(mxArray**)(argv)); break;
+  case 288: flag=_wrap_CRKalmanFilter_setIntegrationMethod(resc,resv,argc,(mxArray**)(argv)); break;
+  case 289: flag=_wrap_CRKalmanFilter_step(resc,resv,argc,(mxArray**)(argv)); break;
+  case 290: flag=_wrap_delete_CRKalmanFilter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 291: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
   default: flag=1, SWIG_Error(SWIG_RuntimeError, "No function id %d.", fcn_id);
   }
   if (flag) {

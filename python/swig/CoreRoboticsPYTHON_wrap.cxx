@@ -3013,47 +3013,48 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_CoreRobotics__CRFrameEuler swig_types[3]
 #define SWIGTYPE_p_CoreRobotics__CRHardLimits swig_types[4]
 #define SWIGTYPE_p_CoreRobotics__CRInverseKinematics swig_types[5]
-#define SWIGTYPE_p_CoreRobotics__CRManipulator swig_types[6]
-#define SWIGTYPE_p_CoreRobotics__CRMath swig_types[7]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseDirac swig_types[8]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseGaussian swig_types[9]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseMixture swig_types[10]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseModel swig_types[11]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseUniform swig_types[12]
-#define SWIGTYPE_p_CoreRobotics__CRNullSpace swig_types[13]
-#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[14]
-#define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[15]
-#define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[16]
-#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[17]
-#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[18]
-#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[19]
-#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[20]
-#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[21]
-#define SWIGTYPE_p_Eigen__Matrix3d swig_types[22]
-#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[23]
-#define SWIGTYPE_p_Eigen__MatrixXd swig_types[24]
-#define SWIGTYPE_p_Eigen__VectorXd swig_types[25]
-#define SWIGTYPE_p_allocator_type swig_types[26]
-#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[27]
-#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[28]
-#define SWIGTYPE_p_char swig_types[29]
-#define SWIGTYPE_p_difference_type swig_types[30]
-#define SWIGTYPE_p_double swig_types[31]
-#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[32]
-#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[33]
-#define SWIGTYPE_p_p_PyObject swig_types[34]
-#define SWIGTYPE_p_size_type swig_types[35]
-#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[36]
-#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[37]
-#define SWIGTYPE_p_std__invalid_argument swig_types[38]
-#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[39]
-#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[40]
-#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[41]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[42]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[43]
-#define SWIGTYPE_p_value_type swig_types[44]
-static swig_type_info *swig_types[46];
-static swig_module_info swig_module = {swig_types, 45, 0, 0, 0, 0};
+#define SWIGTYPE_p_CoreRobotics__CRKalmanFilter swig_types[6]
+#define SWIGTYPE_p_CoreRobotics__CRManipulator swig_types[7]
+#define SWIGTYPE_p_CoreRobotics__CRMath swig_types[8]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseDirac swig_types[9]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseGaussian swig_types[10]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseMixture swig_types[11]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseModel swig_types[12]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseUniform swig_types[13]
+#define SWIGTYPE_p_CoreRobotics__CRNullSpace swig_types[14]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[15]
+#define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[16]
+#define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[17]
+#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[18]
+#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[19]
+#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[20]
+#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[21]
+#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[22]
+#define SWIGTYPE_p_Eigen__Matrix3d swig_types[23]
+#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[24]
+#define SWIGTYPE_p_Eigen__MatrixXd swig_types[25]
+#define SWIGTYPE_p_Eigen__VectorXd swig_types[26]
+#define SWIGTYPE_p_allocator_type swig_types[27]
+#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[28]
+#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[29]
+#define SWIGTYPE_p_char swig_types[30]
+#define SWIGTYPE_p_difference_type swig_types[31]
+#define SWIGTYPE_p_double swig_types[32]
+#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[33]
+#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[34]
+#define SWIGTYPE_p_p_PyObject swig_types[35]
+#define SWIGTYPE_p_size_type swig_types[36]
+#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[37]
+#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[38]
+#define SWIGTYPE_p_std__invalid_argument swig_types[39]
+#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[40]
+#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[41]
+#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[42]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[43]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[44]
+#define SWIGTYPE_p_value_type swig_types[45]
+static swig_type_info *swig_types[47];
+static swig_module_info swig_module = {swig_types, 46, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3201,6 +3202,7 @@ namespace swig {
 #include "CRNullSpace.hpp"
 #include "CRHardLimits.hpp"
 #include "CRSharedMemory.hpp"
+#include "CRKalmanFilter.hpp"
 
 
 #include <iostream>
@@ -19449,6 +19451,802 @@ SWIGINTERN PyObject *CRSharedMemory_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_CRKalmanFilter__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Eigen::MatrixXd arg1 ;
+  Eigen::MatrixXd arg2 ;
+  Eigen::MatrixXd arg3 ;
+  Eigen::MatrixXd arg4 ;
+  Eigen::MatrixXd arg5 ;
+  Eigen::VectorXd arg6 ;
+  Eigen::MatrixXd arg7 ;
+  Eigen::MatrixXd temp1 ;
+  Eigen::MatrixXd temp2 ;
+  Eigen::MatrixXd temp3 ;
+  Eigen::MatrixXd temp4 ;
+  Eigen::MatrixXd temp5 ;
+  Eigen::VectorXd temp6 ;
+  Eigen::MatrixXd temp7 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
+  PyObject * obj5 = 0 ;
+  PyObject * obj6 = 0 ;
+  CoreRobotics::CRKalmanFilter *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOOO:new_CRKalmanFilter",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6)) SWIG_fail;
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp1, obj0))
+    SWIG_fail;
+    arg1 = temp1;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp3, obj2))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp4, obj3))
+    SWIG_fail;
+    arg4 = temp4;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp5, obj4))
+    SWIG_fail;
+    arg5 = temp5;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp6, obj5))
+    SWIG_fail;
+    arg6 = temp6;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp7, obj6))
+    SWIG_fail;
+    arg7 = temp7;
+  }
+  result = (CoreRobotics::CRKalmanFilter *)new CoreRobotics::CRKalmanFilter(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRKalmanFilter, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CRKalmanFilter__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Eigen::MatrixXd arg1 ;
+  Eigen::MatrixXd arg2 ;
+  Eigen::MatrixXd arg3 ;
+  Eigen::MatrixXd arg4 ;
+  Eigen::MatrixXd arg5 ;
+  Eigen::VectorXd arg6 ;
+  Eigen::MatrixXd arg7 ;
+  double arg8 ;
+  Eigen::MatrixXd temp1 ;
+  Eigen::MatrixXd temp2 ;
+  Eigen::MatrixXd temp3 ;
+  Eigen::MatrixXd temp4 ;
+  Eigen::MatrixXd temp5 ;
+  Eigen::VectorXd temp6 ;
+  Eigen::MatrixXd temp7 ;
+  double val8 ;
+  int ecode8 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
+  PyObject * obj5 = 0 ;
+  PyObject * obj6 = 0 ;
+  PyObject * obj7 = 0 ;
+  CoreRobotics::CRKalmanFilter *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOOOO:new_CRKalmanFilter",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6,&obj7)) SWIG_fail;
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp1, obj0))
+    SWIG_fail;
+    arg1 = temp1;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp3, obj2))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp4, obj3))
+    SWIG_fail;
+    arg4 = temp4;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp5, obj4))
+    SWIG_fail;
+    arg5 = temp5;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp6, obj5))
+    SWIG_fail;
+    arg6 = temp6;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp7, obj6))
+    SWIG_fail;
+    arg7 = temp7;
+  }
+  ecode8 = SWIG_AsVal_double(obj7, &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_CRKalmanFilter" "', argument " "8"" of type '" "double""'");
+  } 
+  arg8 = static_cast< double >(val8);
+  result = (CoreRobotics::CRKalmanFilter *)new CoreRobotics::CRKalmanFilter(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRKalmanFilter, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CRKalmanFilter(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[9] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 8) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 7) {
+    int _v;
+    {
+      _v = is_array(argv[0]);
+    }
+    if (_v) {
+      {
+        _v = is_array(argv[1]);
+      }
+      if (_v) {
+        {
+          _v = is_array(argv[2]);
+        }
+        if (_v) {
+          {
+            _v = is_array(argv[3]);
+          }
+          if (_v) {
+            {
+              _v = is_array(argv[4]);
+            }
+            if (_v) {
+              {
+                _v = is_array(argv[5]);
+              }
+              if (_v) {
+                {
+                  _v = is_array(argv[6]);
+                }
+                if (_v) {
+                  return _wrap_new_CRKalmanFilter__SWIG_0(self, args);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  if (argc == 8) {
+    int _v;
+    {
+      _v = is_array(argv[0]);
+    }
+    if (_v) {
+      {
+        _v = is_array(argv[1]);
+      }
+      if (_v) {
+        {
+          _v = is_array(argv[2]);
+        }
+        if (_v) {
+          {
+            _v = is_array(argv[3]);
+          }
+          if (_v) {
+            {
+              _v = is_array(argv[4]);
+            }
+            if (_v) {
+              {
+                _v = is_array(argv[5]);
+              }
+              if (_v) {
+                {
+                  _v = is_array(argv[6]);
+                }
+                if (_v) {
+                  {
+                    int res = SWIG_AsVal_double(argv[7], NULL);
+                    _v = SWIG_CheckState(res);
+                  }
+                  if (_v) {
+                    return _wrap_new_CRKalmanFilter__SWIG_1(self, args);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_CRKalmanFilter'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    CoreRobotics::CRKalmanFilter::CRKalmanFilter(Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::VectorXd,Eigen::MatrixXd)\n"
+    "    CoreRobotics::CRKalmanFilter::CRKalmanFilter(Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::MatrixXd,Eigen::VectorXd,Eigen::MatrixXd,double)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_getA(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Eigen::MatrixXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRKalmanFilter_getA",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getA" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getA();
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_setA(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRKalmanFilter_setA",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setA" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  (arg1)->setA(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_getB(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Eigen::MatrixXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRKalmanFilter_getB",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getB" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getB();
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_setB(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRKalmanFilter_setB",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setB" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  (arg1)->setB(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_getC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Eigen::MatrixXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRKalmanFilter_getC",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getC" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getC();
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_setC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRKalmanFilter_setC",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setC" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  (arg1)->setC(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_getQ(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Eigen::MatrixXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRKalmanFilter_getQ",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getQ" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getQ();
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_setQ(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRKalmanFilter_setQ",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setQ" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  (arg1)->setQ(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_getR(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Eigen::MatrixXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRKalmanFilter_getR",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getR" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getR();
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_setR(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  CoreRobotics::CRResult result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRKalmanFilter_setR",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setR" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  result = (CoreRobotics::CRResult)(arg1)->setR(arg2);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_getState(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Eigen::VectorXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRKalmanFilter_getState",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getState" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getState();
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::VectorXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_getCovariance(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Eigen::MatrixXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRKalmanFilter_getCovariance",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getCovariance" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (arg1)->getCovariance();
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_getTolerance(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRKalmanFilter_getTolerance",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getTolerance" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (double)(arg1)->getTolerance();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_setTolerance(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRKalmanFilter_setTolerance",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setTolerance" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRKalmanFilter_setTolerance" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  (arg1)->setTolerance(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_getStepSize(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRKalmanFilter_getStepSize",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getStepSize" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (double)(arg1)->getStepSize();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_setStepSize(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRKalmanFilter_setStepSize",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setStepSize" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRKalmanFilter_setStepSize" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  (arg1)->setStepSize(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_getIntegrationMethod(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  CoreRobotics::CRIntegrationMethod result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRKalmanFilter_getIntegrationMethod",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_getIntegrationMethod" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  result = (CoreRobotics::CRIntegrationMethod)(arg1)->getIntegrationMethod();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_setIntegrationMethod(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  CoreRobotics::CRIntegrationMethod arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRKalmanFilter_setIntegrationMethod",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_setIntegrationMethod" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRKalmanFilter_setIntegrationMethod" "', argument " "2"" of type '" "CoreRobotics::CRIntegrationMethod""'");
+  } 
+  arg2 = static_cast< CoreRobotics::CRIntegrationMethod >(val2);
+  (arg1)->setIntegrationMethod(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRKalmanFilter_step(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  Eigen::VectorXd arg2 ;
+  Eigen::VectorXd arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::VectorXd temp2 ;
+  Eigen::VectorXd temp3 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  CoreRobotics::CRResult result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CRKalmanFilter_step",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRKalmanFilter_step" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp3, obj2))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  result = (CoreRobotics::CRResult)(arg1)->step(arg2,arg3);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_CRKalmanFilter(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRKalmanFilter *arg1 = (CoreRobotics::CRKalmanFilter *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CRKalmanFilter",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRKalmanFilter, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRKalmanFilter" "', argument " "1"" of type '" "CoreRobotics::CRKalmanFilter *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRKalmanFilter * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *CRKalmanFilter_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__CRKalmanFilter, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_VARARGS, NULL},
@@ -19757,6 +20555,28 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CRSharedMemory_set", _wrap_CRSharedMemory_set, METH_VARARGS, NULL},
 	 { (char *)"CRSharedMemory_get", _wrap_CRSharedMemory_get, METH_VARARGS, NULL},
 	 { (char *)"CRSharedMemory_swigregister", CRSharedMemory_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_CRKalmanFilter", _wrap_new_CRKalmanFilter, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_getA", _wrap_CRKalmanFilter_getA, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_setA", _wrap_CRKalmanFilter_setA, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_getB", _wrap_CRKalmanFilter_getB, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_setB", _wrap_CRKalmanFilter_setB, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_getC", _wrap_CRKalmanFilter_getC, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_setC", _wrap_CRKalmanFilter_setC, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_getQ", _wrap_CRKalmanFilter_getQ, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_setQ", _wrap_CRKalmanFilter_setQ, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_getR", _wrap_CRKalmanFilter_getR, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_setR", _wrap_CRKalmanFilter_setR, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_getState", _wrap_CRKalmanFilter_getState, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_getCovariance", _wrap_CRKalmanFilter_getCovariance, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_getTolerance", _wrap_CRKalmanFilter_getTolerance, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_setTolerance", _wrap_CRKalmanFilter_setTolerance, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_getStepSize", _wrap_CRKalmanFilter_getStepSize, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_setStepSize", _wrap_CRKalmanFilter_setStepSize, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_getIntegrationMethod", _wrap_CRKalmanFilter_getIntegrationMethod, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_setIntegrationMethod", _wrap_CRKalmanFilter_setIntegrationMethod, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_step", _wrap_CRKalmanFilter_step, METH_VARARGS, NULL},
+	 { (char *)"delete_CRKalmanFilter", _wrap_delete_CRKalmanFilter, METH_VARARGS, NULL},
+	 { (char *)"CRKalmanFilter_swigregister", CRKalmanFilter_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -19787,6 +20607,7 @@ static swig_type_info _swigt__p_CoreRobotics__CRFrameDh = {"_p_CoreRobotics__CRF
 static swig_type_info _swigt__p_CoreRobotics__CRFrameEuler = {"_p_CoreRobotics__CRFrameEuler", "CoreRobotics::CRFrameEuler *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRHardLimits = {"_p_CoreRobotics__CRHardLimits", "CoreRobotics::CRHardLimits *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRInverseKinematics = {"_p_CoreRobotics__CRInverseKinematics", "CoreRobotics::CRInverseKinematics *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CoreRobotics__CRKalmanFilter = {"_p_CoreRobotics__CRKalmanFilter", "CoreRobotics::CRKalmanFilter *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRManipulator = {"_p_CoreRobotics__CRManipulator", "CoreRobotics::CRManipulator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRMath = {"_p_CoreRobotics__CRMath", "CoreRobotics::CRMath *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRNoiseDirac = {"_p_CoreRobotics__CRNoiseDirac", "CoreRobotics::CRNoiseDirac *", 0, 0, (void*)0, 0};
@@ -19834,6 +20655,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_CoreRobotics__CRFrameEuler,
   &_swigt__p_CoreRobotics__CRHardLimits,
   &_swigt__p_CoreRobotics__CRInverseKinematics,
+  &_swigt__p_CoreRobotics__CRKalmanFilter,
   &_swigt__p_CoreRobotics__CRManipulator,
   &_swigt__p_CoreRobotics__CRMath,
   &_swigt__p_CoreRobotics__CRNoiseDirac,
@@ -19881,6 +20703,7 @@ static swig_cast_info _swigc__p_CoreRobotics__CRFrameDh[] = {  {&_swigt__p_CoreR
 static swig_cast_info _swigc__p_CoreRobotics__CRFrameEuler[] = {  {&_swigt__p_CoreRobotics__CRFrameEuler, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRHardLimits[] = {  {&_swigt__p_CoreRobotics__CRHardLimits, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRInverseKinematics[] = {  {&_swigt__p_CoreRobotics__CRInverseKinematics, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRKalmanFilter[] = {  {&_swigt__p_CoreRobotics__CRKalmanFilter, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRManipulator[] = {  {&_swigt__p_CoreRobotics__CRManipulator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRMath[] = {  {&_swigt__p_CoreRobotics__CRMath, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRNoiseDirac[] = {  {&_swigt__p_CoreRobotics__CRNoiseDirac, 0, 0, 0},{0, 0, 0, 0}};
@@ -19928,6 +20751,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_CoreRobotics__CRFrameEuler,
   _swigc__p_CoreRobotics__CRHardLimits,
   _swigc__p_CoreRobotics__CRInverseKinematics,
+  _swigc__p_CoreRobotics__CRKalmanFilter,
   _swigc__p_CoreRobotics__CRManipulator,
   _swigc__p_CoreRobotics__CRMath,
   _swigc__p_CoreRobotics__CRNoiseDirac,
@@ -20707,6 +21531,8 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "CR_MANIPULATOR_MODE_POSITION",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANIPULATOR_MODE_POSITION)));
   SWIG_Python_SetConstant(d, "CR_MANAGER_SERVER",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANAGER_SERVER)));
   SWIG_Python_SetConstant(d, "CR_MANAGER_CLIENT",SWIG_From_int(static_cast< int >(CoreRobotics::CR_MANAGER_CLIENT)));
+  SWIG_Python_SetConstant(d, "CR_INTEGRATION_FORWARD_EULER",SWIG_From_int(static_cast< int >(CoreRobotics::CR_INTEGRATION_FORWARD_EULER)));
+  SWIG_Python_SetConstant(d, "CR_INTEGRATION_RK4",SWIG_From_int(static_cast< int >(CoreRobotics::CR_INTEGRATION_RK4)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

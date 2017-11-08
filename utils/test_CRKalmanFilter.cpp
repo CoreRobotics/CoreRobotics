@@ -101,7 +101,7 @@ void test_CRKalmanFilter(void) {
 	}
 
 	std::cout << "---------------------------------------------\n";
-    std::cout << "CASE 1: Continuous time Kalman filter.\n";
+    std::cout << "CASE 2: Continuous time Kalman filter.\n";
 
 	// Test the system as continuous
 	x << 500, 0;

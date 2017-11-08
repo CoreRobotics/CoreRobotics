@@ -1343,6 +1343,83 @@ class CRSharedMemory(_object):
 CRSharedMemory_swigregister = _CoreRobotics.CRSharedMemory_swigregister
 CRSharedMemory_swigregister(CRSharedMemory)
 
+CR_INTEGRATION_FORWARD_EULER = _CoreRobotics.CR_INTEGRATION_FORWARD_EULER
+CR_INTEGRATION_RK4 = _CoreRobotics.CR_INTEGRATION_RK4
+class CRKalmanFilter(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CRKalmanFilter, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, CRKalmanFilter, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        this = _CoreRobotics.new_CRKalmanFilter(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+
+    def getA(self):
+        return _CoreRobotics.CRKalmanFilter_getA(self)
+
+    def setA(self, i_A):
+        return _CoreRobotics.CRKalmanFilter_setA(self, i_A)
+
+    def getB(self):
+        return _CoreRobotics.CRKalmanFilter_getB(self)
+
+    def setB(self, i_B):
+        return _CoreRobotics.CRKalmanFilter_setB(self, i_B)
+
+    def getC(self):
+        return _CoreRobotics.CRKalmanFilter_getC(self)
+
+    def setC(self, i_C):
+        return _CoreRobotics.CRKalmanFilter_setC(self, i_C)
+
+    def getQ(self):
+        return _CoreRobotics.CRKalmanFilter_getQ(self)
+
+    def setQ(self, i_Q):
+        return _CoreRobotics.CRKalmanFilter_setQ(self, i_Q)
+
+    def getR(self):
+        return _CoreRobotics.CRKalmanFilter_getR(self)
+
+    def setR(self, i_R):
+        return _CoreRobotics.CRKalmanFilter_setR(self, i_R)
+
+    def getState(self):
+        return _CoreRobotics.CRKalmanFilter_getState(self)
+
+    def getCovariance(self):
+        return _CoreRobotics.CRKalmanFilter_getCovariance(self)
+
+    def getTolerance(self):
+        return _CoreRobotics.CRKalmanFilter_getTolerance(self)
+
+    def setTolerance(self, i_tol):
+        return _CoreRobotics.CRKalmanFilter_setTolerance(self, i_tol)
+
+    def getStepSize(self):
+        return _CoreRobotics.CRKalmanFilter_getStepSize(self)
+
+    def setStepSize(self, i_dt):
+        return _CoreRobotics.CRKalmanFilter_setStepSize(self, i_dt)
+
+    def getIntegrationMethod(self):
+        return _CoreRobotics.CRKalmanFilter_getIntegrationMethod(self)
+
+    def setIntegrationMethod(self, i_integrationMethod):
+        return _CoreRobotics.CRKalmanFilter_setIntegrationMethod(self, i_integrationMethod)
+
+    def step(self, i_input, i_measurement):
+        return _CoreRobotics.CRKalmanFilter_step(self, i_input, i_measurement)
+    __swig_destroy__ = _CoreRobotics.delete_CRKalmanFilter
+    __del__ = lambda self: None
+CRKalmanFilter_swigregister = _CoreRobotics.CRKalmanFilter_swigregister
+CRKalmanFilter_swigregister(CRKalmanFilter)
+
 # This file is compatible with both classic and new-style classes.
 
 
