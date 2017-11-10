@@ -1,0 +1,232 @@
+image: camerondevine/corerobotics:latest
+
+stages:
+ - wrap
+ - build
+ - test
+ - deploy
+
+python2-wrappers:
+  stage: wrap
+  script:
+   - mkdir build
+   - cd build
+   - cmake ../ -Dpython=only-swig
+   - make
+  cache:
+    key: python2-noswig-$CI_COMMIT_SHA
+    policy: push
+    paths:
+     - $CI_PROJECT_DIR/python/swig
+     - $CI_PROJECT_DIR/python/lib
+
+python3-wrappers:
+  stage: wrap
+  script:
+   - mkdir build
+   - cd build
+   - cmake ../ -Dpython=only-swig
+   - make
+  cache:
+    key: python3-noswig-$CI_COMMIT_SHA
+    policy: push
+    paths:
+     - $CI_PROJECT_DIR/python/swig
+     - $CI_PROJECT_DIR/python/lib
+
+matlab-wrappers:
+  stage: wrap
+  script:
+   - mkdir build
+   - cd build
+   - cmake ../ -Dmatlab=only-swig
+   - make
+  cache:
+    key: matlab-$CI_COMMIT_SHA
+    policy: push
+    paths:
+     - $CI_PROJECT_DIR/matlab/swig
+     - $CI_PROJECT_DIR/matlab/lib
+
+build-cpp:
+  stage: build
+  script: 
+   - mkdir build
+   - cd build
+   - cmake ../
+   - make
+  cache:
+    key: cpp-$CI_COMMIT_SHA
+    policy: push
+    paths:
+     - $CI_PROJECT_DIR/bin
+
+build-python2:
+  stage: build
+  script:
+   - mkdir build
+   - cd build
+   - cmake ../ -Dpython=2
+   - make
+  cache:
+    key: python2-$CI_COMMIT_SHA
+    policy: push
+    paths:
+     - $CI_PROJECT_DIR/python/swig
+     - $CI_PROJECT_DIR/python/lib
+     - $CI_PROJECT_DIR/python/util
+
+build-python3:
+  stage: build
+  script:
+   - mkdir build
+   - cd build
+   - cmake ../ -Dpython=3
+   - make
+  cache:
+    key: python3-$CI_COMMIT_SHA
+    policy: push
+    paths:
+     - $CI_PROJECT_DIR/python/swig
+     - $CI_PROJECT_DIR/python/lib
+     - $CI_PROJECT_DIR/python/util
+
+build-python2-noswig:
+  stage: build
+  script:
+   - mkdir build
+   - cd build
+   - cmake ../ -Dpython=2 -Dnoswig=true
+   - make
+  cache:
+    key: python2-noswig-$CI_COMMIT_SHA
+    paths:
+     - $CI_PROJECT_DIR/python/swig
+     - $CI_PROJECT_DIR/python/lib
+     - $CI_PROJECT_DIR/python/util
+
+build-python3-noswig:
+  stage: build
+  script:
+   - mkdir build
+   - cd build
+   - cmake ../ -Dpython=3 -Dnoswig=true
+   - make
+  cache:
+    key: python3-noswig-$CI_COMMIT_SHA
+    paths:
+     - $CI_PROJECT_DIR/python/swig
+     - $CI_PROJECT_DIR/python/lib
+     - $CI_PROJECT_DIR/python/util
+
+test-cpp:
+  stage: test
+  script:
+   - $CI_PROJECT_DIR/bin/TestModules
+  cache:
+    key: cpp-$CI_COMMIT_SHA
+    policy: pull
+    paths:
+     - $CI_PROJECT_DIR/bin
+
+test-python2:
+  stage: test
+  script:
+   - cd $CI_PROJECT_DIR/python/util
+   - python2 CRTestModules.py
+  cache:
+    key: python2-$CI_COMMIT_SHA
+    policy: pull
+    paths:
+     - $CI_PROJECT_DIR/python/util
+
+test-python3:
+  stage: test
+  script:
+   - cd $CI_PROJECT_DIR/python/util
+   - python3 CRTestModules.py
+  cache:
+    key: python3-$CI_COMMIT_SHA
+    policy: pull
+    paths:
+     - $CI_PROJECT_DIR/python/util
+
+test-python2-noswig:
+  stage: test
+  script:
+   - cd $CI_PROJECT_DIR/python/util
+   - python2 CRTestModules.py
+  cache:
+    key: python2-noswig-$CI_COMMIT_SHA
+    policy: pull
+    paths:
+     - $CI_PROJECT_DIR/python/util
+
+test-python3-noswig:
+  stage: test
+  script:
+   - cd $CI_PROJECT_DIR/python/util
+   - python3 CRTestModules.py
+  cache:
+    key: python3-noswig-$CI_COMMIT_SHA
+    policy: pull
+    paths:
+     - $CI_PROJECT_DIR/python/util
+
+deploy-python-wrappers:
+  stage: deploy
+  script:
+   - eval $(ssh-agent -s)
+   - ssh-add <(echo "$SSH_PRIVATE_KEY")
+   - mkdir -p ~/.ssh
+   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+   - cd $CI_PROJECT_DIR
+   - if ! git diff-index --quiet HEAD; then
+   - git config user.email "$GITLAB_USER_EMAIL"
+   - git config user.name "$GITLAB_USER_NAME"
+   - git add python/swig/CoreRoboticsPYTHON_wrap.cxx
+   - git add python/lib/CoreRobotics.py
+   - git stash
+   - git remote add ssh git@gitlab.com:$CI_PROJECT_PATH.git
+   - git fetch ssh $CI_COMMIT_REF_NAME
+   - git checkout ssh/$CI_COMMIT_REF_NAME
+   - git stash apply
+   - git commit -m "python swig wrappers [ci skip]"
+   - git push ssh HEAD:$CI_COMMIT_REF_NAME
+   - fi
+  cache:
+    key: python2-$CI_COMMIT_SHA
+    policy: pull
+    paths:
+     - $CI_PROJECT_DIR/python/swig
+     - $CI_PROJECT_DIR/python/lib
+  allow_failure: true
+
+deploy-matlab-wrappers:
+  stage: deploy
+  script:
+   - eval $(ssh-agent -s)
+   - ssh-add <(echo "$SSH_PRIVATE_KEY")
+   - mkdir -p ~/.ssh
+   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+   - cd $CI_PROJECT_DIR
+   - if ! git diff-index --quiet HEAD; then
+   - git config user.email "$GITLAB_USER_EMAIL"
+   - git config user.name "$GITLAB_USER_NAME"
+   - git add matlab/swig/CoreRoboticsMATLAB_wrap.cxx
+   - git add matlab/lib/+CoreRobotics/*
+   - git stash
+   - git remote add ssh git@gitlab.com:$CI_PROJECT_PATH.git
+   - git fetch ssh $CI_COMMIT_REF_NAME
+   - git checkout ssh/$CI_COMMIT_REF_NAME
+   - git stash apply
+   - git commit -m "matlab swig wrappers [ci skip]"
+   - git push ssh HEAD:$CI_COMMIT_REF_NAME
+   - fi
+  cache:
+    key: matlab-$CI_COMMIT_SHA
+    policy: pull
+    paths:
+     - $CI_PROJECT_DIR/matlab/swig
+     - $CI_PROJECT_DIR/matlab/lib
+  allow_failure: true
