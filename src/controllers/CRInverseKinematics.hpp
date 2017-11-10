@@ -180,6 +180,9 @@ public:
     
     //! Get the minimum threshold for a non-singular matrix
     double getSingularThresh(void) {return this->m_svdTol;}
+    
+    //! Get the DLS jacobian inverse
+    CRResult getJacInv(Eigen::MatrixXd i_jac, Eigen::MatrixXd &o_jacInv);
 
     
 //---------------------------------------------------------------------
