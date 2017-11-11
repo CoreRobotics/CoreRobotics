@@ -181,7 +181,7 @@ deploy-python-wrappers:
    - mkdir -p ~/.ssh
    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
    - cd $CI_PROJECT_DIR
-   - if ! git diff-index --quiet HEAD; then
+   - if [[ -n $(git status -s) ]]; then
    - git config user.email "$GITLAB_USER_EMAIL"
    - git config user.name "$GITLAB_USER_NAME"
    - git add python/swig/CoreRoboticsPYTHON_wrap.cxx
@@ -191,6 +191,8 @@ deploy-python-wrappers:
    - git fetch ssh $CI_COMMIT_REF_NAME
    - git checkout ssh/$CI_COMMIT_REF_NAME
    - git stash apply
+   - git add python/swig/CoreRoboticsPYTHON_wrap.cxx
+   - git add python/lib/CoreRobotics.py
    - git commit -m "python swig wrappers [ci skip]"
    - git push ssh HEAD:$CI_COMMIT_REF_NAME
    - fi
@@ -210,7 +212,7 @@ deploy-matlab-wrappers:
    - mkdir -p ~/.ssh
    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
    - cd $CI_PROJECT_DIR
-   - if ! git diff-index --quiet HEAD; then
+   - if [[ -n $(git status -s) ]]; then
    - git config user.email "$GITLAB_USER_EMAIL"
    - git config user.name "$GITLAB_USER_NAME"
    - git add matlab/swig/CoreRoboticsMATLAB_wrap.cxx
@@ -220,6 +222,8 @@ deploy-matlab-wrappers:
    - git fetch ssh $CI_COMMIT_REF_NAME
    - git checkout ssh/$CI_COMMIT_REF_NAME
    - git stash apply
+   - git add matlab/swig/CoreRoboticsMATLAB_wrap.cxx
+   - git add matlab/lib/+CoreRobotics/*
    - git commit -m "matlab swig wrappers [ci skip]"
    - git push ssh HEAD:$CI_COMMIT_REF_NAME
    - fi
