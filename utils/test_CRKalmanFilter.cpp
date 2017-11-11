@@ -69,7 +69,7 @@ void test_CRKalmanFilter(void) {
 	Eigen::VectorXd x(2);
 	x << 500, 0;
 
-	Eigen::VectorXd Sigma0(2, 2);
+	Eigen::MatrixXd Sigma0(2, 2);
 	Sigma0 << 0.01, 0, 0, 0.01;
 
 	Eigen::VectorXd u(1);
@@ -105,7 +105,7 @@ void test_CRKalmanFilter(void) {
 
 	// Test the system as continuous
 	x << 500, 0;
-	double dt = 0.1;
+	double dt = 0.01;
 
 	kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0, dt);
 
@@ -115,10 +115,7 @@ void test_CRKalmanFilter(void) {
 		// Create process noise
 		Eigen::VectorXd w = Q * (Eigen::VectorXd(2) << distribution(generator), distribution(generator)).finished();
 		// Step the system forward
-		std::function<Eigen::VectorXd(double, Eigen::VectorXd, Eigen::VectorXd)> stateEq =
-			[A, B, w] (double t, Eigen::VectorXd x, Eigen::VectorXd u) {
-				return A * x + B * u + w; };
-		x = CRMath::rungeKuttaStep(stateEq, i * dt, x, u, dt);
+		x += A * x + B * u + w;
 		kalman.step(u, measurement);
 		// Display the result
 		std::cout << "At t = " << i * dt << std::endl;

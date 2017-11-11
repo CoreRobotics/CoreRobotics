@@ -124,14 +124,6 @@ namespace CoreRobotics {
  [1] F. Flacco, A. De Luca, and O. Khatib, "Control of Redundant Robots Under Hard Joint Constraints: Saturation in the Null Space", IEEE Transactions on Robotics, 2015.\n\n
  
  */
-
-//=====================================================================
-//! Enumerator for integration methods
-enum CRIntegrationMethod {
-	CR_INTEGRATION_FORWARD_EULER,
-	CR_INTEGRATION_RK4
-};
-
 //=====================================================================
 class CRKalmanFilter {
 
@@ -175,7 +167,6 @@ public:
 		this->m_Sigma = i_Sigma0;
 		this->m_tol = 0.001;
 		this->m_dt = i_dt;
-		this->m_integrationMethod = CR_INTEGRATION_RK4;
 		CRMath::svdInverse(this->m_R, this->m_tol, this->m_Rinv);
 	}
 
@@ -238,13 +229,6 @@ public:
 	//! Set the step size
 	void setStepSize(double i_dt) {this->m_dt = i_dt;}
 
-	//! Get the integration method
-	CRIntegrationMethod getIntegrationMethod(void) {return this->m_integrationMethod;}
-
-	//! Set the integration method
-	void setIntegrationMethod(CRIntegrationMethod i_integrationMethod)
-		{this->m_integrationMethod = i_integrationMethod;}
-
 //---------------------------------------------------------------------
 // Solve Methods
 public:
@@ -286,9 +270,6 @@ protected:
 
 	//! The time step
 	double m_dt;
-
-	//! The numerical integration method to use
-	CRIntegrationMethod m_integrationMethod;
 };
 
 //=====================================================================

@@ -41,6 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "CRKalmanFilter.hpp"
 
+
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
@@ -72,19 +73,12 @@ CRResult CRKalmanFilter::step(Eigen::VectorXd i_input,
 		this->m_Sigma = SigmaHat - K * S * K.transpose();
 	} else { // If the system is continuous time
 		Eigen::MatrixXd K = this->m_Sigma * this->m_C.transpose() * this->m_Rinv;
-		std::function<Eigen::VectorXd(double, Eigen::VectorXd, Eigen::VectorXd)> stateEq =
-			[this, K, i_measurement] (double t, Eigen::VectorXd x, Eigen::VectorXd u) {
-				return this->m_A * x + this->m_B * u + K * (i_measurement - this->m_C * x); };
-		std::function<Eigen::MatrixXd(double, Eigen::MatrixXd, Eigen::MatrixXd)> covarianceEq =
-			[this, K] (double t, Eigen::MatrixXd x, Eigen::MatrixXd u) {
-				return this->m_A * x + x * this->m_A.transpose() + this->m_Q - K * this->m_R * K.transpose(); };
-		if (this->m_integrationMethod == CR_INTEGRATION_FORWARD_EULER) {
-			this->m_x = CRMath::forwardEulerStep(stateEq, 0, this->m_x, i_input, this->m_dt);
-			this->m_Sigma = CRMath::forwardEulerStep(covarianceEq, 0, this->m_Sigma, Eigen::MatrixXd::Zero(1, 1), this->m_dt);
-		} else {
-			this->m_x = CRMath::rungeKuttaStep(stateEq, 0, this->m_x, i_input, this->m_dt);
-			this->m_Sigma = CRMath::rungeKuttaStep(covarianceEq, 0, this->m_Sigma, Eigen::MatrixXd::Zero(1, 1), this->m_dt);
-		}
+		this->m_x += this->m_dt * (this->m_A * this->m_x
+		                         + this->m_B * i_input
+		                         + K * (i_measurement - this->m_C * this->m_x));
+		this->m_Sigma += this->m_dt * (this->m_A * this->m_Sigma + this->m_Sigma * this->m_A.transpose()
+		                             + this->m_Q
+		                             - K * this->m_R * K.transpose());
 	}
 	return result;
 }
