@@ -17019,6 +17019,51 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CRInverseKinematics_getJacInv(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRInverseKinematics *arg1 = (CoreRobotics::CRInverseKinematics *) 0 ;
+  Eigen::MatrixXd arg2 ;
+  Eigen::MatrixXd *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::MatrixXd temp2 ;
+  Eigen::MatrixXd temp3 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  CoreRobotics::CRResult result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CRInverseKinematics_getJacInv",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRInverseKinematics, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRInverseKinematics_getJacInv" "', argument " "1"" of type '" "CoreRobotics::CRInverseKinematics *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRInverseKinematics * >(argp1);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  {
+    // In: non-const&
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp3, obj2))
+    SWIG_fail;
+    
+    arg3 = &temp3;
+  }
+  result = (CoreRobotics::CRResult)(arg1)->getJacInv(arg2,*arg3);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  {
+    // Argout: &
+    if (!CopyFromEigenToNumPyMatrix<Eigen::MatrixXd >(obj2, arg3))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_CRInverseKinematics_solve__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CoreRobotics::CRInverseKinematics *arg1 = (CoreRobotics::CRInverseKinematics *) 0 ;
@@ -20278,6 +20323,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CRInverseKinematics_getDampingFactor", _wrap_CRInverseKinematics_getDampingFactor, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_setSingularThresh", _wrap_CRInverseKinematics_setSingularThresh, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_getSingularThresh", _wrap_CRInverseKinematics_getSingularThresh, METH_VARARGS, NULL},
+	 { (char *)"CRInverseKinematics_getJacInv", _wrap_CRInverseKinematics_getJacInv, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_solve", _wrap_CRInverseKinematics_solve, METH_VARARGS, NULL},
 	 { (char *)"delete_CRInverseKinematics", _wrap_delete_CRInverseKinematics, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_swigregister", CRInverseKinematics_swigregister, METH_VARARGS, NULL},

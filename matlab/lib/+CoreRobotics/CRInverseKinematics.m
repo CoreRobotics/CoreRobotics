@@ -53,12 +53,15 @@ classdef CRInverseKinematics < SwigRef
     function varargout = getSingularThresh(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(222, self, varargin{:});
     end
-    function varargout = solve(self,varargin)
+    function varargout = getJacInv(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(223, self, varargin{:});
+    end
+    function varargout = solve(self,varargin)
+      [varargout{1:nargout}] = CoreRoboticsMEX(224, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(224, self);
+        CoreRoboticsMEX(225, self);
         self.swigPtr=[];
       end
     end
