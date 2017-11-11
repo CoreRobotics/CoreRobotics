@@ -130,7 +130,7 @@ endif()
 # If "all" build c++ static library
 # If "python" or "matlab" do not build c++ library
 # If "all" and python version specified build c++ library
-if ((NOT python AND NOT matlab) OR all OR cpp)
+if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 
 	# Create static (or shared) library
 	add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${HEADERS_ESTIMATORS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_ESTIMATORS})
@@ -194,15 +194,41 @@ if(python OR all)
 
 	# If "python" is not "true" consider it as a version number
 	# and find that Python version
-	if(NOT ${python} STREQUAL true)
+	if(NOT ${python} STREQUAL true AND NOT ${python} STREQUAL "only-swig")
 		find_package(PythonLibs ${python} EXACT)
 	# Otherwise find the latest Python version installed
 	else()
-		find_package(PythonLibs REQUIRED)
+		find_package(PythonLibs)
 	endif()
 
+	# Attempt to find SWIG
+	find_package(SWIG)
+
+	# If python set as only-swig generate the wrappers but don't build
+	if(${python} MATCHES "only-swig")
+
+		# Include SWIG
+		include(${SWIG_USE_FILE})
+
+		# Get the Include Directories
+		get_property(INCLUDE_DIRECTORIES DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+
+		# Create a list of arguments to pass to swig by appending -I in front of each path
+		set(PYTHON_SWIG_INCLUDE_ARGS "")
+		foreach(dir ${INCLUDE_DIRECTORIES})
+			list(APPEND PYTHON_SWIG_INCLUDE_ARGS -I${dir})
+		endforeach()
+
+		# Add a custom target to generate the wrapper files
+		add_custom_target(PythonWrappers ALL
+			${SWIG_EXECUTABLE} -c++ -python
+				-outdir ${CMAKE_SOURCE_DIR}/python/lib
+				-o ${CMAKE_SOURCE_DIR}/python/swig/CoreRoboticsPYTHON_wrap.cxx
+				${PYTHON_SWIG_INCLUDE_ARGS}
+				${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i)
+
 	# Check if Python was found and skip if not found
-	if(PythonLibs_FOUND)
+	elseif(PythonLibs_FOUND)
 
 		# Add Python's include path
 		include_directories(${PYTHON_INCLUDE_PATH})
@@ -216,9 +242,6 @@ if(python OR all)
 				OUTPUT_VARIABLE NUMPY_DIR)
 			include_directories(${NUMPY_DIR})
 		endif()
-
-		# Attempt to find SWIG
-		find_package(SWIG)
 
 		# If SWIG not found or noswig set
 		if(NOT SWIG_FOUND OR noswig)
@@ -289,28 +312,51 @@ if(matlab OR all)
 	# Find Matlab
 	find_package(Matlab OPTIONAL_COMPONENTS MX_LIBRARY)
 
+	# Include the Matlab src directory
+	include_directories(${CMAKE_SOURCE_DIR}/matlab/src)
+
+	# Attempt to find SWIG
+	find_package(SWIG)
+
+	# If SWIG was found test for Matlab support
+	if(SWIG_FOUND)
+		# Read the SWIG help output
+		execute_process(COMMAND ${SWIG_EXECUTABLE} -help
+			OUTPUT_VARIABLE swig_help)
+		# Check if includes the word matlab
+		if(${swig_help} MATCHES matlab)
+			set(SWIG_Matlab_FOUND true)
+		endif()
+	endif()
+
+	# If only-swig is defined create the wrapper scripts but don't build
+	if(${matlab} MATCHES "only-swig" AND SWIG_FOUND)
+
+		# Get the Include Directories
+		get_property(INCLUDE_DIRECTORIES DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+
+		# Create a list of arguments to pass to swig by appending -I in front of each path
+		set(Matlab_SWIG_INCLUDE_ARGS "")
+		foreach(dir ${INCLUDE_DIRECTORIES})
+			list(APPEND Matlab_SWIG_INCLUDE_ARGS -I${dir})
+		endforeach()
+
+		# Add a custom target to generate the wrapper files
+		add_custom_target(MatlabWrappers ALL
+			${SWIG_EXECUTABLE} -c++ -matlab
+				-outdir ${CMAKE_SOURCE_DIR}/matlab/lib
+				-o ${CMAKE_SOURCE_DIR}/matlab/swig/CoreRoboticsMATLAB_wrap.cxx
+				${Matlab_SWIG_INCLUDE_ARGS}
+				${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i)
+
 	# If Matlab was found
-	if(Matlab_FOUND)
+	elseif(Matlab_FOUND AND Matlab_MX_LIBRARY)
 
 		# Include the Matlab directories
-		include_directories(${CMAKE_SOURCE_DIR}/matlab/src ${Matlab_INCLUDE_DIRS})
+		include_directories(${Matlab_INCLUDE_DIRS})
 
 		# Set the Matlab project name
 		set(Matlab_PROJECT_NAME ${PROJECT_NAME}Matlab)
-
-		# Attempt to find SWIG
-		find_package(SWIG)
-
-		# If SWIG was found test for Matlab support
-		if(SWIG_FOUND)
-			# Read the SWIG help output
-			execute_process(COMMAND ${SWIG_EXECUTABLE} -help
-				OUTPUT_VARIABLE swig_help)
-			# Check if includes the word matlab
-			if(${swig_help} MATCHES matlab)
-				set(SWIG_Matlab_FOUND true)
-			endif()
-		endif()
 
 		# If no Matlab support or noswig defined
 		if(noswig OR NOT SWIG_Matlab_FOUND)

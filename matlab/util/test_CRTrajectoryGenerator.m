@@ -39,14 +39,38 @@
 %
 %=====================================================================
 
-disp('Running the CoreRobotics Matlab test suite.')
+% Import CoreRobotics
+import CoreRobotics.*
 
-% Run the core test
-test_CRCore
+disp('*************************************');
+disp('Demonstration of CRTrajectoryGenerator.');
 
-% Test the Manipulator
-test_CRManipulator
+% Define a trajectory generator
+trajGen = CRTrajectoryGenerator();
 
-% Test controllers
-test_CRInverseKinematics
-test_CRTrajectoryGenerator
+% Initial and Final conditions
+tf = 1.2;
+x0 = [0 0]';
+v0 = [0 -2]';
+a0 = [0 0]';
+xf = [-0.4 0.5]';
+vf = [1.2 1.0]';
+af = [0 0]';
+
+% Compute the trajectory
+trajGen.solve(x0, v0, a0, xf, vf, af, tf);
+
+disp('t (s) | Position | Velocity | Acceleration');
+t = 0;
+while t <= tf
+	wp = trajGen.step(t);
+	position = wp.position;
+	velocity = wp.velocity;
+	acceleration = wp.acceleration;
+	fprintf('%1.1f | %+1.3f, %+1.3f | %+1.3f, %+1.3f | %+1.3f, %+1.3f\n',...
+		t,...
+		position(1), position(2),...
+		velocity(1), velocity(2),...
+		acceleration(1), acceleration(2));
+	t = t + 0.1;
+end

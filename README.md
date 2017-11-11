@@ -1,3 +1,5 @@
+[![pipeline status](https://gitlab.com/powan/CoreRobotics/badges/master/pipeline.svg)](https://gitlab.com/powan/CoreRobotics/commits/master)
+
 # CoreRobotics Project
 #### Copyright (c) 2017
 #### University of Washington
