@@ -69,44 +69,12 @@ namespace CoreRobotics {
  
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRMath::forwardEulerStep(std::function<Eigen::VectorXd(double,
-                                                                       Eigen::VectorXd,
-                                                                       Eigen::VectorXd)> i_dynamicSystem,
+Eigen::VectorXd CRMath::forwardEulerStep(Eigen::VectorXd(i_dynamicSystem)(double,
+                                                                          Eigen::VectorXd,
+                                                                          Eigen::VectorXd),
                                          double i_t,
                                          Eigen::VectorXd i_x,
                                          Eigen::VectorXd i_u,
-                                         double i_dt){
-    // forward integration step
-    return i_x + i_dt*i_dynamicSystem(i_t,i_x,i_u);
-}
-
-
-//=====================================================================
-/*!
- This method performs a forward euler integration step for the matrix dynamical
- system:\n
- 
- \f[
- \dot{x} = f(t,x,u)
- \f]
- 
- This equation is specified as a callback function to the integration.
- 
- \param [in] i_dynamicSystem - the continuous time dynamic system.
- \param [in] i_t - the current time in seconds
- \param [in] i_x - the current state matrix
- \param [in] i_u - the current input matrix
- \param [in] i_dt - the time step to integrate over
- \return the state vector at t+dt
- 
- */
-//---------------------------------------------------------------------
-Eigen::MatrixXd CRMath::forwardEulerStep(std::function<Eigen::MatrixXd(double,
-                                                                       Eigen::MatrixXd,
-                                                                       Eigen::MatrixXd)> i_dynamicSystem,
-                                         double i_t,
-                                         Eigen::MatrixXd i_x,
-                                         Eigen::MatrixXd i_u,
                                          double i_dt){
     // forward integration step
     return i_x + i_dt*i_dynamicSystem(i_t,i_x,i_u);
@@ -135,9 +103,9 @@ Eigen::MatrixXd CRMath::forwardEulerStep(std::function<Eigen::MatrixXd(double,
  
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRMath::rungeKuttaStep(std::function<Eigen::VectorXd(double,
-                                                                     Eigen::VectorXd,
-                                                                     Eigen::VectorXd)> i_dynamicSystem,
+Eigen::VectorXd CRMath::rungeKuttaStep(Eigen::VectorXd(i_dynamicSystem)(double,
+                                                                        Eigen::VectorXd,
+                                                                        Eigen::VectorXd),
                                        double i_t,
                                        Eigen::VectorXd i_x,
                                        Eigen::VectorXd i_u,
@@ -147,44 +115,6 @@ Eigen::VectorXd CRMath::rungeKuttaStep(std::function<Eigen::VectorXd(double,
     Eigen::VectorXd f2 = i_dynamicSystem(i_t+i_dt/2,i_x+i_dt*f1/2,i_u);
     Eigen::VectorXd f3 = i_dynamicSystem(i_t+i_dt/2,i_x+i_dt*f2/2,i_u);
     Eigen::VectorXd f4 = i_dynamicSystem(i_t+i_dt,i_x+i_dt*f3,i_u);
-    return i_x + i_dt/6*(f1 + 2*f2 + 2*f3 + f4);
-}
-
-
-//=====================================================================
-/*!
- This method performs a Runge-Kutta integration step for the matrix dynamical
- system:\n
- 
- \f[
- \dot{x} = f(t,x,u)
- \f]
- 
- This equation is specified as a callback function to the integration.
- The Runga-Kutta integration is an accurate integration scheme at the
- expense of computational complexity over the forward Euler method.
- 
- \param [in] i_dynamicSystem - the continuous time dynamic system
- \param [in] i_t - the current time in seconds
- \param [in] i_x - the current state matrix
- \param [in] i_u - the current input matrix
- \param [in] i_dt - the time step to integrate over
- \return the state matrix at t+dt
- 
- */
-//---------------------------------------------------------------------
-Eigen::MatrixXd CRMath::rungeKuttaStep(std::function<Eigen::MatrixXd(double,
-                                                                     Eigen::MatrixXd,
-                                                                     Eigen::MatrixXd)> i_dynamicSystem,
-                                       double i_t,
-                                       Eigen::MatrixXd i_x,
-                                       Eigen::MatrixXd i_u,
-                                       double i_dt){
-    // RK4 step
-    Eigen::MatrixXd f1 = i_dynamicSystem(i_t,i_x,i_u);
-    Eigen::MatrixXd f2 = i_dynamicSystem(i_t+i_dt/2,i_x+i_dt*f1/2,i_u);
-    Eigen::MatrixXd f3 = i_dynamicSystem(i_t+i_dt/2,i_x+i_dt*f2/2,i_u);
-    Eigen::MatrixXd f4 = i_dynamicSystem(i_t+i_dt,i_x+i_dt*f3,i_u);
     return i_x + i_dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
 
