@@ -9,20 +9,20 @@ classdef CRTrajectoryGenerator < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(283, varargin{:});
+        tmp = CoreRoboticsMEX(302, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = solve(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(284, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(303, self, varargin{:});
     end
     function varargout = step(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(285, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(304, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(286, self);
+        CoreRoboticsMEX(305, self);
         self.swigPtr=[];
       end
     end
