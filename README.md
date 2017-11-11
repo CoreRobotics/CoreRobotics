@@ -5,8 +5,7 @@
 #### University of Washington
 #### College of Engineering
 
-Created: 2016  
-Last Updated: October 20, 2017  
+Created: 2016   
 Version: 0.9.1
 
 - C++ Platforms: Windows 8.1/10, Mac OS X 10, and Linux.
