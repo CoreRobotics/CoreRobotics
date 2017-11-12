@@ -85,4 +85,4 @@ CRResult CRKalmanFilter::step(Eigen::VectorXd i_input,
 
 //=====================================================================
 // End namespace
-}		
+}
