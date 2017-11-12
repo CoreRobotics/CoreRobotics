@@ -50,12 +50,15 @@ void test_CRKalmanFilter(void) {
 	std::cout << "*************************************\n";
 	std::cout << "Demonstration of CRKalmanFilter.\n";
 
+	// Timestep
+	double dt = 0.1;
+
 	// Initialize matricies
 	Eigen::MatrixXd A(2, 2);
-	A << 1, 1, 0, 1;
+	A << 1, dt, 0, 1;
 
 	Eigen::MatrixXd B(2, 1);
-	B << 0.5, 1;
+	B << 0, -dt;
 
 	Eigen::MatrixXd C(1, 2);
 	C << 1, 0;
@@ -67,13 +70,13 @@ void test_CRKalmanFilter(void) {
 	R << 0.3;
 
 	Eigen::VectorXd x(2);
-	x << 500, 0;
+	x << 5, 0;
 
 	Eigen::MatrixXd Sigma0(2, 2);
 	Sigma0 << 0.01, 0, 0, 0.01;
 
 	Eigen::VectorXd u(1);
-	u << -9.81;
+	u << 9.81;
 
 	std::cout << "---------------------------------------------\n";
     std::cout << "CASE 1: Discrete time Kalman filter.\n";
@@ -87,40 +90,41 @@ void test_CRKalmanFilter(void) {
 	std::default_random_engine generator;
 	std::normal_distribution<double> distribution(0, 1);
 	
-	for(int i = 0; i < 10; i++) {
-		// Take a noisy measurement
-		measurement = C * x + R * (Eigen::VectorXd(1) << distribution(generator)).finished();
-		// Step the system forward
-		x = A * x + B * u + Q * (Eigen::VectorXd(2) << distribution(generator), distribution(generator)).finished();
-		kalman.step(u, measurement);
+	for(int i = 0; i <= 10; i++) {
 		// Print the result
 		std::cout << "At i = " << i << std::endl;
 		std::cout << "The true state is " << x.transpose() << std::endl;
 		std::cout << "And the estimated state is " << kalman.getState().transpose() << std::endl;
 		std::cout << "With covariance\n" << kalman.getCovariance() << std::endl;
+		// Take a noisy measurement
+		measurement = C * x + R * (Eigen::VectorXd(1) << distribution(generator)).finished();
+		// Step the system forward
+		x = A * x + B * u + Q * (Eigen::VectorXd(2) << distribution(generator), distribution(generator)).finished();
+		kalman.step(u, measurement);
 	}
 
 	std::cout << "---------------------------------------------\n";
     std::cout << "CASE 2: Continuous time Kalman filter.\n";
 
 	// Test the system as continuous
-	x << 500, 0;
-	double dt = 0.01;
+	A << 0, 1, 0, 0;
+	B << 0, -1;
+	x << 5, 0;
 
 	kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0, dt);
 
-	for(int i = 0; i < 10; i++) {
-		// Create a noisy measurement
-		measurement = C * x + R * (Eigen::VectorXd(1) << distribution(generator)).finished();
-		// Create process noise
-		Eigen::VectorXd w = Q * (Eigen::VectorXd(2) << distribution(generator), distribution(generator)).finished();
-		// Step the system forward
-		x += A * x + B * u + w;
-		kalman.step(u, measurement);
+	for(int i = 0; i <= 10; i++) {
 		// Display the result
 		std::cout << "At t = " << i * dt << std::endl;
 		std::cout << "The true state is " << x.transpose() << std::endl;
 		std::cout << "And the estimated state is " << kalman.getState().transpose() << std::endl;
 		std::cout << "With covariance\n" << kalman.getCovariance() << std::endl;
+		// Create a noisy measurement
+		measurement = C * x + R * (Eigen::VectorXd(1) << distribution(generator)).finished();
+		// Create process noise
+		Eigen::VectorXd w = Q * (Eigen::VectorXd(2) << distribution(generator), distribution(generator)).finished();
+		// Step the system forward
+		x += dt * (A * x + B * u + w);
+		kalman.step(u, measurement);
 	}
 }
