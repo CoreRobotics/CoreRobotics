@@ -50,3 +50,6 @@ test_CRManipulator
 % Test controllers
 test_CRInverseKinematics
 test_CRTrajectoryGenerator
+
+% Test estimators
+test_CRKalmanFilter

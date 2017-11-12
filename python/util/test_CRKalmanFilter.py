@@ -49,15 +49,18 @@ import numpy as np
 print("*************************************")
 print("Demonstration of CRInverseKinematics.")
 
+# Timestep
+dt = 0.1
+
 # Initialize Matricies
-A = np.matrix([[1., 1.], [0., 1.]])
-B = np.matrix([[0.5, 1.]]).T
+A = np.matrix([[1., dt], [0., 1.]])
+B = np.matrix([[0., -dt]]).T
 C = np.matrix([[1., 0.]])
 Q = np.matrix(0.1 * np.eye(2))
 R = np.matrix([[0.3]])
-x = np.matrix([[500., 0.]]).T
+x = np.matrix([[5., 0.]]).T
 Sigma0 = np.matrix(0.01 * np.eye(2))
-u = np.matrix([[-9.81]])
+u = np.matrix([[9.81]])
 
 print("---------------------------------------------")
 print("CASE 1: Discrete time Kalman filter.")
@@ -65,38 +68,39 @@ print("CASE 1: Discrete time Kalman filter.")
 # Initialize the Kalman filter
 kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0)
 
-for i in range(10):
-	# Take a noisy measurement
-	measurement = C * x + R * np.random.randn(1, 1)
-	# Step the system forward
-	x = A * x + B * u + Q * np.random.randn(2, 1)
-	kalman.step(u, measurement)
+for i in range(11):
 	# Print the result
 	print("At i =", i)
 	print("The true state is", x.T)
 	print("And the estimated state is", kalman.getState().T)
 	print("With covariance")
 	print(kalman.getCovariance())
+	# Take a noisy measurement
+	measurement = C * x + R * np.random.randn(1, 1)
+	# Step the system forward
+	x = A * x + B * u + Q * np.random.randn(2, 1)
+	kalman.step(u, measurement)
 
 print("---------------------------------------------")
 print("CASE 2: Continuous time Kalman filter.")
 
 # Test the system as continuous
-x = np.matrix([[500., 0.]]).T
-dt = 0.1
+A = np.matrix([[0., 1.], [0., 0.]])
+B = np.matrix([[0., -1.]]).T
+x = np.matrix([[5., 0.]]).T
 
 kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0, dt)
 
-for i in range(10):
-	# Create a noisy measurement
-	measurement = C * x + R * np.random.randn(1, 1)
-	# Step the system forward
-	xdot = A * x + B * u + Q * np.random.randn(2, 1)
-	x = x + dt * xdot
-	kalman.step(u, measurement)
+for i in range(11):
 	# Print the results
 	print("At t =", i * dt)
 	print("The true state is", x.T)
 	print("And the estimated state is", kalman.getState().T)
 	print("With covariance")
 	print(kalman.getCovariance())
+	# Create a noisy measurement
+	measurement = C * x + R * np.random.randn(1, 1)
+	# Step the system forward
+	xdot = A * x + B * u + Q * np.random.randn(2, 1)
+	x = x + dt * xdot
+	kalman.step(u, measurement)

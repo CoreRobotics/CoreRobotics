@@ -62,3 +62,6 @@ import test_CRManipulator
 import test_CRInverseKinematics
 import test_CRNullSpace
 import test_CRHardLimits
+
+# Test estimators
+import test_CRKalmanFilter
