@@ -71,7 +71,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/src/models
     ${CMAKE_SOURCE_DIR}/src/physics
     ${CMAKE_SOURCE_DIR}/src/controllers
-	${CMAKE_SOURCE_DIR}/src/estimators
+    ${CMAKE_SOURCE_DIR}/src/estimators
 )
 
 # Include 3rd part library headers
@@ -97,7 +97,7 @@ file(GLOB HEADERS_CONTROLLERS
     src/controllers/*.hpp
 )
 file(GLOB HEADERS_ESTIMATORS
-	src/estimators/*.hpp
+    src/estimators/*.hpp
 )
 
 # Source files
@@ -117,7 +117,7 @@ file(GLOB SOURCES_CONTROLLERS
     src/controllers/*.cpp
 )
 file(GLOB SOURCES_ESTIMATORS
-	src/estimators/*.cpp
+    src/estimators/*.cpp
 )
 
 # If building on linux add pthread and rt
