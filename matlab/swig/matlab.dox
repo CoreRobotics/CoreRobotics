@@ -38,6 +38,13 @@ If this is not the case then CMake will use the SWIG wrapper files it has stored
 purpose. If SWIG is installed but it is desired to not use it the `noswig` flag can be set
 to prevent SWIG from being used.
 
+When building these wrappers on Windows car must be taken to use a compiler that is compatible with
+your version of Matlab. The page at https://www.mathworks.com/support/sysreq/previous_releases.html
+contains links to documents listing compatible compilers. The only free compiler supported appears
+to be the MinGW compiler. Once the correct version of this compiler is installed run the CMake command
+`cmake -G "MinGW Makefiles" ../ -Dmatlab=true` to build the Matlab wrappers, then use `mingw32-make`
+to build the wrappers.
+
 Examples of how to use the Matlab wrapper can be found in the examples provided
 in the `matlab/util` directory.
 
