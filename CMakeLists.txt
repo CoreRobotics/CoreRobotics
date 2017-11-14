@@ -349,6 +349,11 @@ if(matlab OR all)
 		# Set the Matlab project name
 		set(Matlab_PROJECT_NAME ${PROJECT_NAME}Matlab)
 
+		# If building on Windows remove the threading library from Core
+		if(WIN32)
+			list(REMOVE_ITEM SOURCES_CORE ${CMAKE_SOURCE_DIR}/src/core/CRThread.cpp)
+		endif()
+
 		# If no Matlab support or noswig defined
 		if(noswig OR NOT SWIG_Matlab_FOUND)
 
