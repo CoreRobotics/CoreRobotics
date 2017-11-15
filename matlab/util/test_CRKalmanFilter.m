@@ -39,17 +39,66 @@
 %
 %=====================================================================
 
-disp('Running the CoreRobotics Matlab test suite.')
+% Import CoreRobotics
+import CoreRobotics.*
 
-% Run the core test
-test_CRCore
+disp('*************************************');
+disp('Demonstration of CRKalmanFilter.');
 
-% Test the Manipulator
-test_CRManipulator
+% Timestep
+dt = 0.1;
 
-% Test controllers
-test_CRInverseKinematics
-test_CRTrajectoryGenerator
+% Initialize matricies
+A = [1 dt; 0 1];
+B = [0; -dt];
+C = [1 0];
+Q = 0.1 * eye(2);
+R = 0.3;
+x = [5; 0];
+Sigma0 = 0.01 * eye(2);
+u = 9.81;
 
-% Test estimators
-test_CRKalmanFilter
+disp('---------------------------------------------');
+disp('CASE 1: Discrete time Kalman filter.');
+
+% Initialize the Kalman filter
+kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0);
+
+for i = 0:10
+	% Print the results
+	fprintf('At i = %i\n', i);
+	fprintf('The true state is %f %f\n', x);
+	fprintf('And the estimated state is %f %f\n', kalman.getState);
+	disp('With covariance');
+	disp(kalman.getCovariance());
+	% Take a noisy measurement
+	measurement = C * x + R * randn();
+	% Step the system forward
+	x = A * x + B * u + Q * randn(2, 1);
+	kalman.step(u, measurement);
+end
+
+disp('---------------------------------------------');
+disp('CASE 2: Continuous time Kalman filter.');
+
+% Test the system as continuous
+A = [0 1; 0 0];
+B = [0; -1];
+x = [5; 0];
+
+kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0, dt);
+
+for i = 0:10
+	% Print the results
+	fprintf('At t = %f\n', i * dt);
+	fprintf('The true state is %f %f\n', x);
+	fprintf('And the estimated state is %f %f\n', kalman.getState);
+	disp('With covariance');
+	disp(kalman.getCovariance());
+	% Create a noisy measurement
+	measurement = C * x + R * randn();
+	% Step the system forward
+	xdot = A * x + B * u + Q * randn(2, 1);
+	x = x + dt * xdot;
+	kalman.step(u, measurement);
+end

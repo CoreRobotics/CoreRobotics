@@ -35,7 +35,6 @@
 # \project CoreRobotics Project
 # \url     www.corerobotics.org
 # \author  Cameron Devine
-# \version 0.0
 # 
 #
 #=====================================================================
@@ -43,75 +42,65 @@
 # Import the future print function for Python 2/3 compatability
 from __future__ import print_function
 
-# This script is an example of how to use the built in python libraries
-# to emulate the functionality of CRCore
-
-# Use the built in time and threading libraries
-import time
-from threading import Thread
+# Import CoreRobotics and Numpy
 from CoreRobotics import *
 import numpy as np
 
-memoryName = "MyMemory"
+print("*************************************")
+print("Demonstration of CRInverseKinematics.")
 
-print("**********************")
-print("Running the test_CRCore")
+# Timestep
+dt = 0.1
 
-MyClock = time.time()
-time.sleep(0.1)
-t = time.time() - MyClock
+# Initialize Matricies
+A = np.matrix([[1., dt], [0., 1.]])
+B = np.matrix([[0., -dt]]).T
+C = np.matrix([[1., 0.]])
+Q = np.matrix(0.1 * np.eye(2))
+R = np.matrix([[0.3]])
+x = np.matrix([[5., 0.]]).T
+Sigma0 = np.matrix(0.01 * np.eye(2))
+u = np.matrix([[9.81]])
 
-print("t =", t)
+print("---------------------------------------------")
+print("CASE 1: Discrete time Kalman filter.")
 
-# Open a shared memory object
-mem = CRSharedMemory(memoryName, CR_MANAGER_SERVER)
+# Initialize the Kalman filter
+kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0)
 
-# Create a vector of data
-v = np.array([[0.0, 0.8]]).T
+for i in range(11):
+	# Print the result
+	print("At i =", i)
+	print("The true state is", x.T)
+	print("And the estimated state is", kalman.getState().T)
+	print("With covariance")
+	print(kalman.getCovariance())
+	# Take a noisy measurement
+	measurement = C * x + R * np.random.randn(1, 1)
+	# Step the system forward
+	x = A * x + B * u + Q * np.random.randn(2, 1)
+	kalman.step(u, measurement)
 
-# Add a signal
-mem.addSignal("signal_1", v)
+print("---------------------------------------------")
+print("CASE 2: Continuous time Kalman filter.")
 
-# Callback for the first thread
-def callback1():
-	# Open some shared memory as client
-	mem = CRSharedMemory(memoryName, CR_MANAGER_CLIENT)
+# Test the system as continuous
+A = np.matrix([[0., 1.], [0., 0.]])
+B = np.matrix([[0., -1.]]).T
+x = np.matrix([[5., 0.]]).T
 
-	dt = 0.1
-	for i in range(10):
-		c = time.time()
-		v = mem.get("signal_1")
-		print("Thread 1: i = {}, signal = {}, {}".format(i + 1, v[0,0], v[1,0]))
-		t = time.time() - c
-		time.sleep(max(dt - t, 0))
+kalman = CRKalmanFilter(A, B, C, Q, R, x, Sigma0, dt)
 
-# Callback for the second thread
-def callback2():
-	# Open some shared memory as client
-	mem = CRSharedMemory(memoryName, CR_MANAGER_CLIENT)
-	# Create a vector of data
-	v = np.array([[0.1, 0.4]]).T
-
-	dt = 0.25
-	for i in range(4):
-		c = time.time()
-		v = i * v + v
-		mem.set("signal_1", v)
-		print("Thread 2: i = {}, signal = {}, {}".format(i + 1, v[0,0], v[1,0]))
-		t = time.time() - c
-		time.sleep(max(dt - t, 0))
-
-# Create the threads
-myThread1 = Thread(target = callback1)
-myThread2 = Thread(target = callback2)
-
-# Start the threads
-myThread1.start()
-myThread2.start()
-
-# Wait for the threads to complete
-while myThread1.isAlive() and myThread2.isAlive():
-	pass
-
-# Remove the signal
-mem.removeSignal("Signal_1")
+for i in range(11):
+	# Print the results
+	print("At t =", i * dt)
+	print("The true state is", x.T)
+	print("And the estimated state is", kalman.getState().T)
+	print("With covariance")
+	print(kalman.getCovariance())
+	# Create a noisy measurement
+	measurement = C * x + R * np.random.randn(1, 1)
+	# Step the system forward
+	xdot = A * x + B * u + Q * np.random.randn(2, 1)
+	x = x + dt * xdot
+	kalman.step(u, measurement)

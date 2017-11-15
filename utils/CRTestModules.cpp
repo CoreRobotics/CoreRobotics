@@ -85,5 +85,9 @@ int main(int argc, const char * argv[]) {
 	test_CRNullSpace();
 	test_CRHardLimits();
     test_CRTrajectoryGenerator();
+
+	// Test estimators
+	test_CRKalmanFilter();
+
     return 0;
 }

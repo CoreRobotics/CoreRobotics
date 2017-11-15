@@ -77,5 +77,8 @@ void test_CRNullSpace(void);            // test CRNullSpace
 void test_CRHardLimits(void);           // test Hard Limits
 void test_CRTrajectoryGenerator(void);  // test TG
 
+// Test estimator modules
+void test_CRKalmanFilter(void);         // Test KF
+
 
 #endif /* CRTestModules_hpp */

@@ -46,7 +46,11 @@ from __future__ import print_function
 print("Running the CoreRobotics Python test suite.")
 
 # Run the core test
-import test_CRCore
+from sys import version
+if int(version[0]) > 2:
+	import test_CRCore
+else:
+	execfile('test_CRCore.py') # This line is different because "import test_CRCore" was not working correctly with Python 2.
 
 # Test the physics models
 import test_CRFrameDh
@@ -58,3 +62,6 @@ import test_CRManipulator
 import test_CRInverseKinematics
 import test_CRNullSpace
 import test_CRHardLimits
+
+# Test estimators
+import test_CRKalmanFilter
