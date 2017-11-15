@@ -372,6 +372,7 @@ project includes all the CoreRobotics modules.
 //! \brief Implements estimators for recovering model states and densities.
 //---------------------------------------------------------------------------
 #include "CRKalmanFilter.hpp"
+#include "CRParticleFilter.hpp"
 
 
 //---------------------------------------------------------------------------

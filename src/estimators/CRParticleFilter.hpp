@@ -39,13 +39,16 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#ifndef CRSensorLinear_hpp
-#define CRSensorLinear_hpp
+#ifndef CRParticleFilter_hpp
+#define CRParticleFilter_hpp
 
 //=====================================================================
 // Includes
+#include <vector>
 #include "Eigen/Dense"
-#include "CRSensorModel.hpp"
+#include "CRNoiseUniform.hpp"
+#include "CRSensorProbabilistic.hpp"
+#include "CRMotionProbabilistic.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -53,37 +56,27 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRSensorLinear.hpp
- \brief Implements a class that handles sensor models.
+ \file CRParticleFilter.hpp
+ \brief Implements a particle filter.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRSensorLinear
- \ingroup models
+ \class CRParticleFilter
+ \ingroup estimators
  
- \brief This class implements a sensor model.
+ \brief This class implements a particle filter for nonlinear,
+ non-Gaussian state estimation.
  
  \details
  ## Description
- CRSensorLinear implements a sensor model from a supplied observation
- callback function.  Specifically, CRSensorLinear sets up a container
- for the linear observation model
  
- \f$ z = H x \f$,
  
- where \f$x\f$ is the state vector, and \f$z\f$ is the sensor 
- measurement vector.
- 
- These methods are used to interface with the Sensor Model:
- - CRSensorLinear::setState sets the underlying state vector.
- - CRSensorLinear::getState outputs the state vector.
- - CRSensorLinear::measurement computes a simulated measurement 
- vector (z) from the underlying state (x).
- - CRSensorLinear::setObservation sets the observation matrix (H).
+ These methods are available:
+ - CRParticleFilter::setState sets ...
  
  ## Example
- This example demonstrates use of the CRSensorLinear class.
- \include test_CRSensorLinear.cpp
+ This example demonstrates use of the CRParticleFilter class.
+ \include test_CRParticleFilter.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
@@ -93,36 +86,68 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-class CRSensorLinear : public CRSensorModel {
+class CRParticleFilter {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRSensorLinear(Eigen::MatrixXd i_H,
-                   Eigen::VectorXd i_x0);
+    CRParticleFilter(CRMotionProbabilistic* i_motionModel,
+                     CRSensorProbabilistic* i_sensorModel,
+                     std::vector<Eigen::VectorXd> i_particles);
     
-//---------------------------------------------------------------------
-// Get/Set Methods
-public:
-    
-    //! Set the dynamics and input matrices
-    void setObservation(Eigen::MatrixXd i_H){ this->m_H = i_H;}
+    //! Class destructor
+    ~CRParticleFilter();
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
-    //! Simulate the measurement
-    Eigen::VectorXd measurement(void);
+    //! Perform a filter step
+    void step(Eigen::VectorXd i_u,
+              Eigen::VectorXd i_zObserved);
+    
+    //! Progpogate the particles forward
+    std::vector<Eigen::VectorXd> sample(Eigen::VectorXd i_u);
+    
+    //! Update the weights using likelihood
+    Eigen::VectorXd update(Eigen::VectorXd i_zObserved);
+    
+    //! Resample step
+    void resample();
+    
+    //! Compute the mean
+    Eigen::VectorXd getExpectedState();
+    
+    //! Compute the covariance
+    Eigen::MatrixXd getExpectedCovariance();
+    
+//---------------------------------------------------------------------
+// Public Members
+public:
+    
+    //! Motion Model
+    CRMotionProbabilistic* m_motionModel;
+    
+    //! Sensor Model
+    CRSensorProbabilistic* m_sensorModel;
+    
+    //! vector of particles
+    std::vector<Eigen::VectorXd> m_particles;
+    
+    //! vector of weights
+    std::vector<double> m_weights;
+    
+    //! critical number of particles
+    double m_Nresample;
+    
+    //! Uniform random noise
+    CRNoiseUniform* m_uniform;
     
 //---------------------------------------------------------------------
 // Protected Members
 protected:
-    
-    //! Observation matrix
-    Eigen::MatrixXd m_H;
     
 };
 
