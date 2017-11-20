@@ -59,16 +59,23 @@ CRParticleFilter::CRParticleFilter(CRMotionProbabilistic* i_motionModel,
                                    CRSensorProbabilistic* i_sensorModel,
                                    std::vector<Eigen::VectorXd> i_particles){
     
+    // uniform dist for resampling
     Eigen::VectorXd a(1);
     Eigen::VectorXd b(1);
     a << 0;
     b << 1;
+    m_uniform = new CRNoiseUniform(a, b);
     
     // set the initial condition to the particle filter
     m_motionModel = i_motionModel;
     m_sensorModel = i_sensorModel;
     m_particles = i_particles;
-    m_uniform = new CRNoiseUniform(a, b);
+    int n = m_particles.size();
+    
+    double x = 1.0 / double(n);
+    for (int k=0; k<n; k++){
+        m_weights.push_back(x);
+    }
 }
     
     
@@ -80,7 +87,6 @@ CRParticleFilter::CRParticleFilter(CRMotionProbabilistic* i_motionModel,
 CRParticleFilter::~CRParticleFilter(){
     delete m_motionModel;
     delete m_sensorModel;
-    delete m_uniform;
 }
     
     

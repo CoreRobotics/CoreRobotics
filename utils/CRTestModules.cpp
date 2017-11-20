@@ -88,6 +88,7 @@ int main(int argc, const char * argv[]) {
 
 	// Test estimators
 	test_CRKalmanFilter();
+    test_CRParticleFilter();
 
     return 0;
 }

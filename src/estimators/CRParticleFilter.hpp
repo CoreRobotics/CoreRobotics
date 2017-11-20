@@ -139,8 +139,8 @@ public:
     //! vector of weights
     std::vector<double> m_weights;
     
-    //! critical number of particles
-    double m_Nresample;
+    //! critical number of particles - initially this is set to zero
+    double m_Nresample = 0.0;
     
     //! Uniform random noise
     CRNoiseUniform* m_uniform;

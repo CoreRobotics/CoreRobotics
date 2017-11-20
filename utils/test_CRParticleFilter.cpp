@@ -46,12 +46,134 @@ POSSIBILITY OF SUCH DAMAGE.
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
+// Create a global noise model
+CRNoiseGaussian* pfSensorNoise;
+CRNoiseGaussian* pfMotionNoise;
+
+// -------------------------------------------------------------
+// Declare a probabilistic prediction model: zHat = fcn(x,sample)
+Eigen::VectorXd pfSensor(Eigen::VectorXd x,
+                         bool sample){
+    Eigen::VectorXd v(1);
+    if (sample){
+        v = pfSensorNoise->sample();
+    } else {
+        v << 0;
+    }
+    return x + v;  // observation
+}
+
+// -------------------------------------------------------------
+// Declare a likelihood model: p = Pr(zObserved | zPredict)
+double pfSensorLik(Eigen::VectorXd zObserved,
+                  Eigen::VectorXd zPredict){
+    
+    Eigen::MatrixXd cov(1,1);
+    cov << 1;
+    pfSensorNoise->setParameters(cov, zPredict);
+    return pfSensorNoise->probability(zObserved);
+}
+
+// -------------------------------------------------------------
+// Declare a probabilistic continuous motion model - xdot = fcn(t,x,u,s)
+// \dox{x} = -x + u + w
+Eigen::VectorXd pfMotion(double t, Eigen::VectorXd x, Eigen::VectorXd u, bool sample){
+    Eigen::VectorXd w(1);
+    if (sample){
+        w = pfMotionNoise->sample();
+    } else {
+        w << 0;
+    }
+    return -x + u + w;  // motion
+}
+
 
 // -------------------------------------------------------------
 void test_CRParticleFilter(void){
     
     std::cout << "*************************************\n";
     std::cout << "Demonstration of CRParticleFilter.\n";
+    
+    // define an initial state
+    Eigen::VectorXd x(1);
+    x << 0;
+    
+    // define an action
+    Eigen::VectorXd u(1);
+    u << 0;
+    
+    // define an initial measurement
+    Eigen::VectorXd z(1);
+    z << 0;
+    
+    // define estimates (mean and variance)
+    Eigen::VectorXd x_mu(1);
+    Eigen::VectorXd x_var(1);
+    x_mu << 0;
+    x_var << 1;
+    
+    // define the noise model properties
+    Eigen::MatrixXd Q(1,1); // motion cov
+    Eigen::MatrixXd R(1,1); // sensor cov
+    Eigen::VectorXd mu(1); // zero-mean
+    Q << 0.001;
+    R << 0.1;
+    mu << 0;
+    
+    // motion noise
+    pfMotionNoise = new CRNoiseGaussian();
+    pfMotionNoise->setParameters(Q, mu);
+    
+    // sensor noise
+    pfSensorNoise = new CRNoiseGaussian();
+    pfSensorNoise->setParameters(R, mu);
+    
+    // create a new sensor & motion model
+    double dt = 0.1;
+    CRSensorProbabilistic* sensorModel = new CRSensorProbabilistic(*pfSensor, *pfSensorLik, x);
+    CRMotionProbabilistic* motionModel = new CRMotionProbabilistic(*pfMotion, CR_MOTION_CONTINUOUS, x, dt);
+    
+    // create copies for simulation
+    CRSensorProbabilistic* sensorSim = new CRSensorProbabilistic(*pfSensor, *pfSensorLik, x);
+    CRMotionProbabilistic* motionSim = new CRMotionProbabilistic(*pfMotion, CR_MOTION_CONTINUOUS, x, dt);
+    
+    // intialize a set of particles (N = 1000)
+    std::vector<Eigen::VectorXd> particles;
+    Eigen::VectorXd xs(1);
+    for (int k=0; k < 1000; k++){
+        xs << pfSensorNoise->sample(); // sample from large covariance initially
+        particles.push_back(xs);
+    }
+    
+    // create a particle filter
+    CRParticleFilter pf(motionModel, sensorModel, particles);
+    pf.m_Nresample = 10;
+    
+    // loop
+    double t = 0; // init a time
+    printf("Time (s) | Input | State | PF Estimate | PF Covariance\n");
+    while(t <= 10) {
+        
+        // step the particle filter
+        pf.step(u, z);
+        x_mu = pf.getExpectedState();
+        x_var = pf.getExpectedCovariance();
+        
+        // output the time and state
+        printf("%4.1f    | %+.3f | %+.3f | %+.3f | %+.3f \n",t,u(0),x(0),x_mu(0),x_var(0));
+        
+        // step at t = 2.5
+        if (t >= 2.5){
+            u << 1.0;
+        }
+        
+        // get next state & time
+        x = motionSim->motion(u, true);
+        sensorSim->setState(x);
+        z = sensorSim->measurement(true);
+        t = motionSim->getTime();
+    }
+    printf("%4.1f    | %+.3f | %+.3f | %+.3f | %+.3f \n",t,u(0),x(0),x_mu(0),x_var(0));
     
 }
 // -------------------------------------------------------------

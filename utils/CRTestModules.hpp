@@ -79,6 +79,7 @@ void test_CRTrajectoryGenerator(void);  // test TG
 
 // Test estimator modules
 void test_CRKalmanFilter(void);         // Test KF
+void test_CRParticleFilter(void);         // Test PF
 
 
 #endif /* CRTestModules_hpp */
