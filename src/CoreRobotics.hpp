@@ -250,7 +250,6 @@ each class.
 - \subpage models implements models such as dynamics, sensor, and noise
  models, as well as a class for handling manupulators.
 - \subpage controllers implements controllers and planners.
-- \subpage estimators implements state estimtion.
  
  */
 //---------------------------------------------------------------------------
@@ -282,6 +281,7 @@ included in the class descriptions.
      ${CR_DIR}/src/physics
      ${CR_DIR}/src/controllers
      ${CR_DIR}/external/eigen
+     ${CR_DIR}/external/boost
  )
  
  link_directories(${CR_DIR}/lib/Release)
@@ -365,12 +365,6 @@ project includes all the CoreRobotics modules.
 #include "CRMotionModel.hpp"
 #include "CRMotionLinear.hpp"
 #include "CRMotionProbabilistic.hpp"
-
-
-//---------------------------------------------------------------------------
-//! \defgroup estimators Estimators
-//! \brief Implements estimators for recovering model states.
-//---------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------

@@ -1,0 +1,17 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+
+  ],
+  "identifier": "",
+  "codeRepository": "https://gitlab.com/powan/CoreRobotics",
+  "datePublished": "2017-11-21",
+  "dateModified": "2017-11-21",
+  "dateCreated": "2017-11-21",
+  "description": "Open source software for real time robot control.",
+  "keywords": "robotics, control, realtime",
+  "license": "BSD",
+  "title": "CoreRobotics",
+  "version": "v0.9.1"
+}
