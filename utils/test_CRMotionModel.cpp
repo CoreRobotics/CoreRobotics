@@ -78,7 +78,7 @@ void test_CRMotionModel(void){
     double t = 0;
     
     // loop
-    printf("Time (s) | State\n");
+    printf("Time (s) | Input | State\n");
     while(t <= 5) {
         
         // output the time and state
