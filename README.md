@@ -70,7 +70,7 @@ Refer to the [Google C++ Style Guide](https://google.github.io/styleguide/cppgui
 - Use intuitive naming. Use discretion with acronymns or when abbreviating anything that isn’t well known.
 - Classes should have `CR` in front of the name, e.g.: `CRTransferFunction`
 - Methods and members should use Camel case, e.g.: `setProperty(<args>)`, `getTransferFunction()`
-- Use upper case and underscores for enumerators, e.g.: `MY_CRAPPY_NUMERATOR`.
+- Use upper case and underscores for enumerators, e.g.: `MY_CLEVER_ENUMERATOR`.
 - Class members should be protected, and setting/getting the member value should be defined explicitly.  The exception is when a class member is a type associated with a 3rd party library (this is so one can access the property without having to modify the containing CoreRobotics class)
 - All class members should have the `m_` prefix for readibility, e.g.: `m_classProperty`
 - Method arguments should utilize the `i_` prefix to indicate an input argument, e.g.: `i_transferFunction`, and the `o_` prefix to indicate an output argument, e.g.: `o_transferFunction`
