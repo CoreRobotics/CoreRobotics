@@ -1,4 +1,5 @@
 [![pipeline status](https://gitlab.com/powan/CoreRobotics/badges/master/pipeline.svg)](https://gitlab.com/powan/CoreRobotics/commits/master)
+[![status](https://joss.theoj.org/papers/627d0100471555a02730d75e626a85ab/status.svg)](https://joss.theoj.org/papers/627d0100471555a02730d75e626a85ab)
 
 # CoreRobotics Project
 #### Copyright (c) 2017
