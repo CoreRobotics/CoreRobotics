@@ -6150,10 +6150,10 @@ fail:
 }
 
 
-SWIGINTERN int _wrap_CR_PI_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  resv[0] = SWIG_From_double(static_cast< double >(CoreRobotics::CR_PI));
-  return 0;
-}
+// SWIGINTERN int _wrap_CR_PI_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+//  resv[0] = SWIG_From_double(static_cast< double >(CoreRobotics::CR_PI));
+//  return 0;
+//}
 
 
 int _wrap_CRMath_deg2rad (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
@@ -16093,7 +16093,7 @@ const char* swigFunctionName_(int fcn_id) {
   case 73: return "CRClock_startTimer";
   case 74: return "CRClock_getElapsedTime";
   case 75: return "CRClock_sleep";
-  case 76: return "CR_PI_get";
+  // case 76: return "CR_PI_get";
   case 77: return "CRMath_deg2rad";
   case 78: return "CRMath_rad2deg";
   case 79: return "CRMath_svd";
@@ -16437,7 +16437,7 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 73: flag=_wrap_CRClock_startTimer(resc,resv,argc,(mxArray**)(argv)); break;
   case 74: flag=_wrap_CRClock_getElapsedTime(resc,resv,argc,(mxArray**)(argv)); break;
   case 75: flag=_wrap_CRClock_sleep(resc,resv,argc,(mxArray**)(argv)); break;
-  case 76: flag=_wrap_CR_PI_get(resc,resv,argc,(mxArray**)(argv)); break;
+  // case 76: flag=_wrap_CR_PI_get(resc,resv,argc,(mxArray**)(argv)); break;
   case 77: flag=_wrap_CRMath_deg2rad(resc,resv,argc,(mxArray**)(argv)); break;
   case 78: flag=_wrap_CRMath_rad2deg(resc,resv,argc,(mxArray**)(argv)); break;
   case 79: flag=_wrap_CRMath_svd(resc,resv,argc,(mxArray**)(argv)); break;

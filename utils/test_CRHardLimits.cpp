@@ -156,7 +156,7 @@ void test_CRHardLimits(void) {
 	std::cout << "Resulting tool pose (" <<  MyRobot->getToolPose(toolIndex, convention, poseElements).transpose() << ")" << std::endl;
 
 	// Set the initial condition to a point outside the limits
-	q << 0, 0.1, CR_PI, 0.3;
+	q << 0, 0.1, M_PI, 0.3;
 	std::cout << "Setting initial condition outisde the limits, (" << q.transpose() << ")" << std::endl;
 	solver.setQ0(q);
 

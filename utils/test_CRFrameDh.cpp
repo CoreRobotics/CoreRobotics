@@ -52,7 +52,7 @@ void CRTestFrameOffset(void){
     std::cout << "Running the test_CRFrameDh\n";
 
 	CRFrameDh* F = new CRFrameDh();
-    F->setParameters(1.0, CR_PI/2.0, 1.0, 0.0);
+    F->setParameters(1.0, M_PI/2.0, 1.0, 0.0);
     
     std::cout << F->getPose(CR_EULER_MODE_XYZ) << std::endl;
 

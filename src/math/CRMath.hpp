@@ -95,7 +95,7 @@ John Wiley & Sons, 2011.
 //=====================================================================
 
 //! CoreRobotics value for PI
-const double CR_PI = 3.1415926535897932384626433832795;
+// const double CR_PI = M_PI;
 
 //=====================================================================
 class CRMath {
@@ -105,10 +105,10 @@ class CRMath {
 public:
     
     //! Convert angles in degrees to radians
-    static double deg2rad(const double i_deg) { return CR_PI * i_deg / 180.0; }
+    static double deg2rad(const double i_deg) { return M_PI * i_deg / 180.0; }
     
     //! Convert angles in radians to degrees
-    static double rad2deg(const double i_rad) { return 180.0 * i_rad / CR_PI; }
+    static double rad2deg(const double i_rad) { return 180.0 * i_rad / M_PI; }
     
     
 #ifndef SWIG
@@ -214,11 +214,11 @@ public:
 
 	//! Wrap angle (rad) to +/- pi
 	static double wrapToPi(double angle) {
-		angle = fmod(angle + CR_PI, 2 * CR_PI);
+		angle = fmod(angle + M_PI, 2 * M_PI);
 		if (angle < 0) {
-			angle += 2 * CR_PI;
+			angle += 2 * M_PI;
 		}
-		return angle - CR_PI;
+		return angle - M_PI;
 	}
     
 };

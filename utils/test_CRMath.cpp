@@ -95,12 +95,12 @@ void test_CRMath(void){
 
 	// Test the wrap to pi functionality
 	std::cout << "\nWrap to Pi Test:\n";
-	printf("%+6.3f -> %+6.3f\n", CR_PI / 2, CRMath::wrapToPi(CR_PI / 2));
-	printf("%+6.3f -> %+6.3f\n", 3 * CR_PI / 2, CRMath::wrapToPi(3 * CR_PI / 2));
-	printf("%+6.3f -> %+6.3f\n", -CR_PI / 2, CRMath::wrapToPi(-CR_PI / 2));
-	printf("%+6.3f -> %+6.3f\n", -3 * CR_PI / 2, CRMath::wrapToPi(-3 * CR_PI / 2));
-	printf("%+6.3f -> %+6.3f\n", 2 * CR_PI, CRMath::wrapToPi(2 * CR_PI));
-	printf("%+6.3f -> %+6.3f\n\n", 3 * CR_PI, CRMath::wrapToPi(3 * CR_PI));
+	printf("%+6.3f -> %+6.3f\n", M_PI / 2, CRMath::wrapToPi(M_PI / 2));
+	printf("%+6.3f -> %+6.3f\n", 3 * M_PI / 2, CRMath::wrapToPi(3 * M_PI / 2));
+	printf("%+6.3f -> %+6.3f\n", -M_PI / 2, CRMath::wrapToPi(-M_PI / 2));
+	printf("%+6.3f -> %+6.3f\n", -3 * M_PI / 2, CRMath::wrapToPi(-3 * M_PI / 2));
+	printf("%+6.3f -> %+6.3f\n", 2 * M_PI, CRMath::wrapToPi(2 * M_PI));
+	printf("%+6.3f -> %+6.3f\n\n", 3 * M_PI, CRMath::wrapToPi(3 * M_PI));
 }
 
 
