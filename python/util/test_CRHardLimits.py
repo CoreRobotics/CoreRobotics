@@ -46,6 +46,7 @@ from __future__ import print_function
 # Import CoreRobotics Numpy and time
 from CoreRobotics import *
 import numpy as np
+import math
 import copy
 
 print("*************************************")
@@ -151,7 +152,7 @@ MyRobot.setConfiguration(q)
 print("Resulting tool pose ", MyRobot.getToolPose(toolIndex, convention, poseElements).T[0])
 
 # Set the initial condition to a point outside the limits
-q =np.array([0, 0.1, CR_PI, 0.3])
+q =np.array([0, 0.1, math.pi, 0.3])
 print("Setting initial condition outisde the limits, ", q)
 solver.setQ0(q)
 
