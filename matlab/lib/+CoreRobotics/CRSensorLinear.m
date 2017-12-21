@@ -9,20 +9,20 @@ classdef CRSensorLinear < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(205, varargin{:});
+        tmp = CoreRoboticsMEX(204, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = setObservation(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(206, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(205, self, varargin{:});
     end
     function varargout = measurement(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(207, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(206, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(208, self);
+        CoreRoboticsMEX(207, self);
         self.swigPtr=[];
       end
     end
