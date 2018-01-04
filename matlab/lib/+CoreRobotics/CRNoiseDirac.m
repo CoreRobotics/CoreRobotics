@@ -7,23 +7,23 @@ classdef CRNoiseDirac < CoreRobotics.CRNoiseModel
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(177, varargin{:});
+        tmp = CoreRoboticsMEX(181, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = setParameters(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(178, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(182, self, varargin{:});
     end
     function varargout = sample(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(179, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(183, self, varargin{:});
     end
     function varargout = probability(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(180, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(184, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(181, self);
+        CoreRoboticsMEX(185, self);
         self.swigPtr=[];
       end
     end

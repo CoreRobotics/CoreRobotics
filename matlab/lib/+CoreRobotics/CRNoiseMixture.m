@@ -7,23 +7,23 @@ classdef CRNoiseMixture < CoreRobotics.CRNoiseModel
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(199, varargin{:});
+        tmp = CoreRoboticsMEX(203, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = add(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(200, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(204, self, varargin{:});
     end
     function varargout = sample(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(201, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(205, self, varargin{:});
     end
     function varargout = probability(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(202, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(206, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(203, self);
+        CoreRoboticsMEX(207, self);
         self.swigPtr=[];
       end
     end

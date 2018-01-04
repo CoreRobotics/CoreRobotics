@@ -7,30 +7,30 @@ classdef gaussianParam < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(160, self);
+        varargout{1} = CoreRoboticsMEX(164, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(161, self, varargin{1});
+        CoreRoboticsMEX(165, self, varargin{1});
       end
     end
     function varargout = covInv(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(162, self);
+        varargout{1} = CoreRoboticsMEX(166, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(163, self, varargin{1});
+        CoreRoboticsMEX(167, self, varargin{1});
       end
     end
     function varargout = mean(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(164, self);
+        varargout{1} = CoreRoboticsMEX(168, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(165, self, varargin{1});
+        CoreRoboticsMEX(169, self, varargin{1});
       end
     end
     function self = gaussianParam(varargin)
@@ -39,14 +39,14 @@ classdef gaussianParam < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(166, varargin{:});
+        tmp = CoreRoboticsMEX(170, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(167, self);
+        CoreRoboticsMEX(171, self);
         self.swigPtr=[];
       end
     end

@@ -48,31 +48,7 @@
 #define SWIG_FILE_WITH_INIT
 #include <Python.h>
 
-#include "CRClock.hpp"
-//#include "CRThread.hpp"
-#include "CRTypes.hpp"
-#include "CRMath.hpp"
-#include "CRFrame.hpp"
-#include "CRFrameEuler.hpp"
-#include "CRFrameDh.hpp"
-#include "CRRigidBody.hpp"
-#include "CRManipulator.hpp"
-#include "CRNoiseModel.hpp"
-#include "CRNoiseGaussian.hpp"
-#include "CRNoiseDirac.hpp"
-#include "CRNoiseUniform.hpp"
-#include "CRNoiseMixture.hpp"
-//#include "CRSensorModel.hpp"
-#include "CRSensorLinear.hpp"
-//#include "CRSensorProbabilistic.hpp"
-//#include "CRMotionModel.hpp"
-//#include "CRMotionLinear.hpp"
-//#include "CRMotionProbabilistic.hpp"
-#include "CRInverseKinematics.hpp"
-#include "CRNullSpace.hpp"
-#include "CRHardLimits.hpp"
-#include "CRSharedMemory.hpp"
-#include "CRTrajectoryGenerator.hpp"
+#include "CoreRobotics.hpp"
 %}
 
 %include <typemaps.i>
@@ -96,7 +72,9 @@ import_array();
 %include "CRClock.hpp"
 //%include "CRThread.hpp"
 %include "CRTypes.hpp"
-%include "CRMath.hpp"
+%include "CRConversion.hpp"
+%include "CRIntegration.hpp"
+%include "CRMatrix.hpp"
 %include "CRFrame.hpp"
 %include "CRFrameEuler.hpp"
 %include "CRFrameDh.hpp"
