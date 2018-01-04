@@ -10740,20 +10740,6 @@ SWIGINTERN PyObject *CRClock_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
   return SWIG_Py_Void();
 }
 
-// SWIGINTERN int Swig_var_CR_PI_set(PyObject *) {
-//  SWIG_Error(SWIG_AttributeError,"Variable CR_PI is read-only.");
-//  return 1;
-//}
-
-
-//SWIGINTERN PyObject *Swig_var_CR_PI_get(void) {
-//  PyObject *pyobj = 0;
-//
-//  pyobj = SWIG_From_double(static_cast< double >(CoreRobotics::CR_PI));
-//  return pyobj;
-//}
-
-
 SWIGINTERN PyObject *_wrap_CRMath_deg2rad(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double arg1 ;
@@ -21316,8 +21302,6 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "CR_RESULT_SINGULAR",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_SINGULAR)));
   SWIG_Python_SetConstant(d, "CR_RESULT_UNWRITABLE",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_UNWRITABLE)));
   SWIG_Python_SetConstant(d, "CR_RESULT_BAD_IC",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_BAD_IC)));
-  PyDict_SetItemString(md,(char *)"cvar", SWIG_globals());
-  //SWIG_addvarlink(SWIG_globals(),(char *)"CR_PI",Swig_var_CR_PI_get, Swig_var_CR_PI_set);
   SWIG_Python_SetConstant(d, "CR_EULER_MODE_ZXZ",SWIG_From_int(static_cast< int >(CoreRobotics::CR_EULER_MODE_ZXZ)));
   SWIG_Python_SetConstant(d, "CR_EULER_MODE_XYX",SWIG_From_int(static_cast< int >(CoreRobotics::CR_EULER_MODE_XYX)));
   SWIG_Python_SetConstant(d, "CR_EULER_MODE_YZY",SWIG_From_int(static_cast< int >(CoreRobotics::CR_EULER_MODE_YZY)));

@@ -487,8 +487,6 @@ class CRMath(_object):
         return None
 CRMath_swigregister = _CoreRobotics.CRMath_swigregister
 CRMath_swigregister(CRMath)
-cvar = _CoreRobotics.cvar
-CR_PI = cvar.CR_PI
 
 def CRMath_deg2rad(i_deg):
     return _CoreRobotics.CRMath_deg2rad(i_deg)
