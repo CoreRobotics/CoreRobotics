@@ -136,7 +136,6 @@ test-python2-noswig:
    - python2 CRTestModules.py
   dependencies:
    - build-python2-noswig
-   - python-wrappers
 
 test-python3-noswig:
   stage: test
@@ -145,7 +144,6 @@ test-python3-noswig:
    - python3 CRTestModules.py
   dependencies:
    - build-python3-noswig
-   - python-wrappers
 
 deploy-python-wrappers:
   stage: deploy
