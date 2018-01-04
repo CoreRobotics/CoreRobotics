@@ -320,6 +320,8 @@ project includes all the CoreRobotics modules.
 */
 //===========================================================================
 
+#define _USE_MATH_DEFINES
+#include <cmath>
 
 //---------------------------------------------------------------------------
 //! \defgroup core Core
@@ -336,7 +338,9 @@ project includes all the CoreRobotics modules.
 //! \defgroup math Math
 //! \brief Implements math components.
 //---------------------------------------------------------------------------
-#include "CRMath.hpp"
+#include "CRConversion.hpp"
+#include "CRIntegration.hpp"
+#include "CRMatrix.hpp"
 
 
 //---------------------------------------------------------------------------

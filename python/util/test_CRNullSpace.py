@@ -45,6 +45,7 @@ from __future__ import print_function
 
 # Import CoreRobotics Numpy and time
 from CoreRobotics import *
+import math
 import numpy as np
 
 print("*************************************")
@@ -103,10 +104,10 @@ d10	= 39.36
 # Set Euler Angles and Position Offsets
 #							  dx		dy		dz		tx				ty		tz
 F0.setPositionAndOrientation(0.0,		0.0,	d1,		0.0,			0.0,	0.0)
-F1.setPositionAndOrientation(0.0,		0.0,	0.0,	CR_PI/2.0,		0.0,	0.0)
+F1.setPositionAndOrientation(0.0,		0.0,	0.0,	math.pi/2.0,	0.0,	0.0)
 F2.setPositionAndOrientation(d3,		d4,		d2,		0.0,			0.0,	0.0)
 F3.setPositionAndOrientation(d5,		0.0,	-d6,	0.0,			0.0,	0.0)
-F4.setPositionAndOrientation(d7,		0.0,	-d8,	-CR_PI/2.0,		0.0,	0.0)
+F4.setPositionAndOrientation(d7,		0.0,	-d8,	-math.pi/2.0,	0.0,	0.0)
 F5.setPositionAndOrientation(d9,		d10,	0.0,	0.0,			0.0,	0.0)
 F6.setPositionAndOrientation(0.0,		0.0,	0.0,	0.0,			0.0,	0.0)
 
@@ -132,14 +133,14 @@ linkIndex6 = MyRobot.addLink(Link6);
 Tool = CRFrameEuler()
 Tool.setFreeVariable(CR_EULER_FREE_NONE)
 Tool.setMode(CR_EULER_MODE_XYZ)
-Tool.setPositionAndOrientation(90.21, 0.0, -107.43, -CR_PI / 8.0, 0.0, 0.0)
+Tool.setPositionAndOrientation(90.21, 0.0, -107.43, -math.pi / 8.0, 0.0, 0.0)
 toolIndex = MyRobot.addTool(linkIndex6, Tool)
 
 # Initialize the solver
 nullSpaceSolver = CRNullSpace(MyRobot, toolIndex, CR_EULER_MODE_XYZ)
 
 # Set the robot orientation
-InitJoints = np.array([0.0, 2.0, 0.0, -2, 0.0, CR_PI / 8.0])
+InitJoints = np.array([0.0, 2.0, 0.0, -2, 0.0, math.pi / 8.0])
 MyRobot.setConfiguration(InitJoints);
 
 # Compute the initial tool pose

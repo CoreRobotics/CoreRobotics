@@ -425,114 +425,150 @@ CR_RESULT_SUCCESS = _CoreRobotics.CR_RESULT_SUCCESS
 CR_RESULT_SINGULAR = _CoreRobotics.CR_RESULT_SINGULAR
 CR_RESULT_UNWRITABLE = _CoreRobotics.CR_RESULT_UNWRITABLE
 CR_RESULT_BAD_IC = _CoreRobotics.CR_RESULT_BAD_IC
-class CRMath(_object):
+class CRConversion(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRMath, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CRConversion, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRMath, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, CRConversion, name)
     __repr__ = _swig_repr
     if _newclass:
-        deg2rad = staticmethod(_CoreRobotics.CRMath_deg2rad)
+        deg2rad = staticmethod(_CoreRobotics.CRConversion_deg2rad)
     else:
-        deg2rad = _CoreRobotics.CRMath_deg2rad
+        deg2rad = _CoreRobotics.CRConversion_deg2rad
     if _newclass:
-        rad2deg = staticmethod(_CoreRobotics.CRMath_rad2deg)
+        rad2deg = staticmethod(_CoreRobotics.CRConversion_rad2deg)
     else:
-        rad2deg = _CoreRobotics.CRMath_rad2deg
+        rad2deg = _CoreRobotics.CRConversion_rad2deg
     if _newclass:
-        svd = staticmethod(_CoreRobotics.CRMath_svd)
+        wrapToPi = staticmethod(_CoreRobotics.CRConversion_wrapToPi)
     else:
-        svd = _CoreRobotics.CRMath_svd
-    if _newclass:
-        svdInverse = staticmethod(_CoreRobotics.CRMath_svdInverse)
-    else:
-        svdInverse = _CoreRobotics.CRMath_svdInverse
-    if _newclass:
-        rotAboutX = staticmethod(_CoreRobotics.CRMath_rotAboutX)
-    else:
-        rotAboutX = _CoreRobotics.CRMath_rotAboutX
-    if _newclass:
-        rotAboutY = staticmethod(_CoreRobotics.CRMath_rotAboutY)
-    else:
-        rotAboutY = _CoreRobotics.CRMath_rotAboutY
-    if _newclass:
-        rotAboutZ = staticmethod(_CoreRobotics.CRMath_rotAboutZ)
-    else:
-        rotAboutZ = _CoreRobotics.CRMath_rotAboutZ
-    if _newclass:
-        normL1 = staticmethod(_CoreRobotics.CRMath_normL1)
-    else:
-        normL1 = _CoreRobotics.CRMath_normL1
-    if _newclass:
-        normL2 = staticmethod(_CoreRobotics.CRMath_normL2)
-    else:
-        normL2 = _CoreRobotics.CRMath_normL2
-    if _newclass:
-        normLinf = staticmethod(_CoreRobotics.CRMath_normLinf)
-    else:
-        normLinf = _CoreRobotics.CRMath_normLinf
-    if _newclass:
-        wrapToPi = staticmethod(_CoreRobotics.CRMath_wrapToPi)
-    else:
-        wrapToPi = _CoreRobotics.CRMath_wrapToPi
+        wrapToPi = _CoreRobotics.CRConversion_wrapToPi
 
     def __init__(self):
-        this = _CoreRobotics.new_CRMath()
+        this = _CoreRobotics.new_CRConversion()
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _CoreRobotics.delete_CRMath
+    __swig_destroy__ = _CoreRobotics.delete_CRConversion
     def __del__(self):
         return None
-CRMath_swigregister = _CoreRobotics.CRMath_swigregister
-CRMath_swigregister(CRMath)
-cvar = _CoreRobotics.cvar
-CR_PI = cvar.CR_PI
+CRConversion_swigregister = _CoreRobotics.CRConversion_swigregister
+CRConversion_swigregister(CRConversion)
 
-def CRMath_deg2rad(i_deg):
-    return _CoreRobotics.CRMath_deg2rad(i_deg)
-CRMath_deg2rad = _CoreRobotics.CRMath_deg2rad
+def CRConversion_deg2rad(i_deg):
+    return _CoreRobotics.CRConversion_deg2rad(i_deg)
+CRConversion_deg2rad = _CoreRobotics.CRConversion_deg2rad
 
-def CRMath_rad2deg(i_rad):
-    return _CoreRobotics.CRMath_rad2deg(i_rad)
-CRMath_rad2deg = _CoreRobotics.CRMath_rad2deg
+def CRConversion_rad2deg(i_rad):
+    return _CoreRobotics.CRConversion_rad2deg(i_rad)
+CRConversion_rad2deg = _CoreRobotics.CRConversion_rad2deg
 
-def CRMath_svd(i_A, i_tol, o_U, o_Sigma, o_V):
-    return _CoreRobotics.CRMath_svd(i_A, i_tol, o_U, o_Sigma, o_V)
-CRMath_svd = _CoreRobotics.CRMath_svd
+def CRConversion_wrapToPi(*args):
+    return _CoreRobotics.CRConversion_wrapToPi(*args)
+CRConversion_wrapToPi = _CoreRobotics.CRConversion_wrapToPi
 
-def CRMath_svdInverse(i_A, i_tol, o_Ainv):
-    return _CoreRobotics.CRMath_svdInverse(i_A, i_tol, o_Ainv)
-CRMath_svdInverse = _CoreRobotics.CRMath_svdInverse
+class CRIntegration(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CRIntegration, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, CRIntegration, name)
+    __repr__ = _swig_repr
 
-def CRMath_rotAboutX(i_ang):
-    return _CoreRobotics.CRMath_rotAboutX(i_ang)
-CRMath_rotAboutX = _CoreRobotics.CRMath_rotAboutX
+    def __init__(self):
+        this = _CoreRobotics.new_CRIntegration()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _CoreRobotics.delete_CRIntegration
+    def __del__(self):
+        return None
+CRIntegration_swigregister = _CoreRobotics.CRIntegration_swigregister
+CRIntegration_swigregister(CRIntegration)
 
-def CRMath_rotAboutY(i_ang):
-    return _CoreRobotics.CRMath_rotAboutY(i_ang)
-CRMath_rotAboutY = _CoreRobotics.CRMath_rotAboutY
+class CRMatrix(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CRMatrix, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, CRMatrix, name)
+    __repr__ = _swig_repr
+    if _newclass:
+        svd = staticmethod(_CoreRobotics.CRMatrix_svd)
+    else:
+        svd = _CoreRobotics.CRMatrix_svd
+    if _newclass:
+        svdInverse = staticmethod(_CoreRobotics.CRMatrix_svdInverse)
+    else:
+        svdInverse = _CoreRobotics.CRMatrix_svdInverse
+    if _newclass:
+        rotAboutX = staticmethod(_CoreRobotics.CRMatrix_rotAboutX)
+    else:
+        rotAboutX = _CoreRobotics.CRMatrix_rotAboutX
+    if _newclass:
+        rotAboutY = staticmethod(_CoreRobotics.CRMatrix_rotAboutY)
+    else:
+        rotAboutY = _CoreRobotics.CRMatrix_rotAboutY
+    if _newclass:
+        rotAboutZ = staticmethod(_CoreRobotics.CRMatrix_rotAboutZ)
+    else:
+        rotAboutZ = _CoreRobotics.CRMatrix_rotAboutZ
+    if _newclass:
+        normL1 = staticmethod(_CoreRobotics.CRMatrix_normL1)
+    else:
+        normL1 = _CoreRobotics.CRMatrix_normL1
+    if _newclass:
+        normL2 = staticmethod(_CoreRobotics.CRMatrix_normL2)
+    else:
+        normL2 = _CoreRobotics.CRMatrix_normL2
+    if _newclass:
+        normLinf = staticmethod(_CoreRobotics.CRMatrix_normLinf)
+    else:
+        normLinf = _CoreRobotics.CRMatrix_normLinf
 
-def CRMath_rotAboutZ(i_ang):
-    return _CoreRobotics.CRMath_rotAboutZ(i_ang)
-CRMath_rotAboutZ = _CoreRobotics.CRMath_rotAboutZ
+    def __init__(self):
+        this = _CoreRobotics.new_CRMatrix()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _CoreRobotics.delete_CRMatrix
+    def __del__(self):
+        return None
+CRMatrix_swigregister = _CoreRobotics.CRMatrix_swigregister
+CRMatrix_swigregister(CRMatrix)
 
-def CRMath_normL1(x):
-    return _CoreRobotics.CRMath_normL1(x)
-CRMath_normL1 = _CoreRobotics.CRMath_normL1
+def CRMatrix_svd(i_A, i_tol, o_U, o_Sigma, o_V):
+    return _CoreRobotics.CRMatrix_svd(i_A, i_tol, o_U, o_Sigma, o_V)
+CRMatrix_svd = _CoreRobotics.CRMatrix_svd
 
-def CRMath_normL2(x):
-    return _CoreRobotics.CRMath_normL2(x)
-CRMath_normL2 = _CoreRobotics.CRMath_normL2
+def CRMatrix_svdInverse(i_A, i_tol, o_Ainv):
+    return _CoreRobotics.CRMatrix_svdInverse(i_A, i_tol, o_Ainv)
+CRMatrix_svdInverse = _CoreRobotics.CRMatrix_svdInverse
 
-def CRMath_normLinf(x):
-    return _CoreRobotics.CRMath_normLinf(x)
-CRMath_normLinf = _CoreRobotics.CRMath_normLinf
+def CRMatrix_rotAboutX(i_ang):
+    return _CoreRobotics.CRMatrix_rotAboutX(i_ang)
+CRMatrix_rotAboutX = _CoreRobotics.CRMatrix_rotAboutX
 
-def CRMath_wrapToPi(*args):
-    return _CoreRobotics.CRMath_wrapToPi(*args)
-CRMath_wrapToPi = _CoreRobotics.CRMath_wrapToPi
+def CRMatrix_rotAboutY(i_ang):
+    return _CoreRobotics.CRMatrix_rotAboutY(i_ang)
+CRMatrix_rotAboutY = _CoreRobotics.CRMatrix_rotAboutY
+
+def CRMatrix_rotAboutZ(i_ang):
+    return _CoreRobotics.CRMatrix_rotAboutZ(i_ang)
+CRMatrix_rotAboutZ = _CoreRobotics.CRMatrix_rotAboutZ
+
+def CRMatrix_normL1(x):
+    return _CoreRobotics.CRMatrix_normL1(x)
+CRMatrix_normL1 = _CoreRobotics.CRMatrix_normL1
+
+def CRMatrix_normL2(x):
+    return _CoreRobotics.CRMatrix_normL2(x)
+CRMatrix_normL2 = _CoreRobotics.CRMatrix_normL2
+
+def CRMatrix_normLinf(x):
+    return _CoreRobotics.CRMatrix_normLinf(x)
+CRMatrix_normLinf = _CoreRobotics.CRMatrix_normLinf
 
 CR_EULER_MODE_ZXZ = _CoreRobotics.CR_EULER_MODE_ZXZ
 CR_EULER_MODE_XYX = _CoreRobotics.CR_EULER_MODE_XYX

@@ -45,6 +45,7 @@ from __future__ import print_function
 
 # Import CoreRobotics and Numpy
 from CoreRobotics import *
+import math
 import numpy as np
 
 print("*************************************")
@@ -105,7 +106,7 @@ print("Jacobian =")
 print(Jacobian)
 
 # Now set a new robot configuration and get the FK and jacobian
-jointAngles = np.array([CR_PI / 4, -CR_PI / 2])
+jointAngles = np.array([math.pi / 4, -math.pi / 2])
 print("Set joint angles =", jointAngles.T, "rad")
 MyRobot.setConfiguration(jointAngles)
 FwdKin = MyRobot.getForwardKinematics()

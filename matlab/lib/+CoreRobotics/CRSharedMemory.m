@@ -9,28 +9,28 @@ classdef CRSharedMemory < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(265, varargin{:});
+        tmp = CoreRoboticsMEX(268, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(266, self);
+        CoreRoboticsMEX(269, self);
         self.swigPtr=[];
       end
     end
     function varargout = addSignal(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(267, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(270, self, varargin{:});
     end
     function varargout = removeSignal(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(268, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(271, self, varargin{:});
     end
     function varargout = set(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(269, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(272, self, varargin{:});
     end
     function varargout = get(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(270, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(273, self, varargin{:});
     end
   end
   methods(Static)

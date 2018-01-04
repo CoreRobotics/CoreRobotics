@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "CRNullSpace.hpp"
-#include "CRMath.hpp"
+#include "CRMatrix.hpp"
 #include "CRTypes.hpp"
 
 //=====================================================================
@@ -112,7 +112,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
 		this->m_robot->setConfiguration(q);
 		J = this->m_robot->jacobian(this->m_toolIndex,
                                     this->m_eulerMode);
-		result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+		result = CRMatrix::svdInverse(J, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
 		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < m_trivTol)
 		{
@@ -167,7 +167,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
 		J = this->m_robot->jacobian(this->m_toolIndex,
                                     this->m_eulerMode,
                                     i_poseElements);
-		result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
+		result = CRMatrix::svdInverse(J, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
 		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
 		{
@@ -225,7 +225,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
 		J = this->m_robot->jacobian(this->m_toolIndex,
                                     this->m_eulerMode,
                                     i_poseElements);
-		result = CRMath::svdInverse(J * i_w, this->m_svdTol, Jinv);
+		result = CRMatrix::svdInverse(J * i_w, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
 		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
 		{

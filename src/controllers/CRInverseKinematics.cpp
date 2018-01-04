@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "CRInverseKinematics.hpp"
-#include "CRMath.hpp"
+#include "CRMatrix.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -93,7 +93,7 @@ CRResult CRInverseKinematics::getJacInv(Eigen::MatrixXd i_jac, Eigen::MatrixXd &
     Eigen::VectorXd Sigma;
     
     // Compute the SVD
-    CRResult result = CRMath::svd(i_jac, this->m_svdTol, U, Sigma, V);
+    CRResult result = CRMatrix::svd(i_jac, this->m_svdTol, U, Sigma, V);
     // result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
     
     // compute the Damped singular values (E)

@@ -46,6 +46,7 @@ from __future__ import print_function
 # Import CoreRobotics and Numpy
 from CoreRobotics import *
 import numpy as np
+import math
 
 print("**********************")
 print("Running the test_CRFrameDh")
@@ -57,6 +58,6 @@ MyRobot = CRManipulator()
 F = CRFrameDh()
 
 # Set the parameters of the Dh frames
-F.setParameters(1.0, CR_PI/2.0, 1.0, 0.0)
+F.setParameters(1.0, math.pi/2.0, 1.0, 0.0)
 
 print(F.getPose(CR_EULER_MODE_XYZ))

@@ -41,7 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "Eigen/Dense"
 #include "CRNoiseGaussian.hpp"
-#include "CRMath.hpp"
+#include "CRMatrix.hpp"
 #include <chrono>
 #include <math.h>
 
@@ -139,7 +139,7 @@ Eigen::VectorXd CRNoiseGaussian::sample(void)
 double CRNoiseGaussian::probability(Eigen::VectorXd i_x)
 {
     // compute subarguments
-    Eigen::MatrixXd cov2pi = 2*CoreRobotics::CR_PI*this->m_parameters.cov;
+    Eigen::MatrixXd cov2pi = 2*M_PI*this->m_parameters.cov;
     Eigen::VectorXd error = i_x - this->m_parameters.mean;
     
     // define the arguments (gain k and arg of exponent)

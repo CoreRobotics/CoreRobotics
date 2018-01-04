@@ -53,7 +53,7 @@ void test_CRManipulator(void) {
 
 	// ------------------------------------------
 	// Create a new robot
-	CRManipulator MyRobot;
+    CRManipulator MyRobot;
 
 	// create a couple of rigid body links and add them to the manipulator
 	CRFrameEuler* F0 = new CRFrameEuler();
@@ -118,7 +118,7 @@ void test_CRManipulator(void) {
 	std::cout << "Hessian = \n" << Hessian << std::endl;
 
 	// now set a new robot configuration and get the FK and jacobian
-	jointAngles << CoreRobotics::CR_PI / 4.0, -CoreRobotics::CR_PI / 2.0;
+	jointAngles << M_PI / 4.0, -M_PI / 2.0;
 	std::cout << "Set joint angles = ("
 		<< jointAngles.transpose() << ") rad" << std::endl;
 	MyRobot.setConfiguration(jointAngles);

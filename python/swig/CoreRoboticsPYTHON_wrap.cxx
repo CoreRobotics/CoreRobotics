@@ -3004,54 +3004,56 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_CoreRobotics__CRClock swig_types[0]
-#define SWIGTYPE_p_CoreRobotics__CRFrame swig_types[1]
-#define SWIGTYPE_p_CoreRobotics__CRFrameDh swig_types[2]
-#define SWIGTYPE_p_CoreRobotics__CRFrameEuler swig_types[3]
-#define SWIGTYPE_p_CoreRobotics__CRHardLimits swig_types[4]
-#define SWIGTYPE_p_CoreRobotics__CRInverseKinematics swig_types[5]
-#define SWIGTYPE_p_CoreRobotics__CRManipulator swig_types[6]
-#define SWIGTYPE_p_CoreRobotics__CRMath swig_types[7]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseDirac swig_types[8]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseGaussian swig_types[9]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseMixture swig_types[10]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseModel swig_types[11]
-#define SWIGTYPE_p_CoreRobotics__CRNoiseUniform swig_types[12]
-#define SWIGTYPE_p_CoreRobotics__CRNullSpace swig_types[13]
-#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[14]
-#define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[15]
-#define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[16]
-#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[17]
-#define SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator swig_types[18]
-#define SWIGTYPE_p_CoreRobotics__CRWaypoint swig_types[19]
-#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[20]
-#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[21]
-#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[22]
-#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[23]
-#define SWIGTYPE_p_Eigen__Matrix3d swig_types[24]
-#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[25]
-#define SWIGTYPE_p_Eigen__MatrixXd swig_types[26]
-#define SWIGTYPE_p_Eigen__VectorXd swig_types[27]
-#define SWIGTYPE_p_allocator_type swig_types[28]
-#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[29]
-#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[30]
-#define SWIGTYPE_p_char swig_types[31]
-#define SWIGTYPE_p_difference_type swig_types[32]
-#define SWIGTYPE_p_double swig_types[33]
-#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[34]
-#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[35]
-#define SWIGTYPE_p_p_PyObject swig_types[36]
-#define SWIGTYPE_p_size_type swig_types[37]
-#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[38]
-#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[39]
-#define SWIGTYPE_p_std__invalid_argument swig_types[40]
-#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[41]
-#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[42]
-#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[43]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[44]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[45]
-#define SWIGTYPE_p_value_type swig_types[46]
-static swig_type_info *swig_types[48];
-static swig_module_info swig_module = {swig_types, 47, 0, 0, 0, 0};
+#define SWIGTYPE_p_CoreRobotics__CRConversion swig_types[1]
+#define SWIGTYPE_p_CoreRobotics__CRFrame swig_types[2]
+#define SWIGTYPE_p_CoreRobotics__CRFrameDh swig_types[3]
+#define SWIGTYPE_p_CoreRobotics__CRFrameEuler swig_types[4]
+#define SWIGTYPE_p_CoreRobotics__CRHardLimits swig_types[5]
+#define SWIGTYPE_p_CoreRobotics__CRIntegration swig_types[6]
+#define SWIGTYPE_p_CoreRobotics__CRInverseKinematics swig_types[7]
+#define SWIGTYPE_p_CoreRobotics__CRManipulator swig_types[8]
+#define SWIGTYPE_p_CoreRobotics__CRMatrix swig_types[9]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseDirac swig_types[10]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseGaussian swig_types[11]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseMixture swig_types[12]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseModel swig_types[13]
+#define SWIGTYPE_p_CoreRobotics__CRNoiseUniform swig_types[14]
+#define SWIGTYPE_p_CoreRobotics__CRNullSpace swig_types[15]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[16]
+#define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[17]
+#define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[18]
+#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[19]
+#define SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator swig_types[20]
+#define SWIGTYPE_p_CoreRobotics__CRWaypoint swig_types[21]
+#define SWIGTYPE_p_CoreRobotics__diracParam swig_types[22]
+#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[23]
+#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[24]
+#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[25]
+#define SWIGTYPE_p_Eigen__Matrix3d swig_types[26]
+#define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[27]
+#define SWIGTYPE_p_Eigen__MatrixXd swig_types[28]
+#define SWIGTYPE_p_Eigen__VectorXd swig_types[29]
+#define SWIGTYPE_p_allocator_type swig_types[30]
+#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[31]
+#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[32]
+#define SWIGTYPE_p_char swig_types[33]
+#define SWIGTYPE_p_difference_type swig_types[34]
+#define SWIGTYPE_p_double swig_types[35]
+#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[36]
+#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[37]
+#define SWIGTYPE_p_p_PyObject swig_types[38]
+#define SWIGTYPE_p_size_type swig_types[39]
+#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[40]
+#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[41]
+#define SWIGTYPE_p_std__invalid_argument swig_types[42]
+#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[43]
+#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[44]
+#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[45]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[46]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[47]
+#define SWIGTYPE_p_value_type swig_types[48]
+static swig_type_info *swig_types[50];
+static swig_module_info swig_module = {swig_types, 49, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3175,31 +3177,7 @@ namespace swig {
 #define SWIG_FILE_WITH_INIT
 #include <Python.h>
 
-#include "CRClock.hpp"
-//#include "CRThread.hpp"
-#include "CRTypes.hpp"
-#include "CRMath.hpp"
-#include "CRFrame.hpp"
-#include "CRFrameEuler.hpp"
-#include "CRFrameDh.hpp"
-#include "CRRigidBody.hpp"
-#include "CRManipulator.hpp"
-#include "CRNoiseModel.hpp"
-#include "CRNoiseGaussian.hpp"
-#include "CRNoiseDirac.hpp"
-#include "CRNoiseUniform.hpp"
-#include "CRNoiseMixture.hpp"
-//#include "CRSensorModel.hpp"
-#include "CRSensorLinear.hpp"
-//#include "CRSensorProbabilistic.hpp"
-//#include "CRMotionModel.hpp"
-//#include "CRMotionLinear.hpp"
-//#include "CRMotionProbabilistic.hpp"
-#include "CRInverseKinematics.hpp"
-#include "CRNullSpace.hpp"
-#include "CRHardLimits.hpp"
-#include "CRSharedMemory.hpp"
-#include "CRTrajectoryGenerator.hpp"
+#include "CoreRobotics.hpp"
 
 
 #include <iostream>
@@ -10740,21 +10718,7 @@ SWIGINTERN PyObject *CRClock_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
   return SWIG_Py_Void();
 }
 
-SWIGINTERN int Swig_var_CR_PI_set(PyObject *) {
-  SWIG_Error(SWIG_AttributeError,"Variable CR_PI is read-only.");
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_CR_PI_get(void) {
-  PyObject *pyobj = 0;
-  
-  pyobj = SWIG_From_double(static_cast< double >(CoreRobotics::CR_PI));
-  return pyobj;
-}
-
-
-SWIGINTERN PyObject *_wrap_CRMath_deg2rad(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRConversion_deg2rad(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double arg1 ;
   double val1 ;
@@ -10762,13 +10726,13 @@ SWIGINTERN PyObject *_wrap_CRMath_deg2rad(PyObject *SWIGUNUSEDPARM(self), PyObje
   PyObject * obj0 = 0 ;
   double result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:CRMath_deg2rad",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:CRConversion_deg2rad",&obj0)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRMath_deg2rad" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRConversion_deg2rad" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
-  result = (double)CoreRobotics::CRMath::deg2rad(arg1);
+  result = (double)CoreRobotics::CRConversion::deg2rad(arg1);
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -10776,7 +10740,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_rad2deg(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRConversion_rad2deg(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double arg1 ;
   double val1 ;
@@ -10784,13 +10748,13 @@ SWIGINTERN PyObject *_wrap_CRMath_rad2deg(PyObject *SWIGUNUSEDPARM(self), PyObje
   PyObject * obj0 = 0 ;
   double result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:CRMath_rad2deg",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:CRConversion_rad2deg",&obj0)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRMath_rad2deg" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRConversion_rad2deg" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
-  result = (double)CoreRobotics::CRMath::rad2deg(arg1);
+  result = (double)CoreRobotics::CRConversion::rad2deg(arg1);
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -10798,7 +10762,176 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_svd(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRConversion_wrapToPi__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  double arg1 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRConversion_wrapToPi",&obj0)) SWIG_fail;
+  ecode1 = SWIG_AsVal_double(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRConversion_wrapToPi" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  result = (double)CoreRobotics::CRConversion::wrapToPi(arg1);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRConversion_wrapToPi__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Eigen::VectorXd arg1 ;
+  Eigen::VectorXd temp1 ;
+  PyObject * obj0 = 0 ;
+  Eigen::VectorXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRConversion_wrapToPi",&obj0)) SWIG_fail;
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp1, obj0))
+    SWIG_fail;
+    arg1 = temp1;
+  }
+  result = CoreRobotics::CRConversion::wrapToPi(arg1);
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::VectorXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRConversion_wrapToPi(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[2] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = PyObject_Length(args);
+  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      int res = SWIG_AsVal_double(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
+    if (_v) {
+      return _wrap_CRConversion_wrapToPi__SWIG_0(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      _v = is_array(argv[0]);
+    }
+    if (_v) {
+      return _wrap_CRConversion_wrapToPi__SWIG_1(self, args);
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'CRConversion_wrapToPi'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    CoreRobotics::CRConversion::wrapToPi(double)\n"
+    "    CoreRobotics::CRConversion::wrapToPi(Eigen::VectorXd)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CRConversion(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRConversion *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_CRConversion")) SWIG_fail;
+  result = (CoreRobotics::CRConversion *)new CoreRobotics::CRConversion();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRConversion, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_CRConversion(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRConversion *arg1 = (CoreRobotics::CRConversion *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CRConversion",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRConversion, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRConversion" "', argument " "1"" of type '" "CoreRobotics::CRConversion *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRConversion * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *CRConversion_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char *)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__CRConversion, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_CRIntegration(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRIntegration *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_CRIntegration")) SWIG_fail;
+  result = (CoreRobotics::CRIntegration *)new CoreRobotics::CRIntegration();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRIntegration, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_CRIntegration(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRIntegration *arg1 = (CoreRobotics::CRIntegration *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CRIntegration",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRIntegration, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRIntegration" "', argument " "1"" of type '" "CoreRobotics::CRIntegration *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRIntegration * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *CRIntegration_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char *)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__CRIntegration, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_CRMatrix_svd(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Eigen::MatrixXd arg1 ;
   double arg2 ;
@@ -10818,7 +10951,7 @@ SWIGINTERN PyObject *_wrap_CRMath_svd(PyObject *SWIGUNUSEDPARM(self), PyObject *
   PyObject * obj4 = 0 ;
   CoreRobotics::CRResult result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOOO:CRMath_svd",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOOO:CRMatrix_svd",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
   {
     if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp1, obj0))
     SWIG_fail;
@@ -10826,7 +10959,7 @@ SWIGINTERN PyObject *_wrap_CRMath_svd(PyObject *SWIGUNUSEDPARM(self), PyObject *
   }
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRMath_svd" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRMatrix_svd" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   {
@@ -10850,7 +10983,7 @@ SWIGINTERN PyObject *_wrap_CRMath_svd(PyObject *SWIGUNUSEDPARM(self), PyObject *
     
     arg5 = &temp5;
   }
-  result = (CoreRobotics::CRResult)CoreRobotics::CRMath::svd(arg1,arg2,*arg3,*arg4,*arg5);
+  result = (CoreRobotics::CRResult)CoreRobotics::CRMatrix::svd(arg1,arg2,*arg3,*arg4,*arg5);
   resultobj = SWIG_From_int(static_cast< int >(result));
   {
     // Argout: &
@@ -10873,7 +11006,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_svdInverse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRMatrix_svdInverse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Eigen::MatrixXd arg1 ;
   double arg2 ;
@@ -10887,7 +11020,7 @@ SWIGINTERN PyObject *_wrap_CRMath_svdInverse(PyObject *SWIGUNUSEDPARM(self), PyO
   PyObject * obj2 = 0 ;
   CoreRobotics::CRResult result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:CRMath_svdInverse",&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CRMatrix_svdInverse",&obj0,&obj1,&obj2)) SWIG_fail;
   {
     if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp1, obj0))
     SWIG_fail;
@@ -10895,7 +11028,7 @@ SWIGINTERN PyObject *_wrap_CRMath_svdInverse(PyObject *SWIGUNUSEDPARM(self), PyO
   }
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRMath_svdInverse" "', argument " "2"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRMatrix_svdInverse" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   {
@@ -10905,7 +11038,7 @@ SWIGINTERN PyObject *_wrap_CRMath_svdInverse(PyObject *SWIGUNUSEDPARM(self), PyO
     
     arg3 = &temp3;
   }
-  result = (CoreRobotics::CRResult)CoreRobotics::CRMath::svdInverse(arg1,arg2,*arg3);
+  result = (CoreRobotics::CRResult)CoreRobotics::CRMatrix::svdInverse(arg1,arg2,*arg3);
   resultobj = SWIG_From_int(static_cast< int >(result));
   {
     // Argout: &
@@ -10918,7 +11051,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_rotAboutX(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRMatrix_rotAboutX(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double arg1 ;
   double val1 ;
@@ -10926,13 +11059,13 @@ SWIGINTERN PyObject *_wrap_CRMath_rotAboutX(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj0 = 0 ;
   Eigen::Matrix3d result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:CRMath_rotAboutX",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:CRMatrix_rotAboutX",&obj0)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRMath_rotAboutX" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRMatrix_rotAboutX" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
-  result = CoreRobotics::CRMath::rotAboutX(arg1);
+  result = CoreRobotics::CRMatrix::rotAboutX(arg1);
   resultobj = SWIG_NewPointerObj((new Eigen::Matrix3d(static_cast< const Eigen::Matrix3d& >(result))), SWIGTYPE_p_Eigen__Matrix3d, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -10940,7 +11073,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_rotAboutY(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRMatrix_rotAboutY(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double arg1 ;
   double val1 ;
@@ -10948,13 +11081,13 @@ SWIGINTERN PyObject *_wrap_CRMath_rotAboutY(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj0 = 0 ;
   Eigen::Matrix3d result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:CRMath_rotAboutY",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:CRMatrix_rotAboutY",&obj0)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRMath_rotAboutY" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRMatrix_rotAboutY" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
-  result = CoreRobotics::CRMath::rotAboutY(arg1);
+  result = CoreRobotics::CRMatrix::rotAboutY(arg1);
   resultobj = SWIG_NewPointerObj((new Eigen::Matrix3d(static_cast< const Eigen::Matrix3d& >(result))), SWIGTYPE_p_Eigen__Matrix3d, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -10962,7 +11095,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_rotAboutZ(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRMatrix_rotAboutZ(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   double arg1 ;
   double val1 ;
@@ -10970,13 +11103,13 @@ SWIGINTERN PyObject *_wrap_CRMath_rotAboutZ(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj0 = 0 ;
   Eigen::Matrix3d result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:CRMath_rotAboutZ",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:CRMatrix_rotAboutZ",&obj0)) SWIG_fail;
   ecode1 = SWIG_AsVal_double(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRMath_rotAboutZ" "', argument " "1"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRMatrix_rotAboutZ" "', argument " "1"" of type '" "double""'");
   } 
   arg1 = static_cast< double >(val1);
-  result = CoreRobotics::CRMath::rotAboutZ(arg1);
+  result = CoreRobotics::CRMatrix::rotAboutZ(arg1);
   resultobj = SWIG_NewPointerObj((new Eigen::Matrix3d(static_cast< const Eigen::Matrix3d& >(result))), SWIGTYPE_p_Eigen__Matrix3d, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -10984,20 +11117,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_normL1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRMatrix_normL1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Eigen::VectorXd arg1 ;
   Eigen::VectorXd temp1 ;
   PyObject * obj0 = 0 ;
   double result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:CRMath_normL1",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:CRMatrix_normL1",&obj0)) SWIG_fail;
   {
     if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp1, obj0))
     SWIG_fail;
     arg1 = temp1;
   }
-  result = (double)CoreRobotics::CRMath::normL1(arg1);
+  result = (double)CoreRobotics::CRMatrix::normL1(arg1);
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -11005,20 +11138,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_normL2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRMatrix_normL2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Eigen::VectorXd arg1 ;
   Eigen::VectorXd temp1 ;
   PyObject * obj0 = 0 ;
   double result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:CRMath_normL2",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:CRMatrix_normL2",&obj0)) SWIG_fail;
   {
     if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp1, obj0))
     SWIG_fail;
     arg1 = temp1;
   }
-  result = (double)CoreRobotics::CRMath::normL2(arg1);
+  result = (double)CoreRobotics::CRMatrix::normL2(arg1);
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -11026,20 +11159,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_normLinf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRMatrix_normLinf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Eigen::VectorXd arg1 ;
   Eigen::VectorXd temp1 ;
   PyObject * obj0 = 0 ;
   double result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:CRMath_normLinf",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:CRMatrix_normLinf",&obj0)) SWIG_fail;
   {
     if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp1, obj0))
     SWIG_fail;
     arg1 = temp1;
   }
-  result = (double)CoreRobotics::CRMath::normLinf(arg1);
+  result = (double)CoreRobotics::CRMatrix::normLinf(arg1);
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -11047,119 +11180,32 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_wrapToPi__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_CRMatrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Eigen::VectorXd arg1 ;
-  Eigen::VectorXd temp1 ;
-  PyObject * obj0 = 0 ;
-  Eigen::VectorXd result;
+  CoreRobotics::CRMatrix *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:CRMath_wrapToPi",&obj0)) SWIG_fail;
-  {
-    if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp1, obj0))
-    SWIG_fail;
-    arg1 = temp1;
-  }
-  result = CoreRobotics::CRMath::wrapToPi(arg1);
-  {
-    if (!ConvertFromEigenToNumPyMatrix<Eigen::VectorXd >(&resultobj, &result))
-    SWIG_fail;
-  }
+  if (!PyArg_ParseTuple(args,(char *)":new_CRMatrix")) SWIG_fail;
+  result = (CoreRobotics::CRMatrix *)new CoreRobotics::CRMatrix();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRMatrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_CRMath_wrapToPi__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_CRMatrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  double arg1 ;
-  double val1 ;
-  int ecode1 = 0 ;
-  PyObject * obj0 = 0 ;
-  double result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:CRMath_wrapToPi",&obj0)) SWIG_fail;
-  ecode1 = SWIG_AsVal_double(obj0, &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "CRMath_wrapToPi" "', argument " "1"" of type '" "double""'");
-  } 
-  arg1 = static_cast< double >(val1);
-  result = (double)CoreRobotics::CRMath::wrapToPi(arg1);
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_CRMath_wrapToPi(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[2] = {
-    0
-  };
-  Py_ssize_t ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = PyObject_Length(args);
-  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 1) {
-    int _v;
-    {
-      int res = SWIG_AsVal_double(argv[0], NULL);
-      _v = SWIG_CheckState(res);
-    }
-    if (_v) {
-      return _wrap_CRMath_wrapToPi__SWIG_1(self, args);
-    }
-  }
-  if (argc == 1) {
-    int _v;
-    {
-      _v = is_array(argv[0]);
-    }
-    if (_v) {
-      return _wrap_CRMath_wrapToPi__SWIG_0(self, args);
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'CRMath_wrapToPi'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    CoreRobotics::CRMath::wrapToPi(Eigen::VectorXd)\n"
-    "    CoreRobotics::CRMath::wrapToPi(double)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_CRMath(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  CoreRobotics::CRMath *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_CRMath")) SWIG_fail;
-  result = (CoreRobotics::CRMath *)new CoreRobotics::CRMath();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRMath, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_CRMath(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  CoreRobotics::CRMath *arg1 = (CoreRobotics::CRMath *) 0 ;
+  CoreRobotics::CRMatrix *arg1 = (CoreRobotics::CRMatrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_CRMath",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRMath, SWIG_POINTER_DISOWN |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CRMatrix",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRMatrix, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRMath" "', argument " "1"" of type '" "CoreRobotics::CRMath *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRMatrix" "', argument " "1"" of type '" "CoreRobotics::CRMatrix *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::CRMath * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRMatrix * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -11168,10 +11214,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *CRMath_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *CRMatrix_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char *)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__CRMath, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__CRMatrix, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -20160,20 +20206,26 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CRClock_getElapsedTime", _wrap_CRClock_getElapsedTime, METH_VARARGS, NULL},
 	 { (char *)"CRClock_sleep", _wrap_CRClock_sleep, METH_VARARGS, NULL},
 	 { (char *)"CRClock_swigregister", CRClock_swigregister, METH_VARARGS, NULL},
-	 { (char *)"CRMath_deg2rad", _wrap_CRMath_deg2rad, METH_VARARGS, NULL},
-	 { (char *)"CRMath_rad2deg", _wrap_CRMath_rad2deg, METH_VARARGS, NULL},
-	 { (char *)"CRMath_svd", _wrap_CRMath_svd, METH_VARARGS, NULL},
-	 { (char *)"CRMath_svdInverse", _wrap_CRMath_svdInverse, METH_VARARGS, NULL},
-	 { (char *)"CRMath_rotAboutX", _wrap_CRMath_rotAboutX, METH_VARARGS, NULL},
-	 { (char *)"CRMath_rotAboutY", _wrap_CRMath_rotAboutY, METH_VARARGS, NULL},
-	 { (char *)"CRMath_rotAboutZ", _wrap_CRMath_rotAboutZ, METH_VARARGS, NULL},
-	 { (char *)"CRMath_normL1", _wrap_CRMath_normL1, METH_VARARGS, NULL},
-	 { (char *)"CRMath_normL2", _wrap_CRMath_normL2, METH_VARARGS, NULL},
-	 { (char *)"CRMath_normLinf", _wrap_CRMath_normLinf, METH_VARARGS, NULL},
-	 { (char *)"CRMath_wrapToPi", _wrap_CRMath_wrapToPi, METH_VARARGS, NULL},
-	 { (char *)"new_CRMath", _wrap_new_CRMath, METH_VARARGS, NULL},
-	 { (char *)"delete_CRMath", _wrap_delete_CRMath, METH_VARARGS, NULL},
-	 { (char *)"CRMath_swigregister", CRMath_swigregister, METH_VARARGS, NULL},
+	 { (char *)"CRConversion_deg2rad", _wrap_CRConversion_deg2rad, METH_VARARGS, NULL},
+	 { (char *)"CRConversion_rad2deg", _wrap_CRConversion_rad2deg, METH_VARARGS, NULL},
+	 { (char *)"CRConversion_wrapToPi", _wrap_CRConversion_wrapToPi, METH_VARARGS, NULL},
+	 { (char *)"new_CRConversion", _wrap_new_CRConversion, METH_VARARGS, NULL},
+	 { (char *)"delete_CRConversion", _wrap_delete_CRConversion, METH_VARARGS, NULL},
+	 { (char *)"CRConversion_swigregister", CRConversion_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_CRIntegration", _wrap_new_CRIntegration, METH_VARARGS, NULL},
+	 { (char *)"delete_CRIntegration", _wrap_delete_CRIntegration, METH_VARARGS, NULL},
+	 { (char *)"CRIntegration_swigregister", CRIntegration_swigregister, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_svd", _wrap_CRMatrix_svd, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_svdInverse", _wrap_CRMatrix_svdInverse, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_rotAboutX", _wrap_CRMatrix_rotAboutX, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_rotAboutY", _wrap_CRMatrix_rotAboutY, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_rotAboutZ", _wrap_CRMatrix_rotAboutZ, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_normL1", _wrap_CRMatrix_normL1, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_normL2", _wrap_CRMatrix_normL2, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_normLinf", _wrap_CRMatrix_normLinf, METH_VARARGS, NULL},
+	 { (char *)"new_CRMatrix", _wrap_new_CRMatrix, METH_VARARGS, NULL},
+	 { (char *)"delete_CRMatrix", _wrap_delete_CRMatrix, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_swigregister", CRMatrix_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_CRFrame", _wrap_new_CRFrame, METH_VARARGS, NULL},
 	 { (char *)"CRFrame_setFreeValue", _wrap_CRFrame_setFreeValue, METH_VARARGS, NULL},
 	 { (char *)"CRFrame_getFreeValue", _wrap_CRFrame_getFreeValue, METH_VARARGS, NULL},
@@ -20418,13 +20470,15 @@ static void *_p_CoreRobotics__CRFrameDhTo_p_CoreRobotics__CRFrame(void *x, int *
     return (void *)((CoreRobotics::CRFrame *)  ((CoreRobotics::CRFrameDh *) x));
 }
 static swig_type_info _swigt__p_CoreRobotics__CRClock = {"_p_CoreRobotics__CRClock", "CoreRobotics::CRClock *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CoreRobotics__CRConversion = {"_p_CoreRobotics__CRConversion", "CoreRobotics::CRConversion *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRFrame = {"_p_CoreRobotics__CRFrame", "CoreRobotics::CRFrame *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRFrameDh = {"_p_CoreRobotics__CRFrameDh", "CoreRobotics::CRFrameDh *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRFrameEuler = {"_p_CoreRobotics__CRFrameEuler", "CoreRobotics::CRFrameEuler *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRHardLimits = {"_p_CoreRobotics__CRHardLimits", "CoreRobotics::CRHardLimits *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CoreRobotics__CRIntegration = {"_p_CoreRobotics__CRIntegration", "CoreRobotics::CRIntegration *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRInverseKinematics = {"_p_CoreRobotics__CRInverseKinematics", "CoreRobotics::CRInverseKinematics *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRManipulator = {"_p_CoreRobotics__CRManipulator", "CoreRobotics::CRManipulator *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_CoreRobotics__CRMath = {"_p_CoreRobotics__CRMath", "CoreRobotics::CRMath *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CoreRobotics__CRMatrix = {"_p_CoreRobotics__CRMatrix", "CoreRobotics::CRMatrix *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRNoiseDirac = {"_p_CoreRobotics__CRNoiseDirac", "CoreRobotics::CRNoiseDirac *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRNoiseGaussian = {"_p_CoreRobotics__CRNoiseGaussian", "CoreRobotics::CRNoiseGaussian *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRNoiseMixture = {"_p_CoreRobotics__CRNoiseMixture", "CoreRobotics::CRNoiseMixture *", 0, 0, (void*)0, 0};
@@ -20467,13 +20521,15 @@ static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_CoreRobotics__CRClock,
+  &_swigt__p_CoreRobotics__CRConversion,
   &_swigt__p_CoreRobotics__CRFrame,
   &_swigt__p_CoreRobotics__CRFrameDh,
   &_swigt__p_CoreRobotics__CRFrameEuler,
   &_swigt__p_CoreRobotics__CRHardLimits,
+  &_swigt__p_CoreRobotics__CRIntegration,
   &_swigt__p_CoreRobotics__CRInverseKinematics,
   &_swigt__p_CoreRobotics__CRManipulator,
-  &_swigt__p_CoreRobotics__CRMath,
+  &_swigt__p_CoreRobotics__CRMatrix,
   &_swigt__p_CoreRobotics__CRNoiseDirac,
   &_swigt__p_CoreRobotics__CRNoiseGaussian,
   &_swigt__p_CoreRobotics__CRNoiseMixture,
@@ -20516,13 +20572,15 @@ static swig_type_info *swig_type_initial[] = {
 };
 
 static swig_cast_info _swigc__p_CoreRobotics__CRClock[] = {  {&_swigt__p_CoreRobotics__CRClock, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRConversion[] = {  {&_swigt__p_CoreRobotics__CRConversion, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRFrame[] = {  {&_swigt__p_CoreRobotics__CRFrame, 0, 0, 0},  {&_swigt__p_CoreRobotics__CRFrameEuler, _p_CoreRobotics__CRFrameEulerTo_p_CoreRobotics__CRFrame, 0, 0},  {&_swigt__p_CoreRobotics__CRFrameDh, _p_CoreRobotics__CRFrameDhTo_p_CoreRobotics__CRFrame, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRFrameDh[] = {  {&_swigt__p_CoreRobotics__CRFrameDh, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRFrameEuler[] = {  {&_swigt__p_CoreRobotics__CRFrameEuler, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRHardLimits[] = {  {&_swigt__p_CoreRobotics__CRHardLimits, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRIntegration[] = {  {&_swigt__p_CoreRobotics__CRIntegration, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRInverseKinematics[] = {  {&_swigt__p_CoreRobotics__CRInverseKinematics, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRManipulator[] = {  {&_swigt__p_CoreRobotics__CRManipulator, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_CoreRobotics__CRMath[] = {  {&_swigt__p_CoreRobotics__CRMath, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRMatrix[] = {  {&_swigt__p_CoreRobotics__CRMatrix, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRNoiseDirac[] = {  {&_swigt__p_CoreRobotics__CRNoiseDirac, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRNoiseGaussian[] = {  {&_swigt__p_CoreRobotics__CRNoiseGaussian, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRNoiseMixture[] = {  {&_swigt__p_CoreRobotics__CRNoiseMixture, 0, 0, 0},{0, 0, 0, 0}};
@@ -20565,13 +20623,15 @@ static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_CoreRobotics__CRClock,
+  _swigc__p_CoreRobotics__CRConversion,
   _swigc__p_CoreRobotics__CRFrame,
   _swigc__p_CoreRobotics__CRFrameDh,
   _swigc__p_CoreRobotics__CRFrameEuler,
   _swigc__p_CoreRobotics__CRHardLimits,
+  _swigc__p_CoreRobotics__CRIntegration,
   _swigc__p_CoreRobotics__CRInverseKinematics,
   _swigc__p_CoreRobotics__CRManipulator,
-  _swigc__p_CoreRobotics__CRMath,
+  _swigc__p_CoreRobotics__CRMatrix,
   _swigc__p_CoreRobotics__CRNoiseDirac,
   _swigc__p_CoreRobotics__CRNoiseGaussian,
   _swigc__p_CoreRobotics__CRNoiseMixture,
@@ -21316,8 +21376,6 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "CR_RESULT_SINGULAR",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_SINGULAR)));
   SWIG_Python_SetConstant(d, "CR_RESULT_UNWRITABLE",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_UNWRITABLE)));
   SWIG_Python_SetConstant(d, "CR_RESULT_BAD_IC",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_BAD_IC)));
-  PyDict_SetItemString(md,(char *)"cvar", SWIG_globals());
-  SWIG_addvarlink(SWIG_globals(),(char *)"CR_PI",Swig_var_CR_PI_get, Swig_var_CR_PI_set);
   SWIG_Python_SetConstant(d, "CR_EULER_MODE_ZXZ",SWIG_From_int(static_cast< int >(CoreRobotics::CR_EULER_MODE_ZXZ)));
   SWIG_Python_SetConstant(d, "CR_EULER_MODE_XYX",SWIG_From_int(static_cast< int >(CoreRobotics::CR_EULER_MODE_XYX)));
   SWIG_Python_SetConstant(d, "CR_EULER_MODE_YZY",SWIG_From_int(static_cast< int >(CoreRobotics::CR_EULER_MODE_YZY)));

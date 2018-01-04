@@ -7,53 +7,53 @@ classdef CRFrameEuler < CoreRobotics.CRFrame
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(104, varargin{:});
+        tmp = CoreRoboticsMEX(107, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = setFreeValue(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(105, self, varargin{:});
-    end
-    function varargout = getFreeValue(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(106, self, varargin{:});
-    end
-    function varargout = setFreeVariable(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(107, self, varargin{:});
-    end
-    function varargout = getFreeVariable(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(108, self, varargin{:});
     end
-    function varargout = setMode(self,varargin)
+    function varargout = getFreeValue(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(109, self, varargin{:});
     end
-    function varargout = getMode(self,varargin)
+    function varargout = setFreeVariable(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(110, self, varargin{:});
     end
-    function varargout = setPosition(self,varargin)
+    function varargout = getFreeVariable(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(111, self, varargin{:});
     end
-    function varargout = getPosition(self,varargin)
+    function varargout = setMode(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(112, self, varargin{:});
     end
-    function varargout = setOrientation(self,varargin)
+    function varargout = getMode(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(113, self, varargin{:});
     end
-    function varargout = getOrientation(self,varargin)
+    function varargout = setPosition(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(114, self, varargin{:});
     end
-    function varargout = setPositionAndOrientation(self,varargin)
+    function varargout = getPosition(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(115, self, varargin{:});
     end
-    function varargout = getPositionAndOrientation(self,varargin)
+    function varargout = setOrientation(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(116, self, varargin{:});
     end
-    function varargout = isDriven(self,varargin)
+    function varargout = getOrientation(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(117, self, varargin{:});
+    end
+    function varargout = setPositionAndOrientation(self,varargin)
+      [varargout{1:nargout}] = CoreRoboticsMEX(118, self, varargin{:});
+    end
+    function varargout = getPositionAndOrientation(self,varargin)
+      [varargout{1:nargout}] = CoreRoboticsMEX(119, self, varargin{:});
+    end
+    function varargout = isDriven(self,varargin)
+      [varargout{1:nargout}] = CoreRoboticsMEX(120, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(118, self);
+        CoreRoboticsMEX(121, self);
         self.swigPtr=[];
       end
     end
