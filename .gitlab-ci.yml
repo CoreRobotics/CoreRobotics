@@ -13,6 +13,7 @@ python-wrappers:
    - cd build
    - cmake ../ -Dpython=only-swig
    - make
+  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/python/swig/CoreRoboticsPYTHON_wrap.cxx
@@ -26,6 +27,7 @@ matlab-wrappers:
    - cd build
    - cmake ../ -Dmatlab=only-swig
    - make
+  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/matlab/swig/CoreRoboticsMATLAB_wrap.cxx
@@ -40,6 +42,7 @@ build-cpp:
    - cd build
    - cmake ../
    - make
+  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/bin/TestModules
@@ -52,8 +55,11 @@ build-python2:
    - cd build
    - cmake ../ -Dpython=2
    - make
+  dependencies: []
   artifacts:
     paths:
+     - $CI_PROJECT_DIR/python/swig/CoreRoboticsPYTHON_wrap.cxx
+     - $CI_PROJECT_DIR/python/lib/CoreRobotics.py
      - $CI_PROJECT_DIR/python/lib/_CoreRobotics.so
     expire_in: 1 week
 
@@ -64,8 +70,11 @@ build-python3:
    - cd build
    - cmake ../ -Dpython=3
    - make
+  dependencies: []
   artifacts:
     paths:
+     - $CI_PROJECT_DIR/python/swig/CoreRoboticsPYTHON_wrap.cxx
+     - $CI_PROJECT_DIR/python/lib/CoreRobotics.py
      - $CI_PROJECT_DIR/python/lib/_CoreRobotics.so
     expire_in: 1 week
 
@@ -127,6 +136,7 @@ test-python2-noswig:
    - python2 CRTestModules.py
   dependencies:
    - build-python2-noswig
+   - python-wrappers
 
 test-python3-noswig:
   stage: test
@@ -135,6 +145,7 @@ test-python3-noswig:
    - python3 CRTestModules.py
   dependencies:
    - build-python3-noswig
+   - python-wrappers
 
 deploy-python-wrappers:
   stage: deploy
