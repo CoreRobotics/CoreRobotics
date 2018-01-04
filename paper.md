@@ -25,6 +25,8 @@ Real-time controllers for robot manipulators are typically developed and impleme
 
 The CoreRobotics libraries were developed in an effort to provide generalized implementations of algorithms facilitating rapid development of real-time robot control. CoreRobotics utilizes an object-oriented approach in C++ to implement fast cross-platform thread management and timing, core math solvers [@kreyszig], manipulator control [@craig,@murray,@DLS,@NS,@hessian], and trajectory shaping [@minJerk], and modeling for state estimation [@thrun,@crassidis,@smc].
 
+An example application that makes use of the library runs a single-board computer (e.g.: a raspberry PI or similar computer) to control the motion of a small four-jointed robot arm.  A controller that solves for the joint angles to achieve a desired position of the robot tool uses the CoreRobotics InverseKinematics class.  To achieve smooth motions between robot tool waypoints, the controller uses the CoreRobotics TrajectoryGenerator class.  The Manipulator class presents a convenient way to represent the robot and update the robot kinematics quickly when new sensor data becomes available.
+
 CoreRobotics has been compiled on Windows 8.1, 10, Linux, and MacOS on various hardware architectures.  Linear algebra is handled with Eigen [@eigen].  CMake [@cmake] is used to unify the compile process across multi-platform developer environments, and an option is provided to compile Python and MATLAB wrappers using SWIG [@swig].  The CoreRobotics library is used in several research projects at the University of Washington, Seattle.
 
 The authors would like to thank Professor Santosh Devasia and Professor Joseph Garbini for their support and direction during development of the software library.
