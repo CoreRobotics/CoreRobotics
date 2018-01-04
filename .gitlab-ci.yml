@@ -58,9 +58,8 @@ build-python2:
   dependencies: []
   artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/swig/CoreRoboticsPYTHON_wrap.cxx
-     - $CI_PROJECT_DIR/python/lib/CoreRobotics.py
-     - $CI_PROJECT_DIR/python/lib/_CoreRobotics.so
+     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
     expire_in: 1 week
 
 build-python3:
@@ -73,9 +72,8 @@ build-python3:
   dependencies: []
   artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/swig/CoreRoboticsPYTHON_wrap.cxx
-     - $CI_PROJECT_DIR/python/lib/CoreRobotics.py
-     - $CI_PROJECT_DIR/python/lib/_CoreRobotics.so
+     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
     expire_in: 1 week
 
 build-python2-noswig:
@@ -89,7 +87,8 @@ build-python2-noswig:
    - python-wrappers
   artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/lib/_CoreRobotics.so
+     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
     expire_in: 1 week
 
 build-python3-noswig:
@@ -103,7 +102,8 @@ build-python3-noswig:
    - python-wrappers
   artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/lib/_CoreRobotics.so
+     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
     expire_in: 1 week
 
 test-cpp:
