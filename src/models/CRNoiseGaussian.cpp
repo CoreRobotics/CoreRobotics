@@ -41,7 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "Eigen/Dense"
 #include "CRNoiseGaussian.hpp"
-#include "CRMath.hpp"
+#include "CRMatrix.hpp"
 #include <chrono>
 #include <math.h>
 

@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "CRHardLimits.hpp"
-#include "CRMath.hpp"
+#include "CRMatrix.hpp"
 #include "CRTypes.hpp"
 
 //=====================================================================

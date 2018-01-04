@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "CRFrameEuler.hpp"
-#include "CRMath.hpp"
+#include "CRMatrix.hpp"
 #include "Eigen/Dense"
 
 
@@ -362,64 +362,64 @@ void CRFrameEuler::setRotationAndTranslation()
     
     switch (m_eulerMode){
         case CR_EULER_MODE_ZXZ:
-			r1 = CRMath::rotAboutZ(m_angA);
-			r2 = CRMath::rotAboutX(m_angB);
-			r3 = CRMath::rotAboutZ(m_angG);
+			r1 = CRMatrix::rotAboutZ(m_angA);
+			r2 = CRMatrix::rotAboutX(m_angB);
+			r3 = CRMatrix::rotAboutZ(m_angG);
             break;
         case CR_EULER_MODE_XYX:
-			r1 = CRMath::rotAboutX(m_angA);
-			r2 = CRMath::rotAboutY(m_angB);
-			r3 = CRMath::rotAboutX(m_angG);
+			r1 = CRMatrix::rotAboutX(m_angA);
+			r2 = CRMatrix::rotAboutY(m_angB);
+			r3 = CRMatrix::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_YZY:
-			r1 = CRMath::rotAboutY(m_angA);
-			r2 = CRMath::rotAboutZ(m_angB);
-			r3 = CRMath::rotAboutY(m_angG);
+			r1 = CRMatrix::rotAboutY(m_angA);
+			r2 = CRMatrix::rotAboutZ(m_angB);
+			r3 = CRMatrix::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_ZYZ:
-			r1 = CRMath::rotAboutZ(m_angA);
-			r2 = CRMath::rotAboutY(m_angB);
-			r3 = CRMath::rotAboutZ(m_angG);
+			r1 = CRMatrix::rotAboutZ(m_angA);
+			r2 = CRMatrix::rotAboutY(m_angB);
+			r3 = CRMatrix::rotAboutZ(m_angG);
             break;
         case CR_EULER_MODE_XZX:
-			r1 = CRMath::rotAboutX(m_angA);
-			r2 = CRMath::rotAboutZ(m_angB);
-			r3 = CRMath::rotAboutX(m_angG);
+			r1 = CRMatrix::rotAboutX(m_angA);
+			r2 = CRMatrix::rotAboutZ(m_angB);
+			r3 = CRMatrix::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_YXY:
-			r1 = CRMath::rotAboutY(m_angA);
-			r2 = CRMath::rotAboutX(m_angB);
-			r3 = CRMath::rotAboutY(m_angG);
+			r1 = CRMatrix::rotAboutY(m_angA);
+			r2 = CRMatrix::rotAboutX(m_angB);
+			r3 = CRMatrix::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_XYZ:
-			r1 = CRMath::rotAboutX(m_angA);
-			r2 = CRMath::rotAboutY(m_angB);
-			r3 = CRMath::rotAboutZ(m_angG);
+			r1 = CRMatrix::rotAboutX(m_angA);
+			r2 = CRMatrix::rotAboutY(m_angB);
+			r3 = CRMatrix::rotAboutZ(m_angG);
             break;
         case CR_EULER_MODE_YZX:
-			r1 = CRMath::rotAboutY(m_angA);
-			r2 = CRMath::rotAboutZ(m_angB);
-			r3 = CRMath::rotAboutX(m_angG);
+			r1 = CRMatrix::rotAboutY(m_angA);
+			r2 = CRMatrix::rotAboutZ(m_angB);
+			r3 = CRMatrix::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_ZXY:
-			r1 = CRMath::rotAboutZ(m_angA);
-			r2 = CRMath::rotAboutX(m_angB);
-			r3 = CRMath::rotAboutY(m_angG);
+			r1 = CRMatrix::rotAboutZ(m_angA);
+			r2 = CRMatrix::rotAboutX(m_angB);
+			r3 = CRMatrix::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_XZY:
-			r1 = CRMath::rotAboutX(m_angA);
-			r2 = CRMath::rotAboutZ(m_angB);
-			r3 = CRMath::rotAboutY(m_angG);
+			r1 = CRMatrix::rotAboutX(m_angA);
+			r2 = CRMatrix::rotAboutZ(m_angB);
+			r3 = CRMatrix::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_ZYX:
-			r1 = CRMath::rotAboutZ(m_angA);
-			r2 = CRMath::rotAboutY(m_angB);
-			r3 = CRMath::rotAboutX(m_angG);
+			r1 = CRMatrix::rotAboutZ(m_angA);
+			r2 = CRMatrix::rotAboutY(m_angB);
+			r3 = CRMatrix::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_YXZ:
-			r1 = CRMath::rotAboutY(m_angA);
-			r2 = CRMath::rotAboutX(m_angB);
-			r3 = CRMath::rotAboutZ(m_angG);
+			r1 = CRMatrix::rotAboutY(m_angA);
+			r2 = CRMatrix::rotAboutX(m_angB);
+			r3 = CRMatrix::rotAboutZ(m_angG);
             break;
     }
     m_rotation = r1*r2*r3;

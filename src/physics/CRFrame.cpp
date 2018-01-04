@@ -41,7 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "Eigen/Dense"
 #include "CRFrame.hpp"
-#include "CRMath.hpp"
+#include "CRMatrix.hpp"
 
 
 //=====================================================================

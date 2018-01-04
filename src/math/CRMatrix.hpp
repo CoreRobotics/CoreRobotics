@@ -39,8 +39,8 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#ifndef CRMath_hpp
-#define CRMath_hpp
+#ifndef CRMatrix_hpp
+#define CRMatrix_hpp
 
 //=====================================================================
 // Includes
@@ -54,24 +54,20 @@ namespace CoreRobotics {
 
 //=====================================================================
 /*!
-\file CRMath.hpp
-\brief Implements utility math functions.
+\file CRMatrix.hpp
+\brief Implements matrix maths.
 */
 //---------------------------------------------------------------------
 /*!
-\class CRMath
+\class CRMatrix
 \ingroup math
 
-\brief This class implements various math related helper functions.
+\brief This class implements matrix and vector math.
 
 \details
 ## Description
-This class implements various math related helper functions.
+This class implements matrix and vector math.
  
-- CRMath::deg2rad converts degress to radians
-- CRMath::rad2deg converts radians to degrees.
-- CRMath::forwardEulerStep performs forward Euler integration.
-- CRMath::rungeKuttaStep performs 4th order Runga-Kutta integration.
 - CRMath::svd performs singular value decomposition.
 - CRMath::svdInverse performs matrix inverse using SVD.
 - CRMath::rotAboutX constructs a rotation matrix for rotation about x axis.
@@ -80,7 +76,6 @@ This class implements various math related helper functions.
 - CRMath::normL1 takes the L1 norm of a vector.
 - CRMath::normL2 takes the L2 norm of a vector.
 - CRMath::normLinf takes the L-infinity norm of a vector.
-- CRMath::wrapToPi wraps angles to +/- $\pi$ radians.
  
 ## Example
 This example shows usage of the math functions.
@@ -93,43 +88,8 @@ John Wiley & Sons, 2011.
 */
 
 //=====================================================================
-class CRMath {
-
-//---------------------------------------------------------------------
-// Static conversion methods
-public:
+class CRMatrix {
     
-    //! Convert angles in degrees to radians
-    static double deg2rad(const double i_deg) { return M_PI * i_deg / 180.0; }
-    
-    //! Convert angles in radians to degrees
-    static double rad2deg(const double i_rad) { return 180.0 * i_rad / M_PI; }
-    
-    
-#ifndef SWIG
-//---------------------------------------------------------------------
-// Numerical integration routines
-public:
-    
-    //! Forward euler integration
-    static Eigen::VectorXd forwardEulerStep(Eigen::VectorXd(i_dynamicSystem)(double,
-                                                                             Eigen::VectorXd,
-                                                                             Eigen::VectorXd),
-                                            double i_t,
-                                            Eigen::VectorXd i_x,
-                                            Eigen::VectorXd i_u,
-                                            double i_dt);
-    
-    //! Runge-Kutta 4th order integration
-    static Eigen::VectorXd rungeKuttaStep(Eigen::VectorXd(i_dynamicSystem)(double,
-                                                                           Eigen::VectorXd,
-                                                                           Eigen::VectorXd),
-                                          double i_t,
-                                          Eigen::VectorXd i_x,
-                                          Eigen::VectorXd i_u,
-                                          double i_dt);
-#endif
-
 //---------------------------------------------------------------------
 // Matrix factorization
 public:
@@ -198,23 +158,6 @@ public:
 	static double normLinf(Eigen::VectorXd x) {
 		return x.array().abs().maxCoeff();
 	};
-
-	//! Wrap angle (rad) to +/- pi
-	static Eigen::VectorXd wrapToPi(Eigen::VectorXd angle) {
-		for (int i = 0; i < angle.size(); i++) {
-			angle(i) = wrapToPi(angle(i));
-		}
-		return angle;
-	}
-
-	//! Wrap angle (rad) to +/- pi
-	static double wrapToPi(double angle) {
-		angle = fmod(angle + M_PI, 2 * M_PI);
-		if (angle < 0) {
-			angle += 2 * M_PI;
-		}
-		return angle - M_PI;
-	}
     
 };
 
