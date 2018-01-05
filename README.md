@@ -30,7 +30,7 @@ CoreRobotics makes use of Eigen (vector/matrix math) and Boost libraries.  Make 
 On Linux using aptitude, the install is
 `sudo apt-get install libeigen3-dev`
 2. Boost can be found at [http://www.boost.org/](http://www.boost.org/).  Using homebrew (Mac), the install is
-`brew install eigen3`
+`brew install boost`
 On Linux using aptitude, the install is
 `sudo apt-get install libboost-all-dev`
 
