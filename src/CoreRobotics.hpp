@@ -306,8 +306,8 @@ included in the class descriptions.
      ${CR_DIR}/src/estimators
      ${CR_DIR}/src/physics
      ${CR_DIR}/src/controllers
-     ${CR_DIR}/external/eigen
-     ${CR_DIR}/external/boost
+     <path to eigen>
+     <path to boost>
  )
  
  link_directories(${CR_DIR}/lib/Release)
