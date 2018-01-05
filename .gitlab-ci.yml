@@ -6,33 +6,19 @@ stages:
  - test
  - deploy
 
-python2-wrappers:
+python-wrappers:
   stage: wrap
   script:
    - mkdir build
    - cd build
    - cmake ../ -Dpython=only-swig
    - make
-  cache:
-    key: python2-noswig-$CI_COMMIT_SHA
-    policy: push
+  dependencies: []
+  artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/swig
-     - $CI_PROJECT_DIR/python/lib
-
-python3-wrappers:
-  stage: wrap
-  script:
-   - mkdir build
-   - cd build
-   - cmake ../ -Dpython=only-swig
-   - make
-  cache:
-    key: python3-noswig-$CI_COMMIT_SHA
-    policy: push
-    paths:
-     - $CI_PROJECT_DIR/python/swig
-     - $CI_PROJECT_DIR/python/lib
+     - $CI_PROJECT_DIR/python/swig/CoreRoboticsPYTHON_wrap.cxx
+     - $CI_PROJECT_DIR/python/lib/CoreRobotics.py
+    expire_in: 1 week
 
 matlab-wrappers:
   stage: wrap
@@ -41,12 +27,13 @@ matlab-wrappers:
    - cd build
    - cmake ../ -Dmatlab=only-swig
    - make
-  cache:
-    key: matlab-$CI_COMMIT_SHA
-    policy: push
+  dependencies: []
+  artifacts:
     paths:
-     - $CI_PROJECT_DIR/matlab/swig
-     - $CI_PROJECT_DIR/matlab/lib
+     - $CI_PROJECT_DIR/matlab/swig/CoreRoboticsMATLAB_wrap.cxx
+     - $CI_PROJECT_DIR/matlab/lib/*.m
+     - $CI_PROJECT_DIR/matlab/lib/+CoreRobotics/*.m
+    expire_in: 1 week
 
 build-cpp:
   stage: build
@@ -55,11 +42,11 @@ build-cpp:
    - cd build
    - cmake ../
    - make
-  cache:
-    key: cpp-$CI_COMMIT_SHA
-    policy: push
+  dependencies: []
+  artifacts:
     paths:
-     - $CI_PROJECT_DIR/bin
+     - $CI_PROJECT_DIR/bin/TestModules
+    expire_in: 1 week
 
 build-python2:
   stage: build
@@ -68,13 +55,12 @@ build-python2:
    - cd build
    - cmake ../ -Dpython=2
    - make
-  cache:
-    key: python2-$CI_COMMIT_SHA
-    policy: push
+  dependencies: []
+  artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/swig
-     - $CI_PROJECT_DIR/python/lib
-     - $CI_PROJECT_DIR/python/util
+     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
+    expire_in: 1 week
 
 build-python3:
   stage: build
@@ -83,13 +69,12 @@ build-python3:
    - cd build
    - cmake ../ -Dpython=3
    - make
-  cache:
-    key: python3-$CI_COMMIT_SHA
-    policy: push
+  dependencies: []
+  artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/swig
-     - $CI_PROJECT_DIR/python/lib
-     - $CI_PROJECT_DIR/python/util
+     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
+    expire_in: 1 week
 
 build-python2-noswig:
   stage: build
@@ -98,12 +83,13 @@ build-python2-noswig:
    - cd build
    - cmake ../ -Dpython=2 -Dnoswig=true
    - make
-  cache:
-    key: python2-noswig-$CI_COMMIT_SHA
+  dependencies:
+   - python-wrappers
+  artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/swig
-     - $CI_PROJECT_DIR/python/lib
-     - $CI_PROJECT_DIR/python/util
+     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
+    expire_in: 1 week
 
 build-python3-noswig:
   stage: build
@@ -112,66 +98,52 @@ build-python3-noswig:
    - cd build
    - cmake ../ -Dpython=3 -Dnoswig=true
    - make
-  cache:
-    key: python3-noswig-$CI_COMMIT_SHA
+  dependencies:
+   - python-wrappers
+  artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/swig
-     - $CI_PROJECT_DIR/python/lib
-     - $CI_PROJECT_DIR/python/util
+     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
+    expire_in: 1 week
 
 test-cpp:
   stage: test
   script:
    - $CI_PROJECT_DIR/bin/TestModules
-  cache:
-    key: cpp-$CI_COMMIT_SHA
-    policy: pull
-    paths:
-     - $CI_PROJECT_DIR/bin
+  dependencies:
+   - build-cpp
 
 test-python2:
   stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python2 CRTestModules.py
-  cache:
-    key: python2-$CI_COMMIT_SHA
-    policy: pull
-    paths:
-     - $CI_PROJECT_DIR/python/util
+  dependencies:
+   - build-python2
 
 test-python3:
   stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python3 CRTestModules.py
-  cache:
-    key: python3-$CI_COMMIT_SHA
-    policy: pull
-    paths:
-     - $CI_PROJECT_DIR/python/util
+  dependencies:
+   - build-python3
 
 test-python2-noswig:
   stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python2 CRTestModules.py
-  cache:
-    key: python2-noswig-$CI_COMMIT_SHA
-    policy: pull
-    paths:
-     - $CI_PROJECT_DIR/python/util
+  dependencies:
+   - build-python2-noswig
 
 test-python3-noswig:
   stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python3 CRTestModules.py
-  cache:
-    key: python3-noswig-$CI_COMMIT_SHA
-    policy: pull
-    paths:
-     - $CI_PROJECT_DIR/python/util
+  dependencies:
+   - build-python3-noswig
 
 deploy-python-wrappers:
   stage: deploy
@@ -196,12 +168,8 @@ deploy-python-wrappers:
    - git commit -m "python swig wrappers [ci skip]"
    - git push ssh HEAD:$CI_COMMIT_REF_NAME
    - fi
-  cache:
-    key: python2-$CI_COMMIT_SHA
-    policy: pull
-    paths:
-     - $CI_PROJECT_DIR/python/swig
-     - $CI_PROJECT_DIR/python/lib
+  dependencies:
+   - python-wrappers
   allow_failure: true
 
 deploy-matlab-wrappers:
@@ -227,10 +195,6 @@ deploy-matlab-wrappers:
    - git commit -m "matlab swig wrappers [ci skip]"
    - git push ssh HEAD:$CI_COMMIT_REF_NAME
    - fi
-  cache:
-    key: matlab-$CI_COMMIT_SHA
-    policy: pull
-    paths:
-     - $CI_PROJECT_DIR/matlab/swig
-     - $CI_PROJECT_DIR/matlab/lib
+  dependencies:
+   - matlab-wrappers
   allow_failure: true
