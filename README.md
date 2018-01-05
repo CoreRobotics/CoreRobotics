@@ -18,10 +18,21 @@ This git project hosts code for the CoreRobotics open source robotic control lib
 
 ## General Structure:
 - *doc/* contains the doxygen Doxyfile for generating html documentation.  Please install [doxygen](http://www.stack.nl/~dimitri/doxygen/) and run the doxyfile to generate.  The main documentation page will be *doc/html/index.html*
-- *external/* contains source for external libraries that are needed.  For example, *cpp/external/* should include the Eigen library for matrix math.
 - *python/* contains code for the python wrapper.
 - *src/* contains the library source and headers.  "CoreRobotics.hpp" is the main header for the project.  Classes and functions are organized into sub folders.
 - *utils/* contains code for testing library functionality.  Tests for each class are broken out into test_<classname> and should test functionality of each method.  The test binary gets written to *./bin*  These scripts are also useful for seeing examples of how to use a particular function of the library.
+
+
+## External Dependencies
+CoreRobotics makes use of Eigen (vector/matrix math) and Boost libraries.  Make sure you have installed these for your system before proceeding.  Only headers from both libraries are needed, so it is not necessary to compile binaries.  If you are using Mac, you can use homebrew to install.  On Linux, you can use apt-get.
+1. Eigen can be found at [http://eigen.tuxfamily.org/](http://eigen.tuxfamily.org/).  Using homebrew (Mac), the install is
+`brew install eigen`
+On Linux using aptitude, the install is
+`sudo apt-get install libeigen3-dev`
+2. Boost can be found at [http://www.boost.org/](http://www.boost.org/).  Using homebrew (Mac), the install is
+`brew install eigen3`
+On Linux using aptitude, the install is
+`sudo apt-get install libboost-all-dev`
 
 
 ## Building and compiling
@@ -30,7 +41,7 @@ CoreRobotics relies on CMake to compile cross-platform source to platform-specif
 2. Open terminal (or emulator) and change directory (`cd <CoreRoboticsRoot>/`) (replace <CoreRoboticsRoot> for your specific setup with the root directory of the project.)
 3. Create a folder `mkdir build`.
 4. Change directories `cd build`.
-5. Run CMake `cmake -G "<compiler>" ../`  To get a list of compilers available to configure with CMake, type `cmake --help`.
+5. Run CMake `cmake -G "<compiler>" ../`  To get a list of compilers available to configure with CMake, type `cmake --help`.  CMake will check for the dependencies.  Note that if you have not installed Eigen and Boost using one of the methods outlined in the External Dependencies section above (i.e. the packages aren't found by CMake), you must manually specify the path to boost and eigen headers using cmake flags, e.g.:  `cmake -G "<compiler>" -DEIGEN3_INCLUDE_DIR=<path to eigen3> -DBoost_INCLUDE_DIR=<path to boost> ../`  We provide a convenience repository for the needed 3rd party dependencies at [https://gitlab.com/powan/CRexternal](https://gitlab.com/powan/CRexternal) if you don't want to manage these packages.
 6. Open the project in the *build\* directory and build accordingly. (e.g.: For visual studio, a CoreRobotics.sln will be created.  Open this solution and build all.  The library and binaries will be compiled by the Visual Studio IDE.)
 
 
@@ -46,11 +57,22 @@ When built using your CMake-generated project, the CoreRobotics creates a ./bin 
     ${CR_DIR}/src/models
     ${CR_DIR}/src/physics
     ${CR_DIR}/src/controllers
-    ${CR_DIR}/external/eigen
 )`
-3. Include the following folder in your linker directory (note if the library is built in debug, the path must be updated accordingly to reflect).  By default, the compiler builds a static library.  
+3. Add the external dependencies (boost and eigen) to the header search paths.  If eigen and boost are installed properly (i.e. can be found using find_package() in CMake, then use the following commands,
+`find_package (Eigen3 REQUIRED)
+find_package (Boost 1.65.1 REQUIRED)
+include_directories(
+    ${EIGEN3_INCLUDE_DIR}
+    ${Boost_INCLUDE_DIR}
+)`
+otherwise, you must manually specify the path to eigen and boost
+`include_directories(
+    <path to eigen>
+    <path to boost>
+)`
+4. Include the following folder in your linker directory (note if the library is built in debug, the path must be updated accordingly to reflect).  By default, the compiler builds a static library.
 `link_directories(${CR_DIR}/lib/Release)`
-4. Lastly, you must link the corerobotics library after you add your executable (example is shown for Unix, Windows will be CoreRobotics.lib)  
+5. Lastly, you must link the corerobotics library after you add your executable (example is shown for Unix, Windows will be CoreRobotics.lib)
 `target_link_libraries("exec_name" ${CR_DIR}/lib/Release/libCoreRobotics.a)`
 
 
