@@ -66,11 +66,11 @@ project( ${PROJECT_NAME} )
 
 # Find the 3rd party libraries
 
-# If building wrappers Eigen 3.3 is required
+# If building wrappers Eigen 3.3.3 is required
 if(python OR matlab OR all)
-	set(EIGEN_VERSION_REQUIRED 3.3)
+	set(EIGEN_VERSION 3.3.3)
 endif()
-find_package (Eigen3 ${EIGEN_VERSION_REQUIRED} REQUIRED)
+find_package (Eigen3 ${EIGEN_VERSION} REQUIRED)
 
 find_package (Boost 1.48 REQUIRED)
 
