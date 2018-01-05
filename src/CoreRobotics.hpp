@@ -115,10 +115,35 @@ for your IDE of choice.  CMake is a tool for generating platform-specific
 IDE files from cross-platform source code.  We highly recommend the use of 
 CMake to build your first program.  Instructions for how to build CoreRobotics
 for your specific platform using CMake are presented below.
+- \subpage install_dependencies
 - \subpage install_linux
 - \subpage install_mac
 - \subpage install_windows
 \n\n
+ 
+\section install_dependencies Install Dependencies
+CoreRobotics requires Eigen3 and Boost libraries to be installed.  There are
+several options to accomnplish this.  On Mac, you can use Homebrew to install
+the pacakges https://brew.sh/  The following lines of code install homebrew and
+the required dependencies
+\code
+$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+$ brew install eigen
+$ brew install boost
+\endcode
+Note that if the first line fails, go to https://brew.sh/ to get the latest install link.
+ 
+If you are using Linux, you can use aptitude to install eigen and boost using the following
+commands
+\code
+$ sudo apt-get install libeigen3-dev
+$ sudo apt-get install libboost-all-dev
+\endcode
+
+If you are using Windows, you can download the necessary dependencies from our repository at
+ https://gitlab.com/powan/CRexternal
+
+ 
  
 \section install_linux Linux Make
 Tested on Ubuntu 16.04.
@@ -126,7 +151,7 @@ Tested on Ubuntu 16.04.
 ### Step 1.
 Download the latest version of CMake for Linux.
 \code
-sudo apt-get install cmake
+$ sudo apt-get install cmake
 \endcode
 
 ### Step 2.
@@ -208,13 +233,14 @@ installed, it is accesible via GUI or the command line.
 ### Step 2.
 Once CMake is set up for command line use, open terminal and cd into
 the root folder of CoreRobotics.  There should be subfolders named doc, src,
-utils, etc.  Run the following commands one at a time to build the CoreRobotics
+utils, etc.  You will need to specify the path to the dependencies when running
+CMake. Run the following commands one at a time to build the CoreRobotics
 library, test routines, and example code:
 
 \code
 > mkdir build
 > cd build
-> cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 2015" ../
+> cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 2015" DEIGEN3_INCLUDE_DIR=<path to eigen3> -DBoost_INCLUDE_DIR=<path to boost> ../
 > CoreRobotics.sln
 \endcode
 
@@ -280,8 +306,8 @@ included in the class descriptions.
      ${CR_DIR}/src/estimators
      ${CR_DIR}/src/physics
      ${CR_DIR}/src/controllers
-     ${CR_DIR}/external/eigen
-     ${CR_DIR}/external/boost
+     <path to eigen>
+     <path to boost>
  )
  
  link_directories(${CR_DIR}/lib/Release)

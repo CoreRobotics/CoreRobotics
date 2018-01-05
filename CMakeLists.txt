@@ -63,6 +63,20 @@ project( ${PROJECT_NAME} )
 # =====================================================================
 # 1. Setup the library target
 #
+
+# Find the 3rd party libraries
+find_package (Eigen3 REQUIRED)
+find_package (Boost 1.65.1 REQUIRED)
+
+if(NOT Boost_INCLUDE_DIR)
+    message(FATAL_ERROR "Boost_INCLUDE_DIR not found - please define the path to boost")
+endif()
+if(NOT EIGEN3_INCLUDE_DIR)
+    message(FATAL_ERROR "EIGEN3_INCLUDE_DIR not found - please define the path to eigen")
+else()
+    message(STATUS ${EIGEN3_INCLUDE_DIR})
+endif()
+
 # Include headers
 include_directories(
     ${CMAKE_SOURCE_DIR}/src
@@ -71,12 +85,8 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/src/models
     ${CMAKE_SOURCE_DIR}/src/physics
     ${CMAKE_SOURCE_DIR}/src/controllers
-)
-
-# Include 3rd part library headers
-include_directories(
-    ${CMAKE_SOURCE_DIR}/external/eigen/
-    ${CMAKE_SOURCE_DIR}/external/boost/
+    ${EIGEN3_INCLUDE_DIR}
+    ${Boost_INCLUDE_DIR}
 )
 
 # Header files
