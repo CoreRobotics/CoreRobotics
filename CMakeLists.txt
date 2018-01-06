@@ -67,12 +67,12 @@ project( ${PROJECT_NAME} )
 # Find the 3rd party libraries
 
 # If building wrappers Eigen 3.3.3 is required
-if(python OR matlab OR all)
-	set(EIGEN_VERSION 3.3.3)
-endif()
+# if(python OR matlab OR all)
+set(EIGEN_VERSION 3.3.3)
+# endif()
 find_package (Eigen3 ${EIGEN_VERSION} REQUIRED)
-
 find_package (Boost 1.48 REQUIRED)
+find_package (GTest)
 
 if(NOT Boost_INCLUDE_DIR)
     message(FATAL_ERROR "Boost_INCLUDE_DIR not found - please define the path to boost")
@@ -81,7 +81,7 @@ endif()
 if(NOT EIGEN3_INCLUDE_DIR)
     message(FATAL_ERROR "EIGEN3_INCLUDE_DIR not found - please define the path to eigen")
 else()
-    message(STATUS ${EIGEN3_INCLUDE_DIR})
+    message(STATUS "Eigen found at ${EIGEN3_INCLUDE_DIR}")
 endif()
 
 # Include headers
@@ -176,24 +176,35 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 		utils/*.hpp
 	)
 
-	# Add an executable for the utilities
-	add_executable( ${UTIL_TARGET_NAME} ${UTILITIES} )
+    if(NOT GTEST_FOUND)
+        message(STATUS "GTEST not found, not building the test suite")
 
-	# Set the output directory
-	set_target_properties( ${UTIL_TARGET_NAME} PROPERTIES
-		RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
-	)
+    else()
+        message(STATUS "GTEST found, building the test suite")
 
-	# Add the library as a build dependency
-	add_dependencies(${UTIL_TARGET_NAME} ${LIB_TARGET_NAME})
+        # add the gtest includes
+        include_directories(${GTEST_INCLUDE_DIRS})
 
-	# Set libraries to link
-	set(UTIL_LINK_FILES
-		${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
-	)
+        # Add an executable for the utilities
+        add_executable( ${UTIL_TARGET_NAME} ${UTILITIES})
 
-	# Link the library binary
-	target_link_libraries( ${UTIL_TARGET_NAME} ${UTIL_LINK_FILES} ${LINK_FLAGS})
+        # Set the output directory
+        set_target_properties( ${UTIL_TARGET_NAME} PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
+        )
+
+        # Add the library as a build dependency
+        add_dependencies(${UTIL_TARGET_NAME} ${LIB_TARGET_NAME})
+
+        # Set libraries to link
+        set(UTIL_LINK_FILES
+            ${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
+        )
+
+        # Link the library binary
+        target_link_libraries( ${UTIL_TARGET_NAME} ${UTIL_LINK_FILES} ${LINK_FLAGS} ${GTEST_LIBRARIES})
+
+    endif()
 
 endif()
 
