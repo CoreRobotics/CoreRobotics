@@ -65,12 +65,19 @@ project( ${PROJECT_NAME} )
 #
 
 # Find the 3rd party libraries
-find_package (Eigen3 REQUIRED)
-find_package (Boost 1.65.1 REQUIRED)
+
+# If building wrappers Eigen 3.3.3 is required
+if(python OR matlab OR all)
+	set(EIGEN_VERSION 3.3.3)
+endif()
+find_package (Eigen3 ${EIGEN_VERSION} REQUIRED)
+
+find_package (Boost 1.48 REQUIRED)
 
 if(NOT Boost_INCLUDE_DIR)
     message(FATAL_ERROR "Boost_INCLUDE_DIR not found - please define the path to boost")
 endif()
+
 if(NOT EIGEN3_INCLUDE_DIR)
     message(FATAL_ERROR "EIGEN3_INCLUDE_DIR not found - please define the path to eigen")
 else()

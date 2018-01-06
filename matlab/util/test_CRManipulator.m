@@ -101,7 +101,7 @@ disp('Jacobian =');
 disp(Jacobian);
 
 % Now set a new robot configuration and get the FK and jacobian
-jointAngles = [CR_PI / 4; -CR_PI / 2];
+jointAngles = [pi / 4; -pi / 2];
 disp('Set joint angles (rad) ='); 
 disp(jointAngles);
 MyRobot.setConfiguration(jointAngles);
