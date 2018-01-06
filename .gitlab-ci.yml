@@ -1,6 +1,13 @@
 image: camerondevine/corerobotics:latest
 
+stages:
+   - wrap
+   - build
+   - test
+   - deploy
+
 python-wrappers:
+  stage: wrap
   script:
    - mkdir build
    - cd build
@@ -13,6 +20,7 @@ python-wrappers:
     expire_in: 1 week
 
 matlab-wrappers:
+  stage: wrap
   script:
    - mkdir build
    - cd build
@@ -26,6 +34,7 @@ matlab-wrappers:
     expire_in: 1 week
 
 build-cpp:
+  stage: build
   script: 
    - mkdir build
    - cd build
@@ -37,6 +46,7 @@ build-cpp:
     expire_in: 1 week
 
 build-python2:
+  stage: build
   script:
    - mkdir build
    - cd build
@@ -49,6 +59,7 @@ build-python2:
     expire_in: 1 week
 
 build-python3:
+  stage: build
   script:
    - mkdir build
    - cd build
@@ -61,6 +72,7 @@ build-python3:
     expire_in: 1 week
 
 build-python2-noswig:
+  stage: build
   script:
    - mkdir build
    - cd build
@@ -75,6 +87,7 @@ build-python2-noswig:
     expire_in: 1 week
 
 build-python3-noswig:
+  stage: build
   script:
    - mkdir build
    - cd build
@@ -96,6 +109,7 @@ test-cpp:
    - build-cpp
 
 test-python2:
+  stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python2 CRTestModules.py
@@ -103,6 +117,7 @@ test-python2:
    - build-python2
 
 test-python3:
+  stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python3 CRTestModules.py
@@ -110,6 +125,7 @@ test-python3:
    - build-python3
 
 test-python2-noswig:
+  stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python2 CRTestModules.py
@@ -117,6 +133,7 @@ test-python2-noswig:
    - build-python2-noswig
 
 test-python3-noswig:
+  stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python3 CRTestModules.py
@@ -124,6 +141,7 @@ test-python3-noswig:
    - build-python3-noswig
 
 deploy-wrappers:
+  stage: deploy
   script:
    - eval $(ssh-agent -s)
    - ssh-add <(echo "$SSH_PRIVATE_KEY")
