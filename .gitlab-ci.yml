@@ -1,19 +1,11 @@
 image: camerondevine/corerobotics:latest
 
-stages:
- - wrap
- - build
- - test
- - deploy
-
 python-wrappers:
-  stage: wrap
   script:
    - mkdir build
    - cd build
    - cmake ../ -Dpython=only-swig
    - make
-  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/python/swig/CoreRoboticsPYTHON_wrap.cxx
@@ -21,13 +13,11 @@ python-wrappers:
     expire_in: 1 week
 
 matlab-wrappers:
-  stage: wrap
   script:
    - mkdir build
    - cd build
    - cmake ../ -Dmatlab=only-swig
    - make
-  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/matlab/swig/CoreRoboticsMATLAB_wrap.cxx
@@ -36,26 +26,22 @@ matlab-wrappers:
     expire_in: 1 week
 
 build-cpp:
-  stage: build
   script: 
    - mkdir build
    - cd build
    - cmake ../
    - make
-  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/bin/TestModules
     expire_in: 1 week
 
 build-python2:
-  stage: build
   script:
    - mkdir build
    - cd build
    - cmake ../ -Dpython=2
    - make
-  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/python/util/CoreRobotics.py
@@ -63,13 +49,11 @@ build-python2:
     expire_in: 1 week
 
 build-python3:
-  stage: build
   script:
    - mkdir build
    - cd build
    - cmake ../ -Dpython=3
    - make
-  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/python/util/CoreRobotics.py
@@ -77,7 +61,6 @@ build-python3:
     expire_in: 1 week
 
 build-python2-noswig:
-  stage: build
   script:
    - mkdir build
    - cd build
@@ -92,7 +75,6 @@ build-python2-noswig:
     expire_in: 1 week
 
 build-python3-noswig:
-  stage: build
   script:
    - mkdir build
    - cd build
@@ -114,7 +96,6 @@ test-cpp:
    - build-cpp
 
 test-python2:
-  stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python2 CRTestModules.py
@@ -122,7 +103,6 @@ test-python2:
    - build-python2
 
 test-python3:
-  stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python3 CRTestModules.py
@@ -130,7 +110,6 @@ test-python3:
    - build-python3
 
 test-python2-noswig:
-  stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python2 CRTestModules.py
@@ -138,15 +117,13 @@ test-python2-noswig:
    - build-python2-noswig
 
 test-python3-noswig:
-  stage: test
   script:
    - cd $CI_PROJECT_DIR/python/util
    - python3 CRTestModules.py
   dependencies:
    - build-python3-noswig
 
-deploy-python-wrappers:
-  stage: deploy
+deploy-wrappers:
   script:
    - eval $(ssh-agent -s)
    - ssh-add <(echo "$SSH_PRIVATE_KEY")
@@ -158,6 +135,8 @@ deploy-python-wrappers:
    - git config user.name "$GITLAB_USER_NAME"
    - git add python/swig/CoreRoboticsPYTHON_wrap.cxx
    - git add python/lib/CoreRobotics.py
+   - git add matlab/swig/CoreRoboticsMATLAB_wrap.cxx
+   - git add matlab/lib/+CoreRobotics/*
    - git stash
    - git remote add ssh git@gitlab.com:$CI_PROJECT_PATH.git
    - git fetch ssh $CI_COMMIT_REF_NAME
@@ -165,36 +144,16 @@ deploy-python-wrappers:
    - git stash apply
    - git add python/swig/CoreRoboticsPYTHON_wrap.cxx
    - git add python/lib/CoreRobotics.py
-   - git commit -m "python swig wrappers [ci skip]"
+   - git add matlab/swig/CoreRoboticsMATLAB_wrap.cxx
+   - git add matlab/lib/+CoreRobotics/*
+   - git commit -m "swig wrappers [ci skip]"
    - git push ssh HEAD:$CI_COMMIT_REF_NAME
    - fi
   dependencies:
    - python-wrappers
-  allow_failure: true
-
-deploy-matlab-wrappers:
-  stage: deploy
-  script:
-   - eval $(ssh-agent -s)
-   - ssh-add <(echo "$SSH_PRIVATE_KEY")
-   - mkdir -p ~/.ssh
-   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-   - cd $CI_PROJECT_DIR
-   - if [[ -n $(git status -s) ]]; then
-   - git config user.email "$GITLAB_USER_EMAIL"
-   - git config user.name "$GITLAB_USER_NAME"
-   - git add matlab/swig/CoreRoboticsMATLAB_wrap.cxx
-   - git add matlab/lib/+CoreRobotics/*
-   - git stash
-   - git remote add ssh git@gitlab.com:$CI_PROJECT_PATH.git
-   - git fetch ssh $CI_COMMIT_REF_NAME
-   - git checkout ssh/$CI_COMMIT_REF_NAME
-   - git stash apply
-   - git add matlab/swig/CoreRoboticsMATLAB_wrap.cxx
-   - git add matlab/lib/+CoreRobotics/*
-   - git commit -m "matlab swig wrappers [ci skip]"
-   - git push ssh HEAD:$CI_COMMIT_REF_NAME
-   - fi
-  dependencies:
    - matlab-wrappers
+   - test-python2
+   - test-python2-noswig
+   - test-python3
+   - test-python3-noswig
   allow_failure: true
