@@ -40,50 +40,15 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include <iostream>
-#include "CRTestModules.hpp"
 #include "CoreRobotics.hpp"
-
+#include "gtest/gtest.h"
 
 using namespace std;
 
-
-int main(int argc, const char * argv[]) {
+int main(int argc, char **argv) {
     
     cout << "Running the CoreRobotics test suite." << endl;
     
-    // Run the core test
-    test_CRCore();
-    
-    // Run the math test
-    test_CRMath();
-    
-    // Test the physics models
-    CRTestFrameOffset();
-    
-    // Test the noise models
-    test_CRNoiseModel();
-    test_CRNoiseGaussian();
-    test_CRNoiseDirac();
-    test_CRNoiseUniform();
-    test_CRNoiseMixture();
-    
-    // Test the sensor models
-    test_CRSensorModel();
-    test_CRSensorLinear();
-    test_CRSensorProbabilistic();
-    
-    // Test the motion models
-    test_CRMotionModel();
-    test_CRMotionLinear();
-    test_CRMotionProbabilistic();
-    
-    // Test the Manipulator
-    test_CRManipulator();
-    
-    // Test controllers
-    test_CRInverseKinematics();
-	test_CRNullSpace();
-	test_CRHardLimits();
-    test_CRTrajectoryGenerator();
-    return 0;
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
