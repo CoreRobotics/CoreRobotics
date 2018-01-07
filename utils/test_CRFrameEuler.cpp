@@ -51,8 +51,8 @@ using namespace CoreRobotics;
 //
 // constructor
 //
-TEST(CRFrameDh, Construct){
-    CRFrameDh frame;
+TEST(CRFrameEuler, Construct){
+    CRFrameEuler frame;
     Eigen::VectorXd p = frame.getPose(CR_EULER_MODE_XYZ);
     EXPECT_DOUBLE_EQ(0, p(0));
     EXPECT_DOUBLE_EQ(0, p(1));
@@ -66,11 +66,11 @@ TEST(CRFrameDh, Construct){
 //
 // SetFreeValue/GetFreeValue
 //
-TEST(CRFrameDh, GetFreeValue){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
+TEST(CRFrameEuler, GetFreeValue){
+    CRFrameEuler frame(0, 0, 0, M_PI / 2, -M_PI / 2, M_PI / 4, CR_EULER_MODE_XYZ, CR_EULER_FREE_NONE);
     EXPECT_EQ(NULL, frame.getFreeValue());
     
-    frame.setFreeVariable(CR_DH_FREE_THETA);
+    frame.setFreeVariable(CR_EULER_FREE_ANG_A);
     EXPECT_DOUBLE_EQ(M_PI / 2, frame.getFreeValue());
     
     frame.setFreeValue(0);
@@ -81,13 +81,13 @@ TEST(CRFrameDh, GetFreeValue){
 //
 // SetFreeVariable/GetFreeVariable
 //
-TEST(CRFrameDh, GetFreeVariable){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
-    EXPECT_EQ(CR_DH_FREE_NONE, frame.getFreeVariable());
+TEST(CRFrameEuler, GetFreeVariable){
+    CRFrameEuler frame(0, 0, 0, M_PI / 2, -M_PI / 2, M_PI / 4, CR_EULER_MODE_XYZ, CR_EULER_FREE_NONE);
+    EXPECT_EQ(CR_EULER_FREE_NONE, frame.getFreeVariable());
     EXPECT_FALSE(frame.isDriven());
     
-    frame.setFreeVariable(CR_DH_FREE_THETA);
-    EXPECT_EQ(CR_DH_FREE_THETA, frame.getFreeVariable());
+    frame.setFreeVariable(CR_EULER_FREE_ANG_A);
+    EXPECT_EQ(CR_EULER_FREE_ANG_A, frame.getFreeVariable());
     EXPECT_TRUE(frame.isDriven());
 }
 
@@ -95,26 +95,49 @@ TEST(CRFrameDh, GetFreeVariable){
 //
 // SetMode/GetMode
 //
-TEST(CRFrameDh, GetMode){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_CLASSIC, CR_DH_FREE_NONE);
-    EXPECT_EQ(CR_DH_MODE_CLASSIC, frame.getMode());
+TEST(CRFrameEuler, GetMode){
+    CRFrameEuler frame(0, 0, 0, M_PI / 2, -M_PI / 2, M_PI / 4, CR_EULER_MODE_XYZ, CR_EULER_FREE_NONE);
+    EXPECT_EQ(CR_EULER_MODE_XYZ, frame.getMode());
     
-    frame.setFreeVariable(CR_DH_FREE_THETA);
-    frame.setMode(CR_DH_MODE_MODIFIED);
-    EXPECT_EQ(CR_DH_MODE_MODIFIED, frame.getMode());
+    frame.setMode(CR_EULER_MODE_ZYX);
+    EXPECT_EQ(CR_EULER_MODE_ZYX, frame.getMode());
 }
 
 
 //
-// GetParameters
+// SetPositionAndOrientation/GetPositionAndOrientation
 //
-TEST(CRFrameDh, GetParameters){
-    CRFrameDh frame(0.1, 0.2, 0.3, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
-    double r, alpha, d, theta;
-    frame.getParameters(r, alpha, d, theta);
+TEST(CRFrameEuler, GetPositionAndOrientation){
+    CRFrameEuler frame(0, 0, 0, M_PI / 2, -M_PI / 2, M_PI / 4, CR_EULER_MODE_XYZ, CR_EULER_FREE_NONE);
+    double x, y, z, a, b, g;
+    frame.getPosition(x, y, z);
+    EXPECT_DOUBLE_EQ(0, x);
+    EXPECT_DOUBLE_EQ(0, y);
+    EXPECT_DOUBLE_EQ(0, z);
     
-    EXPECT_DOUBLE_EQ(0.1, r);
-    EXPECT_DOUBLE_EQ(0.2, alpha);
-    EXPECT_DOUBLE_EQ(0.3, d);
-    EXPECT_DOUBLE_EQ(M_PI / 2, theta);
+    frame.setPosition(0.1, 0.2, 0.3);
+    frame.getPosition(x, y, z);
+    EXPECT_DOUBLE_EQ(0.1, x);
+    EXPECT_DOUBLE_EQ(0.2, y);
+    EXPECT_DOUBLE_EQ(0.3, z);
+    
+    frame.getOrientation(a, b, g);
+    EXPECT_DOUBLE_EQ( M_PI / 2, a);
+    EXPECT_DOUBLE_EQ(-M_PI / 2, b);
+    EXPECT_DOUBLE_EQ( M_PI / 4, g);
+    
+    frame.setOrientation(0.1, 0.2, 0.3);
+    frame.getOrientation(a, b, g);
+    EXPECT_DOUBLE_EQ(0.1, a);
+    EXPECT_DOUBLE_EQ(0.2, b);
+    EXPECT_DOUBLE_EQ(0.3, g);
+    
+    frame.setPositionAndOrientation(0, 0, 0, M_PI / 2, -M_PI / 2, M_PI / 4);
+    frame.getPositionAndOrientation(x, y, z, a, b, g);
+    EXPECT_DOUBLE_EQ(0, x);
+    EXPECT_DOUBLE_EQ(0, y);
+    EXPECT_DOUBLE_EQ(0, z);
+    EXPECT_DOUBLE_EQ( M_PI / 2, a);
+    EXPECT_DOUBLE_EQ(-M_PI / 2, b);
+    EXPECT_DOUBLE_EQ( M_PI / 4, g);
 }

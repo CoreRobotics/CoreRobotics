@@ -34,7 +34,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 \project CoreRobotics Project
 \url     www.corerobotics.org
-\author  Parker Owan, Tony Piaskowy
+\author  Parker Owan
 
 */
 //=====================================================================
@@ -49,72 +49,49 @@ using namespace CoreRobotics;
 
 
 //
-// constructor
+// Test memory server set/get function
 //
-TEST(CRFrameDh, Construct){
-    CRFrameDh frame;
-    Eigen::VectorXd p = frame.getPose(CR_EULER_MODE_XYZ);
-    EXPECT_DOUBLE_EQ(0, p(0));
-    EXPECT_DOUBLE_EQ(0, p(1));
-    EXPECT_DOUBLE_EQ(0, p(2));
-    EXPECT_DOUBLE_EQ(0, p(3));
-    EXPECT_DOUBLE_EQ(0, p(4));
-    EXPECT_DOUBLE_EQ(0, p(5));
+TEST(CRSharedMemory, Server){
+    const char* memoryName = "MyMemory";
+    CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
+    Eigen::VectorXd v(2);
+    v << 0.0, 0.8;
+    server.addSignal("signal_1", v);
+    Eigen::VectorXd v2 = server.get("signal_1");
+    EXPECT_EQ(2, v2.size());
+    EXPECT_DOUBLE_EQ(0, v2(0));
+    EXPECT_DOUBLE_EQ(0.8, v2(1));
+    
+    v << 1.0, 1.2;
+    server.set("signal_1", v);
+    v2 = server.get("signal_1");
+    EXPECT_EQ(2, v2.size());
+    EXPECT_DOUBLE_EQ(1.0, v2(0));
+    EXPECT_DOUBLE_EQ(1.2, v2(1));
+    server.removeSignal("signal_1");
 }
 
-
 //
-// SetFreeValue/GetFreeValue
+// Test memory client set/get function
 //
-TEST(CRFrameDh, GetFreeValue){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
-    EXPECT_EQ(NULL, frame.getFreeValue());
+TEST(CRSharedMemory, Client){
+    const char* memoryName = "MyMemory";
+    CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
+    Eigen::VectorXd v(1);
+    v << 1.4;
+    server.addSignal("signal_2", v);
     
-    frame.setFreeVariable(CR_DH_FREE_THETA);
-    EXPECT_DOUBLE_EQ(M_PI / 2, frame.getFreeValue());
+    CRSharedMemory client(memoryName, CR_MANAGER_CLIENT);
+    Eigen::VectorXd v2 = client.get("signal_2");
+    EXPECT_EQ(1, v2.size());
+    EXPECT_DOUBLE_EQ(1.4, v2(0));
     
-    frame.setFreeValue(0);
-    EXPECT_DOUBLE_EQ(0, frame.getFreeValue());
+    v << 2.4;
+    client.set("signal_2", v);
+    v2 = server.get("signal_2");
+    EXPECT_EQ(1, v2.size());
+    EXPECT_DOUBLE_EQ(2.4, v2(0));
+    
+    server.removeSignal("signal_2");
 }
 
-
-//
-// SetFreeVariable/GetFreeVariable
-//
-TEST(CRFrameDh, GetFreeVariable){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
-    EXPECT_EQ(CR_DH_FREE_NONE, frame.getFreeVariable());
-    EXPECT_FALSE(frame.isDriven());
-    
-    frame.setFreeVariable(CR_DH_FREE_THETA);
-    EXPECT_EQ(CR_DH_FREE_THETA, frame.getFreeVariable());
-    EXPECT_TRUE(frame.isDriven());
-}
-
-
-//
-// SetMode/GetMode
-//
-TEST(CRFrameDh, GetMode){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_CLASSIC, CR_DH_FREE_NONE);
-    EXPECT_EQ(CR_DH_MODE_CLASSIC, frame.getMode());
-    
-    frame.setFreeVariable(CR_DH_FREE_THETA);
-    frame.setMode(CR_DH_MODE_MODIFIED);
-    EXPECT_EQ(CR_DH_MODE_MODIFIED, frame.getMode());
-}
-
-
-//
-// GetParameters
-//
-TEST(CRFrameDh, GetParameters){
-    CRFrameDh frame(0.1, 0.2, 0.3, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
-    double r, alpha, d, theta;
-    frame.getParameters(r, alpha, d, theta);
-    
-    EXPECT_DOUBLE_EQ(0.1, r);
-    EXPECT_DOUBLE_EQ(0.2, alpha);
-    EXPECT_DOUBLE_EQ(0.3, d);
-    EXPECT_DOUBLE_EQ(M_PI / 2, theta);
-}

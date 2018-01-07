@@ -49,72 +49,12 @@ using namespace CoreRobotics;
 
 
 //
-// constructor
+// Test the set frame method
 //
-TEST(CRFrameDh, Construct){
-    CRFrameDh frame;
-    Eigen::VectorXd p = frame.getPose(CR_EULER_MODE_XYZ);
-    EXPECT_DOUBLE_EQ(0, p(0));
-    EXPECT_DOUBLE_EQ(0, p(1));
-    EXPECT_DOUBLE_EQ(0, p(2));
-    EXPECT_DOUBLE_EQ(0, p(3));
-    EXPECT_DOUBLE_EQ(0, p(4));
-    EXPECT_DOUBLE_EQ(0, p(5));
+TEST(CRRigidBody, SetFrame){
+    CRFrame frame;
+    CRRigidBody link;
+    link.setFrame(&frame);
+    EXPECT_EQ(link.m_frame, &frame);
 }
 
-
-//
-// SetFreeValue/GetFreeValue
-//
-TEST(CRFrameDh, GetFreeValue){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
-    EXPECT_EQ(NULL, frame.getFreeValue());
-    
-    frame.setFreeVariable(CR_DH_FREE_THETA);
-    EXPECT_DOUBLE_EQ(M_PI / 2, frame.getFreeValue());
-    
-    frame.setFreeValue(0);
-    EXPECT_DOUBLE_EQ(0, frame.getFreeValue());
-}
-
-
-//
-// SetFreeVariable/GetFreeVariable
-//
-TEST(CRFrameDh, GetFreeVariable){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
-    EXPECT_EQ(CR_DH_FREE_NONE, frame.getFreeVariable());
-    EXPECT_FALSE(frame.isDriven());
-    
-    frame.setFreeVariable(CR_DH_FREE_THETA);
-    EXPECT_EQ(CR_DH_FREE_THETA, frame.getFreeVariable());
-    EXPECT_TRUE(frame.isDriven());
-}
-
-
-//
-// SetMode/GetMode
-//
-TEST(CRFrameDh, GetMode){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_CLASSIC, CR_DH_FREE_NONE);
-    EXPECT_EQ(CR_DH_MODE_CLASSIC, frame.getMode());
-    
-    frame.setFreeVariable(CR_DH_FREE_THETA);
-    frame.setMode(CR_DH_MODE_MODIFIED);
-    EXPECT_EQ(CR_DH_MODE_MODIFIED, frame.getMode());
-}
-
-
-//
-// GetParameters
-//
-TEST(CRFrameDh, GetParameters){
-    CRFrameDh frame(0.1, 0.2, 0.3, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
-    double r, alpha, d, theta;
-    frame.getParameters(r, alpha, d, theta);
-    
-    EXPECT_DOUBLE_EQ(0.1, r);
-    EXPECT_DOUBLE_EQ(0.2, alpha);
-    EXPECT_DOUBLE_EQ(0.3, d);
-    EXPECT_DOUBLE_EQ(M_PI / 2, theta);
-}
