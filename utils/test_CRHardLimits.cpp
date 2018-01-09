@@ -41,16 +41,20 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include <iostream>
 #include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
 using namespace CoreRobotics;
 
-void test_CRHardLimits(void) {
+CREulerMode convention = CR_EULER_MODE_XYZ;
 
-	std::cout << "*************************************\n";
-	std::cout << "Demonstration of CRHardLimits.\n";
+Eigen::Matrix<bool, 6, 1> poseElements = (Eigen::Matrix<bool, 6, 1>() << 1, 1, 0, 0, 0, 0).finished();
 
-	CREulerMode convention = CR_EULER_MODE_XYZ;
+struct robotData {
+	CRHardLimits solver;
+	CRManipulator* robot;
+	int toolIndex; };
 
+robotData setup_solver(void) {
 	// Define a robot
 	CRManipulator* MyRobot = new CRManipulator();
 
@@ -82,13 +86,25 @@ void test_CRHardLimits(void) {
 	// Change IK solver maximum iterations
 	solver.getIKSolver()->setMaxIter(20);
 
+	// Set the pose elements
+	solver.setPoseElements(poseElements);
+
+	robotData returnStruct = {solver, MyRobot, toolIndex};
+	//returnStruct.solver = solver;
+	//returnStruct.robot = MyRobot;
+	//returnStruct.toolIndex = toolIndex;
+	return returnStruct;
+}
+
+TEST(CRHardLimits, NoLimits) {
+	robotData data = setup_solver();
+	
+	CRHardLimits solver = data.solver;
+	CRManipulator* MyRobot = data.robot;
+	int toolIndex = data.toolIndex;
+
 	// Disable the nullspace solver for now
 	solver.useNullSpace(false);
-
-	// Set the pose elements
-	Eigen::Matrix<bool, 6, 1> poseElements;
-	poseElements << 1, 1, 0, 0, 0, 0;
-	solver.setPoseElements(poseElements);
 
 	// Define the initial configuration
 	Eigen::VectorXd q(4), q0(4);
@@ -97,9 +113,6 @@ void test_CRHardLimits(void) {
 	// Define and set the goal location
 	Eigen::VectorXd goal(2);
 	goal << 0, 4.5;
-
-	std::cout << "Setting goal tool pose to (" << goal.transpose() << "), (x, y)" << std::endl;
-
 	solver.setToolPose(goal);
 
 	// Run the solver
@@ -108,15 +121,38 @@ void test_CRHardLimits(void) {
 		solver.setQ0(q);
 		solver.solve(q);
 	}
-	
-	// Display the results
-	std::cout << "Calculated joint configuration without joint limits (" << q.transpose() << ")" << std::endl;
 
+	// Get tool pose
 	MyRobot->setConfiguration(q);
-	std::cout << "Resulting tool pose (" << MyRobot->getToolPose(toolIndex, convention, poseElements).transpose() << ")" << std::endl;
+	Eigen::VectorXd toolPose = MyRobot->getToolPose(toolIndex, convention, poseElements);
+	
+	// Tests
+	for (int i = 0; i < toolPose.size(); i++) {
+		EXPECT_NEAR(goal(i), toolPose(i), 1e-3);
+	}
+}
+
+TEST(CRHardLimits, Limits) {
+	robotData data = setup_solver();
+	
+	CRHardLimits solver = data.solver;
+	CRManipulator* MyRobot = data.robot;
+	int toolIndex = data.toolIndex;
 
 	// Set jont limits
 	solver.setJointLimits(2, -1, 1);
+
+	// Disable the nullspace solver for now
+	solver.useNullSpace(false);
+
+	// Define the initial configuration
+	Eigen::VectorXd q(4), q0(4);
+	q0 << 0, 0.1, 0.2, 0.3;
+
+	// Define and set the goal location
+	Eigen::VectorXd goal(2);
+	goal << 0, 4.5;
+	solver.setToolPose(goal);
 
 	// Run the solver
 	q = q0;
@@ -125,21 +161,40 @@ void test_CRHardLimits(void) {
 		solver.solve(q);
 	}
 
-	// Display the results
-	std::cout << "Calculated joint configuration with joint limits (" << q.transpose() << ")" << std::endl;
-
+	// Get tool pose
 	MyRobot->setConfiguration(q);
-	std::cout << "Resulting tool pose (" <<  MyRobot->getToolPose(toolIndex, convention, poseElements).transpose() << ")" << std::endl;
+	Eigen::VectorXd toolPose = MyRobot->getToolPose(toolIndex, convention, poseElements);
+	
+	// Tests
+	EXPECT_GT(1, q(2));
+	EXPECT_LT(-1, q(2));
+	for (int i = 0; i < toolPose.size(); i++) {
+		EXPECT_NEAR(goal(i), toolPose(i), 1e-3);
+	}
+}
 
-	// Enable the nullspace solver
-	solver.useNullSpace(true);
+TEST(CRHardLimits, NullSpace) {
+	robotData data = setup_solver();
+	
+	CRHardLimits solver = data.solver;
+	CRManipulator* MyRobot = data.robot;
+	int toolIndex = data.toolIndex;
+
+	// Set jont limits
+	solver.setJointLimits(2, -1, 1);
+
+	// Define the initial configuration
+	Eigen::VectorXd q(4), q0(4);
+	q0 << 0, 0.1, 0.2, 0.3;
+
+	// Define and set the goal location
+	Eigen::VectorXd goal(2);
+	goal << 0, 4.5;
+	solver.setToolPose(goal);
 
 	// Set the desired nullspace joint motion
 	Eigen::VectorXd desiredJointMotion(4);
 	desiredJointMotion << -1, 0, 0, 0;
-
-	std::cout << "Setting nullspace desired joint motion to (" << desiredJointMotion.transpose() << ")" << std::endl;
-
 	solver.setJointMotion(desiredJointMotion);
 
 	// Run the solver
@@ -149,28 +204,47 @@ void test_CRHardLimits(void) {
 		solver.solve(q);
 	}
 
-	// Display the results
-	std::cout << "Calculated joint configuration with joint limits and nullspace control (" << q.transpose() << ")" << std::endl;
-
+	// Get tool pose
 	MyRobot->setConfiguration(q);
-	std::cout << "Resulting tool pose (" <<  MyRobot->getToolPose(toolIndex, convention, poseElements).transpose() << ")" << std::endl;
+	Eigen::VectorXd toolPose = MyRobot->getToolPose(toolIndex, convention, poseElements);
+	
+	// Tests
+	EXPECT_GT(1, q(2));
+	EXPECT_LT(-1, q(2));
+	for (int i = 0; i < toolPose.size(); i++) {
+		EXPECT_NEAR(goal(i), toolPose(i), 1e-3);
+	}
+}
 
-	// Set the initial condition to a point outside the limits
-	q << 0, 0.1, M_PI, 0.3;
-	std::cout << "Setting initial condition outisde the limits, (" << q.transpose() << ")" << std::endl;
-	solver.setQ0(q);
+TEST(CRHardLimits, BadIC) {
+	robotData data = setup_solver();
+	
+	CRHardLimits solver = data.solver;
+	CRManipulator* MyRobot = data.robot;
+	int toolIndex = data.toolIndex;
+
+	// Set jont limits
+	solver.setJointLimits(2, -1, 1);
+
+	// Disable the nullspace solver for now
+	solver.useNullSpace(false);
+
+	// Define the initial configuration
+	Eigen::VectorXd q(4), q0(4);
+	q0 << 0, 0.1, M_PI, 0.3;
+
+	// Define and set the goal location
+	Eigen::VectorXd goal(2);
+	goal << 0, 4.5;
+	solver.setToolPose(goal);
 
 	// Run the solver
+	solver.setQ0(q0);
 	CRResult result = solver.solve(q);
-
-	// Display the results
-	std::cout << "Recieved the result ";
-	if (result == CR_RESULT_SUCCESS) {
-		std::cout << "CR_RESULT_SUCCESS (success)";
-	} else if (result == CR_RESULT_SINGULAR) {
-		std::cout << "CR_RESULT_SINGULAR (singular jacobian)";
-	} else if (result == CR_RESULT_BAD_IC) {
-		std::cout << "CR_RESULT_BAD_IC (bad initial conditions)";
+	
+	// Tests
+	EXPECT_EQ(CR_RESULT_BAD_IC, result);
+	for (int i = 0; i < q.size(); i++) {
+		EXPECT_DOUBLE_EQ(q0(i), q(i));
 	}
-	std::cout << " with joint configuration (" << q.transpose() << ")" << std::endl;
 }
