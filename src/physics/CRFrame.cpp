@@ -39,6 +39,8 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include "Eigen/Dense"
 #include "CRFrame.hpp"
 #include "CRMatrix.hpp"
