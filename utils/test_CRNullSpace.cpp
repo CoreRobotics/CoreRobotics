@@ -41,13 +41,22 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include <iostream>
 #include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
 using namespace CoreRobotics;
 
-void test_CRNullSpace(void) {
+struct testData {
+	Eigen::VectorXd initialToolPose;
+	Eigen::VectorXd finalToolPose;
+	Eigen::VectorXd initialJointAngles;
+	Eigen::VectorXd finalJointAngles;
+	CRResult result; };
 
-	std::cout << "*************************************\n";
-	std::cout << "Demonstration of CRNullSpace.\n";
+testData test_CRNullSpace(Eigen::VectorXd initJoints,
+                          Eigen::VectorXd jointMotion,
+                          bool usePoseElements = false,
+                          Eigen::Matrix<bool, 6, 1> poseElements = (Eigen::Matrix<bool, 6, 1>() << true, true, true, true, true, true).finished()) {
+	testData returnStruct;
 
 	CRManipulator* MyRobot = new CRManipulator();
 
@@ -137,42 +146,59 @@ void test_CRNullSpace(void) {
 	int toolIndex = MyRobot->addTool(linkIndex6, Tool);
 
 	// Initialize the solver
-	CRNullSpace nullSpaceSolver = CRNullSpace(MyRobot, toolIndex, CR_EULER_MODE_XYZ);
+	CRNullSpace nullSpaceSolver = CRNullSpace(MyRobot, toolIndex, CR_EULER_MODE_XYZ);	
 
 	// Set the robot orientation
-	Eigen::VectorXd InitJoints(6);
-	InitJoints << 0.0, 2.0, 0.0, -2, 0.0, M_PI / 8.0;
-	MyRobot->setConfiguration(InitJoints);
+	MyRobot->setConfiguration(initJoints);
+	returnStruct.initialJointAngles = initJoints;
 
 	// Compute the initial tool pose
-	Eigen::VectorXd toolPose;
-	toolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
-	std::cout << "Initial Tool Pose\n" << toolPose.transpose() << std::endl;
+	returnStruct.initialToolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
 
 	// Find a nullspace movement
+	Eigen::VectorXd nullJointMotion(6);
+	if (usePoseElements) {
+		returnStruct.result = nullSpaceSolver.solve(jointMotion, initJoints, poseElements, nullJointMotion);
+	} else {
+		returnStruct.result = nullSpaceSolver.solve(jointMotion, initJoints, nullJointMotion);
+	}
+
+	// Compute the final tool pose
+	MyRobot->setConfiguration(initJoints + nullJointMotion);
+	returnStruct.finalJointAngles = initJoints + nullJointMotion;
+	returnStruct.finalToolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
+
+	return returnStruct;
+}
+
+TEST(CRNullSpace, Full) {
+	Eigen::VectorXd initJoints(6);
+	initJoints << 0.0, 2.0, 0.0, -2, 0.0, M_PI / 8.0;
 	Eigen::VectorXd jointMotion(6);
 	jointMotion << 1, 0, 0, 0, 0, 0;
-	Eigen::VectorXd nullJointMotion(6);
-	CRResult result = nullSpaceSolver.solve(jointMotion, InitJoints, nullJointMotion);
-	if(result != CR_RESULT_SUCCESS) {std::cout << "Singular Jacobian" << std::endl;}
-	std::cout << "NullSpace joint movements\n" << nullJointMotion.transpose() << std::endl;
+	testData data = test_CRNullSpace(initJoints, jointMotion);
+	EXPECT_EQ(CR_RESULT_SUCCESS, data.result);
+	for (int i = 0; i < data.initialToolPose.size(); i++) {
+		EXPECT_DOUBLE_EQ(data.initialToolPose(i), data.finalToolPose(i));
+	}
+	for (int i = 0; i < data.initialJointAngles.size(); i++) {
+		EXPECT_DOUBLE_EQ(data.initialJointAngles(i), data.finalJointAngles(i));
+	}
+}
 
-	// Compute the final tool pose
-	MyRobot->setConfiguration(InitJoints + nullJointMotion);
-	toolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
-	std::cout << "Final Tool Pose\n" << toolPose.transpose() << std::endl;
-
-	// Set pose elements
+TEST(CRNullSpace, PoseElements) {
+	Eigen::VectorXd initJoints(6);
+	initJoints << 0.0, 2.0, 0.0, -2, 0.0, M_PI / 8.0;
+	Eigen::VectorXd jointMotion(6);
+	jointMotion << 1, 0, 0, 0, 0, 0;
 	Eigen::Matrix<bool, 6, 1> poseElements;
 	poseElements << 1, 1, 1, 1, 1, 0;
-
-	// Find a nullspace movement with pose elements
-	result = nullSpaceSolver.solve(jointMotion, InitJoints, poseElements, nullJointMotion);
-	if(result != CR_RESULT_SUCCESS) {std::cout << "Singular Jacobian" << std::endl;}
-	std::cout << "Reduced NullSpace joint movements\n" << nullJointMotion.transpose() << std::endl;
-
-	// Compute the final tool pose
-	MyRobot->setConfiguration(InitJoints + nullJointMotion);
-	toolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
-	std::cout << "Final Tool Pose\n" << toolPose.transpose() << std::endl;
+	testData data = test_CRNullSpace(initJoints, jointMotion, true, poseElements);
+	EXPECT_EQ(CR_RESULT_SUCCESS, data.result);
+	for (int i = 0; i < data.initialToolPose.size(); i++) {
+		EXPECT_NEAR(data.initialToolPose(i), data.finalToolPose(i), 0.22);
+	}
+	for (int i = 0; i < data.initialJointAngles.size(); i++) {
+		EXPECT_NE(data.initialJointAngles(i), data.finalJointAngles(i));
+	}
 }
