@@ -40,6 +40,7 @@ build-cpp:
    - cd build
    - cmake ../
    - make
+  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/tests/bin/TestModules
@@ -53,6 +54,7 @@ build-python2:
    - cd build
    - cmake ../ -Dpython=2
    - make
+  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/python/examples/CoreRobotics.py
@@ -66,6 +68,7 @@ build-python3:
    - cd build
    - cmake ../ -Dpython=3
    - make
+  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/python/examples/CoreRobotics.py
