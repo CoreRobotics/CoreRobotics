@@ -211,13 +211,15 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 	)
 
 	# Compile each example
-	foreach(EXAMPLE EXAMPLES)
-		add_executable(${EXAMPLE} ${EXAMPLE})
-		set_target_properties( ${EXAMPLE} PROPERTIES
+	foreach(EXAMPLE ${EXAMPLES})
+		get_filename_component(EXAMPLE_TARGET ${EXAMPLE} NAME_WE)
+		message(${EXAMPLE_TARGET})
+		add_executable(${EXAMPLE_TARGET} ${EXAMPLE})
+		set_target_properties( ${EXAMPLE_TARGET} PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/examples/bin
         )
-		add_dependencies(${EXAMPLE} ${LIB_TARGET_NAME})
-		target_link_libraries(${EXAMPLE} ${COREROBOTICS_LIB} ${LINK_FLAGS})
+		add_dependencies(${EXAMPLE_TARGET} ${LIB_TARGET_NAME})
+		target_link_libraries(${EXAMPLE_TARGET} ${COREROBOTICS_LIB} ${LINK_FLAGS})
 	endforeach()
 
 endif()
