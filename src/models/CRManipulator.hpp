@@ -103,7 +103,7 @@ namespace CoreRobotics {
  ## Example
  This example shows use of CRManipulator.
 
- \include test_CRManipulator.cpp
+ \include example_CRManipulator.cpp
  
  ## References
  [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,

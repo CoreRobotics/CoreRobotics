@@ -84,7 +84,7 @@ namespace CoreRobotics {
  
  ## Example
  This example creates a DH parameter frame class.
- \include test_CRFrameDh.cpp
+ \include example_CRFrameDh.cpp
  
  ## References
  [1] J. Denavit and R. Hartenberg, "A kinematic notation for lower-pair

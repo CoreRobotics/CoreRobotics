@@ -75,20 +75,7 @@ namespace CoreRobotics {
  
  ## Example
  This example creates an Rigid body object.
- \code
- 
- #include "CoreRobotics.hpp"
- #include <stdio>
- 
- main() {
- 
-    CoreRobotics::CRRigidBody Link;
-    CoreRobotics::CRFrame* Frame = new CoreRobotics::CRFrame();
-
-    Link.setFrame(Frame);
- }
- 
- \endcode
+ \include example_CRManipulator.cpp
  
  ## References
  [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,

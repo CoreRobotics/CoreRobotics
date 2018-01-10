@@ -78,7 +78,7 @@ namespace CoreRobotics {
  ## Example
  This example demonstrates use of the CRNoiseUniform class.
  
- \include test_CRNoiseUniform.cpp
+ \include example_CRNoiseUniform.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

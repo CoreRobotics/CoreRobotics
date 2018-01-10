@@ -82,7 +82,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRTrajectoryGenerator class.
- \include test_CRTrajectoryGenerator.cpp
+ \include example_CRTrajectoryGenerator.cpp
  
  ## References
  [1] N. Hogan, "Adaptive control of mechanical impedance by coactivation of

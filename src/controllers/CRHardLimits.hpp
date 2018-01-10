@@ -119,7 +119,7 @@ namespace CoreRobotics {
  ## Example
 
  This example demonstrates use of the CRHardLimits class.
- \include test_CRHardLimits.cpp
+ \include example_CRHardLimits.cpp
  
  ## References
 

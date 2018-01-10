@@ -83,7 +83,7 @@ namespace CoreRobotics {
  
  ## Example
  This example shows use of the CRSharedMemory class.
- \include test_CRCore.cpp
+ \include example_CRCore.cpp
  */
 //=====================================================================
 //! Enumerator for specifying thread priority

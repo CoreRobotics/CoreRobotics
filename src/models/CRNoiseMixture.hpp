@@ -79,7 +79,7 @@ namespace CoreRobotics {
  ## Example
  This example demonstrates use of the CRNoiseMixture class.
  
- \include test_CRNoiseMixture.cpp
+ \include example_CRNoiseMixture.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

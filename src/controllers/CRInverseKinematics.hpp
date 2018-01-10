@@ -109,7 +109,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRInverseKinematics class.
- \include test_CRInverseKinematics.cpp
+ \include example_CRInverseKinematics.cpp
  
  ## References
  [1] O. Khatib, Lecture Notes (CS327A): "Advanced Robotic Manipulation",
