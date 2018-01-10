@@ -73,7 +73,7 @@ int main(void){
     
     // loop for 2 seconds
     while (t < 2){
-        x = CRMath::forwardEulerStep(*linearSystem, t, x, u, dt);
+        x = CRIntegration::forwardEulerStep(*linearSystem, t, x, u, dt);
         printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
         t = t+dt;
     }
@@ -87,7 +87,7 @@ int main(void){
     
     // loop for 2 seconds
     while (t < 2){
-        x = CRMath::rungeKuttaStep(*linearSystem, t, x, u, dt);
+        x = CRIntegration::rungeKuttaStep(*linearSystem, t, x, u, dt);
         printf("t = %3.1f, x = (%+6.4f, %+6.4f)\n",t,x(0),x(1));
         t = t+dt;
     }
@@ -95,12 +95,12 @@ int main(void){
 
 	// Test the wrap to pi functionality
 	std::cout << "\nWrap to Pi Test:\n";
-	printf("%+6.3f -> %+6.3f\n", CR_PI / 2, CRMath::wrapToPi(CR_PI / 2));
-	printf("%+6.3f -> %+6.3f\n", 3 * CR_PI / 2, CRMath::wrapToPi(3 * CR_PI / 2));
-	printf("%+6.3f -> %+6.3f\n", -CR_PI / 2, CRMath::wrapToPi(-CR_PI / 2));
-	printf("%+6.3f -> %+6.3f\n", -3 * CR_PI / 2, CRMath::wrapToPi(-3 * CR_PI / 2));
-	printf("%+6.3f -> %+6.3f\n", 2 * CR_PI, CRMath::wrapToPi(2 * CR_PI));
-	printf("%+6.3f -> %+6.3f\n\n", 3 * CR_PI, CRMath::wrapToPi(3 * CR_PI));
+	printf("%+6.3f -> %+6.3f\n", M_PI / 2, CRConversion::wrapToPi(M_PI / 2));
+	printf("%+6.3f -> %+6.3f\n", 3 * M_PI / 2, CRConversion::wrapToPi(3 * M_PI / 2));
+	printf("%+6.3f -> %+6.3f\n", -M_PI / 2, CRConversion::wrapToPi(-M_PI / 2));
+	printf("%+6.3f -> %+6.3f\n", -3 * M_PI / 2, CRConversion::wrapToPi(-3 * M_PI / 2));
+	printf("%+6.3f -> %+6.3f\n", 2 * M_PI, CRConversion::wrapToPi(2 * M_PI));
+	printf("%+6.3f -> %+6.3f\n\n", 3 * M_PI, CRConversion::wrapToPi(3 * M_PI));
 }
 
 

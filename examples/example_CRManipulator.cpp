@@ -118,7 +118,7 @@ int main(void) {
 	std::cout << "Hessian = \n" << Hessian << std::endl;
 
 	// now set a new robot configuration and get the FK and jacobian
-	jointAngles << CoreRobotics::CR_PI / 4.0, -CoreRobotics::CR_PI / 2.0;
+	jointAngles << M_PI / 4.0, -M_PI / 2.0;
 	std::cout << "Set joint angles = ("
 		<< jointAngles.transpose() << ") rad" << std::endl;
 	MyRobot.setConfiguration(jointAngles);
