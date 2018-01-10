@@ -54,8 +54,8 @@ build-python2:
    - make
   artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
-     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
+     - $CI_PROJECT_DIR/python/examples/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/examples/_CoreRobotics.so
     expire_in: 1 week
 
 build-python3:
@@ -67,8 +67,8 @@ build-python3:
    - make
   artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
-     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
+     - $CI_PROJECT_DIR/python/examples/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/examples/_CoreRobotics.so
     expire_in: 1 week
 
 build-python2-noswig:
@@ -82,8 +82,8 @@ build-python2-noswig:
    - python-wrappers
   artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
-     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
+     - $CI_PROJECT_DIR/python/examples/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/examples/_CoreRobotics.so
     expire_in: 1 week
 
 build-python3-noswig:
@@ -97,46 +97,63 @@ build-python3-noswig:
    - python-wrappers
   artifacts:
     paths:
-     - $CI_PROJECT_DIR/python/util/CoreRobotics.py
-     - $CI_PROJECT_DIR/python/util/_CoreRobotics.so
+     - $CI_PROJECT_DIR/python/examples/CoreRobotics.py
+     - $CI_PROJECT_DIR/python/examples/_CoreRobotics.so
     expire_in: 1 week
 
 test-cpp:
   stage: test
   script:
-   - $CI_PROJECT_DIR/bin/TestModules
+   - $CI_PROJECT_DIR/tests/bin/TestModules
+  dependencies:
+   - build-cpp
+
+test-cpp-examples:
+  stage: test
+  script:
+   - for file in $CI_PROJECT_DIR/examples/bin/*; do
+   - $file
+   - done
   dependencies:
    - build-cpp
 
 test-python2:
   stage: test
   script:
-   - cd $CI_PROJECT_DIR/python/util
-   - python2 CRTestModules.py
+   - cd $CI_PROJECT_DIR/python/examples
+   - for file in example*.py; do
+   - python2 $file
+   - done
   dependencies:
    - build-python2
 
 test-python3:
   stage: test
   script:
-   - cd $CI_PROJECT_DIR/python/util
-   - python3 CRTestModules.py
+   - cd $CI_PROJECT_DIR/python/examples
+   - for file in example*.py; do
+   - python3 $file
+   - done
   dependencies:
    - build-python3
 
 test-python2-noswig:
   stage: test
   script:
-   - cd $CI_PROJECT_DIR/python/util
-   - python2 CRTestModules.py
+   - cd $CI_PROJECT_DIR/python/examples
+   - for file in example*.py; do
+   - python2 $file
+   - done
   dependencies:
    - build-python2-noswig
 
 test-python3-noswig:
   stage: test
   script:
-   - cd $CI_PROJECT_DIR/python/util
-   - python3 CRTestModules.py
+   - cd $CI_PROJECT_DIR/python/examples
+   - for file in example*.py; do
+   - python3 $file
+   - done
   dependencies:
    - build-python3-noswig
 
@@ -170,8 +187,4 @@ deploy-wrappers:
   dependencies:
    - python-wrappers
    - matlab-wrappers
-   - test-python2
-   - test-python2-noswig
-   - test-python3
-   - test-python3-noswig
   allow_failure: true
