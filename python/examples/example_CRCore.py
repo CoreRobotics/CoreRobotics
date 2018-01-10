@@ -55,7 +55,7 @@ import numpy as np
 memoryName = "MyMemory"
 
 print("**********************")
-print("Running the test_CRCore")
+print("Demonstration of CRCore")
 
 MyClock = time.time()
 time.sleep(0.1)

@@ -49,7 +49,7 @@ import numpy as np
 import math
 
 print("**********************")
-print("Running the test_CRFrameDh")
+print("Demonstration of CRFrameDh")
 
 # Create a new robot
 MyRobot = CRManipulator()
