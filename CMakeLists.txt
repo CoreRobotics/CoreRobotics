@@ -68,7 +68,7 @@ project( ${PROJECT_NAME} )
 
 # =====================================================================
 # 1. Setup the library target
-#
+# =====================================================================
 
 # Find the 3rd party libraries
 
@@ -154,9 +154,27 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 	source_group( "src\\controllers" FILES ${SOURCES_CONTROLLERS})
 
 
+    # =====================================================================
+    # 2. Export the package configuration and version files
+    # =====================================================================
+    # export package for use from the build tree
+    export (TARGETS ${LIB_TARGET_NAME} FILE ${PROJECT_BINARY_DIR}/CoreRoboticsTargets.cmake)
+    export (PACKAGE ${LIB_TARGET_NAME})
+
+    # package definitions
+    set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
+    set (CONF_LIBRARIES    ${LIB_TARGET_NAME})
+    set (CONF_LIBRARY_DIRS ${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR})
+    set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
+
+    # package configuration and version files
+    configure_file (CoreRoboticsConfig.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfig.cmake" @ONLY)
+    configure_file (CoreRoboticsConfigVersion.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY)
+
+
 	# =====================================================================
-	# 2. Setup the utility target
-	#
+	# 3. Setup the tests target
+	# =====================================================================
 	# Source files
 	file(GLOB UTILITIES
 		utils/*.cpp
@@ -194,24 +212,6 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
     endif()
 
 endif()
-
-
-#
-# Export the package configuration and version files
-#
-# export package for use from the build tree
-export (TARGETS ${LIB_TARGET_NAME} FILE ${PROJECT_BINARY_DIR}/CoreRoboticsTargets.cmake)
-export (PACKAGE ${LIB_TARGET_NAME})
-
-# package definitions
-set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
-set (CONF_LIBRARIES    ${LIB_TARGET_NAME})
-set (CONF_LIBRARY_DIRS ${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR})
-set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
-
-# package configuration and version files
-configure_file (CoreRoboticsConfig.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfig.cmake" @ONLY)
-configure_file (CoreRoboticsConfigVersion.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY)
 
 
 # If "python" or "all" build the Python library
