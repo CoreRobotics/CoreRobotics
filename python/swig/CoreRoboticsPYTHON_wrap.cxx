@@ -16677,6 +16677,28 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CRInverseKinematics_getRobot(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRInverseKinematics *arg1 = (CoreRobotics::CRInverseKinematics *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  CoreRobotics::CRManipulator *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRInverseKinematics_getRobot",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRInverseKinematics, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRInverseKinematics_getRobot" "', argument " "1"" of type '" "CoreRobotics::CRInverseKinematics *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRInverseKinematics * >(argp1);
+  result = (CoreRobotics::CRManipulator *)(arg1)->getRobot();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_CRInverseKinematics_setToolIndex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CoreRobotics::CRInverseKinematics *arg1 = (CoreRobotics::CRInverseKinematics *) 0 ;
@@ -16701,6 +16723,28 @@ SWIGINTERN PyObject *_wrap_CRInverseKinematics_setToolIndex(PyObject *SWIGUNUSED
   arg2 = static_cast< unsigned int >(val2);
   (arg1)->setToolIndex(arg2);
   resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRInverseKinematics_getToolIndex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRInverseKinematics *arg1 = (CoreRobotics::CRInverseKinematics *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  unsigned int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRInverseKinematics_getToolIndex",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRInverseKinematics, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRInverseKinematics_getToolIndex" "', argument " "1"" of type '" "CoreRobotics::CRInverseKinematics *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRInverseKinematics * >(argp1);
+  result = (unsigned int)(arg1)->getToolIndex();
+  resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -16759,7 +16803,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRInverseKinematics_setTolerance__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRInverseKinematics_setTolerance(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CoreRobotics::CRInverseKinematics *arg1 = (CoreRobotics::CRInverseKinematics *) 0 ;
   double arg2 ;
@@ -16789,7 +16833,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRInverseKinematics_setTolerance__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRInverseKinematics_getTolerance(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CoreRobotics::CRInverseKinematics *arg1 = (CoreRobotics::CRInverseKinematics *) 0 ;
   void *argp1 = 0 ;
@@ -16797,63 +16841,17 @@ SWIGINTERN PyObject *_wrap_CRInverseKinematics_setTolerance__SWIG_1(PyObject *SW
   PyObject * obj0 = 0 ;
   double result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:CRInverseKinematics_setTolerance",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:CRInverseKinematics_getTolerance",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRInverseKinematics, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRInverseKinematics_setTolerance" "', argument " "1"" of type '" "CoreRobotics::CRInverseKinematics *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRInverseKinematics_getTolerance" "', argument " "1"" of type '" "CoreRobotics::CRInverseKinematics *""'"); 
   }
   arg1 = reinterpret_cast< CoreRobotics::CRInverseKinematics * >(argp1);
-  result = (double)(arg1)->setTolerance();
+  result = (double)(arg1)->getTolerance();
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
   return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_CRInverseKinematics_setTolerance(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[3] = {
-    0
-  };
-  Py_ssize_t ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = PyObject_Length(args);
-  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CoreRobotics__CRInverseKinematics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_CRInverseKinematics_setTolerance__SWIG_1(self, args);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CoreRobotics__CRInverseKinematics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_double(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        return _wrap_CRInverseKinematics_setTolerance__SWIG_0(self, args);
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'CRInverseKinematics_setTolerance'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    CoreRobotics::CRInverseKinematics::setTolerance(double)\n"
-    "    CoreRobotics::CRInverseKinematics::setTolerance()\n");
-  return 0;
 }
 
 
@@ -20363,10 +20361,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CRSensorLinear_swigregister", CRSensorLinear_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_CRInverseKinematics", _wrap_new_CRInverseKinematics, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_setRobot", _wrap_CRInverseKinematics_setRobot, METH_VARARGS, NULL},
+	 { (char *)"CRInverseKinematics_getRobot", _wrap_CRInverseKinematics_getRobot, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_setToolIndex", _wrap_CRInverseKinematics_setToolIndex, METH_VARARGS, NULL},
+	 { (char *)"CRInverseKinematics_getToolIndex", _wrap_CRInverseKinematics_getToolIndex, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_setEulerMode", _wrap_CRInverseKinematics_setEulerMode, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_getEulerMode", _wrap_CRInverseKinematics_getEulerMode, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_setTolerance", _wrap_CRInverseKinematics_setTolerance, METH_VARARGS, NULL},
+	 { (char *)"CRInverseKinematics_getTolerance", _wrap_CRInverseKinematics_getTolerance, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_setMaxIter", _wrap_CRInverseKinematics_setMaxIter, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_getMaxIter", _wrap_CRInverseKinematics_getMaxIter, METH_VARARGS, NULL},
 	 { (char *)"CRInverseKinematics_setStepSize", _wrap_CRInverseKinematics_setStepSize, METH_VARARGS, NULL},

@@ -1181,8 +1181,14 @@ class CRInverseKinematics(_object):
     def setRobot(self, i_robot):
         return _CoreRobotics.CRInverseKinematics_setRobot(self, i_robot)
 
+    def getRobot(self):
+        return _CoreRobotics.CRInverseKinematics_getRobot(self)
+
     def setToolIndex(self, i_toolIndex):
         return _CoreRobotics.CRInverseKinematics_setToolIndex(self, i_toolIndex)
+
+    def getToolIndex(self):
+        return _CoreRobotics.CRInverseKinematics_getToolIndex(self)
 
     def setEulerMode(self, i_eulerMode):
         return _CoreRobotics.CRInverseKinematics_setEulerMode(self, i_eulerMode)
@@ -1190,8 +1196,11 @@ class CRInverseKinematics(_object):
     def getEulerMode(self):
         return _CoreRobotics.CRInverseKinematics_getEulerMode(self)
 
-    def setTolerance(self, *args):
-        return _CoreRobotics.CRInverseKinematics_setTolerance(self, *args)
+    def setTolerance(self, i_tolerance):
+        return _CoreRobotics.CRInverseKinematics_setTolerance(self, i_tolerance)
+
+    def getTolerance(self):
+        return _CoreRobotics.CRInverseKinematics_getTolerance(self)
 
     def setMaxIter(self, i_maxIter):
         return _CoreRobotics.CRInverseKinematics_setMaxIter(self, i_maxIter)
