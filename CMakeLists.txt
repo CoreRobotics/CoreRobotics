@@ -42,6 +42,12 @@
 # CMAKE Flags and variables
 cmake_minimum_required(VERSION 3.0)
 
+# Set version
+set (MAJOR_VERSION 0)
+set (MINOR_VERSION 9)
+set (RELEASE_VERSION 1)
+set (PROJECT_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${RELEASE_VERSION})
+
 # Set CMAKE policy
 cmake_policy(SET CMP0054 NEW)
 
@@ -62,7 +68,7 @@ project( ${PROJECT_NAME} )
 
 # =====================================================================
 # 1. Setup the library target
-#
+# =====================================================================
 
 # Find the 3rd party libraries
 
@@ -85,7 +91,7 @@ else()
 endif()
 
 # Include headers
-include_directories(
+file(GLOB CR_INCLUDE_DIRS
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/core
     ${CMAKE_SOURCE_DIR}/src/math
@@ -95,40 +101,21 @@ include_directories(
     ${EIGEN3_INCLUDE_DIR}
     ${Boost_INCLUDE_DIR}
 )
+include_directories( ${CR_INCLUDE_DIRS} )
 
 # Header files
-file(GLOB HEADERS_CORE
-    src/core/*.hpp
-)
-file(GLOB HEADERS_MATH
-    src/math/*.hpp
-)
-file(GLOB HEADERS_MODELS
-    src/models/*.hpp
-)
-file(GLOB HEADERS_PHYSICS
-    src/physics/*.hpp
-)
-file(GLOB HEADERS_CONTROLLERS
-    src/controllers/*.hpp
-)
+file(GLOB HEADERS_CORE src/core/*.hpp )
+file(GLOB HEADERS_MATH src/math/*.hpp )
+file(GLOB HEADERS_MODELS src/models/*.hpp )
+file(GLOB HEADERS_PHYSICS src/physics/*.hpp )
+file(GLOB HEADERS_CONTROLLERS src/controllers/*.hpp )
 
 # Source files
-file(GLOB SOURCES_CORE
-    src/core/*.cpp
-)
-file(GLOB SOURCES_MATH
-    src/math/*.cpp
-)
-file(GLOB SOURCES_MODELS
-    src/models/*.cpp
-)
-file(GLOB SOURCES_PHYSICS
-    src/physics/*.cpp
-)
-file(GLOB SOURCES_CONTROLLERS
-    src/controllers/*.cpp
-)
+file(GLOB SOURCES_CORE src/core/*.cpp )
+file(GLOB SOURCES_MATH src/math/*.cpp )
+file(GLOB SOURCES_MODELS src/models/*.cpp )
+file(GLOB SOURCES_PHYSICS src/physics/*.cpp )
+file(GLOB SOURCES_CONTROLLERS src/controllers/*.cpp )
 
 # If building on linux add pthread and rt
 if(UNIX AND NOT APPLE) # This may be useful for apple too
@@ -146,10 +133,10 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 	add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
 	# Set the output directory
-	set_target_properties( ${LIB_TARGET_NAME} PROPERTIES 
-		LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-		ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-	)
+    set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
+        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    )
 
 	# Sort into a group structure
 	source_group( "include" FILES "src/CoreRobotics.hpp")
@@ -167,9 +154,28 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 	source_group( "src\\controllers" FILES ${SOURCES_CONTROLLERS})
 
 
+    # =====================================================================
+    # 2. Export the package configuration and version files
+    # =====================================================================
+    # export package for use from the build tree
+    export (TARGETS ${LIB_TARGET_NAME} FILE ${PROJECT_BINARY_DIR}/CoreRoboticsTargets.cmake)
+    export (PACKAGE ${LIB_TARGET_NAME})
+
+    # package definitions
+    set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
+    set (CONF_LIBRARIES    ${LIB_TARGET_NAME})
+    set (CONF_LIBRARY_DIRS ${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR})
+    set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
+
+    # package configuration and version files
+    configure_file (CoreRoboticsConfig.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfig.cmake" @ONLY)
+    configure_file (CoreRoboticsConfigVersion.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY)
+
+
 	# =====================================================================
-	# 2. Setup the tests target
-	#
+	# 3. Setup the tests target
+	# =====================================================================
+
 	# Source files
 	file(GLOB TESTS
 		tests/*.cpp
@@ -223,6 +229,7 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 	endforeach()
 
 endif()
+
 
 # If "python" or "all" build the Python library
 if(python OR all)
