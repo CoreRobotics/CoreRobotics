@@ -40,69 +40,112 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 #include <iostream>
 #include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-
-// -------------------------------------------------------------
-void test_CRTrajectoryGenerator(void) {
-
-	std::cout << "*************************************\n";
-	std::cout << "Demonstration of CRTrajectoryGenerator.\n";
-    std::cout << std::fixed; std::cout.precision(4);
-    
-    // ------------------------------------------
-    // Define a trajectory generator
+//
+// Test solve method
+//
+TEST(CRTrajectoryGenerator, Solve){
     CRTrajectoryGenerator trajGen;
-    
-    // intialize a structure for reading the outhput of trajGen
     CRWaypoint wp;
     
-    
-    // ------------------------------------------
-    // Initialize a clock to time the solver
-    CRClock timer = CRClock();
-    
-
-	// ------------------------------------------
-	// Initial and final conditions
-    double tf = 1.2;
-    Eigen::Vector2d x0;
+    // Initial conditions
+    Eigen::Vector2d x0, v0, a0;
     x0 << 0, 0;
-    Eigen::Vector2d v0;
     v0 << 0, -2;
-    Eigen::Vector2d a0;
     a0 << 0, 0;
-    Eigen::Vector2d xf;
+    
+    // Final conditions
+    double tf = 1.2;
+    Eigen::Vector2d xf, vf, af;
     xf << -0.4, 0.5;
-    Eigen::Vector2d vf;
     vf << 1.2, 1;
-    Eigen::Vector2d af;
     af << 0, 0;
     
-    // ------------------------------------------
-    // Compute the trajectory
+    // Check the solve function
+    CRResult result = trajGen.solve(x0, v0, a0, xf, vf, af, tf);
+    EXPECT_EQ(result, CR_RESULT_SUCCESS);
+}
+
+
+
+//
+// Test step methods
+//
+TEST(CRTrajectoryGenerator, Step){
+    CRTrajectoryGenerator trajGen;
+    CRWaypoint wp;
+    
+    // Initial conditions
+    Eigen::Vector2d x0, v0, a0;
+    x0 << 0, 0;
+    v0 << 0, -2;
+    a0 << 0, 0;
+    
+    // Final conditions
+    double tf = 1.2;
+    Eigen::Vector2d xf, vf, af;
+    xf << -0.4, 0.5;
+    vf << 1.2, 1;
+    af << 0, 0;
+    
+    // add a timer for running the internal clock
+    CRClock timer;
+    
+    // Check the internal timer
     trajGen.solve(x0, v0, a0, xf, vf, af, tf);
     timer.startTimer();
-
-    // ------------------------------------------
-    // loop
-    printf("t (s) | Position | Velocity | Acceleration\n");
-    double t = 0;
-    while(t <= 1.2) {
-        
-        wp = trajGen.step(t);
-        
-        // output the time and state
-        printf("%.1f | %+.3f, %+.3f | %+.3f, %+.3f | %+.3f, %+.3f \n", t,
-              wp.position(0), wp.position(1),
-              wp.velocity(0), wp.velocity(1),
-              wp.acceleration(0), wp.acceleration(1));
-        
-        t += 0.1;
-    }
+    timer.sleep(tf);
+    wp = trajGen.step();
+    EXPECT_NEAR(tf, wp.time, 0.01);
+    EXPECT_NEAR(xf(0), wp.position(0), 0.001);
+    EXPECT_NEAR(xf(1), wp.position(1), 0.001);
+    EXPECT_NEAR(vf(0), wp.velocity(0), 0.001);
+    EXPECT_NEAR(vf(1), wp.velocity(1), 0.001);
+    EXPECT_NEAR(af(0), wp.acceleration(0), 0.001);
+    EXPECT_NEAR(af(1), wp.acceleration(1), 0.001);
     
-
+    // Check the value before the initial time (i.e.: t < 0)
+    wp = trajGen.step(-1);
+    EXPECT_DOUBLE_EQ(0, wp.time);
+    EXPECT_DOUBLE_EQ(x0(0), wp.position(0));
+    EXPECT_DOUBLE_EQ(x0(1), wp.position(1));
+    EXPECT_DOUBLE_EQ(v0(0), wp.velocity(0));
+    EXPECT_DOUBLE_EQ(v0(1), wp.velocity(1));
+    EXPECT_DOUBLE_EQ(a0(0), wp.acceleration(0));
+    EXPECT_DOUBLE_EQ(a0(1), wp.acceleration(1));
+    
+    // Check the value at the initial time (i.e.: t = 0)
+    wp = trajGen.step(0);
+    EXPECT_DOUBLE_EQ(0, wp.time);
+    EXPECT_DOUBLE_EQ(x0(0), wp.position(0));
+    EXPECT_DOUBLE_EQ(x0(1), wp.position(1));
+    EXPECT_DOUBLE_EQ(v0(0), wp.velocity(0));
+    EXPECT_DOUBLE_EQ(v0(1), wp.velocity(1));
+    EXPECT_DOUBLE_EQ(a0(0), wp.acceleration(0));
+    EXPECT_DOUBLE_EQ(a0(1), wp.acceleration(1));
+    
+    // Check the value at the end time (i.e.: t = tf)
+    wp = trajGen.step(tf);
+    EXPECT_DOUBLE_EQ(tf, wp.time);
+    EXPECT_NEAR(xf(0), wp.position(0), 1e-12);
+    EXPECT_NEAR(xf(1), wp.position(1), 1e-12);
+    EXPECT_NEAR(vf(0), wp.velocity(0), 1e-12);
+    EXPECT_NEAR(vf(1), wp.velocity(1), 1e-12);
+    EXPECT_NEAR(af(0), wp.acceleration(0), 1e-12);
+    EXPECT_NEAR(af(1), wp.acceleration(1), 1e-12);
+    
+    // Check the value well past the end time (i.e.: t > tf)
+    wp = trajGen.step(tf + 10);
+    EXPECT_DOUBLE_EQ(tf, wp.time);
+    EXPECT_NEAR(xf(0), wp.position(0), 1e-12);
+    EXPECT_NEAR(xf(1), wp.position(1), 1e-12);
+    EXPECT_NEAR(vf(0), wp.velocity(0), 1e-12);
+    EXPECT_NEAR(vf(1), wp.velocity(1), 1e-12);
+    EXPECT_NEAR(af(0), wp.acceleration(0), 1e-12);
+    EXPECT_NEAR(af(1), wp.acceleration(1), 1e-12);
+    
 }
-// -------------------------------------------------------------
