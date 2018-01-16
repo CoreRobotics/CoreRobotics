@@ -38,77 +38,93 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
-
-
 #include <iostream>
 #include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-CRNoiseGaussian* dynNoise;
+CRNoiseGaussian* dynNoise1;
+CRNoiseGaussian* dynNoise2;
 
-// -------------------------------------------------------------
 // Declare a probabilistic continuous motion model - xdot = fcn(t,x,u,s)
-Eigen::VectorXd probDynFcn(double t, Eigen::VectorXd x, Eigen::VectorXd u, bool sample){
+Eigen::VectorXd probContinuousDynFcn(double t,
+                                     Eigen::VectorXd x,
+                                     Eigen::VectorXd u,
+                                     bool sample){
     Eigen::VectorXd w(1);
     if (sample){
-        w = dynNoise->sample();
+        w = dynNoise1->sample();
     } else {
         w << 0;
     }
     return -x + u + w;  // motion
 }
 
-
-// -------------------------------------------------------------
-void test_CRMotionProbabilistic(void){
-    
-    std::cout << "*************************************\n";
-    std::cout << "Demonstration of CRMotionProbabilistic.\n";
-    
-    
-    // initialize a state vector
-    Eigen::VectorXd x(1);
-    x << 10;
-    
-    
-    // initialize the noise model with a mean and covariance
-    Eigen::MatrixXd cov(1,1);
-    cov << 1;
-    Eigen::VectorXd mean(1);
-    mean << 0;
-    dynNoise = new CRNoiseGaussian(cov, mean);
-    
-    
-    // initialize a deterministic sensor model
-    CRMotionProbabilistic model = CRMotionProbabilistic(*probDynFcn,CR_MOTION_CONTINUOUS,x,0.2);
-    
-    
-    // initialize an input and set it to zero
-    Eigen::VectorXd u(1);
-    u << 0;
-    
-    // Initialize a time t
-    double t = 0;
-    
-    // loop
-    printf("Time (s) | Input | State\n");
-    while(t <= 5) {
-        
-        // output the time and state
-        printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
-        
-        // step at t = 2.5
-        if (t >= 2.5){
-            u << 10;
-        }
-        
-        // get next state (with noise) & time
-        x = model.motion(u, true);
-        t = model.getTime();
+// Declare a probabilistic discrete motion model - xNext = fcn(t,x,u,s)
+Eigen::VectorXd probDiscreteDynFcn(double t,
+                                   Eigen::VectorXd x,
+                                   Eigen::VectorXd u,
+                                   bool sample){
+    Eigen::VectorXd w(1);
+    if (sample){
+        w = dynNoise2->sample();
+    } else {
+        w << 0;
     }
-    printf("%5.1f    | %5.1f | %5.2f\n",t,u(0),x(0));
-    
+    x(0) = exp(-1 * 0.01) * x(0) - 1 * (exp(-1 * 0.01) - 1) * 1 * (u(0) + w(0)); // motion (dt = 0.01)
+    return x;
 }
-// -------------------------------------------------------------
+
+//
+// Test the continuous model.  Here we specify a continuous differential model,
+// which is solved using the internal integration scheme of the CRMotionLinear model
+//
+TEST(CRMotionProbabilistic, Continuous){
+    double dt = 0.01;   // sample rate (seconds)
+    Eigen::VectorXd x(1);     // state vector
+    Eigen::VectorXd u(1);     // input vector
+    Eigen::MatrixXd cov(1,1); // covariance
+    Eigen::VectorXd mean(1);  // mean
+    x << 1;     // initial condition
+    u << 0;     // input value
+    cov << 0.001;   // noise cov
+    mean << 0;  // noise mean
+    dynNoise1 = new CRNoiseGaussian(cov, mean);
+    CRMotionProbabilistic model = CRMotionProbabilistic(*probContinuousDynFcn, CR_MOTION_CONTINUOUS, x, dt);
+    double t = 0; // Initialize a time t
+    while(t < 5) { // simulate for 5 seconds
+        x = model.motion(u, true); // simulate the motion
+        t = model.getTime(); // get the simulation time
+    }
+    EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
+    EXPECT_NEAR(0, x(0), 0.01); // check the final state (should be within 1% of F.V. = 0)
+}
+
+
+//
+// Test the discrete model.  Here we discretize the same system using exact discretization:
+// https://en.wikipedia.org/wiki/Discretization#Discretization_of_linear_state_space_models
+// this approach gives us full control over how the system is discretized
+//
+TEST(CRMotionProbabilistic, Discrete){
+    double dt = 0.01;   // sample rate (seconds)
+    Eigen::VectorXd x(1);     // state vector
+    Eigen::VectorXd u(1);     // input vector
+    Eigen::MatrixXd cov(1,1); // covariance
+    Eigen::VectorXd mean(1);  // mean
+    x << 1;     // initial condition
+    u << 0;     // input value
+    cov << 0.001;   // noise cov
+    mean << 0;  // noise mean
+    dynNoise2 = new CRNoiseGaussian(cov, mean);
+    CRMotionProbabilistic model = CRMotionProbabilistic(*probDiscreteDynFcn, CR_MOTION_DISCRETE, x, dt);
+    double t = 0; // Initialize a time t
+    while(t < 5) { // simulate for 5 seconds
+        x = model.motion(u); // simulate the motion
+        t = model.getTime(); // get the simulation time
+    }
+    EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
+    EXPECT_NEAR(0, x(0), 0.01); // check the final state (should be within 1% of F.V. = 0)
+}
