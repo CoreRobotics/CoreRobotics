@@ -40,305 +40,117 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 #include <iostream>
 #include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
 
-// -------------------------------------------------------------
-void test_CRInverseKinematics(void) {
-
-	std::cout << "*************************************\n";
-	std::cout << "Demonstration of CRInverseKinematics.\n";
-    std::cout << std::fixed; std::cout.precision(4);
+// Setup the CRManipulator robot and return the toolIndex
+int setup3dof(CRManipulator& MyRobot){
+    CRFrameEuler* F0 = new CRFrameEuler();
+    CRFrameEuler* F1 = new CRFrameEuler();
+    CRFrameEuler* F2 = new CRFrameEuler();
+    CRRigidBody* Link0 = new CRRigidBody();
+    CRRigidBody* Link1 = new CRRigidBody();
+    CRRigidBody* Link2 = new CRRigidBody();
     
-    // Set the Euler convention we will use throughout the example
-    // Although CoreRobotics offers the flexibility to choose a
-    // different convention for each method, in general it is good
-    // to adopt the same convention throughout a problem for
-    // consistency.
-    CREulerMode convention = CR_EULER_MODE_XYZ;
-
-	// ------------------------------------------
-	// Create the robot
-
-	// create several rigid body links
-    CRFrameEuler* F0 = new CRFrameEuler(0, 0, 0, 0, 0, 0,
-                                        convention,
-                                        CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F1 = new CRFrameEuler(1, 0, 0, 0, 0, 0,
-                                        convention,
-                                        CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F2 = new CRFrameEuler(2, 0, 0, 0, 0, 0,
-                                        convention,
-                                        CR_EULER_FREE_ANG_G);
-    CRFrameEuler* F3 = new CRFrameEuler(1, 0, 0, 0, 0, 0,
-                                        convention,
-                                        CR_EULER_FREE_NONE);
-	CRRigidBody* Link0 = new CRRigidBody(F0);
-	CRRigidBody* Link1 = new CRRigidBody(F1);
-	CRRigidBody* Link2 = new CRRigidBody(F2);
-    CRRigidBody* Link3 = new CRRigidBody(F3);
+    // Set info for Link 0 and add to MyRobot
+    F0->setFreeVariable(CR_EULER_FREE_ANG_G);
+    F0->setMode(CR_EULER_MODE_XYZ);
+    F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
+    Link0->setFrame(F0);
+    MyRobot.addLink(Link0);
     
-    // Create a new robot & add the links
+    // Set info for Link 1 and add to MyRobot
+    F1->setFreeVariable(CR_EULER_FREE_ANG_G);
+    F1->setMode(CR_EULER_MODE_XYZ);
+    F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
+    Link1->setFrame(F1);
+    MyRobot.addLink(Link1);
+    
+    // Set info for Link 2 and add to MyRobot
+    F2->setFreeVariable(CR_EULER_FREE_ANG_G);
+    F2->setMode(CR_EULER_MODE_XYZ);
+    F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
+    Link2->setFrame(F2);
+    MyRobot.addLink(Link2);
+    
+    // create a tool frame and add to MyRobot
+    CRFrameEuler* Tool = new CRFrameEuler();
+    Tool->setMode(CR_EULER_MODE_XYZ);
+    Tool->setPositionAndOrientation(0, 0, 0, 0, 0, 0);
+    int toolIndex = MyRobot.addTool(2, Tool);
+    return toolIndex;
+}
+
+
+//
+// test the set/get methods
+//
+TEST(CRInverseKinematics, SetGet){
+    CRManipulator MyRobot;
+    int toolIndex = setup3dof(MyRobot);
+    CRInverseKinematics ikSolver = CRInverseKinematics(&MyRobot,
+                                                       toolIndex,
+                                                       CR_EULER_MODE_XYZ);
+    
+    ikSolver.setRobot(&MyRobot);
+    ikSolver.setMaxIter(100);
+    ikSolver.setStepSize(0.1);
+    ikSolver.setEulerMode(CR_EULER_MODE_ZYX);
+    ikSolver.setTolerance(1e-4);
+    ikSolver.setToolIndex(toolIndex);
+    ikSolver.setDampingFactor(1.0);
+    
+    EXPECT_EQ(&MyRobot, ikSolver.getRobot());
+    EXPECT_EQ(100, ikSolver.getMaxIter());
+    EXPECT_DOUBLE_EQ(0.1, ikSolver.getStepSize());
+    EXPECT_EQ(CR_EULER_MODE_ZYX, ikSolver.getEulerMode());
+    EXPECT_DOUBLE_EQ(1e-4, ikSolver.getTolerance());
+    EXPECT_EQ(toolIndex, ikSolver.getToolIndex());
+    EXPECT_DOUBLE_EQ(1.0, ikSolver.getDampingFactor());
+}
+
+
+//
+// test the set/get methods
+//
+TEST(CRInverseKinematics, Solver){
     CRManipulator* MyRobot = new CRManipulator();
-    
-	MyRobot->addLink(Link0);
-	MyRobot->addLink(Link1);
-	MyRobot->addLink(Link2);
-    int attachLink = MyRobot->addLink(Link3);
-
-
-	// create a tool frame and add to MyRobot
-	CRFrameEuler* Tool = new CRFrameEuler(0, 0, 0, 0, 0, 0,
-                                          convention,
-                                          CR_EULER_FREE_NONE);
-	int toolIndex = MyRobot->addTool(attachLink, Tool);
-    
-    
-    // ------------------------------------------
-    // Initialize a clock to time the solver
-    CRClock timer = CRClock();
-    double et;
-
-
-	// ------------------------------------------
-	// Solve several inverse kinematics problems
-    
-    // Set up an inverse kinematics object and attach the robot
+    int toolIndex = setup3dof(*MyRobot);
     CRInverseKinematics ikSolver = CRInverseKinematics(MyRobot,
                                                        toolIndex,
-                                                       convention);
+                                                       CR_EULER_MODE_XYZ);
     
-    // Set up some variables we will use
+    // variables for testing the results
     Eigen::VectorXd q0(3);          // initial configuration
     Eigen::VectorXd qSolved(3);     // configuration that solves p = fk(qSolved)
     Eigen::Matrix<double, 6, 1> p;  // tool set point pose
     Eigen::MatrixXd fk;             // forward kinematics (for testing the result)
+    CRResult result;
     
-    
-    // **********************
-    // CASE 1 : Solver should find a solution within default tolerance (1 mm),
-    // step size (1), and gain (0.1)
-    std::cout << "---------------------------------------------\n";
-    std::cout << "CASE 1: Use the default solver parameters.\n";
-    
-    // Set the initial configuration of the robot
+    // Solve a non-singular solution
+    p << 2.5, 0, 0, 0, 0, 0;
     q0 << 0.1, -0.2, 0.0;
     MyRobot->setConfiguration(q0);
+    result = ikSolver.solve(p, q0, qSolved);
+    EXPECT_EQ(CR_RESULT_SUCCESS, result);
     
-    // Define a set point pose
-    p << 2.5, 0, 0, 0, 0, 0;
-    
-    
-    // Now solve the inverse kinematics for the point
-    timer.startTimer();
-    CRResult result = ikSolver.solve(p, q0, qSolved);
-    et = timer.getElapsedTime();
-    
-    if ( result == CR_RESULT_SUCCESS ){
-        printf("Non-singular solution found in %8.6f s!\n",et);
-        std::cout << qSolved << std::endl;
-        
-        // Now push the new joints through the robot to see if it worked
-        MyRobot->setConfiguration(qSolved);
-        fk = MyRobot->getForwardKinematics();
-        
-        std::cout << "The forward kinematics for this solution are:\n";
-        std::cout << fk << std::endl;
-        
-    } else {
-        std::cout << "The solution is singular.\n";
-        std::cout << qSolved << std::endl;
-    }
-    
-    
-    // **********************
-    // CASE 2:
-    std::cout << "---------------------------------------------\n";
-    std::cout << "CASE 2: Change the default maximum iteration.\n";
-    
-    // Change the maximum iterations
+    // Now check the solution results
+    ikSolver.setDampingFactor(0);
     ikSolver.setMaxIter(100);
-    
-    // I.C.
+    ikSolver.setTolerance(1e-4);
     MyRobot->setConfiguration(q0);
-    
-    // Now solve the inverse kinematics for the point
-    timer.startTimer();
     result = ikSolver.solve(p, q0, qSolved);
-    et = timer.getElapsedTime();
+    MyRobot->setConfiguration(qSolved);
+    fk = MyRobot->getForwardKinematics();
     
-    if ( result == CR_RESULT_SUCCESS ){
-        printf("Non-singular solution found in %8.6f s!\n",et);
-        std::cout << qSolved << std::endl;
-        
-        // Now push the new joints through the robot to see if it worked
-        MyRobot->setConfiguration(qSolved);
-        fk = MyRobot->getForwardKinematics();
-        
-        std::cout << "The forward kinematics for this solution are:\n";
-        std::cout << fk << std::endl;
-        
-    } else {
-		std::cout << "The solution is singular.\n";
-        std::cout << qSolved << std::endl;
-    }
-    
-    
-    // **********************
-    // CASE 3: Change the tolerance and gain
-    std::cout << "---------------------------------------------\n";
-    std::cout << "CASE 3: Change the parameters.\n";
-    
-    // Change the maximum iterations
-    ikSolver.setMaxIter(100);
-    ikSolver.setStepSize(0.2);
-    ikSolver.setTolerance(0.0001);
-    
-    // I.C.
-    MyRobot->setConfiguration(q0);
-    
-    // Now solve the inverse kinematics for the point
-    timer.startTimer();
-    result = ikSolver.solve(p, q0, qSolved);
-    et = timer.getElapsedTime();
-    
-    if ( result == CR_RESULT_SUCCESS ){
-        printf("Non-singular solution found in %8.6f s!\n",et);
-        std::cout << qSolved << std::endl;
-        
-        // Now push the new joints through the robot to see if it worked
-        MyRobot->setConfiguration(qSolved);
-        fk = MyRobot->getForwardKinematics();
-        
-        std::cout << "The forward kinematics for this solution are:\n";
-        std::cout << fk << std::endl;
-        
-    } else {
-		std::cout << "The solution is singular.\n";
-        std::cout << qSolved << std::endl;
-    }
-    
-    
-    // **********************
-    // CASE 4: Assign a set point that is not reachable (singularity test)
-    std::cout << "---------------------------------------------\n";
-    std::cout << "CASE 4: Test a singular solution.\n";
-    
-    // Assign a set point outside the robot reach
-    p << 5, 0, 0, 0, 0, 0;
-    
-    // I.C.
-    MyRobot->setConfiguration(q0);
-    
-    // Now solve the inverse kinematics for the point
-    timer.startTimer();
-    result = ikSolver.solve(p, q0, qSolved);
-    et = timer.getElapsedTime();
-    
-    if ( result == CR_RESULT_SUCCESS ){
-        printf("Non-singular solution found in %8.6f s!\n",et);
-        std::cout << qSolved << std::endl;
-        
-        // Now push the new joints through the robot to see if it worked
-        MyRobot->setConfiguration(qSolved);
-        fk = MyRobot->getForwardKinematics();
-        
-        std::cout << "The forward kinematics for this solution are:\n";
-        std::cout << fk << std::endl;
-        
-    } else {
-		std::cout << "The solution is singular.\n";
-        std::cout << qSolved << std::endl;
-    }
-    
-    
-    
-    // **********************
-    // CASE 5: Try 200 steps (external)
-    std::cout << "---------------------------------------------\n";
-    std::cout << "CASE 5: Reduced pose vector.\n";
-    
-    // Assign a set point
-    Eigen::Matrix<bool, 6, 1> elems;
-    elems << 1, 1, 0, 0, 0, 1;
-    
-    Eigen::VectorXd pRed(3);
-    pRed << 2.5, 0, 0;              // (x, y, g)
-    
-    // Change parameters
-    ikSolver.setStepSize(0.1);
-    ikSolver.setTolerance(0.001);
-    
-    // I.C.
-    MyRobot->setConfiguration(q0);
-    
-    
-    // Now solve the inverse kinematics for the point
-    timer.startTimer();
-    result = ikSolver.solve(pRed, elems, q0, qSolved);
-    et = timer.getElapsedTime();
-    
-    if ( result == CR_RESULT_SUCCESS ){
-        printf("Non-singular solution found in %8.6f s!\n",et);
-        std::cout << qSolved << std::endl;
-        
-        // Now push the new joints through the robot to see if it worked
-        MyRobot->setConfiguration(qSolved);
-        fk = MyRobot->getForwardKinematics();
-        
-        std::cout << "The forward kinematics for this solution are:\n";
-        std::cout << fk << std::endl;
-        
-    } else {
-		std::cout << "The solution is singular.\n";
-        std::cout << qSolved << std::endl;
-    }
-    
-    
-    
-    // **********************
-    // CASE 6: Try 200 steps (external)
-    std::cout << "---------------------------------------------\n";
-    std::cout << "CASE 6: Single step convergence.\n";
-    
-    // Assign a set point
-    p << 2.5, 0, 0, 0, 0, 0;
-    
-    // Change parameters
-    ikSolver.setMaxIter(1);
-    
-    // I.C.
-    MyRobot->setConfiguration(q0);
-    
-    // Define a configruation
-    Eigen::VectorXd q(3);
-    q = q0;
-    
-    
-    // Now solve the inverse kinematics for the point
-    for (int i = 0; i < 100; i++){
-        timer.startTimer();
-        result = ikSolver.solve(p, q, qSolved);
-        et = timer.getElapsedTime();
-        
-        q = qSolved;
-        
-        if ( result == CR_RESULT_SUCCESS ){
-            printf("Solution found in %8.6f s!\n",et);
-            
-            // Now push the new joints through the robot to see if it worked
-            MyRobot->setConfiguration(q);
-            fk = MyRobot->getForwardKinematics();
-            
-        } else {
-			std::cout << "The solution is singular.\n";
-        }
-    }
-    
-    
-    
-
+    EXPECT_EQ(3, fk.rows());
+    EXPECT_EQ(4, fk.cols());
+    EXPECT_EQ(CR_RESULT_SUCCESS, result);
+    EXPECT_NEAR(2.5, fk(0,3), 1e-4);
+    EXPECT_NEAR(0, fk(1,3), 1e-4);
+    EXPECT_NEAR(0.5, fk(2,3), 1e-4);
 }
-// -------------------------------------------------------------
+
