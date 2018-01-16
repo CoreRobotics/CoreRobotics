@@ -84,22 +84,26 @@ Eigen::VectorXd probDiscreteDynFcn(double t,
 TEST(CRMotionProbabilistic, Continuous){
     double dt = 0.01;   // sample rate (seconds)
     Eigen::VectorXd x(1);     // state vector
+    Eigen::VectorXd xb(1);    // baseline state vector
     Eigen::VectorXd u(1);     // input vector
     Eigen::MatrixXd cov(1,1); // covariance
     Eigen::VectorXd mean(1);  // mean
     x << 1;     // initial condition
+    xb << 1;    // I.C.
     u << 0;     // input value
-    cov << 0.001;   // noise cov
+    cov << 1;   // noise cov
     mean << 0;  // noise mean
     dynNoise1 = new CRNoiseGaussian(cov, mean);
     CRMotionProbabilistic model = CRMotionProbabilistic(*probContinuousDynFcn, CR_MOTION_CONTINUOUS, x, dt);
+    CRMotionProbabilistic modelBaseline = model; // init another model to test that noise is sampled
     double t = 0; // Initialize a time t
     while(t < 5) { // simulate for 5 seconds
         x = model.motion(u, true); // simulate the motion
+        xb = modelBaseline.motion(u, false); // without noise
         t = model.getTime(); // get the simulation time
     }
     EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
-    EXPECT_NEAR(0, x(0), 0.01); // check the final state (should be within 1% of F.V. = 0)
+    EXPECT_NE(xb(0), x(0)); // check that noise was added to the final state
 }
 
 
@@ -111,20 +115,24 @@ TEST(CRMotionProbabilistic, Continuous){
 TEST(CRMotionProbabilistic, Discrete){
     double dt = 0.01;   // sample rate (seconds)
     Eigen::VectorXd x(1);     // state vector
+    Eigen::VectorXd xb(1);    // baseline state vector
     Eigen::VectorXd u(1);     // input vector
     Eigen::MatrixXd cov(1,1); // covariance
     Eigen::VectorXd mean(1);  // mean
     x << 1;     // initial condition
+    xb << 1;    // I.C.
     u << 0;     // input value
-    cov << 0.001;   // noise cov
+    cov << 1;   // noise cov
     mean << 0;  // noise mean
     dynNoise2 = new CRNoiseGaussian(cov, mean);
-    CRMotionProbabilistic model = CRMotionProbabilistic(*probDiscreteDynFcn, CR_MOTION_DISCRETE, x, dt);
+    CRMotionProbabilistic model = CRMotionProbabilistic(*probContinuousDynFcn, CR_MOTION_CONTINUOUS, x, dt);
+    CRMotionProbabilistic modelBaseline = model; // init another model to test that noise is sampled
     double t = 0; // Initialize a time t
     while(t < 5) { // simulate for 5 seconds
-        x = model.motion(u); // simulate the motion
+        x = model.motion(u, true); // simulate the motion
+        xb = modelBaseline.motion(u, false); // without noise
         t = model.getTime(); // get the simulation time
     }
     EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
-    EXPECT_NEAR(0, x(0), 0.01); // check the final state (should be within 1% of F.V. = 0)
+    EXPECT_NE(xb(0), x(0)); // check that noise was added to the final state
 }
