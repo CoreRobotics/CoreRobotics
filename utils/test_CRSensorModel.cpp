@@ -38,42 +38,35 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
-
-
 #include <iostream>
 #include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-
-// -------------------------------------------------------------
 // Declare a deterministic model - fcn(x,zHat)
 Eigen::VectorXd detPredFcn(Eigen::VectorXd x){
     return x;  // observation (z = x)
 }
 
-
-// -------------------------------------------------------------
-void test_CRSensorModel(void){
+//
+// Test the model prediction
+//
+TEST(CRSensorModel, Predict){
+    Eigen::VectorXd x(1);   // state vector
+    Eigen::VectorXd z(1);   // observation
+    x << 1;     // initial condition
+    CRSensorModel sensor = CRSensorModel(*detPredFcn, x);
+    z = sensor.measurement();
+    EXPECT_DOUBLE_EQ(1, z(0));
     
-    std::cout << "*************************************\n";
-    std::cout << "Demonstration of CRSensorModel.\n";
+    x = sensor.getState();
+    EXPECT_DOUBLE_EQ(1, x(0));
     
-    
-    // initialize a state vector
-    Eigen::VectorXd x0(1);
-    x0 << 5;
-    
-    
-    // initialize a deterministic sensor model
-    CRSensorModel sensor = CRSensorModel(*detPredFcn,x0);
-    
-    
-    // initialize a sensor prediction vector
-    Eigen::VectorXd zPredict(1);
-    zPredict = sensor.measurement();
-    std::cout << "Predicted measurement = " << zPredict << std::endl;
-    
+    x << 10;
+    sensor.setState(x);
+    x = sensor.getState();
+    EXPECT_DOUBLE_EQ(10, x(0));
 }
-// -------------------------------------------------------------
+

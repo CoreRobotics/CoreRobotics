@@ -38,39 +38,36 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
-
-
 #include <iostream>
 #include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-
-// -------------------------------------------------------------
-void test_CRSensorLinear(void){
-    
-    std::cout << "*************************************\n";
-    std::cout << "Demonstration of CRSensorLinear.\n";
-    
-    
-    // initialize a state vector
-    Eigen::VectorXd x0(1);
-    x0 << 5;
-    
-    // observation matrix
-    Eigen::Matrix<double,1,1> H;
+//
+// Test the linear prediction
+//
+TEST(CRSensorLinear, Predict){
+    Eigen::VectorXd x(1);   // state vector
+    Eigen::VectorXd z(1);   // observation
+    x << 1;     // initial condition
+    Eigen::Matrix<double,1,1> H;    // observation Matrix
     H << 1;
+    CRSensorLinear sensor = CRSensorLinear(H, x);
+    z = sensor.measurement();
+    EXPECT_DOUBLE_EQ(1, z(0));
     
+    x = sensor.getState();
+    EXPECT_DOUBLE_EQ(1, x(0));
     
-    // initialize a deterministic sensor model
-    CRSensorLinear sensor = CRSensorLinear(H,x0);
+    x << 10;
+    sensor.setState(x);
+    x = sensor.getState();
+    EXPECT_DOUBLE_EQ(10, x(0));
     
-    
-    // initialize a sensor prediction vector
-    Eigen::VectorXd zPredict(1);
-    zPredict = sensor.measurement();
-    std::cout << "Predicted measurement = " << zPredict << std::endl;
-    
+    H << 0.1;
+    sensor.setObservation(H);
+    z = sensor.measurement();
+    EXPECT_DOUBLE_EQ(1, z(0));
 }
-// -------------------------------------------------------------
