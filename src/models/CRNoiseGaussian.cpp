@@ -39,11 +39,11 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
+#define _USE_MATH_DEFINES
 #include "Eigen/Dense"
 #include "CRNoiseGaussian.hpp"
 #include "CRMatrix.hpp"
 #include <chrono>
-#include <math.h>
 
 
 //=====================================================================
