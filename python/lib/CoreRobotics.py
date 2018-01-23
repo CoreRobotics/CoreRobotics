@@ -966,61 +966,6 @@ class CRNoiseGaussian(CRNoiseModel):
 CRNoiseGaussian_swigregister = _CoreRobotics.CRNoiseGaussian_swigregister
 CRNoiseGaussian_swigregister(CRNoiseGaussian)
 
-class diracParam(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, diracParam, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, diracParam, name)
-    __repr__ = _swig_repr
-    __swig_setmethods__["point"] = _CoreRobotics.diracParam_point_set
-    __swig_getmethods__["point"] = _CoreRobotics.diracParam_point_get
-    if _newclass:
-        point = _swig_property(_CoreRobotics.diracParam_point_get, _CoreRobotics.diracParam_point_set)
-
-    def __init__(self):
-        this = _CoreRobotics.new_diracParam()
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-    __swig_destroy__ = _CoreRobotics.delete_diracParam
-    def __del__(self):
-        return None
-diracParam_swigregister = _CoreRobotics.diracParam_swigregister
-diracParam_swigregister(diracParam)
-
-class CRNoiseDirac(CRNoiseModel):
-    __swig_setmethods__ = {}
-    for _s in [CRNoiseModel]:
-        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRNoiseDirac, name, value)
-    __swig_getmethods__ = {}
-    for _s in [CRNoiseModel]:
-        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, CRNoiseDirac, name)
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        this = _CoreRobotics.new_CRNoiseDirac(*args)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-
-    def setParameters(self, *args):
-        return _CoreRobotics.CRNoiseDirac_setParameters(self, *args)
-
-    def sample(self):
-        return _CoreRobotics.CRNoiseDirac_sample(self)
-
-    def probability(self, i_x):
-        return _CoreRobotics.CRNoiseDirac_probability(self, i_x)
-    __swig_destroy__ = _CoreRobotics.delete_CRNoiseDirac
-    def __del__(self):
-        return None
-CRNoiseDirac_swigregister = _CoreRobotics.CRNoiseDirac_swigregister
-CRNoiseDirac_swigregister(CRNoiseDirac)
-
 class uniformParam(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, uniformParam, name, value)

@@ -7,20 +7,20 @@ classdef mixtureParam < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(197, self);
+        varargout{1} = CoreRoboticsMEX(188, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(198, self, varargin{1});
+        CoreRoboticsMEX(189, self, varargin{1});
       end
     end
     function varargout = weights(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(199, self);
+        varargout{1} = CoreRoboticsMEX(190, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(200, self, varargin{1});
+        CoreRoboticsMEX(191, self, varargin{1});
       end
     end
     function self = mixtureParam(varargin)
@@ -29,14 +29,14 @@ classdef mixtureParam < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(201, varargin{:});
+        tmp = CoreRoboticsMEX(192, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(202, self);
+        CoreRoboticsMEX(193, self);
         self.swigPtr=[];
       end
     end
