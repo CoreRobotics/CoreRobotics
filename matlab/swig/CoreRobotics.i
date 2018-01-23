@@ -57,7 +57,6 @@ are:
 * - CRManipulator
 * - CRNoiseModel
 * - CRNoiseGaussian
-* - CRNoiseDirac
 * - CRNoiseUniform
 * - CRNoiseMixture
 * - CRSensorLinear
@@ -98,7 +97,6 @@ removed for compatability.
 	* - CRFrameDh
 	* - CRNoiseModel
 	* - CRNoiseGaussian
-	* - CRNoiseDirac
 	* - CRNoiseUniform
 	* - CRNoiseMixture
 	* - CRSensorLinear
@@ -142,7 +140,6 @@ removed for compatability.
 %include "CRManipulator.hpp"
 %include "CRNoiseModel.hpp"
 %include "CRNoiseGaussian.hpp"
-%include "CRNoiseDirac.hpp"
 %include "CRNoiseUniform.hpp"
 %include "CRNoiseMixture.hpp"
 //%include "CRSensorModel.hpp"

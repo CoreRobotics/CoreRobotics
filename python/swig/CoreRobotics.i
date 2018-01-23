@@ -58,7 +58,6 @@ are:
 * - CRManipulator
 * - CRNoiseModel
 * - CRNoiseGaussian
-* - CRNoiseDirac
 * - CRNoiseUniform
 * - CRNoiseMixture
 * - CRSensorLinear
@@ -95,7 +94,6 @@ removed for compatability.
 * - The following modules have not been tested:
 	* - CRNoiseModel
 	* - CRNoiseGaussian
-	* - CRNoiseDirac
 	* - CRNoiseUniform
 	* - CRNoiseMixture
 	* - CRSensorLinear
@@ -143,7 +141,6 @@ import_array();
 %include "CRManipulator.hpp"
 %include "CRNoiseModel.hpp"
 %include "CRNoiseGaussian.hpp"
-%include "CRNoiseDirac.hpp"
 %include "CRNoiseUniform.hpp"
 %include "CRNoiseMixture.hpp"
 //%include "CRSensorModel.hpp"
