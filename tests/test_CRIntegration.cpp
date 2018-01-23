@@ -34,7 +34,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 \project CoreRobotics Project
 \url     www.corerobotics.org
-\author  Parker Owan, Tony Piaskowy, Cameron Devinedir
+\author  Parker Owan
 
 */
 //=====================================================================
@@ -42,12 +42,57 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
 
-using namespace std;
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
-int main(int argc, char **argv) {
-    
-    cout << "Running the CoreRobotics test suite." << endl;
-    
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+// Declare a continuous dynamical system - xdot = fcn(t,x,u)
+// The exact solution of this system is y = exp(-t) for u = 0
+Eigen::VectorXd dynamicalSystem(double t, Eigen::VectorXd x, Eigen::VectorXd u){
+    return -x + u;  // motion
 }
+
+//
+// Test the runge kutta method
+//
+TEST(CRIntegration, RungeKutta){
+    double t = 0;
+    double dt = 0.01;   // sample rate (seconds)
+    Eigen::VectorXd x(1);   // state vector
+    Eigen::VectorXd u(1);   // input vector
+    x << 1;   // initial condition
+    u << 0;     // input value
+    
+    // perform constant sample rate integration
+    while(t <= 5){
+        x = CRIntegration::rungeKuttaStep(*dynamicalSystem, t, x, u, dt);
+        t += dt;
+    }
+    
+    // check that we approach the final values
+    EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
+    EXPECT_NEAR(exp(-t), x(0), 1e-6); // check the final state to exact solution
+}
+
+//
+// Test the forward euler method
+//
+TEST(CRIntegration, ForwardEuler){
+    double t = 0;
+    double dt = 0.01;   // sample rate (seconds)
+    Eigen::VectorXd x(1);   // state vector
+    Eigen::VectorXd u(1);   // input vector
+    x << 1;   // initial condition
+    u << 0;     // input value
+    
+    // perform constant sample rate integration
+    while(t <= 5){
+        x = CRIntegration::forwardEulerStep(*dynamicalSystem, t, x, u, dt);
+        t += dt;
+    }
+    
+    // check that we approach the final values
+    EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
+    EXPECT_NEAR(exp(-t), x(0), 1e-3); // check the final state to exact solution
+}
+
+

@@ -38,15 +38,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
-
 #include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
 
-
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
-
 
 //
 // Test the set frame method

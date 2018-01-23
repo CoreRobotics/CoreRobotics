@@ -64,6 +64,78 @@ TEST(CRFrameDh, Construct){
 
 
 //
+// check the regular dh approach (based on the exact values expected
+// https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters
+//
+TEST(CRFrameDh, ClassicTransformation){
+    
+    // init classic frame
+    double r = 0.1;
+    double alpha = M_PI / 3;
+    double d = 0.2;
+    double theta = M_PI / 6;
+    CRFrameDh frame(r, alpha, d, theta, CR_DH_MODE_CLASSIC, CR_DH_FREE_NONE);
+    
+    Eigen::Matrix3d R;
+    Eigen::Vector3d T;
+    frame.getRotationAndTranslation(R, T);
+    
+    // check to the matrix layout
+    EXPECT_DOUBLE_EQ(cos(theta), R(0,0));
+    EXPECT_DOUBLE_EQ(-sin(theta)*cos(alpha), R(0,1));
+    EXPECT_DOUBLE_EQ(sin(theta)*sin(alpha), R(0,2));
+    
+    EXPECT_DOUBLE_EQ(sin(theta), R(1,0));
+    EXPECT_DOUBLE_EQ(cos(theta)*cos(alpha), R(1,1));
+    EXPECT_DOUBLE_EQ(-cos(theta)*sin(alpha), R(1,2));
+    
+    EXPECT_DOUBLE_EQ(0, R(2,0));
+    EXPECT_DOUBLE_EQ(sin(alpha), R(2,1));
+    EXPECT_DOUBLE_EQ(cos(alpha), R(2,2));
+    
+    EXPECT_DOUBLE_EQ(r * cos(theta), T(0));
+    EXPECT_DOUBLE_EQ(r * sin(theta), T(1));
+    EXPECT_DOUBLE_EQ(d, T(2));
+}
+
+
+//
+// check the modified dh approach (based on the exact values expected
+// https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters
+//
+TEST(CRFrameDh, ModifiedTransformation){
+    
+    // init classic frame
+    double r = 0.1;
+    double alpha = M_PI / 3;
+    double d = 0.2;
+    double theta = M_PI / 6;
+    CRFrameDh frame(r, alpha, d, theta, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
+    
+    Eigen::Matrix3d R;
+    Eigen::Vector3d T;
+    frame.getRotationAndTranslation(R, T);
+    
+    // check to the matrix layout
+    EXPECT_DOUBLE_EQ(cos(theta), R(0,0));
+    EXPECT_DOUBLE_EQ(-sin(theta), R(0,1));
+    EXPECT_DOUBLE_EQ(0, R(0,2));
+    
+    EXPECT_DOUBLE_EQ(sin(theta)*cos(alpha), R(1,0));
+    EXPECT_DOUBLE_EQ(cos(theta)*cos(alpha), R(1,1));
+    EXPECT_DOUBLE_EQ(-sin(alpha), R(1,2));
+    
+    EXPECT_DOUBLE_EQ(sin(theta)*sin(alpha), R(2,0));
+    EXPECT_DOUBLE_EQ(cos(theta)*sin(alpha), R(2,1));
+    EXPECT_DOUBLE_EQ(cos(alpha), R(2,2));
+    
+    EXPECT_DOUBLE_EQ(r, T(0));
+    EXPECT_DOUBLE_EQ(-d * sin(alpha), T(1));
+    EXPECT_DOUBLE_EQ(d * cos(alpha), T(2));
+}
+
+
+//
 // SetFreeValue/GetFreeValue
 //
 TEST(CRFrameDh, GetFreeValue){
