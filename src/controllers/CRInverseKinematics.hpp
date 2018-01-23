@@ -130,7 +130,7 @@ class CRInverseKinematics {
 public:
     
     //! Class constructor
-    CRInverseKinematics(CRManipulator* i_robot,
+    CRInverseKinematics(const CRManipulator& i_robot,
                         unsigned int i_toolIndex,
                         CREulerMode i_eulerMode);
     
@@ -139,10 +139,10 @@ public:
 public:
     
     //! Set the robot to be used
-    void setRobot(CRManipulator* i_robot) {this->m_robot = i_robot;}
+    void setRobot(const CRManipulator& i_robot) {this->m_robot = i_robot;}
     
     //! Get the robot being used
-    CRManipulator* getRobot(void) {return m_robot;}
+    CRManipulator getRobot(void) {return m_robot;}
     
     //! Set robot tool index to use to compute the IK.  Note that a tool must be specified in the robot.
     void setToolIndex(unsigned int i_toolIndex) {this->m_toolIndex = i_toolIndex;}
@@ -221,7 +221,7 @@ public:
 protected:
     
     //! Manipulator object to solve
-    CRManipulator* m_robot;
+    CRManipulator m_robot;
     
     //! Index of the manipulator tool for which to solve the IK
     unsigned int m_toolIndex;

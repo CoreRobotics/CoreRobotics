@@ -77,7 +77,7 @@ int main(void) {
 	int toolIndex = MyRobot->addTool(linkIndex, Tool);
 
 	// Initialize a Hard Limits solver
-	CRHardLimits solver = CRHardLimits(MyRobot, toolIndex, convention, true);
+	CRHardLimits solver = CRHardLimits(*MyRobot, toolIndex, convention, true);
 
 	// Change IK solver maximum iterations
 	solver.getIKSolver()->setMaxIter(20);

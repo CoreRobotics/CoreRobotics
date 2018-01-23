@@ -134,11 +134,11 @@ class CRHardLimits {
 public:
 
 	//! Class constructor
-	CRHardLimits(CRManipulator* i_robot,
+	CRHardLimits(const CRManipulator& i_robot,
 	             unsigned int i_toolIndex,
 	             CREulerMode i_eulerMode);
 
-	CRHardLimits(CRManipulator* i_robot,
+	CRHardLimits(const CRManipulator& i_robot,
 	             unsigned int i_toolIndex,
 	             CREulerMode i_eulerMode,
 	             bool i_useNullSpace);
@@ -246,7 +246,7 @@ public:
 protected:
 
 	//! The CRManipulator object
-	CRManipulator* m_robot;
+	CRManipulator m_robot;
 
 	//! The IK Solver to use
 	CRInverseKinematics* m_IKSolver;

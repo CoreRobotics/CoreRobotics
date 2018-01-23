@@ -106,7 +106,7 @@ int main(void) {
 	// Solve several inverse kinematics problems
     
     // Set up an inverse kinematics object and attach the robot
-    CRInverseKinematics ikSolver = CRInverseKinematics(MyRobot,
+    CRInverseKinematics ikSolver = CRInverseKinematics(*MyRobot,
                                                        toolIndex,
                                                        convention);
     

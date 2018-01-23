@@ -62,7 +62,7 @@ namespace CoreRobotics {
  \param[in]     i_eulerMode     the Euler convention of the pose vector
  */
 //---------------------------------------------------------------------
-CRInverseKinematics::CRInverseKinematics(CRManipulator* i_robot,
+CRInverseKinematics::CRInverseKinematics(const CRManipulator& i_robot,
                                          unsigned int i_toolIndex,
                                          CREulerMode i_eulerMode)
 {
@@ -140,10 +140,10 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
     q = i_q0;
     
     // set the initial robot configuration
-    this->m_robot->setConfiguration(q);
+    this->m_robot.setConfiguration(q);
     
     // return the pose of the robot for the initial configuration
-    pose = this->m_robot->getToolPose(this->m_toolIndex, this->m_eulerMode);
+    pose = this->m_robot.getToolPose(this->m_toolIndex, this->m_eulerMode);
     
     // compute the error by comparing the pose
     error = i_setPoint-pose;
@@ -154,7 +154,7 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
            (result != CR_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
-        J = this->m_robot->jacobian(this->m_toolIndex,
+        J = this->m_robot.jacobian(this->m_toolIndex,
                                     this->m_eulerMode);
         
         // compute the generalized inverse jacobian
@@ -164,8 +164,8 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
         q += this->m_stepSize * Jinv * error;
         
         // Now compute the error for the new config
-        this->m_robot->setConfiguration(q);
-        pose = this->m_robot->getToolPose(this->m_toolIndex, this->m_eulerMode);
+        this->m_robot.setConfiguration(q);
+        pose = this->m_robot.getToolPose(this->m_toolIndex, this->m_eulerMode);
         error = i_setPoint-pose;
         
         // update the iterator
@@ -174,7 +174,7 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
     }
     
 	// Put the robot back in its original configuration
-	this->m_robot->setConfiguration(i_q0);
+	this->m_robot.setConfiguration(i_q0);
 
 	// output the solution
 	o_qSolved = q;
@@ -222,10 +222,10 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     q = i_q0;
     
     // set the initial robot configuration
-    this->m_robot->setConfiguration(q);
+    this->m_robot.setConfiguration(q);
     
     // return the pose of the robot for the initial configuration
-    pose = this->m_robot->getToolPose(this->m_toolIndex,
+    pose = this->m_robot.getToolPose(this->m_toolIndex,
                                       this->m_eulerMode,
                                       i_poseElements);
     
@@ -239,7 +239,7 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
            (result != CR_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
-        J = this->m_robot->jacobian(this->m_toolIndex,
+        J = this->m_robot.jacobian(this->m_toolIndex,
                                     this->m_eulerMode,
                                     i_poseElements);
         
@@ -250,8 +250,8 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
         q += this->m_stepSize * Jinv * error;
         
         // Now compute the error for the new config
-        this->m_robot->setConfiguration(q);
-        pose = this->m_robot->getToolPose(this->m_toolIndex,
+        this->m_robot.setConfiguration(q);
+        pose = this->m_robot.getToolPose(this->m_toolIndex,
                                           this->m_eulerMode,
                                           i_poseElements);
         error = i_setPoint-pose;
@@ -262,7 +262,7 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     }
     
     // Put the robot back in its original configuration
-    this->m_robot->setConfiguration(i_q0);
+    this->m_robot.setConfiguration(i_q0);
     
     // output the solution
     o_qSolved = q;
@@ -313,10 +313,10 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     q = i_q0;
     
     // set the initial robot configuration
-    this->m_robot->setConfiguration(q);
+    this->m_robot.setConfiguration(q);
     
     // return the pose of the robot for the initial configuration
-    pose = this->m_robot->getToolPose(this->m_toolIndex,
+    pose = this->m_robot.getToolPose(this->m_toolIndex,
                                       this->m_eulerMode,
                                       i_poseElements);
     
@@ -330,7 +330,7 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
            (result != CR_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
-        J = this->m_robot->jacobian(this->m_toolIndex,
+        J = this->m_robot.jacobian(this->m_toolIndex,
                                     this->m_eulerMode,
                                     i_poseElements);
 
@@ -344,8 +344,8 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
         q += this->m_stepSize * Jinv * error;
         
         // Now compute the error for the new config
-        this->m_robot->setConfiguration(q);
-        pose = this->m_robot->getToolPose(this->m_toolIndex,
+        this->m_robot.setConfiguration(q);
+        pose = this->m_robot.getToolPose(this->m_toolIndex,
                                           this->m_eulerMode,
                                           i_poseElements);
         error = i_setPoint-pose;
@@ -356,7 +356,7 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     }
     
     // Put the robot back in its original configuration
-    this->m_robot->setConfiguration(i_q0);
+    this->m_robot.setConfiguration(i_q0);
     
     // output the solution
     o_qSolved = q;

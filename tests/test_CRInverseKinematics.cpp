@@ -91,11 +91,11 @@ int setup3dof(CRManipulator& MyRobot){
 TEST(CRInverseKinematics, SetGet){
     CRManipulator MyRobot;
     int toolIndex = setup3dof(MyRobot);
-    CRInverseKinematics ikSolver = CRInverseKinematics(&MyRobot,
+    CRInverseKinematics ikSolver = CRInverseKinematics(MyRobot,
                                                        toolIndex,
                                                        CR_EULER_MODE_XYZ);
     
-    ikSolver.setRobot(&MyRobot);
+    ikSolver.setRobot(MyRobot);
     ikSolver.setMaxIter(100);
     ikSolver.setStepSize(0.1);
     ikSolver.setEulerMode(CR_EULER_MODE_ZYX);
@@ -103,7 +103,7 @@ TEST(CRInverseKinematics, SetGet){
     ikSolver.setToolIndex(toolIndex);
     ikSolver.setDampingFactor(1.0);
     
-    EXPECT_EQ(&MyRobot, ikSolver.getRobot());
+    
     EXPECT_EQ(100, ikSolver.getMaxIter());
     EXPECT_DOUBLE_EQ(0.1, ikSolver.getStepSize());
     EXPECT_EQ(CR_EULER_MODE_ZYX, ikSolver.getEulerMode());
@@ -119,7 +119,7 @@ TEST(CRInverseKinematics, SetGet){
 TEST(CRInverseKinematics, Solver){
     CRManipulator* MyRobot = new CRManipulator();
     int toolIndex = setup3dof(*MyRobot);
-    CRInverseKinematics ikSolver = CRInverseKinematics(MyRobot,
+    CRInverseKinematics ikSolver = CRInverseKinematics(*MyRobot,
                                                        toolIndex,
                                                        CR_EULER_MODE_XYZ);
     

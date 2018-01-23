@@ -137,7 +137,7 @@ int main(void) {
 	int toolIndex = MyRobot->addTool(linkIndex6, Tool);
 
 	// Initialize the solver
-	CRNullSpace nullSpaceSolver = CRNullSpace(MyRobot, toolIndex, CR_EULER_MODE_XYZ);
+	CRNullSpace nullSpaceSolver = CRNullSpace(*MyRobot, toolIndex, CR_EULER_MODE_XYZ);
 
 	// Set the robot orientation
 	Eigen::VectorXd InitJoints(6);
