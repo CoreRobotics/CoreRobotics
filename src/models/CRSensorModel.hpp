@@ -81,7 +81,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRSensorModel class.
- \include test_CRSensorModel.cpp
+ \include example_CRSensorModel.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

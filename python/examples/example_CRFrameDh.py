@@ -43,75 +43,21 @@
 # Import the future print function for Python 2/3 compatability
 from __future__ import print_function
 
-# This script is an example of how to use the built in python libraries
-# to emulate the functionality of CRCore
-
-# Use the built in time and threading libraries
-import time
-from threading import Thread
+# Import CoreRobotics and Numpy
 from CoreRobotics import *
 import numpy as np
-
-memoryName = "MyMemory"
+import math
 
 print("**********************")
-print("Running the test_CRCore")
+print("Demonstration of CRFrameDh")
 
-MyClock = time.time()
-time.sleep(0.1)
-t = time.time() - MyClock
+# Create a new robot
+MyRobot = CRManipulator()
 
-print("t =", t)
+# Create a Dh frame
+F = CRFrameDh()
 
-# Open a shared memory object
-mem = CRSharedMemory(memoryName, CR_MANAGER_SERVER)
+# Set the parameters of the Dh frames
+F.setParameters(1.0, math.pi/2.0, 1.0, 0.0)
 
-# Create a vector of data
-v = np.array([[0.0, 0.8]]).T
-
-# Add a signal
-mem.addSignal("signal_1", v)
-
-# Callback for the first thread
-def callback1():
-	# Open some shared memory as client
-	mem = CRSharedMemory(memoryName, CR_MANAGER_CLIENT)
-
-	dt = 0.1
-	for i in range(10):
-		c = time.time()
-		v = mem.get("signal_1")
-		print("Thread 1: i = {}, signal = {}, {}".format(i + 1, v[0,0], v[1,0]))
-		t = time.time() - c
-		time.sleep(max(dt - t, 0))
-
-# Callback for the second thread
-def callback2():
-	# Open some shared memory as client
-	mem = CRSharedMemory(memoryName, CR_MANAGER_CLIENT)
-	# Create a vector of data
-	v = np.array([[0.1, 0.4]]).T
-
-	dt = 0.25
-	for i in range(4):
-		c = time.time()
-		v = i * v + v
-		mem.set("signal_1", v)
-		print("Thread 2: i = {}, signal = {}, {}".format(i + 1, v[0,0], v[1,0]))
-		t = time.time() - c
-		time.sleep(max(dt - t, 0))
-
-# Create the threads
-myThread1 = Thread(target = callback1)
-myThread2 = Thread(target = callback2)
-
-# Start the threads
-myThread1.start()
-myThread2.start()
-
-# Wait for the threads to complete
-while myThread1.isAlive() and myThread2.isAlive():
-	pass
-
-# Remove the signal
-mem.removeSignal("Signal_1")
+print(F.getPose(CR_EULER_MODE_XYZ))

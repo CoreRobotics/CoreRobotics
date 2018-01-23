@@ -59,7 +59,7 @@ namespace CoreRobotics {
 */
 //---------------------------------------------------------------------
 /*!
-\class CRMath
+\class CRIntegration
 \ingroup math
 
 \brief This class implements numerical integration methods.
@@ -68,12 +68,12 @@ namespace CoreRobotics {
 ## Description
 This class implements numerical integration methods.
  
-- CRMath::forwardEulerStep performs forward Euler integration.
-- CRMath::rungeKuttaStep performs 4th order Runga-Kutta integration.
+- CRIntegration::forwardEulerStep performs forward Euler integration.
+- CRIntegration::rungeKuttaStep performs 4th order Runga-Kutta integration.
  
 ## Example
 This example shows usage of the math functions.
-\include test_CRMath.cpp
+\include example_CRMath.cpp
  
 ## References
 [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,

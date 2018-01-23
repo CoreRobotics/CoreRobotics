@@ -91,7 +91,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRSensorProbabilistic class.
- \include test_CRSensorProbabilistic.cpp
+ \include example_CRSensorProbabilistic.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

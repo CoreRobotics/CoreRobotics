@@ -45,7 +45,7 @@ import CoreRobotics.*
 memoryName = 'MyMemory';
 
 disp('*************************************');
-disp('Running the test_CRCore');
+disp('Demonstration of CRCore');
 
 % Start a timer
 tic;

@@ -61,7 +61,7 @@ set(CMAKE_BUILD_TYPE Release)
 # Define the project name and other CoreRobotics parameters
 set(PROJECT_NAME "CoreRobotics")
 set(LIB_TARGET_NAME ${PROJECT_NAME})
-set(UTIL_TARGET_NAME "TestModules")
+set(TEST_TARGET_NAME "TestModules")
 
 # project title
 project( ${PROJECT_NAME} )
@@ -175,11 +175,16 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 	# =====================================================================
 	# 3. Setup the tests target
 	# =====================================================================
+
 	# Source files
-	file(GLOB UTILITIES
-		utils/*.cpp
-		utils/*.hpp
+	file(GLOB TESTS
+		tests/*.cpp
 	)
+
+	# set the path to the CoreRobotics static library
+    set(COREROBOTICS_LIB
+        ${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
+    )
 
     if(NOT GTEST_FOUND)
         message(STATUS "GTEST not found, not building the test suite")
@@ -190,26 +195,38 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
         # add the gtest includes
         include_directories(${GTEST_INCLUDE_DIRS})
 
-        # Add an executable for the utilities
-        add_executable( ${UTIL_TARGET_NAME} ${UTILITIES})
+        # Add an executable for the tests
+        add_executable( ${TEST_TARGET_NAME} ${TESTS})
 
         # Set the output directory
-        set_target_properties( ${UTIL_TARGET_NAME} PROPERTIES
-            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
+        set_target_properties( ${TEST_TARGET_NAME} PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/bin
         )
 
         # Add the library as a build dependency
-        add_dependencies(${UTIL_TARGET_NAME} ${LIB_TARGET_NAME})
-
-        # Set libraries to link
-        set(UTIL_LINK_FILES
-            ${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
-        )
+        add_dependencies(${TEST_TARGET_NAME} ${LIB_TARGET_NAME})
 
         # Link the library binary
-        target_link_libraries( ${UTIL_TARGET_NAME} ${UTIL_LINK_FILES} ${LINK_FLAGS} ${GTEST_LIBRARIES})
+        target_link_libraries( ${TEST_TARGET_NAME} ${COREROBOTICS_LIB} ${LINK_FLAGS} ${GTEST_LIBRARIES})
 
     endif()
+
+	# Example scripts
+	file(GLOB EXAMPLES
+		examples/*.cpp
+	)
+
+	# Compile each example
+	foreach(EXAMPLE ${EXAMPLES})
+		get_filename_component(EXAMPLE_TARGET ${EXAMPLE} NAME_WE)
+		message(${EXAMPLE_TARGET})
+		add_executable(${EXAMPLE_TARGET} ${EXAMPLE})
+		set_target_properties( ${EXAMPLE_TARGET} PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/examples/bin
+        )
+		add_dependencies(${EXAMPLE_TARGET} ${LIB_TARGET_NAME})
+		target_link_libraries(${EXAMPLE_TARGET} ${COREROBOTICS_LIB} ${LINK_FLAGS})
+	endforeach()
 
 endif()
 
@@ -323,11 +340,11 @@ if(python OR all)
 			LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/python/lib
 			LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/python/lib)
 
-		# Copy the contents of the Python lib folder to the Python util folder
+		# Copy the contents of the Python lib folder to the Python examples folder
 		add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy_directory
 				${CMAKE_SOURCE_DIR}/python/lib
-				${CMAKE_SOURCE_DIR}/python/util)
+				${CMAKE_SOURCE_DIR}/python/examples)
 	endif()
 endif()
 
@@ -454,10 +471,10 @@ if(matlab OR all)
 				${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:${Matlab_PROJECT_NAME}>
 				${CMAKE_SOURCE_DIR}/matlab/lib/${PROJECT_NAME}MEX.${Matlab_MEX_EXTENSION})
 
-		# Copy the lib folder to the util folder
+		# Copy the lib folder to the examples folder
 		add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy_directory
 				${CMAKE_SOURCE_DIR}/matlab/lib
-				${CMAKE_SOURCE_DIR}/matlab/util)
+				${CMAKE_SOURCE_DIR}/matlab/examples)
 	endif()
 endif()

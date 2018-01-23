@@ -101,7 +101,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRNullSpace class.
- \include test_CRNullSpace.cpp
+ \include example_CRNullSpace.cpp
  
  ## References
  [3] B. Siciliano and O. Khatib, "Springer Handbook of Robotics",
