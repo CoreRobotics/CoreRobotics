@@ -70,12 +70,6 @@ int main(void){
     CRNoiseUniform* uniform = new CRNoiseUniform(a, b);
     mixModel.add(uniform, 0.6);
     
-    // define a point mass distribution & add it to the mixture model
-    Eigen::VectorXd c(1);
-    c(0) = 8;
-    CRNoiseDirac* dirac = new CRNoiseDirac(c, 1);
-    mixModel.add(dirac, 0.2);
-    
     
     // initialize parameters for experiments
     const int nrolls=10000;  // number of experiments
