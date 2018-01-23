@@ -73,7 +73,7 @@ int main(void){
     // define a point mass distribution & add it to the mixture model
     Eigen::VectorXd c(1);
     c(0) = 8;
-    CRNoiseDirac* dirac = new CRNoiseDirac(c);
+    CRNoiseDirac* dirac = new CRNoiseDirac(c, 1);
     mixModel.add(dirac, 0.2);
     
     
