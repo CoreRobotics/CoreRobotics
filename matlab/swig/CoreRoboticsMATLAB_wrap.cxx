@@ -11590,10 +11590,10 @@ fail:
 
 
 int _wrap_new_CRInverseKinematics (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::CRManipulator *arg1 = (CoreRobotics::CRManipulator *) 0 ;
+  CoreRobotics::CRManipulator *arg1 = 0 ;
   unsigned int arg2 ;
   CoreRobotics::CREulerMode arg3 ;
-  void *argp1 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
   unsigned int val2 ;
   int ecode2 = 0 ;
@@ -11605,9 +11605,12 @@ int _wrap_new_CRInverseKinematics (int resc, mxArray *resv[], int argc, mxArray 
   if (!SWIG_check_num_args("new_CRInverseKinematics",argc,3,3,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_CoreRobotics__CRManipulator,  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CRInverseKinematics" "', argument " "1"" of type '" "CoreRobotics::CRManipulator *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CRInverseKinematics" "', argument " "1"" of type '" "CoreRobotics::CRManipulator const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CRInverseKinematics" "', argument " "1"" of type '" "CoreRobotics::CRManipulator const &""'"); 
   }
   arg1 = reinterpret_cast< CoreRobotics::CRManipulator * >(argp1);
   ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
@@ -11620,7 +11623,7 @@ int _wrap_new_CRInverseKinematics (int resc, mxArray *resv[], int argc, mxArray 
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CRInverseKinematics" "', argument " "3"" of type '" "CoreRobotics::CREulerMode""'");
   } 
   arg3 = static_cast< CoreRobotics::CREulerMode >(val3);
-  result = (CoreRobotics::CRInverseKinematics *)new CoreRobotics::CRInverseKinematics(arg1,arg2,arg3);
+  result = (CoreRobotics::CRInverseKinematics *)new CoreRobotics::CRInverseKinematics((CoreRobotics::CRManipulator const &)*arg1,arg2,arg3);
   _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRInverseKinematics, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -11631,10 +11634,10 @@ fail:
 
 int _wrap_CRInverseKinematics_setRobot (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   CoreRobotics::CRInverseKinematics *arg1 = (CoreRobotics::CRInverseKinematics *) 0 ;
-  CoreRobotics::CRManipulator *arg2 = (CoreRobotics::CRManipulator *) 0 ;
+  CoreRobotics::CRManipulator *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
+  void *argp2 ;
   int res2 = 0 ;
   mxArray * _out;
   
@@ -11646,12 +11649,15 @@ int _wrap_CRInverseKinematics_setRobot (int resc, mxArray *resv[], int argc, mxA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRInverseKinematics_setRobot" "', argument " "1"" of type '" "CoreRobotics::CRInverseKinematics *""'"); 
   }
   arg1 = reinterpret_cast< CoreRobotics::CRInverseKinematics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_CoreRobotics__CRManipulator,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRInverseKinematics_setRobot" "', argument " "2"" of type '" "CoreRobotics::CRManipulator *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRInverseKinematics_setRobot" "', argument " "2"" of type '" "CoreRobotics::CRManipulator const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRInverseKinematics_setRobot" "', argument " "2"" of type '" "CoreRobotics::CRManipulator const &""'"); 
   }
   arg2 = reinterpret_cast< CoreRobotics::CRManipulator * >(argp2);
-  (arg1)->setRobot(arg2);
+  (arg1)->setRobot((CoreRobotics::CRManipulator const &)*arg2);
   _out = (mxArray*)0;
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -11665,7 +11671,7 @@ int _wrap_CRInverseKinematics_getRobot (int resc, mxArray *resv[], int argc, mxA
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
-  CoreRobotics::CRManipulator *result = 0 ;
+  CoreRobotics::CRManipulator result;
   
   if (!SWIG_check_num_args("CRInverseKinematics_getRobot",argc,1,1,0)) {
     SWIG_fail;
@@ -11675,8 +11681,8 @@ int _wrap_CRInverseKinematics_getRobot (int resc, mxArray *resv[], int argc, mxA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRInverseKinematics_getRobot" "', argument " "1"" of type '" "CoreRobotics::CRInverseKinematics *""'"); 
   }
   arg1 = reinterpret_cast< CoreRobotics::CRInverseKinematics * >(argp1);
-  result = (CoreRobotics::CRManipulator *)(arg1)->getRobot();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  result = (arg1)->getRobot();
+  _out = SWIG_NewPointerObj((new CoreRobotics::CRManipulator(static_cast< const CoreRobotics::CRManipulator& >(result))), SWIGTYPE_p_CoreRobotics__CRManipulator, SWIG_POINTER_OWN |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -12543,10 +12549,10 @@ fail:
 
 
 int _wrap_new_CRNullSpace (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::CRManipulator *arg1 = (CoreRobotics::CRManipulator *) 0 ;
+  CoreRobotics::CRManipulator *arg1 = 0 ;
   unsigned int arg2 ;
   CoreRobotics::CREulerMode arg3 ;
-  void *argp1 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
   unsigned int val2 ;
   int ecode2 = 0 ;
@@ -12558,9 +12564,12 @@ int _wrap_new_CRNullSpace (int resc, mxArray *resv[], int argc, mxArray *argv[])
   if (!SWIG_check_num_args("new_CRNullSpace",argc,3,3,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_CoreRobotics__CRManipulator,  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CRNullSpace" "', argument " "1"" of type '" "CoreRobotics::CRManipulator *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CRNullSpace" "', argument " "1"" of type '" "CoreRobotics::CRManipulator const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CRNullSpace" "', argument " "1"" of type '" "CoreRobotics::CRManipulator const &""'"); 
   }
   arg1 = reinterpret_cast< CoreRobotics::CRManipulator * >(argp1);
   ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
@@ -12573,7 +12582,7 @@ int _wrap_new_CRNullSpace (int resc, mxArray *resv[], int argc, mxArray *argv[])
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CRNullSpace" "', argument " "3"" of type '" "CoreRobotics::CREulerMode""'");
   } 
   arg3 = static_cast< CoreRobotics::CREulerMode >(val3);
-  result = (CoreRobotics::CRNullSpace *)new CoreRobotics::CRNullSpace(arg1,arg2,arg3);
+  result = (CoreRobotics::CRNullSpace *)new CoreRobotics::CRNullSpace((CoreRobotics::CRManipulator const &)*arg1,arg2,arg3);
   _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRNullSpace, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -12584,10 +12593,10 @@ fail:
 
 int _wrap_CRNullSpace_setRobot (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   CoreRobotics::CRNullSpace *arg1 = (CoreRobotics::CRNullSpace *) 0 ;
-  CoreRobotics::CRManipulator *arg2 = (CoreRobotics::CRManipulator *) 0 ;
+  CoreRobotics::CRManipulator *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
+  void *argp2 ;
   int res2 = 0 ;
   mxArray * _out;
   
@@ -12599,12 +12608,15 @@ int _wrap_CRNullSpace_setRobot (int resc, mxArray *resv[], int argc, mxArray *ar
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNullSpace_setRobot" "', argument " "1"" of type '" "CoreRobotics::CRNullSpace *""'"); 
   }
   arg1 = reinterpret_cast< CoreRobotics::CRNullSpace * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_CoreRobotics__CRManipulator,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRNullSpace_setRobot" "', argument " "2"" of type '" "CoreRobotics::CRManipulator *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRNullSpace_setRobot" "', argument " "2"" of type '" "CoreRobotics::CRManipulator const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRNullSpace_setRobot" "', argument " "2"" of type '" "CoreRobotics::CRManipulator const &""'"); 
   }
   arg2 = reinterpret_cast< CoreRobotics::CRManipulator * >(argp2);
-  (arg1)->setRobot(arg2);
+  (arg1)->setRobot((CoreRobotics::CRManipulator const &)*arg2);
   _out = (mxArray*)0;
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -13325,10 +13337,10 @@ fail:
 
 
 int _wrap_new_CRHardLimits__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::CRManipulator *arg1 = (CoreRobotics::CRManipulator *) 0 ;
+  CoreRobotics::CRManipulator *arg1 = 0 ;
   unsigned int arg2 ;
   CoreRobotics::CREulerMode arg3 ;
-  void *argp1 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
   unsigned int val2 ;
   int ecode2 = 0 ;
@@ -13340,9 +13352,12 @@ int _wrap_new_CRHardLimits__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray
   if (!SWIG_check_num_args("new_CRHardLimits",argc,3,3,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_CoreRobotics__CRManipulator,  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CRHardLimits" "', argument " "1"" of type '" "CoreRobotics::CRManipulator *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CRHardLimits" "', argument " "1"" of type '" "CoreRobotics::CRManipulator const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CRHardLimits" "', argument " "1"" of type '" "CoreRobotics::CRManipulator const &""'"); 
   }
   arg1 = reinterpret_cast< CoreRobotics::CRManipulator * >(argp1);
   ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
@@ -13355,7 +13370,7 @@ int _wrap_new_CRHardLimits__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_CRHardLimits" "', argument " "3"" of type '" "CoreRobotics::CREulerMode""'");
   } 
   arg3 = static_cast< CoreRobotics::CREulerMode >(val3);
-  result = (CoreRobotics::CRHardLimits *)new CoreRobotics::CRHardLimits(arg1,arg2,arg3);
+  result = (CoreRobotics::CRHardLimits *)new CoreRobotics::CRHardLimits((CoreRobotics::CRManipulator const &)*arg1,arg2,arg3);
   _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRHardLimits, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -13365,11 +13380,11 @@ fail:
 
 
 int _wrap_new_CRHardLimits__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::CRManipulator *arg1 = (CoreRobotics::CRManipulator *) 0 ;
+  CoreRobotics::CRManipulator *arg1 = 0 ;
   unsigned int arg2 ;
   CoreRobotics::CREulerMode arg3 ;
   bool arg4 ;
-  void *argp1 = 0 ;
+  void *argp1 ;
   int res1 = 0 ;
   unsigned int val2 ;
   int ecode2 = 0 ;
@@ -13383,9 +13398,12 @@ int _wrap_new_CRHardLimits__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray
   if (!SWIG_check_num_args("new_CRHardLimits",argc,4,4,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRManipulator, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_CoreRobotics__CRManipulator,  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CRHardLimits" "', argument " "1"" of type '" "CoreRobotics::CRManipulator *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CRHardLimits" "', argument " "1"" of type '" "CoreRobotics::CRManipulator const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CRHardLimits" "', argument " "1"" of type '" "CoreRobotics::CRManipulator const &""'"); 
   }
   arg1 = reinterpret_cast< CoreRobotics::CRManipulator * >(argp1);
   ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
@@ -13403,7 +13421,7 @@ int _wrap_new_CRHardLimits__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_CRHardLimits" "', argument " "4"" of type '" "bool""'");
   } 
   arg4 = static_cast< bool >(val4);
-  result = (CoreRobotics::CRHardLimits *)new CoreRobotics::CRHardLimits(arg1,arg2,arg3,arg4);
+  result = (CoreRobotics::CRHardLimits *)new CoreRobotics::CRHardLimits((CoreRobotics::CRManipulator const &)*arg1,arg2,arg3,arg4);
   _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRHardLimits, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -13464,8 +13482,8 @@ int _wrap_new_CRHardLimits (int resc, mxArray *resv[], int argc, mxArray *argv[]
   
   SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'new_CRHardLimits'."
     "  Possible C/C++ prototypes are:\n"
-    "    CoreRobotics::CRHardLimits::CRHardLimits(CoreRobotics::CRManipulator *,unsigned int,CoreRobotics::CREulerMode)\n"
-    "    CoreRobotics::CRHardLimits::CRHardLimits(CoreRobotics::CRManipulator *,unsigned int,CoreRobotics::CREulerMode,bool)\n");
+    "    CoreRobotics::CRHardLimits::CRHardLimits(CoreRobotics::CRManipulator const &,unsigned int,CoreRobotics::CREulerMode)\n"
+    "    CoreRobotics::CRHardLimits::CRHardLimits(CoreRobotics::CRManipulator const &,unsigned int,CoreRobotics::CREulerMode,bool)\n");
   return 1;
 }
 
