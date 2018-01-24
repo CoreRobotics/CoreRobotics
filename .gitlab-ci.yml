@@ -43,7 +43,7 @@ build-cpp:
   dependencies: []
   artifacts:
     paths:
-     - $CI_PROJECT_DIR/tests/bin/*
+     - $CI_PROJECT_DIR/tests/bin/TestModules
      - $CI_PROJECT_DIR/examples/bin/*
     expire_in: 1 week
 
@@ -108,9 +108,7 @@ build-python3-noswig:
 test-cpp:
   stage: test
   script:
-   - for file in $CI_PROJECT_DIR/tests/bin/*; do
-   - $file
-   - done
+   - $CI_PROJECT_DIR/tests/bin/TestModules
   dependencies:
    - build-cpp
 

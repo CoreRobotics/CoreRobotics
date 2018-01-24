@@ -76,6 +76,7 @@ project( ${PROJECT_NAME} )
 set(EIGEN_VERSION 3.3.3)
 find_package (Eigen3 ${EIGEN_VERSION})
 find_package (Boost 1.48)
+find_package (GTest)
 
 if(NOT Boost_INCLUDE_DIR)
     message(FATAL_ERROR "Boost_INCLUDE_DIR not found - please define the path to boost")
