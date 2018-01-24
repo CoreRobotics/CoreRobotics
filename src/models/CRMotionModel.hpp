@@ -92,7 +92,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRMotionModel class.
- \include test_CRMotionModel.cpp
+ \include example_CRMotionModel.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

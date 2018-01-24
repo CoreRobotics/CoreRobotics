@@ -83,7 +83,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRSensorLinear class.
- \include test_CRSensorLinear.cpp
+ \include example_CRSensorLinear.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

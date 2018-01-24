@@ -87,7 +87,7 @@ namespace CoreRobotics {
  ## Example
  This example demonstrates use of the CRNoiseModel class.
  
- \include test_CRNoiseModel.cpp
+ \include example_CRNoiseModel.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

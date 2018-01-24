@@ -72,7 +72,7 @@ double CRMinJointRotation = -std::numeric_limits<double>::max();
                                   nullspace solver should be created
  */
 //---------------------------------------------------------------------
-CRHardLimits::CRHardLimits(CRManipulator* i_robot,
+CRHardLimits::CRHardLimits(const CRManipulator& i_robot,
                            unsigned int i_toolIndex,
                            CREulerMode i_eulerMode,
                            bool i_useNullSpace) {
@@ -82,9 +82,9 @@ CRHardLimits::CRHardLimits(CRManipulator* i_robot,
 	if (this->m_useNullSpace) {
 		this->m_NullSpaceSolver = new CRNullSpace(this->m_robot, i_toolIndex, i_eulerMode);
 	}
-	this->m_upperLimits = Eigen::VectorXd::Constant(this->m_robot->getDegreesOfFreedom(),
+	this->m_upperLimits = Eigen::VectorXd::Constant(this->m_robot.getDegreesOfFreedom(),
 	                                                CRMaxJointRotation);
-	this->m_lowerLimits = Eigen::VectorXd::Constant(this->m_robot->getDegreesOfFreedom(),
+	this->m_lowerLimits = Eigen::VectorXd::Constant(this->m_robot.getDegreesOfFreedom(),
 	                                                CRMinJointRotation);
 	this->m_poseElements << 1, 1, 1, 1, 1, 1;
 }
@@ -104,15 +104,15 @@ CRHardLimits::CRHardLimits(CRManipulator* i_robot,
  \param[in]     i_eulerMode       the Euler convention of the pose vector
  */
 //---------------------------------------------------------------------
-CRHardLimits::CRHardLimits(CRManipulator* i_robot,
+CRHardLimits::CRHardLimits(const CRManipulator& i_robot,
                            unsigned int i_toolIndex,
                            CREulerMode i_eulerMode) {
 	this->m_robot = i_robot;
 	this->m_IKSolver = new CRInverseKinematics(this->m_robot, i_toolIndex, i_eulerMode);
 	this->m_useNullSpace = false;
-	this->m_upperLimits = Eigen::VectorXd::Constant(this->m_robot->getDegreesOfFreedom(),
+	this->m_upperLimits = Eigen::VectorXd::Constant(this->m_robot.getDegreesOfFreedom(),
                                                     CRMaxJointRotation);
-	this->m_lowerLimits = Eigen::VectorXd::Constant(this->m_robot->getDegreesOfFreedom(),
+	this->m_lowerLimits = Eigen::VectorXd::Constant(this->m_robot.getDegreesOfFreedom(),
 	                                                CRMinJointRotation);
 	this->m_poseElements << 1, 1, 1, 1, 1, 1;
 }
@@ -130,12 +130,12 @@ CRHardLimits::CRHardLimits(CRManipulator* i_robot,
 //---------------------------------------------------------------------
 CRResult CRHardLimits::solve(Eigen::VectorXd &o_qSolved) {
 	CRResult result = CR_RESULT_SUCCESS;
-	Eigen::MatrixXd W = Eigen::MatrixXd::Identity(this->m_robot->getDegreesOfFreedom(),
-                                                  this->m_robot->getDegreesOfFreedom());
-	Eigen::VectorXd q(this->m_robot->getDegreesOfFreedom());
-	Eigen::VectorXd qNull(this->m_robot->getDegreesOfFreedom());
-	Eigen::VectorXd qSolved(this->m_robot->getDegreesOfFreedom());
-	Eigen::MatrixXd limits(this->m_robot->getDegreesOfFreedom(), 2);
+	Eigen::MatrixXd W = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
+                                                  this->m_robot.getDegreesOfFreedom());
+	Eigen::VectorXd q(this->m_robot.getDegreesOfFreedom());
+	Eigen::VectorXd qNull(this->m_robot.getDegreesOfFreedom());
+	Eigen::VectorXd qSolved(this->m_robot.getDegreesOfFreedom());
+	Eigen::MatrixXd limits(this->m_robot.getDegreesOfFreedom(), 2);
 	Eigen::Index row_index, col_index;
 	limits << (this->m_q0 - this->m_upperLimits), (this->m_lowerLimits - this->m_q0);
 	if (0 < limits.maxCoeff()) {

@@ -42,6 +42,12 @@
 # CMAKE Flags and variables
 cmake_minimum_required(VERSION 3.0)
 
+# Set version
+set (MAJOR_VERSION 0)
+set (MINOR_VERSION 9)
+set (RELEASE_VERSION 1)
+set (PROJECT_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${RELEASE_VERSION})
+
 # Set CMAKE policy
 cmake_policy(SET CMP0054 NEW)
 
@@ -55,14 +61,14 @@ set(CMAKE_BUILD_TYPE Release)
 # Define the project name and other CoreRobotics parameters
 set(PROJECT_NAME "CoreRobotics")
 set(LIB_TARGET_NAME ${PROJECT_NAME})
-set(UTIL_TARGET_NAME "TestModules")
+set(TEST_TARGET_NAME "TestModules")
 
 # project title
 project( ${PROJECT_NAME} )
 
 # =====================================================================
 # 1. Setup the library target
-#
+# =====================================================================
 
 # Find the 3rd party libraries
 
@@ -70,6 +76,7 @@ project( ${PROJECT_NAME} )
 set(EIGEN_VERSION 3.3.3)
 find_package (Eigen3 ${EIGEN_VERSION})
 find_package (Boost 1.48)
+find_package (GTest)
 
 if(NOT Boost_INCLUDE_DIR)
     message(FATAL_ERROR "Boost_INCLUDE_DIR not found - please define the path to boost")
@@ -78,11 +85,11 @@ endif()
 if(NOT EIGEN3_INCLUDE_DIR)
     message(FATAL_ERROR "EIGEN3_INCLUDE_DIR not found - please define the path to eigen")
 else()
-    message(STATUS ${EIGEN3_INCLUDE_DIR})
+    message(STATUS "Eigen found at ${EIGEN3_INCLUDE_DIR}")
 endif()
 
 # Include headers
-include_directories(
+file(GLOB CR_INCLUDE_DIRS
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/core
     ${CMAKE_SOURCE_DIR}/src/math
@@ -92,40 +99,21 @@ include_directories(
     ${EIGEN3_INCLUDE_DIR}
     ${Boost_INCLUDE_DIR}
 )
+include_directories( ${CR_INCLUDE_DIRS} )
 
 # Header files
-file(GLOB HEADERS_CORE
-    src/core/*.hpp
-)
-file(GLOB HEADERS_MATH
-    src/math/*.hpp
-)
-file(GLOB HEADERS_MODELS
-    src/models/*.hpp
-)
-file(GLOB HEADERS_PHYSICS
-    src/physics/*.hpp
-)
-file(GLOB HEADERS_CONTROLLERS
-    src/controllers/*.hpp
-)
+file(GLOB HEADERS_CORE src/core/*.hpp )
+file(GLOB HEADERS_MATH src/math/*.hpp )
+file(GLOB HEADERS_MODELS src/models/*.hpp )
+file(GLOB HEADERS_PHYSICS src/physics/*.hpp )
+file(GLOB HEADERS_CONTROLLERS src/controllers/*.hpp )
 
 # Source files
-file(GLOB SOURCES_CORE
-    src/core/*.cpp
-)
-file(GLOB SOURCES_MATH
-    src/math/*.cpp
-)
-file(GLOB SOURCES_MODELS
-    src/models/*.cpp
-)
-file(GLOB SOURCES_PHYSICS
-    src/physics/*.cpp
-)
-file(GLOB SOURCES_CONTROLLERS
-    src/controllers/*.cpp
-)
+file(GLOB SOURCES_CORE src/core/*.cpp )
+file(GLOB SOURCES_MATH src/math/*.cpp )
+file(GLOB SOURCES_MODELS src/models/*.cpp )
+file(GLOB SOURCES_PHYSICS src/physics/*.cpp )
+file(GLOB SOURCES_CONTROLLERS src/controllers/*.cpp )
 
 # If building on linux add pthread and rt
 if(UNIX AND NOT APPLE) # This may be useful for apple too
@@ -143,10 +131,10 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 	add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
 	# Set the output directory
-	set_target_properties( ${LIB_TARGET_NAME} PROPERTIES 
-		LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-		ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-	)
+    set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
+        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    )
 
 	# Sort into a group structure
 	source_group( "include" FILES "src/CoreRobotics.hpp")
@@ -164,35 +152,82 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 	source_group( "src\\controllers" FILES ${SOURCES_CONTROLLERS})
 
 
+    # =====================================================================
+    # 2. Export the package configuration and version files
+    # =====================================================================
+    # export package for use from the build tree
+    export (TARGETS ${LIB_TARGET_NAME} FILE ${PROJECT_BINARY_DIR}/CoreRoboticsTargets.cmake)
+    export (PACKAGE ${LIB_TARGET_NAME})
+
+    # package definitions
+    set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
+    set (CONF_LIBRARIES    ${LIB_TARGET_NAME})
+    set (CONF_LIBRARY_DIRS ${CMAKE_SOURCE_DIR}/lib)
+    set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
+
+    # package configuration and version files
+    configure_file (CoreRoboticsConfig.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfig.cmake" @ONLY)
+    configure_file (CoreRoboticsConfigVersion.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY)
+
+
 	# =====================================================================
-	# 2. Setup the utility target
-	#
+	# 3. Setup the tests target
+	# =====================================================================
+
 	# Source files
-	file(GLOB UTILITIES
-		utils/*.cpp
-		utils/*.hpp
+	file(GLOB TESTS
+		tests/*.cpp
 	)
 
-	# Add an executable for the utilities
-	add_executable( ${UTIL_TARGET_NAME} ${UTILITIES} )
+	# set the path to the CoreRobotics static library
+    set(COREROBOTICS_LIB
+        ${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
+    )
 
-	# Set the output directory
-	set_target_properties( ${UTIL_TARGET_NAME} PROPERTIES
-		RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
+    if(NOT GTEST_FOUND)
+        message(STATUS "GTEST not found, not building the test suite")
+
+    else()
+        message(STATUS "GTEST found, building the test suite")
+
+        # add the gtest includes
+        include_directories(${GTEST_INCLUDE_DIRS})
+
+        # Add an executable for the tests
+        add_executable( ${TEST_TARGET_NAME} ${TESTS})
+
+        # Set the output directory
+        set_target_properties( ${TEST_TARGET_NAME} PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/bin
+        )
+
+        # Add the library as a build dependency
+        add_dependencies(${TEST_TARGET_NAME} ${LIB_TARGET_NAME})
+
+        # Link the library binary
+        target_link_libraries( ${TEST_TARGET_NAME} ${COREROBOTICS_LIB} ${LINK_FLAGS} ${GTEST_LIBRARIES})
+
+    endif()
+
+	# Example scripts
+	file(GLOB EXAMPLES
+		examples/*.cpp
 	)
 
-	# Add the library as a build dependency
-	add_dependencies(${UTIL_TARGET_NAME} ${LIB_TARGET_NAME})
-
-	# Set libraries to link
-	set(UTIL_LINK_FILES
-		${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
-	)
-
-	# Link the library binary
-	target_link_libraries( ${UTIL_TARGET_NAME} ${UTIL_LINK_FILES} ${LINK_FLAGS})
+	# Compile each example
+	foreach(EXAMPLE ${EXAMPLES})
+		get_filename_component(EXAMPLE_TARGET ${EXAMPLE} NAME_WE)
+		message(${EXAMPLE_TARGET})
+		add_executable(${EXAMPLE_TARGET} ${EXAMPLE})
+		set_target_properties( ${EXAMPLE_TARGET} PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/examples/bin
+        )
+		add_dependencies(${EXAMPLE_TARGET} ${LIB_TARGET_NAME})
+		target_link_libraries(${EXAMPLE_TARGET} ${COREROBOTICS_LIB} ${LINK_FLAGS})
+	endforeach()
 
 endif()
+
 
 # If "python" or "all" build the Python library
 if(python OR all)
@@ -303,11 +338,11 @@ if(python OR all)
 			LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/python/lib
 			LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/python/lib)
 
-		# Copy the contents of the Python lib folder to the Python util folder
+		# Copy the contents of the Python lib folder to the Python examples folder
 		add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy_directory
 				${CMAKE_SOURCE_DIR}/python/lib
-				${CMAKE_SOURCE_DIR}/python/util)
+				${CMAKE_SOURCE_DIR}/python/examples)
 	endif()
 endif()
 
@@ -434,10 +469,10 @@ if(matlab OR all)
 				${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:${Matlab_PROJECT_NAME}>
 				${CMAKE_SOURCE_DIR}/matlab/lib/${PROJECT_NAME}MEX.${Matlab_MEX_EXTENSION})
 
-		# Copy the lib folder to the util folder
+		# Copy the lib folder to the examples folder
 		add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy_directory
 				${CMAKE_SOURCE_DIR}/matlab/lib
-				${CMAKE_SOURCE_DIR}/matlab/util)
+				${CMAKE_SOURCE_DIR}/matlab/examples)
 	endif()
 endif()

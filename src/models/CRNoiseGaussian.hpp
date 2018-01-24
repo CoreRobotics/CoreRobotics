@@ -77,7 +77,7 @@ namespace CoreRobotics {
  ## Example
  This example demonstrates use of the CRNoiseGaussian class.
  
- \include test_CRNoiseGaussian.cpp
+ \include example_CRNoiseGaussian.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

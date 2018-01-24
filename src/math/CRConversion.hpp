@@ -59,7 +59,7 @@ namespace CoreRobotics {
 */
 //---------------------------------------------------------------------
 /*!
-\class CRMath
+\class CRConversion
 \ingroup math
 
 \brief This class implements math conversions.
@@ -68,13 +68,13 @@ namespace CoreRobotics {
 ## Description
 This class implements vmath conversions.
  
-- CRMath::deg2rad converts degress to radians
-- CRMath::rad2deg converts radians to degrees.
-- CRMath::wrapToPi wraps angles to +/- $\pi$ radians.
+- CRConversion::deg2rad converts degress to radians
+- CRConversion::rad2deg converts radians to degrees.
+- CRConversion::wrapToPi wraps angles to +/- \f$\pi\f$ radians.
  
 ## Example
 This example shows usage of the math functions.
-\include test_CRMath.cpp
+\include example_CRMath.cpp
  
 ## References
 [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,

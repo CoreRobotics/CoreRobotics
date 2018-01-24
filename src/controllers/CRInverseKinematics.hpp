@@ -109,7 +109,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRInverseKinematics class.
- \include test_CRInverseKinematics.cpp
+ \include example_CRInverseKinematics.cpp
  
  ## References
  [1] O. Khatib, Lecture Notes (CS327A): "Advanced Robotic Manipulation",
@@ -130,7 +130,7 @@ class CRInverseKinematics {
 public:
     
     //! Class constructor
-    CRInverseKinematics(CRManipulator* i_robot,
+    CRInverseKinematics(const CRManipulator& i_robot,
                         unsigned int i_toolIndex,
                         CREulerMode i_eulerMode);
     
@@ -139,10 +139,16 @@ public:
 public:
     
     //! Set the robot to be used
-    void setRobot(CRManipulator* i_robot) {this->m_robot = i_robot;}
+    void setRobot(const CRManipulator& i_robot) {this->m_robot = i_robot;}
+    
+    //! Get the robot being used
+    CRManipulator getRobot(void) {return m_robot;}
     
     //! Set robot tool index to use to compute the IK.  Note that a tool must be specified in the robot.
     void setToolIndex(unsigned int i_toolIndex) {this->m_toolIndex = i_toolIndex;}
+    
+    //! Get robot tool index
+    unsigned int getToolIndex(void) {return this->m_toolIndex;}
     
     //! Set the Euler angle convention of the IK solver.  This must match the
     //  Euler convention used to supply the set point in the solve() method.
@@ -155,7 +161,7 @@ public:
     void setTolerance(double i_tolerance) {this->m_tolerance = i_tolerance;}
     
     //! Get the algorithm convergence tolerance
-    double setTolerance(void) {return this->m_tolerance;}
+    double getTolerance(void) {return this->m_tolerance;}
     
     //! Set the maximum number of iterations the algorithm can run
     void setMaxIter(unsigned int i_maxIter) {this->m_maxIter = i_maxIter;}
@@ -215,7 +221,7 @@ public:
 protected:
     
     //! Manipulator object to solve
-    CRManipulator* m_robot;
+    CRManipulator m_robot;
     
     //! Index of the manipulator tool for which to solve the IK
     unsigned int m_toolIndex;

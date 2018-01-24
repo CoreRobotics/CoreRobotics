@@ -79,7 +79,7 @@ This class implements matrix and vector math.
  
 ## Example
 This example shows usage of the math functions.
-\include test_CRMath.cpp
+\include example_CRMath.cpp
  
 ## References
 [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,

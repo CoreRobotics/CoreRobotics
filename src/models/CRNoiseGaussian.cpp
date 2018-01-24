@@ -45,7 +45,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CRNoiseGaussian.hpp"
 #include "CRMatrix.hpp"
 #include <chrono>
-// #include <math.h>
 
 
 //=====================================================================

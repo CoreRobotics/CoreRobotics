@@ -101,7 +101,7 @@ namespace CoreRobotics {
  
  ## Example
  This example demonstrates use of the CRNullSpace class.
- \include test_CRNullSpace.cpp
+ \include example_CRNullSpace.cpp
  
  ## References
  [3] B. Siciliano and O. Khatib, "Springer Handbook of Robotics",
@@ -116,7 +116,7 @@ class CRNullSpace {
 public:
 
 	//! Class constructor
-	CRNullSpace(CRManipulator* i_robot,
+	CRNullSpace(const CRManipulator& i_robot,
                 unsigned int i_toolIndex,
                 CREulerMode i_eulerMode);
 
@@ -125,7 +125,7 @@ public:
 public:
 
 	//! Set the robot to be used
-	void setRobot(CRManipulator* i_robot) {this->m_robot = i_robot;}
+	void setRobot(const CRManipulator& i_robot) {this->m_robot = i_robot;}
 
 	//! Set robot tool index to use to compute the nullspace.  Note that a tool must be specified in the robot.
 	void setToolIndex(unsigned int i_toolIndex) {this->m_toolIndex = i_toolIndex;}
@@ -191,7 +191,7 @@ public:
 protected:
 
 	//! Manipulator object to solve
-	CRManipulator* m_robot;
+	CRManipulator m_robot;
 
 	//! Index of the manipulator tool for which to solve the IK
 	unsigned int m_toolIndex;

@@ -40,6 +40,71 @@
 //=====================================================================
 
 
+/*!
+\page matlab Matlab Wrapper
+
+A Matlab wrapper for a portion of the CoreRobotics library has been
+generated with SWIG. The CoreRobotics modules included in the wrapper
+are:
+
+* - CRClock
+* - CRTypes
+* - CRMath
+* - CRFrame
+* - CRFrameEuler
+* - CRFrameDh
+* - CRRigidBody
+* - CRManipulator
+* - CRNoiseModel
+* - CRNoiseGaussian
+* - CRNoiseUniform
+* - CRNoiseMixture
+* - CRSensorLinear
+* - CRInverseKinematics
+* - CRNullSpace
+* - CRHardLimits
+* - CRSharedMemory
+* - CRTrajectoryGenerator
+
+The Matlab wrappers can be built by running CMake with `-Dmatlab=true` to
+build the Matlab wrappers which are located at `matlab/lib`. To build all libraries
+(C++, Python, and Matlab) run `cmake ../ -Dall=true`. This command will automatically
+check if Python and Matlab are installed and build libraries accordingly. Two out of the
+three libraries can also be built by specifing which ones, as in the command
+`cmake ../ -Dmatlab=true -Dcpp=true` which will build C++ and Matlab libraries.
+
+Since these wrappers are built using SWIG, if SWIG with Matlab support (Not part of the
+SWIG master branch) is found on your system it will be used to generate the wrapper code.
+If this is not the case then CMake will use the SWIG wrapper files it has stored for this
+purpose. If SWIG is installed but it is desired to not use it the `noswig` flag can be set
+to prevent SWIG from being used.
+
+When building these wrappers on Windows car must be taken to use a compiler that is compatible with
+your version of Matlab. The page at https://www.mathworks.com/support/sysreq/previous_releases.html
+contains links to documents listing compatible compilers. The only free compiler supported appears
+to be the MinGW compiler. Once the correct version of this compiler is installed run the CMake command
+`cmake -G "MinGW Makefiles" ../ -Dmatlab=true` to build the Matlab wrappers, then use `mingw32-make`
+to build the wrappers.
+
+Examples of how to use the Matlab wrapper can be found in the examples provided
+in the `matlab/util` directory.
+
+\warning
+* - The CRMath module has had the Forward Euler and 4th order Runge-Kutta integrators
+removed for compatability.
+* - The following modules have not been tested:
+	* - CRMath
+	* - CRFrameDh
+	* - CRNoiseModel
+	* - CRNoiseGaussian
+	* - CRNoiseUniform
+	* - CRNoiseMixture
+	* - CRSensorLinear
+	* - CRNullSpace
+	* - CRHardLimits
+*/
+
+
 %include "eigen.i"
 
 %module CoreRobotics
@@ -75,7 +140,6 @@
 %include "CRManipulator.hpp"
 %include "CRNoiseModel.hpp"
 %include "CRNoiseGaussian.hpp"
-%include "CRNoiseDirac.hpp"
 %include "CRNoiseUniform.hpp"
 %include "CRNoiseMixture.hpp"
 //%include "CRSensorModel.hpp"

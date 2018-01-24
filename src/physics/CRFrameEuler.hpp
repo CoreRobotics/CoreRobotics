@@ -84,29 +84,7 @@ namespace CoreRobotics {
  
  ## Example
  This example creates an Euler frame class.
- \code
- 
- #include "CoreRobotics.hpp"
- #include <stdio>
- 
- main() {
-    CoreRobotics::CRFrameEuler Frame;
-
-    Frame.setPositionAndOrientation(0, 0, 1, 0, 0, 0.7);
-    Frame.setMode(CoreRobotics::CR_EULER_MODE_XYZ);
-
-    Eigen::Matrix4d T;
-    Frame.getTransformToParent(T);
-    std::cout << "Transformation to parent\n" << T << std::endl;
-
-    Eigen::Vector3d p, y;
-    p << 5, 6, 7;
-    Frame.transformToParent(p, y);
-    std::cout << "Point " << p.transpose() << " transformed to "
-    << y.transpose() << std::endl;
- }
- 
- \endcode
+ \include example_CRManipulator.cpp
  
  ## References
  [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,

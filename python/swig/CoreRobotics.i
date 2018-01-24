@@ -41,6 +41,65 @@
 //=====================================================================
 
 
+/*!
+\page python Python Wrapper
+
+A Python wrapper for a portion of the CoreRobotics library has been
+generated with SWIG. The CoreRobotics modules included in the wrapper
+are:
+
+* - CRClock
+* - CRTypes
+* - CRMath
+* - CRFrame
+* - CRFrameEuler
+* - CRFrameDh
+* - CRRigidBody
+* - CRManipulator
+* - CRNoiseModel
+* - CRNoiseGaussian
+* - CRNoiseUniform
+* - CRNoiseMixture
+* - CRSensorLinear
+* - CRInverseKinematics
+* - CRNullSpace
+* - CRHardLimits
+* - CRSharedMemory
+* - CRTrajectoryGenerator
+
+The Python wrappers can be built by running CMake with `-Dpython=true` to
+build the Python wrappers which are located at `python/lib`. To build all libraries
+(C++, Python, and Matlab) run `cmake ../ -Dall=true`. This command will automatically
+check if Python and Matlab are installed and build libraries accordingly.
+These commands use the latest version of Python available on your system.
+To compile with a specific version use `cmake ../ -Dpython=2` to compile with Python 2 etc.
+This option can also be used with the `all` flag to compile both the C++ library, and the Python
+library with a specified version, for example `cmake ../ -Dall=true -Dpython=2` will attempt to
+build C++, Python 2 and Matlab libraries, checking if Python and Matlab exist. Two out of the three
+libraries can also be built by specifing which ones, as in the command `cmake ../ -Dpython=true -Dcpp=true`
+which will build C++ and Python libraries.
+
+Since these wrappers are built using SWIG, if SWIG is found on your system it will be used to
+generate the wrapper code. If SWIG is not found on your system then CMake will use the SWIG wrapper
+files it has stored for this purpose. If SWIG is installed but it is desired to not use it the `noswig`
+flag can be set to prevent SWIG from being used.
+
+Examples of how to use the Python wrapper can be found in the examples provided
+in the `python/util` directory.
+
+\warning
+* - The CRClock module does not work as expected.
+* - The CRMath module has had the Forward Euler and 4th order Runge-Kutta integrators
+removed for compatability.
+* - The following modules have not been tested:
+	* - CRNoiseModel
+	* - CRNoiseGaussian
+	* - CRNoiseUniform
+	* - CRNoiseMixture
+	* - CRSensorLinear
+*/
+
+
 %include "eigen.i"
 
 %module CoreRobotics
@@ -82,7 +141,6 @@ import_array();
 %include "CRManipulator.hpp"
 %include "CRNoiseModel.hpp"
 %include "CRNoiseGaussian.hpp"
-%include "CRNoiseDirac.hpp"
 %include "CRNoiseUniform.hpp"
 %include "CRNoiseMixture.hpp"
 //%include "CRSensorModel.hpp"

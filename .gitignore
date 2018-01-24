@@ -61,6 +61,6 @@ bin
 *.mexw64
 
 # Python and Matlab util libraries
-python/util/CoreRobotics.py
-matlab/util/+CoreRobotics
-matlab/util/Swig*
+python/examples/CoreRobotics.py
+matlab/examples/+CoreRobotics
+matlab/examples/Swig*

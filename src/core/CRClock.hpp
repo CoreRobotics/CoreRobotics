@@ -76,7 +76,7 @@ namespace CoreRobotics {
  
  ## Example
  This example creates and runs a simple CRClock.
- \include test_CRCore.cpp
+ \include example_CRCore.cpp
  */
 //=====================================================================
 class CRClock {

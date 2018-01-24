@@ -62,7 +62,7 @@ namespace CoreRobotics {
  \param[in]     i_eulerMode     the Euler convention of the pose vector
  */
 //---------------------------------------------------------------------
-CRNullSpace::CRNullSpace(CRManipulator* i_robot,
+CRNullSpace::CRNullSpace(const CRManipulator& i_robot,
                          unsigned int i_toolIndex,
                          CREulerMode i_eulerMode)
 {
@@ -104,23 +104,23 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
 
 	Eigen::VectorXd q = i_q0;
 	Eigen::MatrixXd J, Jinv;
-	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot->getDegreesOfFreedom(),
-                                                  this->m_robot->getDegreesOfFreedom());
+	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
+                                                  this->m_robot.getDegreesOfFreedom());
 	CRResult result = CR_RESULT_SUCCESS;
 	for(int i = 0; i < iter; i++)
 	{
-		this->m_robot->setConfiguration(q);
-		J = this->m_robot->jacobian(this->m_toolIndex,
+		this->m_robot.setConfiguration(q);
+		J = this->m_robot.jacobian(this->m_toolIndex,
                                     this->m_eulerMode);
 		result = CRMatrix::svdInverse(J, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
 		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < m_trivTol)
 		{
-			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot->getDegreesOfFreedom());
+			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot.getDegreesOfFreedom());
 			return result;
 		}
 	}
-	this->m_robot->setConfiguration(i_q0);
+	this->m_robot.setConfiguration(i_q0);
 	o_nullSpaceJointMotion = q - i_q0;	
 	return result;
 }
@@ -158,24 +158,24 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
 
 	Eigen::VectorXd q = i_q0;
 	Eigen::MatrixXd J, Jinv;
-	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot->getDegreesOfFreedom(),
-                                                  this->m_robot->getDegreesOfFreedom());
+	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
+                                                  this->m_robot.getDegreesOfFreedom());
 	CRResult result = CR_RESULT_SUCCESS;
 	for(int i = 0; i < iter; i++)
 	{
-		this->m_robot->setConfiguration(q);
-		J = this->m_robot->jacobian(this->m_toolIndex,
+		this->m_robot.setConfiguration(q);
+		J = this->m_robot.jacobian(this->m_toolIndex,
                                     this->m_eulerMode,
                                     i_poseElements);
 		result = CRMatrix::svdInverse(J, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
 		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
 		{
-			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot->getDegreesOfFreedom());
+			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot.getDegreesOfFreedom());
 			return result;
 		}
 	}
-	this->m_robot->setConfiguration(i_q0);
+	this->m_robot.setConfiguration(i_q0);
 	o_nullSpaceJointMotion = q - i_q0;	
 	return result;
 }
@@ -216,24 +216,24 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
 
 	Eigen::VectorXd q = i_q0;
 	Eigen::MatrixXd J, Jinv;
-	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot->getDegreesOfFreedom(),
-                                                  this->m_robot->getDegreesOfFreedom());
+	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
+                                                  this->m_robot.getDegreesOfFreedom());
 	CRResult result = CR_RESULT_SUCCESS;
 	for(int i = 0; i < iter; i++)
 	{
-		this->m_robot->setConfiguration(q);
-		J = this->m_robot->jacobian(this->m_toolIndex,
+		this->m_robot.setConfiguration(q);
+		J = this->m_robot.jacobian(this->m_toolIndex,
                                     this->m_eulerMode,
                                     i_poseElements);
 		result = CRMatrix::svdInverse(J * i_w, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
 		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
 		{
-			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot->getDegreesOfFreedom());
+			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot.getDegreesOfFreedom());
 			return result;
 		}
 	}
-	this->m_robot->setConfiguration(i_q0);
+	this->m_robot.setConfiguration(i_q0);
 	o_nullSpaceJointMotion = q - i_q0;	
 	return result;
 }

@@ -131,6 +131,9 @@ CRWaypoint CRTrajectoryGenerator::step(double i_t)
     if (t >= this->m_tf) {
         t = this->m_tf;
     }
+    if (t < 0) {
+        t = 0;
+    }
     
     // Define a waypoint
     CRWaypoint wp;
