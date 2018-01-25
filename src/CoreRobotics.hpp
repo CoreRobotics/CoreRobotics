@@ -133,11 +133,18 @@ $ brew install boost
 \endcode
 Note that if the first line fails, go to https://brew.sh/ to get the latest install link.
  
-If you are using Linux, you can use aptitude to install eigen and boost using the following
-commands
+If you are using Linux, you can use aptitude to install boost using the following
+command
 \code
-$ sudo apt-get install libeigen3-dev
 $ sudo apt-get install libboost-all-dev
+\endcode
+Eigen can be installed by going to https://eigen.tuxfamily.org and downloading an
+archive of the repository. Then follow the directions in the contained `INSTALL` file.
+
+If desired GTest can be installed by running
+\code
+$ sudo apt-get install libgtest-dev
+$ cd /usr/src/gtest && sudo mkdir build && cd build && sudo cmake ../ && sudo make && sudo cp *.a /usr/lib
 \endcode
 
 If you are using Windows, you can download the necessary dependencies from our repository at
