@@ -27,14 +27,17 @@ This git project hosts code for the CoreRobotics open source robotic control lib
 CoreRobotics makes use of Eigen (vector/matrix math) and Boost libraries.  Make sure you have installed these for your system before proceeding.  Only headers from both libraries are needed, so it is not necessary to compile binaries.  If you are using Mac, you can use homebrew to install.  On Linux, you can use apt-get.
 1. Eigen can be found at [http://eigen.tuxfamily.org/](http://eigen.tuxfamily.org/).  Using homebrew (Mac), the install is
 `brew install eigen`
-On Linux using aptitude, the install is
-`sudo apt-get install libeigen3-dev`
+On Linux Eigen can be installed by download an archive from
+[http://eigen.tuxfamily.org/](http://eigen.tuxfamily.org/)
+and following the directions in the contained `INSTALL` file.
 2. Boost can be found at [http://www.boost.org/](http://www.boost.org/).  Using homebrew (Mac), the install is
 `brew install boost`
 On Linux using aptitude, the install is
 `sudo apt-get install libboost-all-dev`
 3. [Optional] GTest is used for the test suite, found at [https://github.com/google/googletest](https://github.com/google/googletest).  On Linux using aptitude, the install is
-`sudo apt-get install libgtest0 libgtest-dev`
+`sudo apt-get install libgtest-dev`
+then the library needs to be compiled and installed by running
+`cd /usr/src/gtest && sudo mkdir build && cd build && sudo cmake ../ && sudo make && sudo cp *.a /usr/lib`
 
 
 ## Building and compiling
