@@ -92,7 +92,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 // Paramter structure declaration
-struct uniformParam{
+struct CRParamNoiseUniform{
     Eigen::VectorXd a;
     Eigen::VectorXd b;
 };
@@ -134,11 +134,11 @@ public:
     double probability(Eigen::VectorXd i_x);
     
 //---------------------------------------------------------------------
-// Protected Members
-protected:
+// Public Members
+public:
     
-    //! Noise model type
-    uniformParam m_parameters;
+    //! Noise model parameters
+    CRParamNoiseUniform m_parameters;
     
 };
 

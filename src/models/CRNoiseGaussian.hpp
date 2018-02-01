@@ -90,7 +90,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 // Paramter structure declaration
-struct gaussianParam{
+struct CRParamNoiseGaussian{
     Eigen::MatrixXd cov;
     Eigen::MatrixXd covInv;
     Eigen::VectorXd mean;
@@ -133,11 +133,11 @@ public:
     double probability(Eigen::VectorXd i_x);
     
 //---------------------------------------------------------------------
-// Protected Members
-protected:
+// Public Members
+public:
     
-    //! Noise model type
-    gaussianParam m_parameters;
+    //! Noise model parameters
+    CRParamNoiseGaussian m_parameters;
     
 };
 
