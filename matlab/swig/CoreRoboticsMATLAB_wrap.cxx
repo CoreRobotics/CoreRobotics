@@ -1224,15 +1224,15 @@ namespace swig {
 #define SWIGTYPE_p_CoreRobotics__CRNoiseModel swig_types[12]
 #define SWIGTYPE_p_CoreRobotics__CRNoiseUniform swig_types[13]
 #define SWIGTYPE_p_CoreRobotics__CRNullSpace swig_types[14]
-#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[15]
-#define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[16]
-#define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[17]
-#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[18]
-#define SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator swig_types[19]
-#define SWIGTYPE_p_CoreRobotics__CRWaypoint swig_types[20]
-#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[21]
-#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[22]
-#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[23]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian swig_types[15]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[16]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture swig_types[17]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform swig_types[18]
+#define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[19]
+#define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[20]
+#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[21]
+#define SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator swig_types[22]
+#define SWIGTYPE_p_CoreRobotics__CRWaypoint swig_types[23]
 #define SWIGTYPE_p_Eigen__Matrix3d swig_types[24]
 #define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[25]
 #define SWIGTYPE_p_Eigen__MatrixXd swig_types[26]
@@ -10053,6 +10053,61 @@ fail:
 }
 
 
+int _wrap_CRNoiseModel_m_parameters_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRNoiseModel *arg1 = (CoreRobotics::CRNoiseModel *) 0 ;
+  CoreRobotics::CRParamNoiseGeneric *arg2 = (CoreRobotics::CRParamNoiseGeneric *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRNoiseModel_m_parameters_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseModel, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseModel_m_parameters_set" "', argument " "1"" of type '" "CoreRobotics::CRNoiseModel *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseModel * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRNoiseModel_m_parameters_set" "', argument " "2"" of type '" "CoreRobotics::CRParamNoiseGeneric *""'"); 
+  }
+  arg2 = reinterpret_cast< CoreRobotics::CRParamNoiseGeneric * >(argp2);
+  if (arg1) (arg1)->m_parameters = *arg2;
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRNoiseModel_m_parameters_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRNoiseModel *arg1 = (CoreRobotics::CRNoiseModel *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  CoreRobotics::CRParamNoiseGeneric *result = 0 ;
+  
+  if (!SWIG_check_num_args("CRNoiseModel_m_parameters_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseModel, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseModel_m_parameters_get" "', argument " "1"" of type '" "CoreRobotics::CRNoiseModel *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseModel * >(argp1);
+  result = (CoreRobotics::CRParamNoiseGeneric *)& ((arg1)->m_parameters);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric, 0 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_delete_CRNoiseModel (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   CoreRobotics::CRNoiseModel *arg1 = (CoreRobotics::CRNoiseModel *) 0 ;
   void *argp1 = 0 ;
@@ -10080,22 +10135,22 @@ fail:
 }
 
 
-int _wrap_gaussianParam_cov_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+int _wrap_CRParamNoiseGaussian_cov_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   Eigen::MatrixXd arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   Eigen::MatrixXd temp2 ;
   mxArray * _out;
   
-  if (!SWIG_check_num_args("gaussianParam_cov_set",argc,2,2,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseGaussian_cov_set",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_cov_set" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_cov_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   {
     if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
     SWIG_fail;
@@ -10110,21 +10165,21 @@ fail:
 }
 
 
-int _wrap_gaussianParam_cov_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+int _wrap_CRParamNoiseGaussian_cov_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   Eigen::MatrixXd result;
   
-  if (!SWIG_check_num_args("gaussianParam_cov_get",argc,1,1,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseGaussian_cov_get",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_cov_get" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_cov_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   result =  ((arg1)->cov);
   {
     if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
@@ -10137,22 +10192,22 @@ fail:
 }
 
 
-int _wrap_gaussianParam_covInv_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+int _wrap_CRParamNoiseGaussian_covInv_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   Eigen::MatrixXd arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   Eigen::MatrixXd temp2 ;
   mxArray * _out;
   
-  if (!SWIG_check_num_args("gaussianParam_covInv_set",argc,2,2,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseGaussian_covInv_set",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_covInv_set" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_covInv_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   {
     if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
     SWIG_fail;
@@ -10167,21 +10222,21 @@ fail:
 }
 
 
-int _wrap_gaussianParam_covInv_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+int _wrap_CRParamNoiseGaussian_covInv_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   Eigen::MatrixXd result;
   
-  if (!SWIG_check_num_args("gaussianParam_covInv_get",argc,1,1,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseGaussian_covInv_get",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_covInv_get" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_covInv_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   result =  ((arg1)->covInv);
   {
     if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
@@ -10194,22 +10249,22 @@ fail:
 }
 
 
-int _wrap_gaussianParam_mean_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+int _wrap_CRParamNoiseGaussian_mean_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   Eigen::VectorXd arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   Eigen::VectorXd temp2 ;
   mxArray * _out;
   
-  if (!SWIG_check_num_args("gaussianParam_mean_set",argc,2,2,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseGaussian_mean_set",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_mean_set" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_mean_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   {
     if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
     SWIG_fail;
@@ -10224,21 +10279,21 @@ fail:
 }
 
 
-int _wrap_gaussianParam_mean_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+int _wrap_CRParamNoiseGaussian_mean_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   Eigen::VectorXd result;
   
-  if (!SWIG_check_num_args("gaussianParam_mean_get",argc,1,1,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseGaussian_mean_get",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_mean_get" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_mean_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   result =  ((arg1)->mean);
   {
     if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
@@ -10251,16 +10306,16 @@ fail:
 }
 
 
-int _wrap_new_gaussianParam (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_new_CRParamNoiseGaussian (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   mxArray * _out;
-  CoreRobotics::gaussianParam *result = 0 ;
+  CoreRobotics::CRParamNoiseGaussian *result = 0 ;
   
-  if (!SWIG_check_num_args("new_gaussianParam",argc,0,0,0)) {
+  if (!SWIG_check_num_args("new_CRParamNoiseGaussian",argc,0,0,0)) {
     SWIG_fail;
   }
   (void)argv; // Unused variable
-  result = (CoreRobotics::gaussianParam *)new CoreRobotics::gaussianParam();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__gaussianParam, 1 |  0 );
+  result = (CoreRobotics::CRParamNoiseGaussian *)new CoreRobotics::CRParamNoiseGaussian();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -10268,22 +10323,22 @@ fail:
 }
 
 
-int _wrap_delete_gaussianParam (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+int _wrap_delete_CRParamNoiseGaussian (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   
   int is_owned;
-  if (!SWIG_check_num_args("delete_gaussianParam",argc,1,1,0)) {
+  if (!SWIG_check_num_args("delete_CRParamNoiseGaussian",argc,1,1,0)) {
     SWIG_fail;
   }
   is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_gaussianParam" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRParamNoiseGaussian" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   if (is_owned) {
     delete arg1;
   }
@@ -10608,6 +10663,61 @@ fail:
 }
 
 
+int _wrap_CRNoiseGaussian_m_parameters_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRNoiseGaussian *arg1 = (CoreRobotics::CRNoiseGaussian *) 0 ;
+  CoreRobotics::CRParamNoiseGaussian *arg2 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRNoiseGaussian_m_parameters_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseGaussian, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseGaussian_m_parameters_set" "', argument " "1"" of type '" "CoreRobotics::CRNoiseGaussian *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseGaussian * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRNoiseGaussian_m_parameters_set" "', argument " "2"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
+  }
+  arg2 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp2);
+  if (arg1) (arg1)->m_parameters = *arg2;
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRNoiseGaussian_m_parameters_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRNoiseGaussian *arg1 = (CoreRobotics::CRNoiseGaussian *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  CoreRobotics::CRParamNoiseGaussian *result = 0 ;
+  
+  if (!SWIG_check_num_args("CRNoiseGaussian_m_parameters_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseGaussian, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseGaussian_m_parameters_get" "', argument " "1"" of type '" "CoreRobotics::CRNoiseGaussian *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseGaussian * >(argp1);
+  result = (CoreRobotics::CRParamNoiseGaussian *)& ((arg1)->m_parameters);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_delete_CRNoiseGaussian (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   CoreRobotics::CRNoiseGaussian *arg1 = (CoreRobotics::CRNoiseGaussian *) 0 ;
   void *argp1 = 0 ;
@@ -10635,22 +10745,22 @@ fail:
 }
 
 
-int _wrap_uniformParam_a_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::uniformParam *arg1 = (CoreRobotics::uniformParam *) 0 ;
+int _wrap_CRParamNoiseUniform_a_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseUniform *arg1 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
   Eigen::VectorXd arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   Eigen::VectorXd temp2 ;
   mxArray * _out;
   
-  if (!SWIG_check_num_args("uniformParam_a_set",argc,2,2,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseUniform_a_set",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__uniformParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "uniformParam_a_set" "', argument " "1"" of type '" "CoreRobotics::uniformParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseUniform_a_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::uniformParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp1);
   {
     if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
     SWIG_fail;
@@ -10665,21 +10775,21 @@ fail:
 }
 
 
-int _wrap_uniformParam_a_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::uniformParam *arg1 = (CoreRobotics::uniformParam *) 0 ;
+int _wrap_CRParamNoiseUniform_a_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseUniform *arg1 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   Eigen::VectorXd result;
   
-  if (!SWIG_check_num_args("uniformParam_a_get",argc,1,1,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseUniform_a_get",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__uniformParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "uniformParam_a_get" "', argument " "1"" of type '" "CoreRobotics::uniformParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseUniform_a_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::uniformParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp1);
   result =  ((arg1)->a);
   {
     if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
@@ -10692,22 +10802,22 @@ fail:
 }
 
 
-int _wrap_uniformParam_b_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::uniformParam *arg1 = (CoreRobotics::uniformParam *) 0 ;
+int _wrap_CRParamNoiseUniform_b_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseUniform *arg1 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
   Eigen::VectorXd arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   Eigen::VectorXd temp2 ;
   mxArray * _out;
   
-  if (!SWIG_check_num_args("uniformParam_b_set",argc,2,2,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseUniform_b_set",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__uniformParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "uniformParam_b_set" "', argument " "1"" of type '" "CoreRobotics::uniformParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseUniform_b_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::uniformParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp1);
   {
     if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
     SWIG_fail;
@@ -10722,21 +10832,21 @@ fail:
 }
 
 
-int _wrap_uniformParam_b_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::uniformParam *arg1 = (CoreRobotics::uniformParam *) 0 ;
+int _wrap_CRParamNoiseUniform_b_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseUniform *arg1 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   Eigen::VectorXd result;
   
-  if (!SWIG_check_num_args("uniformParam_b_get",argc,1,1,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseUniform_b_get",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__uniformParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "uniformParam_b_get" "', argument " "1"" of type '" "CoreRobotics::uniformParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseUniform_b_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::uniformParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp1);
   result =  ((arg1)->b);
   {
     if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
@@ -10749,16 +10859,16 @@ fail:
 }
 
 
-int _wrap_new_uniformParam (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_new_CRParamNoiseUniform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   mxArray * _out;
-  CoreRobotics::uniformParam *result = 0 ;
+  CoreRobotics::CRParamNoiseUniform *result = 0 ;
   
-  if (!SWIG_check_num_args("new_uniformParam",argc,0,0,0)) {
+  if (!SWIG_check_num_args("new_CRParamNoiseUniform",argc,0,0,0)) {
     SWIG_fail;
   }
   (void)argv; // Unused variable
-  result = (CoreRobotics::uniformParam *)new CoreRobotics::uniformParam();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__uniformParam, 1 |  0 );
+  result = (CoreRobotics::CRParamNoiseUniform *)new CoreRobotics::CRParamNoiseUniform();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -10766,22 +10876,22 @@ fail:
 }
 
 
-int _wrap_delete_uniformParam (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::uniformParam *arg1 = (CoreRobotics::uniformParam *) 0 ;
+int _wrap_delete_CRParamNoiseUniform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseUniform *arg1 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   
   int is_owned;
-  if (!SWIG_check_num_args("delete_uniformParam",argc,1,1,0)) {
+  if (!SWIG_check_num_args("delete_CRParamNoiseUniform",argc,1,1,0)) {
     SWIG_fail;
   }
   is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__uniformParam, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_uniformParam" "', argument " "1"" of type '" "CoreRobotics::uniformParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRParamNoiseUniform" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::uniformParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp1);
   if (is_owned) {
     delete arg1;
   }
@@ -11106,6 +11216,61 @@ fail:
 }
 
 
+int _wrap_CRNoiseUniform_m_parameters_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRNoiseUniform *arg1 = (CoreRobotics::CRNoiseUniform *) 0 ;
+  CoreRobotics::CRParamNoiseUniform *arg2 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRNoiseUniform_m_parameters_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseUniform, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseUniform_m_parameters_set" "', argument " "1"" of type '" "CoreRobotics::CRNoiseUniform *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseUniform * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRNoiseUniform_m_parameters_set" "', argument " "2"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
+  }
+  arg2 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp2);
+  if (arg1) (arg1)->m_parameters = *arg2;
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRNoiseUniform_m_parameters_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRNoiseUniform *arg1 = (CoreRobotics::CRNoiseUniform *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  CoreRobotics::CRParamNoiseUniform *result = 0 ;
+  
+  if (!SWIG_check_num_args("CRNoiseUniform_m_parameters_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseUniform, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseUniform_m_parameters_get" "', argument " "1"" of type '" "CoreRobotics::CRNoiseUniform *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseUniform * >(argp1);
+  result = (CoreRobotics::CRParamNoiseUniform *)& ((arg1)->m_parameters);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_delete_CRNoiseUniform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   CoreRobotics::CRNoiseUniform *arg1 = (CoreRobotics::CRNoiseUniform *) 0 ;
   void *argp1 = 0 ;
@@ -11133,8 +11298,8 @@ fail:
 }
 
 
-int _wrap_mixtureParam_models_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::mixtureParam *arg1 = (CoreRobotics::mixtureParam *) 0 ;
+int _wrap_CRParamNoiseMixture_models_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseMixture *arg1 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
   std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *arg2 = (std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11142,17 +11307,17 @@ int _wrap_mixtureParam_models_set (int resc, mxArray *resv[], int argc, mxArray 
   int res2 = 0 ;
   mxArray * _out;
   
-  if (!SWIG_check_num_args("mixtureParam_models_set",argc,2,2,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseMixture_models_set",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__mixtureParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mixtureParam_models_set" "', argument " "1"" of type '" "CoreRobotics::mixtureParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseMixture_models_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::mixtureParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "mixtureParam_models_set" "', argument " "2"" of type '" "std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRParamNoiseMixture_models_set" "', argument " "2"" of type '" "std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *""'"); 
   }
   arg2 = reinterpret_cast< std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > * >(argp2);
   if (arg1) (arg1)->models = *arg2;
@@ -11164,21 +11329,21 @@ fail:
 }
 
 
-int _wrap_mixtureParam_models_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::mixtureParam *arg1 = (CoreRobotics::mixtureParam *) 0 ;
+int _wrap_CRParamNoiseMixture_models_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseMixture *arg1 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *result = 0 ;
   
-  if (!SWIG_check_num_args("mixtureParam_models_get",argc,1,1,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseMixture_models_get",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__mixtureParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mixtureParam_models_get" "', argument " "1"" of type '" "CoreRobotics::mixtureParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseMixture_models_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::mixtureParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp1);
   result = (std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *)& ((arg1)->models);
   _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t, 0 |  0 );
   if (_out) --resc, *resv++ = _out;
@@ -11188,8 +11353,8 @@ fail:
 }
 
 
-int _wrap_mixtureParam_weights_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::mixtureParam *arg1 = (CoreRobotics::mixtureParam *) 0 ;
+int _wrap_CRParamNoiseMixture_weights_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseMixture *arg1 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
   std::vector< double,std::allocator< double > > *arg2 = (std::vector< double,std::allocator< double > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11197,17 +11362,17 @@ int _wrap_mixtureParam_weights_set (int resc, mxArray *resv[], int argc, mxArray
   int res2 = 0 ;
   mxArray * _out;
   
-  if (!SWIG_check_num_args("mixtureParam_weights_set",argc,2,2,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseMixture_weights_set",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__mixtureParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mixtureParam_weights_set" "', argument " "1"" of type '" "CoreRobotics::mixtureParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseMixture_weights_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::mixtureParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp1);
   res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "mixtureParam_weights_set" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRParamNoiseMixture_weights_set" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > *""'"); 
   }
   arg2 = reinterpret_cast< std::vector< double,std::allocator< double > > * >(argp2);
   if (arg1) (arg1)->weights = *arg2;
@@ -11219,21 +11384,21 @@ fail:
 }
 
 
-int _wrap_mixtureParam_weights_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::mixtureParam *arg1 = (CoreRobotics::mixtureParam *) 0 ;
+int _wrap_CRParamNoiseMixture_weights_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseMixture *arg1 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   std::vector< double,std::allocator< double > > *result = 0 ;
   
-  if (!SWIG_check_num_args("mixtureParam_weights_get",argc,1,1,0)) {
+  if (!SWIG_check_num_args("CRParamNoiseMixture_weights_get",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__mixtureParam, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mixtureParam_weights_get" "', argument " "1"" of type '" "CoreRobotics::mixtureParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseMixture_weights_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::mixtureParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp1);
   result = (std::vector< double,std::allocator< double > > *)& ((arg1)->weights);
   _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t, 0 |  0 );
   if (_out) --resc, *resv++ = _out;
@@ -11243,16 +11408,16 @@ fail:
 }
 
 
-int _wrap_new_mixtureParam (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_new_CRParamNoiseMixture (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   mxArray * _out;
-  CoreRobotics::mixtureParam *result = 0 ;
+  CoreRobotics::CRParamNoiseMixture *result = 0 ;
   
-  if (!SWIG_check_num_args("new_mixtureParam",argc,0,0,0)) {
+  if (!SWIG_check_num_args("new_CRParamNoiseMixture",argc,0,0,0)) {
     SWIG_fail;
   }
   (void)argv; // Unused variable
-  result = (CoreRobotics::mixtureParam *)new CoreRobotics::mixtureParam();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__mixtureParam, 1 |  0 );
+  result = (CoreRobotics::CRParamNoiseMixture *)new CoreRobotics::CRParamNoiseMixture();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -11260,22 +11425,22 @@ fail:
 }
 
 
-int _wrap_delete_mixtureParam (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  CoreRobotics::mixtureParam *arg1 = (CoreRobotics::mixtureParam *) 0 ;
+int _wrap_delete_CRParamNoiseMixture (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRParamNoiseMixture *arg1 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
   
   int is_owned;
-  if (!SWIG_check_num_args("delete_mixtureParam",argc,1,1,0)) {
+  if (!SWIG_check_num_args("delete_CRParamNoiseMixture",argc,1,1,0)) {
     SWIG_fail;
   }
   is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__mixtureParam, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_mixtureParam" "', argument " "1"" of type '" "CoreRobotics::mixtureParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRParamNoiseMixture" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::mixtureParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp1);
   if (is_owned) {
     delete arg1;
   }
@@ -11441,6 +11606,61 @@ int _wrap_CRNoiseMixture_probability (int resc, mxArray *resv[], int argc, mxArr
   }
   result = (double)(arg1)->probability(arg2);
   _out = SWIG_From_double(static_cast< double >(result));
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRNoiseMixture_m_parameters_set (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRNoiseMixture *arg1 = (CoreRobotics::CRNoiseMixture *) 0 ;
+  CoreRobotics::CRParamNoiseMixture *arg2 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  
+  if (!SWIG_check_num_args("CRNoiseMixture_m_parameters_set",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseMixture, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseMixture_m_parameters_set" "', argument " "1"" of type '" "CoreRobotics::CRNoiseMixture *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseMixture * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRNoiseMixture_m_parameters_set" "', argument " "2"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
+  }
+  arg2 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp2);
+  if (arg1) (arg1)->m_parameters = *arg2;
+  _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRNoiseMixture_m_parameters_get (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  CoreRobotics::CRNoiseMixture *arg1 = (CoreRobotics::CRNoiseMixture *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  CoreRobotics::CRParamNoiseMixture *result = 0 ;
+  
+  if (!SWIG_check_num_args("CRNoiseMixture_m_parameters_get",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseMixture, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseMixture_m_parameters_get" "', argument " "1"" of type '" "CoreRobotics::CRNoiseMixture *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseMixture * >(argp1);
+  result = (CoreRobotics::CRParamNoiseMixture *)& ((arg1)->m_parameters);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -15200,15 +15420,15 @@ static swig_type_info _swigt__p_CoreRobotics__CRNoiseMixture = {"_p_CoreRobotics
 static swig_type_info _swigt__p_CoreRobotics__CRNoiseModel = {"_p_CoreRobotics__CRNoiseModel", "CoreRobotics::CRNoiseModel *", 0, 0, (void*)"CoreRobotics.CRNoiseModel", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRNoiseUniform = {"_p_CoreRobotics__CRNoiseUniform", "CoreRobotics::CRNoiseUniform *", 0, 0, (void*)"CoreRobotics.CRNoiseUniform", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRNullSpace = {"_p_CoreRobotics__CRNullSpace", "CoreRobotics::CRNullSpace *", 0, 0, (void*)"CoreRobotics.CRNullSpace", 0};
+static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseGaussian = {"_p_CoreRobotics__CRParamNoiseGaussian", "CoreRobotics::CRParamNoiseGaussian *", 0, 0, (void*)"CoreRobotics.CRParamNoiseGaussian", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseGeneric = {"_p_CoreRobotics__CRParamNoiseGeneric", "CoreRobotics::CRParamNoiseGeneric *", 0, 0, (void*)"CoreRobotics.CRParamNoiseGeneric", 0};
+static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseMixture = {"_p_CoreRobotics__CRParamNoiseMixture", "CoreRobotics::CRParamNoiseMixture *", 0, 0, (void*)"CoreRobotics.CRParamNoiseMixture", 0};
+static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseUniform = {"_p_CoreRobotics__CRParamNoiseUniform", "CoreRobotics::CRParamNoiseUniform *", 0, 0, (void*)"CoreRobotics.CRParamNoiseUniform", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRRigidBody = {"_p_CoreRobotics__CRRigidBody", "CoreRobotics::CRRigidBody *", 0, 0, (void*)"CoreRobotics.CRRigidBody", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRSensorLinear = {"_p_CoreRobotics__CRSensorLinear", "CoreRobotics::CRSensorLinear *", 0, 0, (void*)"CoreRobotics.CRSensorLinear", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRSharedMemory = {"_p_CoreRobotics__CRSharedMemory", "CoreRobotics::CRSharedMemory *", 0, 0, (void*)"CoreRobotics.CRSharedMemory", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRTrajectoryGenerator = {"_p_CoreRobotics__CRTrajectoryGenerator", "CoreRobotics::CRTrajectoryGenerator *", 0, 0, (void*)"CoreRobotics.CRTrajectoryGenerator", 0};
 static swig_type_info _swigt__p_CoreRobotics__CRWaypoint = {"_p_CoreRobotics__CRWaypoint", "CoreRobotics::CRWaypoint *", 0, 0, (void*)"CoreRobotics.CRWaypoint", 0};
-static swig_type_info _swigt__p_CoreRobotics__gaussianParam = {"_p_CoreRobotics__gaussianParam", "CoreRobotics::gaussianParam *", 0, 0, (void*)"CoreRobotics.gaussianParam", 0};
-static swig_type_info _swigt__p_CoreRobotics__mixtureParam = {"_p_CoreRobotics__mixtureParam", "CoreRobotics::mixtureParam *", 0, 0, (void*)"CoreRobotics.mixtureParam", 0};
-static swig_type_info _swigt__p_CoreRobotics__uniformParam = {"_p_CoreRobotics__uniformParam", "CoreRobotics::uniformParam *", 0, 0, (void*)"CoreRobotics.uniformParam", 0};
 static swig_type_info _swigt__p_Eigen__Matrix3d = {"_p_Eigen__Matrix3d", "Eigen::Matrix3d *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__MatrixT_bool_6_1_t = {"_p_Eigen__MatrixT_bool_6_1_t", "Eigen::Matrix< bool,6,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__MatrixXd = {"_p_Eigen__MatrixXd", "std::vector< Eigen::MatrixXd >::value_type *|Eigen::MatrixXd *", 0, 0, (void*)0, 0};
@@ -15247,15 +15467,15 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_CoreRobotics__CRNoiseModel,
   &_swigt__p_CoreRobotics__CRNoiseUniform,
   &_swigt__p_CoreRobotics__CRNullSpace,
+  &_swigt__p_CoreRobotics__CRParamNoiseGaussian,
   &_swigt__p_CoreRobotics__CRParamNoiseGeneric,
+  &_swigt__p_CoreRobotics__CRParamNoiseMixture,
+  &_swigt__p_CoreRobotics__CRParamNoiseUniform,
   &_swigt__p_CoreRobotics__CRRigidBody,
   &_swigt__p_CoreRobotics__CRSensorLinear,
   &_swigt__p_CoreRobotics__CRSharedMemory,
   &_swigt__p_CoreRobotics__CRTrajectoryGenerator,
   &_swigt__p_CoreRobotics__CRWaypoint,
-  &_swigt__p_CoreRobotics__gaussianParam,
-  &_swigt__p_CoreRobotics__mixtureParam,
-  &_swigt__p_CoreRobotics__uniformParam,
   &_swigt__p_Eigen__Matrix3d,
   &_swigt__p_Eigen__MatrixT_bool_6_1_t,
   &_swigt__p_Eigen__MatrixXd,
@@ -15294,15 +15514,15 @@ static swig_cast_info _swigc__p_CoreRobotics__CRNoiseMixture[] = {  {&_swigt__p_
 static swig_cast_info _swigc__p_CoreRobotics__CRNoiseModel[] = {  {&_swigt__p_CoreRobotics__CRNoiseModel, 0, 0, 0},  {&_swigt__p_CoreRobotics__CRNoiseUniform, _p_CoreRobotics__CRNoiseUniformTo_p_CoreRobotics__CRNoiseModel, 0, 0},  {&_swigt__p_CoreRobotics__CRNoiseGaussian, _p_CoreRobotics__CRNoiseGaussianTo_p_CoreRobotics__CRNoiseModel, 0, 0},  {&_swigt__p_CoreRobotics__CRNoiseMixture, _p_CoreRobotics__CRNoiseMixtureTo_p_CoreRobotics__CRNoiseModel, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRNoiseUniform[] = {  {&_swigt__p_CoreRobotics__CRNoiseUniform, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRNullSpace[] = {  {&_swigt__p_CoreRobotics__CRNullSpace, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseGaussian[] = {  {&_swigt__p_CoreRobotics__CRParamNoiseGaussian, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseGeneric[] = {  {&_swigt__p_CoreRobotics__CRParamNoiseGeneric, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseMixture[] = {  {&_swigt__p_CoreRobotics__CRParamNoiseMixture, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseUniform[] = {  {&_swigt__p_CoreRobotics__CRParamNoiseUniform, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRRigidBody[] = {  {&_swigt__p_CoreRobotics__CRRigidBody, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRSensorLinear[] = {  {&_swigt__p_CoreRobotics__CRSensorLinear, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRSharedMemory[] = {  {&_swigt__p_CoreRobotics__CRSharedMemory, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRTrajectoryGenerator[] = {  {&_swigt__p_CoreRobotics__CRTrajectoryGenerator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRWaypoint[] = {  {&_swigt__p_CoreRobotics__CRWaypoint, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_CoreRobotics__gaussianParam[] = {  {&_swigt__p_CoreRobotics__gaussianParam, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_CoreRobotics__mixtureParam[] = {  {&_swigt__p_CoreRobotics__mixtureParam, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_CoreRobotics__uniformParam[] = {  {&_swigt__p_CoreRobotics__uniformParam, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__Matrix3d[] = {  {&_swigt__p_Eigen__Matrix3d, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__MatrixT_bool_6_1_t[] = {  {&_swigt__p_Eigen__MatrixT_bool_6_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__MatrixXd[] = {  {&_swigt__p_Eigen__MatrixXd, 0, 0, 0},{0, 0, 0, 0}};
@@ -15341,15 +15561,15 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_CoreRobotics__CRNoiseModel,
   _swigc__p_CoreRobotics__CRNoiseUniform,
   _swigc__p_CoreRobotics__CRNullSpace,
+  _swigc__p_CoreRobotics__CRParamNoiseGaussian,
   _swigc__p_CoreRobotics__CRParamNoiseGeneric,
+  _swigc__p_CoreRobotics__CRParamNoiseMixture,
+  _swigc__p_CoreRobotics__CRParamNoiseUniform,
   _swigc__p_CoreRobotics__CRRigidBody,
   _swigc__p_CoreRobotics__CRSensorLinear,
   _swigc__p_CoreRobotics__CRSharedMemory,
   _swigc__p_CoreRobotics__CRTrajectoryGenerator,
   _swigc__p_CoreRobotics__CRWaypoint,
-  _swigc__p_CoreRobotics__gaussianParam,
-  _swigc__p_CoreRobotics__mixtureParam,
-  _swigc__p_CoreRobotics__uniformParam,
   _swigc__p_Eigen__Matrix3d,
   _swigc__p_Eigen__MatrixT_bool_6_1_t,
   _swigc__p_Eigen__MatrixXd,
@@ -15908,128 +16128,136 @@ const char* swigFunctionName_(int fcn_id) {
   case 160: return "CRNoiseModel_setParameters";
   case 161: return "CRNoiseModel_sample";
   case 162: return "CRNoiseModel_probability";
-  case 163: return "delete_CRNoiseModel";
-  case 164: return "gaussianParam_cov_get";
-  case 165: return "gaussianParam_cov_set";
-  case 166: return "gaussianParam_covInv_get";
-  case 167: return "gaussianParam_covInv_set";
-  case 168: return "gaussianParam_mean_get";
-  case 169: return "gaussianParam_mean_set";
-  case 170: return "new_gaussianParam";
-  case 171: return "delete_gaussianParam";
-  case 172: return "new_CRNoiseGaussian";
-  case 173: return "CRNoiseGaussian_setParameters";
-  case 174: return "CRNoiseGaussian_sample";
-  case 175: return "CRNoiseGaussian_probability";
-  case 176: return "delete_CRNoiseGaussian";
-  case 177: return "uniformParam_a_get";
-  case 178: return "uniformParam_a_set";
-  case 179: return "uniformParam_b_get";
-  case 180: return "uniformParam_b_set";
-  case 181: return "new_uniformParam";
-  case 182: return "delete_uniformParam";
-  case 183: return "new_CRNoiseUniform";
-  case 184: return "CRNoiseUniform_setParameters";
-  case 185: return "CRNoiseUniform_sample";
-  case 186: return "CRNoiseUniform_probability";
-  case 187: return "delete_CRNoiseUniform";
-  case 188: return "mixtureParam_models_get";
-  case 189: return "mixtureParam_models_set";
-  case 190: return "mixtureParam_weights_get";
-  case 191: return "mixtureParam_weights_set";
-  case 192: return "new_mixtureParam";
-  case 193: return "delete_mixtureParam";
-  case 194: return "new_CRNoiseMixture";
-  case 195: return "CRNoiseMixture_add";
-  case 196: return "CRNoiseMixture_sample";
-  case 197: return "CRNoiseMixture_probability";
-  case 198: return "delete_CRNoiseMixture";
-  case 199: return "new_CRSensorLinear";
-  case 200: return "CRSensorLinear_setObservation";
-  case 201: return "CRSensorLinear_measurement";
-  case 202: return "delete_CRSensorLinear";
-  case 203: return "new_CRInverseKinematics";
-  case 204: return "CRInverseKinematics_setRobot";
-  case 205: return "CRInverseKinematics_getRobot";
-  case 206: return "CRInverseKinematics_setToolIndex";
-  case 207: return "CRInverseKinematics_getToolIndex";
-  case 208: return "CRInverseKinematics_setEulerMode";
-  case 209: return "CRInverseKinematics_getEulerMode";
-  case 210: return "CRInverseKinematics_setTolerance";
-  case 211: return "CRInverseKinematics_getTolerance";
-  case 212: return "CRInverseKinematics_setMaxIter";
-  case 213: return "CRInverseKinematics_getMaxIter";
-  case 214: return "CRInverseKinematics_setStepSize";
-  case 215: return "CRInverseKinematics_getStepSize";
-  case 216: return "CRInverseKinematics_setDampingFactor";
-  case 217: return "CRInverseKinematics_getDampingFactor";
-  case 218: return "CRInverseKinematics_setSingularThresh";
-  case 219: return "CRInverseKinematics_getSingularThresh";
-  case 220: return "CRInverseKinematics_getJacInv";
-  case 221: return "CRInverseKinematics_solve";
-  case 222: return "delete_CRInverseKinematics";
-  case 223: return "new_CRNullSpace";
-  case 224: return "CRNullSpace_setRobot";
-  case 225: return "CRNullSpace_setToolIndex";
-  case 226: return "CRNullSpace_setEulerMode";
-  case 227: return "CRNullSpace_getEulerMode";
-  case 228: return "CRNullSpace_setSingularThresh";
-  case 229: return "CRNullSpace_getSingularThresh";
-  case 230: return "CRNullSpace_setMinStepSize";
-  case 231: return "CRNullSpace_getMinStepSize";
-  case 232: return "CRNullSpace_setMaxIter";
-  case 233: return "CRNullSpace_getMaxIter";
-  case 234: return "CRNullSpace_setTrivialTolerance";
-  case 235: return "CRNullSpace_getTrivialTolerance";
-  case 236: return "CRNullSpace_solve";
-  case 237: return "delete_CRNullSpace";
-  case 238: return "new_CRHardLimits";
-  case 239: return "CRHardLimits_getIKSolver";
-  case 240: return "CRHardLimits_getNullSpaceSolver";
-  case 241: return "CRHardLimits_useNullSpace";
-  case 242: return "CRHardLimits_nullSpaceStatus";
-  case 243: return "CRHardLimits_setPoseElements";
-  case 244: return "CRHardLimits_getPoseElements";
-  case 245: return "CRHardLimits_setJointUpperLimit";
-  case 246: return "CRHardLimits_setJointLowerLimit";
-  case 247: return "CRHardLimits_getJointUpperLimit";
-  case 248: return "CRHardLimits_getJointLowerLimit";
-  case 249: return "CRHardLimits_setJointLimits";
-  case 250: return "CRHardLimits_setJointUpperLimits";
-  case 251: return "CRHardLimits_setJointLowerLimits";
-  case 252: return "CRHardLimits_getJointUpperLimits";
-  case 253: return "CRHardLimits_getJointLowerLimits";
-  case 254: return "CRHardLimits_setQ0";
-  case 255: return "CRHardLimits_getQ0";
-  case 256: return "CRHardLimits_setToolPose";
-  case 257: return "CRHardLimits_getToolPose";
-  case 258: return "CRHardLimits_setJointMotion";
-  case 259: return "CRHardLimits_getJointMotion";
-  case 260: return "CRHardLimits_solve";
-  case 261: return "delete_CRHardLimits";
-  case 262: return "new_CRSharedMemory";
-  case 263: return "delete_CRSharedMemory";
-  case 264: return "CRSharedMemory_addSignal";
-  case 265: return "CRSharedMemory_removeSignal";
-  case 266: return "CRSharedMemory_set";
-  case 267: return "CRSharedMemory_get";
-  case 268: return "CRWaypoint_time_get";
-  case 269: return "CRWaypoint_time_set";
-  case 270: return "CRWaypoint_position_get";
-  case 271: return "CRWaypoint_position_set";
-  case 272: return "CRWaypoint_velocity_get";
-  case 273: return "CRWaypoint_velocity_set";
-  case 274: return "CRWaypoint_acceleration_get";
-  case 275: return "CRWaypoint_acceleration_set";
-  case 276: return "CRWaypoint_jerk_get";
-  case 277: return "CRWaypoint_jerk_set";
-  case 278: return "new_CRWaypoint";
-  case 279: return "delete_CRWaypoint";
-  case 280: return "new_CRTrajectoryGenerator";
-  case 281: return "CRTrajectoryGenerator_solve";
-  case 282: return "CRTrajectoryGenerator_step";
-  case 283: return "delete_CRTrajectoryGenerator";
-  case 284: return "_wrap_poseElements";
+  case 163: return "CRNoiseModel_m_parameters_get";
+  case 164: return "CRNoiseModel_m_parameters_set";
+  case 165: return "delete_CRNoiseModel";
+  case 166: return "CRParamNoiseGaussian_cov_get";
+  case 167: return "CRParamNoiseGaussian_cov_set";
+  case 168: return "CRParamNoiseGaussian_covInv_get";
+  case 169: return "CRParamNoiseGaussian_covInv_set";
+  case 170: return "CRParamNoiseGaussian_mean_get";
+  case 171: return "CRParamNoiseGaussian_mean_set";
+  case 172: return "new_CRParamNoiseGaussian";
+  case 173: return "delete_CRParamNoiseGaussian";
+  case 174: return "new_CRNoiseGaussian";
+  case 175: return "CRNoiseGaussian_setParameters";
+  case 176: return "CRNoiseGaussian_sample";
+  case 177: return "CRNoiseGaussian_probability";
+  case 178: return "CRNoiseGaussian_m_parameters_get";
+  case 179: return "CRNoiseGaussian_m_parameters_set";
+  case 180: return "delete_CRNoiseGaussian";
+  case 181: return "CRParamNoiseUniform_a_get";
+  case 182: return "CRParamNoiseUniform_a_set";
+  case 183: return "CRParamNoiseUniform_b_get";
+  case 184: return "CRParamNoiseUniform_b_set";
+  case 185: return "new_CRParamNoiseUniform";
+  case 186: return "delete_CRParamNoiseUniform";
+  case 187: return "new_CRNoiseUniform";
+  case 188: return "CRNoiseUniform_setParameters";
+  case 189: return "CRNoiseUniform_sample";
+  case 190: return "CRNoiseUniform_probability";
+  case 191: return "CRNoiseUniform_m_parameters_get";
+  case 192: return "CRNoiseUniform_m_parameters_set";
+  case 193: return "delete_CRNoiseUniform";
+  case 194: return "CRParamNoiseMixture_models_get";
+  case 195: return "CRParamNoiseMixture_models_set";
+  case 196: return "CRParamNoiseMixture_weights_get";
+  case 197: return "CRParamNoiseMixture_weights_set";
+  case 198: return "new_CRParamNoiseMixture";
+  case 199: return "delete_CRParamNoiseMixture";
+  case 200: return "new_CRNoiseMixture";
+  case 201: return "CRNoiseMixture_add";
+  case 202: return "CRNoiseMixture_sample";
+  case 203: return "CRNoiseMixture_probability";
+  case 204: return "CRNoiseMixture_m_parameters_get";
+  case 205: return "CRNoiseMixture_m_parameters_set";
+  case 206: return "delete_CRNoiseMixture";
+  case 207: return "new_CRSensorLinear";
+  case 208: return "CRSensorLinear_setObservation";
+  case 209: return "CRSensorLinear_measurement";
+  case 210: return "delete_CRSensorLinear";
+  case 211: return "new_CRInverseKinematics";
+  case 212: return "CRInverseKinematics_setRobot";
+  case 213: return "CRInverseKinematics_getRobot";
+  case 214: return "CRInverseKinematics_setToolIndex";
+  case 215: return "CRInverseKinematics_getToolIndex";
+  case 216: return "CRInverseKinematics_setEulerMode";
+  case 217: return "CRInverseKinematics_getEulerMode";
+  case 218: return "CRInverseKinematics_setTolerance";
+  case 219: return "CRInverseKinematics_getTolerance";
+  case 220: return "CRInverseKinematics_setMaxIter";
+  case 221: return "CRInverseKinematics_getMaxIter";
+  case 222: return "CRInverseKinematics_setStepSize";
+  case 223: return "CRInverseKinematics_getStepSize";
+  case 224: return "CRInverseKinematics_setDampingFactor";
+  case 225: return "CRInverseKinematics_getDampingFactor";
+  case 226: return "CRInverseKinematics_setSingularThresh";
+  case 227: return "CRInverseKinematics_getSingularThresh";
+  case 228: return "CRInverseKinematics_getJacInv";
+  case 229: return "CRInverseKinematics_solve";
+  case 230: return "delete_CRInverseKinematics";
+  case 231: return "new_CRNullSpace";
+  case 232: return "CRNullSpace_setRobot";
+  case 233: return "CRNullSpace_setToolIndex";
+  case 234: return "CRNullSpace_setEulerMode";
+  case 235: return "CRNullSpace_getEulerMode";
+  case 236: return "CRNullSpace_setSingularThresh";
+  case 237: return "CRNullSpace_getSingularThresh";
+  case 238: return "CRNullSpace_setMinStepSize";
+  case 239: return "CRNullSpace_getMinStepSize";
+  case 240: return "CRNullSpace_setMaxIter";
+  case 241: return "CRNullSpace_getMaxIter";
+  case 242: return "CRNullSpace_setTrivialTolerance";
+  case 243: return "CRNullSpace_getTrivialTolerance";
+  case 244: return "CRNullSpace_solve";
+  case 245: return "delete_CRNullSpace";
+  case 246: return "new_CRHardLimits";
+  case 247: return "CRHardLimits_getIKSolver";
+  case 248: return "CRHardLimits_getNullSpaceSolver";
+  case 249: return "CRHardLimits_useNullSpace";
+  case 250: return "CRHardLimits_nullSpaceStatus";
+  case 251: return "CRHardLimits_setPoseElements";
+  case 252: return "CRHardLimits_getPoseElements";
+  case 253: return "CRHardLimits_setJointUpperLimit";
+  case 254: return "CRHardLimits_setJointLowerLimit";
+  case 255: return "CRHardLimits_getJointUpperLimit";
+  case 256: return "CRHardLimits_getJointLowerLimit";
+  case 257: return "CRHardLimits_setJointLimits";
+  case 258: return "CRHardLimits_setJointUpperLimits";
+  case 259: return "CRHardLimits_setJointLowerLimits";
+  case 260: return "CRHardLimits_getJointUpperLimits";
+  case 261: return "CRHardLimits_getJointLowerLimits";
+  case 262: return "CRHardLimits_setQ0";
+  case 263: return "CRHardLimits_getQ0";
+  case 264: return "CRHardLimits_setToolPose";
+  case 265: return "CRHardLimits_getToolPose";
+  case 266: return "CRHardLimits_setJointMotion";
+  case 267: return "CRHardLimits_getJointMotion";
+  case 268: return "CRHardLimits_solve";
+  case 269: return "delete_CRHardLimits";
+  case 270: return "new_CRSharedMemory";
+  case 271: return "delete_CRSharedMemory";
+  case 272: return "CRSharedMemory_addSignal";
+  case 273: return "CRSharedMemory_removeSignal";
+  case 274: return "CRSharedMemory_set";
+  case 275: return "CRSharedMemory_get";
+  case 276: return "CRWaypoint_time_get";
+  case 277: return "CRWaypoint_time_set";
+  case 278: return "CRWaypoint_position_get";
+  case 279: return "CRWaypoint_position_set";
+  case 280: return "CRWaypoint_velocity_get";
+  case 281: return "CRWaypoint_velocity_set";
+  case 282: return "CRWaypoint_acceleration_get";
+  case 283: return "CRWaypoint_acceleration_set";
+  case 284: return "CRWaypoint_jerk_get";
+  case 285: return "CRWaypoint_jerk_set";
+  case 286: return "new_CRWaypoint";
+  case 287: return "delete_CRWaypoint";
+  case 288: return "new_CRTrajectoryGenerator";
+  case 289: return "CRTrajectoryGenerator_solve";
+  case 290: return "CRTrajectoryGenerator_step";
+  case 291: return "delete_CRTrajectoryGenerator";
+  case 292: return "_wrap_poseElements";
   default: return 0;
   }
 }
@@ -16249,128 +16477,136 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 160: flag=_wrap_CRNoiseModel_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
   case 161: flag=_wrap_CRNoiseModel_sample(resc,resv,argc,(mxArray**)(argv)); break;
   case 162: flag=_wrap_CRNoiseModel_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 163: flag=_wrap_delete_CRNoiseModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 164: flag=_wrap_gaussianParam_cov_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 165: flag=_wrap_gaussianParam_cov_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 166: flag=_wrap_gaussianParam_covInv_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 167: flag=_wrap_gaussianParam_covInv_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 168: flag=_wrap_gaussianParam_mean_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 169: flag=_wrap_gaussianParam_mean_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 170: flag=_wrap_new_gaussianParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 171: flag=_wrap_delete_gaussianParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 172: flag=_wrap_new_CRNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 173: flag=_wrap_CRNoiseGaussian_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 174: flag=_wrap_CRNoiseGaussian_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 175: flag=_wrap_CRNoiseGaussian_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 176: flag=_wrap_delete_CRNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 177: flag=_wrap_uniformParam_a_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 178: flag=_wrap_uniformParam_a_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 179: flag=_wrap_uniformParam_b_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 180: flag=_wrap_uniformParam_b_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 181: flag=_wrap_new_uniformParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 182: flag=_wrap_delete_uniformParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 183: flag=_wrap_new_CRNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 184: flag=_wrap_CRNoiseUniform_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 185: flag=_wrap_CRNoiseUniform_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 186: flag=_wrap_CRNoiseUniform_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 187: flag=_wrap_delete_CRNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 188: flag=_wrap_mixtureParam_models_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 189: flag=_wrap_mixtureParam_models_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 190: flag=_wrap_mixtureParam_weights_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 191: flag=_wrap_mixtureParam_weights_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 192: flag=_wrap_new_mixtureParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 193: flag=_wrap_delete_mixtureParam(resc,resv,argc,(mxArray**)(argv)); break;
-  case 194: flag=_wrap_new_CRNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
-  case 195: flag=_wrap_CRNoiseMixture_add(resc,resv,argc,(mxArray**)(argv)); break;
-  case 196: flag=_wrap_CRNoiseMixture_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 197: flag=_wrap_CRNoiseMixture_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 198: flag=_wrap_delete_CRNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
-  case 199: flag=_wrap_new_CRSensorLinear(resc,resv,argc,(mxArray**)(argv)); break;
-  case 200: flag=_wrap_CRSensorLinear_setObservation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 201: flag=_wrap_CRSensorLinear_measurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 202: flag=_wrap_delete_CRSensorLinear(resc,resv,argc,(mxArray**)(argv)); break;
-  case 203: flag=_wrap_new_CRInverseKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 204: flag=_wrap_CRInverseKinematics_setRobot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 205: flag=_wrap_CRInverseKinematics_getRobot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 206: flag=_wrap_CRInverseKinematics_setToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 207: flag=_wrap_CRInverseKinematics_getToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 208: flag=_wrap_CRInverseKinematics_setEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 209: flag=_wrap_CRInverseKinematics_getEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 210: flag=_wrap_CRInverseKinematics_setTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 211: flag=_wrap_CRInverseKinematics_getTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 212: flag=_wrap_CRInverseKinematics_setMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 213: flag=_wrap_CRInverseKinematics_getMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 214: flag=_wrap_CRInverseKinematics_setStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 215: flag=_wrap_CRInverseKinematics_getStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 216: flag=_wrap_CRInverseKinematics_setDampingFactor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 217: flag=_wrap_CRInverseKinematics_getDampingFactor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 218: flag=_wrap_CRInverseKinematics_setSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 219: flag=_wrap_CRInverseKinematics_getSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 220: flag=_wrap_CRInverseKinematics_getJacInv(resc,resv,argc,(mxArray**)(argv)); break;
-  case 221: flag=_wrap_CRInverseKinematics_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 222: flag=_wrap_delete_CRInverseKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 223: flag=_wrap_new_CRNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 224: flag=_wrap_CRNullSpace_setRobot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 225: flag=_wrap_CRNullSpace_setToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 226: flag=_wrap_CRNullSpace_setEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 227: flag=_wrap_CRNullSpace_getEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 228: flag=_wrap_CRNullSpace_setSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 229: flag=_wrap_CRNullSpace_getSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 230: flag=_wrap_CRNullSpace_setMinStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 231: flag=_wrap_CRNullSpace_getMinStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 232: flag=_wrap_CRNullSpace_setMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 233: flag=_wrap_CRNullSpace_getMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 234: flag=_wrap_CRNullSpace_setTrivialTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 235: flag=_wrap_CRNullSpace_getTrivialTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 236: flag=_wrap_CRNullSpace_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 237: flag=_wrap_delete_CRNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 238: flag=_wrap_new_CRHardLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 239: flag=_wrap_CRHardLimits_getIKSolver(resc,resv,argc,(mxArray**)(argv)); break;
-  case 240: flag=_wrap_CRHardLimits_getNullSpaceSolver(resc,resv,argc,(mxArray**)(argv)); break;
-  case 241: flag=_wrap_CRHardLimits_useNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 242: flag=_wrap_CRHardLimits_nullSpaceStatus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 243: flag=_wrap_CRHardLimits_setPoseElements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 244: flag=_wrap_CRHardLimits_getPoseElements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 245: flag=_wrap_CRHardLimits_setJointUpperLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 246: flag=_wrap_CRHardLimits_setJointLowerLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 247: flag=_wrap_CRHardLimits_getJointUpperLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 248: flag=_wrap_CRHardLimits_getJointLowerLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 249: flag=_wrap_CRHardLimits_setJointLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 250: flag=_wrap_CRHardLimits_setJointUpperLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 251: flag=_wrap_CRHardLimits_setJointLowerLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 252: flag=_wrap_CRHardLimits_getJointUpperLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 253: flag=_wrap_CRHardLimits_getJointLowerLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 254: flag=_wrap_CRHardLimits_setQ0(resc,resv,argc,(mxArray**)(argv)); break;
-  case 255: flag=_wrap_CRHardLimits_getQ0(resc,resv,argc,(mxArray**)(argv)); break;
-  case 256: flag=_wrap_CRHardLimits_setToolPose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 257: flag=_wrap_CRHardLimits_getToolPose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 258: flag=_wrap_CRHardLimits_setJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
-  case 259: flag=_wrap_CRHardLimits_getJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
-  case 260: flag=_wrap_CRHardLimits_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 261: flag=_wrap_delete_CRHardLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 262: flag=_wrap_new_CRSharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
-  case 263: flag=_wrap_delete_CRSharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
-  case 264: flag=_wrap_CRSharedMemory_addSignal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 265: flag=_wrap_CRSharedMemory_removeSignal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 266: flag=_wrap_CRSharedMemory_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 267: flag=_wrap_CRSharedMemory_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 268: flag=_wrap_CRWaypoint_time_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 269: flag=_wrap_CRWaypoint_time_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 270: flag=_wrap_CRWaypoint_position_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 271: flag=_wrap_CRWaypoint_position_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 272: flag=_wrap_CRWaypoint_velocity_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 273: flag=_wrap_CRWaypoint_velocity_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 274: flag=_wrap_CRWaypoint_acceleration_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 275: flag=_wrap_CRWaypoint_acceleration_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 276: flag=_wrap_CRWaypoint_jerk_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 277: flag=_wrap_CRWaypoint_jerk_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 278: flag=_wrap_new_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 279: flag=_wrap_delete_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 280: flag=_wrap_new_CRTrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 281: flag=_wrap_CRTrajectoryGenerator_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 282: flag=_wrap_CRTrajectoryGenerator_step(resc,resv,argc,(mxArray**)(argv)); break;
-  case 283: flag=_wrap_delete_CRTrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 284: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 163: flag=_wrap_CRNoiseModel_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 164: flag=_wrap_CRNoiseModel_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 165: flag=_wrap_delete_CRNoiseModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 166: flag=_wrap_CRParamNoiseGaussian_cov_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 167: flag=_wrap_CRParamNoiseGaussian_cov_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 168: flag=_wrap_CRParamNoiseGaussian_covInv_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 169: flag=_wrap_CRParamNoiseGaussian_covInv_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 170: flag=_wrap_CRParamNoiseGaussian_mean_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 171: flag=_wrap_CRParamNoiseGaussian_mean_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 172: flag=_wrap_new_CRParamNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 173: flag=_wrap_delete_CRParamNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 174: flag=_wrap_new_CRNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 175: flag=_wrap_CRNoiseGaussian_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 176: flag=_wrap_CRNoiseGaussian_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 177: flag=_wrap_CRNoiseGaussian_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 178: flag=_wrap_CRNoiseGaussian_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 179: flag=_wrap_CRNoiseGaussian_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 180: flag=_wrap_delete_CRNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 181: flag=_wrap_CRParamNoiseUniform_a_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 182: flag=_wrap_CRParamNoiseUniform_a_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 183: flag=_wrap_CRParamNoiseUniform_b_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 184: flag=_wrap_CRParamNoiseUniform_b_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 185: flag=_wrap_new_CRParamNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 186: flag=_wrap_delete_CRParamNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 187: flag=_wrap_new_CRNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 188: flag=_wrap_CRNoiseUniform_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 189: flag=_wrap_CRNoiseUniform_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 190: flag=_wrap_CRNoiseUniform_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 191: flag=_wrap_CRNoiseUniform_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 192: flag=_wrap_CRNoiseUniform_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 193: flag=_wrap_delete_CRNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 194: flag=_wrap_CRParamNoiseMixture_models_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 195: flag=_wrap_CRParamNoiseMixture_models_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 196: flag=_wrap_CRParamNoiseMixture_weights_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 197: flag=_wrap_CRParamNoiseMixture_weights_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 198: flag=_wrap_new_CRParamNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 199: flag=_wrap_delete_CRParamNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 200: flag=_wrap_new_CRNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 201: flag=_wrap_CRNoiseMixture_add(resc,resv,argc,(mxArray**)(argv)); break;
+  case 202: flag=_wrap_CRNoiseMixture_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 203: flag=_wrap_CRNoiseMixture_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 204: flag=_wrap_CRNoiseMixture_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 205: flag=_wrap_CRNoiseMixture_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 206: flag=_wrap_delete_CRNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 207: flag=_wrap_new_CRSensorLinear(resc,resv,argc,(mxArray**)(argv)); break;
+  case 208: flag=_wrap_CRSensorLinear_setObservation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 209: flag=_wrap_CRSensorLinear_measurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 210: flag=_wrap_delete_CRSensorLinear(resc,resv,argc,(mxArray**)(argv)); break;
+  case 211: flag=_wrap_new_CRInverseKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 212: flag=_wrap_CRInverseKinematics_setRobot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 213: flag=_wrap_CRInverseKinematics_getRobot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 214: flag=_wrap_CRInverseKinematics_setToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 215: flag=_wrap_CRInverseKinematics_getToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 216: flag=_wrap_CRInverseKinematics_setEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 217: flag=_wrap_CRInverseKinematics_getEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 218: flag=_wrap_CRInverseKinematics_setTolerance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 219: flag=_wrap_CRInverseKinematics_getTolerance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 220: flag=_wrap_CRInverseKinematics_setMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 221: flag=_wrap_CRInverseKinematics_getMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 222: flag=_wrap_CRInverseKinematics_setStepSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 223: flag=_wrap_CRInverseKinematics_getStepSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 224: flag=_wrap_CRInverseKinematics_setDampingFactor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 225: flag=_wrap_CRInverseKinematics_getDampingFactor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 226: flag=_wrap_CRInverseKinematics_setSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 227: flag=_wrap_CRInverseKinematics_getSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 228: flag=_wrap_CRInverseKinematics_getJacInv(resc,resv,argc,(mxArray**)(argv)); break;
+  case 229: flag=_wrap_CRInverseKinematics_solve(resc,resv,argc,(mxArray**)(argv)); break;
+  case 230: flag=_wrap_delete_CRInverseKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 231: flag=_wrap_new_CRNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 232: flag=_wrap_CRNullSpace_setRobot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 233: flag=_wrap_CRNullSpace_setToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 234: flag=_wrap_CRNullSpace_setEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 235: flag=_wrap_CRNullSpace_getEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 236: flag=_wrap_CRNullSpace_setSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 237: flag=_wrap_CRNullSpace_getSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 238: flag=_wrap_CRNullSpace_setMinStepSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 239: flag=_wrap_CRNullSpace_getMinStepSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 240: flag=_wrap_CRNullSpace_setMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 241: flag=_wrap_CRNullSpace_getMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 242: flag=_wrap_CRNullSpace_setTrivialTolerance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 243: flag=_wrap_CRNullSpace_getTrivialTolerance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 244: flag=_wrap_CRNullSpace_solve(resc,resv,argc,(mxArray**)(argv)); break;
+  case 245: flag=_wrap_delete_CRNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 246: flag=_wrap_new_CRHardLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 247: flag=_wrap_CRHardLimits_getIKSolver(resc,resv,argc,(mxArray**)(argv)); break;
+  case 248: flag=_wrap_CRHardLimits_getNullSpaceSolver(resc,resv,argc,(mxArray**)(argv)); break;
+  case 249: flag=_wrap_CRHardLimits_useNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 250: flag=_wrap_CRHardLimits_nullSpaceStatus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 251: flag=_wrap_CRHardLimits_setPoseElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 252: flag=_wrap_CRHardLimits_getPoseElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 253: flag=_wrap_CRHardLimits_setJointUpperLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 254: flag=_wrap_CRHardLimits_setJointLowerLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 255: flag=_wrap_CRHardLimits_getJointUpperLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 256: flag=_wrap_CRHardLimits_getJointLowerLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 257: flag=_wrap_CRHardLimits_setJointLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 258: flag=_wrap_CRHardLimits_setJointUpperLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 259: flag=_wrap_CRHardLimits_setJointLowerLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 260: flag=_wrap_CRHardLimits_getJointUpperLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 261: flag=_wrap_CRHardLimits_getJointLowerLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 262: flag=_wrap_CRHardLimits_setQ0(resc,resv,argc,(mxArray**)(argv)); break;
+  case 263: flag=_wrap_CRHardLimits_getQ0(resc,resv,argc,(mxArray**)(argv)); break;
+  case 264: flag=_wrap_CRHardLimits_setToolPose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 265: flag=_wrap_CRHardLimits_getToolPose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 266: flag=_wrap_CRHardLimits_setJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
+  case 267: flag=_wrap_CRHardLimits_getJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
+  case 268: flag=_wrap_CRHardLimits_solve(resc,resv,argc,(mxArray**)(argv)); break;
+  case 269: flag=_wrap_delete_CRHardLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 270: flag=_wrap_new_CRSharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
+  case 271: flag=_wrap_delete_CRSharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
+  case 272: flag=_wrap_CRSharedMemory_addSignal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 273: flag=_wrap_CRSharedMemory_removeSignal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 274: flag=_wrap_CRSharedMemory_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 275: flag=_wrap_CRSharedMemory_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 276: flag=_wrap_CRWaypoint_time_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 277: flag=_wrap_CRWaypoint_time_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 278: flag=_wrap_CRWaypoint_position_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 279: flag=_wrap_CRWaypoint_position_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 280: flag=_wrap_CRWaypoint_velocity_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 281: flag=_wrap_CRWaypoint_velocity_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 282: flag=_wrap_CRWaypoint_acceleration_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 283: flag=_wrap_CRWaypoint_acceleration_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 284: flag=_wrap_CRWaypoint_jerk_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 285: flag=_wrap_CRWaypoint_jerk_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 286: flag=_wrap_new_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 287: flag=_wrap_delete_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 288: flag=_wrap_new_CRTrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 289: flag=_wrap_CRTrajectoryGenerator_solve(resc,resv,argc,(mxArray**)(argv)); break;
+  case 290: flag=_wrap_CRTrajectoryGenerator_step(resc,resv,argc,(mxArray**)(argv)); break;
+  case 291: flag=_wrap_delete_CRTrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 292: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
   default: flag=1, SWIG_Error(SWIG_RuntimeError, "No function id %d.", fcn_id);
   }
   if (flag) {
