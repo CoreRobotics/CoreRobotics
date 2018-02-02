@@ -45,6 +45,44 @@ POSSIBILITY OF SUCH DAMAGE.
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
+
+//
+// Test the reductions
+//
+TEST(CRMatrix, Reductions){
+    
+    // simple vector
+    Eigen::VectorXd x(3);
+    x << 1, 2, 3;
+    
+    // Reduced vector
+    Eigen::VectorXi idx(2);
+    idx << 0, 2;
+    Eigen::VectorXd y = CRMatrix::reducedVector(x, idx);
+    
+    EXPECT_DOUBLE_EQ(1, y(0));
+    EXPECT_DOUBLE_EQ(3, y(1));
+    EXPECT_EQ(2, y.size());
+    
+    
+    // simple matrix
+    Eigen::Matrix3d A;
+    A << 1, 2, 3, 4, 5, 6, 7, 8, 9;
+    
+    // Reduced vector
+    Eigen::VectorXi rIdx(1);
+    Eigen::VectorXi cIdx(2);
+    rIdx << 1;
+    cIdx << 0, 2;
+    Eigen::MatrixXd Y = CRMatrix::reducedMatrix(A, rIdx, cIdx);
+    
+    EXPECT_EQ(1, Y.rows());
+    EXPECT_EQ(2, Y.cols());
+    EXPECT_DOUBLE_EQ(4, Y(0,0));
+    EXPECT_DOUBLE_EQ(6, Y(0,1));
+}
+
+
 //
 // Test the svd
 //

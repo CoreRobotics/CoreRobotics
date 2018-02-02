@@ -68,14 +68,16 @@ namespace CoreRobotics {
 ## Description
 This class implements matrix and vector math.
  
-- CRMath::svd performs singular value decomposition.
-- CRMath::svdInverse performs matrix inverse using SVD.
-- CRMath::rotAboutX constructs a rotation matrix for rotation about x axis.
-- CRMath::rotAboutY constructs a rotation matrix for rotation about y axis.
-- CRMath::rotAboutZ constructs a rotation matrix for rotation about z axis.
-- CRMath::normL1 takes the L1 norm of a vector.
-- CRMath::normL2 takes the L2 norm of a vector.
-- CRMath::normLinf takes the L-infinity norm of a vector.
+ - CRMatrix::reducedVector returns a sub vector
+ - CRMatrix::reducedMatrix returns a sub matrix
+ - CRMatrix::svd performs singular value decomposition.
+ - CRMatrix::svdInverse performs matrix inverse using SVD.
+ - CRMatrix::rotAboutX constructs a rotation matrix for rotation about x axis.
+ - CRMatrix::rotAboutY constructs a rotation matrix for rotation about y axis.
+ - CRMatrix::rotAboutZ constructs a rotation matrix for rotation about z axis.
+ - CRMatrix::normL1 takes the L1 norm of a vector.
+ - CRMatrix::normL2 takes the L2 norm of a vector.
+ - CRMatrix::normLinf takes the L-infinity norm of a vector.
  
 ## Example
 This example shows usage of the math functions.
@@ -89,6 +91,19 @@ John Wiley & Sons, 2011.
 
 //=====================================================================
 class CRMatrix {
+    
+//---------------------------------------------------------------------
+// Matrix downselection
+public:
+
+    //! Return sub vector of indicated indices
+    static Eigen::VectorXd reducedVector(Eigen::VectorXd i_x,
+                                         Eigen::VectorXi i_indices);
+    
+    //! Return sub matrix of indicated indices
+    static Eigen::MatrixXd reducedMatrix(Eigen::MatrixXd i_x,
+                                         Eigen::VectorXi i_rowIndices,
+                                         Eigen::VectorXi i_colIndices);
     
 //---------------------------------------------------------------------
 // Matrix factorization

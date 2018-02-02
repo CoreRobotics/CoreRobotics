@@ -42,11 +42,68 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CRMatrix.hpp"
 #include "Eigen/Dense"
 #include "Eigen/SVD"
-
+#include <iostream>
 
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
+    
+    
+    
+//=====================================================================
+/*!
+ This method returns a reduced vector.\n.
+ 
+ \param [in] i_x - the input vector
+ \param [out] i_indices - a vector of indices to return.  Note that the
+ size of i_indices corresponds to the size of the output vector.
+ \return - the reduced vector
+ */
+//---------------------------------------------------------------------
+Eigen::VectorXd CRMatrix::reducedVector(Eigen::VectorXd i_x,
+                                        Eigen::VectorXi i_indices)
+{
+    Eigen::VectorXd y;
+    y.setZero(i_indices.size());
+    
+    // now perform the down selection
+    for (int k = 0; k < i_indices.size(); k++){
+        y(k) = i_x(i_indices(k));
+    }
+    return y;
+}
+
+    
+
+//=====================================================================
+/*!
+ This method returns a reduced matrix.\n.
+ 
+ \param [in] i_x - the input matrix
+ \param [out] i_rowIndices - a vector of rows indices to return.  Note
+ that the size of i_rowIndices corresponds to the number of rows in the
+ output matrix.
+ \param [out] i_colIndices - a vector of column indices to return.  Note
+ that the size of i_colIndices corresponds to the number of columns in the
+ output matrix.
+ \return - the reduced matrix
+ */
+//---------------------------------------------------------------------
+Eigen::MatrixXd CRMatrix::reducedMatrix(Eigen::MatrixXd i_x,
+                                        Eigen::VectorXi i_rowIndices,
+                                        Eigen::VectorXi i_colIndices)
+{
+    Eigen::MatrixXd y;
+    y.setZero(i_rowIndices.size(), i_colIndices.size());
+    
+    // now perform the down selection
+    for (int i = 0; i < i_rowIndices.size(); i++){
+        for (int j = 0; j < i_colIndices.size(); j++){
+            y(i, j) = i_x(i_rowIndices(i), i_colIndices(j));
+        }
+    }
+    return y;
+}
 
 
 
