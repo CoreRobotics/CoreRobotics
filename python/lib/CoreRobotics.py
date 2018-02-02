@@ -494,6 +494,14 @@ class CRMatrix(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, CRMatrix, name)
     __repr__ = _swig_repr
     if _newclass:
+        reducedVector = staticmethod(_CoreRobotics.CRMatrix_reducedVector)
+    else:
+        reducedVector = _CoreRobotics.CRMatrix_reducedVector
+    if _newclass:
+        reducedMatrix = staticmethod(_CoreRobotics.CRMatrix_reducedMatrix)
+    else:
+        reducedMatrix = _CoreRobotics.CRMatrix_reducedMatrix
+    if _newclass:
         svd = staticmethod(_CoreRobotics.CRMatrix_svd)
     else:
         svd = _CoreRobotics.CRMatrix_svd
@@ -537,6 +545,14 @@ class CRMatrix(_object):
         return None
 CRMatrix_swigregister = _CoreRobotics.CRMatrix_swigregister
 CRMatrix_swigregister(CRMatrix)
+
+def CRMatrix_reducedVector(i_x, i_indices):
+    return _CoreRobotics.CRMatrix_reducedVector(i_x, i_indices)
+CRMatrix_reducedVector = _CoreRobotics.CRMatrix_reducedVector
+
+def CRMatrix_reducedMatrix(i_x, i_rowIndices, i_colIndices):
+    return _CoreRobotics.CRMatrix_reducedMatrix(i_x, i_rowIndices, i_colIndices)
+CRMatrix_reducedMatrix = _CoreRobotics.CRMatrix_reducedMatrix
 
 def CRMatrix_svd(i_A, i_tol, o_U, o_Sigma, o_V):
     return _CoreRobotics.CRMatrix_svd(i_A, i_tol, o_U, o_Sigma, o_V)

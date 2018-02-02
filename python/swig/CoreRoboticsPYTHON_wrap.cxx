@@ -3031,27 +3031,28 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[25]
 #define SWIGTYPE_p_Eigen__MatrixXd swig_types[26]
 #define SWIGTYPE_p_Eigen__VectorXd swig_types[27]
-#define SWIGTYPE_p_allocator_type swig_types[28]
-#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[29]
-#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[30]
-#define SWIGTYPE_p_char swig_types[31]
-#define SWIGTYPE_p_difference_type swig_types[32]
-#define SWIGTYPE_p_double swig_types[33]
-#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[34]
-#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[35]
-#define SWIGTYPE_p_p_PyObject swig_types[36]
-#define SWIGTYPE_p_size_type swig_types[37]
-#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[38]
-#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[39]
-#define SWIGTYPE_p_std__invalid_argument swig_types[40]
-#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[41]
-#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[42]
-#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[43]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[44]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[45]
-#define SWIGTYPE_p_value_type swig_types[46]
-static swig_type_info *swig_types[48];
-static swig_module_info swig_module = {swig_types, 47, 0, 0, 0, 0};
+#define SWIGTYPE_p_Eigen__VectorXi swig_types[28]
+#define SWIGTYPE_p_allocator_type swig_types[29]
+#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[30]
+#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[31]
+#define SWIGTYPE_p_char swig_types[32]
+#define SWIGTYPE_p_difference_type swig_types[33]
+#define SWIGTYPE_p_double swig_types[34]
+#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[35]
+#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[36]
+#define SWIGTYPE_p_p_PyObject swig_types[37]
+#define SWIGTYPE_p_size_type swig_types[38]
+#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[39]
+#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[40]
+#define SWIGTYPE_p_std__invalid_argument swig_types[41]
+#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[42]
+#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[43]
+#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[44]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[45]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[46]
+#define SWIGTYPE_p_value_type swig_types[47]
+static swig_type_info *swig_types[49];
+static swig_module_info swig_module = {swig_types, 48, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -10928,6 +10929,105 @@ SWIGINTERN PyObject *CRIntegration_swigregister(PyObject *SWIGUNUSEDPARM(self), 
   SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__CRIntegration, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
+
+SWIGINTERN PyObject *_wrap_CRMatrix_reducedVector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Eigen::VectorXd arg1 ;
+  Eigen::VectorXi arg2 ;
+  Eigen::VectorXd temp1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Eigen::VectorXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRMatrix_reducedVector",&obj0,&obj1)) SWIG_fail;
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp1, obj0))
+    SWIG_fail;
+    arg1 = temp1;
+  }
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Eigen__VectorXi,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRMatrix_reducedVector" "', argument " "2"" of type '" "Eigen::VectorXi""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRMatrix_reducedVector" "', argument " "2"" of type '" "Eigen::VectorXi""'");
+    } else {
+      Eigen::VectorXi * temp = reinterpret_cast< Eigen::VectorXi * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = CoreRobotics::CRMatrix::reducedVector(arg1,arg2);
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::VectorXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRMatrix_reducedMatrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Eigen::MatrixXd arg1 ;
+  Eigen::VectorXi arg2 ;
+  Eigen::VectorXi arg3 ;
+  Eigen::MatrixXd temp1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  Eigen::MatrixXd result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CRMatrix_reducedMatrix",&obj0,&obj1,&obj2)) SWIG_fail;
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp1, obj0))
+    SWIG_fail;
+    arg1 = temp1;
+  }
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Eigen__VectorXi,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRMatrix_reducedMatrix" "', argument " "2"" of type '" "Eigen::VectorXi""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRMatrix_reducedMatrix" "', argument " "2"" of type '" "Eigen::VectorXi""'");
+    } else {
+      Eigen::VectorXi * temp = reinterpret_cast< Eigen::VectorXi * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_Eigen__VectorXi,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CRMatrix_reducedMatrix" "', argument " "3"" of type '" "Eigen::VectorXi""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRMatrix_reducedMatrix" "', argument " "3"" of type '" "Eigen::VectorXi""'");
+    } else {
+      Eigen::VectorXi * temp = reinterpret_cast< Eigen::VectorXi * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = CoreRobotics::CRMatrix::reducedMatrix(arg1,arg2,arg3);
+  {
+    if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
+    SWIG_fail;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
 
 SWIGINTERN PyObject *_wrap_CRMatrix_svd(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
@@ -20068,6 +20168,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_CRIntegration", _wrap_new_CRIntegration, METH_VARARGS, NULL},
 	 { (char *)"delete_CRIntegration", _wrap_delete_CRIntegration, METH_VARARGS, NULL},
 	 { (char *)"CRIntegration_swigregister", CRIntegration_swigregister, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_reducedVector", _wrap_CRMatrix_reducedVector, METH_VARARGS, NULL},
+	 { (char *)"CRMatrix_reducedMatrix", _wrap_CRMatrix_reducedMatrix, METH_VARARGS, NULL},
 	 { (char *)"CRMatrix_svd", _wrap_CRMatrix_svd, METH_VARARGS, NULL},
 	 { (char *)"CRMatrix_svdInverse", _wrap_CRMatrix_svdInverse, METH_VARARGS, NULL},
 	 { (char *)"CRMatrix_rotAboutX", _wrap_CRMatrix_rotAboutX, METH_VARARGS, NULL},
@@ -20347,6 +20449,7 @@ static swig_type_info _swigt__p_Eigen__Matrix3d = {"_p_Eigen__Matrix3d", "Eigen:
 static swig_type_info _swigt__p_Eigen__MatrixT_bool_6_1_t = {"_p_Eigen__MatrixT_bool_6_1_t", "Eigen::Matrix< bool,6,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__MatrixXd = {"_p_Eigen__MatrixXd", "std::vector< Eigen::MatrixXd >::value_type *|Eigen::MatrixXd *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__VectorXd = {"_p_Eigen__VectorXd", "Eigen::VectorXd *|std::vector< Eigen::VectorXd >::value_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Eigen__VectorXi = {"_p_Eigen__VectorXi", "Eigen::VectorXi *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t = {"_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t", "CoreRobotics::ShmemAllocator *|boost::interprocess::allocator< double,boost::interprocess::managed_shared_memory::segment_manager > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t = {"_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t", "boost::interprocess::vector< double,CoreRobotics::ShmemAllocator > *|CoreRobotics::Signal *", 0, 0, (void*)0, 0};
@@ -20396,6 +20499,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Eigen__MatrixT_bool_6_1_t,
   &_swigt__p_Eigen__MatrixXd,
   &_swigt__p_Eigen__VectorXd,
+  &_swigt__p_Eigen__VectorXi,
   &_swigt__p_allocator_type,
   &_swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t,
   &_swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t,
@@ -20445,6 +20549,7 @@ static swig_cast_info _swigc__p_Eigen__Matrix3d[] = {  {&_swigt__p_Eigen__Matrix
 static swig_cast_info _swigc__p_Eigen__MatrixT_bool_6_1_t[] = {  {&_swigt__p_Eigen__MatrixT_bool_6_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__MatrixXd[] = {  {&_swigt__p_Eigen__MatrixXd, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__VectorXd[] = {  {&_swigt__p_Eigen__VectorXd, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Eigen__VectorXi[] = {  {&_swigt__p_Eigen__VectorXi, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t[] = {  {&_swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t[] = {  {&_swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -20494,6 +20599,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Eigen__MatrixT_bool_6_1_t,
   _swigc__p_Eigen__MatrixXd,
   _swigc__p_Eigen__VectorXd,
+  _swigc__p_Eigen__VectorXi,
   _swigc__p_allocator_type,
   _swigc__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t,
   _swigc__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t,

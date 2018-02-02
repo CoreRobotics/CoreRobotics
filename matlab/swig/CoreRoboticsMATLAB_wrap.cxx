@@ -1237,25 +1237,26 @@ namespace swig {
 #define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[25]
 #define SWIGTYPE_p_Eigen__MatrixXd swig_types[26]
 #define SWIGTYPE_p_Eigen__VectorXd swig_types[27]
-#define SWIGTYPE_p_allocator_type swig_types[28]
-#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[29]
-#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[30]
-#define SWIGTYPE_p_char swig_types[31]
-#define SWIGTYPE_p_difference_type swig_types[32]
-#define SWIGTYPE_p_double swig_types[33]
-#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[34]
-#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[35]
-#define SWIGTYPE_p_size_type swig_types[36]
-#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[37]
-#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[38]
-#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[39]
-#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[40]
-#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[41]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[42]
-#define SWIGTYPE_p_swig__MatlabSwigIterator swig_types[43]
-#define SWIGTYPE_p_value_type swig_types[44]
-static swig_type_info *swig_types[46];
-static swig_module_info swig_module = {swig_types, 45, 0, 0, 0, 0};
+#define SWIGTYPE_p_Eigen__VectorXi swig_types[28]
+#define SWIGTYPE_p_allocator_type swig_types[29]
+#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[30]
+#define SWIGTYPE_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t swig_types[31]
+#define SWIGTYPE_p_char swig_types[32]
+#define SWIGTYPE_p_difference_type swig_types[33]
+#define SWIGTYPE_p_double swig_types[34]
+#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[35]
+#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[36]
+#define SWIGTYPE_p_size_type swig_types[37]
+#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[38]
+#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[39]
+#define SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t swig_types[40]
+#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[41]
+#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[42]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[43]
+#define SWIGTYPE_p_swig__MatlabSwigIterator swig_types[44]
+#define SWIGTYPE_p_value_type swig_types[45]
+static swig_type_info *swig_types[47];
+static swig_module_info swig_module = {swig_types, 46, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6333,6 +6334,100 @@ int _wrap_delete_CRIntegration (int resc, mxArray *resv[], int argc, mxArray *ar
     delete arg1;
   }
   _out = (mxArray*)0;
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRMatrix_reducedVector (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  Eigen::VectorXd arg1 ;
+  Eigen::VectorXi arg2 ;
+  Eigen::VectorXd temp1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  Eigen::VectorXd result;
+  
+  if (!SWIG_check_num_args("CRMatrix_reducedVector",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp1, argv[0]))
+    SWIG_fail;
+    arg1 = temp1;
+  }
+  {
+    res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_Eigen__VectorXi,  0 );
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRMatrix_reducedVector" "', argument " "2"" of type '" "Eigen::VectorXi""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRMatrix_reducedVector" "', argument " "2"" of type '" "Eigen::VectorXi""'");
+    } else {
+      arg2 = *(reinterpret_cast< Eigen::VectorXi * >(argp2));
+    }
+  }
+  result = CoreRobotics::CRMatrix::reducedVector(arg1,arg2);
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
+    SWIG_fail;
+  }
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
+int _wrap_CRMatrix_reducedMatrix (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  Eigen::MatrixXd arg1 ;
+  Eigen::VectorXi arg2 ;
+  Eigen::VectorXi arg3 ;
+  Eigen::MatrixXd temp1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  mxArray * _out;
+  Eigen::MatrixXd result;
+  
+  if (!SWIG_check_num_args("CRMatrix_reducedMatrix",argc,3,3,0)) {
+    SWIG_fail;
+  }
+  {
+    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp1, argv[0]))
+    SWIG_fail;
+    arg1 = temp1;
+  }
+  {
+    res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_Eigen__VectorXi,  0 );
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRMatrix_reducedMatrix" "', argument " "2"" of type '" "Eigen::VectorXi""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRMatrix_reducedMatrix" "', argument " "2"" of type '" "Eigen::VectorXi""'");
+    } else {
+      arg2 = *(reinterpret_cast< Eigen::VectorXi * >(argp2));
+    }
+  }
+  {
+    res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_Eigen__VectorXi,  0 );
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CRMatrix_reducedMatrix" "', argument " "3"" of type '" "Eigen::VectorXi""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRMatrix_reducedMatrix" "', argument " "3"" of type '" "Eigen::VectorXi""'");
+    } else {
+      arg3 = *(reinterpret_cast< Eigen::VectorXi * >(argp3));
+    }
+  }
+  result = CoreRobotics::CRMatrix::reducedMatrix(arg1,arg2,arg3);
+  {
+    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
+    SWIG_fail;
+  }
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -15433,6 +15528,7 @@ static swig_type_info _swigt__p_Eigen__Matrix3d = {"_p_Eigen__Matrix3d", "Eigen:
 static swig_type_info _swigt__p_Eigen__MatrixT_bool_6_1_t = {"_p_Eigen__MatrixT_bool_6_1_t", "Eigen::Matrix< bool,6,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__MatrixXd = {"_p_Eigen__MatrixXd", "std::vector< Eigen::MatrixXd >::value_type *|Eigen::MatrixXd *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__VectorXd = {"_p_Eigen__VectorXd", "Eigen::VectorXd *|std::vector< Eigen::VectorXd >::value_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Eigen__VectorXi = {"_p_Eigen__VectorXi", "Eigen::VectorXi *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t = {"_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t", "CoreRobotics::ShmemAllocator *|boost::interprocess::allocator< double,boost::interprocess::managed_shared_memory::segment_manager > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t = {"_p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t", "boost::interprocess::vector< double,CoreRobotics::ShmemAllocator > *|CoreRobotics::Signal *", 0, 0, (void*)0, 0};
@@ -15480,6 +15576,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Eigen__MatrixT_bool_6_1_t,
   &_swigt__p_Eigen__MatrixXd,
   &_swigt__p_Eigen__VectorXd,
+  &_swigt__p_Eigen__VectorXi,
   &_swigt__p_allocator_type,
   &_swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t,
   &_swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t,
@@ -15527,6 +15624,7 @@ static swig_cast_info _swigc__p_Eigen__Matrix3d[] = {  {&_swigt__p_Eigen__Matrix
 static swig_cast_info _swigc__p_Eigen__MatrixT_bool_6_1_t[] = {  {&_swigt__p_Eigen__MatrixT_bool_6_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__MatrixXd[] = {  {&_swigt__p_Eigen__MatrixXd, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__VectorXd[] = {  {&_swigt__p_Eigen__VectorXd, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Eigen__VectorXi[] = {  {&_swigt__p_Eigen__VectorXi, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t[] = {  {&_swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t[] = {  {&_swigt__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -15574,6 +15672,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Eigen__MatrixT_bool_6_1_t,
   _swigc__p_Eigen__MatrixXd,
   _swigc__p_Eigen__VectorXd,
+  _swigc__p_Eigen__VectorXi,
   _swigc__p_allocator_type,
   _swigc__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t,
   _swigc__p_boost__interprocess__vectorT_double_CoreRobotics__ShmemAllocator_t,
@@ -16048,216 +16147,218 @@ const char* swigFunctionName_(int fcn_id) {
   case 80: return "delete_CRConversion";
   case 81: return "new_CRIntegration";
   case 82: return "delete_CRIntegration";
-  case 83: return "CRMatrix_svd";
-  case 84: return "CRMatrix_svdInverse";
-  case 85: return "CRMatrix_rotAboutX";
-  case 86: return "CRMatrix_rotAboutY";
-  case 87: return "CRMatrix_rotAboutZ";
-  case 88: return "CRMatrix_normL1";
-  case 89: return "CRMatrix_normL2";
-  case 90: return "CRMatrix_normLinf";
-  case 91: return "new_CRMatrix";
-  case 92: return "delete_CRMatrix";
-  case 93: return "new_CRFrame";
-  case 94: return "CRFrame_setFreeValue";
-  case 95: return "CRFrame_getFreeValue";
-  case 96: return "CRFrame_setRotationAndTranslation";
-  case 97: return "CRFrame_getRotationAndTranslation";
-  case 98: return "CRFrame_getTransformToParent";
-  case 99: return "CRFrame_getTransformToChild";
-  case 100: return "CRFrame_transformToParent";
-  case 101: return "CRFrame_transformToChild";
-  case 102: return "CRFrame_isDriven";
-  case 103: return "CRFrame_getPosition";
-  case 104: return "CRFrame_getOrientation";
-  case 105: return "CRFrame_getPose";
-  case 106: return "delete_CRFrame";
-  case 107: return "new_CRFrameEuler";
-  case 108: return "CRFrameEuler_setFreeValue";
-  case 109: return "CRFrameEuler_getFreeValue";
-  case 110: return "CRFrameEuler_setFreeVariable";
-  case 111: return "CRFrameEuler_getFreeVariable";
-  case 112: return "CRFrameEuler_setMode";
-  case 113: return "CRFrameEuler_getMode";
-  case 114: return "CRFrameEuler_setPosition";
-  case 115: return "CRFrameEuler_getPosition";
-  case 116: return "CRFrameEuler_setOrientation";
-  case 117: return "CRFrameEuler_getOrientation";
-  case 118: return "CRFrameEuler_setPositionAndOrientation";
-  case 119: return "CRFrameEuler_getPositionAndOrientation";
-  case 120: return "CRFrameEuler_isDriven";
-  case 121: return "delete_CRFrameEuler";
-  case 122: return "new_CRFrameDh";
-  case 123: return "CRFrameDh_setFreeValue";
-  case 124: return "CRFrameDh_getFreeValue";
-  case 125: return "CRFrameDh_setFreeVariable";
-  case 126: return "CRFrameDh_getFreeVariable";
-  case 127: return "CRFrameDh_setMode";
-  case 128: return "CRFrameDh_getMode";
-  case 129: return "CRFrameDh_setParameters";
-  case 130: return "CRFrameDh_getParameters";
-  case 131: return "CRFrameDh_isDriven";
-  case 132: return "delete_CRFrameDh";
-  case 133: return "new_CRRigidBody";
-  case 134: return "CRRigidBody_setFrame";
-  case 135: return "CRRigidBody_m_frame_get";
-  case 136: return "CRRigidBody_m_frame_set";
-  case 137: return "delete_CRRigidBody";
-  case 138: return "new_CRManipulator";
-  case 139: return "CRManipulator_setConfiguration";
-  case 140: return "CRManipulator_getConfiguration";
-  case 141: return "CRManipulator_getForwardKinematics";
-  case 142: return "CRManipulator_getNumberOfLinks";
-  case 143: return "CRManipulator_getDegreesOfFreedom";
-  case 144: return "CRManipulator_getToolFrame";
-  case 145: return "CRManipulator_getLinkFrame";
-  case 146: return "CRManipulator_getToolPose";
-  case 147: return "CRManipulator_setModelType";
-  case 148: return "CRManipulator_jacobian";
-  case 149: return "CRManipulator_hessian";
-  case 150: return "CRManipulator_addLink";
-  case 151: return "CRManipulator_addTool";
-  case 152: return "delete_CRManipulator";
-  case 153: return "CRParamNoiseGeneric_icdFunction_get";
-  case 154: return "CRParamNoiseGeneric_icdFunction_set";
-  case 155: return "CRParamNoiseGeneric_probFunction_get";
-  case 156: return "CRParamNoiseGeneric_probFunction_set";
-  case 157: return "new_CRParamNoiseGeneric";
-  case 158: return "delete_CRParamNoiseGeneric";
-  case 159: return "new_CRNoiseModel";
-  case 160: return "CRNoiseModel_setParameters";
-  case 161: return "CRNoiseModel_sample";
-  case 162: return "CRNoiseModel_probability";
-  case 163: return "CRNoiseModel_m_parameters_get";
-  case 164: return "CRNoiseModel_m_parameters_set";
-  case 165: return "delete_CRNoiseModel";
-  case 166: return "CRParamNoiseGaussian_cov_get";
-  case 167: return "CRParamNoiseGaussian_cov_set";
-  case 168: return "CRParamNoiseGaussian_covInv_get";
-  case 169: return "CRParamNoiseGaussian_covInv_set";
-  case 170: return "CRParamNoiseGaussian_mean_get";
-  case 171: return "CRParamNoiseGaussian_mean_set";
-  case 172: return "new_CRParamNoiseGaussian";
-  case 173: return "delete_CRParamNoiseGaussian";
-  case 174: return "new_CRNoiseGaussian";
-  case 175: return "CRNoiseGaussian_setParameters";
-  case 176: return "CRNoiseGaussian_sample";
-  case 177: return "CRNoiseGaussian_probability";
-  case 178: return "CRNoiseGaussian_m_parameters_get";
-  case 179: return "CRNoiseGaussian_m_parameters_set";
-  case 180: return "delete_CRNoiseGaussian";
-  case 181: return "CRParamNoiseUniform_a_get";
-  case 182: return "CRParamNoiseUniform_a_set";
-  case 183: return "CRParamNoiseUniform_b_get";
-  case 184: return "CRParamNoiseUniform_b_set";
-  case 185: return "new_CRParamNoiseUniform";
-  case 186: return "delete_CRParamNoiseUniform";
-  case 187: return "new_CRNoiseUniform";
-  case 188: return "CRNoiseUniform_setParameters";
-  case 189: return "CRNoiseUniform_sample";
-  case 190: return "CRNoiseUniform_probability";
-  case 191: return "CRNoiseUniform_m_parameters_get";
-  case 192: return "CRNoiseUniform_m_parameters_set";
-  case 193: return "delete_CRNoiseUniform";
-  case 194: return "CRParamNoiseMixture_models_get";
-  case 195: return "CRParamNoiseMixture_models_set";
-  case 196: return "CRParamNoiseMixture_weights_get";
-  case 197: return "CRParamNoiseMixture_weights_set";
-  case 198: return "new_CRParamNoiseMixture";
-  case 199: return "delete_CRParamNoiseMixture";
-  case 200: return "new_CRNoiseMixture";
-  case 201: return "CRNoiseMixture_add";
-  case 202: return "CRNoiseMixture_sample";
-  case 203: return "CRNoiseMixture_probability";
-  case 204: return "CRNoiseMixture_m_parameters_get";
-  case 205: return "CRNoiseMixture_m_parameters_set";
-  case 206: return "delete_CRNoiseMixture";
-  case 207: return "new_CRSensorLinear";
-  case 208: return "CRSensorLinear_setObservation";
-  case 209: return "CRSensorLinear_measurement";
-  case 210: return "delete_CRSensorLinear";
-  case 211: return "new_CRInverseKinematics";
-  case 212: return "CRInverseKinematics_setRobot";
-  case 213: return "CRInverseKinematics_getRobot";
-  case 214: return "CRInverseKinematics_setToolIndex";
-  case 215: return "CRInverseKinematics_getToolIndex";
-  case 216: return "CRInverseKinematics_setEulerMode";
-  case 217: return "CRInverseKinematics_getEulerMode";
-  case 218: return "CRInverseKinematics_setTolerance";
-  case 219: return "CRInverseKinematics_getTolerance";
-  case 220: return "CRInverseKinematics_setMaxIter";
-  case 221: return "CRInverseKinematics_getMaxIter";
-  case 222: return "CRInverseKinematics_setStepSize";
-  case 223: return "CRInverseKinematics_getStepSize";
-  case 224: return "CRInverseKinematics_setDampingFactor";
-  case 225: return "CRInverseKinematics_getDampingFactor";
-  case 226: return "CRInverseKinematics_setSingularThresh";
-  case 227: return "CRInverseKinematics_getSingularThresh";
-  case 228: return "CRInverseKinematics_getJacInv";
-  case 229: return "CRInverseKinematics_solve";
-  case 230: return "delete_CRInverseKinematics";
-  case 231: return "new_CRNullSpace";
-  case 232: return "CRNullSpace_setRobot";
-  case 233: return "CRNullSpace_setToolIndex";
-  case 234: return "CRNullSpace_setEulerMode";
-  case 235: return "CRNullSpace_getEulerMode";
-  case 236: return "CRNullSpace_setSingularThresh";
-  case 237: return "CRNullSpace_getSingularThresh";
-  case 238: return "CRNullSpace_setMinStepSize";
-  case 239: return "CRNullSpace_getMinStepSize";
-  case 240: return "CRNullSpace_setMaxIter";
-  case 241: return "CRNullSpace_getMaxIter";
-  case 242: return "CRNullSpace_setTrivialTolerance";
-  case 243: return "CRNullSpace_getTrivialTolerance";
-  case 244: return "CRNullSpace_solve";
-  case 245: return "delete_CRNullSpace";
-  case 246: return "new_CRHardLimits";
-  case 247: return "CRHardLimits_getIKSolver";
-  case 248: return "CRHardLimits_getNullSpaceSolver";
-  case 249: return "CRHardLimits_useNullSpace";
-  case 250: return "CRHardLimits_nullSpaceStatus";
-  case 251: return "CRHardLimits_setPoseElements";
-  case 252: return "CRHardLimits_getPoseElements";
-  case 253: return "CRHardLimits_setJointUpperLimit";
-  case 254: return "CRHardLimits_setJointLowerLimit";
-  case 255: return "CRHardLimits_getJointUpperLimit";
-  case 256: return "CRHardLimits_getJointLowerLimit";
-  case 257: return "CRHardLimits_setJointLimits";
-  case 258: return "CRHardLimits_setJointUpperLimits";
-  case 259: return "CRHardLimits_setJointLowerLimits";
-  case 260: return "CRHardLimits_getJointUpperLimits";
-  case 261: return "CRHardLimits_getJointLowerLimits";
-  case 262: return "CRHardLimits_setQ0";
-  case 263: return "CRHardLimits_getQ0";
-  case 264: return "CRHardLimits_setToolPose";
-  case 265: return "CRHardLimits_getToolPose";
-  case 266: return "CRHardLimits_setJointMotion";
-  case 267: return "CRHardLimits_getJointMotion";
-  case 268: return "CRHardLimits_solve";
-  case 269: return "delete_CRHardLimits";
-  case 270: return "new_CRSharedMemory";
-  case 271: return "delete_CRSharedMemory";
-  case 272: return "CRSharedMemory_addSignal";
-  case 273: return "CRSharedMemory_removeSignal";
-  case 274: return "CRSharedMemory_set";
-  case 275: return "CRSharedMemory_get";
-  case 276: return "CRWaypoint_time_get";
-  case 277: return "CRWaypoint_time_set";
-  case 278: return "CRWaypoint_position_get";
-  case 279: return "CRWaypoint_position_set";
-  case 280: return "CRWaypoint_velocity_get";
-  case 281: return "CRWaypoint_velocity_set";
-  case 282: return "CRWaypoint_acceleration_get";
-  case 283: return "CRWaypoint_acceleration_set";
-  case 284: return "CRWaypoint_jerk_get";
-  case 285: return "CRWaypoint_jerk_set";
-  case 286: return "new_CRWaypoint";
-  case 287: return "delete_CRWaypoint";
-  case 288: return "new_CRTrajectoryGenerator";
-  case 289: return "CRTrajectoryGenerator_solve";
-  case 290: return "CRTrajectoryGenerator_step";
-  case 291: return "delete_CRTrajectoryGenerator";
-  case 292: return "_wrap_poseElements";
+  case 83: return "CRMatrix_reducedVector";
+  case 84: return "CRMatrix_reducedMatrix";
+  case 85: return "CRMatrix_svd";
+  case 86: return "CRMatrix_svdInverse";
+  case 87: return "CRMatrix_rotAboutX";
+  case 88: return "CRMatrix_rotAboutY";
+  case 89: return "CRMatrix_rotAboutZ";
+  case 90: return "CRMatrix_normL1";
+  case 91: return "CRMatrix_normL2";
+  case 92: return "CRMatrix_normLinf";
+  case 93: return "new_CRMatrix";
+  case 94: return "delete_CRMatrix";
+  case 95: return "new_CRFrame";
+  case 96: return "CRFrame_setFreeValue";
+  case 97: return "CRFrame_getFreeValue";
+  case 98: return "CRFrame_setRotationAndTranslation";
+  case 99: return "CRFrame_getRotationAndTranslation";
+  case 100: return "CRFrame_getTransformToParent";
+  case 101: return "CRFrame_getTransformToChild";
+  case 102: return "CRFrame_transformToParent";
+  case 103: return "CRFrame_transformToChild";
+  case 104: return "CRFrame_isDriven";
+  case 105: return "CRFrame_getPosition";
+  case 106: return "CRFrame_getOrientation";
+  case 107: return "CRFrame_getPose";
+  case 108: return "delete_CRFrame";
+  case 109: return "new_CRFrameEuler";
+  case 110: return "CRFrameEuler_setFreeValue";
+  case 111: return "CRFrameEuler_getFreeValue";
+  case 112: return "CRFrameEuler_setFreeVariable";
+  case 113: return "CRFrameEuler_getFreeVariable";
+  case 114: return "CRFrameEuler_setMode";
+  case 115: return "CRFrameEuler_getMode";
+  case 116: return "CRFrameEuler_setPosition";
+  case 117: return "CRFrameEuler_getPosition";
+  case 118: return "CRFrameEuler_setOrientation";
+  case 119: return "CRFrameEuler_getOrientation";
+  case 120: return "CRFrameEuler_setPositionAndOrientation";
+  case 121: return "CRFrameEuler_getPositionAndOrientation";
+  case 122: return "CRFrameEuler_isDriven";
+  case 123: return "delete_CRFrameEuler";
+  case 124: return "new_CRFrameDh";
+  case 125: return "CRFrameDh_setFreeValue";
+  case 126: return "CRFrameDh_getFreeValue";
+  case 127: return "CRFrameDh_setFreeVariable";
+  case 128: return "CRFrameDh_getFreeVariable";
+  case 129: return "CRFrameDh_setMode";
+  case 130: return "CRFrameDh_getMode";
+  case 131: return "CRFrameDh_setParameters";
+  case 132: return "CRFrameDh_getParameters";
+  case 133: return "CRFrameDh_isDriven";
+  case 134: return "delete_CRFrameDh";
+  case 135: return "new_CRRigidBody";
+  case 136: return "CRRigidBody_setFrame";
+  case 137: return "CRRigidBody_m_frame_get";
+  case 138: return "CRRigidBody_m_frame_set";
+  case 139: return "delete_CRRigidBody";
+  case 140: return "new_CRManipulator";
+  case 141: return "CRManipulator_setConfiguration";
+  case 142: return "CRManipulator_getConfiguration";
+  case 143: return "CRManipulator_getForwardKinematics";
+  case 144: return "CRManipulator_getNumberOfLinks";
+  case 145: return "CRManipulator_getDegreesOfFreedom";
+  case 146: return "CRManipulator_getToolFrame";
+  case 147: return "CRManipulator_getLinkFrame";
+  case 148: return "CRManipulator_getToolPose";
+  case 149: return "CRManipulator_setModelType";
+  case 150: return "CRManipulator_jacobian";
+  case 151: return "CRManipulator_hessian";
+  case 152: return "CRManipulator_addLink";
+  case 153: return "CRManipulator_addTool";
+  case 154: return "delete_CRManipulator";
+  case 155: return "CRParamNoiseGeneric_icdFunction_get";
+  case 156: return "CRParamNoiseGeneric_icdFunction_set";
+  case 157: return "CRParamNoiseGeneric_probFunction_get";
+  case 158: return "CRParamNoiseGeneric_probFunction_set";
+  case 159: return "new_CRParamNoiseGeneric";
+  case 160: return "delete_CRParamNoiseGeneric";
+  case 161: return "new_CRNoiseModel";
+  case 162: return "CRNoiseModel_setParameters";
+  case 163: return "CRNoiseModel_sample";
+  case 164: return "CRNoiseModel_probability";
+  case 165: return "CRNoiseModel_m_parameters_get";
+  case 166: return "CRNoiseModel_m_parameters_set";
+  case 167: return "delete_CRNoiseModel";
+  case 168: return "CRParamNoiseGaussian_cov_get";
+  case 169: return "CRParamNoiseGaussian_cov_set";
+  case 170: return "CRParamNoiseGaussian_covInv_get";
+  case 171: return "CRParamNoiseGaussian_covInv_set";
+  case 172: return "CRParamNoiseGaussian_mean_get";
+  case 173: return "CRParamNoiseGaussian_mean_set";
+  case 174: return "new_CRParamNoiseGaussian";
+  case 175: return "delete_CRParamNoiseGaussian";
+  case 176: return "new_CRNoiseGaussian";
+  case 177: return "CRNoiseGaussian_setParameters";
+  case 178: return "CRNoiseGaussian_sample";
+  case 179: return "CRNoiseGaussian_probability";
+  case 180: return "CRNoiseGaussian_m_parameters_get";
+  case 181: return "CRNoiseGaussian_m_parameters_set";
+  case 182: return "delete_CRNoiseGaussian";
+  case 183: return "CRParamNoiseUniform_a_get";
+  case 184: return "CRParamNoiseUniform_a_set";
+  case 185: return "CRParamNoiseUniform_b_get";
+  case 186: return "CRParamNoiseUniform_b_set";
+  case 187: return "new_CRParamNoiseUniform";
+  case 188: return "delete_CRParamNoiseUniform";
+  case 189: return "new_CRNoiseUniform";
+  case 190: return "CRNoiseUniform_setParameters";
+  case 191: return "CRNoiseUniform_sample";
+  case 192: return "CRNoiseUniform_probability";
+  case 193: return "CRNoiseUniform_m_parameters_get";
+  case 194: return "CRNoiseUniform_m_parameters_set";
+  case 195: return "delete_CRNoiseUniform";
+  case 196: return "CRParamNoiseMixture_models_get";
+  case 197: return "CRParamNoiseMixture_models_set";
+  case 198: return "CRParamNoiseMixture_weights_get";
+  case 199: return "CRParamNoiseMixture_weights_set";
+  case 200: return "new_CRParamNoiseMixture";
+  case 201: return "delete_CRParamNoiseMixture";
+  case 202: return "new_CRNoiseMixture";
+  case 203: return "CRNoiseMixture_add";
+  case 204: return "CRNoiseMixture_sample";
+  case 205: return "CRNoiseMixture_probability";
+  case 206: return "CRNoiseMixture_m_parameters_get";
+  case 207: return "CRNoiseMixture_m_parameters_set";
+  case 208: return "delete_CRNoiseMixture";
+  case 209: return "new_CRSensorLinear";
+  case 210: return "CRSensorLinear_setObservation";
+  case 211: return "CRSensorLinear_measurement";
+  case 212: return "delete_CRSensorLinear";
+  case 213: return "new_CRInverseKinematics";
+  case 214: return "CRInverseKinematics_setRobot";
+  case 215: return "CRInverseKinematics_getRobot";
+  case 216: return "CRInverseKinematics_setToolIndex";
+  case 217: return "CRInverseKinematics_getToolIndex";
+  case 218: return "CRInverseKinematics_setEulerMode";
+  case 219: return "CRInverseKinematics_getEulerMode";
+  case 220: return "CRInverseKinematics_setTolerance";
+  case 221: return "CRInverseKinematics_getTolerance";
+  case 222: return "CRInverseKinematics_setMaxIter";
+  case 223: return "CRInverseKinematics_getMaxIter";
+  case 224: return "CRInverseKinematics_setStepSize";
+  case 225: return "CRInverseKinematics_getStepSize";
+  case 226: return "CRInverseKinematics_setDampingFactor";
+  case 227: return "CRInverseKinematics_getDampingFactor";
+  case 228: return "CRInverseKinematics_setSingularThresh";
+  case 229: return "CRInverseKinematics_getSingularThresh";
+  case 230: return "CRInverseKinematics_getJacInv";
+  case 231: return "CRInverseKinematics_solve";
+  case 232: return "delete_CRInverseKinematics";
+  case 233: return "new_CRNullSpace";
+  case 234: return "CRNullSpace_setRobot";
+  case 235: return "CRNullSpace_setToolIndex";
+  case 236: return "CRNullSpace_setEulerMode";
+  case 237: return "CRNullSpace_getEulerMode";
+  case 238: return "CRNullSpace_setSingularThresh";
+  case 239: return "CRNullSpace_getSingularThresh";
+  case 240: return "CRNullSpace_setMinStepSize";
+  case 241: return "CRNullSpace_getMinStepSize";
+  case 242: return "CRNullSpace_setMaxIter";
+  case 243: return "CRNullSpace_getMaxIter";
+  case 244: return "CRNullSpace_setTrivialTolerance";
+  case 245: return "CRNullSpace_getTrivialTolerance";
+  case 246: return "CRNullSpace_solve";
+  case 247: return "delete_CRNullSpace";
+  case 248: return "new_CRHardLimits";
+  case 249: return "CRHardLimits_getIKSolver";
+  case 250: return "CRHardLimits_getNullSpaceSolver";
+  case 251: return "CRHardLimits_useNullSpace";
+  case 252: return "CRHardLimits_nullSpaceStatus";
+  case 253: return "CRHardLimits_setPoseElements";
+  case 254: return "CRHardLimits_getPoseElements";
+  case 255: return "CRHardLimits_setJointUpperLimit";
+  case 256: return "CRHardLimits_setJointLowerLimit";
+  case 257: return "CRHardLimits_getJointUpperLimit";
+  case 258: return "CRHardLimits_getJointLowerLimit";
+  case 259: return "CRHardLimits_setJointLimits";
+  case 260: return "CRHardLimits_setJointUpperLimits";
+  case 261: return "CRHardLimits_setJointLowerLimits";
+  case 262: return "CRHardLimits_getJointUpperLimits";
+  case 263: return "CRHardLimits_getJointLowerLimits";
+  case 264: return "CRHardLimits_setQ0";
+  case 265: return "CRHardLimits_getQ0";
+  case 266: return "CRHardLimits_setToolPose";
+  case 267: return "CRHardLimits_getToolPose";
+  case 268: return "CRHardLimits_setJointMotion";
+  case 269: return "CRHardLimits_getJointMotion";
+  case 270: return "CRHardLimits_solve";
+  case 271: return "delete_CRHardLimits";
+  case 272: return "new_CRSharedMemory";
+  case 273: return "delete_CRSharedMemory";
+  case 274: return "CRSharedMemory_addSignal";
+  case 275: return "CRSharedMemory_removeSignal";
+  case 276: return "CRSharedMemory_set";
+  case 277: return "CRSharedMemory_get";
+  case 278: return "CRWaypoint_time_get";
+  case 279: return "CRWaypoint_time_set";
+  case 280: return "CRWaypoint_position_get";
+  case 281: return "CRWaypoint_position_set";
+  case 282: return "CRWaypoint_velocity_get";
+  case 283: return "CRWaypoint_velocity_set";
+  case 284: return "CRWaypoint_acceleration_get";
+  case 285: return "CRWaypoint_acceleration_set";
+  case 286: return "CRWaypoint_jerk_get";
+  case 287: return "CRWaypoint_jerk_set";
+  case 288: return "new_CRWaypoint";
+  case 289: return "delete_CRWaypoint";
+  case 290: return "new_CRTrajectoryGenerator";
+  case 291: return "CRTrajectoryGenerator_solve";
+  case 292: return "CRTrajectoryGenerator_step";
+  case 293: return "delete_CRTrajectoryGenerator";
+  case 294: return "_wrap_poseElements";
   default: return 0;
   }
 }
@@ -16397,216 +16498,218 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 80: flag=_wrap_delete_CRConversion(resc,resv,argc,(mxArray**)(argv)); break;
   case 81: flag=_wrap_new_CRIntegration(resc,resv,argc,(mxArray**)(argv)); break;
   case 82: flag=_wrap_delete_CRIntegration(resc,resv,argc,(mxArray**)(argv)); break;
-  case 83: flag=_wrap_CRMatrix_svd(resc,resv,argc,(mxArray**)(argv)); break;
-  case 84: flag=_wrap_CRMatrix_svdInverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 85: flag=_wrap_CRMatrix_rotAboutX(resc,resv,argc,(mxArray**)(argv)); break;
-  case 86: flag=_wrap_CRMatrix_rotAboutY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 87: flag=_wrap_CRMatrix_rotAboutZ(resc,resv,argc,(mxArray**)(argv)); break;
-  case 88: flag=_wrap_CRMatrix_normL1(resc,resv,argc,(mxArray**)(argv)); break;
-  case 89: flag=_wrap_CRMatrix_normL2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 90: flag=_wrap_CRMatrix_normLinf(resc,resv,argc,(mxArray**)(argv)); break;
-  case 91: flag=_wrap_new_CRMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 92: flag=_wrap_delete_CRMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 93: flag=_wrap_new_CRFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 94: flag=_wrap_CRFrame_setFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
-  case 95: flag=_wrap_CRFrame_getFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
-  case 96: flag=_wrap_CRFrame_setRotationAndTranslation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 97: flag=_wrap_CRFrame_getRotationAndTranslation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 98: flag=_wrap_CRFrame_getTransformToParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 99: flag=_wrap_CRFrame_getTransformToChild(resc,resv,argc,(mxArray**)(argv)); break;
-  case 100: flag=_wrap_CRFrame_transformToParent(resc,resv,argc,(mxArray**)(argv)); break;
-  case 101: flag=_wrap_CRFrame_transformToChild(resc,resv,argc,(mxArray**)(argv)); break;
-  case 102: flag=_wrap_CRFrame_isDriven(resc,resv,argc,(mxArray**)(argv)); break;
-  case 103: flag=_wrap_CRFrame_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 104: flag=_wrap_CRFrame_getOrientation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 105: flag=_wrap_CRFrame_getPose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 106: flag=_wrap_delete_CRFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 107: flag=_wrap_new_CRFrameEuler(resc,resv,argc,(mxArray**)(argv)); break;
-  case 108: flag=_wrap_CRFrameEuler_setFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
-  case 109: flag=_wrap_CRFrameEuler_getFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
-  case 110: flag=_wrap_CRFrameEuler_setFreeVariable(resc,resv,argc,(mxArray**)(argv)); break;
-  case 111: flag=_wrap_CRFrameEuler_getFreeVariable(resc,resv,argc,(mxArray**)(argv)); break;
-  case 112: flag=_wrap_CRFrameEuler_setMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 113: flag=_wrap_CRFrameEuler_getMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 114: flag=_wrap_CRFrameEuler_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 115: flag=_wrap_CRFrameEuler_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 116: flag=_wrap_CRFrameEuler_setOrientation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 117: flag=_wrap_CRFrameEuler_getOrientation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 118: flag=_wrap_CRFrameEuler_setPositionAndOrientation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 119: flag=_wrap_CRFrameEuler_getPositionAndOrientation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 120: flag=_wrap_CRFrameEuler_isDriven(resc,resv,argc,(mxArray**)(argv)); break;
-  case 121: flag=_wrap_delete_CRFrameEuler(resc,resv,argc,(mxArray**)(argv)); break;
-  case 122: flag=_wrap_new_CRFrameDh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 123: flag=_wrap_CRFrameDh_setFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
-  case 124: flag=_wrap_CRFrameDh_getFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
-  case 125: flag=_wrap_CRFrameDh_setFreeVariable(resc,resv,argc,(mxArray**)(argv)); break;
-  case 126: flag=_wrap_CRFrameDh_getFreeVariable(resc,resv,argc,(mxArray**)(argv)); break;
-  case 127: flag=_wrap_CRFrameDh_setMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 128: flag=_wrap_CRFrameDh_getMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 129: flag=_wrap_CRFrameDh_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 130: flag=_wrap_CRFrameDh_getParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 131: flag=_wrap_CRFrameDh_isDriven(resc,resv,argc,(mxArray**)(argv)); break;
-  case 132: flag=_wrap_delete_CRFrameDh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 133: flag=_wrap_new_CRRigidBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 134: flag=_wrap_CRRigidBody_setFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 135: flag=_wrap_CRRigidBody_m_frame_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 136: flag=_wrap_CRRigidBody_m_frame_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 137: flag=_wrap_delete_CRRigidBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 138: flag=_wrap_new_CRManipulator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 139: flag=_wrap_CRManipulator_setConfiguration(resc,resv,argc,(mxArray**)(argv)); break;
-  case 140: flag=_wrap_CRManipulator_getConfiguration(resc,resv,argc,(mxArray**)(argv)); break;
-  case 141: flag=_wrap_CRManipulator_getForwardKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 142: flag=_wrap_CRManipulator_getNumberOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 143: flag=_wrap_CRManipulator_getDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 144: flag=_wrap_CRManipulator_getToolFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 145: flag=_wrap_CRManipulator_getLinkFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 146: flag=_wrap_CRManipulator_getToolPose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 147: flag=_wrap_CRManipulator_setModelType(resc,resv,argc,(mxArray**)(argv)); break;
-  case 148: flag=_wrap_CRManipulator_jacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 149: flag=_wrap_CRManipulator_hessian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 150: flag=_wrap_CRManipulator_addLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 151: flag=_wrap_CRManipulator_addTool(resc,resv,argc,(mxArray**)(argv)); break;
-  case 152: flag=_wrap_delete_CRManipulator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 153: flag=_wrap_CRParamNoiseGeneric_icdFunction_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 154: flag=_wrap_CRParamNoiseGeneric_icdFunction_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 155: flag=_wrap_CRParamNoiseGeneric_probFunction_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 156: flag=_wrap_CRParamNoiseGeneric_probFunction_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 157: flag=_wrap_new_CRParamNoiseGeneric(resc,resv,argc,(mxArray**)(argv)); break;
-  case 158: flag=_wrap_delete_CRParamNoiseGeneric(resc,resv,argc,(mxArray**)(argv)); break;
-  case 159: flag=_wrap_new_CRNoiseModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 160: flag=_wrap_CRNoiseModel_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 161: flag=_wrap_CRNoiseModel_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 162: flag=_wrap_CRNoiseModel_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 163: flag=_wrap_CRNoiseModel_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 164: flag=_wrap_CRNoiseModel_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 165: flag=_wrap_delete_CRNoiseModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 166: flag=_wrap_CRParamNoiseGaussian_cov_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 167: flag=_wrap_CRParamNoiseGaussian_cov_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 168: flag=_wrap_CRParamNoiseGaussian_covInv_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 169: flag=_wrap_CRParamNoiseGaussian_covInv_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 170: flag=_wrap_CRParamNoiseGaussian_mean_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 171: flag=_wrap_CRParamNoiseGaussian_mean_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 172: flag=_wrap_new_CRParamNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 173: flag=_wrap_delete_CRParamNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 174: flag=_wrap_new_CRNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 175: flag=_wrap_CRNoiseGaussian_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 176: flag=_wrap_CRNoiseGaussian_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 177: flag=_wrap_CRNoiseGaussian_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 178: flag=_wrap_CRNoiseGaussian_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 179: flag=_wrap_CRNoiseGaussian_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 180: flag=_wrap_delete_CRNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 181: flag=_wrap_CRParamNoiseUniform_a_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 182: flag=_wrap_CRParamNoiseUniform_a_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 183: flag=_wrap_CRParamNoiseUniform_b_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 184: flag=_wrap_CRParamNoiseUniform_b_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 185: flag=_wrap_new_CRParamNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 186: flag=_wrap_delete_CRParamNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 187: flag=_wrap_new_CRNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 188: flag=_wrap_CRNoiseUniform_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 189: flag=_wrap_CRNoiseUniform_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 190: flag=_wrap_CRNoiseUniform_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 191: flag=_wrap_CRNoiseUniform_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 192: flag=_wrap_CRNoiseUniform_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 193: flag=_wrap_delete_CRNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 194: flag=_wrap_CRParamNoiseMixture_models_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 195: flag=_wrap_CRParamNoiseMixture_models_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 196: flag=_wrap_CRParamNoiseMixture_weights_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 197: flag=_wrap_CRParamNoiseMixture_weights_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 198: flag=_wrap_new_CRParamNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
-  case 199: flag=_wrap_delete_CRParamNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
-  case 200: flag=_wrap_new_CRNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
-  case 201: flag=_wrap_CRNoiseMixture_add(resc,resv,argc,(mxArray**)(argv)); break;
-  case 202: flag=_wrap_CRNoiseMixture_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 203: flag=_wrap_CRNoiseMixture_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 204: flag=_wrap_CRNoiseMixture_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 205: flag=_wrap_CRNoiseMixture_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 206: flag=_wrap_delete_CRNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
-  case 207: flag=_wrap_new_CRSensorLinear(resc,resv,argc,(mxArray**)(argv)); break;
-  case 208: flag=_wrap_CRSensorLinear_setObservation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 209: flag=_wrap_CRSensorLinear_measurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 210: flag=_wrap_delete_CRSensorLinear(resc,resv,argc,(mxArray**)(argv)); break;
-  case 211: flag=_wrap_new_CRInverseKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 212: flag=_wrap_CRInverseKinematics_setRobot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 213: flag=_wrap_CRInverseKinematics_getRobot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 214: flag=_wrap_CRInverseKinematics_setToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 215: flag=_wrap_CRInverseKinematics_getToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 216: flag=_wrap_CRInverseKinematics_setEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 217: flag=_wrap_CRInverseKinematics_getEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 218: flag=_wrap_CRInverseKinematics_setTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 219: flag=_wrap_CRInverseKinematics_getTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 220: flag=_wrap_CRInverseKinematics_setMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 221: flag=_wrap_CRInverseKinematics_getMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 222: flag=_wrap_CRInverseKinematics_setStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 223: flag=_wrap_CRInverseKinematics_getStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 224: flag=_wrap_CRInverseKinematics_setDampingFactor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 225: flag=_wrap_CRInverseKinematics_getDampingFactor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 226: flag=_wrap_CRInverseKinematics_setSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 227: flag=_wrap_CRInverseKinematics_getSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 228: flag=_wrap_CRInverseKinematics_getJacInv(resc,resv,argc,(mxArray**)(argv)); break;
-  case 229: flag=_wrap_CRInverseKinematics_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 230: flag=_wrap_delete_CRInverseKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 231: flag=_wrap_new_CRNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 232: flag=_wrap_CRNullSpace_setRobot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 233: flag=_wrap_CRNullSpace_setToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 234: flag=_wrap_CRNullSpace_setEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 235: flag=_wrap_CRNullSpace_getEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 236: flag=_wrap_CRNullSpace_setSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 237: flag=_wrap_CRNullSpace_getSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 238: flag=_wrap_CRNullSpace_setMinStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 239: flag=_wrap_CRNullSpace_getMinStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 240: flag=_wrap_CRNullSpace_setMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 241: flag=_wrap_CRNullSpace_getMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 242: flag=_wrap_CRNullSpace_setTrivialTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 243: flag=_wrap_CRNullSpace_getTrivialTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 244: flag=_wrap_CRNullSpace_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 245: flag=_wrap_delete_CRNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 246: flag=_wrap_new_CRHardLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 247: flag=_wrap_CRHardLimits_getIKSolver(resc,resv,argc,(mxArray**)(argv)); break;
-  case 248: flag=_wrap_CRHardLimits_getNullSpaceSolver(resc,resv,argc,(mxArray**)(argv)); break;
-  case 249: flag=_wrap_CRHardLimits_useNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 250: flag=_wrap_CRHardLimits_nullSpaceStatus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 251: flag=_wrap_CRHardLimits_setPoseElements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 252: flag=_wrap_CRHardLimits_getPoseElements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 253: flag=_wrap_CRHardLimits_setJointUpperLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 254: flag=_wrap_CRHardLimits_setJointLowerLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 255: flag=_wrap_CRHardLimits_getJointUpperLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 256: flag=_wrap_CRHardLimits_getJointLowerLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 257: flag=_wrap_CRHardLimits_setJointLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 258: flag=_wrap_CRHardLimits_setJointUpperLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 259: flag=_wrap_CRHardLimits_setJointLowerLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 260: flag=_wrap_CRHardLimits_getJointUpperLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 261: flag=_wrap_CRHardLimits_getJointLowerLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 262: flag=_wrap_CRHardLimits_setQ0(resc,resv,argc,(mxArray**)(argv)); break;
-  case 263: flag=_wrap_CRHardLimits_getQ0(resc,resv,argc,(mxArray**)(argv)); break;
-  case 264: flag=_wrap_CRHardLimits_setToolPose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 265: flag=_wrap_CRHardLimits_getToolPose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 266: flag=_wrap_CRHardLimits_setJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
-  case 267: flag=_wrap_CRHardLimits_getJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
-  case 268: flag=_wrap_CRHardLimits_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 269: flag=_wrap_delete_CRHardLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 270: flag=_wrap_new_CRSharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
-  case 271: flag=_wrap_delete_CRSharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
-  case 272: flag=_wrap_CRSharedMemory_addSignal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 273: flag=_wrap_CRSharedMemory_removeSignal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 274: flag=_wrap_CRSharedMemory_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 275: flag=_wrap_CRSharedMemory_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 276: flag=_wrap_CRWaypoint_time_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 277: flag=_wrap_CRWaypoint_time_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 278: flag=_wrap_CRWaypoint_position_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 279: flag=_wrap_CRWaypoint_position_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 280: flag=_wrap_CRWaypoint_velocity_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 281: flag=_wrap_CRWaypoint_velocity_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 282: flag=_wrap_CRWaypoint_acceleration_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 283: flag=_wrap_CRWaypoint_acceleration_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 284: flag=_wrap_CRWaypoint_jerk_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 285: flag=_wrap_CRWaypoint_jerk_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 286: flag=_wrap_new_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 287: flag=_wrap_delete_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 288: flag=_wrap_new_CRTrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 289: flag=_wrap_CRTrajectoryGenerator_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 290: flag=_wrap_CRTrajectoryGenerator_step(resc,resv,argc,(mxArray**)(argv)); break;
-  case 291: flag=_wrap_delete_CRTrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 292: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 83: flag=_wrap_CRMatrix_reducedVector(resc,resv,argc,(mxArray**)(argv)); break;
+  case 84: flag=_wrap_CRMatrix_reducedMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 85: flag=_wrap_CRMatrix_svd(resc,resv,argc,(mxArray**)(argv)); break;
+  case 86: flag=_wrap_CRMatrix_svdInverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 87: flag=_wrap_CRMatrix_rotAboutX(resc,resv,argc,(mxArray**)(argv)); break;
+  case 88: flag=_wrap_CRMatrix_rotAboutY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 89: flag=_wrap_CRMatrix_rotAboutZ(resc,resv,argc,(mxArray**)(argv)); break;
+  case 90: flag=_wrap_CRMatrix_normL1(resc,resv,argc,(mxArray**)(argv)); break;
+  case 91: flag=_wrap_CRMatrix_normL2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 92: flag=_wrap_CRMatrix_normLinf(resc,resv,argc,(mxArray**)(argv)); break;
+  case 93: flag=_wrap_new_CRMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 94: flag=_wrap_delete_CRMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 95: flag=_wrap_new_CRFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 96: flag=_wrap_CRFrame_setFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
+  case 97: flag=_wrap_CRFrame_getFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
+  case 98: flag=_wrap_CRFrame_setRotationAndTranslation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 99: flag=_wrap_CRFrame_getRotationAndTranslation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 100: flag=_wrap_CRFrame_getTransformToParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 101: flag=_wrap_CRFrame_getTransformToChild(resc,resv,argc,(mxArray**)(argv)); break;
+  case 102: flag=_wrap_CRFrame_transformToParent(resc,resv,argc,(mxArray**)(argv)); break;
+  case 103: flag=_wrap_CRFrame_transformToChild(resc,resv,argc,(mxArray**)(argv)); break;
+  case 104: flag=_wrap_CRFrame_isDriven(resc,resv,argc,(mxArray**)(argv)); break;
+  case 105: flag=_wrap_CRFrame_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 106: flag=_wrap_CRFrame_getOrientation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 107: flag=_wrap_CRFrame_getPose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 108: flag=_wrap_delete_CRFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 109: flag=_wrap_new_CRFrameEuler(resc,resv,argc,(mxArray**)(argv)); break;
+  case 110: flag=_wrap_CRFrameEuler_setFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
+  case 111: flag=_wrap_CRFrameEuler_getFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
+  case 112: flag=_wrap_CRFrameEuler_setFreeVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 113: flag=_wrap_CRFrameEuler_getFreeVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 114: flag=_wrap_CRFrameEuler_setMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 115: flag=_wrap_CRFrameEuler_getMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 116: flag=_wrap_CRFrameEuler_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 117: flag=_wrap_CRFrameEuler_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 118: flag=_wrap_CRFrameEuler_setOrientation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 119: flag=_wrap_CRFrameEuler_getOrientation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 120: flag=_wrap_CRFrameEuler_setPositionAndOrientation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 121: flag=_wrap_CRFrameEuler_getPositionAndOrientation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 122: flag=_wrap_CRFrameEuler_isDriven(resc,resv,argc,(mxArray**)(argv)); break;
+  case 123: flag=_wrap_delete_CRFrameEuler(resc,resv,argc,(mxArray**)(argv)); break;
+  case 124: flag=_wrap_new_CRFrameDh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 125: flag=_wrap_CRFrameDh_setFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
+  case 126: flag=_wrap_CRFrameDh_getFreeValue(resc,resv,argc,(mxArray**)(argv)); break;
+  case 127: flag=_wrap_CRFrameDh_setFreeVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 128: flag=_wrap_CRFrameDh_getFreeVariable(resc,resv,argc,(mxArray**)(argv)); break;
+  case 129: flag=_wrap_CRFrameDh_setMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 130: flag=_wrap_CRFrameDh_getMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 131: flag=_wrap_CRFrameDh_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 132: flag=_wrap_CRFrameDh_getParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 133: flag=_wrap_CRFrameDh_isDriven(resc,resv,argc,(mxArray**)(argv)); break;
+  case 134: flag=_wrap_delete_CRFrameDh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 135: flag=_wrap_new_CRRigidBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 136: flag=_wrap_CRRigidBody_setFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 137: flag=_wrap_CRRigidBody_m_frame_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 138: flag=_wrap_CRRigidBody_m_frame_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 139: flag=_wrap_delete_CRRigidBody(resc,resv,argc,(mxArray**)(argv)); break;
+  case 140: flag=_wrap_new_CRManipulator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 141: flag=_wrap_CRManipulator_setConfiguration(resc,resv,argc,(mxArray**)(argv)); break;
+  case 142: flag=_wrap_CRManipulator_getConfiguration(resc,resv,argc,(mxArray**)(argv)); break;
+  case 143: flag=_wrap_CRManipulator_getForwardKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 144: flag=_wrap_CRManipulator_getNumberOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
+  case 145: flag=_wrap_CRManipulator_getDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
+  case 146: flag=_wrap_CRManipulator_getToolFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 147: flag=_wrap_CRManipulator_getLinkFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 148: flag=_wrap_CRManipulator_getToolPose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 149: flag=_wrap_CRManipulator_setModelType(resc,resv,argc,(mxArray**)(argv)); break;
+  case 150: flag=_wrap_CRManipulator_jacobian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 151: flag=_wrap_CRManipulator_hessian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 152: flag=_wrap_CRManipulator_addLink(resc,resv,argc,(mxArray**)(argv)); break;
+  case 153: flag=_wrap_CRManipulator_addTool(resc,resv,argc,(mxArray**)(argv)); break;
+  case 154: flag=_wrap_delete_CRManipulator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 155: flag=_wrap_CRParamNoiseGeneric_icdFunction_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 156: flag=_wrap_CRParamNoiseGeneric_icdFunction_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 157: flag=_wrap_CRParamNoiseGeneric_probFunction_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 158: flag=_wrap_CRParamNoiseGeneric_probFunction_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 159: flag=_wrap_new_CRParamNoiseGeneric(resc,resv,argc,(mxArray**)(argv)); break;
+  case 160: flag=_wrap_delete_CRParamNoiseGeneric(resc,resv,argc,(mxArray**)(argv)); break;
+  case 161: flag=_wrap_new_CRNoiseModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 162: flag=_wrap_CRNoiseModel_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 163: flag=_wrap_CRNoiseModel_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 164: flag=_wrap_CRNoiseModel_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 165: flag=_wrap_CRNoiseModel_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 166: flag=_wrap_CRNoiseModel_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 167: flag=_wrap_delete_CRNoiseModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 168: flag=_wrap_CRParamNoiseGaussian_cov_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 169: flag=_wrap_CRParamNoiseGaussian_cov_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 170: flag=_wrap_CRParamNoiseGaussian_covInv_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 171: flag=_wrap_CRParamNoiseGaussian_covInv_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 172: flag=_wrap_CRParamNoiseGaussian_mean_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 173: flag=_wrap_CRParamNoiseGaussian_mean_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 174: flag=_wrap_new_CRParamNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 175: flag=_wrap_delete_CRParamNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 176: flag=_wrap_new_CRNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 177: flag=_wrap_CRNoiseGaussian_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 178: flag=_wrap_CRNoiseGaussian_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 179: flag=_wrap_CRNoiseGaussian_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 180: flag=_wrap_CRNoiseGaussian_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 181: flag=_wrap_CRNoiseGaussian_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 182: flag=_wrap_delete_CRNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 183: flag=_wrap_CRParamNoiseUniform_a_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 184: flag=_wrap_CRParamNoiseUniform_a_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 185: flag=_wrap_CRParamNoiseUniform_b_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 186: flag=_wrap_CRParamNoiseUniform_b_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 187: flag=_wrap_new_CRParamNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 188: flag=_wrap_delete_CRParamNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 189: flag=_wrap_new_CRNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 190: flag=_wrap_CRNoiseUniform_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 191: flag=_wrap_CRNoiseUniform_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 192: flag=_wrap_CRNoiseUniform_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 193: flag=_wrap_CRNoiseUniform_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 194: flag=_wrap_CRNoiseUniform_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 195: flag=_wrap_delete_CRNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 196: flag=_wrap_CRParamNoiseMixture_models_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 197: flag=_wrap_CRParamNoiseMixture_models_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 198: flag=_wrap_CRParamNoiseMixture_weights_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 199: flag=_wrap_CRParamNoiseMixture_weights_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 200: flag=_wrap_new_CRParamNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 201: flag=_wrap_delete_CRParamNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 202: flag=_wrap_new_CRNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 203: flag=_wrap_CRNoiseMixture_add(resc,resv,argc,(mxArray**)(argv)); break;
+  case 204: flag=_wrap_CRNoiseMixture_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 205: flag=_wrap_CRNoiseMixture_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 206: flag=_wrap_CRNoiseMixture_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 207: flag=_wrap_CRNoiseMixture_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 208: flag=_wrap_delete_CRNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 209: flag=_wrap_new_CRSensorLinear(resc,resv,argc,(mxArray**)(argv)); break;
+  case 210: flag=_wrap_CRSensorLinear_setObservation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 211: flag=_wrap_CRSensorLinear_measurement(resc,resv,argc,(mxArray**)(argv)); break;
+  case 212: flag=_wrap_delete_CRSensorLinear(resc,resv,argc,(mxArray**)(argv)); break;
+  case 213: flag=_wrap_new_CRInverseKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 214: flag=_wrap_CRInverseKinematics_setRobot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 215: flag=_wrap_CRInverseKinematics_getRobot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 216: flag=_wrap_CRInverseKinematics_setToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 217: flag=_wrap_CRInverseKinematics_getToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 218: flag=_wrap_CRInverseKinematics_setEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 219: flag=_wrap_CRInverseKinematics_getEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 220: flag=_wrap_CRInverseKinematics_setTolerance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 221: flag=_wrap_CRInverseKinematics_getTolerance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 222: flag=_wrap_CRInverseKinematics_setMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 223: flag=_wrap_CRInverseKinematics_getMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 224: flag=_wrap_CRInverseKinematics_setStepSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 225: flag=_wrap_CRInverseKinematics_getStepSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 226: flag=_wrap_CRInverseKinematics_setDampingFactor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 227: flag=_wrap_CRInverseKinematics_getDampingFactor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 228: flag=_wrap_CRInverseKinematics_setSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 229: flag=_wrap_CRInverseKinematics_getSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 230: flag=_wrap_CRInverseKinematics_getJacInv(resc,resv,argc,(mxArray**)(argv)); break;
+  case 231: flag=_wrap_CRInverseKinematics_solve(resc,resv,argc,(mxArray**)(argv)); break;
+  case 232: flag=_wrap_delete_CRInverseKinematics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 233: flag=_wrap_new_CRNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 234: flag=_wrap_CRNullSpace_setRobot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 235: flag=_wrap_CRNullSpace_setToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
+  case 236: flag=_wrap_CRNullSpace_setEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 237: flag=_wrap_CRNullSpace_getEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
+  case 238: flag=_wrap_CRNullSpace_setSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 239: flag=_wrap_CRNullSpace_getSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
+  case 240: flag=_wrap_CRNullSpace_setMinStepSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 241: flag=_wrap_CRNullSpace_getMinStepSize(resc,resv,argc,(mxArray**)(argv)); break;
+  case 242: flag=_wrap_CRNullSpace_setMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 243: flag=_wrap_CRNullSpace_getMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
+  case 244: flag=_wrap_CRNullSpace_setTrivialTolerance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 245: flag=_wrap_CRNullSpace_getTrivialTolerance(resc,resv,argc,(mxArray**)(argv)); break;
+  case 246: flag=_wrap_CRNullSpace_solve(resc,resv,argc,(mxArray**)(argv)); break;
+  case 247: flag=_wrap_delete_CRNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 248: flag=_wrap_new_CRHardLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 249: flag=_wrap_CRHardLimits_getIKSolver(resc,resv,argc,(mxArray**)(argv)); break;
+  case 250: flag=_wrap_CRHardLimits_getNullSpaceSolver(resc,resv,argc,(mxArray**)(argv)); break;
+  case 251: flag=_wrap_CRHardLimits_useNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
+  case 252: flag=_wrap_CRHardLimits_nullSpaceStatus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 253: flag=_wrap_CRHardLimits_setPoseElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 254: flag=_wrap_CRHardLimits_getPoseElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 255: flag=_wrap_CRHardLimits_setJointUpperLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 256: flag=_wrap_CRHardLimits_setJointLowerLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 257: flag=_wrap_CRHardLimits_getJointUpperLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 258: flag=_wrap_CRHardLimits_getJointLowerLimit(resc,resv,argc,(mxArray**)(argv)); break;
+  case 259: flag=_wrap_CRHardLimits_setJointLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 260: flag=_wrap_CRHardLimits_setJointUpperLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 261: flag=_wrap_CRHardLimits_setJointLowerLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 262: flag=_wrap_CRHardLimits_getJointUpperLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 263: flag=_wrap_CRHardLimits_getJointLowerLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 264: flag=_wrap_CRHardLimits_setQ0(resc,resv,argc,(mxArray**)(argv)); break;
+  case 265: flag=_wrap_CRHardLimits_getQ0(resc,resv,argc,(mxArray**)(argv)); break;
+  case 266: flag=_wrap_CRHardLimits_setToolPose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 267: flag=_wrap_CRHardLimits_getToolPose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 268: flag=_wrap_CRHardLimits_setJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
+  case 269: flag=_wrap_CRHardLimits_getJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
+  case 270: flag=_wrap_CRHardLimits_solve(resc,resv,argc,(mxArray**)(argv)); break;
+  case 271: flag=_wrap_delete_CRHardLimits(resc,resv,argc,(mxArray**)(argv)); break;
+  case 272: flag=_wrap_new_CRSharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
+  case 273: flag=_wrap_delete_CRSharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
+  case 274: flag=_wrap_CRSharedMemory_addSignal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 275: flag=_wrap_CRSharedMemory_removeSignal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 276: flag=_wrap_CRSharedMemory_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 277: flag=_wrap_CRSharedMemory_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 278: flag=_wrap_CRWaypoint_time_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 279: flag=_wrap_CRWaypoint_time_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 280: flag=_wrap_CRWaypoint_position_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 281: flag=_wrap_CRWaypoint_position_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 282: flag=_wrap_CRWaypoint_velocity_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 283: flag=_wrap_CRWaypoint_velocity_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 284: flag=_wrap_CRWaypoint_acceleration_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 285: flag=_wrap_CRWaypoint_acceleration_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 286: flag=_wrap_CRWaypoint_jerk_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 287: flag=_wrap_CRWaypoint_jerk_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 288: flag=_wrap_new_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 289: flag=_wrap_delete_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 290: flag=_wrap_new_CRTrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 291: flag=_wrap_CRTrajectoryGenerator_solve(resc,resv,argc,(mxArray**)(argv)); break;
+  case 292: flag=_wrap_CRTrajectoryGenerator_step(resc,resv,argc,(mxArray**)(argv)); break;
+  case 293: flag=_wrap_delete_CRTrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
+  case 294: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
   default: flag=1, SWIG_Error(SWIG_RuntimeError, "No function id %d.", fcn_id);
   }
   if (flag) {
