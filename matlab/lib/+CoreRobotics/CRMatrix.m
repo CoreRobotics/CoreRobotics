@@ -9,42 +9,48 @@ classdef CRMatrix < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(91, varargin{:});
+        tmp = CoreRoboticsMEX(93, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(92, self);
+        CoreRoboticsMEX(94, self);
         self.swigPtr=[];
       end
     end
   end
   methods(Static)
-    function varargout = svd(varargin)
+    function varargout = reducedVector(varargin)
      [varargout{1:nargout}] = CoreRoboticsMEX(83, varargin{:});
     end
-    function varargout = svdInverse(varargin)
+    function varargout = reducedMatrix(varargin)
      [varargout{1:nargout}] = CoreRoboticsMEX(84, varargin{:});
     end
-    function varargout = rotAboutX(varargin)
+    function varargout = svd(varargin)
      [varargout{1:nargout}] = CoreRoboticsMEX(85, varargin{:});
     end
-    function varargout = rotAboutY(varargin)
+    function varargout = svdInverse(varargin)
      [varargout{1:nargout}] = CoreRoboticsMEX(86, varargin{:});
     end
-    function varargout = rotAboutZ(varargin)
+    function varargout = rotAboutX(varargin)
      [varargout{1:nargout}] = CoreRoboticsMEX(87, varargin{:});
     end
-    function varargout = normL1(varargin)
+    function varargout = rotAboutY(varargin)
      [varargout{1:nargout}] = CoreRoboticsMEX(88, varargin{:});
     end
-    function varargout = normL2(varargin)
+    function varargout = rotAboutZ(varargin)
      [varargout{1:nargout}] = CoreRoboticsMEX(89, varargin{:});
     end
-    function varargout = normLinf(varargin)
+    function varargout = normL1(varargin)
      [varargout{1:nargout}] = CoreRoboticsMEX(90, varargin{:});
+    end
+    function varargout = normL2(varargin)
+     [varargout{1:nargout}] = CoreRoboticsMEX(91, varargin{:});
+    end
+    function varargout = normLinf(varargin)
+     [varargout{1:nargout}] = CoreRoboticsMEX(92, varargin{:});
     end
   end
 end

@@ -92,7 +92,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 // Paramter structure declaration
-struct mixtureParam{
+struct CRParamNoiseMixture{
     std::vector<CoreRobotics::CRNoiseModel*> models;
     std::vector<double> weights;
 };
@@ -128,11 +128,12 @@ public:
     double probability(Eigen::VectorXd i_x);
     
 //---------------------------------------------------------------------
-// Protected Members
-protected:
+// Public Members
+public:
     
     //! Noise model parameters
-    mixtureParam m_parameters;
+    CRParamNoiseMixture m_parameters;
+    
     
 private:
     

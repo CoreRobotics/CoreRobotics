@@ -395,6 +395,7 @@ project includes all the CoreRobotics modules.
 #include "CRNoiseGaussian.hpp"
 #include "CRNoiseUniform.hpp"
 #include "CRNoiseMixture.hpp"
+#include "CRGmm.hpp"
 #include "CRSensorModel.hpp"
 #include "CRSensorLinear.hpp"
 #include "CRSensorProbabilistic.hpp"

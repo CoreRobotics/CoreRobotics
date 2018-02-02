@@ -142,11 +142,15 @@ protected:
     void randomSeed(void);
     
 //---------------------------------------------------------------------
+// Public Members
+public:
+    
+    //! Noise model parameters
+    CRParamNoiseGeneric m_parameters;
+    
+//---------------------------------------------------------------------
 // Protected Members
 protected:
-    
-    //! Noise model type
-    CRParamNoiseGeneric m_parameters;
     
     //! Seed value
     unsigned m_seed;
