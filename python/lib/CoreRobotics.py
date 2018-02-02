@@ -897,42 +897,46 @@ class CRNoiseModel(_object):
 
     def probability(self, i_x):
         return _CoreRobotics.CRNoiseModel_probability(self, i_x)
+    __swig_setmethods__["m_parameters"] = _CoreRobotics.CRNoiseModel_m_parameters_set
+    __swig_getmethods__["m_parameters"] = _CoreRobotics.CRNoiseModel_m_parameters_get
+    if _newclass:
+        m_parameters = _swig_property(_CoreRobotics.CRNoiseModel_m_parameters_get, _CoreRobotics.CRNoiseModel_m_parameters_set)
     __swig_destroy__ = _CoreRobotics.delete_CRNoiseModel
     def __del__(self):
         return None
 CRNoiseModel_swigregister = _CoreRobotics.CRNoiseModel_swigregister
 CRNoiseModel_swigregister(CRNoiseModel)
 
-class gaussianParam(_object):
+class CRParamNoiseGaussian(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, gaussianParam, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CRParamNoiseGaussian, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, gaussianParam, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, CRParamNoiseGaussian, name)
     __repr__ = _swig_repr
-    __swig_setmethods__["cov"] = _CoreRobotics.gaussianParam_cov_set
-    __swig_getmethods__["cov"] = _CoreRobotics.gaussianParam_cov_get
+    __swig_setmethods__["cov"] = _CoreRobotics.CRParamNoiseGaussian_cov_set
+    __swig_getmethods__["cov"] = _CoreRobotics.CRParamNoiseGaussian_cov_get
     if _newclass:
-        cov = _swig_property(_CoreRobotics.gaussianParam_cov_get, _CoreRobotics.gaussianParam_cov_set)
-    __swig_setmethods__["covInv"] = _CoreRobotics.gaussianParam_covInv_set
-    __swig_getmethods__["covInv"] = _CoreRobotics.gaussianParam_covInv_get
+        cov = _swig_property(_CoreRobotics.CRParamNoiseGaussian_cov_get, _CoreRobotics.CRParamNoiseGaussian_cov_set)
+    __swig_setmethods__["covInv"] = _CoreRobotics.CRParamNoiseGaussian_covInv_set
+    __swig_getmethods__["covInv"] = _CoreRobotics.CRParamNoiseGaussian_covInv_get
     if _newclass:
-        covInv = _swig_property(_CoreRobotics.gaussianParam_covInv_get, _CoreRobotics.gaussianParam_covInv_set)
-    __swig_setmethods__["mean"] = _CoreRobotics.gaussianParam_mean_set
-    __swig_getmethods__["mean"] = _CoreRobotics.gaussianParam_mean_get
+        covInv = _swig_property(_CoreRobotics.CRParamNoiseGaussian_covInv_get, _CoreRobotics.CRParamNoiseGaussian_covInv_set)
+    __swig_setmethods__["mean"] = _CoreRobotics.CRParamNoiseGaussian_mean_set
+    __swig_getmethods__["mean"] = _CoreRobotics.CRParamNoiseGaussian_mean_get
     if _newclass:
-        mean = _swig_property(_CoreRobotics.gaussianParam_mean_get, _CoreRobotics.gaussianParam_mean_set)
+        mean = _swig_property(_CoreRobotics.CRParamNoiseGaussian_mean_get, _CoreRobotics.CRParamNoiseGaussian_mean_set)
 
     def __init__(self):
-        this = _CoreRobotics.new_gaussianParam()
+        this = _CoreRobotics.new_CRParamNoiseGaussian()
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _CoreRobotics.delete_gaussianParam
+    __swig_destroy__ = _CoreRobotics.delete_CRParamNoiseGaussian
     def __del__(self):
         return None
-gaussianParam_swigregister = _CoreRobotics.gaussianParam_swigregister
-gaussianParam_swigregister(gaussianParam)
+CRParamNoiseGaussian_swigregister = _CoreRobotics.CRParamNoiseGaussian_swigregister
+CRParamNoiseGaussian_swigregister(CRParamNoiseGaussian)
 
 class CRNoiseGaussian(CRNoiseModel):
     __swig_setmethods__ = {}
@@ -960,38 +964,42 @@ class CRNoiseGaussian(CRNoiseModel):
 
     def probability(self, i_x):
         return _CoreRobotics.CRNoiseGaussian_probability(self, i_x)
+    __swig_setmethods__["m_parameters"] = _CoreRobotics.CRNoiseGaussian_m_parameters_set
+    __swig_getmethods__["m_parameters"] = _CoreRobotics.CRNoiseGaussian_m_parameters_get
+    if _newclass:
+        m_parameters = _swig_property(_CoreRobotics.CRNoiseGaussian_m_parameters_get, _CoreRobotics.CRNoiseGaussian_m_parameters_set)
     __swig_destroy__ = _CoreRobotics.delete_CRNoiseGaussian
     def __del__(self):
         return None
 CRNoiseGaussian_swigregister = _CoreRobotics.CRNoiseGaussian_swigregister
 CRNoiseGaussian_swigregister(CRNoiseGaussian)
 
-class uniformParam(_object):
+class CRParamNoiseUniform(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, uniformParam, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CRParamNoiseUniform, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, uniformParam, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, CRParamNoiseUniform, name)
     __repr__ = _swig_repr
-    __swig_setmethods__["a"] = _CoreRobotics.uniformParam_a_set
-    __swig_getmethods__["a"] = _CoreRobotics.uniformParam_a_get
+    __swig_setmethods__["a"] = _CoreRobotics.CRParamNoiseUniform_a_set
+    __swig_getmethods__["a"] = _CoreRobotics.CRParamNoiseUniform_a_get
     if _newclass:
-        a = _swig_property(_CoreRobotics.uniformParam_a_get, _CoreRobotics.uniformParam_a_set)
-    __swig_setmethods__["b"] = _CoreRobotics.uniformParam_b_set
-    __swig_getmethods__["b"] = _CoreRobotics.uniformParam_b_get
+        a = _swig_property(_CoreRobotics.CRParamNoiseUniform_a_get, _CoreRobotics.CRParamNoiseUniform_a_set)
+    __swig_setmethods__["b"] = _CoreRobotics.CRParamNoiseUniform_b_set
+    __swig_getmethods__["b"] = _CoreRobotics.CRParamNoiseUniform_b_get
     if _newclass:
-        b = _swig_property(_CoreRobotics.uniformParam_b_get, _CoreRobotics.uniformParam_b_set)
+        b = _swig_property(_CoreRobotics.CRParamNoiseUniform_b_get, _CoreRobotics.CRParamNoiseUniform_b_set)
 
     def __init__(self):
-        this = _CoreRobotics.new_uniformParam()
+        this = _CoreRobotics.new_CRParamNoiseUniform()
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _CoreRobotics.delete_uniformParam
+    __swig_destroy__ = _CoreRobotics.delete_CRParamNoiseUniform
     def __del__(self):
         return None
-uniformParam_swigregister = _CoreRobotics.uniformParam_swigregister
-uniformParam_swigregister(uniformParam)
+CRParamNoiseUniform_swigregister = _CoreRobotics.CRParamNoiseUniform_swigregister
+CRParamNoiseUniform_swigregister(CRParamNoiseUniform)
 
 class CRNoiseUniform(CRNoiseModel):
     __swig_setmethods__ = {}
@@ -1019,38 +1027,42 @@ class CRNoiseUniform(CRNoiseModel):
 
     def probability(self, i_x):
         return _CoreRobotics.CRNoiseUniform_probability(self, i_x)
+    __swig_setmethods__["m_parameters"] = _CoreRobotics.CRNoiseUniform_m_parameters_set
+    __swig_getmethods__["m_parameters"] = _CoreRobotics.CRNoiseUniform_m_parameters_get
+    if _newclass:
+        m_parameters = _swig_property(_CoreRobotics.CRNoiseUniform_m_parameters_get, _CoreRobotics.CRNoiseUniform_m_parameters_set)
     __swig_destroy__ = _CoreRobotics.delete_CRNoiseUniform
     def __del__(self):
         return None
 CRNoiseUniform_swigregister = _CoreRobotics.CRNoiseUniform_swigregister
 CRNoiseUniform_swigregister(CRNoiseUniform)
 
-class mixtureParam(_object):
+class CRParamNoiseMixture(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, mixtureParam, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CRParamNoiseMixture, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, mixtureParam, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, CRParamNoiseMixture, name)
     __repr__ = _swig_repr
-    __swig_setmethods__["models"] = _CoreRobotics.mixtureParam_models_set
-    __swig_getmethods__["models"] = _CoreRobotics.mixtureParam_models_get
+    __swig_setmethods__["models"] = _CoreRobotics.CRParamNoiseMixture_models_set
+    __swig_getmethods__["models"] = _CoreRobotics.CRParamNoiseMixture_models_get
     if _newclass:
-        models = _swig_property(_CoreRobotics.mixtureParam_models_get, _CoreRobotics.mixtureParam_models_set)
-    __swig_setmethods__["weights"] = _CoreRobotics.mixtureParam_weights_set
-    __swig_getmethods__["weights"] = _CoreRobotics.mixtureParam_weights_get
+        models = _swig_property(_CoreRobotics.CRParamNoiseMixture_models_get, _CoreRobotics.CRParamNoiseMixture_models_set)
+    __swig_setmethods__["weights"] = _CoreRobotics.CRParamNoiseMixture_weights_set
+    __swig_getmethods__["weights"] = _CoreRobotics.CRParamNoiseMixture_weights_get
     if _newclass:
-        weights = _swig_property(_CoreRobotics.mixtureParam_weights_get, _CoreRobotics.mixtureParam_weights_set)
+        weights = _swig_property(_CoreRobotics.CRParamNoiseMixture_weights_get, _CoreRobotics.CRParamNoiseMixture_weights_set)
 
     def __init__(self):
-        this = _CoreRobotics.new_mixtureParam()
+        this = _CoreRobotics.new_CRParamNoiseMixture()
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _CoreRobotics.delete_mixtureParam
+    __swig_destroy__ = _CoreRobotics.delete_CRParamNoiseMixture
     def __del__(self):
         return None
-mixtureParam_swigregister = _CoreRobotics.mixtureParam_swigregister
-mixtureParam_swigregister(mixtureParam)
+CRParamNoiseMixture_swigregister = _CoreRobotics.CRParamNoiseMixture_swigregister
+CRParamNoiseMixture_swigregister(CRParamNoiseMixture)
 
 class CRNoiseMixture(CRNoiseModel):
     __swig_setmethods__ = {}
@@ -1078,6 +1090,10 @@ class CRNoiseMixture(CRNoiseModel):
 
     def probability(self, i_x):
         return _CoreRobotics.CRNoiseMixture_probability(self, i_x)
+    __swig_setmethods__["m_parameters"] = _CoreRobotics.CRNoiseMixture_m_parameters_set
+    __swig_getmethods__["m_parameters"] = _CoreRobotics.CRNoiseMixture_m_parameters_get
+    if _newclass:
+        m_parameters = _swig_property(_CoreRobotics.CRNoiseMixture_m_parameters_get, _CoreRobotics.CRNoiseMixture_m_parameters_set)
     __swig_destroy__ = _CoreRobotics.delete_CRNoiseMixture
     def __del__(self):
         return None

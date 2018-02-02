@@ -3018,15 +3018,15 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_CoreRobotics__CRNoiseModel swig_types[12]
 #define SWIGTYPE_p_CoreRobotics__CRNoiseUniform swig_types[13]
 #define SWIGTYPE_p_CoreRobotics__CRNullSpace swig_types[14]
-#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[15]
-#define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[16]
-#define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[17]
-#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[18]
-#define SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator swig_types[19]
-#define SWIGTYPE_p_CoreRobotics__CRWaypoint swig_types[20]
-#define SWIGTYPE_p_CoreRobotics__gaussianParam swig_types[21]
-#define SWIGTYPE_p_CoreRobotics__mixtureParam swig_types[22]
-#define SWIGTYPE_p_CoreRobotics__uniformParam swig_types[23]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian swig_types[15]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric swig_types[16]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture swig_types[17]
+#define SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform swig_types[18]
+#define SWIGTYPE_p_CoreRobotics__CRRigidBody swig_types[19]
+#define SWIGTYPE_p_CoreRobotics__CRSensorLinear swig_types[20]
+#define SWIGTYPE_p_CoreRobotics__CRSharedMemory swig_types[21]
+#define SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator swig_types[22]
+#define SWIGTYPE_p_CoreRobotics__CRWaypoint swig_types[23]
 #define SWIGTYPE_p_Eigen__Matrix3d swig_types[24]
 #define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[25]
 #define SWIGTYPE_p_Eigen__MatrixXd swig_types[26]
@@ -14696,6 +14696,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CRNoiseModel_m_parameters_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRNoiseModel *arg1 = (CoreRobotics::CRNoiseModel *) 0 ;
+  CoreRobotics::CRParamNoiseGeneric *arg2 = (CoreRobotics::CRParamNoiseGeneric *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRNoiseModel_m_parameters_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseModel, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseModel_m_parameters_set" "', argument " "1"" of type '" "CoreRobotics::CRNoiseModel *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseModel * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRNoiseModel_m_parameters_set" "', argument " "2"" of type '" "CoreRobotics::CRParamNoiseGeneric *""'"); 
+  }
+  arg2 = reinterpret_cast< CoreRobotics::CRParamNoiseGeneric * >(argp2);
+  if (arg1) (arg1)->m_parameters = *arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRNoiseModel_m_parameters_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRNoiseModel *arg1 = (CoreRobotics::CRNoiseModel *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  CoreRobotics::CRParamNoiseGeneric *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRNoiseModel_m_parameters_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseModel, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseModel_m_parameters_get" "', argument " "1"" of type '" "CoreRobotics::CRNoiseModel *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseModel * >(argp1);
+  result = (CoreRobotics::CRParamNoiseGeneric *)& ((arg1)->m_parameters);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseGeneric, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_CRNoiseModel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CoreRobotics::CRNoiseModel *arg1 = (CoreRobotics::CRNoiseModel *) 0 ;
@@ -14724,9 +14776,9 @@ SWIGINTERN PyObject *CRNoiseModel_swigregister(PyObject *SWIGUNUSEDPARM(self), P
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_gaussianParam_cov_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseGaussian_cov_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   Eigen::MatrixXd arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -14734,12 +14786,12 @@ SWIGINTERN PyObject *_wrap_gaussianParam_cov_set(PyObject *SWIGUNUSEDPARM(self),
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:gaussianParam_cov_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRParamNoiseGaussian_cov_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_cov_set" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_cov_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   {
     if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp2, obj1))
     SWIG_fail;
@@ -14753,20 +14805,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_gaussianParam_cov_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseGaussian_cov_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   Eigen::MatrixXd result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:gaussianParam_cov_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:CRParamNoiseGaussian_cov_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_cov_get" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_cov_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   result =  ((arg1)->cov);
   {
     if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
@@ -14778,9 +14830,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_gaussianParam_covInv_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseGaussian_covInv_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   Eigen::MatrixXd arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -14788,12 +14840,12 @@ SWIGINTERN PyObject *_wrap_gaussianParam_covInv_set(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:gaussianParam_covInv_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRParamNoiseGaussian_covInv_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_covInv_set" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_covInv_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   {
     if (!ConvertFromNumpyToEigenMatrix<Eigen::MatrixXd >(&temp2, obj1))
     SWIG_fail;
@@ -14807,20 +14859,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_gaussianParam_covInv_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseGaussian_covInv_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   Eigen::MatrixXd result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:gaussianParam_covInv_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:CRParamNoiseGaussian_covInv_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_covInv_get" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_covInv_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   result =  ((arg1)->covInv);
   {
     if (!ConvertFromEigenToNumPyMatrix<Eigen::MatrixXd >(&resultobj, &result))
@@ -14832,9 +14884,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_gaussianParam_mean_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseGaussian_mean_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   Eigen::VectorXd arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -14842,12 +14894,12 @@ SWIGINTERN PyObject *_wrap_gaussianParam_mean_set(PyObject *SWIGUNUSEDPARM(self)
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:gaussianParam_mean_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRParamNoiseGaussian_mean_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_mean_set" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_mean_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   {
     if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp2, obj1))
     SWIG_fail;
@@ -14861,20 +14913,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_gaussianParam_mean_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseGaussian_mean_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   Eigen::VectorXd result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:gaussianParam_mean_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:CRParamNoiseGaussian_mean_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "gaussianParam_mean_get" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseGaussian_mean_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   result =  ((arg1)->mean);
   {
     if (!ConvertFromEigenToNumPyMatrix<Eigen::VectorXd >(&resultobj, &result))
@@ -14886,32 +14938,32 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_gaussianParam(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_CRParamNoiseGaussian(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::gaussianParam *result = 0 ;
+  CoreRobotics::CRParamNoiseGaussian *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)":new_gaussianParam")) SWIG_fail;
-  result = (CoreRobotics::gaussianParam *)new CoreRobotics::gaussianParam();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__gaussianParam, SWIG_POINTER_NEW |  0 );
+  if (!PyArg_ParseTuple(args,(char *)":new_CRParamNoiseGaussian")) SWIG_fail;
+  result = (CoreRobotics::CRParamNoiseGaussian *)new CoreRobotics::CRParamNoiseGaussian();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_gaussianParam(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_CRParamNoiseGaussian(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::gaussianParam *arg1 = (CoreRobotics::gaussianParam *) 0 ;
+  CoreRobotics::CRParamNoiseGaussian *arg1 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_gaussianParam",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__gaussianParam, SWIG_POINTER_DISOWN |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CRParamNoiseGaussian",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_gaussianParam" "', argument " "1"" of type '" "CoreRobotics::gaussianParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRParamNoiseGaussian" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::gaussianParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -14920,10 +14972,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *gaussianParam_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *CRParamNoiseGaussian_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char *)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__gaussianParam, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -15256,6 +15308,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CRNoiseGaussian_m_parameters_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRNoiseGaussian *arg1 = (CoreRobotics::CRNoiseGaussian *) 0 ;
+  CoreRobotics::CRParamNoiseGaussian *arg2 = (CoreRobotics::CRParamNoiseGaussian *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRNoiseGaussian_m_parameters_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseGaussian, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseGaussian_m_parameters_set" "', argument " "1"" of type '" "CoreRobotics::CRNoiseGaussian *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseGaussian * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRNoiseGaussian_m_parameters_set" "', argument " "2"" of type '" "CoreRobotics::CRParamNoiseGaussian *""'"); 
+  }
+  arg2 = reinterpret_cast< CoreRobotics::CRParamNoiseGaussian * >(argp2);
+  if (arg1) (arg1)->m_parameters = *arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRNoiseGaussian_m_parameters_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRNoiseGaussian *arg1 = (CoreRobotics::CRNoiseGaussian *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  CoreRobotics::CRParamNoiseGaussian *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRNoiseGaussian_m_parameters_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseGaussian, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseGaussian_m_parameters_get" "', argument " "1"" of type '" "CoreRobotics::CRNoiseGaussian *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseGaussian * >(argp1);
+  result = (CoreRobotics::CRParamNoiseGaussian *)& ((arg1)->m_parameters);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseGaussian, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_CRNoiseGaussian(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CoreRobotics::CRNoiseGaussian *arg1 = (CoreRobotics::CRNoiseGaussian *) 0 ;
@@ -15284,9 +15388,9 @@ SWIGINTERN PyObject *CRNoiseGaussian_swigregister(PyObject *SWIGUNUSEDPARM(self)
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_uniformParam_a_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseUniform_a_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::uniformParam *arg1 = (CoreRobotics::uniformParam *) 0 ;
+  CoreRobotics::CRParamNoiseUniform *arg1 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
   Eigen::VectorXd arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -15294,12 +15398,12 @@ SWIGINTERN PyObject *_wrap_uniformParam_a_set(PyObject *SWIGUNUSEDPARM(self), Py
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:uniformParam_a_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__uniformParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRParamNoiseUniform_a_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "uniformParam_a_set" "', argument " "1"" of type '" "CoreRobotics::uniformParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseUniform_a_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::uniformParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp1);
   {
     if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp2, obj1))
     SWIG_fail;
@@ -15313,20 +15417,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_uniformParam_a_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseUniform_a_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::uniformParam *arg1 = (CoreRobotics::uniformParam *) 0 ;
+  CoreRobotics::CRParamNoiseUniform *arg1 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   Eigen::VectorXd result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:uniformParam_a_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__uniformParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:CRParamNoiseUniform_a_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "uniformParam_a_get" "', argument " "1"" of type '" "CoreRobotics::uniformParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseUniform_a_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::uniformParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp1);
   result =  ((arg1)->a);
   {
     if (!ConvertFromEigenToNumPyMatrix<Eigen::VectorXd >(&resultobj, &result))
@@ -15338,9 +15442,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_uniformParam_b_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseUniform_b_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::uniformParam *arg1 = (CoreRobotics::uniformParam *) 0 ;
+  CoreRobotics::CRParamNoiseUniform *arg1 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
   Eigen::VectorXd arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -15348,12 +15452,12 @@ SWIGINTERN PyObject *_wrap_uniformParam_b_set(PyObject *SWIGUNUSEDPARM(self), Py
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:uniformParam_b_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__uniformParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRParamNoiseUniform_b_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "uniformParam_b_set" "', argument " "1"" of type '" "CoreRobotics::uniformParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseUniform_b_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::uniformParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp1);
   {
     if (!ConvertFromNumpyToEigenMatrix<Eigen::VectorXd >(&temp2, obj1))
     SWIG_fail;
@@ -15367,20 +15471,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_uniformParam_b_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseUniform_b_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::uniformParam *arg1 = (CoreRobotics::uniformParam *) 0 ;
+  CoreRobotics::CRParamNoiseUniform *arg1 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   Eigen::VectorXd result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:uniformParam_b_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__uniformParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:CRParamNoiseUniform_b_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "uniformParam_b_get" "', argument " "1"" of type '" "CoreRobotics::uniformParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseUniform_b_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::uniformParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp1);
   result =  ((arg1)->b);
   {
     if (!ConvertFromEigenToNumPyMatrix<Eigen::VectorXd >(&resultobj, &result))
@@ -15392,32 +15496,32 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_uniformParam(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_CRParamNoiseUniform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::uniformParam *result = 0 ;
+  CoreRobotics::CRParamNoiseUniform *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)":new_uniformParam")) SWIG_fail;
-  result = (CoreRobotics::uniformParam *)new CoreRobotics::uniformParam();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__uniformParam, SWIG_POINTER_NEW |  0 );
+  if (!PyArg_ParseTuple(args,(char *)":new_CRParamNoiseUniform")) SWIG_fail;
+  result = (CoreRobotics::CRParamNoiseUniform *)new CoreRobotics::CRParamNoiseUniform();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_uniformParam(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_CRParamNoiseUniform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::uniformParam *arg1 = (CoreRobotics::uniformParam *) 0 ;
+  CoreRobotics::CRParamNoiseUniform *arg1 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_uniformParam",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__uniformParam, SWIG_POINTER_DISOWN |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CRParamNoiseUniform",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_uniformParam" "', argument " "1"" of type '" "CoreRobotics::uniformParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRParamNoiseUniform" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::uniformParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -15426,10 +15530,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *uniformParam_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *CRParamNoiseUniform_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char *)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__uniformParam, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -15762,6 +15866,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CRNoiseUniform_m_parameters_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRNoiseUniform *arg1 = (CoreRobotics::CRNoiseUniform *) 0 ;
+  CoreRobotics::CRParamNoiseUniform *arg2 = (CoreRobotics::CRParamNoiseUniform *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRNoiseUniform_m_parameters_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseUniform, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseUniform_m_parameters_set" "', argument " "1"" of type '" "CoreRobotics::CRNoiseUniform *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseUniform * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRNoiseUniform_m_parameters_set" "', argument " "2"" of type '" "CoreRobotics::CRParamNoiseUniform *""'"); 
+  }
+  arg2 = reinterpret_cast< CoreRobotics::CRParamNoiseUniform * >(argp2);
+  if (arg1) (arg1)->m_parameters = *arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRNoiseUniform_m_parameters_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRNoiseUniform *arg1 = (CoreRobotics::CRNoiseUniform *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  CoreRobotics::CRParamNoiseUniform *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRNoiseUniform_m_parameters_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseUniform, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseUniform_m_parameters_get" "', argument " "1"" of type '" "CoreRobotics::CRNoiseUniform *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseUniform * >(argp1);
+  result = (CoreRobotics::CRParamNoiseUniform *)& ((arg1)->m_parameters);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseUniform, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_CRNoiseUniform(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CoreRobotics::CRNoiseUniform *arg1 = (CoreRobotics::CRNoiseUniform *) 0 ;
@@ -15790,9 +15946,9 @@ SWIGINTERN PyObject *CRNoiseUniform_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_mixtureParam_models_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseMixture_models_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::mixtureParam *arg1 = (CoreRobotics::mixtureParam *) 0 ;
+  CoreRobotics::CRParamNoiseMixture *arg1 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
   std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *arg2 = (std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -15801,15 +15957,15 @@ SWIGINTERN PyObject *_wrap_mixtureParam_models_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:mixtureParam_models_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__mixtureParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRParamNoiseMixture_models_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mixtureParam_models_set" "', argument " "1"" of type '" "CoreRobotics::mixtureParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseMixture_models_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::mixtureParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "mixtureParam_models_set" "', argument " "2"" of type '" "std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRParamNoiseMixture_models_set" "', argument " "2"" of type '" "std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *""'"); 
   }
   arg2 = reinterpret_cast< std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > * >(argp2);
   if (arg1) (arg1)->models = *arg2;
@@ -15820,20 +15976,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_mixtureParam_models_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseMixture_models_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::mixtureParam *arg1 = (CoreRobotics::mixtureParam *) 0 ;
+  CoreRobotics::CRParamNoiseMixture *arg1 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:mixtureParam_models_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__mixtureParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:CRParamNoiseMixture_models_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mixtureParam_models_get" "', argument " "1"" of type '" "CoreRobotics::mixtureParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseMixture_models_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::mixtureParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp1);
   result = (std::vector< CoreRobotics::CRNoiseModel *,std::allocator< CoreRobotics::CRNoiseModel * > > *)& ((arg1)->models);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_CoreRobotics__CRNoiseModel_p_std__allocatorT_CoreRobotics__CRNoiseModel_p_t_t, 0 |  0 );
   return resultobj;
@@ -15842,9 +15998,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_mixtureParam_weights_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseMixture_weights_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::mixtureParam *arg1 = (CoreRobotics::mixtureParam *) 0 ;
+  CoreRobotics::CRParamNoiseMixture *arg1 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
   std::vector< double,std::allocator< double > > *arg2 = (std::vector< double,std::allocator< double > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -15853,15 +16009,15 @@ SWIGINTERN PyObject *_wrap_mixtureParam_weights_set(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:mixtureParam_weights_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__mixtureParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRParamNoiseMixture_weights_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mixtureParam_weights_set" "', argument " "1"" of type '" "CoreRobotics::mixtureParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseMixture_weights_set" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::mixtureParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "mixtureParam_weights_set" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRParamNoiseMixture_weights_set" "', argument " "2"" of type '" "std::vector< double,std::allocator< double > > *""'"); 
   }
   arg2 = reinterpret_cast< std::vector< double,std::allocator< double > > * >(argp2);
   if (arg1) (arg1)->weights = *arg2;
@@ -15872,20 +16028,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_mixtureParam_weights_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRParamNoiseMixture_weights_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::mixtureParam *arg1 = (CoreRobotics::mixtureParam *) 0 ;
+  CoreRobotics::CRParamNoiseMixture *arg1 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::vector< double,std::allocator< double > > *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:mixtureParam_weights_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__mixtureParam, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:CRParamNoiseMixture_weights_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "mixtureParam_weights_get" "', argument " "1"" of type '" "CoreRobotics::mixtureParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRParamNoiseMixture_weights_get" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::mixtureParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp1);
   result = (std::vector< double,std::allocator< double > > *)& ((arg1)->weights);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t, 0 |  0 );
   return resultobj;
@@ -15894,32 +16050,32 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_mixtureParam(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_CRParamNoiseMixture(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::mixtureParam *result = 0 ;
+  CoreRobotics::CRParamNoiseMixture *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)":new_mixtureParam")) SWIG_fail;
-  result = (CoreRobotics::mixtureParam *)new CoreRobotics::mixtureParam();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__mixtureParam, SWIG_POINTER_NEW |  0 );
+  if (!PyArg_ParseTuple(args,(char *)":new_CRParamNoiseMixture")) SWIG_fail;
+  result = (CoreRobotics::CRParamNoiseMixture *)new CoreRobotics::CRParamNoiseMixture();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_mixtureParam(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_CRParamNoiseMixture(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  CoreRobotics::mixtureParam *arg1 = (CoreRobotics::mixtureParam *) 0 ;
+  CoreRobotics::CRParamNoiseMixture *arg1 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_mixtureParam",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__mixtureParam, SWIG_POINTER_DISOWN |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CRParamNoiseMixture",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_mixtureParam" "', argument " "1"" of type '" "CoreRobotics::mixtureParam *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRParamNoiseMixture" "', argument " "1"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
   }
-  arg1 = reinterpret_cast< CoreRobotics::mixtureParam * >(argp1);
+  arg1 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -15928,10 +16084,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *mixtureParam_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *CRParamNoiseMixture_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char *)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__mixtureParam, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -16093,6 +16249,58 @@ SWIGINTERN PyObject *_wrap_CRNoiseMixture_probability(PyObject *SWIGUNUSEDPARM(s
   }
   result = (double)(arg1)->probability(arg2);
   resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRNoiseMixture_m_parameters_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRNoiseMixture *arg1 = (CoreRobotics::CRNoiseMixture *) 0 ;
+  CoreRobotics::CRParamNoiseMixture *arg2 = (CoreRobotics::CRParamNoiseMixture *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CRNoiseMixture_m_parameters_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseMixture, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseMixture_m_parameters_set" "', argument " "1"" of type '" "CoreRobotics::CRNoiseMixture *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseMixture * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRNoiseMixture_m_parameters_set" "', argument " "2"" of type '" "CoreRobotics::CRParamNoiseMixture *""'"); 
+  }
+  arg2 = reinterpret_cast< CoreRobotics::CRParamNoiseMixture * >(argp2);
+  if (arg1) (arg1)->m_parameters = *arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRNoiseMixture_m_parameters_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRNoiseMixture *arg1 = (CoreRobotics::CRNoiseMixture *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  CoreRobotics::CRParamNoiseMixture *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CRNoiseMixture_m_parameters_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRNoiseMixture, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRNoiseMixture_m_parameters_get" "', argument " "1"" of type '" "CoreRobotics::CRNoiseMixture *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRNoiseMixture * >(argp1);
+  result = (CoreRobotics::CRParamNoiseMixture *)& ((arg1)->m_parameters);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_CoreRobotics__CRParamNoiseMixture, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -19947,47 +20155,55 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CRNoiseModel_setParameters", _wrap_CRNoiseModel_setParameters, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseModel_sample", _wrap_CRNoiseModel_sample, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseModel_probability", _wrap_CRNoiseModel_probability, METH_VARARGS, NULL},
+	 { (char *)"CRNoiseModel_m_parameters_set", _wrap_CRNoiseModel_m_parameters_set, METH_VARARGS, NULL},
+	 { (char *)"CRNoiseModel_m_parameters_get", _wrap_CRNoiseModel_m_parameters_get, METH_VARARGS, NULL},
 	 { (char *)"delete_CRNoiseModel", _wrap_delete_CRNoiseModel, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseModel_swigregister", CRNoiseModel_swigregister, METH_VARARGS, NULL},
-	 { (char *)"gaussianParam_cov_set", _wrap_gaussianParam_cov_set, METH_VARARGS, NULL},
-	 { (char *)"gaussianParam_cov_get", _wrap_gaussianParam_cov_get, METH_VARARGS, NULL},
-	 { (char *)"gaussianParam_covInv_set", _wrap_gaussianParam_covInv_set, METH_VARARGS, NULL},
-	 { (char *)"gaussianParam_covInv_get", _wrap_gaussianParam_covInv_get, METH_VARARGS, NULL},
-	 { (char *)"gaussianParam_mean_set", _wrap_gaussianParam_mean_set, METH_VARARGS, NULL},
-	 { (char *)"gaussianParam_mean_get", _wrap_gaussianParam_mean_get, METH_VARARGS, NULL},
-	 { (char *)"new_gaussianParam", _wrap_new_gaussianParam, METH_VARARGS, NULL},
-	 { (char *)"delete_gaussianParam", _wrap_delete_gaussianParam, METH_VARARGS, NULL},
-	 { (char *)"gaussianParam_swigregister", gaussianParam_swigregister, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseGaussian_cov_set", _wrap_CRParamNoiseGaussian_cov_set, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseGaussian_cov_get", _wrap_CRParamNoiseGaussian_cov_get, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseGaussian_covInv_set", _wrap_CRParamNoiseGaussian_covInv_set, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseGaussian_covInv_get", _wrap_CRParamNoiseGaussian_covInv_get, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseGaussian_mean_set", _wrap_CRParamNoiseGaussian_mean_set, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseGaussian_mean_get", _wrap_CRParamNoiseGaussian_mean_get, METH_VARARGS, NULL},
+	 { (char *)"new_CRParamNoiseGaussian", _wrap_new_CRParamNoiseGaussian, METH_VARARGS, NULL},
+	 { (char *)"delete_CRParamNoiseGaussian", _wrap_delete_CRParamNoiseGaussian, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseGaussian_swigregister", CRParamNoiseGaussian_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_CRNoiseGaussian", _wrap_new_CRNoiseGaussian, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseGaussian_setParameters", _wrap_CRNoiseGaussian_setParameters, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseGaussian_sample", _wrap_CRNoiseGaussian_sample, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseGaussian_probability", _wrap_CRNoiseGaussian_probability, METH_VARARGS, NULL},
+	 { (char *)"CRNoiseGaussian_m_parameters_set", _wrap_CRNoiseGaussian_m_parameters_set, METH_VARARGS, NULL},
+	 { (char *)"CRNoiseGaussian_m_parameters_get", _wrap_CRNoiseGaussian_m_parameters_get, METH_VARARGS, NULL},
 	 { (char *)"delete_CRNoiseGaussian", _wrap_delete_CRNoiseGaussian, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseGaussian_swigregister", CRNoiseGaussian_swigregister, METH_VARARGS, NULL},
-	 { (char *)"uniformParam_a_set", _wrap_uniformParam_a_set, METH_VARARGS, NULL},
-	 { (char *)"uniformParam_a_get", _wrap_uniformParam_a_get, METH_VARARGS, NULL},
-	 { (char *)"uniformParam_b_set", _wrap_uniformParam_b_set, METH_VARARGS, NULL},
-	 { (char *)"uniformParam_b_get", _wrap_uniformParam_b_get, METH_VARARGS, NULL},
-	 { (char *)"new_uniformParam", _wrap_new_uniformParam, METH_VARARGS, NULL},
-	 { (char *)"delete_uniformParam", _wrap_delete_uniformParam, METH_VARARGS, NULL},
-	 { (char *)"uniformParam_swigregister", uniformParam_swigregister, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseUniform_a_set", _wrap_CRParamNoiseUniform_a_set, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseUniform_a_get", _wrap_CRParamNoiseUniform_a_get, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseUniform_b_set", _wrap_CRParamNoiseUniform_b_set, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseUniform_b_get", _wrap_CRParamNoiseUniform_b_get, METH_VARARGS, NULL},
+	 { (char *)"new_CRParamNoiseUniform", _wrap_new_CRParamNoiseUniform, METH_VARARGS, NULL},
+	 { (char *)"delete_CRParamNoiseUniform", _wrap_delete_CRParamNoiseUniform, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseUniform_swigregister", CRParamNoiseUniform_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_CRNoiseUniform", _wrap_new_CRNoiseUniform, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseUniform_setParameters", _wrap_CRNoiseUniform_setParameters, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseUniform_sample", _wrap_CRNoiseUniform_sample, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseUniform_probability", _wrap_CRNoiseUniform_probability, METH_VARARGS, NULL},
+	 { (char *)"CRNoiseUniform_m_parameters_set", _wrap_CRNoiseUniform_m_parameters_set, METH_VARARGS, NULL},
+	 { (char *)"CRNoiseUniform_m_parameters_get", _wrap_CRNoiseUniform_m_parameters_get, METH_VARARGS, NULL},
 	 { (char *)"delete_CRNoiseUniform", _wrap_delete_CRNoiseUniform, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseUniform_swigregister", CRNoiseUniform_swigregister, METH_VARARGS, NULL},
-	 { (char *)"mixtureParam_models_set", _wrap_mixtureParam_models_set, METH_VARARGS, NULL},
-	 { (char *)"mixtureParam_models_get", _wrap_mixtureParam_models_get, METH_VARARGS, NULL},
-	 { (char *)"mixtureParam_weights_set", _wrap_mixtureParam_weights_set, METH_VARARGS, NULL},
-	 { (char *)"mixtureParam_weights_get", _wrap_mixtureParam_weights_get, METH_VARARGS, NULL},
-	 { (char *)"new_mixtureParam", _wrap_new_mixtureParam, METH_VARARGS, NULL},
-	 { (char *)"delete_mixtureParam", _wrap_delete_mixtureParam, METH_VARARGS, NULL},
-	 { (char *)"mixtureParam_swigregister", mixtureParam_swigregister, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseMixture_models_set", _wrap_CRParamNoiseMixture_models_set, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseMixture_models_get", _wrap_CRParamNoiseMixture_models_get, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseMixture_weights_set", _wrap_CRParamNoiseMixture_weights_set, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseMixture_weights_get", _wrap_CRParamNoiseMixture_weights_get, METH_VARARGS, NULL},
+	 { (char *)"new_CRParamNoiseMixture", _wrap_new_CRParamNoiseMixture, METH_VARARGS, NULL},
+	 { (char *)"delete_CRParamNoiseMixture", _wrap_delete_CRParamNoiseMixture, METH_VARARGS, NULL},
+	 { (char *)"CRParamNoiseMixture_swigregister", CRParamNoiseMixture_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_CRNoiseMixture", _wrap_new_CRNoiseMixture, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseMixture_add", _wrap_CRNoiseMixture_add, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseMixture_sample", _wrap_CRNoiseMixture_sample, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseMixture_probability", _wrap_CRNoiseMixture_probability, METH_VARARGS, NULL},
+	 { (char *)"CRNoiseMixture_m_parameters_set", _wrap_CRNoiseMixture_m_parameters_set, METH_VARARGS, NULL},
+	 { (char *)"CRNoiseMixture_m_parameters_get", _wrap_CRNoiseMixture_m_parameters_get, METH_VARARGS, NULL},
 	 { (char *)"delete_CRNoiseMixture", _wrap_delete_CRNoiseMixture, METH_VARARGS, NULL},
 	 { (char *)"CRNoiseMixture_swigregister", CRNoiseMixture_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_CRSensorLinear", _wrap_new_CRSensorLinear, METH_VARARGS, NULL},
@@ -20118,15 +20334,15 @@ static swig_type_info _swigt__p_CoreRobotics__CRNoiseMixture = {"_p_CoreRobotics
 static swig_type_info _swigt__p_CoreRobotics__CRNoiseModel = {"_p_CoreRobotics__CRNoiseModel", "CoreRobotics::CRNoiseModel *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRNoiseUniform = {"_p_CoreRobotics__CRNoiseUniform", "CoreRobotics::CRNoiseUniform *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRNullSpace = {"_p_CoreRobotics__CRNullSpace", "CoreRobotics::CRNullSpace *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseGaussian = {"_p_CoreRobotics__CRParamNoiseGaussian", "CoreRobotics::CRParamNoiseGaussian *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseGeneric = {"_p_CoreRobotics__CRParamNoiseGeneric", "CoreRobotics::CRParamNoiseGeneric *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseMixture = {"_p_CoreRobotics__CRParamNoiseMixture", "CoreRobotics::CRParamNoiseMixture *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_CoreRobotics__CRParamNoiseUniform = {"_p_CoreRobotics__CRParamNoiseUniform", "CoreRobotics::CRParamNoiseUniform *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRRigidBody = {"_p_CoreRobotics__CRRigidBody", "CoreRobotics::CRRigidBody *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRSensorLinear = {"_p_CoreRobotics__CRSensorLinear", "CoreRobotics::CRSensorLinear *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRSharedMemory = {"_p_CoreRobotics__CRSharedMemory", "CoreRobotics::CRSharedMemory *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRTrajectoryGenerator = {"_p_CoreRobotics__CRTrajectoryGenerator", "CoreRobotics::CRTrajectoryGenerator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_CoreRobotics__CRWaypoint = {"_p_CoreRobotics__CRWaypoint", "CoreRobotics::CRWaypoint *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_CoreRobotics__gaussianParam = {"_p_CoreRobotics__gaussianParam", "CoreRobotics::gaussianParam *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_CoreRobotics__mixtureParam = {"_p_CoreRobotics__mixtureParam", "CoreRobotics::mixtureParam *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_CoreRobotics__uniformParam = {"_p_CoreRobotics__uniformParam", "CoreRobotics::uniformParam *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__Matrix3d = {"_p_Eigen__Matrix3d", "Eigen::Matrix3d *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__MatrixT_bool_6_1_t = {"_p_Eigen__MatrixT_bool_6_1_t", "Eigen::Matrix< bool,6,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__MatrixXd = {"_p_Eigen__MatrixXd", "std::vector< Eigen::MatrixXd >::value_type *|Eigen::MatrixXd *", 0, 0, (void*)0, 0};
@@ -20167,15 +20383,15 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_CoreRobotics__CRNoiseModel,
   &_swigt__p_CoreRobotics__CRNoiseUniform,
   &_swigt__p_CoreRobotics__CRNullSpace,
+  &_swigt__p_CoreRobotics__CRParamNoiseGaussian,
   &_swigt__p_CoreRobotics__CRParamNoiseGeneric,
+  &_swigt__p_CoreRobotics__CRParamNoiseMixture,
+  &_swigt__p_CoreRobotics__CRParamNoiseUniform,
   &_swigt__p_CoreRobotics__CRRigidBody,
   &_swigt__p_CoreRobotics__CRSensorLinear,
   &_swigt__p_CoreRobotics__CRSharedMemory,
   &_swigt__p_CoreRobotics__CRTrajectoryGenerator,
   &_swigt__p_CoreRobotics__CRWaypoint,
-  &_swigt__p_CoreRobotics__gaussianParam,
-  &_swigt__p_CoreRobotics__mixtureParam,
-  &_swigt__p_CoreRobotics__uniformParam,
   &_swigt__p_Eigen__Matrix3d,
   &_swigt__p_Eigen__MatrixT_bool_6_1_t,
   &_swigt__p_Eigen__MatrixXd,
@@ -20216,15 +20432,15 @@ static swig_cast_info _swigc__p_CoreRobotics__CRNoiseMixture[] = {  {&_swigt__p_
 static swig_cast_info _swigc__p_CoreRobotics__CRNoiseModel[] = {  {&_swigt__p_CoreRobotics__CRNoiseModel, 0, 0, 0},  {&_swigt__p_CoreRobotics__CRNoiseUniform, _p_CoreRobotics__CRNoiseUniformTo_p_CoreRobotics__CRNoiseModel, 0, 0},  {&_swigt__p_CoreRobotics__CRNoiseGaussian, _p_CoreRobotics__CRNoiseGaussianTo_p_CoreRobotics__CRNoiseModel, 0, 0},  {&_swigt__p_CoreRobotics__CRNoiseMixture, _p_CoreRobotics__CRNoiseMixtureTo_p_CoreRobotics__CRNoiseModel, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRNoiseUniform[] = {  {&_swigt__p_CoreRobotics__CRNoiseUniform, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRNullSpace[] = {  {&_swigt__p_CoreRobotics__CRNullSpace, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseGaussian[] = {  {&_swigt__p_CoreRobotics__CRParamNoiseGaussian, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseGeneric[] = {  {&_swigt__p_CoreRobotics__CRParamNoiseGeneric, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseMixture[] = {  {&_swigt__p_CoreRobotics__CRParamNoiseMixture, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_CoreRobotics__CRParamNoiseUniform[] = {  {&_swigt__p_CoreRobotics__CRParamNoiseUniform, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRRigidBody[] = {  {&_swigt__p_CoreRobotics__CRRigidBody, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRSensorLinear[] = {  {&_swigt__p_CoreRobotics__CRSensorLinear, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRSharedMemory[] = {  {&_swigt__p_CoreRobotics__CRSharedMemory, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRTrajectoryGenerator[] = {  {&_swigt__p_CoreRobotics__CRTrajectoryGenerator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_CoreRobotics__CRWaypoint[] = {  {&_swigt__p_CoreRobotics__CRWaypoint, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_CoreRobotics__gaussianParam[] = {  {&_swigt__p_CoreRobotics__gaussianParam, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_CoreRobotics__mixtureParam[] = {  {&_swigt__p_CoreRobotics__mixtureParam, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_CoreRobotics__uniformParam[] = {  {&_swigt__p_CoreRobotics__uniformParam, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__Matrix3d[] = {  {&_swigt__p_Eigen__Matrix3d, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__MatrixT_bool_6_1_t[] = {  {&_swigt__p_Eigen__MatrixT_bool_6_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__MatrixXd[] = {  {&_swigt__p_Eigen__MatrixXd, 0, 0, 0},{0, 0, 0, 0}};
@@ -20265,15 +20481,15 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_CoreRobotics__CRNoiseModel,
   _swigc__p_CoreRobotics__CRNoiseUniform,
   _swigc__p_CoreRobotics__CRNullSpace,
+  _swigc__p_CoreRobotics__CRParamNoiseGaussian,
   _swigc__p_CoreRobotics__CRParamNoiseGeneric,
+  _swigc__p_CoreRobotics__CRParamNoiseMixture,
+  _swigc__p_CoreRobotics__CRParamNoiseUniform,
   _swigc__p_CoreRobotics__CRRigidBody,
   _swigc__p_CoreRobotics__CRSensorLinear,
   _swigc__p_CoreRobotics__CRSharedMemory,
   _swigc__p_CoreRobotics__CRTrajectoryGenerator,
   _swigc__p_CoreRobotics__CRWaypoint,
-  _swigc__p_CoreRobotics__gaussianParam,
-  _swigc__p_CoreRobotics__mixtureParam,
-  _swigc__p_CoreRobotics__uniformParam,
   _swigc__p_Eigen__Matrix3d,
   _swigc__p_Eigen__MatrixT_bool_6_1_t,
   _swigc__p_Eigen__MatrixXd,
