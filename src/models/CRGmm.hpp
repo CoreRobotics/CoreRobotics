@@ -123,11 +123,11 @@ public:
 public:
     
     //! Sample a noise vector from the density
-    using CRNoiseModel::sample;
+    using CRNoiseMixture::sample;
     Eigen::VectorXd sample(void);
     
     //! Evaluate the probability from the density
-    using CRNoiseModel::probability;
+    using CRNoiseMixture::probability;
     double probability(Eigen::VectorXd i_x);
     
     //! Perform Gaussian Mixture Regression (GMR)
@@ -145,10 +145,6 @@ public:
     CRParamGaussianMixture m_parameters;
     
 private:
-    
-    //! hide the setParameters method and make it do nothing
-    using CRNoiseModel::setParameters;
-    void setParameters(void) {};
     
     //! Evaluate the multivariate normal dist
     double mvnpdf(Eigen::VectorXd i_x,
