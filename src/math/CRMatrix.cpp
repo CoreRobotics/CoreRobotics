@@ -42,7 +42,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CRMatrix.hpp"
 #include "Eigen/Dense"
 #include "Eigen/SVD"
-#include <iostream>
 
 //=====================================================================
 // CoreRobotics namespace
