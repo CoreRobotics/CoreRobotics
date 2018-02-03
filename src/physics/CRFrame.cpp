@@ -101,14 +101,14 @@ CRResult CRFrame::setFreeValue(double i_q)
 //=====================================================================
 /*!
  This method gets the value of the free variable.  The method returns
- NULL if there is no free variable.\n
+ 0 if there is no free variable.\n
  
  \return        value of the free variable.
  */
 //---------------------------------------------------------------------
 double CRFrame::getFreeValue(void)
 {
-    return NULL;
+    return 0;
 }
 
 
