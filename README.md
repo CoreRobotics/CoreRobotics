@@ -99,7 +99,7 @@ otherwise, you must manually specify the path to eigen and boost
 
 
 ## Support:
-We use the Service Desk feature in Gitlab to offer support.  If you are a user but not contributing to the library, please email your issues or questions to: [incoming+powan/CoreRobotics@gitlab.com](incoming+powan/CoreRobotics@gitlab.com).  You'll receive an email notification that the issue went through, and we'll get to work on addressing it!  If you are a contributor, please submit your issues through the issue tracker feature in Gitlab.
+We use the Service Desk feature in Gitlab to offer support.  If you are a user but not contributing to the library, please email your issues or questions to: [incoming+powan/CoreRobotics@gitlab.com](mailto:incoming+powan/CoreRobotics@gitlab.com).  You'll receive an email notification that the issue went through, and we'll get to work on addressing it!  If you are a contributor, please submit your issues through the issue tracker feature in Gitlab.
 
 
 ## Developer Guidelines:
