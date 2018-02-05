@@ -10,10 +10,13 @@ Created: 2016
 Version: 0.9.1
 
 - C++ Platforms: Windows 8.1/10, Mac OS X 10, and Linux.
-- MATLAB Version (not active): R2016a (Windows, Mac, Linux)
 
 ## Description:
-This git project hosts code for the CoreRobotics open source robotic control library.  The CoreRobotics library is distrubted under the [BSD-3-Clause license](https://opensource.org/licenses/BSD-3-Clause).  This allows unlimited redistribution as long as the copyright notices and disclaimers of warranty are maintained.  The third clause indicates permission is required to the use of names of contributors for endorsement in any derived work.
+This git project hosts code for the CoreRobotics open source robotic control library.  The CoreRobotics libraries were developed in an effort to provide generalized implementations of algorithms facilitating rapid development of real-time robot manipulator control.  This is useful for roboticists and researchers who need full access to the control loop for high-performance applications, and can't afford the overhead associated with larger libraries such as the Robot Operating System (ROS).  CoreRobotics utilizes an object-oriented approach in C++ to implement fast cross-platform thread management and timing, core math solvers, manipulator control, and trajectory shaping, and modeling for state estimation.
+
+An example application that makes use of the library runs a single-board computer (e.g.: a raspberry PI or similar computer) to control the motion of a small four-jointed robot arm.  A controller that solves for the joint angles to achieve a desired position of the robot tool uses the CoreRobotics InverseKinematics class.  To achieve smooth motions between robot tool waypoints, the controller uses the CoreRobotics TrajectoryGenerator class.  The Manipulator class presents a convenient way to represent the robot and update the robot kinematics quickly when new sensor data becomes available.
+
+The CoreRobotics library is distrubted under the [BSD-3-Clause license](https://opensource.org/licenses/BSD-3-Clause).  This allows unlimited redistribution as long as the copyright notices and disclaimers of warranty are maintained.  The third clause indicates permission is required to the use of names of contributors for endorsement in any derived work.
 
 
 ## General Structure:
@@ -43,6 +46,25 @@ CoreRobotics relies on CMake to compile cross-platform source to platform-specif
 4. Change directories `cd build`.
 5. Run CMake `cmake -G "<compiler>" ../`  To get a list of compilers available to configure with CMake, type `cmake --help`.  CMake will check for the dependencies.  Note that if you have not installed Eigen and Boost using one of the methods outlined in the External Dependencies section above (i.e. the packages aren't found by CMake), you must manually specify the path to boost and eigen headers using cmake flags, e.g.:  `cmake -G "<compiler>" -DEIGEN3_INCLUDE_DIR=<path to eigen3> -DBoost_INCLUDE_DIR=<path to boost> ../`  We provide a convenience repository for the needed 3rd party dependencies at [https://gitlab.com/powan/CRexternal](https://gitlab.com/powan/CRexternal) if you don't want to manage these packages.
 6. Open the project in the *build\* directory and build accordingly. (e.g.: For visual studio, a CoreRobotics.sln will be created.  Open this solution and build all.  The library and binaries will be compiled by the Visual Studio IDE.)
+7. To test that the library works, there are 2 options:  If GTest is installed on your machine, the tests will be build to `tests/bin` - all green "OK's" means everything is working properly.  The examples will be compiled to `examples/bin`.  Running `example_core` checks basic multithreading capability and should output the following:
+`**********************
+Demonstration of CRCore
+t = 0.101898
+Thread 1: i = 1
+Thread 2: i = 1
+Thread 1: i = 2
+Thread 1: i = 3
+Thread 2: i = 2
+Thread 1: i = 4
+Thread 1: i = 5
+Thread 2: i = 3
+Thread 1: i = 6
+Thread 1: i = 7
+Thread 1: i = 8
+Thread 2: i = 4
+Thread 1: i = 9
+Thread 1: i = 10`
+
 
 
 ## Using the library
@@ -76,6 +98,10 @@ otherwise, you must manually specify the path to eigen and boost
 `target_link_libraries("exec_name" ${CR_DIR}/lib/Release/libCoreRobotics.a)`
 
 
+## Support:
+We use the Service Desk feature in Gitlab to offer support.  If you are a user but not contributing to the library, please email your issues or questions to: [incoming+powan/CoreRobotics@gitlab.com](incoming+powan/CoreRobotics@gitlab.com).  You'll receive an email notification that the issue went through, and we'll get to work on addressing it!  If you are a contributor, please submit your issues through the issue tracker feature in Gitlab.
+
+
 ## Developer Guidelines:
 For general questions about git, see the [Gitlab help pages](https://gitlab.com/help/)
 
@@ -87,6 +113,7 @@ For general questions about git, see the [Gitlab help pages](https://gitlab.com/
 6. Comment your classes for Doxygen.  Following existing code for examples on how to do this.
 7. Use the *utils/* folder to write tests for your contirbutions.
 8. Please keep the code in working condition.  Only commit changes you've made to code if it is working properly (this means compile and run BEFORE you commit!).
+
 
 ## Brief Style Guide
 Refer to the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) for detailed explanations.
