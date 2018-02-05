@@ -38,12 +38,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
-
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include <chrono>
+#include <iostream>
 #include "Eigen/Dense"
 #include "CRGmm.hpp"
 #include "CRMatrix.hpp"
-#include <chrono>
-#include <iostream>
 
 
 //=====================================================================

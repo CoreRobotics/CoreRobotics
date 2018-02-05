@@ -44,9 +44,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "Eigen/Dense"
 #include <random>
 #include <vector>
+#include "Eigen/Dense"
 #include "CRNoiseMixture.hpp"
 #include "CRNoiseGaussian.hpp"
 
