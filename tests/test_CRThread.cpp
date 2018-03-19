@@ -49,8 +49,8 @@ using namespace CoreRobotics;
 
 
 // Callback for the thread
-void callback(void){
-    const char* memoryName = "MyMemory";
+void callback1(void){
+    const char* memoryName = "MyMemory1";
     // Open some shared memory as client
     CRSharedMemory mem(memoryName, CR_MANAGER_CLIENT);
     
@@ -67,24 +67,72 @@ void callback(void){
 }
 
 
+// Callback for the thread
+void callback2(void* arg){
+    const char* memoryName = "MyMemory2";
+    // Open some shared memory as client
+    CRSharedMemory mem(memoryName, CR_MANAGER_CLIENT);
+    
+    // create a vector of data
+    Eigen::VectorXd v(1);
+    v << 0;
+    
+    int i = 0;
+    while(i<10){
+        v(0) = double(i);
+        mem.set("signal_4", v);
+        i++;
+    }
+}
+
+
+
 //
 // Test thread start function
 //
 TEST(CRThread, Start){
-    const char* memoryName = "MyMemory";
+    const char* memoryName = "MyMemory1";
     CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
     Eigen::VectorXd v(1);
     v << 1.0;
     server.addSignal("signal_3", v);
     
-    // Create another thread
+    CRMutex threadMutex;
+    
+    // Create a thread
     CRThread myThread;
-    myThread.setCallback(*callback);
+    myThread.setCallback(*callback1);
     
     // start the thread
     myThread.start();
     
     Eigen::VectorXd v2 = server.get("signal_3");
+    EXPECT_EQ(1, v2.size());
+    EXPECT_DOUBLE_EQ(9, v2(0));
+}
+
+
+
+
+//
+// Test thread start function - with argumnet
+//
+TEST(CRThread, StartArgument){
+    const char* memoryName = "MyMemory2";
+    CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
+    Eigen::VectorXd v(1);
+    v << 1.0;
+    server.addSignal("signal_4", v);
+    
+    // Create a thread
+    void* arg;
+    CRThread myThread;
+    myThread.setCallback(*callback2, arg);
+    
+    // start the thread
+    myThread.start();
+    
+    Eigen::VectorXd v2 = server.get("signal_4");
     EXPECT_EQ(1, v2.size());
     EXPECT_DOUBLE_EQ(9, v2(0));
 }

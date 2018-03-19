@@ -94,6 +94,21 @@ void CRThread::setCallback(void(i_callbackFunction)(void)) {
     *m_loop = std::thread(i_callbackFunction);
 }
 
+    
+    
+//=====================================================================
+/*!
+ This method sets the thread callback function with an argument.
+ 
+ \param [in] i_callbackFunction - the callback function to be executed
+ by the thread
+ \param [in] i_arg              - argument to pass to thread
+ */
+//---------------------------------------------------------------------
+void CRThread::setCallback(void(i_callbackFunction)(void*),
+                           void* i_arg) {
+    *m_loop = std::thread(i_callbackFunction, i_arg);
+}
 
 
 //=====================================================================

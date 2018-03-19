@@ -39,13 +39,12 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#ifndef CRThread_hpp
-#define CRThread_hpp
+#ifndef CRMutex_hpp
+#define CRMutex_hpp
 
 //=====================================================================
 // Includes
-#include <thread>
-
+#include <mutex>
 
 //=====================================================================
 // CoreRobotics namespace
@@ -53,74 +52,49 @@ namespace CoreRobotics {
     
 //=====================================================================
 /*!
- \file CRThread.hpp
- \brief Implements thread execution.
+ \file CRMutex.hpp
+ \brief Implements a thread mutex.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRThread
+ \class CRMutex
  \ingroup core
  
- \brief This class implements threads to enable running multiple
- control loops within a single application.
+ \brief This class implements a mutex to ensure mutually exclusive
+ writing of data to thread data.
  
  \details
  ## Description
- CRThread implements a simple thread interface for setting a callback
- and starting and stopping thread execution.
+ CRMutex implements a mutex to for deterministic data transfer between
+ threads.
  
- - CRThread::setCallback sets the callback function.
- - CRThread::setPriority sets the priority of the thread.
- - CRThread::start starts the thread execution.
- - CRThread::stop stops the thread execution.
- 
- ## Example
- This example creates and runs a simple CRThread.
- \include example_CRCore.cpp
+ - CRMutex::lock locks the thread from access.
+ - CRMutex::unlock releases the thread for access.
  */
-//=====================================================================
-//! Enumerator for specifying thread priority
-enum CRThreadPriority {
-	CR_PRIORITY_LOWEST,
-	CR_PRIORITY_LOW,
-	CR_PRIORITY_NORMAL,
-	CR_PRIORITY_HIGH,
-	CR_PRIORITY_HIGHEST
-};
 
 //=====================================================================
-class CRThread {
+class CRMutex {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRThread();
-	CRThread(CRThreadPriority i_priority);
+    CRMutex();
     
     //! Class destructor
-    virtual ~CRThread();
+    ~CRMutex();
     
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
-    //! Set the thread callback function
-    void setCallback(void(i_callbackFunction)(void));
-    
-    //! Set the thread callback function
-    void setCallback(void(i_callbackFunction)(void*), void* arg);
+    //! Acquire the mutex
+    void lock();
 
-	//! Set the thread priority
-	void setPriority(CRThreadPriority i_priority);
-    
-    //! Start the thread
-    void start();
-    
-    //! Stop the thread
-    void stop();
+	//! Release the mutex
+	void unlock();
     
     
 //---------------------------------------------------------------------
@@ -128,7 +102,7 @@ public:
 private:
 
 	//! thread pointer
-    std::thread* m_loop;
+    std::recursive_mutex* m_mutex;
     
     
 };
