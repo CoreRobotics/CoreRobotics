@@ -72,6 +72,20 @@ CRGmm::CRGmm() {
     this->randomSeed();
     
 }
+
+
+//=====================================================================
+/*!
+Destructor.\n
+*/
+//---------------------------------------------------------------------
+CRGmm::~CRGmm() {
+	for (unsigned k = 0; k < m_parameters.models.size(); k++) {
+		delete m_parameters.models.at(k);
+	}
+	m_parameters.models.clear();
+	m_parameters.weights.clear();
+}
     
     
 //=====================================================================
@@ -191,6 +205,9 @@ void CRGmm::regression(Eigen::VectorXd i_x,
                        Eigen::VectorXd& o_mean,
                        Eigen::MatrixXd& o_covariance)
 {
+	// Define the smallest number of double precision
+	double realmin = 2.225073858507202e-308;
+
     // Get cluster/input/output dimensions
     int NK = m_parameters.models.size();
     
@@ -199,7 +216,7 @@ void CRGmm::regression(Eigen::VectorXd i_x,
     o_covariance.setZero(i_outputIndices.size(), i_outputIndices.size());
     
     // Init the intermediate variables
-    double cweight = 0;
+    double cweight = realmin; // initialize to smallest double so we don't ever divide by zero
     double weight = 0;
     Eigen::MatrixXd c1;
     c1.setZero(i_outputIndices.size(), i_outputIndices.size());
@@ -213,6 +230,13 @@ void CRGmm::regression(Eigen::VectorXd i_x,
         Eigen::MatrixXd SigmaXY = CRMatrix::reducedMatrix(m_parameters.models.at(k)->m_parameters.cov, i_inputIndices, i_outputIndices);
         Eigen::MatrixXd SigmaXX = CRMatrix::reducedMatrix(m_parameters.models.at(k)->m_parameters.cov, i_inputIndices, i_inputIndices);
         Eigen::MatrixXd SigmaXXInv = SigmaXX.inverse();
+		// Eigen::MatrixXd SigmaXXInv;
+		// CRMatrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv);
+		/*
+		if (CRMatrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv) == CR_RESULT_SINGULAR) {
+			printf("\n\nSingular SigmaXX inverse!!!!\n\n");
+		}
+		*/
         Eigen::VectorXd MuY = CRMatrix::reducedVector(m_parameters.models.at(k)->m_parameters.mean, i_outputIndices);
         Eigen::VectorXd MuX = CRMatrix::reducedVector(m_parameters.models.at(k)->m_parameters.mean, i_inputIndices);
         

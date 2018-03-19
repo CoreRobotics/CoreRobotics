@@ -110,6 +110,9 @@ public:
     //! Class constructor
     CRGmm(unsigned i_seed);
     CRGmm();
+
+	//! Class destructor
+	~CRGmm();
     
 //---------------------------------------------------------------------
 // Add models to the mixture
