@@ -109,6 +109,9 @@ public:
     
     //! Set the thread callback function
     void setCallback(void(i_callbackFunction)(void));
+    
+    //! Set the thread callback function
+    void setCallback(void(i_callbackFunction)(void*), void* arg);
 
 	//! Set the thread priority
 	void setPriority(CRThreadPriority i_priority);
