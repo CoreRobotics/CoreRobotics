@@ -96,6 +96,8 @@ TEST(CRThread, Start){
     v << 1.0;
     server.addSignal("signal_3", v);
     
+    CRMutex threadMutex;
+    
     // Create a thread
     CRThread myThread;
     myThread.setCallback(*callback1);
