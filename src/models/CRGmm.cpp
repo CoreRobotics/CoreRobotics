@@ -72,6 +72,20 @@ CRGmm::CRGmm() {
     this->randomSeed();
     
 }
+
+
+//=====================================================================
+/*!
+Destructor.\n
+*/
+//---------------------------------------------------------------------
+CRGmm::~CRGmm() {
+	for (unsigned k = 0; k < m_parameters.models.size(); k++) {
+		delete m_parameters.models.at(k);
+	}
+	m_parameters.models.clear();
+	m_parameters.weights.clear();
+}
     
     
 //=====================================================================
