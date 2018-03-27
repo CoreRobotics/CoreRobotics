@@ -141,8 +141,8 @@ public:
     virtual double getFreeValue(void);
     
     //! Set the rotation and translation
-    virtual void setRotationAndTranslation(Eigen::Matrix3d i_rot,
-                                           Eigen::Vector3d i_trans){
+    void setRotationAndTranslation(Eigen::Matrix3d i_rot,
+                                   Eigen::Vector3d i_trans){
         this->m_rotation = i_rot; this->m_translation = i_trans;
     }
 

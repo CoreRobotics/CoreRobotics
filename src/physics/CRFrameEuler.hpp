@@ -211,10 +211,8 @@ private:
 // Private Methods
 private:
     
-    //! Overload the inhereted method to set the rotation and
-    //  translation explicitly for Euler angles
-    using CRFrame::setRotationAndTranslation;
-    void setRotationAndTranslation();
+    //! Update the rotation and translation matrices from data
+    void update();
 
 };
 

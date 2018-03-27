@@ -200,10 +200,8 @@ private:
 // Private Methods
 private:
     
-    //! Overload the inhereted method to set the rotation and
-    //  translation explicitly for DH parameters
-    using CRFrame::setRotationAndTranslation;
-    void setRotationAndTranslation(void);
+    //! Update the rotation and translation matrices from data
+    void update();
 
 };
 
