@@ -75,7 +75,7 @@ CRFrameDh::CRFrameDh(double i_r,
 	m_dhMode = i_mode;
     m_freeVar = i_free;
 	// m_freeVarOffset = i_offset;
-	this->update();
+	this->setRotationAndTranslation();
 }
 CRFrameDh::CRFrameDh()
 {
@@ -86,7 +86,7 @@ CRFrameDh::CRFrameDh()
     m_dhMode = CR_DH_MODE_MODIFIED;
     m_freeVar = CR_DH_FREE_NONE;
 	// m_freeVarOffset = 0.0;
-    this->update();
+    this->setRotationAndTranslation();
 }
 
 
@@ -121,7 +121,7 @@ CRResult CRFrameDh::setFreeValue(double i_q)
             m_dhTheta = i_q;
         break;
     }
-    this->update();
+    this->setRotationAndTranslation();
     return result;
 }
 
@@ -167,7 +167,7 @@ double CRFrameDh::getFreeValue()
 void CRFrameDh::setMode(CRDhMode i_mode)
 {
     m_dhMode = i_mode;
-    this->update();
+    this->setRotationAndTranslation();
 }
 
 
@@ -205,7 +205,7 @@ void CRFrameDh::setParameters(double i_r,
     m_dhD = i_d;
     m_dhTheta = i_theta;
 	// m_freeVarOffset = i_offset;
-    this->update();
+    this->setRotationAndTranslation();
 }
 
 
@@ -257,7 +257,7 @@ bool CRFrameDh::isDriven(void) {
 //! sets the private rotation and translation members - Note that
 //  anytime a parameter gets set in the frame class, this method gets
 //  called to update the rotation/translation members.
-void CRFrameDh::update()
+void CRFrameDh::setRotationAndTranslation()
 {
 
     // Todo: add a variable offset to make handling offsets easier on real robots.

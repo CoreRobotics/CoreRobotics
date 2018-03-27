@@ -212,7 +212,8 @@ private:
 private:
     
     //! Update the rotation and translation matrices from data
-    void update();
+    using CRFrame::setRotationAndTranslation;
+    void setRotationAndTranslation();
 
 };
 

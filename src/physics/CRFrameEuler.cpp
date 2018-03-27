@@ -81,7 +81,7 @@ CRFrameEuler::CRFrameEuler(double i_x,
     m_angG = i_g;
     m_eulerMode = i_mode;
     m_freeVar = i_free;
-    this->update();
+    this->setRotationAndTranslation();
 }
 CRFrameEuler::CRFrameEuler()
 {
@@ -93,7 +93,7 @@ CRFrameEuler::CRFrameEuler()
     m_angG = 0.0;
     m_eulerMode = CR_EULER_MODE_ZXZ;
     m_freeVar = CR_EULER_FREE_NONE;
-    this->update();
+    this->setRotationAndTranslation();
 }
 
 
@@ -134,7 +134,7 @@ CRResult CRFrameEuler::setFreeValue(double i_q)
             m_angG = i_q;
             break;
     }
-    this->update();
+    this->setRotationAndTranslation();
     return result;
 }
 
@@ -187,7 +187,7 @@ double CRFrameEuler::getFreeValue(void)
 void CRFrameEuler::setMode(CREulerMode i_mode)
 {
     m_eulerMode = i_mode;
-    this->update();
+    this->setRotationAndTranslation();
 }
 
 
@@ -220,7 +220,7 @@ void CRFrameEuler::setPosition(double i_x, double i_y, double i_z)
     m_posX = i_x;
     m_posY = i_y;
     m_posZ = i_z;
-    this->update();
+    this->setRotationAndTranslation();
 }
 
 
@@ -256,7 +256,7 @@ void CRFrameEuler::setOrientation(double i_a, double i_b, double i_g)
     m_angA = i_a;
     m_angB = i_b;
     m_angG = i_g;
-    this->update();
+    this->setRotationAndTranslation();
 }
 
 
@@ -352,8 +352,8 @@ bool CRFrameEuler::isDriven(void) {
     
 //! sets the private rotation and translation members - Note that
 //  anytime a parameter gets set in the frame class, this method gets
-//  called to update the rotation/translation members.
-void CRFrameEuler::update()
+//  called to compute the rotation/translation members.
+void CRFrameEuler::setRotationAndTranslation()
 {
     
     Eigen::Matrix3d r1 = Eigen::Matrix3d::Identity();
