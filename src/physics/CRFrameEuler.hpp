@@ -171,6 +171,10 @@ public:
                                    double& o_a,
                                    double& o_b,
                                    double& o_g);
+    
+    //! (NOT RECOMMENDED) Set the rotation and translation matrices
+    void setRotationAndTranslation(Eigen::Matrix3d i_rot,
+                                   Eigen::Vector3d i_trans);
 
 //---------------------------------------------------------------------
 // Public Methods

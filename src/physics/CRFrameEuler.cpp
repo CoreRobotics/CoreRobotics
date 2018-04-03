@@ -330,6 +330,27 @@ void CRFrameEuler::getPositionAndOrientation(double& o_x,
     
 //=====================================================================
 /*!
+ NOT RECCOMENDED!
+ This method sets the rotation and translation matrices for the frame
+ transformation.\n
+ 
+ \param[int]   i_rot     - rotation matrix (3 x 3)
+ \param[out]   i_trans   - translation vector (3 x 1)
+ */
+//---------------------------------------------------------------------
+void CRFrameEuler::setRotationAndTranslation(Eigen::Matrix3d i_rot,
+                                             Eigen::Vector3d i_trans)
+{
+    this->m_rotation = i_rot;
+    this->m_translation = i_trans;
+    Eigen::Matrix<double,6,1> p = this->getPose(this->getMode());
+    this->setPositionAndOrientation(p(0), p(1), p(2), p(3), p(4), p(5));
+}
+    
+    
+    
+//=====================================================================
+/*!
  This method returns a true if the frame is driven (i.e. has a free 
  variable) or a false if the frame is not driven.\n
  
