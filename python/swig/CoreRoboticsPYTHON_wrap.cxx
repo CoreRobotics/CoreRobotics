@@ -12631,6 +12631,52 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CRFrameEuler_setRotationAndTranslation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRFrameEuler *arg1 = (CoreRobotics::CRFrameEuler *) 0 ;
+  Eigen::Matrix3d arg2 ;
+  Eigen::Vector3d arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  Eigen::Vector3d temp3 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CRFrameEuler_setRotationAndTranslation",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRFrameEuler, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRFrameEuler_setRotationAndTranslation" "', argument " "1"" of type '" "CoreRobotics::CRFrameEuler *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRFrameEuler * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Eigen__Matrix3d,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRFrameEuler_setRotationAndTranslation" "', argument " "2"" of type '" "Eigen::Matrix3d""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRFrameEuler_setRotationAndTranslation" "', argument " "2"" of type '" "Eigen::Matrix3d""'");
+    } else {
+      Eigen::Matrix3d * temp = reinterpret_cast< Eigen::Matrix3d * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::Vector3d >(&temp3, obj2))
+    SWIG_fail;
+    arg3 = temp3;
+  }
+  (arg1)->setRotationAndTranslation(arg2,arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_CRFrameEuler_isDriven(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CoreRobotics::CRFrameEuler *arg1 = (CoreRobotics::CRFrameEuler *) 0 ;
@@ -20209,6 +20255,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CRFrameEuler_getOrientation", _wrap_CRFrameEuler_getOrientation, METH_VARARGS, NULL},
 	 { (char *)"CRFrameEuler_setPositionAndOrientation", _wrap_CRFrameEuler_setPositionAndOrientation, METH_VARARGS, NULL},
 	 { (char *)"CRFrameEuler_getPositionAndOrientation", _wrap_CRFrameEuler_getPositionAndOrientation, METH_VARARGS, NULL},
+	 { (char *)"CRFrameEuler_setRotationAndTranslation", _wrap_CRFrameEuler_setRotationAndTranslation, METH_VARARGS, NULL},
 	 { (char *)"CRFrameEuler_isDriven", _wrap_CRFrameEuler_isDriven, METH_VARARGS, NULL},
 	 { (char *)"delete_CRFrameEuler", _wrap_delete_CRFrameEuler, METH_VARARGS, NULL},
 	 { (char *)"CRFrameEuler_swigregister", CRFrameEuler_swigregister, METH_VARARGS, NULL},
