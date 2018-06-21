@@ -48,12 +48,15 @@ classdef CRFrameEuler < CoreRobotics.CRFrame
     function varargout = getPositionAndOrientation(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(121, self, varargin{:});
     end
-    function varargout = isDriven(self,varargin)
+    function varargout = setRotationAndTranslation(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(122, self, varargin{:});
+    end
+    function varargout = isDriven(self,varargin)
+      [varargout{1:nargout}] = CoreRoboticsMEX(123, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(123, self);
+        CoreRoboticsMEX(124, self);
         self.swigPtr=[];
       end
     end

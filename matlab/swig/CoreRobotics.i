@@ -124,6 +124,7 @@ removed for compatability.
 
 %eigen_typemaps(Eigen::Matrix<double, 6, 1>)
 %eigen_typemaps(Eigen::Vector3d)
+%eigen_typemaps(Eigen::Matrix3d)
 %eigen_typemaps(Eigen::Matrix4d)
 %eigen_typemaps(Eigen::Matrix<int, 6, 1>)
 

@@ -714,6 +714,9 @@ class CRFrameEuler(CRFrame):
     def getPositionAndOrientation(self, o_x, o_y, o_z, o_a, o_b, o_g):
         return _CoreRobotics.CRFrameEuler_getPositionAndOrientation(self, o_x, o_y, o_z, o_a, o_b, o_g)
 
+    def setRotationAndTranslation(self, i_rot, i_trans):
+        return _CoreRobotics.CRFrameEuler_setRotationAndTranslation(self, i_rot, i_trans)
+
     def isDriven(self):
         return _CoreRobotics.CRFrameEuler_isDriven(self)
     __swig_destroy__ = _CoreRobotics.delete_CRFrameEuler

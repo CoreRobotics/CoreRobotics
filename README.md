@@ -18,6 +18,8 @@ An example application that makes use of the library runs a single-board compute
 
 The CoreRobotics library is distrubted under the [BSD-3-Clause license](https://opensource.org/licenses/BSD-3-Clause).  This allows unlimited redistribution as long as the copyright notices and disclaimers of warranty are maintained.  The third clause indicates permission is required to the use of names of contributors for endorsement in any derived work.
 
+The best way to get involved is to read this document, check out the library, and start contributing code by submitting a merge request!
+
 
 ## General Structure:
 - *doc/* contains the doxygen Doxyfile for generating html documentation.  Please install [doxygen](http://www.stack.nl/~dimitri/doxygen/) and run the doxyfile to generate.  The main documentation page will be *doc/html/index.html*
@@ -85,7 +87,7 @@ target_link_libraries("MyExecutable" ${CR_LIBRARIES})
 
 
 ## Support:
-We use the Service Desk feature in Gitlab to offer support.  If you are a user but not contributing to the library, please email your issues or questions to: [incoming+powan/CoreRobotics@gitlab.com](mailto:incoming+powan/CoreRobotics@gitlab.com).  You'll receive an email notification that the issue went through, and we'll get to work on addressing it!  If you are a contributor, please submit your issues through the issue tracker feature in Gitlab.
+We use the Service Desk feature in Gitlab to offer support.  If you are a user but not contributing to the library, please email your issues or questions to: [incoming+powan/CoreRobotics@incoming.gitlab.com](mailto:incoming+powan/CoreRobotics@incoming.gitlab.com).  You'll receive an email notification that the issue went through, and we'll get to work on addressing it!  If you are a contributor, please submit your issues through the issue tracker feature in Gitlab.
 
 
 ## Developer Guidelines:
