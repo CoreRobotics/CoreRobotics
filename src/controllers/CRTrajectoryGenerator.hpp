@@ -124,6 +124,10 @@ public:
                    Eigen::VectorXd m_af,
                    double i_tf);
     
+    //! Solve for the coefficients needed to achieve the trajectory
+    CRResult solve(CRWaypoint i_wp0,
+                   CRWaypoint i_wpf);
+    
     //! Get the trajectory at time t
     CRWaypoint step(double i_t);
     

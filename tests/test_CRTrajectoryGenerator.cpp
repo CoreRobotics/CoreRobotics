@@ -50,7 +50,7 @@ using namespace CoreRobotics;
 //
 TEST(CRTrajectoryGenerator, Solve){
     CRTrajectoryGenerator trajGen;
-    CRWaypoint wp;
+    CRWaypoint wp0, wpf;
     
     // Initial conditions
     Eigen::Vector2d x0, v0, a0;
@@ -67,6 +67,20 @@ TEST(CRTrajectoryGenerator, Solve){
     
     // Check the solve function
     CRResult result = trajGen.solve(x0, v0, a0, xf, vf, af, tf);
+    EXPECT_EQ(result, CR_RESULT_SUCCESS);
+    
+    
+    // Now check the solve function with the waypoints
+    wp0.position = x0;
+    wp0.velocity = v0;
+    wp0.acceleration = a0;
+    wp0.time = 0;
+    
+    wpf.position = xf;
+    wpf.velocity = vf;
+    wpf.acceleration = af;
+    wpf.time = tf;
+    result = trajGen.solve(wp0, wpf);
     EXPECT_EQ(result, CR_RESULT_SUCCESS);
 }
 

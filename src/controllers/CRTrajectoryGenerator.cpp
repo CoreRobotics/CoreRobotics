@@ -118,6 +118,33 @@ CRResult CRTrajectoryGenerator::solve(Eigen::VectorXd i_x0,
     
 //=====================================================================
 /*!
+ This method computes the trajectory for the specified conditions.  When
+ this method is called, the internal clock is reset to time = 0.\n
+ 
+ \param[in]     i_wp0 - initial waypoint
+ \param[in]     i_wpf - final waypoint
+ \return        CoreRobotics::CRResult indicator
+ */
+//---------------------------------------------------------------------
+CRResult CRTrajectoryGenerator::solve(CRWaypoint i_wp0,
+                                      CRWaypoint i_wpf)
+{
+    // define the vectors
+    Eigen::VectorXd x0 = i_wp0.position;
+    Eigen::VectorXd v0 = i_wp0.velocity;
+    Eigen::VectorXd a0 = i_wp0.acceleration;
+    Eigen::VectorXd xf = i_wpf.position;
+    Eigen::VectorXd vf = i_wpf.velocity;
+    Eigen::VectorXd af = i_wpf.acceleration;
+    double tf = i_wpf.time - i_wpf.time;
+    
+    // solve
+    return solve(x0, v0, a0, xf, vf, af, tf);
+}
+    
+    
+//=====================================================================
+/*!
  This method computes the values of the trajectory at time i_t (s).\n
  
  \param[in]     i_t - the time at which to evaluate.
