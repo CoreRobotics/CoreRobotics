@@ -1446,8 +1446,8 @@ class CRTrajectoryGenerator(_object):
         except __builtin__.Exception:
             self.this = this
 
-    def solve(self, i_x0, i_v0, m_a0, m_xf, m_vf, m_af, i_tf):
-        return _CoreRobotics.CRTrajectoryGenerator_solve(self, i_x0, i_v0, m_a0, m_xf, m_vf, m_af, i_tf)
+    def solve(self, *args):
+        return _CoreRobotics.CRTrajectoryGenerator_solve(self, *args)
 
     def step(self, *args):
         return _CoreRobotics.CRTrajectoryGenerator_step(self, *args)

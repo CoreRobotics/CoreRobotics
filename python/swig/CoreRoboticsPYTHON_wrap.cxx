@@ -19890,7 +19890,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CRTrajectoryGenerator_solve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_CRTrajectoryGenerator_solve__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   CoreRobotics::CRTrajectoryGenerator *arg1 = (CoreRobotics::CRTrajectoryGenerator *) 0 ;
   Eigen::VectorXd arg2 ;
@@ -19966,6 +19966,146 @@ SWIGINTERN PyObject *_wrap_CRTrajectoryGenerator_solve(PyObject *SWIGUNUSEDPARM(
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRTrajectoryGenerator_solve__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  CoreRobotics::CRTrajectoryGenerator *arg1 = (CoreRobotics::CRTrajectoryGenerator *) 0 ;
+  CoreRobotics::CRWaypoint arg2 ;
+  CoreRobotics::CRWaypoint arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  CoreRobotics::CRResult result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CRTrajectoryGenerator_solve",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRTrajectoryGenerator_solve" "', argument " "1"" of type '" "CoreRobotics::CRTrajectoryGenerator *""'"); 
+  }
+  arg1 = reinterpret_cast< CoreRobotics::CRTrajectoryGenerator * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_CoreRobotics__CRWaypoint,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CRTrajectoryGenerator_solve" "', argument " "2"" of type '" "CoreRobotics::CRWaypoint""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRTrajectoryGenerator_solve" "', argument " "2"" of type '" "CoreRobotics::CRWaypoint""'");
+    } else {
+      CoreRobotics::CRWaypoint * temp = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_CoreRobotics__CRWaypoint,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CRTrajectoryGenerator_solve" "', argument " "3"" of type '" "CoreRobotics::CRWaypoint""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CRTrajectoryGenerator_solve" "', argument " "3"" of type '" "CoreRobotics::CRWaypoint""'");
+    } else {
+      CoreRobotics::CRWaypoint * temp = reinterpret_cast< CoreRobotics::CRWaypoint * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  result = (CoreRobotics::CRResult)(arg1)->solve(arg2,arg3);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CRTrajectoryGenerator_solve(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[9] = {
+    0
+  };
+  Py_ssize_t ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = PyObject_Length(args);
+  for (ii = 0; (ii < 8) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_CoreRobotics__CRWaypoint, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_CoreRobotics__CRWaypoint, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_CRTrajectoryGenerator_solve__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 8) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_CoreRobotics__CRTrajectoryGenerator, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = is_array(argv[1]);
+      }
+      if (_v) {
+        {
+          _v = is_array(argv[2]);
+        }
+        if (_v) {
+          {
+            _v = is_array(argv[3]);
+          }
+          if (_v) {
+            {
+              _v = is_array(argv[4]);
+            }
+            if (_v) {
+              {
+                _v = is_array(argv[5]);
+              }
+              if (_v) {
+                {
+                  _v = is_array(argv[6]);
+                }
+                if (_v) {
+                  {
+                    int res = SWIG_AsVal_double(argv[7], NULL);
+                    _v = SWIG_CheckState(res);
+                  }
+                  if (_v) {
+                    return _wrap_CRTrajectoryGenerator_solve__SWIG_0(self, args);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'CRTrajectoryGenerator_solve'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    CoreRobotics::CRTrajectoryGenerator::solve(Eigen::VectorXd,Eigen::VectorXd,Eigen::VectorXd,Eigen::VectorXd,Eigen::VectorXd,Eigen::VectorXd,double)\n"
+    "    CoreRobotics::CRTrajectoryGenerator::solve(CoreRobotics::CRWaypoint,CoreRobotics::CRWaypoint)\n");
+  return 0;
 }
 
 
