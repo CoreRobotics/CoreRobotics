@@ -84,7 +84,7 @@ CRThread::~CRThread() { }
 
 //=====================================================================
 /*!
- This method sets the thread callback function.
+ This method sets the thread callback function and starts the thread.
  
  \param [in] i_callbackFunction - the callback function to be executed
                                 by the thread
@@ -98,7 +98,8 @@ void CRThread::setCallback(void(i_callbackFunction)(void)) {
     
 //=====================================================================
 /*!
- This method sets the thread callback function with an argument.
+ This method sets the thread callback function with an argument and
+ starts the thread.
  
  \param [in] i_callbackFunction - the callback function to be executed
  by the thread
@@ -189,20 +190,22 @@ void CRThread::setPriority(CRThreadPriority i_priority) {
 
 //=====================================================================
 /*!
- This method starts the thread by joining it to the main thread.
+ This method waits for a thread to finish its execution.  See C++
+ std::thread for details.
  */
 //---------------------------------------------------------------------
-void CRThread::start() {
+void CRThread::join() {
     m_loop->join();
 }
     
     
 //=====================================================================
 /*!
- This method stops the thread execution by detaching it from the main.
+ This method permits the thread to execute independently from the
+ thread handle.  See C++ std::thread for details.
  */
 //---------------------------------------------------------------------
-void CRThread::stop() {
+void CRThread::detach() {
     m_loop->detach();
 }
 

@@ -116,11 +116,11 @@ public:
 	//! Set the thread priority
 	void setPriority(CRThreadPriority i_priority);
     
-    //! Start the thread
-    void start();
+    //! Waits for a thread to finish its execution
+    void join();
     
-    //! Stop the thread
-    void stop();
+    //! Permits the thread to execute independently from the thread handle
+    void detach();
     
     
 //---------------------------------------------------------------------
