@@ -416,15 +416,13 @@ class CRClock(_object):
 CRClock_swigregister = _CoreRobotics.CRClock_swigregister
 CRClock_swigregister(CRClock)
 
-CR_SIGNAL_FORCE = _CoreRobotics.CR_SIGNAL_FORCE
-CR_SIGNAL_POSITION = _CoreRobotics.CR_SIGNAL_POSITION
-CR_SIGNAL_VELOCITY = _CoreRobotics.CR_SIGNAL_VELOCITY
-CR_SIGNAL_ACCELERATION = _CoreRobotics.CR_SIGNAL_ACCELERATION
-CR_SIGNAL_GENERIC = _CoreRobotics.CR_SIGNAL_GENERIC
 CR_RESULT_SUCCESS = _CoreRobotics.CR_RESULT_SUCCESS
 CR_RESULT_SINGULAR = _CoreRobotics.CR_RESULT_SINGULAR
 CR_RESULT_UNWRITABLE = _CoreRobotics.CR_RESULT_UNWRITABLE
 CR_RESULT_BAD_IC = _CoreRobotics.CR_RESULT_BAD_IC
+CR_RUN_STATE_RUNNING = _CoreRobotics.CR_RUN_STATE_RUNNING
+CR_RUN_STATE_STOPPED = _CoreRobotics.CR_RUN_STATE_STOPPED
+CR_RUN_STATE_PAUSED = _CoreRobotics.CR_RUN_STATE_PAUSED
 class CRConversion(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, CRConversion, name, value)
