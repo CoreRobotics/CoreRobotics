@@ -43,9 +43,9 @@
 cmake_minimum_required(VERSION 3.0)
 
 # Set version
-set (MAJOR_VERSION 0)
-set (MINOR_VERSION 9)
-set (RELEASE_VERSION 1)
+set (MAJOR_VERSION 2)
+set (MINOR_VERSION 0)
+set (RELEASE_VERSION 0)
 set (PROJECT_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${RELEASE_VERSION})
 
 # Set CMAKE policy
@@ -137,19 +137,12 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
     )
 
 	# Sort into a group structure
-	source_group( "include" FILES "src/CoreRobotics.hpp")
-
-	source_group( "include\\core" FILES ${HEADERS_CORE})
-	source_group( "include\\math" FILES ${HEADERS_MATH})
-	source_group( "include\\models" FILES ${HEADERS_MODELS})
-	source_group( "include\\physics" FILES ${HEADERS_PHYSICS})
-	source_group( "include\\controllers" FILES ${HEADERS_CONTROLLERS})
-
-	source_group( "src\\core" FILES ${SOURCES_CORE})
-	source_group( "src\\math" FILES ${SOURCES_MATH})
-	source_group( "src\\models" FILES ${SOURCES_MODELS})
-	source_group( "src\\physics" FILES ${SOURCES_PHYSICS})
-	source_group( "src\\controllers" FILES ${SOURCES_CONTROLLERS})
+    source_group( "\\" FILES "src/CoreRobotics.hpp")
+	source_group( "core" FILES ${HEADERS_CORE} ${SOURCES_CORE})
+	source_group( "math" FILES ${HEADERS_MATH} ${SOURCES_MATH})
+	source_group( "models" FILES ${HEADERS_MODELS} ${SOURCES_MODELS})
+	source_group( "physics" FILES ${HEADERS_PHYSICS} ${SOURCES_PHYSICS})
+	source_group( "controllers" FILES ${HEADERS_CONTROLLERS} ${SOURCES_CONTROLLERS})
 
 
     # =====================================================================
