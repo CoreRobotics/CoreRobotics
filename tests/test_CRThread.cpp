@@ -103,8 +103,8 @@ TEST(CRThread, Start){
     CRThread myThread;
     myThread.setCallback(*callback1);
     
-    // start the thread
-    myThread.start();
+    // wait for the thread to finish
+    myThread.join();
     
     Eigen::VectorXd v2 = server.get("signal_3");
     EXPECT_EQ(1, v2.size());
@@ -129,8 +129,8 @@ TEST(CRThread, StartArgument){
     CRThread myThread;
     myThread.setCallback(*callback2, arg);
     
-    // start the thread
-    myThread.start();
+    // wait for the thread to finish
+    myThread.join();
     
     Eigen::VectorXd v2 = server.get("signal_4");
     EXPECT_EQ(1, v2.size());

@@ -78,8 +78,8 @@ int main(void){
     
     
     // start the threads
-    myThread1.start();
-    myThread2.start();
+    myThread1.join();
+    myThread2.join();
     
 }
 
