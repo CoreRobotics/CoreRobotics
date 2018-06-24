@@ -52,22 +52,33 @@ namespace CoreRobotics {
  \brief Enumerator types for common usage across all modules.
  */
 //=====================================================================
-//! Enumerator for signal types
-enum CRSignalType {
-    CR_SIGNAL_FORCE,
-    CR_SIGNAL_POSITION,
-    CR_SIGNAL_VELOCITY,
-    CR_SIGNAL_ACCELERATION,
-    CR_SIGNAL_GENERIC
-};
-//=====================================================================
-//! Result enumerator for consistent operation result flags.
-enum CRResult {
-    CR_RESULT_SUCCESS,
-    CR_RESULT_SINGULAR,
-    CR_RESULT_UNWRITABLE,
-	CR_RESULT_BAD_IC,
-};
+
+    //! Enumerator for signal types
+    /*
+    enum CRSignalType {
+        CR_SIGNAL_FORCE,
+        CR_SIGNAL_POSITION,
+        CR_SIGNAL_VELOCITY,
+        CR_SIGNAL_ACCELERATION,
+        CR_SIGNAL_GENERIC
+    };
+     */
+
+    //! Result enumerator for consistent operation result flags.
+    enum CRResult {
+        CR_RESULT_SUCCESS,
+        CR_RESULT_SINGULAR,
+        CR_RESULT_UNWRITABLE,
+        CR_RESULT_BAD_IC,
+    };
+    
+    //! Thread run state
+    enum CRRunState {
+        CR_RUN_STATE_RUNNING,
+        CR_RUN_STATE_STOPPED,
+        CR_RUN_STATE_PAUSED,
+    };
+    
 //=====================================================================
 // End namespace
 }
