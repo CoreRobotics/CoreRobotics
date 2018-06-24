@@ -21483,15 +21483,13 @@ SWIG_init(void) {
   
   import_array();
   
-  SWIG_Python_SetConstant(d, "CR_SIGNAL_FORCE",SWIG_From_int(static_cast< int >(CoreRobotics::CR_SIGNAL_FORCE)));
-  SWIG_Python_SetConstant(d, "CR_SIGNAL_POSITION",SWIG_From_int(static_cast< int >(CoreRobotics::CR_SIGNAL_POSITION)));
-  SWIG_Python_SetConstant(d, "CR_SIGNAL_VELOCITY",SWIG_From_int(static_cast< int >(CoreRobotics::CR_SIGNAL_VELOCITY)));
-  SWIG_Python_SetConstant(d, "CR_SIGNAL_ACCELERATION",SWIG_From_int(static_cast< int >(CoreRobotics::CR_SIGNAL_ACCELERATION)));
-  SWIG_Python_SetConstant(d, "CR_SIGNAL_GENERIC",SWIG_From_int(static_cast< int >(CoreRobotics::CR_SIGNAL_GENERIC)));
   SWIG_Python_SetConstant(d, "CR_RESULT_SUCCESS",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_SUCCESS)));
   SWIG_Python_SetConstant(d, "CR_RESULT_SINGULAR",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_SINGULAR)));
   SWIG_Python_SetConstant(d, "CR_RESULT_UNWRITABLE",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_UNWRITABLE)));
   SWIG_Python_SetConstant(d, "CR_RESULT_BAD_IC",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_BAD_IC)));
+  SWIG_Python_SetConstant(d, "CR_RUN_STATE_RUNNING",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RUN_STATE_RUNNING)));
+  SWIG_Python_SetConstant(d, "CR_RUN_STATE_STOPPED",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RUN_STATE_STOPPED)));
+  SWIG_Python_SetConstant(d, "CR_RUN_STATE_PAUSED",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RUN_STATE_PAUSED)));
   SWIG_Python_SetConstant(d, "CR_EULER_MODE_ZXZ",SWIG_From_int(static_cast< int >(CoreRobotics::CR_EULER_MODE_ZXZ)));
   SWIG_Python_SetConstant(d, "CR_EULER_MODE_XYX",SWIG_From_int(static_cast< int >(CoreRobotics::CR_EULER_MODE_XYX)));
   SWIG_Python_SetConstant(d, "CR_EULER_MODE_YZY",SWIG_From_int(static_cast< int >(CoreRobotics::CR_EULER_MODE_YZY)));

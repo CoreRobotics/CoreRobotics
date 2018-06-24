@@ -1,7 +1,7 @@
-function v = CR_EULER_MODE_XYX()
+function v = CR_RUN_STATE_PAUSED()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = CoreRoboticsMEX(0, 8);
+    vInitialized = CoreRoboticsMEX(0, 6);
   end
   v = vInitialized;
 end
