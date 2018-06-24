@@ -162,7 +162,7 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
     # package definitions
     set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
     set (CONF_LIBRARIES    ${LIB_TARGET_NAME})
-    set (CONF_LIBRARY_DIRS ${CMAKE_SOURCE_DIR}/lib)
+    set (CONF_LIBRARY_DIRS ${CMAKE_SOURCE_DIR}/lib ${CMAKE_SOURCE_DIR}/lib/Release ${CMAKE_SOURCE_DIR}/lib/Debug)
     set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
 
     # package configuration and version files
