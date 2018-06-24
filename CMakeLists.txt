@@ -43,9 +43,9 @@
 cmake_minimum_required(VERSION 3.0)
 
 # Set version
-set (MAJOR_VERSION 0)
-set (MINOR_VERSION 9)
-set (RELEASE_VERSION 1)
+set (MAJOR_VERSION 1)
+set (MINOR_VERSION 1)
+set (RELEASE_VERSION 0)
 set (PROJECT_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${RELEASE_VERSION})
 
 # Set CMAKE policy
