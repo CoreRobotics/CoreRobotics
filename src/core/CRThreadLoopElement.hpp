@@ -64,10 +64,6 @@ namespace CoreRobotics {
  - CRThreadLoopElement::step() is called on each iteration of the thread
  while the thread is running.
  - CRThreadLoopElement::setPriority sets the priority of the thread.
- 
- ## Example
- This example creates and runs a simple CRThreadLoop.
- \include example_CRThreadLoop.cpp
  */
 //---------------------------------------------------------------------
 class CRThreadLoop;
@@ -98,6 +94,9 @@ class CRThreadLoopElement {
     
         //! set the pointer to the parent - called by the thread on construction
         void setParent(CRThreadLoop* i_parent) {m_parent = i_parent;}
+    
+        //! return the pointer to the parent (NULL value indicates no parent)
+        CRThreadLoop* getParent() {return m_parent; }
     
     
     // Protected members

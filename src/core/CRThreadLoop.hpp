@@ -70,10 +70,6 @@ namespace CoreRobotics {
  exit the thread of execution.
  - CRThreadLoop::stop exits the thread of execution.
  - CRThreadLoop::stop stops the thread execution.
- 
- ## Example
- This example creates and runs a simple CRThreadLoop.
- \include example_CRThreadLoop.cpp
  */
 //---------------------------------------------------------------------
 class CRThreadLoop {
