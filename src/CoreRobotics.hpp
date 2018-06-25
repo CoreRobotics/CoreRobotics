@@ -371,6 +371,15 @@ project includes all the CoreRobotics modules.
 
 
 //---------------------------------------------------------------------------
+//! \defgroup world World
+//! \brief TEMPORARY DURING MAJOR REVISION TO 2.0
+//---------------------------------------------------------------------------
+#include "CRSignal.hpp"
+#include "CRModel.hpp"
+#include "CRPolicy.hpp"
+
+
+//---------------------------------------------------------------------------
 //! \defgroup math Math
 //! \brief Implements math components.
 //---------------------------------------------------------------------------

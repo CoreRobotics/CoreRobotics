@@ -96,6 +96,7 @@ file(GLOB CR_INCLUDE_DIRS
     ${CMAKE_SOURCE_DIR}/src/models
     ${CMAKE_SOURCE_DIR}/src/physics
     ${CMAKE_SOURCE_DIR}/src/controllers
+    ${CMAKE_SOURCE_DIR}/src/world
     ${EIGEN3_INCLUDE_DIR}
     ${Boost_INCLUDE_DIR}
 )
@@ -107,6 +108,7 @@ file(GLOB HEADERS_MATH src/math/*.hpp )
 file(GLOB HEADERS_MODELS src/models/*.hpp )
 file(GLOB HEADERS_PHYSICS src/physics/*.hpp )
 file(GLOB HEADERS_CONTROLLERS src/controllers/*.hpp )
+file(GLOB HEADERS_WORLD src/world/*.hpp )
 
 # Source files
 file(GLOB SOURCES_CORE src/core/*.cpp )
@@ -114,6 +116,7 @@ file(GLOB SOURCES_MATH src/math/*.cpp )
 file(GLOB SOURCES_MODELS src/models/*.cpp )
 file(GLOB SOURCES_PHYSICS src/physics/*.cpp )
 file(GLOB SOURCES_CONTROLLERS src/controllers/*.cpp )
+file(GLOB SOURCES_WORLD src/world/*.cpp )
 
 # If building on linux add pthread and rt
 if(UNIX AND NOT APPLE) # This may be useful for apple too
@@ -128,7 +131,7 @@ endif()
 if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 
 	# Create static (or shared) library
-	add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${HEADERS_WORLD} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD})
 
 	# Set the output directory
     set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
@@ -143,6 +146,7 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 	source_group( "models" FILES ${HEADERS_MODELS} ${SOURCES_MODELS})
 	source_group( "physics" FILES ${HEADERS_PHYSICS} ${SOURCES_PHYSICS})
 	source_group( "controllers" FILES ${HEADERS_CONTROLLERS} ${SOURCES_CONTROLLERS})
+    source_group( "world" FILES ${HEADERS_WORLD} ${SOURCES_WORLD})
 
 
     # =====================================================================

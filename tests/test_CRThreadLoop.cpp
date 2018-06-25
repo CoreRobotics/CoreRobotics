@@ -73,7 +73,7 @@ public:
     virtual void step() {
         
         // this is a simple low pass system with forward euler discretiation
-        x = (1 - this->m_parent->getUpdateRate() / m_tau) * x;
+        x = (1 - this->m_caller->getUpdateRate() / m_tau) * x;
     };
     
     //! Reset the thread element (called on Thread::start())

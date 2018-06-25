@@ -40,11 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRThreadLoopElement_hpp
-#define CRThreadLoopElement_hpp
-
-#include <vector>
-
+#ifndef CRSignal_hpp
+#define CRSignal_hpp
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -52,80 +49,80 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- \class CRThreadLoopElement
+ \class CRSignal
  \ingroup core
  
- \brief This abstract class defines the methods needed to derive a
- call for a CRThreadLoop.
+ \brief
  
  \details
  ## Description
- This abstract class defines the methods needed to derive a
- call for a CRThreadLoop.  The primary methods to be implemented are:
  
- - CRThreadLoopElement::step() is called on each iteration of the thread
- while the thread is running.
- - CRThreadLoopElement::setPriority sets the priority of the thread.
  */
 //---------------------------------------------------------------------
-class CRThreadLoop;
-class CRThreadLoopElement {
+class CRSignal {
     
-    // Constructor and destructor
+    // Constructor and Destructor
     public:
     
-        //! constructor
-        CRThreadLoopElement() {}
+        //! Class constructor
+        CRSignal();
     
-        //! destructor
-        ~CRThreadLoopElement() {
-            delete m_caller;
-            // delete m_parent;
-        }
+        //! Class destructor
+        ~CRSignal();
     
-    
-    // Primary CRThreadLoopElement functions that must be implemented
-    public:
-    
-        //! Step the element - called on each iteration of the thread while running
-        virtual void step() = 0;
-    
-        //! Reset the element - called on ThreadLoop::start())
-        virtual void reset() = 0;
-    
-    
-    // ther methods called by the caller thread
-    public:
-    
-        //! set the pointer to the caller thread - called by the thread on construction
-        void setCaller(CRThreadLoop* i_caller) {m_caller = i_caller;}
-    
-        //! return the pointer to the caller (NULL value indicates no caller)
-        CRThreadLoop* getCaller() {return m_caller; }
-    
-        //! set the pointer to a parent
-        // void setParent(CRThreadLoopElement* i_parent) {m_parent = i_parent;}
-    
-        //! return the pointer to a parent
-        // CRThreadLoopElement* getParent() {return m_parent; }
-    
-        //! add a child to the list of children
-        // void addChild(CRThreadLoopElement* i_child) { m_children.push_back(i_child); }
-    
-    
-    // Protected members
-    protected:
-    
-        //! thread caller
-        CRThreadLoop* m_caller = NULL;
-    
-        //! parent
-        // CRThreadLoopElement* m_parent = NULL;
-            
-        //! list of children
-        // std::vector<CRThreadLoopElement*> m_children;
 };
     
+    
+//---------------------------------------------------------------------
+/*!
+ \class CRState
+ \ingroup core
+ 
+ \brief
+ 
+ \details
+ ## Description
+ 
+ */
+//---------------------------------------------------------------------
+class CRState : public CRSignal {
+        
+    // Constructor and Destructor
+    public:
+    
+        //! Class constructor
+        CRState();
+    
+        //! Class destructor
+        ~CRState();
+        
+};
+
+//---------------------------------------------------------------------
+/*!
+ \class CRAction
+ \ingroup core
+ 
+ \brief
+ 
+ \details
+ ## Description
+ 
+ */
+//---------------------------------------------------------------------
+class CRAction : public CRSignal {
+        
+    // Constructor and Destructor
+    public:
+        
+        //! Class constructor
+        CRAction();
+        
+        //! Class destructor
+        ~CRAction();
+        
+};
+
 }
 // end namespace
 //---------------------------------------------------------------------

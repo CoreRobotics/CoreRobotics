@@ -59,7 +59,7 @@ CRThreadLoop::CRThreadLoop(CRThreadLoopElement* i_element){
     m_element = i_element;
     
     // Set the parent
-    m_element->setParent(this);
+    m_element->setCaller(this);
     
     // Set the thread update rate (s)
     m_updateRate = 0.001;
