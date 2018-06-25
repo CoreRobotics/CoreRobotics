@@ -42,6 +42,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef CRTypes_hpp
 #define CRTypes_hpp
 
+#include <string>
+
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {

@@ -365,6 +365,7 @@ project includes all the CoreRobotics modules.
 #include "CRClock.hpp"
 #include "CRThread.hpp"
 #include "CRThreadLoop.hpp"
+#include "CRThreadLoopElement.hpp"
 #include "CRMutex.hpp"
 #include "CRSharedMemory.hpp"
 

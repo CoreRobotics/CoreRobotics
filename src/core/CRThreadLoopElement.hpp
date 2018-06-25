@@ -40,13 +40,9 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRThreadLoop_hpp
-#define CRThreadLoop_hpp
+#ifndef CRThreadLoopElement_hpp
+#define CRThreadLoopElement_hpp
 
-#include <thread>
-#include "CRThreadLoopElement.hpp"
-#include "CRClock.hpp"
-#include "CRTypes.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -54,107 +50,64 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- \class CRThreadLoop
+ \class CRThreadLoopElement
  \ingroup core
  
- \brief This class implements looped thread execution, which includes
- soft real-time control and start/stop functionality.
+ \brief This abstract class defines the methods needed to derive a
+ call for a CRThreadLoop.
  
  \details
  ## Description
- CRThreadLoop implements a thread loop controller class, which includes
- the following methods:
+ This abstract class defines the methods needed to derive a
+ call for a CRThreadLoop.  The primary methods to be implemented are:
  
- - CRThreadLoop::start starts the thread loop element.
- - CRThreadLoop::pause pauses the loop element execution, but does not
- exit the thread of execution.
- - CRThreadLoop::stop exits the thread of execution.
- - CRThreadLoop::stop stops the thread execution.
+ - CRThreadLoopElement::step() is called on each iteration of the thread
+ while the thread is running.
+ - CRThreadLoopElement::setPriority sets the priority of the thread.
  
  ## Example
  This example creates and runs a simple CRThreadLoop.
  \include example_CRThreadLoop.cpp
  */
 //---------------------------------------------------------------------
-class CRThreadLoop {
+class CRThreadLoop;
+class CRThreadLoopElement {
     
-    // Constructor and Destructor
+    // Constructor and destructor
     public:
     
-        //! Class constructor
-        CRThreadLoop(CRThreadLoopElement* i_member);
+        //! constructor
+        CRThreadLoopElement() {}
     
-        //! Class destructor
-        virtual ~CRThreadLoop();
+        //! destructor
+        ~CRThreadLoopElement() { delete m_parent; }
     
     
-    // Primary control functions
+    // Primary CRThreadLoopElement functions that must be implemented
     public:
     
-        //! Start the thread execution
-        void start();
+        //! Step the element - called on each iteration of the thread while running
+        virtual void step() = 0;
     
-        //! Pause the thread execution
-        void pause();
-    
-        //! Stop the thread execution
-        void stop();
-    
-        //! Thread callback
-        void callback();
+        //! Reset the element - called on ThreadLoop::start())
+        virtual void reset() = 0;
     
     
-    // Set/get functions
+    // Other methods called by the parent thread
     public:
     
-        //! Set the update rate
-        void setUpdateRate(const double a_updateRate) {m_updateRate = a_updateRate;}
+        //! set the pointer to the parent - called by the thread on construction
+        void setParent(CRThreadLoop* i_parent) {m_parent = i_parent;}
     
-        //! Get the update rate
-        double getUpdateRate() {return m_updateRate;}
     
-        //! Get the current thread run time
-        double getCurrentTime();
+    // Protected members
+    protected:
     
-
-    // Private members
-    private:
-    
-        //! thread member
-        CRThreadLoopElement* m_element;
-    
-        //! simulation state
-        CRRunState m_runState = CR_RUN_STATE_STOPPED;
-    
-        //! thread
-        // CoreRobotics::CRThread* m_thread = NULL;
-        std::thread* m_thread = NULL;
-    
-        //! global timer
-        CRClock m_timer;
-    
-        //! thread update rate (s)
-        double m_updateRate;
-    
-        //! amount of time spent in pause since first start from stop (s).
-        double m_t0 = 0;
-    
-        //! time at last pause() call
-        double m_tPaused = 0;
-    
+        //! thread parent
+        CRThreadLoop* m_parent = NULL;
     
 };
     
-    
-//---------------------------------------------------------------------
-/*!
- Smart pointer to CRThreadLoop.
- */
-//---------------------------------------------------------------------
-typedef std::shared_ptr<CRThreadLoop> CRThreadLoopPtr;
-    
-    
-
 }
 // end namespace
 //---------------------------------------------------------------------
