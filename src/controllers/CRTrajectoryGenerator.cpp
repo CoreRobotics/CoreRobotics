@@ -136,7 +136,7 @@ CRResult CRTrajectoryGenerator::solve(CRWaypoint i_wp0,
     Eigen::VectorXd xf = i_wpf.position;
     Eigen::VectorXd vf = i_wpf.velocity;
     Eigen::VectorXd af = i_wpf.acceleration;
-    double tf = i_wpf.time - i_wpf.time;
+    double tf = i_wpf.time - i_wp0.time;
     
     // solve
     return solve(x0, v0, a0, xf, vf, af, tf);
