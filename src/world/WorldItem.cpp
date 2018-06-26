@@ -64,34 +64,7 @@ WorldItem::WorldItem()
 //---------------------------------------------------------------------
 WorldItem::~WorldItem()
 {
-	delete m_parent;
-}
-
-
-//---------------------------------------------------------------------
-/*!
-Add a child to the list of this element's children
-
-\param[in]		i_child - pointer to the child being added
-*/
-//---------------------------------------------------------------------
-void WorldItem::addChild(WorldItem* i_child)
-{
-	m_children.push_back(i_child);
-	i_child->setParent(this);
-}
-
-
-//---------------------------------------------------------------------
-/*!
-Sets the parent to this element
-
-\param[in]		i_parent - pointer to the parent
-*/
-//---------------------------------------------------------------------
-void WorldItem::setParent(WorldItem* i_parent)
-{
-	m_parent = i_parent;
+	// delete m_parent;
 }
 
 

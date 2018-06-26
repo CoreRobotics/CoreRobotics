@@ -72,26 +72,6 @@ class WorldItem {
     
         //! Class destructor
         ~WorldItem();
-    
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-		void addChild(WorldItem* i_child);
-
-		//! set the parent
-		void setParent(WorldItem* i_parent);
-
-
-	// Private members
-	private:
-
-		//! list of children
-		std::vector<WorldItem*> m_children;
-
-		//! parent
-		WorldItem* m_parent = NULL;
 };
 
 }
