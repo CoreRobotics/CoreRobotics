@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef CR_WORLD_HPP_
 #define CR_WORLD_HPP_
 
-#include "CRLoopElement.hpp"
+#include "CRLoopRoot.hpp"
 #include "WorldItem.hpp"
 
 //---------------------------------------------------------------------
@@ -61,7 +61,7 @@ namespace CoreRobotics {
  
  */
 //---------------------------------------------------------------------
-class World : public CRLoopElement {
+class World : public CRLoopRoot {
     
     // Constructor and Destructor
     public:

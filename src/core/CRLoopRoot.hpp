@@ -40,10 +40,11 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRItem_hpp
-#define CRItem_hpp
+#ifndef CRLoopRoot_hpp
+#define CRLoopRoot_hpp
 
-# include <string>
+#include <vector>
+#include "CRLoop.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -51,48 +52,61 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- \class CRItem
+ \class CRLoopRoot
  \ingroup core
  
- \brief This class defines common properties of items
+ \brief This abstract class defines the methods needed to derive a
+ root node call for a CRLoop.
+ 
+ \details
+ ## Description
+ This abstract class defines the methods needed to derive a
+ call for the root element of a CRLoop.  The primary methods to be
+ implemented are:
+ 
+ - CRLoopRoot::step() is called on each iteration of the Loop
+ while the thread is running.
  */
 //---------------------------------------------------------------------
-class CRItem {
+class CRLoopRoot {
     
     // Constructor and destructor
     public:
     
         //! constructor
-		CRItem() {}
+        CRLoopRoot() {}
     
         //! destructor
-        ~CRItem() {}
+        ~CRLoopRoot() {
+            delete m_caller;
+        }
     
     
-    // Get/set common properties
+    // Primary CRLoopRoot functions that must be implemented
     public:
     
-        //! set the item name
-		void setName(std::string i_name) { m_name = i_name; }
-
-		//! return the item name
-		std::string getName() { return m_name; }
+        //! Step the element - called on each iteration of the thread while running
+        virtual void step() = 0;
     
-		//! set the item icon
-		void setIcon(std::string i_icon) { m_icon = i_icon; }
-
-		//! return the item icon
-		std::string getIcon() { return m_icon; }
+        //! Reset the element - called on ThreadLoop::start())
+        virtual void reset() = 0;
+    
+    
+    // LoopElement graph methods
+    public:
+    
+        //! set the pointer to the CRLoopElement parent caller
+        void setCaller(CRLoop* i_caller) { m_caller = i_caller; }
+    
+        //! return the pointer to the parent caller (NULL value indicates no caller)
+        CRLoop* getCaller() { return m_caller; }
     
     
     // Protected members
     protected:
     
-        //! name
-		std::string m_name;
-
-		//! icon
-		std::string m_icon;
+        //! thread caller
+        CRLoop* m_caller = NULL;
 };
     
 }

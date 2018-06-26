@@ -51,19 +51,19 @@ using namespace CoreRobotics;
 //---------------------------------------------------------------------
 // Define a simple loop element.
 //---------------------------------------------------------------------
-class simpleThreadElement : public CRLoopElement
+class simpleThreadRoot : public CRLoopRoot
 {
     
 // Constructor and destructor
 public:
     
     //! constructor
-    simpleThreadElement() {
+    simpleThreadRoot() {
         this->reset();
     };
     
     //! destructor
-    ~simpleThreadElement() {};
+    ~simpleThreadRoot() {};
     
     
 // Primary ThreadElement functions
@@ -106,7 +106,7 @@ public:
 TEST(CRLoop, reset){
     
     // Create the thread element smart pointer
-    simpleThreadElement* myElemRaw = new simpleThreadElement();
+    simpleThreadRoot* myElemRaw = new simpleThreadRoot();
     
     // Create a thread and attach the thread element
     CRLoopPtr myThread(new CRLoop(myElemRaw));
@@ -125,7 +125,7 @@ TEST(CRLoop, reset){
 TEST(CRLoop, execution){
     
     // Create the thread element smart pointer
-    simpleThreadElement* myElemRaw = new simpleThreadElement();
+    simpleThreadRoot* myElemRaw = new simpleThreadRoot();
     
     // Create a thread and attach the thread element
     CRLoopPtr myThread(new CRLoop(myElemRaw));

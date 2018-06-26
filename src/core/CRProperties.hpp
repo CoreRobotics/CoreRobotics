@@ -40,12 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRLoopElement_hpp
-#define CRLoopElement_hpp
-
-#include <vector>
-#include "CRLoop.hpp"
-
+#ifndef CRProperties_hpp
+#define CRProperties_hpp
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -53,61 +49,32 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- \class CRLoopElement
+ \class CRProperties
  \ingroup core
  
- \brief This abstract class defines the methods needed to derive a
- call for a CRLoop.
- 
- \details
- ## Description
- This abstract class defines the methods needed to derive a
- call for a CRLoop.  The primary methods to be implemented are:
- 
- - CRLoopElement::step() is called on each iteration of the thread
- while the thread is running.
- - CRLoopElement::setPriority sets the priority of the thread.
+ \brief This class defines a property set.
  */
 //---------------------------------------------------------------------
-class CRLoopElement {
+class CRProperties {
     
     // Constructor and destructor
     public:
     
         //! constructor
-        CRLoopElement() {}
+		CRProperties() {}
     
         //! destructor
-        ~CRLoopElement() {
-            delete m_caller;
-        }
-    
-    
-    // Primary CRLoopElement functions that must be implemented
-    public:
-    
-        //! Step the element - called on each iteration of the thread while running
-        virtual void step() = 0;
-    
-        //! Reset the element - called on ThreadLoop::start())
-        virtual void reset() = 0;
-    
-    
-    // ther methods called by the caller thread
-    public:
-    
-        //! set the pointer to the caller thread - called by the thread on construction
-        void setCaller(CRLoop* i_caller) {m_caller = i_caller;}
-    
-        //! return the pointer to the caller (NULL value indicates no caller)
-        CRLoop* getCaller() {return m_caller; }
+        ~CRProperties() {}
     
     
     // Protected members
     protected:
     
-        //! thread caller
-        CRLoop* m_caller = NULL;
+        //! name
+        std::string m_name;
+    
+        //! icon
+        std::string m_icon;
 };
     
 }

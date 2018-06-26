@@ -43,7 +43,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef CR_WORLDITEM_HPP_
 #define CR_WORLDITEM_HPP_
 
-#include "CRItem.hpp"
 #include <vector>
 
 //---------------------------------------------------------------------
@@ -63,7 +62,7 @@ namespace CoreRobotics {
  
  */
 //---------------------------------------------------------------------
-class WorldItem : public CRItem {
+class WorldItem {
     
     // Constructor and Destructor
     public:

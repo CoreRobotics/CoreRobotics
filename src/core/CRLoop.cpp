@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "CRLoop.hpp"
-#include "CRLoopElement.hpp"
+#include "CRLoopRoot.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -56,7 +56,7 @@ namespace CoreRobotics {
  \param[in]     i_element     element to be executed by the thread
  */
 //---------------------------------------------------------------------
-CRLoop::CRLoop(CRLoopElement* i_element){
+CRLoop::CRLoop(CRLoopRoot* i_element){
     
     // Set the element pointer
     m_element = i_element;
@@ -76,13 +76,8 @@ The constructor sets up the thread loop with a specific update
 \param[in]	   i_updateRate	 this sets a constant update rate (s)
 */
 //---------------------------------------------------------------------
-CRLoop::CRLoop(CRLoopElement* i_element, double i_updateRate) {
-
-	// Set the element pointer
-	m_element = i_element;
-
-	// Set this thread loop as the caller
-	m_element->setCaller(this);
+CRLoop::CRLoop(CRLoopRoot* i_element, double i_updateRate)
+    : CRLoop(i_element) {
 
 	// Set the thread update rate (s)
 	m_updateRate = i_updateRate;
@@ -101,7 +96,7 @@ CRLoop::~CRLoop(){
         this->stop();
     }
     
-    // delete the thread
+    // delete pointers
     delete m_thread;
 }
 
