@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRBaseItem_hpp
-#define CRBaseItem_hpp
+#ifndef CRItem_hpp
+#define CRItem_hpp
 
 # include <string>
 
@@ -51,22 +51,22 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- \class CRBaseItem
+ \class CRItem
  \ingroup core
  
- \brief This class defines common properties of elements
+ \brief This class defines common properties of items
  */
 //---------------------------------------------------------------------
-class CRBaseItem {
+class CRItem {
     
     // Constructor and destructor
     public:
     
         //! constructor
-		CRBaseItem() {}
+		CRItem() {}
     
         //! destructor
-        ~CRBaseItem() {}
+        ~CRItem() {}
     
     
     // Get/set common properties

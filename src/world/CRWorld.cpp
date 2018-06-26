@@ -37,51 +37,37 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CRSensor_hpp
-#define CRSensor_hpp
+#include "CRWorld.hpp"
 
-#include "CRSignal.hpp"
-
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
+    
     
 //---------------------------------------------------------------------
 /*!
- \class CRSensor
- \ingroup core
- 
- \brief
- 
- \details
- 
+ The constructor sets up the world.\n
  */
 //---------------------------------------------------------------------
-class CRSensor {
+CRWorld::CRWorld(){
     
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		CRSensor();
-    
-        //! Class destructor
-        ~CRSensor();
-    
-    
-    // Private members
-    private:
-    
-        //! State
-        CRState m_state;
-    
-};
+}
+
+
+//---------------------------------------------------------------------
+/*!
+ The destructor deletes the world.\n
+ */
+//---------------------------------------------------------------------
+CRWorld::~CRWorld(){
 
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+
+//=====================================================================
+// End namespace
+}
+
+

@@ -57,7 +57,6 @@ namespace CoreRobotics {
  \brief
  
  \details
- ## Description
  
  */
 //---------------------------------------------------------------------

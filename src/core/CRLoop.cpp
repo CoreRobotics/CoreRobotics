@@ -39,7 +39,7 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#include "CRThreadLoop.hpp"
+#include "CRLoop.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -48,21 +48,43 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the thread loop.\n
+ The constructor sets up the thread loop without a specific update 
+ rate.  The loop will attempt to execute each step as quickly as 
+ possible.\n
  
  \param[in]     i_element     element to be executed by the thread
  */
 //---------------------------------------------------------------------
-CRThreadLoop::CRThreadLoop(CRThreadLoopElement* i_element){
+CRLoop::CRLoop(CRLoopElement* i_element){
     
     // Set the element pointer
     m_element = i_element;
     
-    // Set the parent
+    // Set this thread loop as the caller
     m_element->setCaller(this);
-    
-    // Set the thread update rate (s)
-    m_updateRate = 0.001;
+}
+
+
+//---------------------------------------------------------------------
+/*!
+The constructor sets up the thread loop with a specific update 
+ rate.  The loop will attempt to execute each step at the rate
+ specified by i_updateRate.\n
+
+\param[in]     i_element     element to be executed by the thread
+\param[in]	   i_updateRate	 this sets a constant update rate (s)
+*/
+//---------------------------------------------------------------------
+CRLoop::CRLoop(CRLoopElement* i_element, double i_updateRate) {
+
+	// Set the element pointer
+	m_element = i_element;
+
+	// Set this thread loop as the caller
+	m_element->setCaller(this);
+
+	// Set the thread update rate (s)
+	m_updateRate = i_updateRate;
 }
 
 
@@ -71,7 +93,7 @@ CRThreadLoop::CRThreadLoop(CRThreadLoopElement* i_element){
  The destructor closes the thread loop.\n
  */
 //---------------------------------------------------------------------
-CRThreadLoop::~CRThreadLoop(){
+CRLoop::~CRLoop(){
     
     // stop the run (only if running)
     if (m_runState != CR_RUN_STATE_STOPPED) {
@@ -88,7 +110,7 @@ CRThreadLoop::~CRThreadLoop(){
  This function starts the thread loop.\n
  */
 //---------------------------------------------------------------------
-void CRThreadLoop::start(){
+void CRLoop::start(){
     
     // check the thread state
     if (m_runState == CR_RUN_STATE_STOPPED)
@@ -127,7 +149,7 @@ void CRThreadLoop::start(){
  This function pauses the thread loop.\n
  */
 //---------------------------------------------------------------------
-void CRThreadLoop::pause(){
+void CRLoop::pause(){
     
     // check the thread state
     if (m_runState == CR_RUN_STATE_RUNNING)
@@ -145,7 +167,7 @@ void CRThreadLoop::pause(){
  This function stops the thread loop.\n
  */
 //---------------------------------------------------------------------
-void CRThreadLoop::stop(){
+void CRLoop::stop(){
     
     // check the thread state
     if (m_runState != CR_RUN_STATE_STOPPED)
@@ -167,7 +189,7 @@ void CRThreadLoop::stop(){
  This is the thread loop callback function.\n
  */
 //---------------------------------------------------------------------
-void CRThreadLoop::callback(){
+void CRLoop::callback(){
     
     // run the thread
     while (m_runState != CR_RUN_STATE_STOPPED)
@@ -186,7 +208,9 @@ void CRThreadLoop::callback(){
         double et = m_timer.getElapsedTime() - t1;
         
         // sleep until completed
-        m_timer.sleep(m_updateRate - et);
+		if (m_updateRate > 0) {
+			m_timer.sleep(m_updateRate - et);
+		}
     }
 }
 
@@ -197,7 +221,7 @@ void CRThreadLoop::callback(){
  \return        current run time (s)
  */
 //---------------------------------------------------------------------
-double CRThreadLoop::getCurrentTime(){
+double CRLoop::getCurrentTime(){
     
     // compute the amount of time spent paused
     double tp = m_t0;

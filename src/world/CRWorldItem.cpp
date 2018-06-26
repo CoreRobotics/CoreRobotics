@@ -37,51 +37,66 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CRSensor_hpp
-#define CRSensor_hpp
+#include "CRWorldItem.hpp"
 
-#include "CRSignal.hpp"
-
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
+    
     
 //---------------------------------------------------------------------
 /*!
- \class CRSensor
- \ingroup core
- 
- \brief
- 
- \details
- 
+ The constructor sets up the world item.\n
  */
 //---------------------------------------------------------------------
-class CRSensor {
+CRWorldItem::CRWorldItem()
+{
     
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		CRSensor();
-    
-        //! Class destructor
-        ~CRSensor();
-    
-    
-    // Private members
-    private:
-    
-        //! State
-        CRState m_state;
-    
-};
-
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+
+//---------------------------------------------------------------------
+/*!
+ The destructor deletes the world item.\n
+ */
+//---------------------------------------------------------------------
+CRWorldItem::~CRWorldItem()
+{
+	delete m_parent;
+}
+
+
+//---------------------------------------------------------------------
+/*!
+Add a child to the list of this element's children
+
+\param[in]		i_child - pointer to the child being added
+*/
+//---------------------------------------------------------------------
+void CRWorldItem::addChild(CRWorldItem* i_child)
+{
+	m_children.push_back(i_child);
+	i_child->setParent(this);
+}
+
+
+//---------------------------------------------------------------------
+/*!
+Sets the parent to this element
+
+\param[in]		i_parent - pointer to the parent
+*/
+//---------------------------------------------------------------------
+void CRWorldItem::setParent(CRWorldItem* i_parent)
+{
+	m_parent = i_parent;
+}
+
+
+//=====================================================================
+// End namespace
+}
+
+

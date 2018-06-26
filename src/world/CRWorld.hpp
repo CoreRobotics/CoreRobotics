@@ -40,10 +40,11 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRSensor_hpp
-#define CRSensor_hpp
+#ifndef CRWorld_hpp
+#define CRWorld_hpp
 
-#include "CRSignal.hpp"
+#include "CRLoopElement.hpp"
+#include "CRWorldItem.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -51,7 +52,7 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- \class CRSensor
+ \class CRWorld
  \ingroup core
  
  \brief
@@ -60,23 +61,40 @@ namespace CoreRobotics {
  
  */
 //---------------------------------------------------------------------
-class CRSensor {
+class CRWorld : public CRLoopElement {
     
     // Constructor and Destructor
     public:
     
         //! Class constructor
-		CRSensor();
+		CRWorld();
     
         //! Class destructor
-        ~CRSensor();
-    
+        ~CRWorld();
+
+
+	// ThreadLoopElement behaviors
+	public:
+
+		//! step()
+		virtual void step();
+
+		//! reset()
+		virtual void reset();
+
+
+	// Scene graph behaviors
+	public:
+
+		//! add a child to the list of children
+		void addChild(CRWorldItem* i_child) { m_children.push_back(i_child); }
+
     
     // Private members
     private:
-    
-        //! State
-        CRState m_state;
+
+		//! list of children
+		std::vector<CRWorldItem*> m_children;
     
 };
 

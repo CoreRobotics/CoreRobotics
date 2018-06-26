@@ -39,7 +39,7 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#include "CRSignal.hpp"
+#include "CRModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace

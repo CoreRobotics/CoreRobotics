@@ -364,10 +364,11 @@ project includes all the CoreRobotics modules.
 #include "CRTypes.hpp"
 #include "CRClock.hpp"
 #include "CRThread.hpp"
-#include "CRThreadLoop.hpp"
-#include "CRThreadLoopElement.hpp"
+#include "CRLoop.hpp"
+#include "CRLoopElement.hpp"
 #include "CRMutex.hpp"
 #include "CRSharedMemory.hpp"
+#include "CRItem.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -375,8 +376,12 @@ project includes all the CoreRobotics modules.
 //! \brief TEMPORARY DURING MAJOR REVISION TO 2.0
 //---------------------------------------------------------------------------
 #include "CRSignal.hpp"
+#include "CRWorld.hpp"
+#include "CRWorldItem.hpp"
 #include "CRModel.hpp"
-#include "CRPolicy.hpp"
+#include "CRSensor.hpp"
+#include "CRActuator.hpp"
+// #include "CRPolicy.hpp"
 
 
 //---------------------------------------------------------------------------
