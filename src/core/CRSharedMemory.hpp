@@ -94,7 +94,7 @@ enum CRManagerRole {
 //=====================================================================
 //! A couple type definitions
 typedef boost::interprocess::allocator<double, boost::interprocess::managed_shared_memory::segment_manager>  ShmemAllocator;
-typedef boost::interprocess::vector<double, ShmemAllocator> Signal;
+typedef boost::interprocess::vector<double, ShmemAllocator> ShmemData;
 //=====================================================================
 class CRSharedMemory {
     
@@ -143,9 +143,6 @@ private:
     
     //! name of the memory
     const char* m_name;
-    
-    //! Vector of signals in the shared memory
-    // std::vector<const char*> m_signals;
     
 };
 //=====================================================================

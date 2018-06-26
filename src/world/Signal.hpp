@@ -58,16 +58,16 @@ namespace CoreRobotics {
  
  */
 //---------------------------------------------------------------------
-class CRSignal {
+class Signal {
     
     // Constructor and Destructor
     public:
     
         //! Class constructor
-        CRSignal();
+        Signal();
     
         //! Class destructor
-        ~CRSignal();
+        ~Signal();
     
 };
     
@@ -84,7 +84,7 @@ class CRSignal {
  
  */
 //---------------------------------------------------------------------
-class State : public CRSignal {
+class State : public Signal {
         
     // Constructor and Destructor
     public:
@@ -109,7 +109,7 @@ class State : public CRSignal {
  
  */
 //---------------------------------------------------------------------
-class Action : public CRSignal {
+class Action : public Signal {
         
     // Constructor and Destructor
     public:

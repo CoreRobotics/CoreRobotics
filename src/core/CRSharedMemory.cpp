@@ -122,7 +122,7 @@ void CRSharedMemory::addSignal(const char* i_signalName,
     // if does exist, return a CRResult that indicates the variable wasn't created
     
     // Construct a vector named "MyVector" in shared memory with argument alloc_inst
-    Signal *myvector = m_segment->construct<Signal>(i_signalName)(*m_alloc_inst);
+    ShmemData *myvector = m_segment->construct<ShmemData>(i_signalName)(*m_alloc_inst);
     
     //Insert data in the vector
     for(int i = 0; i < i_data.size(); ++i)
@@ -140,7 +140,7 @@ void CRSharedMemory::addSignal(const char* i_signalName,
 void CRSharedMemory::removeSignal(const char* i_signalName) {
     
     // destroy the signal
-    m_segment->destroy<Signal>(i_signalName);
+    m_segment->destroy<ShmemData>(i_signalName);
 }
     
     
@@ -157,7 +157,7 @@ void CRSharedMemory::set(const char* i_signalName,
                          Eigen::VectorXd i_data) {
     
     // find
-    Signal *myvector = m_segment->find<Signal>(i_signalName).first;
+    ShmemData *myvector = m_segment->find<ShmemData>(i_signalName).first;
     
     //Insert data in the vector
     for(int i = 0; i < i_data.size(); ++i)
@@ -180,7 +180,7 @@ Eigen::VectorXd CRSharedMemory::get(const char* i_signalName) {
     Eigen::VectorXd data;
     
     // find
-    Signal *myvector = m_segment->find<Signal>(i_signalName).first;
+    ShmemData *myvector = m_segment->find<ShmemData>(i_signalName).first;
     int n = myvector->size();
     
     // data
