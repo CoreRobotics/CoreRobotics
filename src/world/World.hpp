@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRBX_WORLD_HPP_
-#define CRBX_WORLD_HPP_
+#ifndef CR_WORLD_HPP_
+#define CR_WORLD_HPP_
 
 #include "CRLoopElement.hpp"
 #include "WorldItem.hpp"

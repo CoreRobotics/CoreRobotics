@@ -97,7 +97,7 @@ CRLoop::CRLoop(CRLoopElement* i_element, double i_updateRate) {
 CRLoop::~CRLoop(){
     
     // stop the run (only if running)
-    if (m_runState != CRBX_RUN_STATE_STOPPED) {
+    if (m_runState != CR_RUN_STATE_STOPPED) {
         this->stop();
     }
     
@@ -114,7 +114,7 @@ CRLoop::~CRLoop(){
 void CRLoop::start(){
     
     // check the thread state
-    if (m_runState == CRBX_RUN_STATE_STOPPED)
+    if (m_runState == CR_RUN_STATE_STOPPED)
     {
         
         // reset initial conditions
@@ -128,20 +128,20 @@ void CRLoop::start(){
         m_timer.startTimer();
         
         // set run flag (before assigning the callback)
-        m_runState = CRBX_RUN_STATE_RUNNING;
+        m_runState = CR_RUN_STATE_RUNNING;
         
         // Assign the callback (which begins the thread)
         // see lambdas: https://msdn.microsoft.com/en-us/library/dd293608.aspx
         m_thread = new std::thread( [this] { callback(); });
         
     }
-    else if (m_runState == CRBX_RUN_STATE_PAUSED)
+    else if (m_runState == CR_RUN_STATE_PAUSED)
     {
         // compute the new offset
         m_t0 += m_timer.getElapsedTime() - m_tPaused;
         
         // set the run flag
-        m_runState = CRBX_RUN_STATE_RUNNING;
+        m_runState = CR_RUN_STATE_RUNNING;
     }
 }
 
@@ -153,10 +153,10 @@ void CRLoop::start(){
 void CRLoop::pause(){
     
     // check the thread state
-    if (m_runState == CRBX_RUN_STATE_RUNNING)
+    if (m_runState == CR_RUN_STATE_RUNNING)
     {
         // set run flag
-        m_runState = CRBX_RUN_STATE_PAUSED;
+        m_runState = CR_RUN_STATE_PAUSED;
         
         // store the current time
         m_tPaused = m_timer.getElapsedTime();
@@ -171,10 +171,10 @@ void CRLoop::pause(){
 void CRLoop::stop(){
     
     // check the thread state
-    if (m_runState != CRBX_RUN_STATE_STOPPED)
+    if (m_runState != CR_RUN_STATE_STOPPED)
     {
         // set run flag
-        m_runState = CRBX_RUN_STATE_STOPPED;
+        m_runState = CR_RUN_STATE_STOPPED;
         
         // join the main thread (i.e. wait for it to complete before continuing)
         m_thread->join();
@@ -193,13 +193,13 @@ void CRLoop::stop(){
 void CRLoop::callback(){
     
     // run the thread
-    while (m_runState != CRBX_RUN_STATE_STOPPED)
+    while (m_runState != CR_RUN_STATE_STOPPED)
     {
         // get the time
         double t1 = m_timer.getElapsedTime();
         
         // if the thread is running
-        if (m_runState == CRBX_RUN_STATE_RUNNING){
+        if (m_runState == CR_RUN_STATE_RUNNING){
             
             // step the thread member
             m_element->step();
@@ -226,7 +226,7 @@ double CRLoop::getCurrentTime(){
     
     // compute the amount of time spent paused
     double tp = m_t0;
-    if (m_runState == CRBX_RUN_STATE_PAUSED)
+    if (m_runState == CR_RUN_STATE_PAUSED)
     {
         tp += m_timer.getElapsedTime() - m_tPaused;
     }

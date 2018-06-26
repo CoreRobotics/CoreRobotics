@@ -94,13 +94,13 @@ namespace CoreRobotics {
 //=====================================================================
 //! Enumerator for handling Euler angle free variable candidates
 enum CREulerFreeVariable {
-    CRBX_EULER_FREE_NONE,
-    CRBX_EULER_FREE_POS_X,
-    CRBX_EULER_FREE_POS_Y,
-    CRBX_EULER_FREE_POS_Z,
-    CRBX_EULER_FREE_ANG_A,
-    CRBX_EULER_FREE_ANG_B,
-    CRBX_EULER_FREE_ANG_G,
+    CR_EULER_FREE_NONE,
+    CR_EULER_FREE_POS_X,
+    CR_EULER_FREE_POS_Y,
+    CR_EULER_FREE_POS_Z,
+    CR_EULER_FREE_ANG_A,
+    CR_EULER_FREE_ANG_B,
+    CR_EULER_FREE_ANG_G,
 };
 
 

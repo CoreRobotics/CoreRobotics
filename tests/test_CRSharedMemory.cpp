@@ -53,7 +53,7 @@ using namespace CoreRobotics;
 //
 TEST(CRSharedMemory, Server){
     const char* memoryName = "MyMemory";
-    CRSharedMemory server(memoryName, CRBX_MANAGER_SERVER);
+    CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
     Eigen::VectorXd v(2);
     v << 0.0, 0.8;
     server.addSignal("signal_1", v);
@@ -76,12 +76,12 @@ TEST(CRSharedMemory, Server){
 //
 TEST(CRSharedMemory, Client){
     const char* memoryName = "MyMemory";
-    CRSharedMemory server(memoryName, CRBX_MANAGER_SERVER);
+    CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
     Eigen::VectorXd v(1);
     v << 1.4;
     server.addSignal("signal_2", v);
     
-    CRSharedMemory client(memoryName, CRBX_MANAGER_CLIENT);
+    CRSharedMemory client(memoryName, CR_MANAGER_CLIENT);
     Eigen::VectorXd v2 = client.get("signal_2");
     EXPECT_EQ(1, v2.size());
     EXPECT_DOUBLE_EQ(1.4, v2(0));

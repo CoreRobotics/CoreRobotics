@@ -66,7 +66,7 @@ TEST(CRMotionModel, Continuous){
     Eigen::VectorXd u(1);   // input vector
     x << 1;     // initial condition
     u << 0;     // input value
-    CRMotionModel model = CRMotionModel(*continuousDynFcn, CRBX_MOTION_CONTINUOUS, x, dt);
+    CRMotionModel model = CRMotionModel(*continuousDynFcn, CR_MOTION_CONTINUOUS, x, dt);
     double t = 0; // Initialize a time t
     while(t < 5) { // simulate for 5 seconds
         x = model.motion(u); // simulate the motion
@@ -88,7 +88,7 @@ TEST(CRMotionModel, Discrete){
     Eigen::VectorXd u(1);   // input vector
     x << 1;     // initial condition
     u << 0;     // input value
-    CRMotionModel model = CRMotionModel(*discreteDynFcn, CRBX_MOTION_DISCRETE, x, dt);
+    CRMotionModel model = CRMotionModel(*discreteDynFcn, CR_MOTION_DISCRETE, x, dt);
     double t = 0; // Initialize a time t
     while(t < 5) { // simulate for 5 seconds
         x = model.motion(u); // simulate the motion

@@ -93,7 +93,7 @@ TEST(CRFrame, GetOrientation){
     frame.setRotationAndTranslation(rot, trans);
     
     Eigen::Vector3d o;
-    o = frame.getOrientation(CRBX_EULER_MODE_ZYX);
+    o = frame.getOrientation(CR_EULER_MODE_ZYX);
     EXPECT_DOUBLE_EQ(-M_PI / 2, o(0));
     EXPECT_DOUBLE_EQ(-M_PI / 2, o(1));
     EXPECT_DOUBLE_EQ(0, o(2));
@@ -112,7 +112,7 @@ TEST(CRFrame, GetPose){
     frame.setRotationAndTranslation(rot, trans);
     
     Eigen::VectorXd p;
-    p = frame.getPose(CRBX_EULER_MODE_ZYX);
+    p = frame.getPose(CR_EULER_MODE_ZYX);
     EXPECT_EQ(6, p.size());
     EXPECT_DOUBLE_EQ(0.1, p(0));
     EXPECT_DOUBLE_EQ(0.2, p(1));
@@ -124,7 +124,7 @@ TEST(CRFrame, GetPose){
     // now try a reduced pose
     Eigen::Matrix<bool, 6, 1> pe;
     pe << true, true, true, true, false, false;
-    p = frame.getPose(CRBX_EULER_MODE_XYZ, pe);
+    p = frame.getPose(CR_EULER_MODE_XYZ, pe);
     EXPECT_EQ(4, p.size());
     EXPECT_DOUBLE_EQ(0.1, p(0));
     EXPECT_DOUBLE_EQ(0.2, p(1));

@@ -84,7 +84,7 @@ CRResult CRTrajectoryGenerator::solve(Eigen::VectorXd i_x0,
 {
     
     // indicator if solution is singular
-    CRResult result = CRBX_RESULT_SUCCESS;         // break the algorithm if it is singular
+    CRResult result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
     
     // Set the internal time to the specified final time
     this->m_tf = i_tf;

@@ -303,23 +303,23 @@ included in the class descriptions.
  in brackets with specific names for your setup.
  
  \code
- set (CRBX_DIR <path/to/corerobotics/root>)
+ set (CR_DIR <path/to/corerobotics/root>)
  
  include_directories(
-     ${CRBX_DIR}/src
-     ${CRBX_DIR}/src/core
-     ${CRBX_DIR}/src/math
-     ${CRBX_DIR}/src/models
-     ${CRBX_DIR}/src/estimators
-     ${CRBX_DIR}/src/physics
-     ${CRBX_DIR}/src/controllers
+     ${CR_DIR}/src
+     ${CR_DIR}/src/core
+     ${CR_DIR}/src/math
+     ${CR_DIR}/src/models
+     ${CR_DIR}/src/estimators
+     ${CR_DIR}/src/physics
+     ${CR_DIR}/src/controllers
      <path to eigen>
      <path to boost>
  )
  
- link_directories(${CRBX_DIR}/lib/Release)
+ link_directories(${CR_DIR}/lib/Release)
  
- target_link_libraries(<target_name> ${CRBX_DIR}/lib/Release/<lib name>)
+ target_link_libraries(<target_name> ${CR_DIR}/lib/Release/<lib name>)
  \endcode
  */
 //---------------------------------------------------------------------------

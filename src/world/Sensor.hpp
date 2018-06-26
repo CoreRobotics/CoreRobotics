@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRBX_SENSOR_HPP_
-#define CRBX_SENSOR_HPP_
+#ifndef CR_SENSOR_HPP_
+#define CR_SENSOR_HPP_
 
 #include "Signal.hpp"
 

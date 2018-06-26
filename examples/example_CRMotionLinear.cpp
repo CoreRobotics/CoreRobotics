@@ -67,7 +67,7 @@ int main(void){
     B << 1;
     
     // initialize a linear dynamics model
-    CRMotionLinear model = CRMotionLinear(A,B,CRBX_MOTION_CONTINUOUS,x,0.2);
+    CRMotionLinear model = CRMotionLinear(A,B,CR_MOTION_CONTINUOUS,x,0.2);
     
     
     // initialize an input and set it to zero

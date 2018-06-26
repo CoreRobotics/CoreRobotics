@@ -53,7 +53,7 @@ using namespace CoreRobotics;
 //
 TEST(CRFrameDh, Construct){
     CRFrameDh frame;
-    Eigen::VectorXd p = frame.getPose(CRBX_EULER_MODE_XYZ);
+    Eigen::VectorXd p = frame.getPose(CR_EULER_MODE_XYZ);
     EXPECT_DOUBLE_EQ(0, p(0));
     EXPECT_DOUBLE_EQ(0, p(1));
     EXPECT_DOUBLE_EQ(0, p(2));
@@ -74,7 +74,7 @@ TEST(CRFrameDh, ClassicTransformation){
     double alpha = M_PI / 3;
     double d = 0.2;
     double theta = M_PI / 6;
-    CRFrameDh frame(r, alpha, d, theta, CRBX_DH_MODE_CLASSIC, CRBX_DH_FREE_NONE);
+    CRFrameDh frame(r, alpha, d, theta, CR_DH_MODE_CLASSIC, CR_DH_FREE_NONE);
     
     Eigen::Matrix3d R;
     Eigen::Vector3d T;
@@ -110,7 +110,7 @@ TEST(CRFrameDh, ModifiedTransformation){
     double alpha = M_PI / 3;
     double d = 0.2;
     double theta = M_PI / 6;
-    CRFrameDh frame(r, alpha, d, theta, CRBX_DH_MODE_MODIFIED, CRBX_DH_FREE_NONE);
+    CRFrameDh frame(r, alpha, d, theta, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
     
     Eigen::Matrix3d R;
     Eigen::Vector3d T;
@@ -139,10 +139,10 @@ TEST(CRFrameDh, ModifiedTransformation){
 // SetFreeValue/GetFreeValue
 //
 TEST(CRFrameDh, GetFreeValue){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CRBX_DH_MODE_MODIFIED, CRBX_DH_FREE_NONE);
+    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
     EXPECT_EQ(NULL, frame.getFreeValue());
     
-    frame.setFreeVariable(CRBX_DH_FREE_THETA);
+    frame.setFreeVariable(CR_DH_FREE_THETA);
     EXPECT_DOUBLE_EQ(M_PI / 2, frame.getFreeValue());
     
     frame.setFreeValue(0);
@@ -154,12 +154,12 @@ TEST(CRFrameDh, GetFreeValue){
 // SetFreeVariable/GetFreeVariable
 //
 TEST(CRFrameDh, GetFreeVariable){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CRBX_DH_MODE_MODIFIED, CRBX_DH_FREE_NONE);
-    EXPECT_EQ(CRBX_DH_FREE_NONE, frame.getFreeVariable());
+    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
+    EXPECT_EQ(CR_DH_FREE_NONE, frame.getFreeVariable());
     EXPECT_FALSE(frame.isDriven());
     
-    frame.setFreeVariable(CRBX_DH_FREE_THETA);
-    EXPECT_EQ(CRBX_DH_FREE_THETA, frame.getFreeVariable());
+    frame.setFreeVariable(CR_DH_FREE_THETA);
+    EXPECT_EQ(CR_DH_FREE_THETA, frame.getFreeVariable());
     EXPECT_TRUE(frame.isDriven());
 }
 
@@ -168,12 +168,12 @@ TEST(CRFrameDh, GetFreeVariable){
 // SetMode/GetMode
 //
 TEST(CRFrameDh, GetMode){
-    CRFrameDh frame(0, 0, 0, M_PI / 2, CRBX_DH_MODE_CLASSIC, CRBX_DH_FREE_NONE);
-    EXPECT_EQ(CRBX_DH_MODE_CLASSIC, frame.getMode());
+    CRFrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_CLASSIC, CR_DH_FREE_NONE);
+    EXPECT_EQ(CR_DH_MODE_CLASSIC, frame.getMode());
     
-    frame.setFreeVariable(CRBX_DH_FREE_THETA);
-    frame.setMode(CRBX_DH_MODE_MODIFIED);
-    EXPECT_EQ(CRBX_DH_MODE_MODIFIED, frame.getMode());
+    frame.setFreeVariable(CR_DH_FREE_THETA);
+    frame.setMode(CR_DH_MODE_MODIFIED);
+    EXPECT_EQ(CR_DH_MODE_MODIFIED, frame.getMode());
 }
 
 
@@ -181,7 +181,7 @@ TEST(CRFrameDh, GetMode){
 // GetParameters
 //
 TEST(CRFrameDh, GetParameters){
-    CRFrameDh frame(0.1, 0.2, 0.3, M_PI / 2, CRBX_DH_MODE_MODIFIED, CRBX_DH_FREE_NONE);
+    CRFrameDh frame(0.1, 0.2, 0.3, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
     double r, alpha, d, theta;
     frame.getParameters(r, alpha, d, theta);
     

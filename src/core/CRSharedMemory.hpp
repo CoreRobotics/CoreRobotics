@@ -88,8 +88,8 @@ namespace CoreRobotics {
 //=====================================================================
 //! Enumerator for specifying thread priority
 enum CRManagerRole {
-    CRBX_MANAGER_SERVER,
-    CRBX_MANAGER_CLIENT,
+    CR_MANAGER_SERVER,
+    CR_MANAGER_CLIENT,
 };
 //=====================================================================
 //! A couple type definitions

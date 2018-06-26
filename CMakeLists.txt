@@ -89,7 +89,7 @@ else()
 endif()
 
 # Include headers
-file(GLOB CRBX_INCLUDE_DIRS
+file(GLOB CR_INCLUDE_DIRS
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/core
     ${CMAKE_SOURCE_DIR}/src/math
@@ -100,7 +100,7 @@ file(GLOB CRBX_INCLUDE_DIRS
     ${EIGEN3_INCLUDE_DIR}
     ${Boost_INCLUDE_DIR}
 )
-include_directories( ${CRBX_INCLUDE_DIRS} )
+include_directories( ${CR_INCLUDE_DIRS} )
 
 # Header files
 file(GLOB HEADERS_CORE src/core/*.hpp )
@@ -157,7 +157,7 @@ add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${H
     export (PACKAGE ${LIB_TARGET_NAME})
 
     # package definitions
-    set (CONF_INCLUDE_DIRS ${CRBX_INCLUDE_DIRS})
+    set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
     set (CONF_LIBRARIES    ${LIB_TARGET_NAME})
     set (CONF_LIBRARY_DIRS ${CMAKE_SOURCE_DIR}/lib ${CMAKE_SOURCE_DIR}/lib/Release ${CMAKE_SOURCE_DIR}/lib/Debug)
     set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})

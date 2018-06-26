@@ -80,22 +80,22 @@ testData test_CRNullSpace(Eigen::VectorXd initJoints,
 
 
 	// Set translation frames and DH Modified
-	F0->setMode(CRBX_EULER_MODE_XYZ);
-	F1->setMode(CRBX_EULER_MODE_XYZ);
-	F2->setMode(CRBX_EULER_MODE_XYZ);
-	F3->setMode(CRBX_EULER_MODE_XYZ);
-	F4->setMode(CRBX_EULER_MODE_XYZ);
-	F5->setMode(CRBX_EULER_MODE_XYZ);
-	F6->setMode(CRBX_EULER_MODE_XYZ);
+	F0->setMode(CR_EULER_MODE_XYZ);
+	F1->setMode(CR_EULER_MODE_XYZ);
+	F2->setMode(CR_EULER_MODE_XYZ);
+	F3->setMode(CR_EULER_MODE_XYZ);
+	F4->setMode(CR_EULER_MODE_XYZ);
+	F5->setMode(CR_EULER_MODE_XYZ);
+	F6->setMode(CR_EULER_MODE_XYZ);
 
 	// Set tralation frame free variables
-	F0->setFreeVariable(CRBX_EULER_FREE_ANG_G);
-	F1->setFreeVariable(CRBX_EULER_FREE_ANG_G);
-	F2->setFreeVariable(CRBX_EULER_FREE_ANG_A);
-	F3->setFreeVariable(CRBX_EULER_FREE_ANG_G);
-	F4->setFreeVariable(CRBX_EULER_FREE_ANG_B);
-	F5->setFreeVariable(CRBX_EULER_FREE_ANG_A);
-	F6->setFreeVariable(CRBX_EULER_FREE_NONE);
+	F0->setFreeVariable(CR_EULER_FREE_ANG_G);
+	F1->setFreeVariable(CR_EULER_FREE_ANG_G);
+	F2->setFreeVariable(CR_EULER_FREE_ANG_A);
+	F3->setFreeVariable(CR_EULER_FREE_ANG_G);
+	F4->setFreeVariable(CR_EULER_FREE_ANG_B);
+	F5->setFreeVariable(CR_EULER_FREE_ANG_A);
+	F6->setFreeVariable(CR_EULER_FREE_NONE);
 
 
 	// lengths
@@ -140,20 +140,20 @@ testData test_CRNullSpace(Eigen::VectorXd initJoints,
 
 	// Create a tool frame and add to MyRobot
 	CRFrameEuler* Tool = new CRFrameEuler();
-	Tool->setFreeVariable(CRBX_EULER_FREE_NONE);
-	Tool->setMode(CRBX_EULER_MODE_XYZ);
+	Tool->setFreeVariable(CR_EULER_FREE_NONE);
+	Tool->setMode(CR_EULER_MODE_XYZ);
 	Tool->setPositionAndOrientation(90.21, 0.0, -107.43, -M_PI / 8.0, 0.0, 0.0);
 	int toolIndex = MyRobot->addTool(linkIndex6, Tool);
 
 	// Initialize the solver
-	CRNullSpace nullSpaceSolver = CRNullSpace(*MyRobot, toolIndex, CRBX_EULER_MODE_XYZ);
+	CRNullSpace nullSpaceSolver = CRNullSpace(*MyRobot, toolIndex, CR_EULER_MODE_XYZ);
 
 	// Set the robot orientation
 	MyRobot->setConfiguration(initJoints);
 	returnStruct.initialJointAngles = initJoints;
 
 	// Compute the initial tool pose
-	returnStruct.initialToolPose = MyRobot->getToolPose(toolIndex, CRBX_EULER_MODE_XYZ);
+	returnStruct.initialToolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
 
 	// Find a nullspace movement
 	Eigen::VectorXd nullJointMotion(6);
@@ -166,7 +166,7 @@ testData test_CRNullSpace(Eigen::VectorXd initJoints,
 	// Compute the final tool pose
 	MyRobot->setConfiguration(initJoints + nullJointMotion);
 	returnStruct.finalJointAngles = initJoints + nullJointMotion;
-	returnStruct.finalToolPose = MyRobot->getToolPose(toolIndex, CRBX_EULER_MODE_XYZ);
+	returnStruct.finalToolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
 
 	return returnStruct;
 }
@@ -177,7 +177,7 @@ TEST(CRNullSpace, Full) {
 	Eigen::VectorXd jointMotion(6);
 	jointMotion << 1, 0, 0, 0, 0, 0;
 	testData data = test_CRNullSpace(initJoints, jointMotion);
-	EXPECT_EQ(CRBX_RESULT_SUCCESS, data.result);
+	EXPECT_EQ(CR_RESULT_SUCCESS, data.result);
 	for (int i = 0; i < data.initialToolPose.size(); i++) {
 		EXPECT_DOUBLE_EQ(data.initialToolPose(i), data.finalToolPose(i));
 	}
@@ -194,7 +194,7 @@ TEST(CRNullSpace, PoseElements) {
 	Eigen::Matrix<bool, 6, 1> poseElements;
 	poseElements << 1, 1, 1, 1, 1, 0;
 	testData data = test_CRNullSpace(initJoints, jointMotion, true, poseElements);
-	EXPECT_EQ(CRBX_RESULT_SUCCESS, data.result);
+	EXPECT_EQ(CR_RESULT_SUCCESS, data.result);
 	for (int i = 0; i < data.initialToolPose.size(); i++) {
 		EXPECT_NEAR(data.initialToolPose(i), data.finalToolPose(i), 0.22);
 	}

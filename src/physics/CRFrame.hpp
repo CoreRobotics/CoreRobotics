@@ -102,18 +102,18 @@ namespace CoreRobotics {
 //=====================================================================
 //! Enumerator for handling Euler angle conventions
 enum CREulerMode {
-    CRBX_EULER_MODE_ZXZ,
-    CRBX_EULER_MODE_XYX,
-    CRBX_EULER_MODE_YZY,
-    CRBX_EULER_MODE_ZYZ,
-    CRBX_EULER_MODE_XZX,
-    CRBX_EULER_MODE_YXY,
-    CRBX_EULER_MODE_XYZ,
-    CRBX_EULER_MODE_YZX,
-    CRBX_EULER_MODE_ZXY,
-    CRBX_EULER_MODE_XZY,
-    CRBX_EULER_MODE_ZYX,
-    CRBX_EULER_MODE_YXZ,
+    CR_EULER_MODE_ZXZ,
+    CR_EULER_MODE_XYX,
+    CR_EULER_MODE_YZY,
+    CR_EULER_MODE_ZYZ,
+    CR_EULER_MODE_XZX,
+    CR_EULER_MODE_YXY,
+    CR_EULER_MODE_XYZ,
+    CR_EULER_MODE_YZX,
+    CR_EULER_MODE_ZXY,
+    CR_EULER_MODE_XZY,
+    CR_EULER_MODE_ZYX,
+    CR_EULER_MODE_YXZ,
 };
     
 //=====================================================================

@@ -105,8 +105,8 @@ namespace CoreRobotics {
 //! Enumerator for specifying whether the specified dynamic model is
 //  either continuous or discrete.
 enum CRMotionModelType {
-    CRBX_MOTION_CONTINUOUS,
-    CRBX_MOTION_DISCRETE
+    CR_MOTION_CONTINUOUS,
+    CR_MOTION_DISCRETE
 };
 
 //=====================================================================

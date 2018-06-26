@@ -121,7 +121,7 @@ class CRLoop {
         CRLoopElement* m_element;
     
         //! simulation state
-        CRRunState m_runState = CRBX_RUN_STATE_STOPPED;
+        CRRunState m_runState = CR_RUN_STATE_STOPPED;
     
         //! thread
         // CoreRobotics::CRThread* m_thread = NULL;

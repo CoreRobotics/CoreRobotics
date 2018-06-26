@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRBX_SIGNAL_HPP_
-#define CRBX_SIGNAL_HPP_
+#ifndef CR_SIGNAL_HPP_
+#define CR_SIGNAL_HPP_
 
 //---------------------------------------------------------------------
 // Begin namespace

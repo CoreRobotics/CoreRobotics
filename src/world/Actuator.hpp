@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRBX_ACTUATOR_HPP_
-#define CRBX_ACTUATOR_HPP_
+#ifndef CR_ACTUATOR_HPP_
+#define CR_ACTUATOR_HPP_
 
 #include "Signal.hpp"
 

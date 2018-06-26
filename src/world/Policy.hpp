@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRBX_POLICY_HPP_
-#define CRBX_POLICY_HPP_
+#ifndef CR_POLICY_HPP_
+#define CR_POLICY_HPP_
 
 #include "Signal.hpp"
 

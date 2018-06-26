@@ -134,7 +134,7 @@ CRResult CRMatrix::svd(Eigen::MatrixXd i_A,
 					 Eigen::VectorXd& o_Sigma,
 					 Eigen::MatrixXd& o_V)
 {
-	CRResult result = CRBX_RESULT_SUCCESS;
+	CRResult result = CR_RESULT_SUCCESS;
 
 	// Compute the SVD of A
 	Eigen::JacobiSVD<Eigen::MatrixXd> svd(i_A, Eigen::ComputeThinU | Eigen::ComputeThinV);
@@ -145,7 +145,7 @@ CRResult CRMatrix::svd(Eigen::MatrixXd i_A,
 	// check for singular condition
 	for (int i = 0; i < sVals.size(); i++) {
 		if (sVals(i) <= i_tol) {
-			result = CRBX_RESULT_SINGULAR;
+			result = CR_RESULT_SINGULAR;
 			break;
 		}
 	}
@@ -190,7 +190,7 @@ CRResult CRMatrix::svd(Eigen::MatrixXd i_A,
 //---------------------------------------------------------------------
 CRResult CRMatrix::svdInverse(Eigen::MatrixXd i_A, double i_tol, Eigen::MatrixXd& o_Ainv)
 {
-    CRResult result = CRBX_RESULT_SUCCESS;
+    CRResult result = CR_RESULT_SUCCESS;
     
     // Compute the SVD of A
     Eigen::JacobiSVD<Eigen::MatrixXd> svd(i_A, Eigen::ComputeThinU | Eigen::ComputeThinV);
@@ -201,7 +201,7 @@ CRResult CRMatrix::svdInverse(Eigen::MatrixXd i_A, double i_tol, Eigen::MatrixXd
     // check for singular condition
     for (int i = 0; i < sVals.size(); i++){
         if (sVals(i) <= i_tol){
-            result = CRBX_RESULT_SINGULAR;
+            result = CR_RESULT_SINGULAR;
             break;
         }
     }

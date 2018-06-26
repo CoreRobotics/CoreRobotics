@@ -81,11 +81,11 @@ namespace CoreRobotics {
 //=====================================================================
 //! Enumerator for specifying thread priority
 enum CRThreadPriority {
-	CRBX_PRIORITY_LOWEST,
-	CRBX_PRIORITY_LOW,
-	CRBX_PRIORITY_NORMAL,
-	CRBX_PRIORITY_HIGH,
-	CRBX_PRIORITY_HIGHEST
+	CR_PRIORITY_LOWEST,
+	CR_PRIORITY_LOW,
+	CR_PRIORITY_NORMAL,
+	CR_PRIORITY_HIGH,
+	CR_PRIORITY_HIGHEST
 };
 
 //=====================================================================

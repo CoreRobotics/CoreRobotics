@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRBX_MODEL_HPP_
-#define CRBX_MODEL_HPP_
+#ifndef CR_MODEL_HPP_
+#define CR_MODEL_HPP_
 
 #include "Signal.hpp"
 

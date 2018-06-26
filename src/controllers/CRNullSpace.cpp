@@ -106,7 +106,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
 	Eigen::MatrixXd J, Jinv;
 	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
                                                   this->m_robot.getDegreesOfFreedom());
-	CRResult result = CRBX_RESULT_SUCCESS;
+	CRResult result = CR_RESULT_SUCCESS;
 	for(int i = 0; i < iter; i++)
 	{
 		this->m_robot.setConfiguration(q);
@@ -114,7 +114,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
                                     this->m_eulerMode);
 		result = CRMatrix::svdInverse(J, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
-		if(result != CRBX_RESULT_SUCCESS || (q - i_q0).norm() < m_trivTol)
+		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < m_trivTol)
 		{
 			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot.getDegreesOfFreedom());
 			return result;
@@ -160,7 +160,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
 	Eigen::MatrixXd J, Jinv;
 	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
                                                   this->m_robot.getDegreesOfFreedom());
-	CRResult result = CRBX_RESULT_SUCCESS;
+	CRResult result = CR_RESULT_SUCCESS;
 	for(int i = 0; i < iter; i++)
 	{
 		this->m_robot.setConfiguration(q);
@@ -169,7 +169,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
                                     i_poseElements);
 		result = CRMatrix::svdInverse(J, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
-		if(result != CRBX_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
+		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
 		{
 			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot.getDegreesOfFreedom());
 			return result;
@@ -218,7 +218,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
 	Eigen::MatrixXd J, Jinv;
 	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
                                                   this->m_robot.getDegreesOfFreedom());
-	CRResult result = CRBX_RESULT_SUCCESS;
+	CRResult result = CR_RESULT_SUCCESS;
 	for(int i = 0; i < iter; i++)
 	{
 		this->m_robot.setConfiguration(q);
@@ -227,7 +227,7 @@ CRResult CRNullSpace::solve(Eigen::VectorXd i_jointMotion,
                                     i_poseElements);
 		result = CRMatrix::svdInverse(J * i_w, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
-		if(result != CRBX_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
+		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
 		{
 			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot.getDegreesOfFreedom());
 			return result;

@@ -97,18 +97,18 @@ namespace CoreRobotics {
 //=====================================================================
 //! Enumerator for handling DH parameter free variable candidates
 enum CRDhFreeVariable {
-    CRBX_DH_FREE_NONE,
-    CRBX_DH_FREE_R,
-    CRBX_DH_FREE_ALPHA,
-    CRBX_DH_FREE_D,
-    CRBX_DH_FREE_THETA,
+    CR_DH_FREE_NONE,
+    CR_DH_FREE_R,
+    CR_DH_FREE_ALPHA,
+    CR_DH_FREE_D,
+    CR_DH_FREE_THETA,
 };
 
 
 //! Enumerator for handling DH conventions
 enum CRDhMode {
-    CRBX_DH_MODE_CLASSIC,
-    CRBX_DH_MODE_MODIFIED,
+    CR_DH_MODE_CLASSIC,
+    CR_DH_MODE_MODIFIED,
 };
 
 
