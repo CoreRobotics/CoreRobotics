@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 using namespace CoreRobotics;
 
-CREulerMode convention = CR_EULER_MODE_XYZ;
+CREulerMode convention = CRBX_EULER_MODE_XYZ;
 
 Eigen::Matrix<bool, 6, 1> poseElements = (Eigen::Matrix<bool, 6, 1>() << 1, 1, 0, 0, 0, 0).finished();
 
@@ -59,10 +59,10 @@ robotData setup_solver(void) {
 	CRManipulator* MyRobot = new CRManipulator();
 
 	// Define several frames
-	CRFrameEuler* F0 = new CRFrameEuler(0, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F1 = new CRFrameEuler(2, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F2 = new CRFrameEuler(-4, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F3 = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
+	CRFrameEuler* F0 = new CRFrameEuler(0, 0, 0, 0, 0, 0, convention, CRBX_EULER_FREE_ANG_G);
+	CRFrameEuler* F1 = new CRFrameEuler(2, 0, 0, 0, 0, 0, convention, CRBX_EULER_FREE_ANG_G);
+	CRFrameEuler* F2 = new CRFrameEuler(-4, 0, 0, 0, 0, 0, convention, CRBX_EULER_FREE_ANG_G);
+	CRFrameEuler* F3 = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CRBX_EULER_FREE_ANG_G);
 
 	// Define the robot links
 	CRRigidBody* Link0 = new CRRigidBody(F0);
@@ -77,7 +77,7 @@ robotData setup_solver(void) {
 	int linkIndex = MyRobot->addLink(Link3);
 
 	// Create a tool and add it
-	CRFrameEuler* Tool = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_NONE);
+	CRFrameEuler* Tool = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CRBX_EULER_FREE_NONE);
 	int toolIndex = MyRobot->addTool(linkIndex, Tool);
 
 	// Initialize a Hard Limits solver
@@ -243,7 +243,7 @@ TEST(CRHardLimits, BadIC) {
 	CRResult result = solver.solve(q);
 	
 	// Tests
-	EXPECT_EQ(CR_RESULT_BAD_IC, result);
+	EXPECT_EQ(CRBX_RESULT_BAD_IC, result);
 	for (int i = 0; i < q.size(); i++) {
 		EXPECT_DOUBLE_EQ(q0(i), q(i));
 	}

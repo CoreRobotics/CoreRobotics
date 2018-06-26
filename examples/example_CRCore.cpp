@@ -69,7 +69,7 @@ int main(void){
     
     
     // Create a thread
-    CRThread myThread1 = CRThread(CR_PRIORITY_HIGH);
+    CRThread myThread1 = CRThread(CRBX_PRIORITY_HIGH);
     myThread1.setCallback(*callback1);
     
     // Create another thread

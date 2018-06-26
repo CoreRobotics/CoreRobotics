@@ -52,7 +52,7 @@ namespace CoreRobotics {
 /*!
  The constructor creates a manipulator.\n
 
- \param[in]     i_type      the manipulator type (default: CR_MANIPULATOR_MODE_POSITION)
+ \param[in]     i_type      the manipulator type (default: CRBX_MANIPULATOR_MODE_POSITION)
  */
 //---------------------------------------------------------------------
 CRManipulator::CRManipulator(CRManipulatorType i_type) {
@@ -61,7 +61,7 @@ CRManipulator::CRManipulator(CRManipulatorType i_type) {
 }
 
 CRManipulator::CRManipulator() {
-    this->m_modelType = CR_MANIPULATOR_MODE_POSITION;
+    this->m_modelType = CRBX_MANIPULATOR_MODE_POSITION;
 	this->m_tipFrame = new CoreRobotics::CRFrame();
 }
     

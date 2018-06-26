@@ -71,22 +71,22 @@ int main(void) {
 
 
 	// Set translation frames and DH Modified
-	F0->setMode(CR_EULER_MODE_XYZ);
-	F1->setMode(CR_EULER_MODE_XYZ);
-	F2->setMode(CR_EULER_MODE_XYZ);
-	F3->setMode(CR_EULER_MODE_XYZ);
-	F4->setMode(CR_EULER_MODE_XYZ);
-	F5->setMode(CR_EULER_MODE_XYZ);
-	F6->setMode(CR_EULER_MODE_XYZ);
+	F0->setMode(CRBX_EULER_MODE_XYZ);
+	F1->setMode(CRBX_EULER_MODE_XYZ);
+	F2->setMode(CRBX_EULER_MODE_XYZ);
+	F3->setMode(CRBX_EULER_MODE_XYZ);
+	F4->setMode(CRBX_EULER_MODE_XYZ);
+	F5->setMode(CRBX_EULER_MODE_XYZ);
+	F6->setMode(CRBX_EULER_MODE_XYZ);
 
 	// Set tralation frame free variables
-	F0->setFreeVariable(CR_EULER_FREE_ANG_G);
-	F1->setFreeVariable(CR_EULER_FREE_ANG_G);
-	F2->setFreeVariable(CR_EULER_FREE_ANG_A);
-	F3->setFreeVariable(CR_EULER_FREE_ANG_G);
-	F4->setFreeVariable(CR_EULER_FREE_ANG_B);
-	F5->setFreeVariable(CR_EULER_FREE_ANG_A);
-	F6->setFreeVariable(CR_EULER_FREE_NONE);
+	F0->setFreeVariable(CRBX_EULER_FREE_ANG_G);
+	F1->setFreeVariable(CRBX_EULER_FREE_ANG_G);
+	F2->setFreeVariable(CRBX_EULER_FREE_ANG_A);
+	F3->setFreeVariable(CRBX_EULER_FREE_ANG_G);
+	F4->setFreeVariable(CRBX_EULER_FREE_ANG_B);
+	F5->setFreeVariable(CRBX_EULER_FREE_ANG_A);
+	F6->setFreeVariable(CRBX_EULER_FREE_NONE);
 
 
 	// lengths
@@ -131,13 +131,13 @@ int main(void) {
 
 	// Create a tool frame and add to MyRobot
 	CRFrameEuler* Tool = new CRFrameEuler();
-	Tool->setFreeVariable(CR_EULER_FREE_NONE);
-	Tool->setMode(CR_EULER_MODE_XYZ);
+	Tool->setFreeVariable(CRBX_EULER_FREE_NONE);
+	Tool->setMode(CRBX_EULER_MODE_XYZ);
 	Tool->setPositionAndOrientation(90.21, 0.0, -107.43, -M_PI / 8.0, 0.0, 0.0);
 	int toolIndex = MyRobot->addTool(linkIndex6, Tool);
 
 	// Initialize the solver
-	CRNullSpace nullSpaceSolver = CRNullSpace(*MyRobot, toolIndex, CR_EULER_MODE_XYZ);
+	CRNullSpace nullSpaceSolver = CRNullSpace(*MyRobot, toolIndex, CRBX_EULER_MODE_XYZ);
 
 	// Set the robot orientation
 	Eigen::VectorXd InitJoints(6);
@@ -146,7 +146,7 @@ int main(void) {
 
 	// Compute the initial tool pose
 	Eigen::VectorXd toolPose;
-	toolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
+	toolPose = MyRobot->getToolPose(toolIndex, CRBX_EULER_MODE_XYZ);
 	std::cout << "Initial Tool Pose\n" << toolPose.transpose() << std::endl;
 
 	// Find a nullspace movement
@@ -154,12 +154,12 @@ int main(void) {
 	jointMotion << 1, 0, 0, 0, 0, 0;
 	Eigen::VectorXd nullJointMotion(6);
 	CRResult result = nullSpaceSolver.solve(jointMotion, InitJoints, nullJointMotion);
-	if(result != CR_RESULT_SUCCESS) {std::cout << "Singular Jacobian" << std::endl;}
+	if(result != CRBX_RESULT_SUCCESS) {std::cout << "Singular Jacobian" << std::endl;}
 	std::cout << "NullSpace joint movements\n" << nullJointMotion.transpose() << std::endl;
 
 	// Compute the final tool pose
 	MyRobot->setConfiguration(InitJoints + nullJointMotion);
-	toolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
+	toolPose = MyRobot->getToolPose(toolIndex, CRBX_EULER_MODE_XYZ);
 	std::cout << "Final Tool Pose\n" << toolPose.transpose() << std::endl;
 
 	// Set pose elements
@@ -168,11 +168,11 @@ int main(void) {
 
 	// Find a nullspace movement with pose elements
 	result = nullSpaceSolver.solve(jointMotion, InitJoints, poseElements, nullJointMotion);
-	if(result != CR_RESULT_SUCCESS) {std::cout << "Singular Jacobian" << std::endl;}
+	if(result != CRBX_RESULT_SUCCESS) {std::cout << "Singular Jacobian" << std::endl;}
 	std::cout << "Reduced NullSpace joint movements\n" << nullJointMotion.transpose() << std::endl;
 
 	// Compute the final tool pose
 	MyRobot->setConfiguration(InitJoints + nullJointMotion);
-	toolPose = MyRobot->getToolPose(toolIndex, CR_EULER_MODE_XYZ);
+	toolPose = MyRobot->getToolPose(toolIndex, CRBX_EULER_MODE_XYZ);
 	std::cout << "Final Tool Pose\n" << toolPose.transpose() << std::endl;
 }

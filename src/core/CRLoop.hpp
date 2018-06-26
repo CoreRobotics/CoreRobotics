@@ -44,7 +44,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #define CRLoop_hpp
 
 #include <thread>
-#include "CRLoopElement.hpp"
 #include "CRClock.hpp"
 #include "CRTypes.hpp"
 
@@ -72,6 +71,7 @@ namespace CoreRobotics {
  - CRLoop::stop stops the thread execution.
  */
 //---------------------------------------------------------------------
+class CRLoopElement;
 class CRLoop {
     
     // Constructor and Destructor
@@ -121,7 +121,7 @@ class CRLoop {
         CRLoopElement* m_element;
     
         //! simulation state
-        CRRunState m_runState = CR_RUN_STATE_STOPPED;
+        CRRunState m_runState = CRBX_RUN_STATE_STOPPED;
     
         //! thread
         // CoreRobotics::CRThread* m_thread = NULL;

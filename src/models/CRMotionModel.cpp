@@ -54,7 +54,7 @@ namespace CoreRobotics {
  
  Case 1: (Continuous)
  
- If i_type is set to CR_MOTION_CONTINUOUS, then the callback sets
+ If i_type is set to CRBX_MOTION_CONTINUOUS, then the callback sets
  
  \f$ \dot{x} = f(t,x,u) \f$
  
@@ -64,7 +64,7 @@ namespace CoreRobotics {
  
  Case 2: (Discrete)
  
- If i_type is set to CR_MOTION_DISCRETE, then the callback sets
+ If i_type is set to CRBX_MOTION_DISCRETE, then the callback sets
  
  \f$ x_{k+1} = f(t_k,x_k,u_k) \f$
  
@@ -118,11 +118,11 @@ Eigen::VectorXd CRMotionModel::motion(Eigen::VectorXd i_u)
     double t = this->m_time;
     double dt = this->m_dt;
     
-    if (this->m_type == CR_MOTION_DISCRETE) {
+    if (this->m_type == CRBX_MOTION_DISCRETE) {
         // update the state
         m_state = (this->m_dynPredictFcn)(t, m_state, i_u);
         
-    } else if (this->m_type == CR_MOTION_CONTINUOUS) {
+    } else if (this->m_type == CRBX_MOTION_CONTINUOUS) {
         // update the state
         m_state = this->rk4step(t, m_state, i_u, dt);
     }

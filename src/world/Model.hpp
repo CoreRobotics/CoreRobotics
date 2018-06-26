@@ -40,11 +40,10 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRWorldItem_hpp
-#define CRWorldItem_hpp
+#ifndef CRBX_MODEL_HPP_
+#define CRBX_MODEL_HPP_
 
-#include "CRItem.hpp"
-#include <vector>
+#include "Signal.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -52,47 +51,33 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- \class CRWorldItem
+ \class Model
  \ingroup core
  
  \brief
- This class implements a basic world scene graph item for attaching to
- a CRWorld thread element or other CRWorldItems.
-
+ 
  \details
  
  */
 //---------------------------------------------------------------------
-class CRWorldItem : public CRItem {
+class Model {
     
     // Constructor and Destructor
     public:
     
         //! Class constructor
-		CRWorldItem();
+        Model();
     
         //! Class destructor
-        ~CRWorldItem();
+        ~Model();
     
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-		void addChild(CRWorldItem* i_child);
-
-		//! set the parent
-		void setParent(CRWorldItem* i_parent);
-
-
-	// Private members
-	private:
-
-		//! list of children
-		std::vector<CRWorldItem*> m_children;
-
-		//! parent
-		CRWorldItem* m_parent = NULL;
+    
+    // Private members
+    private:
+    
+        //! State
+        State m_state;
+    
 };
 
 }

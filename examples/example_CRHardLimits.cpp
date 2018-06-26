@@ -49,16 +49,16 @@ int main(void) {
 	std::cout << "*************************************\n";
 	std::cout << "Demonstration of CRHardLimits.\n";
 
-	CREulerMode convention = CR_EULER_MODE_XYZ;
+	CREulerMode convention = CRBX_EULER_MODE_XYZ;
 
 	// Define a robot
 	CRManipulator* MyRobot = new CRManipulator();
 
 	// Define several frames
-	CRFrameEuler* F0 = new CRFrameEuler(0, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F1 = new CRFrameEuler(2, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F2 = new CRFrameEuler(-4, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F3 = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
+	CRFrameEuler* F0 = new CRFrameEuler(0, 0, 0, 0, 0, 0, convention, CRBX_EULER_FREE_ANG_G);
+	CRFrameEuler* F1 = new CRFrameEuler(2, 0, 0, 0, 0, 0, convention, CRBX_EULER_FREE_ANG_G);
+	CRFrameEuler* F2 = new CRFrameEuler(-4, 0, 0, 0, 0, 0, convention, CRBX_EULER_FREE_ANG_G);
+	CRFrameEuler* F3 = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CRBX_EULER_FREE_ANG_G);
 
 	// Define the robot links
 	CRRigidBody* Link0 = new CRRigidBody(F0);
@@ -73,7 +73,7 @@ int main(void) {
 	int linkIndex = MyRobot->addLink(Link3);
 
 	// Create a tool and add it
-	CRFrameEuler* Tool = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_NONE);
+	CRFrameEuler* Tool = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CRBX_EULER_FREE_NONE);
 	int toolIndex = MyRobot->addTool(linkIndex, Tool);
 
 	// Initialize a Hard Limits solver
@@ -165,12 +165,12 @@ int main(void) {
 
 	// Display the results
 	std::cout << "Recieved the result ";
-	if (result == CR_RESULT_SUCCESS) {
-		std::cout << "CR_RESULT_SUCCESS (success)";
-	} else if (result == CR_RESULT_SINGULAR) {
-		std::cout << "CR_RESULT_SINGULAR (singular jacobian)";
-	} else if (result == CR_RESULT_BAD_IC) {
-		std::cout << "CR_RESULT_BAD_IC (bad initial conditions)";
+	if (result == CRBX_RESULT_SUCCESS) {
+		std::cout << "CRBX_RESULT_SUCCESS (success)";
+	} else if (result == CRBX_RESULT_SINGULAR) {
+		std::cout << "CRBX_RESULT_SINGULAR (singular jacobian)";
+	} else if (result == CRBX_RESULT_BAD_IC) {
+		std::cout << "CRBX_RESULT_BAD_IC (bad initial conditions)";
 	}
 	std::cout << " with joint configuration (" << q.transpose() << ")" << std::endl;
 }

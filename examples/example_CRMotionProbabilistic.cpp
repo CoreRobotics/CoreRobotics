@@ -82,7 +82,7 @@ int main(void){
     
     
     // initialize a deterministic sensor model
-    CRMotionProbabilistic model = CRMotionProbabilistic(*probDynFcn,CR_MOTION_CONTINUOUS,x,0.2);
+    CRMotionProbabilistic model = CRMotionProbabilistic(*probDynFcn,CRBX_MOTION_CONTINUOUS,x,0.2);
     
     
     // initialize an input and set it to zero

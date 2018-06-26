@@ -60,8 +60,8 @@ namespace CoreRobotics {
  \param[in]   i_a      - alpha angle of the frame [rad] (0)
  \param[in]   i_b      - beta angle of the frame [rad] (0)
  \param[in]   i_g      - gamma angle of the frame [rad] (0)
- \param[in]   i_mode   - Euler angle convention (CR_EULER_MODE_ZXZ)
- \param[in]   i_free   - free variable (CR_EULER_FREE_NONE)
+ \param[in]   i_mode   - Euler angle convention (CRBX_EULER_MODE_ZXZ)
+ \param[in]   i_free   - free variable (CRBX_EULER_FREE_NONE)
  */
 //---------------------------------------------------------------------
 CRFrameEuler::CRFrameEuler(double i_x,
@@ -91,8 +91,8 @@ CRFrameEuler::CRFrameEuler()
     m_angA = 0.0;
     m_angB = 0.0;
     m_angG = 0.0;
-    m_eulerMode = CR_EULER_MODE_ZXZ;
-    m_freeVar = CR_EULER_FREE_NONE;
+    m_eulerMode = CRBX_EULER_MODE_ZXZ;
+    m_freeVar = CRBX_EULER_FREE_NONE;
     this->setRotationAndTranslation();
 }
 
@@ -102,7 +102,7 @@ CRFrameEuler::CRFrameEuler()
 /*!
  This method sets the value of the free variable.  The method returns
  a true if the value was written and a false if m_freeVar is set to 
- CR_EULER_FREE_NONE.\n
+ CRBX_EULER_FREE_NONE.\n
  
  \param[in]   i_q   - value of the variable to be set
  \return - CRResult flag indicating if the parameter is writable
@@ -110,27 +110,27 @@ CRFrameEuler::CRFrameEuler()
 //---------------------------------------------------------------------
 CRResult CRFrameEuler::setFreeValue(double i_q)
 {
-    CRResult result = CR_RESULT_SUCCESS;
+    CRResult result = CRBX_RESULT_SUCCESS;
     switch (m_freeVar){
-        case CR_EULER_FREE_NONE:
-            result = CR_RESULT_UNWRITABLE;
+        case CRBX_EULER_FREE_NONE:
+            result = CRBX_RESULT_UNWRITABLE;
             break;
-        case CR_EULER_FREE_POS_X:
+        case CRBX_EULER_FREE_POS_X:
             m_posX = i_q;
             break;
-        case CR_EULER_FREE_POS_Y:
+        case CRBX_EULER_FREE_POS_Y:
             m_posY = i_q;
             break;
-        case CR_EULER_FREE_POS_Z:
+        case CRBX_EULER_FREE_POS_Z:
             m_posZ = i_q;
             break;
-        case CR_EULER_FREE_ANG_A:
+        case CRBX_EULER_FREE_ANG_A:
             m_angA = i_q;
             break;
-        case CR_EULER_FREE_ANG_B:
+        case CRBX_EULER_FREE_ANG_B:
             m_angB = i_q;
             break;
-        case CR_EULER_FREE_ANG_G:
+        case CRBX_EULER_FREE_ANG_G:
             m_angG = i_q;
             break;
     }
@@ -143,7 +143,7 @@ CRResult CRFrameEuler::setFreeValue(double i_q)
 //=====================================================================
 /*!
  This method get the value of the free variable.  The method returns 
- q = NULL if m_freeVar is set to CR_EULER_FREE_NONE.\n
+ q = NULL if m_freeVar is set to CRBX_EULER_FREE_NONE.\n
  
  \return - value of the free variable.
  */
@@ -151,25 +151,25 @@ CRResult CRFrameEuler::setFreeValue(double i_q)
 double CRFrameEuler::getFreeValue(void)
 {
     switch (m_freeVar){
-        case CR_EULER_FREE_NONE:
+        case CRBX_EULER_FREE_NONE:
             return 0.0;
             break;
-        case CR_EULER_FREE_POS_X:
+        case CRBX_EULER_FREE_POS_X:
             return m_posX;
             break;
-        case CR_EULER_FREE_POS_Y:
+        case CRBX_EULER_FREE_POS_Y:
             return m_posY;
             break;
-        case CR_EULER_FREE_POS_Z:
+        case CRBX_EULER_FREE_POS_Z:
             return m_posZ;
             break;
-        case CR_EULER_FREE_ANG_A:
+        case CRBX_EULER_FREE_ANG_A:
             return m_angA;
             break;
-        case CR_EULER_FREE_ANG_B:
+        case CRBX_EULER_FREE_ANG_B:
             return m_angB;
             break;
-        case CR_EULER_FREE_ANG_G:
+        case CRBX_EULER_FREE_ANG_G:
             return m_angG;
             break;
     }
@@ -359,7 +359,7 @@ void CRFrameEuler::setRotationAndTranslation(Eigen::Matrix3d i_rot,
  */
 //---------------------------------------------------------------------
 bool CRFrameEuler::isDriven(void) {
-    if (m_freeVar == CR_EULER_FREE_NONE) {
+    if (m_freeVar == CRBX_EULER_FREE_NONE) {
         return false;
     } else {
         return true;
@@ -382,62 +382,62 @@ void CRFrameEuler::setRotationAndTranslation()
     Eigen::Matrix3d r3 = Eigen::Matrix3d::Identity();
     
     switch (m_eulerMode){
-        case CR_EULER_MODE_ZXZ:
+        case CRBX_EULER_MODE_ZXZ:
 			r1 = CRMatrix::rotAboutZ(m_angA);
 			r2 = CRMatrix::rotAboutX(m_angB);
 			r3 = CRMatrix::rotAboutZ(m_angG);
             break;
-        case CR_EULER_MODE_XYX:
+        case CRBX_EULER_MODE_XYX:
 			r1 = CRMatrix::rotAboutX(m_angA);
 			r2 = CRMatrix::rotAboutY(m_angB);
 			r3 = CRMatrix::rotAboutX(m_angG);
             break;
-        case CR_EULER_MODE_YZY:
+        case CRBX_EULER_MODE_YZY:
 			r1 = CRMatrix::rotAboutY(m_angA);
 			r2 = CRMatrix::rotAboutZ(m_angB);
 			r3 = CRMatrix::rotAboutY(m_angG);
             break;
-        case CR_EULER_MODE_ZYZ:
+        case CRBX_EULER_MODE_ZYZ:
 			r1 = CRMatrix::rotAboutZ(m_angA);
 			r2 = CRMatrix::rotAboutY(m_angB);
 			r3 = CRMatrix::rotAboutZ(m_angG);
             break;
-        case CR_EULER_MODE_XZX:
+        case CRBX_EULER_MODE_XZX:
 			r1 = CRMatrix::rotAboutX(m_angA);
 			r2 = CRMatrix::rotAboutZ(m_angB);
 			r3 = CRMatrix::rotAboutX(m_angG);
             break;
-        case CR_EULER_MODE_YXY:
+        case CRBX_EULER_MODE_YXY:
 			r1 = CRMatrix::rotAboutY(m_angA);
 			r2 = CRMatrix::rotAboutX(m_angB);
 			r3 = CRMatrix::rotAboutY(m_angG);
             break;
-        case CR_EULER_MODE_XYZ:
+        case CRBX_EULER_MODE_XYZ:
 			r1 = CRMatrix::rotAboutX(m_angA);
 			r2 = CRMatrix::rotAboutY(m_angB);
 			r3 = CRMatrix::rotAboutZ(m_angG);
             break;
-        case CR_EULER_MODE_YZX:
+        case CRBX_EULER_MODE_YZX:
 			r1 = CRMatrix::rotAboutY(m_angA);
 			r2 = CRMatrix::rotAboutZ(m_angB);
 			r3 = CRMatrix::rotAboutX(m_angG);
             break;
-        case CR_EULER_MODE_ZXY:
+        case CRBX_EULER_MODE_ZXY:
 			r1 = CRMatrix::rotAboutZ(m_angA);
 			r2 = CRMatrix::rotAboutX(m_angB);
 			r3 = CRMatrix::rotAboutY(m_angG);
             break;
-        case CR_EULER_MODE_XZY:
+        case CRBX_EULER_MODE_XZY:
 			r1 = CRMatrix::rotAboutX(m_angA);
 			r2 = CRMatrix::rotAboutZ(m_angB);
 			r3 = CRMatrix::rotAboutY(m_angG);
             break;
-        case CR_EULER_MODE_ZYX:
+        case CRBX_EULER_MODE_ZYX:
 			r1 = CRMatrix::rotAboutZ(m_angA);
 			r2 = CRMatrix::rotAboutY(m_angB);
 			r3 = CRMatrix::rotAboutX(m_angG);
             break;
-        case CR_EULER_MODE_YXZ:
+        case CRBX_EULER_MODE_YXZ:
 			r1 = CRMatrix::rotAboutY(m_angA);
 			r2 = CRMatrix::rotAboutX(m_angB);
 			r3 = CRMatrix::rotAboutZ(m_angG);

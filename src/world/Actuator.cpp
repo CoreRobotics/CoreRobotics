@@ -37,93 +37,40 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CRSignal_hpp
-#define CRSignal_hpp
+#include "Actuator.hpp"
 
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
     
-//---------------------------------------------------------------------
-/*!
- \class CRSignal
- \ingroup core
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-class CRSignal {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-        CRSignal();
-    
-        //! Class destructor
-        ~CRSignal();
-    
-};
-    
     
 //---------------------------------------------------------------------
 /*!
- \class CRState
- \ingroup core
- 
- \brief
- 
- \details
- ## Description
- 
+ The constructor sets up the actuator.\n
  */
 //---------------------------------------------------------------------
-class CRState : public CRSignal {
-        
-    // Constructor and Destructor
-    public:
+/*
+Actuator::Actuator(){
     
-        //! Class constructor
-        CRState();
-    
-        //! Class destructor
-        ~CRState();
-        
-};
-
-//---------------------------------------------------------------------
-/*!
- \class CRAction
- \ingroup core
- 
- \brief
- 
- \details
- ## Description
- 
- */
-//---------------------------------------------------------------------
-class CRAction : public CRSignal {
-        
-    // Constructor and Destructor
-    public:
-        
-        //! Class constructor
-        CRAction();
-        
-        //! Class destructor
-        ~CRAction();
-        
-};
-
 }
-// end namespace
-//---------------------------------------------------------------------
+*/
 
-#endif
+
+//---------------------------------------------------------------------
+/*!
+ The destructor deletes the actuator.\n
+ */
+//---------------------------------------------------------------------
+    /*
+Actuator::~Actuator(){
+}
+     */
+
+
+//=====================================================================
+// End namespace
+}
+
+

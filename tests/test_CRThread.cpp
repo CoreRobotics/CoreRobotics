@@ -52,7 +52,7 @@ using namespace CoreRobotics;
 void callback1(void){
     const char* memoryName = "MyMemory1";
     // Open some shared memory as client
-    CRSharedMemory mem(memoryName, CR_MANAGER_CLIENT);
+    CRSharedMemory mem(memoryName, CRBX_MANAGER_CLIENT);
     
     // create a vector of data
     Eigen::VectorXd v(1);
@@ -71,7 +71,7 @@ void callback1(void){
 void callback2(void* arg){
     const char* memoryName = "MyMemory2";
     // Open some shared memory as client
-    CRSharedMemory mem(memoryName, CR_MANAGER_CLIENT);
+    CRSharedMemory mem(memoryName, CRBX_MANAGER_CLIENT);
     
     // create a vector of data
     Eigen::VectorXd v(1);
@@ -92,7 +92,7 @@ void callback2(void* arg){
 //
 TEST(CRThread, Start){
     const char* memoryName = "MyMemory1";
-    CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
+    CRSharedMemory server(memoryName, CRBX_MANAGER_SERVER);
     Eigen::VectorXd v(1);
     v << 1.0;
     server.addSignal("signal_3", v);
@@ -119,7 +119,7 @@ TEST(CRThread, Start){
 //
 TEST(CRThread, StartArgument){
     const char* memoryName = "MyMemory2";
-    CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
+    CRSharedMemory server(memoryName, CRBX_MANAGER_SERVER);
     Eigen::VectorXd v(1);
     v << 1.0;
     server.addSignal("signal_4", v);

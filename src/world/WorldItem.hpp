@@ -40,10 +40,11 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRPolicy_hpp
-#define CRPolicy_hpp
+#ifndef CRBX_WORLDITEM_HPP_
+#define CRBX_WORLDITEM_HPP_
 
-#include "CRSignal.hpp"
+#include "CRItem.hpp"
+#include <vector>
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -51,40 +52,47 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- \class CRPolicy
+ \class WorldItem
  \ingroup core
  
  \brief
- 
+ This class implements a basic world scene graph item for attaching to
+ a World thread element or other WorldItems.
+
  \details
  
  */
 //---------------------------------------------------------------------
-class CRPolicy {
+class WorldItem : public CRItem {
     
     // Constructor and Destructor
     public:
     
         //! Class constructor
-        CRPolicy();
+		WorldItem();
     
         //! Class destructor
-        ~CRPolicy();
+        ~WorldItem();
     
-    
-    // Return the action
-    public:
-    
-        //! get the current action
-        virtual CRAction get() = 0;
-    
-    
-    // Private members
-    private:
-    
-        //! Action
-        CRAction m_action;
-    
+
+	// Scene graph behaviors
+	public:
+
+		//! add a child to the list of children
+		void addChild(WorldItem* i_child);
+
+		//! set the parent
+		void setParent(WorldItem* i_parent);
+
+
+	// Private members
+	private:
+
+		//! list of children
+		std::vector<WorldItem*> m_children;
+
+		//! parent
+		WorldItem* m_parent = NULL;
 };
 
 }

@@ -67,7 +67,7 @@ TEST(CRTrajectoryGenerator, Solve){
     
     // Check the solve function
     CRResult result = trajGen.solve(x0, v0, a0, xf, vf, af, tf);
-    EXPECT_EQ(result, CR_RESULT_SUCCESS);
+    EXPECT_EQ(result, CRBX_RESULT_SUCCESS);
     
     
     // Now check the solve function with the waypoints
@@ -81,7 +81,7 @@ TEST(CRTrajectoryGenerator, Solve){
     wpf.acceleration = af;
     wpf.time = tf;
     result = trajGen.solve(wp0, wpf);
-    EXPECT_EQ(result, CR_RESULT_SUCCESS);
+    EXPECT_EQ(result, CRBX_RESULT_SUCCESS);
 }
 
 

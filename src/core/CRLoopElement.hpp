@@ -44,6 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define CRLoopElement_hpp
 
 #include <vector>
+#include "CRLoop.hpp"
 
 
 //---------------------------------------------------------------------
@@ -68,7 +69,6 @@ namespace CoreRobotics {
  - CRLoopElement::setPriority sets the priority of the thread.
  */
 //---------------------------------------------------------------------
-class CRLoop;
 class CRLoopElement {
     
     // Constructor and destructor

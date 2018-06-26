@@ -94,7 +94,7 @@ TEST(CRMotionProbabilistic, Continuous){
     cov << 1;   // noise cov
     mean << 0;  // noise mean
     dynNoise1 = new CRNoiseGaussian(cov, mean);
-    CRMotionProbabilistic model = CRMotionProbabilistic(*probContinuousDynFcn, CR_MOTION_CONTINUOUS, x, dt);
+    CRMotionProbabilistic model = CRMotionProbabilistic(*probContinuousDynFcn, CRBX_MOTION_CONTINUOUS, x, dt);
     CRMotionProbabilistic modelBaseline = model; // init another model to test that noise is sampled
     double t = 0; // Initialize a time t
     while(t < 5) { // simulate for 5 seconds
@@ -125,7 +125,7 @@ TEST(CRMotionProbabilistic, Discrete){
     cov << 1;   // noise cov
     mean << 0;  // noise mean
     dynNoise2 = new CRNoiseGaussian(cov, mean);
-    CRMotionProbabilistic model = CRMotionProbabilistic(*probContinuousDynFcn, CR_MOTION_CONTINUOUS, x, dt);
+    CRMotionProbabilistic model = CRMotionProbabilistic(*probContinuousDynFcn, CRBX_MOTION_CONTINUOUS, x, dt);
     CRMotionProbabilistic modelBaseline = model; // init another model to test that noise is sampled
     double t = 0; // Initialize a time t
     while(t < 5) { // simulate for 5 seconds

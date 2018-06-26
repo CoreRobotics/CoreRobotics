@@ -37,40 +37,51 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
+// Begin header definition
 
-#include "CRActuator.hpp"
+#ifndef CRBX_SENSOR_HPP_
+#define CRBX_SENSOR_HPP_
 
-//=====================================================================
-// CoreRobotics namespace
+#include "Signal.hpp"
+
+//---------------------------------------------------------------------
+// Begin namespace
 namespace CoreRobotics {
     
-    
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the actuator.\n
+ \class Sensor
+ \ingroup core
+ 
+ \brief
+ 
+ \details
+ 
  */
 //---------------------------------------------------------------------
-/*
-CRActuator::CRActuator(){
+class Sensor {
     
+    // Constructor and Destructor
+    public:
+    
+        //! Class constructor
+		Sensor();
+    
+        //! Class destructor
+        ~Sensor();
+    
+    
+    // Private members
+    private:
+    
+        //! State
+        State m_state;
+    
+};
+
 }
-*/
-
-
+// end namespace
 //---------------------------------------------------------------------
-/*!
- The destructor deletes the actuator.\n
- */
-//---------------------------------------------------------------------
-    /*
-CRActuator::~CRActuator(){
-}
-     */
 
-
-//=====================================================================
-// End namespace
-}
-
-
+#endif

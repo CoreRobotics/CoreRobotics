@@ -37,69 +37,40 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CRWorld_hpp
-#define CRWorld_hpp
+#include "Signal.hpp"
 
-#include "CRLoopElement.hpp"
-#include "CRWorldItem.hpp"
-
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
+    
     
 //---------------------------------------------------------------------
 /*!
- \class CRWorld
- \ingroup core
- 
- \brief
- 
- \details
- 
+ The constructor sets up the signal.\n
  */
 //---------------------------------------------------------------------
-class CRWorld : public CRLoopElement {
+/*
+Signal::Signal(){
     
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		CRWorld();
-    
-        //! Class destructor
-        ~CRWorld();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-		virtual void step();
-
-		//! reset()
-		virtual void reset();
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-		void addChild(CRWorldItem* i_child) { m_children.push_back(i_child); }
-
-    
-    // Private members
-    private:
-
-		//! list of children
-		std::vector<CRWorldItem*> m_children;
-    
-};
-
 }
-// end namespace
-//---------------------------------------------------------------------
+*/
 
-#endif
+
+//---------------------------------------------------------------------
+/*!
+ The destructor deletes the signal.\n
+ */
+//---------------------------------------------------------------------
+    /*
+Signal::~Signal(){
+}
+     */
+
+
+//=====================================================================
+// End namespace
+}
+
+

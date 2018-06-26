@@ -93,7 +93,7 @@ CRFrame::CRFrame()
 //---------------------------------------------------------------------
 CRResult CRFrame::setFreeValue(double i_q)
 {
-    return CR_RESULT_UNWRITABLE;
+    return CRBX_RESULT_UNWRITABLE;
 }
 
 
@@ -233,7 +233,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
 
     switch (i_mode)
     {
-    case CR_EULER_MODE_ZXZ:
+    case CRBX_EULER_MODE_ZXZ:
         if (r22 < 1)
         {
             if (r22 > -1)
@@ -256,7 +256,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_XYX:
+    case CRBX_EULER_MODE_XYX:
         if (r00 < 1)
         {
             if (r00 > -1)
@@ -279,7 +279,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_YZY:
+    case CRBX_EULER_MODE_YZY:
         if (r11 < 1)
         {
             if (r11 > -1)
@@ -302,7 +302,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_ZYZ:
+    case CRBX_EULER_MODE_ZYZ:
         if (r22 < 1)
         {
             if (r22 > -1)
@@ -325,7 +325,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_XZX:
+    case CRBX_EULER_MODE_XZX:
         if (r00 < 1)
         {
             if (r00 > -1)
@@ -348,7 +348,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_YXY:
+    case CRBX_EULER_MODE_YXY:
         if (r11 < 1)
         {
             if (r11 > -1)
@@ -371,7 +371,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_XYZ:
+    case CRBX_EULER_MODE_XYZ:
 
         if (r02 < 1)
         {
@@ -395,7 +395,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_YZX:
+    case CRBX_EULER_MODE_YZX:
         if (r10 < 1)
         {
             if (10 > -1)
@@ -418,7 +418,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_ZXY:
+    case CRBX_EULER_MODE_ZXY:
         if (r21 < 1)
         {
             if (r21 > -1)
@@ -441,7 +441,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_XZY:
+    case CRBX_EULER_MODE_XZY:
         if (r01 < 1)
         {
             if (r01 > -1)
@@ -464,7 +464,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_ZYX:
+    case CRBX_EULER_MODE_ZYX:
         if (r20 < 1)
         {
             if (r20 > -1)
@@ -487,7 +487,7 @@ Eigen::Vector3d CRFrame::getOrientation(CREulerMode i_mode)
             g = 0;
         }
         break;
-    case CR_EULER_MODE_YXZ:
+    case CRBX_EULER_MODE_YXZ:
         if (r12 < 1)
         {
             if (r12 > -1)

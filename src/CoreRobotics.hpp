@@ -303,23 +303,23 @@ included in the class descriptions.
  in brackets with specific names for your setup.
  
  \code
- set (CR_DIR <path/to/corerobotics/root>)
+ set (CRBX_DIR <path/to/corerobotics/root>)
  
  include_directories(
-     ${CR_DIR}/src
-     ${CR_DIR}/src/core
-     ${CR_DIR}/src/math
-     ${CR_DIR}/src/models
-     ${CR_DIR}/src/estimators
-     ${CR_DIR}/src/physics
-     ${CR_DIR}/src/controllers
+     ${CRBX_DIR}/src
+     ${CRBX_DIR}/src/core
+     ${CRBX_DIR}/src/math
+     ${CRBX_DIR}/src/models
+     ${CRBX_DIR}/src/estimators
+     ${CRBX_DIR}/src/physics
+     ${CRBX_DIR}/src/controllers
      <path to eigen>
      <path to boost>
  )
  
- link_directories(${CR_DIR}/lib/Release)
+ link_directories(${CRBX_DIR}/lib/Release)
  
- target_link_libraries(<target_name> ${CR_DIR}/lib/Release/<lib name>)
+ target_link_libraries(<target_name> ${CRBX_DIR}/lib/Release/<lib name>)
  \endcode
  */
 //---------------------------------------------------------------------------
@@ -375,12 +375,12 @@ project includes all the CoreRobotics modules.
 //! \defgroup world World
 //! \brief TEMPORARY DURING MAJOR REVISION TO 2.0
 //---------------------------------------------------------------------------
-#include "CRSignal.hpp"
-#include "CRWorld.hpp"
-#include "CRWorldItem.hpp"
-#include "CRModel.hpp"
-#include "CRSensor.hpp"
-#include "CRActuator.hpp"
+#include "Signal.hpp"
+#include "World.hpp"
+#include "WorldItem.hpp"
+#include "Model.hpp"
+#include "Sensor.hpp"
+#include "Actuator.hpp"
 // #include "CRPolicy.hpp"
 
 

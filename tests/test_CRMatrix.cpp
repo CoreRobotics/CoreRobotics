@@ -112,11 +112,11 @@ TEST(CRMatrix, SVD){
     EXPECT_DOUBLE_EQ(5, S(0));
     EXPECT_DOUBLE_EQ(1, S(1));
     
-    EXPECT_EQ(CRResult::CR_RESULT_SUCCESS, res);
+    EXPECT_EQ(CRResult::CRBX_RESULT_SUCCESS, res);
     
     // now check that the singularity flag works to tolerance
     res = CRMatrix::svd(A, 1+1e-12, U, S, V);
-    EXPECT_EQ(CRResult::CR_RESULT_SINGULAR, res);
+    EXPECT_EQ(CRResult::CRBX_RESULT_SINGULAR, res);
 }
 
 //
@@ -139,11 +139,11 @@ TEST(CRMatrix, SVDInverse){
     EXPECT_DOUBLE_EQ(0, Ainv(1,0));
     EXPECT_DOUBLE_EQ(1, Ainv(1,1));
     
-    EXPECT_EQ(CRResult::CR_RESULT_SUCCESS, res);
+    EXPECT_EQ(CRResult::CRBX_RESULT_SUCCESS, res);
     
     // now check that the singularity flag works to tolerance
     res = CRMatrix::svdInverse(A, 1+1e-12, Ainv);
-    EXPECT_EQ(CRResult::CR_RESULT_SINGULAR, res);
+    EXPECT_EQ(CRResult::CRBX_RESULT_SINGULAR, res);
 }
 
 //

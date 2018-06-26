@@ -69,7 +69,7 @@ CRThread::CRThread(CRThreadPriority i_priority) {
 }
 CRThread::CRThread() {
     this->m_loop = new std::thread;
-	this->setPriority(CR_PRIORITY_NORMAL);
+	this->setPriority(CRBX_PRIORITY_NORMAL);
 }
 
 
@@ -133,19 +133,19 @@ void CRThread::setPriority(CRThreadPriority i_priority) {
 
 		int tPriority = THREAD_PRIORITY_NORMAL;
 		switch (i_priority) {
-			case CR_PRIORITY_LOWEST:	// 11
+			case CRBX_PRIORITY_LOWEST:	// 11
 				tPriority = THREAD_PRIORITY_LOWEST;
 				break;
-			case CR_PRIORITY_LOW:		// 12
+			case CRBX_PRIORITY_LOW:		// 12
 				tPriority = THREAD_PRIORITY_BELOW_NORMAL;
 				break;
-			case CR_PRIORITY_NORMAL:	// 13
+			case CRBX_PRIORITY_NORMAL:	// 13
 				tPriority = THREAD_PRIORITY_NORMAL;
 				break;
-			case CR_PRIORITY_HIGH:		// 14
+			case CRBX_PRIORITY_HIGH:		// 14
 				tPriority = THREAD_PRIORITY_ABOVE_NORMAL;
 				break;
-			case CR_PRIORITY_HIGHEST:   // 15
+			case CRBX_PRIORITY_HIGHEST:   // 15
 				tPriority = THREAD_PRIORITY_HIGHEST;
 				break;
 		}
@@ -165,19 +165,19 @@ void CRThread::setPriority(CRThreadPriority i_priority) {
         pthread_getschedparam(hThread, &tPolicy, &sch);
     
         switch (i_priority) {
-            case CR_PRIORITY_LOWEST:
+            case CRBX_PRIORITY_LOWEST:
                 sch.sched_priority = 1;
                 break;
-            case CR_PRIORITY_LOW:
+            case CRBX_PRIORITY_LOW:
                 sch.sched_priority = 25;
                 break;
-            case CR_PRIORITY_NORMAL:
+            case CRBX_PRIORITY_NORMAL:
                 sch.sched_priority = 50;
                 break;
-            case CR_PRIORITY_HIGH:
+            case CRBX_PRIORITY_HIGH:
                 sch.sched_priority = 75;
                 break;
-            case CR_PRIORITY_HIGHEST:
+            case CRBX_PRIORITY_HIGHEST:
                 sch.sched_priority = 99;
                 break;
         }

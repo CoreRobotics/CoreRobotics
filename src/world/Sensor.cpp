@@ -37,51 +37,40 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CRModel_hpp
-#define CRModel_hpp
+#include "Sensor.hpp"
 
-#include "CRSignal.hpp"
-
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
+    
     
 //---------------------------------------------------------------------
 /*!
- \class CRActuator
- \ingroup core
- 
- \brief
- 
- \details
- 
+ The constructor sets up the sensor.\n
  */
 //---------------------------------------------------------------------
-class CRActuator {
+/*
+Sensor::Sensor(){
     
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		CRActuator();
-    
-        //! Class destructor
-        ~CRActuator();
-    
-    
-    // Private members
-    private:
-    
-        //! State
-        CRState m_state;
-    
-};
-
 }
-// end namespace
-//---------------------------------------------------------------------
+*/
 
-#endif
+
+//---------------------------------------------------------------------
+/*!
+ The destructor deletes the sensor.\n
+ */
+//---------------------------------------------------------------------
+    /*
+Sensor::~Sensor(){
+}
+     */
+
+
+//=====================================================================
+// End namespace
+}
+
+

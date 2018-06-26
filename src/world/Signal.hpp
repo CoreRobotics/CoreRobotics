@@ -37,66 +37,93 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
+// Begin header definition
 
-#include "CRWorldItem.hpp"
+#ifndef CRBX_SIGNAL_HPP_
+#define CRBX_SIGNAL_HPP_
 
-//=====================================================================
-// CoreRobotics namespace
+//---------------------------------------------------------------------
+// Begin namespace
 namespace CoreRobotics {
     
+//---------------------------------------------------------------------
+/*!
+ \class Signal
+ \ingroup core
+ 
+ \brief
+ 
+ \details
+ 
+ */
+//---------------------------------------------------------------------
+class CRSignal {
+    
+    // Constructor and Destructor
+    public:
+    
+        //! Class constructor
+        CRSignal();
+    
+        //! Class destructor
+        ~CRSignal();
+    
+};
+    
     
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the world item.\n
+ \class State
+ \ingroup core
+ 
+ \brief
+ 
+ \details
+ ## Description
+ 
  */
 //---------------------------------------------------------------------
-CRWorldItem::CRWorldItem()
-{
+class State : public CRSignal {
+        
+    // Constructor and Destructor
+    public:
     
-}
-
+        //! Class constructor
+        State();
+    
+        //! Class destructor
+        ~State();
+        
+};
 
 //---------------------------------------------------------------------
 /*!
- The destructor deletes the world item.\n
+ \class Action
+ \ingroup core
+ 
+ \brief
+ 
+ \details
+ ## Description
+ 
  */
 //---------------------------------------------------------------------
-CRWorldItem::~CRWorldItem()
-{
-	delete m_parent;
+class Action : public CRSignal {
+        
+    // Constructor and Destructor
+    public:
+        
+        //! Class constructor
+        Action();
+        
+        //! Class destructor
+        ~Action();
+        
+};
+
 }
-
-
+// end namespace
 //---------------------------------------------------------------------
-/*!
-Add a child to the list of this element's children
 
-\param[in]		i_child - pointer to the child being added
-*/
-//---------------------------------------------------------------------
-void CRWorldItem::addChild(CRWorldItem* i_child)
-{
-	m_children.push_back(i_child);
-	i_child->setParent(this);
-}
-
-
-//---------------------------------------------------------------------
-/*!
-Sets the parent to this element
-
-\param[in]		i_parent - pointer to the parent
-*/
-//---------------------------------------------------------------------
-void CRWorldItem::setParent(CRWorldItem* i_parent)
-{
-	m_parent = i_parent;
-}
-
-
-//=====================================================================
-// End namespace
-}
-
-
+#endif

@@ -57,7 +57,7 @@ int main(void) {
     // different convention for each method, in general it is good
     // to adopt the same convention throughout a problem for
     // consistency.
-    CREulerMode convention = CR_EULER_MODE_XYZ;
+    CREulerMode convention = CRBX_EULER_MODE_XYZ;
 
 	// ------------------------------------------
 	// Create the robot
@@ -65,16 +65,16 @@ int main(void) {
 	// create several rigid body links
     CRFrameEuler* F0 = new CRFrameEuler(0, 0, 0, 0, 0, 0,
                                         convention,
-                                        CR_EULER_FREE_ANG_G);
+                                        CRBX_EULER_FREE_ANG_G);
 	CRFrameEuler* F1 = new CRFrameEuler(1, 0, 0, 0, 0, 0,
                                         convention,
-                                        CR_EULER_FREE_ANG_G);
+                                        CRBX_EULER_FREE_ANG_G);
 	CRFrameEuler* F2 = new CRFrameEuler(2, 0, 0, 0, 0, 0,
                                         convention,
-                                        CR_EULER_FREE_ANG_G);
+                                        CRBX_EULER_FREE_ANG_G);
     CRFrameEuler* F3 = new CRFrameEuler(1, 0, 0, 0, 0, 0,
                                         convention,
-                                        CR_EULER_FREE_NONE);
+                                        CRBX_EULER_FREE_NONE);
 	CRRigidBody* Link0 = new CRRigidBody(F0);
 	CRRigidBody* Link1 = new CRRigidBody(F1);
 	CRRigidBody* Link2 = new CRRigidBody(F2);
@@ -92,7 +92,7 @@ int main(void) {
 	// create a tool frame and add to MyRobot
 	CRFrameEuler* Tool = new CRFrameEuler(0, 0, 0, 0, 0, 0,
                                           convention,
-                                          CR_EULER_FREE_NONE);
+                                          CRBX_EULER_FREE_NONE);
 	int toolIndex = MyRobot->addTool(attachLink, Tool);
     
     
@@ -136,7 +136,7 @@ int main(void) {
     CRResult result = ikSolver.solve(p, q0, qSolved);
     et = timer.getElapsedTime();
     
-    if ( result == CR_RESULT_SUCCESS ){
+    if ( result == CRBX_RESULT_SUCCESS ){
         printf("Non-singular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
@@ -169,7 +169,7 @@ int main(void) {
     result = ikSolver.solve(p, q0, qSolved);
     et = timer.getElapsedTime();
     
-    if ( result == CR_RESULT_SUCCESS ){
+    if ( result == CRBX_RESULT_SUCCESS ){
         printf("Non-singular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
@@ -204,7 +204,7 @@ int main(void) {
     result = ikSolver.solve(p, q0, qSolved);
     et = timer.getElapsedTime();
     
-    if ( result == CR_RESULT_SUCCESS ){
+    if ( result == CRBX_RESULT_SUCCESS ){
         printf("Non-singular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
@@ -237,7 +237,7 @@ int main(void) {
     result = ikSolver.solve(p, q0, qSolved);
     et = timer.getElapsedTime();
     
-    if ( result == CR_RESULT_SUCCESS ){
+    if ( result == CRBX_RESULT_SUCCESS ){
         printf("Non-singular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
@@ -280,7 +280,7 @@ int main(void) {
     result = ikSolver.solve(pRed, elems, q0, qSolved);
     et = timer.getElapsedTime();
     
-    if ( result == CR_RESULT_SUCCESS ){
+    if ( result == CRBX_RESULT_SUCCESS ){
         printf("Non-singular solution found in %8.6f s!\n",et);
         std::cout << qSolved << std::endl;
         
@@ -325,7 +325,7 @@ int main(void) {
         
         q = qSolved;
         
-        if ( result == CR_RESULT_SUCCESS ){
+        if ( result == CRBX_RESULT_SUCCESS ){
             printf("Solution found in %8.6f s!\n",et);
             
             // Now push the new joints through the robot to see if it worked

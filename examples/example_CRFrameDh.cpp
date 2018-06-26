@@ -54,7 +54,7 @@ int main(void){
 	CRFrameDh* F = new CRFrameDh();
     F->setParameters(1.0, M_PI/2.0, 1.0, 0.0);
     
-    std::cout << F->getPose(CR_EULER_MODE_XYZ) << std::endl;
+    std::cout << F->getPose(CRBX_EULER_MODE_XYZ) << std::endl;
 
 }
 

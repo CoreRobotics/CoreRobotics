@@ -124,9 +124,9 @@ namespace CoreRobotics {
 //! Enumerator for specifying how the manipulator is driven
 enum CRManipulatorType {
 	// TODO: add several modes of control for the driving values
-    CR_MANIPULATOR_MODE_POSITION,
-    // CR_MANIPULATOR_MODE_VELOCITY,
-    // CR_MANIPULATOR_MODE_TORQUE,
+    CRBX_MANIPULATOR_MODE_POSITION,
+    // CRBX_MANIPULATOR_MODE_VELOCITY,
+    // CRBX_MANIPULATOR_MODE_TORQUE,
 };
     
 //=====================================================================

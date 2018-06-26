@@ -127,7 +127,7 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
 {
     
     // indicator if solution is singular
-    CRResult result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
+    CRResult result = CRBX_RESULT_SUCCESS;         // break the algorithm if it is singular
     
     // set up variables
     Eigen::Matrix<double, 6, 1> error;  // error (setPoint - fk(q))
@@ -151,7 +151,7 @@ CRResult CRInverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoin
     // optimization routine
     while ((error.norm() >= this->m_tolerance) &&
            (iter < this->m_maxIter) &&
-           (result != CR_RESULT_SINGULAR)) {
+           (result != CRBX_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
         J = this->m_robot.jacobian(this->m_toolIndex,
@@ -209,7 +209,7 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
 {
     
     // indicator if solution is singular
-    CRResult result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
+    CRResult result = CRBX_RESULT_SUCCESS;         // break the algorithm if it is singular
     
     // set up variables
     Eigen::VectorXd error;          // error (setPoint - fk(q))
@@ -236,7 +236,7 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     // optimization routine
     while ((error.norm() >= this->m_tolerance) &&
            (iter < this->m_maxIter) &&
-           (result != CR_RESULT_SINGULAR)) {
+           (result != CRBX_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
         J = this->m_robot.jacobian(this->m_toolIndex,
@@ -300,7 +300,7 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
 {
     
     // indicator if solution is singular
-    CRResult result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
+    CRResult result = CRBX_RESULT_SUCCESS;         // break the algorithm if it is singular
     
     // set up variables
     Eigen::VectorXd error;          // error (setPoint - fk(q))
@@ -327,7 +327,7 @@ CRResult CRInverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     // optimization routine
     while ((error.norm() >= this->m_tolerance) &&
            (iter < this->m_maxIter) &&
-           (result != CR_RESULT_SINGULAR)) {
+           (result != CRBX_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
         J = this->m_robot.jacobian(this->m_toolIndex,

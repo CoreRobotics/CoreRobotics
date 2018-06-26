@@ -55,29 +55,29 @@ int setupRobot(CRManipulator& MyRobot){
     CRRigidBody* Link2 = new CRRigidBody();
     
     // Set info for Link 0 and add to MyRobot
-    F0->setFreeVariable(CR_EULER_FREE_ANG_G);
-    F0->setMode(CR_EULER_MODE_XYZ);
+    F0->setFreeVariable(CRBX_EULER_FREE_ANG_G);
+    F0->setMode(CRBX_EULER_MODE_XYZ);
     F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
     Link0->setFrame(F0);
     MyRobot.addLink(Link0);
     
     // Set info for Link 1 and add to MyRobot
-    F1->setFreeVariable(CR_EULER_FREE_ANG_G);
-    F1->setMode(CR_EULER_MODE_XYZ);
+    F1->setFreeVariable(CRBX_EULER_FREE_ANG_G);
+    F1->setMode(CRBX_EULER_MODE_XYZ);
     F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
     Link1->setFrame(F1);
     MyRobot.addLink(Link1);
     
     // Set info for Link 2 and add to MyRobot
-    F2->setFreeVariable(CR_EULER_FREE_NONE);
-    F2->setMode(CR_EULER_MODE_XYZ);
+    F2->setFreeVariable(CRBX_EULER_FREE_NONE);
+    F2->setMode(CRBX_EULER_MODE_XYZ);
     F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
     Link2->setFrame(F2);
     MyRobot.addLink(Link2);
     
     // create a tool frame and add to MyRobot
     CRFrameEuler* Tool = new CRFrameEuler();
-    Tool->setMode(CR_EULER_MODE_XYZ);
+    Tool->setMode(CRBX_EULER_MODE_XYZ);
     Tool->setPositionAndOrientation(0, 0, 0, 0, 0, 0);
     int toolIndex = MyRobot.addTool(2, Tool);
     return toolIndex;
@@ -98,24 +98,24 @@ TEST(CRManipulator, Setup){
     CRRigidBody* Link2 = new CRRigidBody();
     
     // Set info for Link 0 and add to MyRobot
-    F0->setFreeVariable(CR_EULER_FREE_ANG_G);
-    F0->setMode(CR_EULER_MODE_XYZ);
+    F0->setFreeVariable(CRBX_EULER_FREE_ANG_G);
+    F0->setMode(CRBX_EULER_MODE_XYZ);
     F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
     Link0->setFrame(F0);
     int i = MyRobot.addLink(Link0);
     EXPECT_EQ(0, i);
     
     // Set info for Link 1 and add to MyRobot
-    F1->setFreeVariable(CR_EULER_FREE_ANG_G);
-    F1->setMode(CR_EULER_MODE_XYZ);
+    F1->setFreeVariable(CRBX_EULER_FREE_ANG_G);
+    F1->setMode(CRBX_EULER_MODE_XYZ);
     F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
     Link1->setFrame(F1);
     i = MyRobot.addLink(Link1);
     EXPECT_EQ(1, i);
     
     // Set info for Link 2 and add to MyRobot
-    F2->setFreeVariable(CR_EULER_FREE_NONE);
-    F2->setMode(CR_EULER_MODE_XYZ);
+    F2->setFreeVariable(CRBX_EULER_FREE_NONE);
+    F2->setMode(CRBX_EULER_MODE_XYZ);
     F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
     Link2->setFrame(F2);
     i = MyRobot.addLink(Link2);
@@ -123,7 +123,7 @@ TEST(CRManipulator, Setup){
     
     // create a tool frame and add to MyRobot
     CRFrameEuler* Tool = new CRFrameEuler();
-    Tool->setMode(CR_EULER_MODE_XYZ);
+    Tool->setMode(CRBX_EULER_MODE_XYZ);
     Tool->setPositionAndOrientation(0, 0, 0, 0, 0, 0);
     int toolIndex = MyRobot.addTool(2, Tool);
     EXPECT_EQ(0, toolIndex);
@@ -189,7 +189,7 @@ TEST(CRManipulator, Jacobian){
     int toolIndex = setupRobot(MyRobot);
     
     Eigen::MatrixXd J;
-    J = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ);
+    J = MyRobot.jacobian(toolIndex, CRBX_EULER_MODE_XYZ);
     EXPECT_EQ(6, J.rows());
     EXPECT_EQ(2, J.cols());
     EXPECT_DOUBLE_EQ(0, J(0, 0));
@@ -207,7 +207,7 @@ TEST(CRManipulator, Jacobian){
     
     Eigen::Matrix<bool, 6, 1> pe;
     pe << true, true, false, false, false, true;
-    J = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ, pe);
+    J = MyRobot.jacobian(toolIndex, CRBX_EULER_MODE_XYZ, pe);
     EXPECT_EQ(3, J.rows());
     EXPECT_EQ(2, J.cols());
     EXPECT_DOUBLE_EQ(0, J(0, 0));
@@ -228,7 +228,7 @@ TEST(CRManipulator, Hessian){
     
     // NOTE: the numerical hessian is noisy!
     Eigen::MatrixXd H;
-    H = MyRobot.hessian(toolIndex, CR_EULER_MODE_XYZ);
+    H = MyRobot.hessian(toolIndex, CRBX_EULER_MODE_XYZ);
     EXPECT_EQ(6, H.rows());
     EXPECT_EQ(2, H.cols());
     EXPECT_NEAR(-3, H(0, 0), 1e-3);
@@ -246,7 +246,7 @@ TEST(CRManipulator, Hessian){
     
     Eigen::Matrix<bool, 6, 1> pe;
     pe << true, true, false, false, false, true;
-    H = MyRobot.hessian(toolIndex, CR_EULER_MODE_XYZ, pe);
+    H = MyRobot.hessian(toolIndex, CRBX_EULER_MODE_XYZ, pe);
     EXPECT_EQ(3, H.rows());
     EXPECT_EQ(2, H.cols());
     EXPECT_NEAR(-3, H(0, 0), 1e-3);
@@ -284,7 +284,7 @@ TEST(CRManipulator, GetFrames){
     EXPECT_DOUBLE_EQ(1, T(2, 2));
     EXPECT_DOUBLE_EQ(0.5, T(2, 3));
     
-    Eigen::VectorXd p = MyRobot.getToolPose(toolIndex, CR_EULER_MODE_XYZ);
+    Eigen::VectorXd p = MyRobot.getToolPose(toolIndex, CRBX_EULER_MODE_XYZ);
     EXPECT_EQ(6, p.size());
     EXPECT_DOUBLE_EQ(3, p(0));
     EXPECT_DOUBLE_EQ(0, p(1));

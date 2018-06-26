@@ -37,40 +37,58 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
+// Begin header definition
 
-#include "CRSensor.hpp"
+#ifndef CRBX_POLICY_HPP_
+#define CRBX_POLICY_HPP_
 
-//=====================================================================
-// CoreRobotics namespace
+#include "Signal.hpp"
+
+//---------------------------------------------------------------------
+// Begin namespace
 namespace CoreRobotics {
     
-    
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the sensor.\n
+ \class Policy
+ \ingroup core
+ 
+ \brief
+ 
+ \details
+ 
  */
 //---------------------------------------------------------------------
-/*
-CRSensor::CRSensor(){
+class Policy {
     
+    // Constructor and Destructor
+    public:
+    
+        //! Class constructor
+        Policy();
+    
+        //! Class destructor
+        ~Policy();
+    
+    
+    // Return the action
+    public:
+    
+        //! get the current action
+        virtual Action get() = 0;
+    
+    
+    // Private members
+    private:
+    
+        //! Action
+        Action m_action;
+    
+};
+
 }
-*/
-
-
+// end namespace
 //---------------------------------------------------------------------
-/*!
- The destructor deletes the sensor.\n
- */
-//---------------------------------------------------------------------
-    /*
-CRSensor::~CRSensor(){
-}
-     */
 
-
-//=====================================================================
-// End namespace
-}
-
-
+#endif

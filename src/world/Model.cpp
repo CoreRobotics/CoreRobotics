@@ -39,7 +39,7 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#include "CRPolicy.hpp"
+#include "Model.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -52,7 +52,7 @@ namespace CoreRobotics {
  */
 //---------------------------------------------------------------------
 /*
-CRPolicy::CRPolicy(){
+Signal::Model(){
     
 }
 */
@@ -64,7 +64,7 @@ CRPolicy::CRPolicy(){
  */
 //---------------------------------------------------------------------
     /*
-CRPolicy::~CRPolicy(){
+Signal::~Model(){
 }
      */
 

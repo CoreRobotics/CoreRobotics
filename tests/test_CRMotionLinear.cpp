@@ -59,7 +59,7 @@ TEST(CRMotionLinear, Continuous){
     Eigen::Matrix<double,1,1> B;    // input matrix
     A << -1;
     B << 1;
-    CRMotionLinear model = CRMotionLinear(A, B, CR_MOTION_CONTINUOUS, x, dt);
+    CRMotionLinear model = CRMotionLinear(A, B, CRBX_MOTION_CONTINUOUS, x, dt);
     double t = 0; // Initialize a time t
     while(t < 5) { // simulate for 5 seconds
         x = model.motion(u); // simulate the motion
@@ -85,7 +85,7 @@ TEST(CRMotionLinear, Discrete){
     Eigen::Matrix<double,1,1> B;    // input matrix
     A << exp(-1 * dt);                  // exact discretization
     B << -1 * (exp(-1 * dt) - 1) * 1;   // exact discretization
-    CRMotionLinear model = CRMotionLinear(A, B, CR_MOTION_DISCRETE, x, dt);
+    CRMotionLinear model = CRMotionLinear(A, B, CRBX_MOTION_DISCRETE, x, dt);
     double t = 0; // Initialize a time t
     while(t < 5) { // simulate for 5 seconds
         x = model.motion(u); // simulate the motion

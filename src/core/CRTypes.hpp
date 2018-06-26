@@ -58,27 +58,27 @@ namespace CoreRobotics {
     //! Enumerator for signal types
     /*
     enum CRSignalType {
-        CR_SIGNAL_FORCE,
-        CR_SIGNAL_POSITION,
-        CR_SIGNAL_VELOCITY,
-        CR_SIGNAL_ACCELERATION,
-        CR_SIGNAL_GENERIC
+        CRBX_SIGNAL_FORCE,
+        CRBX_SIGNAL_POSITION,
+        CRBX_SIGNAL_VELOCITY,
+        CRBX_SIGNAL_ACCELERATION,
+        CRBX_SIGNAL_GENERIC
     };
      */
 
     //! Result enumerator for consistent operation result flags.
     enum CRResult {
-        CR_RESULT_SUCCESS,
-        CR_RESULT_SINGULAR,
-        CR_RESULT_UNWRITABLE,
-        CR_RESULT_BAD_IC,
+        CRBX_RESULT_SUCCESS,
+        CRBX_RESULT_SINGULAR,
+        CRBX_RESULT_UNWRITABLE,
+        CRBX_RESULT_BAD_IC,
     };
     
     //! Thread run state
     enum CRRunState {
-        CR_RUN_STATE_RUNNING,
-        CR_RUN_STATE_STOPPED,
-        CR_RUN_STATE_PAUSED,
+        CRBX_RUN_STATE_RUNNING,
+        CRBX_RUN_STATE_STOPPED,
+        CRBX_RUN_STATE_PAUSED,
     };
     
 //=====================================================================

@@ -37,40 +37,51 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
+// Begin header definition
 
-#include "CRSignal.hpp"
+#ifndef CRBX_ACTUATOR_HPP_
+#define CRBX_ACTUATOR_HPP_
 
-//=====================================================================
-// CoreRobotics namespace
+#include "Signal.hpp"
+
+//---------------------------------------------------------------------
+// Begin namespace
 namespace CoreRobotics {
     
-    
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the signal.\n
+ \class Actuator
+ \ingroup core
+ 
+ \brief
+ 
+ \details
+ 
  */
 //---------------------------------------------------------------------
-/*
-CRSignal::CRSignal(){
+class Actuator {
     
+    // Constructor and Destructor
+    public:
+    
+        //! Class constructor
+		Actuator();
+    
+        //! Class destructor
+        ~Actuator();
+    
+    
+    // Private members
+    private:
+    
+        //! State
+        State m_state;
+    
+};
+
 }
-*/
-
-
+// end namespace
 //---------------------------------------------------------------------
-/*!
- The destructor deletes the signal.\n
- */
-//---------------------------------------------------------------------
-    /*
-CRSignal::~CRSignal(){
-}
-     */
 
-
-//=====================================================================
-// End namespace
-}
-
-
+#endif

@@ -64,7 +64,7 @@ CRSharedMemory::CRSharedMemory(const char* i_memoryName,
     m_role = i_role;
     
     // Create a new segment with given name and size
-    if (m_role == CR_MANAGER_SERVER){
+    if (m_role == CRBX_MANAGER_SERVER){
         
         // Remove shared memory on construction
         boost::interprocess::shared_memory_object::remove(m_name);
@@ -96,7 +96,7 @@ CRSharedMemory::~CRSharedMemory() {
     boost::interprocess::shared_memory_object::remove(m_name);
     
     // Remove the allocator
-    if (m_role == CR_MANAGER_SERVER){
+    if (m_role == CRBX_MANAGER_SERVER){
         delete m_alloc_inst;
     }
     

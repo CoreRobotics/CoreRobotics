@@ -37,51 +37,37 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CRModel_hpp
-#define CRModel_hpp
+#include "World.hpp"
 
-#include "CRSignal.hpp"
-
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
+    
     
 //---------------------------------------------------------------------
 /*!
- \class CRModel
- \ingroup core
- 
- \brief
- 
- \details
- 
+ The constructor sets up the world.\n
  */
 //---------------------------------------------------------------------
-class CRModel {
+World::World(){
     
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-        CRModel();
-    
-        //! Class destructor
-        ~CRModel();
-    
-    
-    // Private members
-    private:
-    
-        //! State
-        CRState m_state;
-    
-};
+}
+
+
+//---------------------------------------------------------------------
+/*!
+ The destructor deletes the world.\n
+ */
+//---------------------------------------------------------------------
+World::~World(){
 
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+
+//=====================================================================
+// End namespace
+}
+
+

@@ -233,7 +233,7 @@ void CRGmm::regression(Eigen::VectorXd i_x,
 		// Eigen::MatrixXd SigmaXXInv;
 		// CRMatrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv);
 		/*
-		if (CRMatrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv) == CR_RESULT_SINGULAR) {
+		if (CRMatrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv) == CRBX_RESULT_SINGULAR) {
 			printf("\n\nSingular SigmaXX inverse!!!!\n\n");
 		}
 		*/
