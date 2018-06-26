@@ -49,9 +49,9 @@ using namespace CoreRobotics;
 
 
 //---------------------------------------------------------------------
-// Define a simple thread loop element.
+// Define a simple loop element.
 //---------------------------------------------------------------------
-class simpleThreadElement : public CRThreadLoopElement
+class simpleThreadElement : public CRLoopElement
 {
     
 // Constructor and destructor
@@ -103,13 +103,13 @@ public:
  Test the reset function (called on construction)
  */
 //---------------------------------------------------------------------
-TEST(CRThreadLoop, reset){
+TEST(CRLoop, reset){
     
     // Create the thread element smart pointer
     simpleThreadElement* myElemRaw = new simpleThreadElement();
     
     // Create a thread and attach the thread element
-    CRThreadLoopPtr myThread(new CRThreadLoop(myElemRaw));
+    CRLoopPtr myThread(new CRLoop(myElemRaw));
     
     // Query the internal state to make sure the reset call happened
     EXPECT_DOUBLE_EQ(myElemRaw->x, myElemRaw->x0);
@@ -122,13 +122,13 @@ TEST(CRThreadLoop, reset){
  Test the thread execution functionality
  */
 //---------------------------------------------------------------------
-TEST(CRThreadLoop, execution){
+TEST(CRLoop, execution){
     
     // Create the thread element smart pointer
     simpleThreadElement* myElemRaw = new simpleThreadElement();
     
     // Create a thread and attach the thread element
-    CRThreadLoopPtr myThread(new CRThreadLoop(myElemRaw));
+    CRLoopPtr myThread(new CRLoop(myElemRaw));
     
     // Set the update rate to be super slow - 20 Hz
     double dt = 0.05;
