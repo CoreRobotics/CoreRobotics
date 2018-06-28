@@ -1,7 +1,7 @@
-function v = CR_EULER_FREE_POS_Y()
+function v = CR_RESULT_NOT_FOUND()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = CoreRoboticsMEX(0, 22);
+    vInitialized = CoreRoboticsMEX(0, 4);
   end
   v = vInitialized;
 end

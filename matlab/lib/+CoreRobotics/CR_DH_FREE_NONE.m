@@ -1,7 +1,7 @@
 function v = CR_DH_FREE_NONE()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = CoreRoboticsMEX(0, 26);
+    vInitialized = CoreRoboticsMEX(0, 27);
   end
   v = vInitialized;
 end

@@ -21487,6 +21487,7 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "CR_RESULT_SINGULAR",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_SINGULAR)));
   SWIG_Python_SetConstant(d, "CR_RESULT_UNWRITABLE",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_UNWRITABLE)));
   SWIG_Python_SetConstant(d, "CR_RESULT_BAD_IC",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_BAD_IC)));
+  SWIG_Python_SetConstant(d, "CR_RESULT_NOT_FOUND",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RESULT_NOT_FOUND)));
   SWIG_Python_SetConstant(d, "CR_RUN_STATE_RUNNING",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RUN_STATE_RUNNING)));
   SWIG_Python_SetConstant(d, "CR_RUN_STATE_STOPPED",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RUN_STATE_STOPPED)));
   SWIG_Python_SetConstant(d, "CR_RUN_STATE_PAUSED",SWIG_From_int(static_cast< int >(CoreRobotics::CR_RUN_STATE_PAUSED)));
