@@ -51,7 +51,7 @@ using namespace CoreRobotics;
 //---------------------------------------------------------------------
 // Define a simple loop element.
 //---------------------------------------------------------------------
-class simpleThreadRoot : public CRLoopRoot
+class simpleThreadRoot : public CRLoopElement
 {
     
 // Constructor and destructor
