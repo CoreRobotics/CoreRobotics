@@ -72,6 +72,7 @@ namespace CoreRobotics {
         CR_RESULT_SINGULAR,
         CR_RESULT_UNWRITABLE,
         CR_RESULT_BAD_IC,
+        CR_RESULT_NOT_FOUND,
     };
     
     //! Thread run state

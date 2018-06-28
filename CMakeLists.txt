@@ -77,6 +77,7 @@ set(EIGEN_VERSION 3.3.3)
 find_package (Eigen3 ${EIGEN_VERSION})
 find_package (Boost 1.48)
 find_package (GTest)
+find_package (OpenSceneGraph)
 
 if(NOT Boost_INCLUDE_DIR)
     message(FATAL_ERROR "Boost_INCLUDE_DIR not found - please define the path to boost")
@@ -86,6 +87,10 @@ if(NOT EIGEN3_INCLUDE_DIR)
     message(FATAL_ERROR "EIGEN3_INCLUDE_DIR not found - please define the path to eigen")
 else()
     message(STATUS "Eigen found at ${EIGEN3_INCLUDE_DIR}")
+endif()
+
+if(OpenSceneGraph_FOUND)
+    add_definitions(-DUSE_OSG) #preprocessor directive to use OSG
 endif()
 
 # Include headers
@@ -99,6 +104,7 @@ file(GLOB CR_INCLUDE_DIRS
     ${CMAKE_SOURCE_DIR}/src/world
     ${EIGEN3_INCLUDE_DIR}
     ${Boost_INCLUDE_DIR}
+    ${OPENSCENEGRAPH_INCLUDE_DIRS}
 )
 include_directories( ${CR_INCLUDE_DIRS} )
 
@@ -220,7 +226,7 @@ add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${H
             RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/examples/bin
         )
 		add_dependencies(${EXAMPLE_TARGET} ${LIB_TARGET_NAME})
-		target_link_libraries(${EXAMPLE_TARGET} ${COREROBOTICS_LIB} ${LINK_FLAGS})
+		target_link_libraries(${EXAMPLE_TARGET} ${COREROBOTICS_LIB} ${OPENSCENEGRAPH_LIBRARIES} ${LINK_FLAGS})
 	endforeach()
 
 endif()

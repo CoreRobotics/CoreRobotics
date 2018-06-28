@@ -48,23 +48,164 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the world item.\n
+ Constructor to the world item.\n
  */
 //---------------------------------------------------------------------
-WorldItem::WorldItem()
-{
+WorldItem::WorldItem(){
     
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Destructor to the world item.\n
+ */
+//---------------------------------------------------------------------
+WorldItem::~WorldItem(){
+    delete m_parent;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Create a new world item.\n
+ */
+//---------------------------------------------------------------------
+    /*
+WorldItemPtr WorldItem::create(){
+    return std::make_shared<WorldItem>();
+}
+     */
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This function adds an item to the list of children
+ 
+ \param[in]     i_item - the child to add
+ */
+//---------------------------------------------------------------------
+void WorldItem::addChild(WorldItem* i_item)
+{
+    i_item->setParent(this);
+    m_children.push_back(i_item);
 }
 
 
 //---------------------------------------------------------------------
 /*!
- The destructor deletes the world item.\n
+ This function removes an item from the list of children
+ 
+ \param[in]     i_item - the child to remove
+ \return        result of the remove operation
+                (CR_RESULT_SUCCESS or CR_RESULT_NOT_FOUND)
  */
 //---------------------------------------------------------------------
-WorldItem::~WorldItem()
+CRResult WorldItem::removeChild(WorldItem* i_item)
 {
-	// delete m_parent;
+    for (int k = 0; k < m_children.size(); k++){
+        if (m_children.at(k) == i_item)
+        {
+            m_children.erase(m_children.begin()+k);
+            i_item->setParent(NULL);
+            return CR_RESULT_SUCCESS;
+        }
+    }
+    return CR_RESULT_NOT_FOUND;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This function sets the parent of the item.
+ 
+ \param[in]     i_item - the parent item
+ */
+//---------------------------------------------------------------------
+void WorldItem::setParent(WorldItem* i_item)
+{
+    m_parent = i_item;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This function return the parent of the item.
+ 
+ \return        the parent item
+ */
+//---------------------------------------------------------------------
+WorldItem* WorldItem::getParent()
+{
+    return m_parent;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This function sets the local frame transformation (relative to
+ the parent frame).
+ 
+ \param[in]     i_frame - the local frame transformation
+ */
+//---------------------------------------------------------------------
+void WorldItem::setLocalTransform(const CRFrame& i_frame)
+{
+    m_frame = i_frame;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This function gets the local frame transformation (relative to
+ the parent frame).
+ 
+ \return        the local frame transformation
+ */
+//---------------------------------------------------------------------
+CRFrame WorldItem::getLocalTransform()
+{
+    return m_frame;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This function gets the global frame transformation (relative to
+ the world frame).
+ 
+ \return        the local frame transformation
+ */
+//---------------------------------------------------------------------
+CRFrame WorldItem::getGlobalTransform()
+{
+    Eigen::Matrix4d T = m_frame.getTransformToParent();
+    WorldItem* parent = m_parent;
+    while (parent != NULL){
+        T = parent->getLocalTransform().getTransformToParent() * T;
+        parent = parent->getParent();
+    }
+    CRFrame f;
+    f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
+    return f;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This function gets a relative frame transformation (relative to
+ the frame of the intput item).
+ 
+ \return        the relative frame transformation
+ */
+//---------------------------------------------------------------------
+CRFrame WorldItem::getRelativeTransform(WorldItem* i_item)
+{
+    Eigen::Matrix4d T0 = this->getGlobalTransform().getTransformToParent();
+    Eigen::Matrix4d T = i_item->getGlobalTransform().getTransformToChild() * T0;
+    CRFrame f;
+    f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
+    return f;
 }
 
 

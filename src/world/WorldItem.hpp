@@ -44,10 +44,16 @@ POSSIBILITY OF SUCH DAMAGE.
 #define CR_WORLDITEM_HPP_
 
 #include <vector>
+#include "CRFrame.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace CoreRobotics {
+    
+//! WorldItem shared pointer
+// class WorldItem;
+// typedef std::shared_ptr<WorldItem> WorldItemPtr;
+    
     
 //---------------------------------------------------------------------
 /*!
@@ -68,10 +74,65 @@ class WorldItem {
     public:
     
         //! Class constructor
-		WorldItem();
+        WorldItem();
     
         //! Class destructor
         ~WorldItem();
+    
+        //! Create a pointer
+        // static WorldItemPtr create();
+    
+    
+    // Scene graph controls
+    public:
+    
+        //! add a child to the list of children
+        void addChild(WorldItem* i_item);
+    
+        //! remove a child from the list of children
+        CRResult removeChild(WorldItem* i_item);
+    
+        //! set the parent of the item
+        void setParent(WorldItem* i_item);
+    
+        //! get the parent of the child
+        WorldItem* getParent();
+    
+    
+    // Frame transformation controls
+    public:
+    
+        //! set the local frame transformation
+        void setLocalTransform(const CRFrame& i_frame);
+    
+        //! return the local frame transformation
+        CRFrame getLocalTransform();
+    
+        //! return the global frame transformation
+        CRFrame getGlobalTransform();
+    
+        //! return the relative frame transformation
+        CRFrame getRelativeTransform(WorldItem* i_item);
+    
+    
+    // protected member data
+    protected:
+    
+        //! Transformation
+        CRFrame m_frame;
+    
+    
+    // private member data
+    private:
+    
+        //! parent item
+        WorldItem* m_parent = NULL;
+    
+        //! list of children
+        std::vector<WorldItem*> m_children;
+    
+    
+    
 };
 
 }

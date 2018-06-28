@@ -50,6 +50,11 @@ POSSIBILITY OF SUCH DAMAGE.
 // Begin namespace
 namespace CoreRobotics {
     
+//! World shared pointer
+class World;
+typedef std::shared_ptr<World> WorldPtr;
+    
+    
 //---------------------------------------------------------------------
 /*!
  \class World
@@ -71,30 +76,36 @@ class World : public CRLoopRoot {
     
         //! Class destructor
         ~World();
+    
+        //! Create a pointer
+        static WorldPtr create();
 
 
 	// ThreadLoopElement behaviors
 	public:
 
 		//! step()
-		virtual void step();
+        virtual void step() {};
 
 		//! reset()
-		virtual void reset();
+        virtual void reset() {};
 
 
 	// Scene graph behaviors
 	public:
 
 		//! add a child to the list of children
-		void addChild(WorldItem* i_child) { m_children.push_back(i_child); }
+        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
+    
+        //! remove a child from the list of children
+        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
 
     
     // Private members
     private:
-
-		//! list of children
-		std::vector<WorldItem*> m_children;
+    
+        //! add a world item
+        WorldItem* m_rootItem;
     
 };
 

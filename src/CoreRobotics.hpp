@@ -366,6 +366,8 @@ project includes all the CoreRobotics modules.
 #include "CRClock.hpp"
 #include "CRMutex.hpp"
 #include "CRThread.hpp"
+#include "Signal.hpp"
+#include "Slot.hpp"
 #include "CRLoop.hpp"
 #include "CRLoopRoot.hpp"
 // #include "CRLoopNode.hpp"
@@ -377,11 +379,10 @@ project includes all the CoreRobotics modules.
 //! \defgroup world World
 //! \brief TEMPORARY DURING MAJOR REVISION TO 2.0
 //---------------------------------------------------------------------------
-#include "Signal.hpp"
 #include "World.hpp"
 #include "WorldItem.hpp"
-#include "Model.hpp"
-#include "Sensor.hpp"
+// #include "Model.hpp"
+// #include "Sensor.hpp"
 // #include "CRPolicy.hpp"
 
 

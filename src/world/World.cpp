@@ -52,7 +52,8 @@ namespace CoreRobotics {
  */
 //---------------------------------------------------------------------
 World::World(){
-    
+    // m_rootItem = std::make_shared<WorldItem>();
+    m_rootItem = new WorldItem();
 }
 
 
@@ -64,7 +65,19 @@ World::World(){
 World::~World(){
 
 }
-
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Create a whole new world.\n
+ */
+//---------------------------------------------------------------------
+    /*
+WorldPtr World::create(){
+    return std::make_shared<World>();
+}
+     */
+    
 
 }
 // end namespace

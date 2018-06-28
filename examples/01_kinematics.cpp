@@ -37,40 +37,50 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
+//=====================================================================
 
-#include "Model.hpp"
+#include <iostream>
+#include "CoreRobotics.hpp"
 
-//---------------------------------------------------------------------
-// Begin namespace
-namespace CoreRobotics {
+#include <osg/ref_ptr>
+#include <osgViewer/GraphicsWindow>
+#include <osgViewer/Viewer>
+#include <osg/Camera>
+#include <osg/ShapeDrawable>
+#include <osg/StateSet>
+#include <osg/Material>
+#include <osgGA/EventQueue>
+#include <osgGA/TrackballManipulator>
+
+
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
+
+
+// main function
+int main( int argc, char **argv )
+{
+    // examples:
+    // https://github.com/openscenegraph/OpenSceneGraph/blob/master/examples/osgpoints/osgpoints.cpp
+    // https://gist.github.com/vicrucann/874ec3c0a7ba4a814bd84756447bc798
     
     
-//---------------------------------------------------------------------
-/*!
- The constructor sets up the signal.\n
- */
-//---------------------------------------------------------------------
-/*
-Signal::Model(){
+    // Set up the OpenSceneGraph
+    // osg::Node* model = osgDB::readNodeFile(argv[1]);
+    // osg::ref_ptr<osgViewer::Viewer> viewer;
+    // viewer->setCameraManipulator(new osgGA::TrackballManipulator());
+    // osg::ref_ptr<osgViewer::GraphicsWindow> graphicsWindow;
     
-}
-*/
-
-
-//---------------------------------------------------------------------
-/*!
- The destructor deletes the signal.\n
- */
-//---------------------------------------------------------------------
     /*
-Signal::~Model(){
+    osg::Geode* geode = dynamic_cast<osg::Geode*>(viewer->getSceneData());
+    osg::StateSet* stateSet = geode->getOrCreateStateSet();
+    osg::Material* material = new osg::Material;
+    material->setColorMode( osg::Material::AMBIENT_AND_DIFFUSE );
+    stateSet->setAttributeAndModes( material, osg::StateAttribute::ON );
+    stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
+    */
+     
+    // return viewer->run();
+    return 0;
+    
 }
-     */
-
-
-}
-// end namespace
-//---------------------------------------------------------------------
-
-
