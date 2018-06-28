@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRLoopRoot_hpp
-#define CRLoopRoot_hpp
+#ifndef CRLoopElement_hpp
+#define CRLoopElement_hpp
 
 #include <vector>
 #include "CRLoop.hpp"
@@ -52,32 +52,32 @@ namespace CoreRobotics {
     
 //---------------------------------------------------------------------
 /*!
- \class CRLoopRoot
+ \class CRLoopElement
  \ingroup core
  
  \brief This abstract class defines the methods needed to derive a
- root node call for a CRLoop.
+ root call element for a CRLoop.
  
  \details
  ## Description
  This abstract class defines the methods needed to derive a
- call for the root element of a CRLoop.  The primary methods to be
- implemented are:
+ call for the root element of a CRLoopElement.  The primary methods
+ to be implemented are:
  
- - CRLoopRoot::step() is called on each iteration of the Loop
+ - CRLoopElement::step() is called on each iteration of the Loop
  while the thread is running.
  */
 //---------------------------------------------------------------------
-class CRLoopRoot {
+class CRLoopElement {
     
     // Constructor and destructor
     public:
     
         //! constructor
-        CRLoopRoot() {}
+		CRLoopElement() {}
     
         //! destructor
-        ~CRLoopRoot() {
+        ~CRLoopElement() {
             delete m_caller;
         }
     

@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef CR_WORLD_HPP_
 #define CR_WORLD_HPP_
 
-#include "CRLoopRoot.hpp"
+#include "CRLoopElement.hpp"
 #include "WorldItem.hpp"
 
 //---------------------------------------------------------------------
@@ -66,7 +66,7 @@ typedef std::shared_ptr<World> WorldPtr;
  
  */
 //---------------------------------------------------------------------
-class World : public CRLoopRoot {
+class World : public CRLoopElement {
     
     // Constructor and Destructor
     public:

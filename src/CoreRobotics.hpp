@@ -369,7 +369,7 @@ project includes all the CoreRobotics modules.
 #include "Signal.hpp"
 #include "Slot.hpp"
 #include "CRLoop.hpp"
-#include "CRLoopRoot.hpp"
+#include "CRLoopElement.hpp"
 // #include "CRLoopNode.hpp"
 #include "CRSharedMemory.hpp"
 // #include "CRItem.hpp"

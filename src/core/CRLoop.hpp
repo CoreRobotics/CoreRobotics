@@ -71,15 +71,15 @@ namespace CoreRobotics {
  - CRLoop::stop stops the thread execution.
  */
 //---------------------------------------------------------------------
-class CRLoopRoot;
+class CRLoopElement;
 class CRLoop {
     
     // Constructor and Destructor
     public:
     
         //! Class constructor
-        CRLoop(CRLoopRoot* i_member);
-		CRLoop(CRLoopRoot* i_member, double i_updateRate);
+        CRLoop(CRLoopElement* i_member);
+		CRLoop(CRLoopElement* i_member, double i_updateRate);
     
         //! Class destructor
         virtual ~CRLoop();
@@ -118,7 +118,7 @@ class CRLoop {
     private:
     
         //! thread member
-        CRLoopRoot* m_element;
+        CRLoopElement* m_element;
     
         //! simulation state
         CRRunState m_runState = CR_RUN_STATE_STOPPED;
