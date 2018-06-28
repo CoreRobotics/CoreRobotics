@@ -90,7 +90,7 @@ else()
 endif()
 
 if(OpenSceneGraph_FOUND)
-    add_definitions(-DUSE_OSG) #preprocessor directive to use OSG
+    add_definitions(-DUSE_OSG) # macro to use OSG
 endif()
 
 # Include headers

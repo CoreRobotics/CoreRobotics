@@ -40,43 +40,84 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CRProperties_hpp
-#define CRProperties_hpp
+#ifndef CR_MODEL_HPP_
+#define CR_MODEL_HPP_
+
+#include "Signal.hpp"
+#include "CRProperties.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace CoreRobotics {
+
+
+//---------------------------------------------------------------------
+/*!
+\class ModelProperties
+\ingroup core
+
+\brief
+
+\details
+
+*/
+//---------------------------------------------------------------------
+/*
+class ModelProperties : public CRProperties {
+
+
+};
+*/
+
     
 //---------------------------------------------------------------------
 /*!
- \class CRProperties
+ \class Model
  \ingroup core
  
- \brief This class defines a property set.
+ \brief
+ 
+ \details
+ 
  */
 //---------------------------------------------------------------------
-class CRProperties {
+class Model {
     
-    // Constructor and destructor
+    // Constructor and Destructor
     public:
     
-        //! constructor
-		CRProperties() {}
+        //! Class constructor
+        Model();
     
-        //! destructor
-        ~CRProperties() {}
+        //! Class destructor
+        virtual ~Model();
+
+
+	// LoopNode interface
+	public:
+
+		//! Step the node
+		virtual void step() = 0;
+
+
+	// Signal interface methods
+	public:
+
+		//! Set the action(s)
+		virtual void set(Action i_action) {};
+
+		//! Return the state(s)
+		virtual State get() {};
     
     
-    // Protected members
-    protected:
+    // Private members
+    private:
+
+		//! properties
+		// ModelProperties m_properties;
     
-        //! name
-        std::string m_name;
-    
-        //! icon
-        std::string m_icon;
 };
-    
+
 }
 // end namespace
 //---------------------------------------------------------------------

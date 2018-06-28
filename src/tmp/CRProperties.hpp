@@ -37,52 +37,46 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
+// Begin header definition
 
-#include <iostream>
-#include "CoreRobotics.hpp"
+#ifndef CRProperties_hpp
+#define CRProperties_hpp
 
-#ifdef USE_OSG
-#include <osg/ref_ptr>
-#include <osgViewer/GraphicsWindow>
-#include <osgViewer/Viewer>
-#include <osg/Camera>
-#include <osg/ShapeDrawable>
-#include <osg/StateSet>
-#include <osg/Material>
-#include <osgGA/EventQueue>
-#include <osgGA/TrackballManipulator>
-#endif
+#include <string>
 
-
-// Use the CoreRobotics namespace
-using namespace CoreRobotics;
-
-
-// main function
-int main( int argc, char **argv )
-{
-    // examples:
-    // https://github.com/openscenegraph/OpenSceneGraph/blob/master/examples/osgpoints/osgpoints.cpp
-    // https://gist.github.com/vicrucann/874ec3c0a7ba4a814bd84756447bc798
+//---------------------------------------------------------------------
+// Begin namespace
+namespace CoreRobotics {
     
+//---------------------------------------------------------------------
+/*!
+ \class CRProperties
+ \ingroup core
+ 
+ \brief This class defines a property set.
+ */
+//---------------------------------------------------------------------
+class CRProperties {
     
-    // Set up the OpenSceneGraph
-    // osg::Node* model = osgDB::readNodeFile(argv[1]);
-    // osg::ref_ptr<osgViewer::Viewer> viewer;
-    // viewer->setCameraManipulator(new osgGA::TrackballManipulator());
-    // osg::ref_ptr<osgViewer::GraphicsWindow> graphicsWindow;
+    // Constructor and destructor
+    public:
     
-    /*
-    osg::Geode* geode = dynamic_cast<osg::Geode*>(viewer->getSceneData());
-    osg::StateSet* stateSet = geode->getOrCreateStateSet();
-    osg::Material* material = new osg::Material;
-    material->setColorMode( osg::Material::AMBIENT_AND_DIFFUSE );
-    stateSet->setAttributeAndModes( material, osg::StateAttribute::ON );
-    stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
-    */
-     
-    // return viewer->run();
-    return 0;
+        //! constructor
+		CRProperties() {}
+    
+        //! destructor
+        ~CRProperties() {}
+    
+    // Protected members
+    protected:
+    
+        std::string m_name;		// name 
+        std::string m_icon;		// icon
+};
     
 }
+// end namespace
+//---------------------------------------------------------------------
+
+#endif
