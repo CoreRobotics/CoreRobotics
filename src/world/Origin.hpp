@@ -51,6 +51,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
+namespace world {
     
 //! Origin shared pointer
 class Origin;
@@ -120,6 +121,7 @@ class Origin : public LoopElement, public Item
     
 };
 
+}
 }
 // end namespace
 //---------------------------------------------------------------------

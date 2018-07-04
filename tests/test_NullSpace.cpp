@@ -58,7 +58,7 @@ testData test_NullSpace(Eigen::VectorXd initJoints,
                           Eigen::Matrix<bool, 6, 1> poseElements = (Eigen::Matrix<bool, 6, 1>() << true, true, true, true, true, true).finished()) {
 	testData returnStruct;
 
-	Manipulator* MyRobot = new Manipulator();
+	world::Manipulator* MyRobot = new world::Manipulator();
 
 	// Initialize translation frames
 	FrameEuler* F0 = new FrameEuler();

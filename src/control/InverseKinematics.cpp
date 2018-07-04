@@ -53,16 +53,16 @@ namespace cr {
  the algorithm uses the Jacobian pseudoinverse approach.  The SVD is
  used to compute the Jacobian inverse.\n
  
- \param[in]     i_robot         the cr::Manipulator object 
+ \param[in]     i_robot         the cr::world::Manipulator object 
                                 to be used for solving the inverse 
                                 kinematics
  \param[in]     i_toolIndex     the index of the robot tool for which 
                                 the IK is being solved, see 
-                                cr::Manipulator::addTool()
+                                cr::world::Manipulator::addTool()
  \param[in]     i_eulerMode     the Euler convention of the pose vector
  */
 //---------------------------------------------------------------------
-InverseKinematics::InverseKinematics(const Manipulator& i_robot,
+InverseKinematics::InverseKinematics(const world::Manipulator& i_robot,
                                          unsigned int i_toolIndex,
                                          CREulerMode i_eulerMode)
 {
@@ -376,7 +376,7 @@ singular and no solution can be found.\n
 \param[in]     i_setPoint         the pose vector set point.
 \param[in]     i_poseElementsInt  a integer vector indiciating which
                                   elements of the pose vector are specified
-							      in i_setPoint (see Manipulator::jacobian)
+							      in i_setPoint (see world::Manipulator::jacobian)
 \param[in]     i_q0               the intial configuration to use for
 							      the iterations.
 \param[out]    o_qSolved          the new configuration

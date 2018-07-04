@@ -47,7 +47,7 @@ using namespace cr;
 
 
 // Setup the Manipulator robot and return the toolIndex
-int setup3dof(Manipulator& MyRobot){
+int setup3dof(world::Manipulator& MyRobot){
     FrameEuler* F0 = new FrameEuler();
     FrameEuler* F1 = new FrameEuler();
     FrameEuler* F2 = new FrameEuler();
@@ -89,7 +89,7 @@ int setup3dof(Manipulator& MyRobot){
 // test the set/get methods
 //
 TEST(InverseKinematics, SetGet){
-    Manipulator MyRobot;
+    world::Manipulator MyRobot;
     int toolIndex = setup3dof(MyRobot);
     InverseKinematics ikSolver = InverseKinematics(MyRobot,
                                                        toolIndex,
@@ -117,7 +117,7 @@ TEST(InverseKinematics, SetGet){
 // test the set/get methods
 //
 TEST(InverseKinematics, Solver){
-    Manipulator* MyRobot = new Manipulator();
+    world::Manipulator* MyRobot = new world::Manipulator();
     int toolIndex = setup3dof(*MyRobot);
     InverseKinematics ikSolver = InverseKinematics(*MyRobot,
                                                        toolIndex,

@@ -56,12 +56,12 @@ using namespace cr;
 TEST(Node, transforms){
     
     // create a world
-    OriginPtr myOrigin = Origin::create();
+    world::OriginPtr myOrigin = world::Origin::create();
     
     // create 3 world items
-    NodePtr item1 = Node::create();
-    NodePtr item2 = Node::create();
-    NodePtr item3 = Node::create();
+    world::NodePtr item1 = world::Node::create();
+    world::NodePtr item2 = world::Node::create();
+    world::NodePtr item3 = world::Node::create();
     
     // define 3 unique frame transforms
     Frame f1, f2, f3;
@@ -143,8 +143,8 @@ TEST(Node, transforms){
 TEST(Node, leaf){
     
     // create 2 world items
-    NodePtr item1 = Node::create();
-    NodePtr item2 = Node::create();
+    world::NodePtr item1 = world::Node::create();
+    world::NodePtr item2 = world::Node::create();
     
     EXPECT_EQ(item1->isLeaf(), true);
     EXPECT_EQ(item2->isLeaf(), true);

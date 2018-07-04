@@ -46,6 +46,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 // CoreRobotics namespace
 namespace cr {
+namespace world {
     
     
 //---------------------------------------------------------------------
@@ -676,4 +677,5 @@ int Manipulator::addTool(unsigned i_parentIndex, Frame* i_tool)
 
 //=====================================================================
 // End namespace
+}
 }

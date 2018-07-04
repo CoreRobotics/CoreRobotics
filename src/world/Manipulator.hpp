@@ -51,6 +51,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
+namespace world {
     
 //! Manipulator shared pointer
 class Manipulator;
@@ -251,6 +252,7 @@ class Manipulator
 };
 
     
+}
 }
 // end namespace
 //---------------------------------------------------------------------

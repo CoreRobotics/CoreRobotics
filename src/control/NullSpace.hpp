@@ -84,7 +84,7 @@ namespace cr {
  These methods are used to interface with the nullspace controller:
  - NullSpace::setRobot sets the manipulator nullspace to solve
  - NullSpace::setToolIndex set the tool index of the 
- associated manipulator (see Manipulator::addTool) for which we are
+ associated manipulator (see world::Manipulator::addTool) for which we are
  setting a desired nullspace command.  Note that a tool must be added in the manipulator
  prior to using the nullspace solver.
  - NullSpace::setEulerMode sets the Euler convention of the pose
@@ -116,7 +116,7 @@ class NullSpace {
 public:
 
 	//! Class constructor
-	NullSpace(const Manipulator& i_robot,
+	NullSpace(const world::Manipulator& i_robot,
                 unsigned int i_toolIndex,
                 CREulerMode i_eulerMode);
 
@@ -125,7 +125,7 @@ public:
 public:
 
 	//! Set the robot to be used
-	void setRobot(const Manipulator& i_robot) {this->m_robot = i_robot;}
+	void setRobot(const world::Manipulator& i_robot) {this->m_robot = i_robot;}
 
 	//! Set robot tool index to use to compute the nullspace.  Note that a tool must be specified in the robot.
 	void setToolIndex(unsigned int i_toolIndex) {this->m_toolIndex = i_toolIndex;}
@@ -191,7 +191,7 @@ public:
 protected:
 
 	//! Manipulator object to solve
-	Manipulator m_robot;
+	world::Manipulator m_robot;
 
 	//! Index of the manipulator tool for which to solve the IK
 	unsigned int m_toolIndex;

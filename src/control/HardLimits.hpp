@@ -134,11 +134,11 @@ class HardLimits {
 public:
 
 	//! Class constructor
-	HardLimits(const Manipulator& i_robot,
+	HardLimits(const world::Manipulator& i_robot,
 	             unsigned int i_toolIndex,
 	             CREulerMode i_eulerMode);
 
-	HardLimits(const Manipulator& i_robot,
+	HardLimits(const world::Manipulator& i_robot,
 	             unsigned int i_toolIndex,
 	             CREulerMode i_eulerMode,
 	             bool i_useNullSpace);
@@ -246,7 +246,7 @@ public:
 protected:
 
 	//! The Manipulator object
-	Manipulator m_robot;
+	world::Manipulator m_robot;
 
 	//! The IK Solver to use
 	InverseKinematics* m_IKSolver;

@@ -46,7 +46,7 @@ POSSIBILITY OF SUCH DAMAGE.
 using namespace cr;
 
 // Setup the Manipulator robot and return the toolIndex
-int setupRobot(Manipulator& MyRobot){
+int setupRobot(world::Manipulator& MyRobot){
     FrameEuler* F0 = new FrameEuler();
     FrameEuler* F1 = new FrameEuler();
     FrameEuler* F2 = new FrameEuler();
@@ -89,7 +89,7 @@ int setupRobot(Manipulator& MyRobot){
 // setup the manipulator
 //
 TEST(Manipulator, Setup){
-    Manipulator MyRobot;
+    world::Manipulator MyRobot;
     FrameEuler* F0 = new FrameEuler();
     FrameEuler* F1 = new FrameEuler();
     FrameEuler* F2 = new FrameEuler();
@@ -135,7 +135,7 @@ TEST(Manipulator, Setup){
 // Set/GetConfiguration, GetNLinks, GetDOF
 //
 TEST(Manipulator, GetConfiguration){
-    Manipulator MyRobot;
+    world::Manipulator MyRobot;
     int toolIndex = setupRobot(MyRobot);
     
     int n = MyRobot.getNumberOfLinks();
@@ -159,7 +159,7 @@ TEST(Manipulator, GetConfiguration){
 // Get Forward kin
 //
 TEST(Manipulator, Kinematics){
-    Manipulator MyRobot;
+    world::Manipulator MyRobot;
     int toolIndex = setupRobot(MyRobot);
     
     Eigen::MatrixXd fk;
@@ -185,7 +185,7 @@ TEST(Manipulator, Kinematics){
 // Get Jacobian
 //
 TEST(Manipulator, Jacobian){
-    Manipulator MyRobot;
+    world::Manipulator MyRobot;
     int toolIndex = setupRobot(MyRobot);
     
     Eigen::MatrixXd J;
@@ -223,7 +223,7 @@ TEST(Manipulator, Jacobian){
 // Get Hessian
 //
 TEST(Manipulator, Hessian){
-    Manipulator MyRobot;
+    world::Manipulator MyRobot;
     int toolIndex = setupRobot(MyRobot);
     
     // NOTE: the numerical hessian is noisy!
@@ -263,7 +263,7 @@ TEST(Manipulator, Hessian){
 // Get tool/link frames
 //
 TEST(Manipulator, GetFrames){
-    Manipulator MyRobot;
+    world::Manipulator MyRobot;
     int toolIndex = setupRobot(MyRobot);
     
     // now get the transformation to the tool for the current configuration

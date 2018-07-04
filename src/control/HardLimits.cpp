@@ -62,7 +62,7 @@ double CRMinJointRotation = -std::numeric_limits<double>::max();
  inverse kinematics and, if desired, a nullspace solver to solve the inverse
  kinematics problem with hard joint limits.\n
  
- \param[in]     i_robot           the cr::Manipulator object 
+ \param[in]     i_robot           the cr::world::Manipulator object 
                                   to be used for solving the inverse 
                                   kinematics
  \param[in]     i_toolIndex       the tool index to use for solving the
@@ -72,7 +72,7 @@ double CRMinJointRotation = -std::numeric_limits<double>::max();
                                   nullspace solver should be created
  */
 //---------------------------------------------------------------------
-HardLimits::HardLimits(const Manipulator& i_robot,
+HardLimits::HardLimits(const world::Manipulator& i_robot,
                            unsigned int i_toolIndex,
                            CREulerMode i_eulerMode,
                            bool i_useNullSpace) {
@@ -96,7 +96,7 @@ HardLimits::HardLimits(const Manipulator& i_robot,
  inverse kinematics solver to solve the inverse kinematics problem with
  hard joint limits.\n
  
- \param[in]     i_robot           the cr::Manipulator object 
+ \param[in]     i_robot           the cr::world::Manipulator object 
                                   to be used for solving the inverse 
                                   kinematics
  \param[in]     i_toolIndex       the tool index to use for solving the
@@ -104,7 +104,7 @@ HardLimits::HardLimits(const Manipulator& i_robot,
  \param[in]     i_eulerMode       the Euler convention of the pose vector
  */
 //---------------------------------------------------------------------
-HardLimits::HardLimits(const Manipulator& i_robot,
+HardLimits::HardLimits(const world::Manipulator& i_robot,
                            unsigned int i_toolIndex,
                            CREulerMode i_eulerMode) {
 	this->m_robot = i_robot;

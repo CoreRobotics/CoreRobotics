@@ -51,6 +51,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
+namespace world {
     
 //! Node shared pointer
 class Node;
@@ -152,6 +153,7 @@ class Node
     
 };
 
+}
 }
 // end namespace
 //---------------------------------------------------------------------

@@ -51,12 +51,12 @@ Eigen::Matrix<bool, 6, 1> poseElements = (Eigen::Matrix<bool, 6, 1>() << 1, 1, 0
 
 struct robotData {
 	HardLimits solver;
-	Manipulator* robot;
+	world::Manipulator* robot;
 	int toolIndex; };
 
 robotData setup_solver(void) {
 	// Define a robot
-	Manipulator* MyRobot = new Manipulator();
+	world::Manipulator* MyRobot = new world::Manipulator();
 
 	// Define several frames
 	FrameEuler* F0 = new FrameEuler(0, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
@@ -100,7 +100,7 @@ TEST(HardLimits, NoLimits) {
 	robotData data = setup_solver();
 	
 	HardLimits solver = data.solver;
-	Manipulator* MyRobot = data.robot;
+	world::Manipulator* MyRobot = data.robot;
 	int toolIndex = data.toolIndex;
 
 	// Disable the nullspace solver for now
@@ -136,7 +136,7 @@ TEST(HardLimits, Limits) {
 	robotData data = setup_solver();
 	
 	HardLimits solver = data.solver;
-	Manipulator* MyRobot = data.robot;
+	world::Manipulator* MyRobot = data.robot;
 	int toolIndex = data.toolIndex;
 
 	// Set jont limits
@@ -177,7 +177,7 @@ TEST(HardLimits, NullSpace) {
 	robotData data = setup_solver();
 	
 	HardLimits solver = data.solver;
-	Manipulator* MyRobot = data.robot;
+	world::Manipulator* MyRobot = data.robot;
 	int toolIndex = data.toolIndex;
 
 	// Set jont limits
@@ -220,7 +220,7 @@ TEST(HardLimits, BadIC) {
 	robotData data = setup_solver();
 	
 	HardLimits solver = data.solver;
-	Manipulator* MyRobot = data.robot;
+	world::Manipulator* MyRobot = data.robot;
 	int toolIndex = data.toolIndex;
 
 	// Set jont limits
