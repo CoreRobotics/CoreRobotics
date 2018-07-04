@@ -51,7 +51,8 @@ namespace cr {
  The constructor sets up the world.\n
  */
 //---------------------------------------------------------------------
-World::World(){
+World::World()
+{
     m_rootItem = std::make_shared<WorldItem>();
     // m_rootItem = new WorldItem();
 }
@@ -62,7 +63,8 @@ World::World(){
  The destructor deletes the world.\n
  */
 //---------------------------------------------------------------------
-World::~World(){
+World::~World()
+{
 
 }
     
@@ -72,13 +74,41 @@ World::~World(){
  Create a whole new world.\n
  */
 //---------------------------------------------------------------------
-WorldPtr World::create(){
+WorldPtr World::create()
+{
     return std::make_shared<World>();
 }
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Print the output scene.\n
+ */
+//---------------------------------------------------------------------
+void World::print(std::ostream& i_stream)
+{
+    i_stream << "+ cr::World '" << getName() << "'\n";
+    m_rootItem->print(i_stream);
+}
+    
     
 
 }
 // end namespace
 //---------------------------------------------------------------------
 
+
+
+//---------------------------------------------------------------------
+/*!
+ Display operator details to an output stream.\n
+ */
+//---------------------------------------------------------------------
+/*
+std::ostream& operator<<(std::ostream& os, cr::WorldPtr obj)
+{
+    os << "obj->getName()" << "\n";
+    return os;
+}
+ */
 

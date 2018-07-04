@@ -48,23 +48,33 @@ POSSIBILITY OF SUCH DAMAGE.
 namespace cr {
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  The constructor creates a manipulator.\n
-
- \param[in]     i_type      the manipulator type (default: CR_MANIPULATOR_MODE_POSITION)
  */
 //---------------------------------------------------------------------
-    /*
-Manipulator::Manipulator(ManipulatorType i_type) {
-	this->m_modelType = i_type;
+Manipulator::Manipulator() {
 	this->m_tipFrame = new cr::Frame();
 }
-     */
-
-Manipulator::Manipulator() {
-    // this->m_modelType = CR_MANIPULATOR_MODE_POSITION;
-	this->m_tipFrame = new cr::Frame();
+    
+    
+//---------------------------------------------------------------------
+/*!
+ The destructor deletes a manipulator.\n
+ */
+//---------------------------------------------------------------------
+Manipulator::~Manipulator() {
+    // delete m_tipFrame;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Create a new manipulator in memory.\n
+ */
+//---------------------------------------------------------------------
+ManipulatorPtr Manipulator::create(){
+    return std::make_shared<Manipulator>();
 }
     
     

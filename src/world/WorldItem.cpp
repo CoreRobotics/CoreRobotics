@@ -157,6 +157,25 @@ bool WorldItem::isLeaf()
     
 //---------------------------------------------------------------------
 /*!
+ This function returns the depth of the node in the tree
+ 
+ \return        integer depth (0 = root)
+ */
+//---------------------------------------------------------------------
+unsigned WorldItem::getDepth()
+{
+    unsigned d = 0;
+    WorldItemPtr parent = getParent();
+    while ( parent != NULL) {
+        d++;
+        parent = parent->getParent();
+    }
+    return d;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
  This function sets the local frame transformation (relative to
  the parent frame).
  
@@ -220,6 +239,25 @@ Frame WorldItem::getRelativeTransform(WorldItemPtr i_item)
     Frame f;
     f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
     return f;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Print the children.\n
+ */
+//---------------------------------------------------------------------
+void WorldItem::print(std::ostream& i_stream)
+{
+    unsigned d = getDepth();
+    for (int i = 0; i < d; i++){
+        i_stream << "  ";
+    }
+    i_stream << "+ cr::WorldItem '" << getName() << "'\n";
+    for (int i = 0; i < m_children.size(); i++)
+    {
+        m_children.at(i)->print(i_stream);
+    }
 }
 
 

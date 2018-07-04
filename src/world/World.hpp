@@ -45,6 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "LoopElement.hpp"
 #include "WorldItem.hpp"
+#include "Item.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -62,11 +63,13 @@ typedef std::shared_ptr<World> WorldPtr;
  
  \brief
  
+ 
  \details
  
  */
 //---------------------------------------------------------------------
-class World : public LoopElement {
+class World : public LoopElement, public Item
+{
     
     // Constructor and Destructor
     public:
@@ -99,6 +102,13 @@ class World : public LoopElement {
     
         //! remove a child from the list of children
         void removeChild(WorldItemPtr i_item) { m_rootItem->removeChild(i_item); }
+    
+    
+    // Print details
+    public:
+    
+        //! print out the scene
+        void print(std::ostream& i_stream);
 
     
     // Private members
@@ -112,5 +122,11 @@ class World : public LoopElement {
 }
 // end namespace
 //---------------------------------------------------------------------
+
+
+//! World display operator overload
+// std::ostream& operator<<(std::ostream&, const cr::World&);
+
+
 
 #endif

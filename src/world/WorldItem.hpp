@@ -70,7 +70,7 @@ typedef std::shared_ptr<WorldItem> WorldItemPtr;
  */
 //---------------------------------------------------------------------
 class WorldItem
-    : public std::enable_shared_from_this<WorldItem>, Item
+    : public std::enable_shared_from_this<WorldItem>, public Item
 {
     
     // Constructor and Destructor
@@ -104,6 +104,9 @@ class WorldItem
         //! return if the item is a leaf (i.e. no children)
         bool isLeaf();
     
+        //! return the depth of the node (0 = root)
+        unsigned getDepth();
+    
     
     // Frame transformation controls
     public:
@@ -119,6 +122,13 @@ class WorldItem
     
         //! return the relative frame transformation
         Frame getRelativeTransform(WorldItemPtr i_item);
+    
+    
+    // Print details
+    public:
+    
+        //! print the scene
+        void print(std::ostream& i_stream);
     
     
     // protected member data

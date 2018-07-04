@@ -44,7 +44,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define CR_MANIPULATOR_HPP_
 
 #include <vector>
+#include <memory>
 #include "RigidBody.hpp"
+#include "WorldItem.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -53,17 +55,7 @@ namespace cr {
 //! Manipulator shared pointer
 class Manipulator;
 typedef std::shared_ptr<Manipulator> ManipulatorPtr;
-    
-    
-//! Enumerator for specifying how the manipulator is driven
-/*
- enum ManipulatorType {
- // TODO: add several modes of control for the driving values
- CR_MANIPULATOR_MODE_POSITION,
- // CR_MANIPULATOR_MODE_VELOCITY,
- // CR_MANIPULATOR_MODE_TORQUE,
- };
- */
+
 
 //---------------------------------------------------------------------
 /*!
@@ -131,7 +123,8 @@ typedef std::shared_ptr<Manipulator> ManipulatorPtr;
  */
 //---------------------------------------------------------------------
 class Manipulator
-    : public std::enable_shared_from_this<Manipulator>
+    : public std::enable_shared_from_this<Manipulator>,
+    public WorldItem
 {
     
 
@@ -139,8 +132,13 @@ class Manipulator
     public:
     
         //! Class constructor
-        // Manipulator(ManipulatorType i_type);
         Manipulator();
+    
+        //! Class destructor
+        ~Manipulator();
+    
+        //! Create a pointer
+        static ManipulatorPtr create();
     
 
     // Get/Set Methods
