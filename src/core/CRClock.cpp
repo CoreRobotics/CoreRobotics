@@ -46,7 +46,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace crbx {
+namespace core {
     
     
 //=====================================================================
@@ -122,6 +123,7 @@ void CRClock::sleep(double i_time) {
 
 //=====================================================================
 // End namespace
+}
 }
 
 

@@ -39,8 +39,8 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#ifndef CRClock_hpp
-#define CRClock_hpp
+#ifndef CR_CLOCK_HPP_
+#define CR_CLOCK_HPP_
 
 //=====================================================================
 // Includes
@@ -49,7 +49,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace crbx {
+namespace core {
     
 //=====================================================================
 /*!
@@ -121,6 +122,7 @@ private:
 };
 //=====================================================================
 // End namespace
+}
 }
 
 #endif
