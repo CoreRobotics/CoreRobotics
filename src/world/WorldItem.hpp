@@ -68,7 +68,9 @@ typedef std::shared_ptr<WorldItem> WorldItemPtr;
  
  */
 //---------------------------------------------------------------------
-class WorldItem {
+class WorldItem
+    : public std::enable_shared_from_this<WorldItem>
+{
     
     // Constructor and Destructor
     public:
@@ -87,16 +89,16 @@ class WorldItem {
     public:
     
         //! add a child to the list of children
-        void addChild(WorldItem* i_item);
+        void addChild(WorldItemPtr i_item);
     
         //! remove a child from the list of children
-        Result removeChild(WorldItem* i_item);
+        Result removeChild(WorldItemPtr i_item);
     
         //! set the parent of the item
-        void setParent(WorldItem* i_item);
+        void setParent(WorldItemPtr i_item);
     
         //! get the parent of the child
-        WorldItem* getParent();
+        WorldItemPtr getParent();
     
     
     // Frame transformation controls
@@ -112,7 +114,7 @@ class WorldItem {
         Frame getGlobalTransform();
     
         //! return the relative frame transformation
-        Frame getRelativeTransform(WorldItem* i_item);
+        Frame getRelativeTransform(WorldItemPtr i_item);
     
     
     // protected member data
@@ -126,10 +128,10 @@ class WorldItem {
     private:
     
         //! parent item
-        WorldItem* m_parent = NULL;
+        WorldItemPtr m_parent = NULL;
     
         //! list of children
-        std::vector<WorldItem*> m_children;
+        std::vector<WorldItemPtr> m_children;
     
     
     

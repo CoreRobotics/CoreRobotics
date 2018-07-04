@@ -52,8 +52,8 @@ namespace cr {
  */
 //---------------------------------------------------------------------
 World::World(){
-    // m_rootItem = std::make_shared<WorldItem>();
-    m_rootItem = new WorldItem();
+    m_rootItem = std::make_shared<WorldItem>();
+    // m_rootItem = new WorldItem();
 }
 
 

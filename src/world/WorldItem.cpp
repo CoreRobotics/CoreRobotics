@@ -62,7 +62,7 @@ WorldItem::WorldItem(){
  */
 //---------------------------------------------------------------------
 WorldItem::~WorldItem(){
-    delete m_parent;
+    // delete m_parent;
 }
     
     
@@ -83,9 +83,9 @@ WorldItemPtr WorldItem::create(){
  \param[in]     i_item - the child to add
  */
 //---------------------------------------------------------------------
-void WorldItem::addChild(WorldItem* i_item)
+void WorldItem::addChild(WorldItemPtr i_item)
 {
-    i_item->setParent(this);
+    i_item->setParent(shared_from_this());
     m_children.push_back(i_item);
 }
 
@@ -99,7 +99,7 @@ void WorldItem::addChild(WorldItem* i_item)
                 (CR_RESULT_SUCCESS or CR_RESULT_NOT_FOUND)
  */
 //---------------------------------------------------------------------
-Result WorldItem::removeChild(WorldItem* i_item)
+Result WorldItem::removeChild(WorldItemPtr i_item)
 {
     for (int k = 0; k < m_children.size(); k++){
         if (m_children.at(k) == i_item)
@@ -120,7 +120,7 @@ Result WorldItem::removeChild(WorldItem* i_item)
  \param[in]     i_item - the parent item
  */
 //---------------------------------------------------------------------
-void WorldItem::setParent(WorldItem* i_item)
+void WorldItem::setParent(WorldItemPtr i_item)
 {
     m_parent = i_item;
 }
@@ -133,7 +133,7 @@ void WorldItem::setParent(WorldItem* i_item)
  \return        the parent item
  */
 //---------------------------------------------------------------------
-WorldItem* WorldItem::getParent()
+WorldItemPtr WorldItem::getParent()
 {
     return m_parent;
 }
@@ -178,7 +178,7 @@ Frame WorldItem::getLocalTransform()
 Frame WorldItem::getGlobalTransform()
 {
     Eigen::Matrix4d T = m_frame.getTransformToParent();
-    WorldItem* parent = m_parent;
+    WorldItemPtr parent = m_parent;
     while (parent != NULL){
         T = parent->getLocalTransform().getTransformToParent() * T;
         parent = parent->getParent();
@@ -197,7 +197,7 @@ Frame WorldItem::getGlobalTransform()
  \return        the relative frame transformation
  */
 //---------------------------------------------------------------------
-Frame WorldItem::getRelativeTransform(WorldItem* i_item)
+Frame WorldItem::getRelativeTransform(WorldItemPtr i_item)
 {
     Eigen::Matrix4d T0 = this->getGlobalTransform().getTransformToParent();
     Eigen::Matrix4d T = i_item->getGlobalTransform().getTransformToChild() * T0;

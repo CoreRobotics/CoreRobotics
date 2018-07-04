@@ -95,17 +95,17 @@ class World : public LoopElement {
 	public:
 
 		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
+        void addChild(WorldItemPtr i_item) { m_rootItem->addChild(i_item); }
     
         //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
+        void removeChild(WorldItemPtr i_item) { m_rootItem->removeChild(i_item); }
 
     
     // Private members
     private:
     
         //! add a world item
-        WorldItem* m_rootItem;
+        WorldItemPtr m_rootItem;
     
 };
 
