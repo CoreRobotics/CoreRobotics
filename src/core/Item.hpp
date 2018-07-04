@@ -75,13 +75,13 @@ class Item {
     public:
     
         //! set the item name
-		void setName(std::string i_name) { m_name = i_name; }
+		virtual void setName(std::string i_name) { m_name = i_name; }
 
 		//! return the item name
 		std::string getName() { return m_name; }
     
 		//! set the item icon
-		void setIcon(std::string i_icon) { m_icon = i_icon; }
+		virtual void setIcon(std::string i_icon) { m_icon = i_icon; }
 
 		//! return the item icon
 		std::string getIcon() { return m_icon; }

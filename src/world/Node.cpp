@@ -158,6 +158,22 @@ bool Node::isLeaf()
     
 //---------------------------------------------------------------------
 /*!
+ This function returns a flag indicating if it is a root (i.e. no parent).
+ 
+ \return        flag (true = if there is no parent)
+ */
+//---------------------------------------------------------------------
+bool Node::isRoot()
+{
+    bool isRoot = false;
+    if (m_parent == NULL)
+        isRoot = true;
+    return isRoot;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
  This function returns the depth of the node in the tree
  
  \return        integer depth (0 = root)
@@ -254,7 +270,13 @@ void Node::print(std::ostream& i_stream)
     for (int i = 0; i < d; i++){
         i_stream << "  ";
     }
-    i_stream << "+ cr::Node '" << getName() << "'\n";
+    std::string id = "N";
+    if (isLeaf()) {
+        id = "L";
+    } else if (isRoot()) {
+        id = "R";
+    }
+    i_stream << "+ cr::Node [" << id << "] '" << getName() << "'\n";
     for (int i = 0; i < m_children.size(); i++)
     {
         m_children.at(i)->print(i_stream);

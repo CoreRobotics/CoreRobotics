@@ -94,9 +94,16 @@ class Origin : public LoopElement, public Item
 
 		//! reset()
         virtual void reset() {};
+    
+    
+    // naming
+    public:
+    
+        //! set the name
+        virtual void setName(std::string i_name);
 
 
-	// Scene graph behaviors
+	// Tree graph behaviors
 	public:
 
 		//! add a child to the list of children

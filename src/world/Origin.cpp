@@ -55,7 +55,6 @@ namespace world {
 Origin::Origin()
 {
     m_rootItem = std::make_shared<Node>();
-    // m_rootItem = new Node();
 }
 
 
@@ -83,13 +82,28 @@ OriginPtr Origin::create()
     
 //---------------------------------------------------------------------
 /*!
+ Set the name.\n
+ 
+ \param[in]     i_name - the name to set
+ */
+//---------------------------------------------------------------------
+void Origin::setName(std::string i_name)
+{
+    Item::setName(i_name);
+    m_rootItem->setName(i_name.append(" root"));
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
  Print the output scene.\n
  */
 //---------------------------------------------------------------------
 void Origin::print(std::ostream& i_stream)
 {
-    i_stream << "+ cr::Origin '" << getName() << "'\n";
+    i_stream << "\nTree graph structure from world::Origin:\n\n";
     m_rootItem->print(i_stream);
+    i_stream << "\n";
 }
     
     

@@ -88,7 +88,7 @@ class Node
         static NodePtr create();
     
     
-    // Scene graph controls
+    // Tree graph controls
     public:
     
         //! add a child to the list of children
@@ -105,6 +105,9 @@ class Node
     
         //! return if the item is a leaf (i.e. no children)
         bool isLeaf();
+    
+        //! return if the item is a root (i.e. no parent)
+        bool isRoot();
     
         //! return the depth of the node (0 = root)
         unsigned getDepth();
