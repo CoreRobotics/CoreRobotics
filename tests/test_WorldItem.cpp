@@ -57,12 +57,8 @@ TEST(WorldItem, transforms){
     
     // create a world
     WorldPtr myWorld = World::create();
-    // World* myWorld = new World;
     
     // create 3 world items
-    // WorldItem* item1 = new WorldItem;
-    // WorldItem* item2 = new WorldItem;
-    // WorldItem* item3 = new WorldItem;
     WorldItemPtr item1 = WorldItem::create();
     WorldItemPtr item2 = WorldItem::create();
     WorldItemPtr item3 = WorldItem::create();
