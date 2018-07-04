@@ -137,6 +137,22 @@ WorldItemPtr WorldItem::getParent()
 {
     return m_parent;
 }
+
+
+//---------------------------------------------------------------------
+/*!
+ This function returns a flag indicating if it is a leaf (i.e. no children).
+ 
+ \return        flag (true = if there are no children)
+ */
+//---------------------------------------------------------------------
+bool WorldItem::isLeaf()
+{
+    bool isLeaf = true;
+    if (m_children.size() > 0)
+        isLeaf = false;
+    return isLeaf;
+}
     
     
 //---------------------------------------------------------------------

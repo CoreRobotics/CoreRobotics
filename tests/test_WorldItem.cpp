@@ -135,7 +135,26 @@ TEST(WorldItem, transforms){
 }
      
 
-
+//---------------------------------------------------------------------
+/*!
+ Test the frame transform methods
+ */
+//---------------------------------------------------------------------
+TEST(WorldItem, leaf){
+    
+    // create 2 world items
+    WorldItemPtr item1 = WorldItem::create();
+    WorldItemPtr item2 = WorldItem::create();
+    
+    EXPECT_EQ(item1->isLeaf(), true);
+    EXPECT_EQ(item2->isLeaf(), true);
+    
+    item1->addChild(item2);
+    
+    EXPECT_EQ(item1->isLeaf(), false);
+    EXPECT_EQ(item2->isLeaf(), true);
+    
+}
 
 
 

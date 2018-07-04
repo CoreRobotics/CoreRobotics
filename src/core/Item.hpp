@@ -40,107 +40,62 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_WORLDITEM_HPP_
-#define CR_WORLDITEM_HPP_
+#ifndef CR_ITEM_HPP_
+#define CR_ITEM_HPP_
 
-#include <vector>
-#include "Frame.hpp"
-#include "Item.hpp"
+#include <string>
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
     
-//! WorldItem shared pointer
-class WorldItem;
-typedef std::shared_ptr<WorldItem> WorldItemPtr;
-    
-    
 //---------------------------------------------------------------------
 /*!
- \class WorldItem
- \ingroup world
+ \class Item
+ \ingroup core
  
- \brief
- This class implements a basic world scene graph item for attaching to
- a World thread element or other WorldItems.
-
- \details
- 
+ \brief This abstract class defines common properties and methods for
+ classes that have names, icons, and loadable properties, etc...
  */
 //---------------------------------------------------------------------
-class WorldItem
-    : public std::enable_shared_from_this<WorldItem>, Item
-{
+class Item {
     
-    // Constructor and Destructor
+    // Constructor and destructor
     public:
     
-        //! Class constructor
-        WorldItem();
+        //! constructor
+		Item() {}
     
-        //! Class destructor
-        ~WorldItem();
-    
-        //! Create a pointer
-        static WorldItemPtr create();
+        //! destructor
+        virtual ~Item() {}
     
     
-    // Scene graph controls
+    // Get/set common properties
     public:
     
-        //! add a child to the list of children
-        void addChild(WorldItemPtr i_item);
+        //! set the item name
+		void setName(std::string i_name) { m_name = i_name; }
+
+		//! return the item name
+		std::string getName() { return m_name; }
     
-        //! remove a child from the list of children
-        Result removeChild(WorldItemPtr i_item);
-    
-        //! set the parent of the item
-        void setParent(WorldItemPtr i_item);
-    
-        //! get the parent of the child
-        WorldItemPtr getParent();
-    
-        //! return if the item is a leaf (i.e. no children)
-        bool isLeaf();
+		//! set the item icon
+		void setIcon(std::string i_icon) { m_icon = i_icon; }
+
+		//! return the item icon
+		std::string getIcon() { return m_icon; }
     
     
-    // Frame transformation controls
-    public:
-    
-        //! set the local frame transformation
-        void setLocalTransform(const Frame& i_frame);
-    
-        //! return the local frame transformation
-        Frame getLocalTransform();
-    
-        //! return the global frame transformation
-        Frame getGlobalTransform();
-    
-        //! return the relative frame transformation
-        Frame getRelativeTransform(WorldItemPtr i_item);
-    
-    
-    // protected member data
+    // Protected members
     protected:
     
-        //! Transformation
-        Frame m_frame;
-    
-    
-    // private member data
-    private:
-    
-        //! parent item
-        WorldItemPtr m_parent = NULL;
-    
-        //! list of children
-        std::vector<WorldItemPtr> m_children;
-    
-    
-    
-};
+        //! name
+		std::string m_name;
 
+		//! icon
+		std::string m_icon;
+};
+    
 }
 // end namespace
 //---------------------------------------------------------------------

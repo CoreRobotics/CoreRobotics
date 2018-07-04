@@ -359,9 +359,10 @@ project includes all the CoreRobotics modules.
 //---------------------------------------------------------------------------
 //! \defgroup core Core
 //! \brief This module implements the core functionality of the library,
-//! such as timing, loop definitions and threading.
+//! such as timing, signals, communication, common types, and thread control.
 //---------------------------------------------------------------------------
 #include "Types.hpp"
+#include "Item.hpp"
 // #include "CRProperties.hpp"
 #include "Clock.hpp"
 #include "Mutex.hpp"
@@ -370,26 +371,23 @@ project includes all the CoreRobotics modules.
 #include "Slot.hpp"
 #include "Loop.hpp"
 #include "LoopElement.hpp"
-// #include "LoopNode.hpp"
 #include "SharedMemory.hpp"
-// #include "CRItem.hpp"
 
 
 //---------------------------------------------------------------------------
 //! \defgroup world World
-//! \brief Implements simulation world elements
+//! \brief This module implements simulation elements representing the world.
 //---------------------------------------------------------------------------
 #include "World.hpp"
 #include "WorldItem.hpp"
 #include "Manipulator.hpp"
-// #include "Model.hpp"
 // #include "Sensor.hpp"
 // #include "CRPolicy.hpp"
 
 
 //---------------------------------------------------------------------------
 //! \defgroup math Math
-//! \brief Implements math components.
+//! \brief This module implements math components.
 //---------------------------------------------------------------------------
 #include "Conversion.hpp"
 #include "Integration.hpp"
@@ -398,7 +396,8 @@ project includes all the CoreRobotics modules.
 
 //---------------------------------------------------------------------------
 //! \defgroup physics Physics
-//! \brief Implements physics (kinematics and dynamics) representations.
+//! \brief This module implements physics representations for computing
+//! kinematics and dynamics.
 //---------------------------------------------------------------------------
 #include "Frame.hpp"
 #include "FrameEuler.hpp"
@@ -408,7 +407,8 @@ project includes all the CoreRobotics modules.
 
 //---------------------------------------------------------------------------
 //! \defgroup models Models
-//! \brief Implements model (sensor, motion, and noise) representations.
+//! \brief This module implements generic model (sensor, motion, and
+//! noise) representations.
 //---------------------------------------------------------------------------
 #include "NoiseModel.hpp"
 #include "NoiseGaussian.hpp"
@@ -425,7 +425,8 @@ project includes all the CoreRobotics modules.
 
 //---------------------------------------------------------------------------
 //! \defgroup controllers Controllers
-//! \brief Implements controllers and policies for regulating motion and actions.
+//! \brief This module implements controllers and policies for regulating
+//! motion and actions.
 //---------------------------------------------------------------------------
 #include "InverseKinematics.hpp"
 #include "NullSpace.hpp"
