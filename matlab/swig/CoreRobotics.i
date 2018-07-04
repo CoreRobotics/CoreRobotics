@@ -93,15 +93,15 @@ in the `matlab/util` directory.
 * - The CRMath module has had the Forward Euler and 4th order Runge-Kutta integrators
 removed for compatability.
 * - The following modules have not been tested:
-	* - CRMath
-	* - CRFrameDh
-	* - CRNoiseModel
-	* - CRNoiseGaussian
-	* - CRNoiseUniform
-	* - CRNoiseMixture
-	* - CRSensorLinear
-	* - CRNullSpace
-	* - CRHardLimits
+	* - Math
+	* - FrameDh
+	* - NoiseModel
+	* - NoiseGaussian
+	* - NoiseUniform
+	* - NoiseMixture
+	* - SensorLinear
+	* - NullSpace
+	* - HardLimits
 */
 
 
@@ -128,31 +128,31 @@ removed for compatability.
 %eigen_typemaps(Eigen::Matrix4d)
 %eigen_typemaps(Eigen::Matrix<int, 6, 1>)
 
-%include "CRClock.hpp"
+%include "Clock.hpp"
 //%include "CRThread.hpp"
-%include "CRTypes.hpp"
-%include "CRConversion.hpp"
-%include "CRIntegration.hpp"
-%include "CRMatrix.hpp"
-%include "CRFrame.hpp"
-%include "CRFrameEuler.hpp"
-%include "CRFrameDh.hpp"
-%include "CRRigidBody.hpp"
-%include "CRManipulator.hpp"
-%include "CRNoiseModel.hpp"
-%include "CRNoiseGaussian.hpp"
-%include "CRNoiseUniform.hpp"
-%include "CRNoiseMixture.hpp"
-//%include "CRSensorModel.hpp"
-%include "CRSensorLinear.hpp"
-//%include "CRSensorProbabilistic.hpp"
-//%include "CRMotionModel.hpp"
-//%include "CRMotionLinear.hpp"
-//%include "CRMotionProbabilistic.hpp"
-%include "CRInverseKinematics.hpp"
-%include "CRNullSpace.hpp"
-%include "CRHardLimits.hpp"
-%include "CRSharedMemory.hpp"
-%include "CRTrajectoryGenerator.hpp"
+%include "Types.hpp"
+%include "Conversion.hpp"
+%include "Integration.hpp"
+%include "Matrix.hpp"
+%include "Frame.hpp"
+%include "FrameEuler.hpp"
+%include "FrameDh.hpp"
+%include "RigidBody.hpp"
+%include "Manipulator.hpp"
+%include "NoiseModel.hpp"
+%include "NoiseGaussian.hpp"
+%include "NoiseUniform.hpp"
+%include "NoiseMixture.hpp"
+//%include "SensorModel.hpp"
+%include "SensorLinear.hpp"
+//%include "SensorProbabilistic.hpp"
+//%include "MotionModel.hpp"
+//%include "MotionLinear.hpp"
+//%include "MotionProbabilistic.hpp"
+%include "InverseKinematics.hpp"
+%include "NullSpace.hpp"
+%include "HardLimits.hpp"
+%include "SharedMemory.hpp"
+%include "TrajectoryGenerator.hpp"
 
 %include "matlabHelpers.hpp"
