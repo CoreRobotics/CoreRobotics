@@ -58,7 +58,7 @@ typedef std::shared_ptr<World> WorldPtr;
 //---------------------------------------------------------------------
 /*!
  \class World
- \ingroup core
+ \ingroup world
  
  \brief
  

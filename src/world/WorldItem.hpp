@@ -58,7 +58,7 @@ typedef std::shared_ptr<WorldItem> WorldItemPtr;
 //---------------------------------------------------------------------
 /*!
  \class WorldItem
- \ingroup core
+ \ingroup world
  
  \brief
  This class implements a basic world scene graph item for attaching to

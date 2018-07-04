@@ -37,53 +37,57 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
+// Begin header definition
 
 #ifndef CR_TYPES_HPP_
 #define CR_TYPES_HPP_
 
 #include <string>
 
-//=====================================================================
-// CoreRobotics namespace
+//---------------------------------------------------------------------
+// Begin namespace
 namespace cr {
 
-    
-//=====================================================================
+
+//---------------------------------------------------------------------
 /*!
  \file Types.hpp
- \brief Enumerator types for common usage across all modules.
+ \brief Enumerator and basic types for common usage across all modules.
  */
-//=====================================================================
+//---------------------------------------------------------------------
 
-    //! Enumerator for signal types
-    /*
-    enum SignalType {
-        CR_SIGNAL_FORCE,
-        CR_SIGNAL_POSITION,
-        CR_SIGNAL_VELOCITY,
-        CR_SIGNAL_ACCELERATION,
-        CR_SIGNAL_GENERIC
-    };
-     */
 
-    //! Result enumerator for consistent operation result flags.
-    enum Result {
-        CR_RESULT_SUCCESS,
-        CR_RESULT_SINGULAR,
-        CR_RESULT_UNWRITABLE,
-        CR_RESULT_BAD_IC,
-        CR_RESULT_NOT_FOUND,
-    };
+//! Enumerator for signal types
+/*
+enum SignalType {
+    CR_SIGNAL_FORCE,
+    CR_SIGNAL_POSITION,
+    CR_SIGNAL_VELOCITY,
+    CR_SIGNAL_ACCELERATION,
+    CR_SIGNAL_GENERIC
+};
+ */
+
+//! Result enumerator for consistent operation result flags.
+enum Result {
+    CR_RESULT_SUCCESS,
+    CR_RESULT_SINGULAR,
+    CR_RESULT_UNWRITABLE,
+    CR_RESULT_BAD_IC,
+    CR_RESULT_NOT_FOUND,
+};
+
+//! Thread run state
+enum RunState {
+    CR_RUN_STATE_RUNNING,
+    CR_RUN_STATE_STOPPED,
+    CR_RUN_STATE_PAUSED,
+};
     
-    //! Thread run state
-    enum RunState {
-        CR_RUN_STATE_RUNNING,
-        CR_RUN_STATE_STOPPED,
-        CR_RUN_STATE_PAUSED,
-    };
     
-//=====================================================================
-// End namespace
 }
-#endif /* CRSignalType_hpp */
+// end namespace
+//---------------------------------------------------------------------
+
+#endif

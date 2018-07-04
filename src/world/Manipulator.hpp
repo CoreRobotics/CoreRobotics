@@ -37,29 +37,38 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
+// Begin header definition
 
-#ifndef Manipulator_hpp
-#define Manipulator_hpp
+#ifndef CR_MANIPULATOR_HPP_
+#define CR_MANIPULATOR_HPP_
 
-//=====================================================================
-// Includes
 #include <vector>
 #include "RigidBody.hpp"
 
-//=====================================================================
-// CoreRobotics namespace
+//---------------------------------------------------------------------
+// Begin namespace
 namespace cr {
     
-//=====================================================================
-/*!
- \file Manipulator.hpp
- \brief Implements a class that handles kinematics of a manipulator.
+//! Manipulator shared pointer
+class Manipulator;
+typedef std::shared_ptr<Manipulator> ManipulatorPtr;
+    
+    
+//! Enumerator for specifying how the manipulator is driven
+/*
+ enum ManipulatorType {
+ // TODO: add several modes of control for the driving values
+ CR_MANIPULATOR_MODE_POSITION,
+ // CR_MANIPULATOR_MODE_VELOCITY,
+ // CR_MANIPULATOR_MODE_TORQUE,
+ };
  */
+
 //---------------------------------------------------------------------
 /*!
  \class Manipulator
- \ingroup models
+ \ingroup world
  
  \brief This class implements a robotic manipulator composed of a
  series of rigid bodies.  Currently only supports serial manipulators.
@@ -120,141 +129,133 @@ namespace cr {
  <a href="http://doi.org/10.1109/CIRA.2005.1554272">
 
  */
-//=====================================================================
-//! Enumerator for specifying how the manipulator is driven
-    /*
-enum ManipulatorType {
-	// TODO: add several modes of control for the driving values
-    CR_MANIPULATOR_MODE_POSITION,
-    // CR_MANIPULATOR_MODE_VELOCITY,
-    // CR_MANIPULATOR_MODE_TORQUE,
-};
-     */
-    
-//=====================================================================
-class Manipulator {
-    
 //---------------------------------------------------------------------
-// Constructor and Destructor
-public:
+class Manipulator
+    : public std::enable_shared_from_this<Manipulator>
+{
     
-    //! Class constructor
-	// Manipulator(ManipulatorType i_type);
-    Manipulator();
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
-public:
-    
-    //! Set the configuration (joint) space positions
-    void setConfiguration(Eigen::VectorXd i_q);
-    
-    //! Get the configuration (joint) space positions
-    Eigen::VectorXd getConfiguration(void);
-    
-    //! Get the instantaneous forward kinematics
-    Eigen::MatrixXd getForwardKinematics(void);
-    
-    //! Get the number of links in the list
-    int getNumberOfLinks(void);
-    
-    //! Get the number of driven links (degrees of freedom: DOF)
-    int getDegreesOfFreedom(void);
 
-	//! Get tool frame for the current manipulator configuration
-	void getToolFrame(unsigned i_toolIndex, Frame& o_tool);
-
-	//! Get a link frame for the current manipulator configuration
-	void getLinkFrame(unsigned i_linkIndex, Frame& o_link);
+    // Constructor and Destructor
+    public:
     
-    //! Get the pose for the specified tool index
-    Eigen::Matrix<double, 6, 1> getToolPose(unsigned i_toolIndex,
-                                            CREulerMode i_mode);
+        //! Class constructor
+        // Manipulator(ManipulatorType i_type);
+        Manipulator();
     
-    Eigen::VectorXd getToolPose(unsigned i_toolIndex,
-                                CREulerMode i_mode,
-                                Eigen::Matrix<bool, 6, 1> i_poseElements);
 
-	Eigen::VectorXd getToolPose(unsigned i_toolIndex,
-                                CREulerMode i_mode,
-                                Eigen::Matrix<int, 6, 1> i_poseElementsInt);
-
-	//! Set the model type
-	// void setModelType(ManipulatorType type) { this->m_modelType = type; }
+    // Get/Set Methods
+    public:
     
-//---------------------------------------------------------------------
-// Jacobian
-public:
+        //! Set the configuration (joint) space positions
+        void setConfiguration(Eigen::VectorXd i_q);
     
-    //! Compute the instantaneous numerical Jacobian
-    Eigen::MatrixXd jacobian(unsigned i_toolIndex,
-                             CREulerMode i_mode);
+        //! Get the configuration (joint) space positions
+        Eigen::VectorXd getConfiguration(void);
     
-    Eigen::MatrixXd jacobian(unsigned i_toolIndex,
-                             CREulerMode i_mode,
-                             Eigen::Matrix<bool, 6, 1> i_poseElements);
+        //! Get the instantaneous forward kinematics
+        Eigen::MatrixXd getForwardKinematics(void);
+    
+        //! Get the number of links in the list
+        int getNumberOfLinks(void);
+    
+        //! Get the number of driven links (degrees of freedom: DOF)
+        int getDegreesOfFreedom(void);
 
-	Eigen::MatrixXd jacobian(unsigned i_toolIndex,
-                             CREulerMode i_mode,
-                             Eigen::Matrix<int, 6, 1> i_poseElementsInt);
+        //! Get tool frame for the current manipulator configuration
+        void getToolFrame(unsigned i_toolIndex, Frame& o_tool);
 
-//---------------------------------------------------------------------
-// Hessian
-public:
+        //! Get a link frame for the current manipulator configuration
+        void getLinkFrame(unsigned i_linkIndex, Frame& o_link);
+    
+        //! Get the pose for the specified tool index
+        Eigen::Matrix<double, 6, 1> getToolPose(unsigned i_toolIndex,
+                                                CREulerMode i_mode);
+    
+        Eigen::VectorXd getToolPose(unsigned i_toolIndex,
+                                    CREulerMode i_mode,
+                                    Eigen::Matrix<bool, 6, 1> i_poseElements);
 
-	//! Compute the instantaneous numerical Hessian
-	Eigen::MatrixXd hessian(unsigned i_toolIndex,
-		CREulerMode i_mode);
+        Eigen::VectorXd getToolPose(unsigned i_toolIndex,
+                                    CREulerMode i_mode,
+                                    Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
-	Eigen::MatrixXd hessian(unsigned i_toolIndex,
-		CREulerMode i_mode,
-		Eigen::Matrix<bool, 6, 1> i_poseElements);
+        //! Set the model type
+        // void setModelType(ManipulatorType type) { this->m_modelType = type; }
+    
 
-	Eigen::MatrixXd hessian(unsigned i_toolIndex,
-		CREulerMode i_mode,
-		Eigen::Matrix<int, 6, 1> i_poseElementsInt);
+    // Jacobian
+    public:
+    
+        //! Compute the instantaneous numerical Jacobian
+        Eigen::MatrixXd jacobian(unsigned i_toolIndex,
+                                 CREulerMode i_mode);
+    
+        Eigen::MatrixXd jacobian(unsigned i_toolIndex,
+                                 CREulerMode i_mode,
+                                 Eigen::Matrix<bool, 6, 1> i_poseElements);
+
+        Eigen::MatrixXd jacobian(unsigned i_toolIndex,
+                                 CREulerMode i_mode,
+                                 Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
 
-//---------------------------------------------------------------------
-// Add link/tool Methods
-public:
-    
-    //! Add a link to the kinematic structure, return the index of the added link
-    int addLink(cr::RigidBody* i_link);
+    // Hessian
+    public:
 
-	//! Add a tool to the manipulator, return the index of the added tool
-	int addTool(unsigned i_parentIndex, Frame* i_tool);
-    
-//---------------------------------------------------------------------
-// Protected Members
-protected:
+        //! Compute the instantaneous numerical Hessian
+        Eigen::MatrixXd hessian(unsigned i_toolIndex,
+            CREulerMode i_mode);
 
-	//! Define the manipulator type specifying the dynamics model
-	// ManipulatorType m_modelType;
-    
-    //! List of the links in the manipulator
-    std::vector<cr::RigidBody*> m_listLinks;
-    
-    //! List of the link parent indices
-    std::vector<int> m_listParents;
-    
-    //! List of the driven link indices
-    std::vector<int> m_listDriven;
+        Eigen::MatrixXd hessian(unsigned i_toolIndex,
+            CREulerMode i_mode,
+            Eigen::Matrix<bool, 6, 1> i_poseElements);
 
-	//! List of tool frames
-	std::vector<cr::Frame*> m_listToolFrames;
+        Eigen::MatrixXd hessian(unsigned i_toolIndex,
+            CREulerMode i_mode,
+            Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
-	//! List of tool parents
-	std::vector<int> m_listToolParents;
 
-	//! Arbitrary frame for computing tip position
-	cr::Frame* m_tipFrame;
+
+    // Add link/tool Methods
+    public:
+    
+        //! Add a link to the kinematic structure, return the index of the added link
+        int addLink(cr::RigidBody* i_link);
+
+        //! Add a tool to the manipulator, return the index of the added tool
+        int addTool(unsigned i_parentIndex, Frame* i_tool);
+    
+
+    // Protected Members
+    protected:
+
+        //! Define the manipulator type specifying the dynamics model
+        // ManipulatorType m_modelType;
+    
+        //! List of the links in the manipulator
+        std::vector<cr::RigidBody*> m_listLinks;
+    
+        //! List of the link parent indices
+        std::vector<int> m_listParents;
+    
+        //! List of the driven link indices
+        std::vector<int> m_listDriven;
+
+        //! List of tool frames
+        std::vector<cr::Frame*> m_listToolFrames;
+
+        //! List of tool parents
+        std::vector<int> m_listToolParents;
+
+        //! Arbitrary frame for computing tip position
+        cr::Frame* m_tipFrame;
     
 };
 
-//=====================================================================
-// End namespace
+    
 }
+// end namespace
+//---------------------------------------------------------------------
 
 
 #endif
