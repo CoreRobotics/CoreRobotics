@@ -37,80 +37,59 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
+#include <iostream>
+#include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
+// Create a global noise model
+NoiseGaussian* measNoise;
 
-//---------------------------------------------------------------------
-// Begin namespace
-namespace CoreRobotics {
-    
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
-/*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-class World : public LoopElement {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+// Declare a probabilistic prediction model: zHat = fcn(x,sample)
+Eigen::VectorXd probPredFcn(Eigen::VectorXd x,
+                            bool sample){
+    Eigen::VectorXd v(1);
+    if (sample){
+        v = measNoise->sample();
+    } else {
+        v << 0;
+    }
+    return x + v;  // observation
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+// Declare a likelihood model: p = Pr(zObserved | zPredict)
+double probLikFcn(Eigen::VectorXd zObserved,
+                  Eigen::VectorXd zPredict){
+    
+    Eigen::MatrixXd cov(1,1);
+    cov << 0.001;
+    measNoise->setParameters(cov, zPredict);
+    return measNoise->probability(zObserved);
+}
+
+//
+// Test the prediction and likelihood evaluation
+//
+TEST(SensorProbabilistic, Predict){
+    Eigen::VectorXd x(1);   // state vector
+    Eigen::VectorXd z(1);   // observation
+    x << 1;     // initial condition
+    Eigen::MatrixXd cov(1,1);
+    Eigen::VectorXd mean(1);
+    cov << 0.001;
+    mean << 0;
+    measNoise = new NoiseGaussian(cov, mean);
+    SensorProbabilistic sensor = SensorProbabilistic(*probPredFcn, *probLikFcn, x);
+    z = sensor.measurement(false);
+    EXPECT_DOUBLE_EQ(1, z(0));
+    
+    double pExact = 1 / sqrt( cov(0,0) * 2 * M_PI );
+    double p = sensor.likelihood(z);
+    EXPECT_DOUBLE_EQ(pExact, p);
+    
+    z = sensor.measurement(true);
+    EXPECT_NE(1, z(0));
+}

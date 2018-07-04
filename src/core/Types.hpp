@@ -37,80 +37,53 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#ifndef CR_TYPES_HPP_
+#define CR_TYPES_HPP_
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
+#include <string>
 
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
+
     
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
+//=====================================================================
 /*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
+ \file Types.hpp
+ \brief Enumerator types for common usage across all modules.
  */
-//---------------------------------------------------------------------
-class World : public LoopElement {
+//=====================================================================
+
+    //! Enumerator for signal types
+    /*
+    enum SignalType {
+        CR_SIGNAL_FORCE,
+        CR_SIGNAL_POSITION,
+        CR_SIGNAL_VELOCITY,
+        CR_SIGNAL_ACCELERATION,
+        CR_SIGNAL_GENERIC
+    };
+     */
+
+    //! Result enumerator for consistent operation result flags.
+    enum Result {
+        CR_RESULT_SUCCESS,
+        CR_RESULT_SINGULAR,
+        CR_RESULT_UNWRITABLE,
+        CR_RESULT_BAD_IC,
+        CR_RESULT_NOT_FOUND,
+    };
     
-    // Constructor and Destructor
-    public:
+    //! Thread run state
+    enum RunState {
+        CR_RUN_STATE_RUNNING,
+        CR_RUN_STATE_STOPPED,
+        CR_RUN_STATE_PAUSED,
+    };
     
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+//=====================================================================
+// End namespace
 }
-// end namespace
-//---------------------------------------------------------------------
-
-#endif
+#endif /* CRSignalType_hpp */

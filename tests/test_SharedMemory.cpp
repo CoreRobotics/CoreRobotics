@@ -37,80 +37,61 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#include <iostream>
+#include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
 
-//---------------------------------------------------------------------
-// Begin namespace
-namespace CoreRobotics {
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
+
+
+//
+// Test memory server set/get function
+//
+TEST(SharedMemory, Server){
+    const char* memoryName = "MyMemory";
+    SharedMemory server(memoryName, CR_MANAGER_SERVER);
+    Eigen::VectorXd v(2);
+    v << 0.0, 0.8;
+    server.addSignal("signal_1", v);
+    Eigen::VectorXd v2 = server.get("signal_1");
+    EXPECT_EQ(2, v2.size());
+    EXPECT_DOUBLE_EQ(0, v2(0));
+    EXPECT_DOUBLE_EQ(0.8, v2(1));
     
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
-/*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-class World : public LoopElement {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+    v << 1.0, 1.2;
+    server.set("signal_1", v);
+    v2 = server.get("signal_1");
+    EXPECT_EQ(2, v2.size());
+    EXPECT_DOUBLE_EQ(1.0, v2(0));
+    EXPECT_DOUBLE_EQ(1.2, v2(1));
+    server.removeSignal("signal_1");
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+//
+// Test memory client set/get function
+//
+TEST(SharedMemory, Client){
+    const char* memoryName = "MyMemory";
+    SharedMemory server(memoryName, CR_MANAGER_SERVER);
+    Eigen::VectorXd v(1);
+    v << 1.4;
+    server.addSignal("signal_2", v);
+    
+    SharedMemory client(memoryName, CR_MANAGER_CLIENT);
+    Eigen::VectorXd v2 = client.get("signal_2");
+    EXPECT_EQ(1, v2.size());
+    EXPECT_DOUBLE_EQ(1.4, v2(0));
+    
+    v << 2.4;
+    client.set("signal_2", v);
+    v2 = server.get("signal_2");
+    EXPECT_EQ(1, v2.size());
+    EXPECT_DOUBLE_EQ(2.4, v2(0));
+    
+    server.removeSignal("signal_2");
+}
+

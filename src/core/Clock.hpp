@@ -37,80 +37,91 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#ifndef CR_CLOCK_HPP_
+#define CR_CLOCK_HPP_
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
+//=====================================================================
+// Includes
+#include <chrono>
 
-//---------------------------------------------------------------------
-// Begin namespace
+
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
+
     
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
+//=====================================================================
 /*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
+ \file Clock.hpp
+ \brief Implements a clock.
  */
 //---------------------------------------------------------------------
-class World : public LoopElement {
+/*!
+ \class Clock
+ \ingroup core
+ 
+ \brief This class implements a clock for timing code sections and
+ control loop rates.
+ 
+ \details
+ ## Description
+ Clock implements a simple clock interface for timing the 
+ execution of code.
+ 
+ - Clock::startTimer starts the clock.
+ - Clock::getElapsedTime returns the elapsed time (s) since the most
+ recent call of startTimer().
+ - Clock::sleep sleeps the current thread (s).
+ 
+ ## Example
+ This example creates and runs a simple Clock.
+ \include example_Core.cpp
+ */
+//=====================================================================
+class Clock {
     
-    // Constructor and Destructor
-    public:
+//---------------------------------------------------------------------
+// Constructor and Destructor
+public:
     
-        //! Class constructor
-		World();
+    //! Class constructor
+    Clock();
     
-        //! Class destructor
-        ~World();
+    //! Class destructor
+    virtual ~Clock();
     
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
     
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
+    
+//---------------------------------------------------------------------
+// Public Methods
+public:
+    
+    //! Start the timer
+    void startTimer(void);
+    
+    //! Get the elapsed time [s] since startTimer() was called
+    double getElapsedTime(void);
+    
+    //! Sleep the current thread
+    void sleep(double i_time);
+    
+    
+//---------------------------------------------------------------------
+// Protected Members
+private:
 
+	//! steady_clock object
+	std::chrono::steady_clock m_clock;
     
-    // Private members
-    private:
+    //! steady_clock timepoints
+	std::chrono::steady_clock::time_point m_t0, m_t1;
     
-        //! add a world item
-        WorldItem* m_rootItem;
     
 };
-
+//=====================================================================
+// End namespace
 }
-// end namespace
-//---------------------------------------------------------------------
 
 #endif

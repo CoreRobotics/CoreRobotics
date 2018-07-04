@@ -37,80 +37,61 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#include "SensorModel.hpp"
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
 
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
     
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
     
-    
-//---------------------------------------------------------------------
+//=====================================================================
 /*!
- \class World
- \ingroup core
+ The constructor creates a sensor model.  The i_predictor specifies 
+ the observation equation:\n
  
- \brief
+ \f$ zPredict =  h(x) \f$
  
- \details
+ where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
+ sensor observation. The callback function prototype is thus
+ \code
+ Eigen::VectorXd i_predictor(Eigen::VectorXd x){
+    // compute zPredict from x here.
+    return zPredict;
+ };
+ \endcode
  
+ \param[in] i_predictor - a model function of the form specified above
+ \param[in] i_x0 - the initial state.
  */
 //---------------------------------------------------------------------
-class World : public LoopElement {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+SensorModel::SensorModel(Eigen::VectorXd(i_predictor)(Eigen::VectorXd),
+                             Eigen::VectorXd i_x0)
+{
+    this->m_measPredictFcn = i_predictor;
+    this->setState(i_x0);
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+// overloaded constructor for initializing derived classes
+SensorModel::SensorModel() { }
+
+
+//=====================================================================
+/*!
+ This method simulates the measurement from the value of the underlying
+ state.\n
+ 
+ \return - simulated measurement (z).
+ */
+//---------------------------------------------------------------------
+Eigen::VectorXd SensorModel::measurement(void)
+{
+    return (this->m_measPredictFcn)(this->m_state);
+}
+
+
+//=====================================================================
+// End namespace
+}

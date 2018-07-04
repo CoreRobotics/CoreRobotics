@@ -44,7 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define CR_WORLDITEM_HPP_
 
 #include <vector>
-#include "CRFrame.hpp"
+#include "Frame.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -90,7 +90,7 @@ class WorldItem {
         void addChild(WorldItem* i_item);
     
         //! remove a child from the list of children
-        CRResult removeChild(WorldItem* i_item);
+        Result removeChild(WorldItem* i_item);
     
         //! set the parent of the item
         void setParent(WorldItem* i_item);
@@ -103,23 +103,23 @@ class WorldItem {
     public:
     
         //! set the local frame transformation
-        void setLocalTransform(const CRFrame& i_frame);
+        void setLocalTransform(const Frame& i_frame);
     
         //! return the local frame transformation
-        CRFrame getLocalTransform();
+        Frame getLocalTransform();
     
         //! return the global frame transformation
-        CRFrame getGlobalTransform();
+        Frame getGlobalTransform();
     
         //! return the relative frame transformation
-        CRFrame getRelativeTransform(WorldItem* i_item);
+        Frame getRelativeTransform(WorldItem* i_item);
     
     
     // protected member data
     protected:
     
         //! Transformation
-        CRFrame m_frame;
+        Frame m_frame;
     
     
     // private member data

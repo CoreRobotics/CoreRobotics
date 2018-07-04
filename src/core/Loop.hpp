@@ -40,74 +40,117 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#ifndef CR_LOOP_HPP_
+#define CR_LOOP_HPP_
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
+#include <thread>
+#include "Clock.hpp"
+#include "Types.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace CoreRobotics {
-    
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
+
     
 //---------------------------------------------------------------------
 /*!
- \class World
+ \class Loop
  \ingroup core
  
- \brief
+ \brief This class implements looped thread execution, which includes
+ soft real-time control and start/stop functionality.
  
  \details
+ ## Description
+ Loop implements a thread loop controller class, which includes
+ the following methods:
  
+ - Loop::start starts the thread loop element.
+ - Loop::pause pauses the loop element execution, but does not
+ exit the thread of execution.
+ - Loop::stop exits the thread of execution.
+ - Loop::stop stops the thread execution.
  */
 //---------------------------------------------------------------------
-class World : public LoopElement {
+class LoopElement;
+class Loop {
     
     // Constructor and Destructor
     public:
     
         //! Class constructor
-		World();
+        Loop(LoopElement* i_member);
+		Loop(LoopElement* i_member, double i_updateRate);
     
         //! Class destructor
-        ~World();
+        virtual ~Loop();
     
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
     
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
+    // Primary control functions
+    public:
     
+        //! Start the thread execution
+        void start();
+    
+        //! Pause the thread execution
+        void pause();
+    
+        //! Stop the thread execution
+        void stop();
+    
+        //! Thread callback
+        void callback();
+    
+    
+    // Set/get functions
+    public:
+    
+        //! Set the update rate
+        void setUpdateRate(const double a_updateRate) {m_updateRate = a_updateRate;}
+    
+        //! Get the update rate
+        double getUpdateRate() {return m_updateRate;}
+    
+        //! Get the current thread run time
+        double getCurrentTime();
+    
+
     // Private members
     private:
     
-        //! add a world item
-        WorldItem* m_rootItem;
+        //! thread member
+        LoopElement* m_element;
+    
+        //! simulation state
+        RunState m_runState = CR_RUN_STATE_STOPPED;
+    
+        //! thread
+        // CoreRobotics::Thread* m_thread = NULL;
+        std::thread* m_thread = NULL;
+    
+        //! global timer
+        Clock m_timer;
+    
+        //! thread update rate (s)
+        double m_updateRate = 0;
+    
+        //! amount of time spent in pause since first start from stop (s).
+        double m_t0 = 0;
+    
+        //! time at last pause() call
+        double m_tPaused = 0;
     
 };
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Smart pointer to Loop.
+ */
+//---------------------------------------------------------------------
+typedef std::shared_ptr<Loop> LoopPtr;
+    
+    
 
 }
 // end namespace

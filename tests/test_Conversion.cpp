@@ -37,80 +37,49 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#include <iostream>
+#include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
 
-//---------------------------------------------------------------------
-// Begin namespace
-namespace CoreRobotics {
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
+
+
+//
+// Test the unit conversion maths
+//
+TEST(Conversion, Units){
     
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
-/*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-class World : public LoopElement {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+    // basic radian/degree conversions
+    EXPECT_DOUBLE_EQ(180, Conversion::rad2deg(M_PI));
+    EXPECT_DOUBLE_EQ(90,  Conversion::rad2deg(M_PI / 2));
+    EXPECT_DOUBLE_EQ(M_PI, Conversion::deg2rad(180));
+    EXPECT_DOUBLE_EQ(M_PI / 2,  Conversion::deg2rad(90));
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+
+//
+// Test the angle wrapping maths
+//
+TEST(Conversion, Wrapping){
+    
+    // check wrapping
+    EXPECT_NEAR(0, Conversion::wrapToPi(0), 1e-12);
+    EXPECT_NEAR(0, Conversion::wrapToPi(2 * M_PI), 1e-12);
+    EXPECT_NEAR(0, Conversion::wrapToPi(4 * M_PI), 1e-12);
+    
+    // slight offsets
+    EXPECT_NEAR(0.1 - M_PI, Conversion::wrapToPi(M_PI + 0.1), 1e-12);
+    EXPECT_NEAR(M_PI - 0.1, Conversion::wrapToPi(-(M_PI + 0.1)), 1e-12);
+    EXPECT_NEAR(0.1, Conversion::wrapToPi(2 * M_PI + 0.1), 1e-12);
+    
+    // at pi boundary (always goes to negative)
+    EXPECT_NEAR(-M_PI, Conversion::wrapToPi(M_PI), 1e-12);
+    EXPECT_NEAR(-M_PI, Conversion::wrapToPi(-M_PI), 1e-12);
+    EXPECT_NEAR(-M_PI, Conversion::wrapToPi(11 * M_PI), 1e-12);
+    EXPECT_NEAR(-M_PI, Conversion::wrapToPi(-11 * M_PI), 1e-12);
+}
+

@@ -37,80 +37,57 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#include "Mutex.hpp"
+#include <mutex>
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
-
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
-    
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
+
     
     
-//---------------------------------------------------------------------
+//=====================================================================
 /*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
+ The constructor defines a mutex.\n
  */
 //---------------------------------------------------------------------
-class World : public LoopElement {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+Mutex::Mutex() {
+    m_mutex = new std::recursive_mutex;
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+
+//=====================================================================
+/*!
+ The destructor frees up memory.\n
+ */
+//---------------------------------------------------------------------
+Mutex::~Mutex() { }
+
+    
+
+//=====================================================================
+/*!
+ This method acquires the mutex to block other threads from writing data.
+ */
+//---------------------------------------------------------------------
+void Mutex::lock() {
+    m_mutex->lock();
+}
+
+
+//=====================================================================
+/*!
+This method releases the mutex to allow other threads to write data.
+*/
+//---------------------------------------------------------------------
+void Mutex::unlock() {
+    m_mutex->unlock();
+}
+
+
+//=====================================================================
+// End namespace
+}
+

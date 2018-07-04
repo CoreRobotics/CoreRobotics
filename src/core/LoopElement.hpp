@@ -40,75 +40,76 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#ifndef CR_LOOP_ELEMENT_HPP_
+#define CR_LOOP_ELEMENT_HPP_
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
+#include <vector>
+#include "Loop.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace CoreRobotics {
-    
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
+
     
 //---------------------------------------------------------------------
 /*!
- \class World
+ \class LoopElement
  \ingroup core
  
- \brief
+ \brief This abstract class defines the methods needed to derive a
+ root call element for a Loop.
  
  \details
+ ## Description
+ This abstract class defines the methods needed to derive a
+ call for the root element of a LoopElement.  The primary methods
+ to be implemented are:
  
+ - LoopElement::step() is called on each iteration of the Loop
+ while the thread is running.
  */
 //---------------------------------------------------------------------
-class World : public LoopElement {
+class LoopElement {
     
-    // Constructor and Destructor
+    // Constructor and destructor
     public:
     
-        //! Class constructor
-		World();
+        //! constructor
+		LoopElement() {}
     
-        //! Class destructor
-        ~World();
+        //! destructor
+        ~LoopElement() {
+            delete m_caller;
+        }
     
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
     
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
+    // Primary LoopRoot functions that must be implemented
+    public:
     
-    // Private members
-    private:
+        //! Step the element - called on each iteration of the thread while running
+        virtual void step() = 0;
     
-        //! add a world item
-        WorldItem* m_rootItem;
+        //! Reset the element - called on ThreadLoop::start())
+        virtual void reset() = 0;
     
+    
+    // LoopElement graph methods
+    public:
+    
+        //! set the pointer to the LoopElement parent caller
+        void setCaller(Loop* i_caller) { m_caller = i_caller; }
+    
+        //! return the pointer to the parent caller (NULL value indicates no caller)
+        Loop* getCaller() { return m_caller; }
+    
+    
+    // Protected members
+    protected:
+    
+        //! thread caller
+        Loop* m_caller = NULL;
 };
-
+    
 }
 // end namespace
 //---------------------------------------------------------------------

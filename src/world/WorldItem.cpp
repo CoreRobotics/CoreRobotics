@@ -101,7 +101,7 @@ void WorldItem::addChild(WorldItem* i_item)
                 (CR_RESULT_SUCCESS or CR_RESULT_NOT_FOUND)
  */
 //---------------------------------------------------------------------
-CRResult WorldItem::removeChild(WorldItem* i_item)
+Result WorldItem::removeChild(WorldItem* i_item)
 {
     for (int k = 0; k < m_children.size(); k++){
         if (m_children.at(k) == i_item)
@@ -149,7 +149,7 @@ WorldItem* WorldItem::getParent()
  \param[in]     i_frame - the local frame transformation
  */
 //---------------------------------------------------------------------
-void WorldItem::setLocalTransform(const CRFrame& i_frame)
+void WorldItem::setLocalTransform(const Frame& i_frame)
 {
     m_frame = i_frame;
 }
@@ -163,7 +163,7 @@ void WorldItem::setLocalTransform(const CRFrame& i_frame)
  \return        the local frame transformation
  */
 //---------------------------------------------------------------------
-CRFrame WorldItem::getLocalTransform()
+Frame WorldItem::getLocalTransform()
 {
     return m_frame;
 }
@@ -177,7 +177,7 @@ CRFrame WorldItem::getLocalTransform()
  \return        the local frame transformation
  */
 //---------------------------------------------------------------------
-CRFrame WorldItem::getGlobalTransform()
+Frame WorldItem::getGlobalTransform()
 {
     Eigen::Matrix4d T = m_frame.getTransformToParent();
     WorldItem* parent = m_parent;
@@ -185,7 +185,7 @@ CRFrame WorldItem::getGlobalTransform()
         T = parent->getLocalTransform().getTransformToParent() * T;
         parent = parent->getParent();
     }
-    CRFrame f;
+    Frame f;
     f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
     return f;
 }
@@ -199,11 +199,11 @@ CRFrame WorldItem::getGlobalTransform()
  \return        the relative frame transformation
  */
 //---------------------------------------------------------------------
-CRFrame WorldItem::getRelativeTransform(WorldItem* i_item)
+Frame WorldItem::getRelativeTransform(WorldItem* i_item)
 {
     Eigen::Matrix4d T0 = this->getGlobalTransform().getTransformToParent();
     Eigen::Matrix4d T = i_item->getGlobalTransform().getTransformToChild() * T0;
-    CRFrame f;
+    Frame f;
     f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
     return f;
 }

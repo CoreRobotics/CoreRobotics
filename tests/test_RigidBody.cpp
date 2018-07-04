@@ -34,83 +34,24 @@ POSSIBILITY OF SUCH DAMAGE.
 
 \project CoreRobotics Project
 \url     www.corerobotics.org
-\author  Parker Owan
+\author  Parker Owan, Tony Piaskowy
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
+#include <iostream>
+#include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
-
-//---------------------------------------------------------------------
-// Begin namespace
-namespace CoreRobotics {
-    
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
-/*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-class World : public LoopElement {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+//
+// Test the set frame method
+//
+TEST(RigidBody, SetFrame){
+    Frame frame;
+    RigidBody link;
+    link.setFrame(&frame);
+    EXPECT_EQ(link.m_frame, &frame);
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif

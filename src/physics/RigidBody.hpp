@@ -37,80 +37,82 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#ifndef RigidBody_hpp
+#define RigidBody_hpp
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
+//=====================================================================
+// Includes
+#include "Frame.hpp"
+#include "FrameDh.hpp"
+#include "FrameEuler.hpp"
 
-//---------------------------------------------------------------------
-// Begin namespace
+
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
     
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
+//=====================================================================
 /*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
+ \file RigidBody.hpp
+ \brief Implements a container class for rigid body transformations and
+ dynamics properties.
  */
 //---------------------------------------------------------------------
-class World : public LoopElement {
+/*!
+ \class RigidBody
+ \ingroup physics
+ 
+ \brief This class is a container for rigid body transformations and
+ dynamic properties necessary for multibody representations.
+ 
+ \details
+ ## Description
+ RigidBody implements a container for representing rigid body
+ dynamics.  At a minimum it points to a CoreRobotics::Frame class or
+ derived subclass.
+ 
+ ## Example
+ This example creates an Rigid body object.
+ \include example_Manipulator.cpp
+ 
+ ## References
+ [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
+ Pearson, 2004.
+ */
+//=====================================================================
+class RigidBody {
     
-    // Constructor and Destructor
-    public:
+//---------------------------------------------------------------------
+// Constructor and Destructor
+public:
     
-        //! Class constructor
-		World();
+    //! Class constructor
+    RigidBody(Frame* i_frame);
+    RigidBody();
     
-        //! Class destructor
-        ~World();
+    //! Class destructor
+    // virtual ~RigidBody() = 0;
     
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
+//---------------------------------------------------------------------
+// Get/Set Methods
+public:
     
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
+    //! Sets the pointer to the frame class for the transformation
+    void setFrame(Frame* i_frame) {this->m_frame = i_frame;}
     
-    // Private members
-    private:
+//---------------------------------------------------------------------
+// Public Members
+public:
     
-        //! add a world item
-        WorldItem* m_rootItem;
+    //! Pointer to the rigid body frame transformation
+    CoreRobotics::Frame* m_frame;
     
 };
 
+//=====================================================================
+// End namespace
 }
-// end namespace
-//---------------------------------------------------------------------
 
 #endif

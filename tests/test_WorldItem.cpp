@@ -68,7 +68,7 @@ TEST(WorldItem, transforms){
     // WorldItemPtr item3 = WorldItem::create();
     
     // define 3 unique frame transforms
-    CRFrame f1, f2, f3;
+    Frame f1, f2, f3;
     Eigen::Matrix3d R;
     R.setIdentity();
     Eigen::Vector3d T;

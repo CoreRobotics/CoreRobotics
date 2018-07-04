@@ -37,80 +37,78 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#ifndef CR_MUTEX_HPP_
+#define CR_MUTEX_HPP_
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
+//=====================================================================
+// Includes
+#include <mutex>
 
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
+
     
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
+//=====================================================================
 /*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
+ \file Mutex.hpp
+ \brief Implements a thread mutex.
  */
 //---------------------------------------------------------------------
-class World : public LoopElement {
+/*!
+ \class Mutex
+ \ingroup core
+ 
+ \brief This class implements a mutex to ensure mutually exclusive
+ writing of data to thread data.
+ 
+ \details
+ ## Description
+ Mutex implements a mutex to for deterministic data transfer between
+ threads.
+ 
+ - Mutex::lock locks the thread from access.
+ - Mutex::unlock releases the thread for access.
+ */
+
+//=====================================================================
+class Mutex {
     
-    // Constructor and Destructor
-    public:
+//---------------------------------------------------------------------
+// Constructor and Destructor
+public:
     
-        //! Class constructor
-		World();
+    //! Class constructor
+    Mutex();
     
-        //! Class destructor
-        ~World();
+    //! Class destructor
+    ~Mutex();
     
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
     
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
+//---------------------------------------------------------------------
+// Public Methods
+public:
+    
+    //! Acquire the mutex
+    void lock();
 
+	//! Release the mutex
+	void unlock();
     
-    // Private members
-    private:
     
-        //! add a world item
-        WorldItem* m_rootItem;
+//---------------------------------------------------------------------
+// Protected Members
+private:
+
+	//! thread pointer
+    std::recursive_mutex* m_mutex;
+    
     
 };
-
+//=====================================================================
+// End namespace
 }
-// end namespace
-//---------------------------------------------------------------------
 
 #endif

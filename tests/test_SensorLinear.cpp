@@ -37,80 +37,37 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
+#include <iostream>
+#include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
-
-//---------------------------------------------------------------------
-// Begin namespace
-namespace CoreRobotics {
+//
+// Test the linear prediction
+//
+TEST(SensorLinear, Predict){
+    Eigen::VectorXd x(1);   // state vector
+    Eigen::VectorXd z(1);   // observation
+    x << 1;     // initial condition
+    Eigen::Matrix<double,1,1> H;    // observation Matrix
+    H << 1;
+    SensorLinear sensor = SensorLinear(H, x);
+    z = sensor.measurement();
+    EXPECT_DOUBLE_EQ(1, z(0));
     
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
+    x = sensor.getState();
+    EXPECT_DOUBLE_EQ(1, x(0));
     
+    x << 10;
+    sensor.setState(x);
+    x = sensor.getState();
+    EXPECT_DOUBLE_EQ(10, x(0));
     
-//---------------------------------------------------------------------
-/*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-class World : public LoopElement {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+    H << 0.1;
+    sensor.setObservation(H);
+    z = sensor.measurement();
+    EXPECT_DOUBLE_EQ(1, z(0));
 }
-// end namespace
-//---------------------------------------------------------------------
-
-#endif

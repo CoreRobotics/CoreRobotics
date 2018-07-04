@@ -40,12 +40,13 @@
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_SIGNAL_HPP_
-#define CR_SIGNAL_HPP_
+#ifndef CR_SLOT_HPP_
+#define CR_SLOT_HPP_
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace CoreRobotics {
+
     
 //---------------------------------------------------------------------
 /*!

@@ -37,80 +37,36 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
-
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
-
-//---------------------------------------------------------------------
-// Begin namespace
-namespace CoreRobotics {
-    
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
-/*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-class World : public LoopElement {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
+#include <iostream>
+#include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
 
-	// ThreadLoopElement behaviors
-	public:
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+//
+// Test the function of the clock to sleep for 100 ms
+//
+TEST(Clock, ClockSleepLong){
+    Clock MyClock;
+    double t;
+    MyClock.startTimer();
+    MyClock.sleep(0.1);
+    t = MyClock.getElapsedTime();
+    EXPECT_NEAR(0.1, t, 0.01);
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+//
+// Test the function of the clock to sleep for 1 ms
+//
+TEST(Clock, ClockSleepShort){
+    Clock MyClock;
+    double t;
+    MyClock.startTimer();
+    MyClock.sleep(0.001);
+    t = MyClock.getElapsedTime();
+    EXPECT_NEAR(0.001, t, 0.001);
+}

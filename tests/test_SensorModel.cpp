@@ -37,80 +37,36 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
+#include <iostream>
+#include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+// Use the CoreRobotics namespace
+using namespace CoreRobotics;
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
-
-//---------------------------------------------------------------------
-// Begin namespace
-namespace CoreRobotics {
-    
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
-/*!
- \class World
- \ingroup core
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-class World : public LoopElement {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+// Declare a deterministic model - fcn(x,zHat)
+Eigen::VectorXd detPredFcn(Eigen::VectorXd x){
+    return x;  // observation (z = x)
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+//
+// Test the model prediction
+//
+TEST(SensorModel, Predict){
+    Eigen::VectorXd x(1);   // state vector
+    Eigen::VectorXd z(1);   // observation
+    x << 1;     // initial condition
+    SensorModel sensor = SensorModel(*detPredFcn, x);
+    z = sensor.measurement();
+    EXPECT_DOUBLE_EQ(1, z(0));
+    
+    x = sensor.getState();
+    EXPECT_DOUBLE_EQ(1, x(0));
+    
+    x << 10;
+    sensor.setState(x);
+    x = sensor.getState();
+    EXPECT_DOUBLE_EQ(10, x(0));
+}
+

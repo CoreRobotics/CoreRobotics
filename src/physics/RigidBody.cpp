@@ -37,80 +37,44 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#include "RigidBody.hpp"
 
-#include "LoopElement.hpp"
-#include "WorldItem.hpp"
 
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace CoreRobotics {
     
-//! World shared pointer
-class World;
-typedef std::shared_ptr<World> WorldPtr;
-    
-    
-//---------------------------------------------------------------------
+
+//=====================================================================
 /*!
- \class World
- \ingroup core
+ The constructor creates a rigid body container.\n
  
- \brief
- 
- \details
- 
+ \param[in] i_frame - pointer to the frame associated with the rigid
+ body transformation.
  */
 //---------------------------------------------------------------------
-class World : public LoopElement {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		World();
-    
-        //! Class destructor
-        ~World();
-    
-        //! Create a pointer
-        static WorldPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-
-
-	// Scene graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(WorldItem* i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(WorldItem* i_item) { m_rootItem->removeChild(i_item); }
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        WorldItem* m_rootItem;
-    
-};
-
+RigidBody::RigidBody(Frame* i_frame){
+    this->m_frame = i_frame;
 }
-// end namespace
-//---------------------------------------------------------------------
+    
+RigidBody::RigidBody() { }
 
-#endif
+
+//=====================================================================
+/*!
+ Destructor.\n
+ */
+//---------------------------------------------------------------------
+//RigidBody::~RigidBody() {
+//    delete frame;
+//}
+
+
+
+//=====================================================================
+// End namespace
+}
+
+
