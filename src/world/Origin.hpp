@@ -38,77 +38,96 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //---------------------------------------------------------------------
+// Begin header definition
 
-#include "World.hpp"
+#ifndef CR_WORLD_HPP_
+#define CR_WORLD_HPP_
+
+#include "LoopElement.hpp"
+#include "Node.hpp"
+#include "Item.hpp"
+#include <memory>
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
     
+//! Origin shared pointer
+class Origin;
+typedef std::shared_ptr<Origin> OriginPtr;
+    
     
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the world.\n
+ \class Origin
+ \ingroup world
+ 
+ \brief
+ 
+ 
+ \details
+ 
  */
 //---------------------------------------------------------------------
-World::World()
+class Origin : public LoopElement, public Item
 {
-    m_rootItem = std::make_shared<WorldItem>();
-    // m_rootItem = new WorldItem();
-}
+    
+    // Constructor and Destructor
+    public:
+    
+        //! Class constructor
+		Origin();
+    
+        //! Class destructor
+        ~Origin();
+    
+        //! Create a pointer
+        static OriginPtr create();
 
 
-//---------------------------------------------------------------------
-/*!
- The destructor deletes the world.\n
- */
-//---------------------------------------------------------------------
-World::~World()
-{
+	// ThreadLoopElement behaviors
+	public:
 
-}
+		//! step()
+        virtual void step() {};
+
+		//! reset()
+        virtual void reset() {};
+
+
+	// Scene graph behaviors
+	public:
+
+		//! add a child to the list of children
+        void addChild(NodePtr i_item) { m_rootItem->addChild(i_item); }
+    
+        //! remove a child from the list of children
+        void removeChild(NodePtr i_item) { m_rootItem->removeChild(i_item); }
     
     
-//---------------------------------------------------------------------
-/*!
- Create a whole new world.\n
- */
-//---------------------------------------------------------------------
-WorldPtr World::create()
-{
-    return std::make_shared<World>();
-}
+    // Print details
+    public:
     
+        //! print out the scene
+        void print(std::ostream& i_stream);
+
     
-//---------------------------------------------------------------------
-/*!
- Print the output scene.\n
- */
-//---------------------------------------------------------------------
-void World::print(std::ostream& i_stream)
-{
-    i_stream << "+ cr::World '" << getName() << "'\n";
-    m_rootItem->print(i_stream);
-}
+    // Private members
+    private:
     
+        //! add a world item
+        NodePtr m_rootItem;
     
+};
 
 }
 // end namespace
 //---------------------------------------------------------------------
 
 
+//! Origin display operator overload
+// std::ostream& operator<<(std::ostream&, const cr::Origin&);
 
-//---------------------------------------------------------------------
-/*!
- Display operator details to an output stream.\n
- */
-//---------------------------------------------------------------------
-/*
-std::ostream& operator<<(std::ostream& os, cr::WorldPtr obj)
-{
-    os << "obj->getName()" << "\n";
-    return os;
-}
- */
 
+
+#endif

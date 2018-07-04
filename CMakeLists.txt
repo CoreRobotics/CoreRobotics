@@ -98,9 +98,9 @@ file(GLOB CR_INCLUDE_DIRS
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/core
     ${CMAKE_SOURCE_DIR}/src/math
-    ${CMAKE_SOURCE_DIR}/src/models
+    ${CMAKE_SOURCE_DIR}/src/model
     ${CMAKE_SOURCE_DIR}/src/physics
-    ${CMAKE_SOURCE_DIR}/src/controllers
+    ${CMAKE_SOURCE_DIR}/src/control
     ${CMAKE_SOURCE_DIR}/src/world
     ${EIGEN3_INCLUDE_DIR}
     ${Boost_INCLUDE_DIR}
@@ -111,17 +111,17 @@ include_directories( ${CR_INCLUDE_DIRS} )
 # Header files
 file(GLOB HEADERS_CORE src/core/*.hpp )
 file(GLOB HEADERS_MATH src/math/*.hpp )
-file(GLOB HEADERS_MODELS src/models/*.hpp )
+file(GLOB HEADERS_MODELS src/model/*.hpp )
 file(GLOB HEADERS_PHYSICS src/physics/*.hpp )
-file(GLOB HEADERS_CONTROLLERS src/controllers/*.hpp )
+file(GLOB HEADERS_CONTROLLERS src/control/*.hpp )
 file(GLOB HEADERS_WORLD src/world/*.hpp )
 
 # Source files
 file(GLOB SOURCES_CORE src/core/*.cpp )
 file(GLOB SOURCES_MATH src/math/*.cpp )
-file(GLOB SOURCES_MODELS src/models/*.cpp )
+file(GLOB SOURCES_MODELS src/model/*.cpp )
 file(GLOB SOURCES_PHYSICS src/physics/*.cpp )
-file(GLOB SOURCES_CONTROLLERS src/controllers/*.cpp )
+file(GLOB SOURCES_CONTROLLERS src/control/*.cpp )
 file(GLOB SOURCES_WORLD src/world/*.cpp )
 
 # If building on linux add pthread and rt
@@ -149,9 +149,9 @@ add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${H
     source_group( "\\" FILES "src/CoreRobotics.hpp")
 	source_group( "core" FILES ${HEADERS_CORE} ${SOURCES_CORE})
 	source_group( "math" FILES ${HEADERS_MATH} ${SOURCES_MATH})
-	source_group( "models" FILES ${HEADERS_MODELS} ${SOURCES_MODELS})
+	source_group( "model" FILES ${HEADERS_MODELS} ${SOURCES_MODELS})
 	source_group( "physics" FILES ${HEADERS_PHYSICS} ${SOURCES_PHYSICS})
-	source_group( "controllers" FILES ${HEADERS_CONTROLLERS} ${SOURCES_CONTROLLERS})
+	source_group( "control" FILES ${HEADERS_CONTROLLERS} ${SOURCES_CONTROLLERS})
     source_group( "world" FILES ${HEADERS_WORLD} ${SOURCES_WORLD})
 
 

@@ -44,6 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define CR_ITEM_HPP_
 
 #include <string>
+#include <iostream>
 
 //---------------------------------------------------------------------
 // Begin namespace

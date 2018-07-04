@@ -53,15 +53,15 @@ using namespace cr;
  Test the frame transform methods
  */
 //---------------------------------------------------------------------
-TEST(WorldItem, transforms){
+TEST(Node, transforms){
     
     // create a world
-    WorldPtr myWorld = World::create();
+    OriginPtr myOrigin = Origin::create();
     
     // create 3 world items
-    WorldItemPtr item1 = WorldItem::create();
-    WorldItemPtr item2 = WorldItem::create();
-    WorldItemPtr item3 = WorldItem::create();
+    NodePtr item1 = Node::create();
+    NodePtr item2 = Node::create();
+    NodePtr item3 = Node::create();
     
     // define 3 unique frame transforms
     Frame f1, f2, f3;
@@ -83,8 +83,8 @@ TEST(WorldItem, transforms){
     // assign a simple scene graph
     // !!! THIS IS WHERE THE SEG FAULT HAPPENS
     item1->addChild(item2);
-    myWorld->addChild(item1);
-    myWorld->addChild(item3);
+    myOrigin->addChild(item1);
+    myOrigin->addChild(item3);
     
     // return the frame transformation locations
     Eigen::Vector3d p;
@@ -140,11 +140,11 @@ TEST(WorldItem, transforms){
  Test the frame transform methods
  */
 //---------------------------------------------------------------------
-TEST(WorldItem, leaf){
+TEST(Node, leaf){
     
     // create 2 world items
-    WorldItemPtr item1 = WorldItem::create();
-    WorldItemPtr item2 = WorldItem::create();
+    NodePtr item1 = Node::create();
+    NodePtr item2 = Node::create();
     
     EXPECT_EQ(item1->isLeaf(), true);
     EXPECT_EQ(item2->isLeaf(), true);

@@ -40,66 +40,67 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_WORLDITEM_HPP_
-#define CR_WORLDITEM_HPP_
+#ifndef CR_NODE_HPP_
+#define CR_NODE_HPP_
 
-#include <vector>
 #include "Frame.hpp"
 #include "Item.hpp"
+#include <vector>
+#include <memory>
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
     
-//! WorldItem shared pointer
-class WorldItem;
-typedef std::shared_ptr<WorldItem> WorldItemPtr;
+//! Node shared pointer
+class Node;
+typedef std::shared_ptr<Node> NodePtr;
     
     
 //---------------------------------------------------------------------
 /*!
- \class WorldItem
+ \class Node
  \ingroup world
  
  \brief
  This class implements a basic world scene graph item for attaching to
- a World thread element or other WorldItems.
+ a Origin thread element or other Nodes.
 
  \details
  
  */
 //---------------------------------------------------------------------
-class WorldItem
-    : public std::enable_shared_from_this<WorldItem>, public Item
+class Node
+    : public std::enable_shared_from_this<Node>, public Item
 {
     
     // Constructor and Destructor
     public:
     
         //! Class constructor
-        WorldItem();
+        Node();
     
         //! Class destructor
-        ~WorldItem();
+        ~Node();
     
         //! Create a pointer
-        static WorldItemPtr create();
+        static NodePtr create();
     
     
     // Scene graph controls
     public:
     
         //! add a child to the list of children
-        void addChild(WorldItemPtr i_item);
+        void addChild(NodePtr i_item);
     
         //! remove a child from the list of children
-        Result removeChild(WorldItemPtr i_item);
+        Result removeChild(NodePtr i_item);
     
         //! set the parent of the item
-        void setParent(WorldItemPtr i_item);
+        void setParent(NodePtr i_item);
     
         //! get the parent of the child
-        WorldItemPtr getParent();
+        NodePtr getParent();
     
         //! return if the item is a leaf (i.e. no children)
         bool isLeaf();
@@ -121,7 +122,7 @@ class WorldItem
         Frame getGlobalTransform();
     
         //! return the relative frame transformation
-        Frame getRelativeTransform(WorldItemPtr i_item);
+        Frame getRelativeTransform(NodePtr i_item);
     
     
     // Print details
@@ -142,10 +143,10 @@ class WorldItem
     private:
     
         //! parent item
-        WorldItemPtr m_parent = NULL;
+        NodePtr m_parent = NULL;
     
         //! list of children
-        std::vector<WorldItemPtr> m_children;
+        std::vector<NodePtr> m_children;
     
     
     

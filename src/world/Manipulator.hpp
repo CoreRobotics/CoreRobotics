@@ -46,7 +46,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <vector>
 #include <memory>
 #include "RigidBody.hpp"
-#include "WorldItem.hpp"
+#include "Node.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -124,7 +124,7 @@ typedef std::shared_ptr<Manipulator> ManipulatorPtr;
 //---------------------------------------------------------------------
 class Manipulator
     : public std::enable_shared_from_this<Manipulator>,
-    public WorldItem
+    public Node
 {
     
 

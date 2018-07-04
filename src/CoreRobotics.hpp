@@ -376,10 +376,10 @@ project includes all the CoreRobotics modules.
 
 //---------------------------------------------------------------------------
 //! \defgroup world World
-//! \brief This module implements simulation elements representing the world.
+//! \brief This module implements a kinematic tree graph.
 //---------------------------------------------------------------------------
-#include "World.hpp"
-#include "WorldItem.hpp"
+#include "Origin.hpp"
+#include "Node.hpp"
 #include "Manipulator.hpp"
 // #include "Sensor.hpp"
 // #include "CRPolicy.hpp"
@@ -406,7 +406,7 @@ project includes all the CoreRobotics modules.
 
 
 //---------------------------------------------------------------------------
-//! \defgroup models Models
+//! \defgroup model Model
 //! \brief This module implements generic model (sensor, motion, and
 //! noise) representations.
 //---------------------------------------------------------------------------
@@ -424,8 +424,8 @@ project includes all the CoreRobotics modules.
 
 
 //---------------------------------------------------------------------------
-//! \defgroup controllers Controllers
-//! \brief This module implements controllers and policies for regulating
+//! \defgroup control Control
+//! \brief This module implements control policies for regulating
 //! motion and actions.
 //---------------------------------------------------------------------------
 #include "InverseKinematics.hpp"

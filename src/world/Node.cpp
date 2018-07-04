@@ -39,7 +39,7 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //---------------------------------------------------------------------
 
-#include "WorldItem.hpp"
+#include "Node.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -51,7 +51,7 @@ namespace cr {
  Constructor to the world item.\n
  */
 //---------------------------------------------------------------------
-WorldItem::WorldItem(){
+Node::Node(){
     
 }
     
@@ -61,7 +61,7 @@ WorldItem::WorldItem(){
  Destructor to the world item.\n
  */
 //---------------------------------------------------------------------
-WorldItem::~WorldItem(){
+Node::~Node(){
     // delete m_parent;
 }
     
@@ -71,8 +71,8 @@ WorldItem::~WorldItem(){
  Create a new world item.\n
  */
 //---------------------------------------------------------------------
-WorldItemPtr WorldItem::create(){
-    return std::make_shared<WorldItem>();
+NodePtr Node::create(){
+    return std::make_shared<Node>();
 }
     
     
@@ -83,7 +83,7 @@ WorldItemPtr WorldItem::create(){
  \param[in]     i_item - the child to add
  */
 //---------------------------------------------------------------------
-void WorldItem::addChild(WorldItemPtr i_item)
+void Node::addChild(NodePtr i_item)
 {
     i_item->setParent(shared_from_this());
     m_children.push_back(i_item);
@@ -99,7 +99,7 @@ void WorldItem::addChild(WorldItemPtr i_item)
                 (CR_RESULT_SUCCESS or CR_RESULT_NOT_FOUND)
  */
 //---------------------------------------------------------------------
-Result WorldItem::removeChild(WorldItemPtr i_item)
+Result Node::removeChild(NodePtr i_item)
 {
     for (int k = 0; k < m_children.size(); k++){
         if (m_children.at(k) == i_item)
@@ -120,7 +120,7 @@ Result WorldItem::removeChild(WorldItemPtr i_item)
  \param[in]     i_item - the parent item
  */
 //---------------------------------------------------------------------
-void WorldItem::setParent(WorldItemPtr i_item)
+void Node::setParent(NodePtr i_item)
 {
     m_parent = i_item;
 }
@@ -133,7 +133,7 @@ void WorldItem::setParent(WorldItemPtr i_item)
  \return        the parent item
  */
 //---------------------------------------------------------------------
-WorldItemPtr WorldItem::getParent()
+NodePtr Node::getParent()
 {
     return m_parent;
 }
@@ -146,7 +146,7 @@ WorldItemPtr WorldItem::getParent()
  \return        flag (true = if there are no children)
  */
 //---------------------------------------------------------------------
-bool WorldItem::isLeaf()
+bool Node::isLeaf()
 {
     bool isLeaf = true;
     if (m_children.size() > 0)
@@ -162,10 +162,10 @@ bool WorldItem::isLeaf()
  \return        integer depth (0 = root)
  */
 //---------------------------------------------------------------------
-unsigned WorldItem::getDepth()
+unsigned Node::getDepth()
 {
     unsigned d = 0;
-    WorldItemPtr parent = getParent();
+    NodePtr parent = getParent();
     while ( parent != NULL) {
         d++;
         parent = parent->getParent();
@@ -182,7 +182,7 @@ unsigned WorldItem::getDepth()
  \param[in]     i_frame - the local frame transformation
  */
 //---------------------------------------------------------------------
-void WorldItem::setLocalTransform(const Frame& i_frame)
+void Node::setLocalTransform(const Frame& i_frame)
 {
     m_frame = i_frame;
 }
@@ -196,7 +196,7 @@ void WorldItem::setLocalTransform(const Frame& i_frame)
  \return        the local frame transformation
  */
 //---------------------------------------------------------------------
-Frame WorldItem::getLocalTransform()
+Frame Node::getLocalTransform()
 {
     return m_frame;
 }
@@ -210,10 +210,10 @@ Frame WorldItem::getLocalTransform()
  \return        the local frame transformation
  */
 //---------------------------------------------------------------------
-Frame WorldItem::getGlobalTransform()
+Frame Node::getGlobalTransform()
 {
     Eigen::Matrix4d T = m_frame.getTransformToParent();
-    WorldItemPtr parent = m_parent;
+    NodePtr parent = m_parent;
     while (parent != NULL){
         T = parent->getLocalTransform().getTransformToParent() * T;
         parent = parent->getParent();
@@ -232,7 +232,7 @@ Frame WorldItem::getGlobalTransform()
  \return        the relative frame transformation
  */
 //---------------------------------------------------------------------
-Frame WorldItem::getRelativeTransform(WorldItemPtr i_item)
+Frame Node::getRelativeTransform(NodePtr i_item)
 {
     Eigen::Matrix4d T0 = this->getGlobalTransform().getTransformToParent();
     Eigen::Matrix4d T = i_item->getGlobalTransform().getTransformToChild() * T0;
@@ -247,13 +247,13 @@ Frame WorldItem::getRelativeTransform(WorldItemPtr i_item)
  Print the children.\n
  */
 //---------------------------------------------------------------------
-void WorldItem::print(std::ostream& i_stream)
+void Node::print(std::ostream& i_stream)
 {
     unsigned d = getDepth();
     for (int i = 0; i < d; i++){
         i_stream << "  ";
     }
-    i_stream << "+ cr::WorldItem '" << getName() << "'\n";
+    i_stream << "+ cr::Node '" << getName() << "'\n";
     for (int i = 0; i < m_children.size(); i++)
     {
         m_children.at(i)->print(i_stream);
