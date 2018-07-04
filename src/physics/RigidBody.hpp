@@ -51,7 +51,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
     
 //=====================================================================
 /*!
@@ -70,7 +70,7 @@ namespace CoreRobotics {
  \details
  ## Description
  RigidBody implements a container for representing rigid body
- dynamics.  At a minimum it points to a CoreRobotics::Frame class or
+ dynamics.  At a minimum it points to a cr::Frame class or
  derived subclass.
  
  ## Example
@@ -107,7 +107,7 @@ public:
 public:
     
     //! Pointer to the rigid body frame transformation
-    CoreRobotics::Frame* m_frame;
+    cr::Frame* m_frame;
     
 };
 

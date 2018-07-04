@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //---------------------------------------------------------------------
 // Begin namespace
-namespace CoreRobotics {
+namespace cr {
     
     
 //---------------------------------------------------------------------
@@ -71,11 +71,9 @@ WorldItem::~WorldItem(){
  Create a new world item.\n
  */
 //---------------------------------------------------------------------
-    /*
 WorldItemPtr WorldItem::create(){
     return std::make_shared<WorldItem>();
 }
-     */
     
     
 //---------------------------------------------------------------------

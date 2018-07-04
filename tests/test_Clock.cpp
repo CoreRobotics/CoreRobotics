@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 // Use the CoreRobotics namespace
-using namespace CoreRobotics;
+using namespace cr;
 
 //
 // Test the function of the clock to sleep for 100 ms

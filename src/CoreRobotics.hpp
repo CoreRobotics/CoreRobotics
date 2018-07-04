@@ -377,10 +377,11 @@ project includes all the CoreRobotics modules.
 
 //---------------------------------------------------------------------------
 //! \defgroup world World
-//! \brief TEMPORARY DURING MAJOR REVISION TO 2.0
+//! \brief Implements simulation world elements
 //---------------------------------------------------------------------------
 #include "World.hpp"
 #include "WorldItem.hpp"
+#include "Manipulator.hpp"
 // #include "Model.hpp"
 // #include "Sensor.hpp"
 // #include "CRPolicy.hpp"
@@ -409,7 +410,6 @@ project includes all the CoreRobotics modules.
 //! \defgroup models Models
 //! \brief Implements model (sensor, motion, and noise) representations.
 //---------------------------------------------------------------------------
-#include "Manipulator.hpp"
 #include "NoiseModel.hpp"
 #include "NoiseGaussian.hpp"
 #include "NoiseUniform.hpp"

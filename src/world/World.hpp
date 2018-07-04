@@ -48,7 +48,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //---------------------------------------------------------------------
 // Begin namespace
-namespace CoreRobotics {
+namespace cr {
     
 //! World shared pointer
 class World;

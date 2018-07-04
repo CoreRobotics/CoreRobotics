@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 // Use the CoreRobotics namespace
-using namespace CoreRobotics;
+using namespace cr;
 
 
 // Callback for the thread

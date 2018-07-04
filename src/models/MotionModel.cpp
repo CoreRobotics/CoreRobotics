@@ -44,7 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
     
     
 //=====================================================================
@@ -74,7 +74,7 @@ namespace CoreRobotics {
  
  \param[in] i_dynamics - callback to the dynamics equation
  \param[in] i_type - indicates whether the callback is continuous or 
-                      discrete, see CoreRobotics::MotionModelType.
+                      discrete, see cr::MotionModelType.
  \param[in] i_x0 - the initial state.
  \param[in] i_timeStep - the time step of the system
  */

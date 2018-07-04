@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
 
 //=====================================================================
 
@@ -62,7 +62,7 @@ double CRMinJointRotation = -std::numeric_limits<double>::max();
  inverse kinematics and, if desired, a nullspace solver to solve the inverse
  kinematics problem with hard joint limits.\n
  
- \param[in]     i_robot           the CoreRobotics::Manipulator object 
+ \param[in]     i_robot           the cr::Manipulator object 
                                   to be used for solving the inverse 
                                   kinematics
  \param[in]     i_toolIndex       the tool index to use for solving the
@@ -96,7 +96,7 @@ HardLimits::HardLimits(const Manipulator& i_robot,
  inverse kinematics solver to solve the inverse kinematics problem with
  hard joint limits.\n
  
- \param[in]     i_robot           the CoreRobotics::Manipulator object 
+ \param[in]     i_robot           the cr::Manipulator object 
                                   to be used for solving the inverse 
                                   kinematics
  \param[in]     i_toolIndex       the tool index to use for solving the

@@ -43,7 +43,7 @@
 
 //---------------------------------------------------------------------
 // Begin namespace
-namespace CoreRobotics {
+namespace cr {
 
     
     

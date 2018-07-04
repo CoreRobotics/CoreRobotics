@@ -50,7 +50,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
     
 //=====================================================================
 /*!
@@ -77,10 +77,10 @@ namespace CoreRobotics {
  Properties of the transform can be set with methods
  - FrameDh::setParameters sets the DH parameter values.
  - FrameDh::setMode sets the DH convention (options are in
- CoreRobotics::CRDhMode).
+ cr::CRDhMode).
  
  The free variable can be specified by the FrameDh::m_freeVar member
- (options are in CoreRobotics::CRDhFreeVariable).
+ (options are in cr::CRDhFreeVariable).
  
  ## Example
  This example creates a DH parameter frame class.

@@ -49,7 +49,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
     
 //=====================================================================
 /*!
@@ -76,7 +76,7 @@ namespace CoreRobotics {
  - Manipulator::addTool adds a tool to the chain relative to a link
  frame in the kinematic chain
  - Manipulator::setModelType sets how the manipulator is driven.
- Available options are defined in CoreRobotics::ManipulatorType.
+ Available options are defined in cr::ManipulatorType.
  
  These methods operate on the configuration space (i.e. joint space) 
  of the robot:
@@ -218,7 +218,7 @@ public:
 public:
     
     //! Add a link to the kinematic structure, return the index of the added link
-    int addLink(CoreRobotics::RigidBody* i_link);
+    int addLink(cr::RigidBody* i_link);
 
 	//! Add a tool to the manipulator, return the index of the added tool
 	int addTool(unsigned i_parentIndex, Frame* i_tool);
@@ -231,7 +231,7 @@ protected:
 	ManipulatorType m_modelType;
     
     //! List of the links in the manipulator
-    std::vector<CoreRobotics::RigidBody*> m_listLinks;
+    std::vector<cr::RigidBody*> m_listLinks;
     
     //! List of the link parent indices
     std::vector<int> m_listParents;
@@ -240,13 +240,13 @@ protected:
     std::vector<int> m_listDriven;
 
 	//! List of tool frames
-	std::vector<CoreRobotics::Frame*> m_listToolFrames;
+	std::vector<cr::Frame*> m_listToolFrames;
 
 	//! List of tool parents
 	std::vector<int> m_listToolParents;
 
 	//! Arbitrary frame for computing tip position
-	CoreRobotics::Frame* m_tipFrame;
+	cr::Frame* m_tipFrame;
     
 };
 

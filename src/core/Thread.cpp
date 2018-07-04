@@ -53,7 +53,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
 
     
     
@@ -61,7 +61,7 @@ namespace CoreRobotics {
 /*!
  The constructor defines a thread.\n
 
- \param[in] i_priority - the thread priority, see CoreRobotics::ThreadPriority
+ \param[in] i_priority - the thread priority, see cr::ThreadPriority
  */
 //---------------------------------------------------------------------
 Thread::Thread(ThreadPriority i_priority) {
@@ -117,7 +117,7 @@ void Thread::setCallback(void(i_callbackFunction)(void*),
 /*!
 This method sets the thread priority.
 
-\param[in] i_priority - the thread priority, see CoreRobotics::ThreadPriority
+\param[in] i_priority - the thread priority, see cr::ThreadPriority
 */
 //---------------------------------------------------------------------
 void Thread::setPriority(ThreadPriority i_priority) {

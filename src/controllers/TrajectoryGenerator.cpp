@@ -47,7 +47,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
     
     
 //=====================================================================
@@ -71,7 +71,7 @@ TrajectoryGenerator::TrajectoryGenerator()
  \param[in]     i_vf - final state 1st derivative (velocity)
  \param[in]     i_af - final state 2nd derivative (acceleration)
  \param[in]     i_tf - final time
- \return        CoreRobotics::Result indicator
+ \return        cr::Result indicator
  */
 //---------------------------------------------------------------------
 Result TrajectoryGenerator::solve(Eigen::VectorXd i_x0,
@@ -123,7 +123,7 @@ Result TrajectoryGenerator::solve(Eigen::VectorXd i_x0,
  
  \param[in]     i_wp0 - initial waypoint
  \param[in]     i_wpf - final waypoint
- \return        CoreRobotics::Result indicator
+ \return        cr::Result indicator
  */
 //---------------------------------------------------------------------
 Result TrajectoryGenerator::solve(CRWaypoint i_wp0,

@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
     
     
 //=====================================================================
@@ -57,12 +57,12 @@ namespace CoreRobotics {
 //---------------------------------------------------------------------
 Manipulator::Manipulator(ManipulatorType i_type) {
 	this->m_modelType = i_type;
-	this->m_tipFrame = new CoreRobotics::Frame();
+	this->m_tipFrame = new cr::Frame();
 }
 
 Manipulator::Manipulator() {
     this->m_modelType = CR_MANIPULATOR_MODE_POSITION;
-	this->m_tipFrame = new CoreRobotics::Frame();
+	this->m_tipFrame = new cr::Frame();
 }
     
     
@@ -612,7 +612,7 @@ Eigen::VectorXd Manipulator::getToolPose(unsigned i_toolIndex,
  \return                        returns the integer (index) of the added link
  */
 //---------------------------------------------------------------------
-int Manipulator::addLink(CoreRobotics::RigidBody* i_link)
+int Manipulator::addLink(cr::RigidBody* i_link)
 {
     int n = this->getNumberOfLinks();
     

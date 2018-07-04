@@ -44,7 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
     
     
 //=====================================================================
@@ -53,12 +53,12 @@ namespace CoreRobotics {
  the algorithm uses the Jacobian pseudoinverse approach.  The SVD is
  used to compute the Jacobian inverse.\n
  
- \param[in]     i_robot         the CoreRobotics::Manipulator object 
+ \param[in]     i_robot         the cr::Manipulator object 
                                 to be used for solving the inverse 
                                 kinematics
  \param[in]     i_toolIndex     the index of the robot tool for which 
                                 the IK is being solved, see 
-                                CoreRobotics::Manipulator::addTool()
+                                cr::Manipulator::addTool()
  \param[in]     i_eulerMode     the Euler convention of the pose vector
  */
 //---------------------------------------------------------------------
@@ -83,7 +83,7 @@ InverseKinematics::InverseKinematics(const Manipulator& i_robot,
  
  \param[in]     i_jac    - jacobian matrix (without damping)
  \param[out]    o_jacInv - inverse jacobian matrix (with damping)
- \return        CoreRobotics::Result result of the inversion operation
+ \return        cr::Result result of the inversion operation
  */
 //---------------------------------------------------------------------
 Result InverseKinematics::getJacInv(Eigen::MatrixXd i_jac, Eigen::MatrixXd &o_jacInv)
@@ -118,7 +118,7 @@ Result InverseKinematics::getJacInv(Eigen::MatrixXd i_jac, Eigen::MatrixXd &o_ja
  \param[in]     i_q0            the intial configuration to use for 
                                 the iterations.
  \param[out]    o_qSolved       the new configuration
- \return        CoreRobotics::Result result of the inversion operation
+ \return        cr::Result result of the inversion operation
  */
 //---------------------------------------------------------------------
 Result InverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoint,

@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
 
 
 //=====================================================================
@@ -54,11 +54,11 @@ namespace CoreRobotics {
  the algorithm uses an orthogonal projection matrix.  The SVD is
  used to compute the Jacobian generalized inverse.\n
  
- \param[in]     i_robot         the CoreRobotics::Manipulator object 
+ \param[in]     i_robot         the cr::Manipulator object 
                                 to be used for solving for the null space
  \param[in]     i_toolIndex     the index of the robot tool for which 
                                 the IK is being solved, see 
-                                CoreRobotics::Manipulator::addTool()
+                                cr::Manipulator::addTool()
  \param[in]     i_eulerMode     the Euler convention of the pose vector
  */
 //---------------------------------------------------------------------

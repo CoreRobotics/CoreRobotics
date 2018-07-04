@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 // Use the CoreRobotics namespace
-using namespace CoreRobotics;
+using namespace cr;
 
 
 //---------------------------------------------------------------------
@@ -136,7 +136,7 @@ TEST(Loop, execution){
     EXPECT_DOUBLE_EQ(myThread->getUpdateRate(), dt);
     
     // Create a timer
-    CoreRobotics::Clock timer;
+    cr::Clock timer;
     
     // Start the thread
     // std::cout << "Start() call\n";

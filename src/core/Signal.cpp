@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //---------------------------------------------------------------------
 // Begin namespace
-namespace CoreRobotics {
+namespace cr {
 
     
     

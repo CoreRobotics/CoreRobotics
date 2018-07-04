@@ -49,7 +49,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //---------------------------------------------------------------------
 // Begin namespace
-namespace CoreRobotics {
+namespace cr {
 
     
 //---------------------------------------------------------------------
@@ -125,7 +125,7 @@ class Loop {
         RunState m_runState = CR_RUN_STATE_STOPPED;
     
         //! thread
-        // CoreRobotics::Thread* m_thread = NULL;
+        // cr::Thread* m_thread = NULL;
         std::thread* m_thread = NULL;
     
         //! global timer

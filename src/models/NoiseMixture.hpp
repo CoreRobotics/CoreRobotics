@@ -51,7 +51,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
     
 //=====================================================================
 /*!
@@ -93,7 +93,7 @@ namespace CoreRobotics {
 //=====================================================================
 // Paramter structure declaration
 struct CRParamNoiseMixture{
-    std::vector<CoreRobotics::NoiseModel*> models;
+    std::vector<cr::NoiseModel*> models;
     std::vector<double> weights;
 };
     

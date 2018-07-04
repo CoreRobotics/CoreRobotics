@@ -50,7 +50,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
     
 //=====================================================================
 /*!
@@ -77,10 +77,10 @@ namespace CoreRobotics {
  - FrameEuler::setPosition, FrameEuler::setOrientation and
  FrameEuler::setPositionAndOrientation set transformation values.
  - FrameEuler::setMode sets the Euler angle convention (options are in
- CoreRobotics::CREulerMode).
+ cr::CREulerMode).
  
  The free variable can be specified by the FrameEuler::m_freeVar member
- (options are in CoreRobotics::CREulerFreeVariable).
+ (options are in cr::CREulerFreeVariable).
  
  ## Example
  This example creates an Euler frame class.

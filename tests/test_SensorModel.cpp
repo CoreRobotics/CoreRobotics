@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
-using namespace CoreRobotics;
+using namespace cr;
 
 // Declare a deterministic model - fcn(x,zHat)
 Eigen::VectorXd detPredFcn(Eigen::VectorXd x){

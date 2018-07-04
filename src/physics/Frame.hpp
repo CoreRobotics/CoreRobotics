@@ -50,7 +50,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace cr {
     
 //=====================================================================
 /*!
@@ -172,7 +172,10 @@ public:
     virtual bool isDriven(void);
 
 	//! Get the position vector
-	Eigen::Vector3d getPosition(void) { return this->m_translation; }
+	Eigen::Vector3d getPosition() { return m_translation; }
+    
+    //! Get the rotation matrix
+    Eigen::Matrix3d getRotation() { return m_rotation; }
 
     //! Get a vector of the Euler angles
     Eigen::Vector3d getOrientation(CREulerMode i_mode);

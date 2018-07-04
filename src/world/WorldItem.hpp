@@ -48,11 +48,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //---------------------------------------------------------------------
 // Begin namespace
-namespace CoreRobotics {
+namespace cr {
     
 //! WorldItem shared pointer
-// class WorldItem;
-// typedef std::shared_ptr<WorldItem> WorldItemPtr;
+class WorldItem;
+typedef std::shared_ptr<WorldItem> WorldItemPtr;
     
     
 //---------------------------------------------------------------------
@@ -80,7 +80,7 @@ class WorldItem {
         ~WorldItem();
     
         //! Create a pointer
-        // static WorldItemPtr create();
+        static WorldItemPtr create();
     
     
     // Scene graph controls

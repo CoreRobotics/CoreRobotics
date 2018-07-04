@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
-using namespace CoreRobotics;
+using namespace cr;
 
 // Declare a continuous motion model - xdot = fcn(t,x,u)
 Eigen::VectorXd continuousDynFcn(double t, Eigen::VectorXd x, Eigen::VectorXd u){
