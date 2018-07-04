@@ -122,12 +122,14 @@ namespace cr {
  */
 //=====================================================================
 //! Enumerator for specifying how the manipulator is driven
+    /*
 enum ManipulatorType {
 	// TODO: add several modes of control for the driving values
     CR_MANIPULATOR_MODE_POSITION,
     // CR_MANIPULATOR_MODE_VELOCITY,
     // CR_MANIPULATOR_MODE_TORQUE,
 };
+     */
     
 //=====================================================================
 class Manipulator {
@@ -137,7 +139,7 @@ class Manipulator {
 public:
     
     //! Class constructor
-	Manipulator(ManipulatorType i_type);
+	// Manipulator(ManipulatorType i_type);
     Manipulator();
     
 //---------------------------------------------------------------------
@@ -178,7 +180,7 @@ public:
                                 Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
 	//! Set the model type
-	void setModelType(ManipulatorType type) { this->m_modelType = type; }
+	// void setModelType(ManipulatorType type) { this->m_modelType = type; }
     
 //---------------------------------------------------------------------
 // Jacobian
@@ -228,7 +230,7 @@ public:
 protected:
 
 	//! Define the manipulator type specifying the dynamics model
-	ManipulatorType m_modelType;
+	// ManipulatorType m_modelType;
     
     //! List of the links in the manipulator
     std::vector<cr::RigidBody*> m_listLinks;
