@@ -380,9 +380,10 @@ project includes all the CoreRobotics modules.
 //---------------------------------------------------------------------------
 #include "Origin.hpp"
 #include "Node.hpp"
+#include "Link.hpp"
 #include "Manipulator.hpp"
+#include "Robot.hpp"
 // #include "Sensor.hpp"
-// #include "CRPolicy.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -428,6 +429,7 @@ project includes all the CoreRobotics modules.
 //! \brief This module implements control policies for regulating
 //! motion and actions.
 //---------------------------------------------------------------------------
+// #include "Policy.hpp"
 #include "InverseKinematics.hpp"
 #include "NullSpace.hpp"
 #include "HardLimits.hpp"

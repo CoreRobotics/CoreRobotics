@@ -103,6 +103,12 @@ class Node
         //! get the parent of the child
         NodePtr getParent();
     
+        //! check if a node is an ancestor (parent at any level) of this node
+        bool isAncestor(NodePtr i_node);
+    
+        //! check if a node is an descendant (child at any level) of this node
+        bool isDescendent(NodePtr i_node);
+    
         //! return if the item is a leaf (i.e. no children)
         bool isLeaf();
     
@@ -133,7 +139,7 @@ class Node
     public:
     
         //! print the scene
-        void print(std::ostream& i_stream);
+        virtual void print(std::ostream& i_stream);
     
     
     // protected member data
@@ -141,10 +147,6 @@ class Node
     
         //! Transformation
         Frame m_frame;
-    
-    
-    // private member data
-    private:
     
         //! parent item
         NodePtr m_parent = NULL;

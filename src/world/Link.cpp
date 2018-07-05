@@ -38,95 +38,69 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //---------------------------------------------------------------------
-// Begin header definition
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
-
-#include "LoopElement.hpp"
-#include "Node.hpp"
-#include "Item.hpp"
-#include <memory>
+#include "Link.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
 namespace world {
     
-//! Origin shared pointer
-class Origin;
-typedef std::shared_ptr<Origin> OriginPtr;
+    
+//---------------------------------------------------------------------
+/*!
+ Constructor to the world item.\n
+ */
+//---------------------------------------------------------------------
+Link::Link(){
+    
+}
     
     
 //---------------------------------------------------------------------
 /*!
- \class Origin
- \ingroup world
- 
- \brief
- 
- 
- \details
- 
+ Destructor to the world item.\n
  */
 //---------------------------------------------------------------------
-class Origin : public LoopElement, public Item
+Link::~Link(){
+    // delete m_parent;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Create a new world item.\n
+ */
+//---------------------------------------------------------------------
+LinkPtr Link::create(){
+    return std::make_shared<Link>();
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Print the children.\n
+ */
+//---------------------------------------------------------------------
+void Link::print(std::ostream& i_stream)
 {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-		Origin();
-    
-        //! Class destructor
-        ~Origin();
-    
-        //! Create a pointer
-        static OriginPtr create();
+    unsigned d = getDepth();
+    for (int i = 0; i < d; i++){
+        i_stream << "  ";
+    }
+    std::string id = "N";
+    if (isLeaf()) {
+        id = "L";
+    } else if (isRoot()) {
+        id = "R";
+    }
+    i_stream << "+ cr::Link [" << id << "] '" << getName() << "'\n";
+    for (int i = 0; i < m_children.size(); i++)
+    {
+        m_children.at(i)->print(i_stream);
+    }
+}
 
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
-    
-    
-    // naming
-    public:
-    
-        //! set the name
-        virtual void setName(std::string i_name);
-
-
-	// Tree graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(NodePtr i_item) { m_rootItem->addChild(i_item); }
-    
-        //! remove a child from the list of children
-        void removeChild(NodePtr i_item) { m_rootItem->removeChild(i_item); }
-    
-    
-    // Print details
-    public:
-    
-        //! print out the scene
-        virtual void print(std::ostream& i_stream);
-
-    
-    // Private members
-    private:
-    
-        //! add a world item
-        NodePtr m_rootItem;
-    
-};
 
 }
 }
@@ -134,9 +108,3 @@ class Origin : public LoopElement, public Item
 //---------------------------------------------------------------------
 
 
-//! Origin display operator overload
-// std::ostream& operator<<(std::ostream&, const cr::Origin&);
-
-
-
-#endif

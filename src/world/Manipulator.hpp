@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include <vector>
 #include <memory>
-#include "RigidBody.hpp"
+#include "Link.hpp"
 #include "Node.hpp"
 
 //---------------------------------------------------------------------
@@ -123,9 +123,7 @@ typedef std::shared_ptr<Manipulator> ManipulatorPtr;
 
  */
 //---------------------------------------------------------------------
-class Manipulator
-    : public std::enable_shared_from_this<Manipulator>,
-    public Node
+class Manipulator : public Node
 {
     
 
@@ -140,6 +138,13 @@ class Manipulator
     
         //! Create a pointer
         static ManipulatorPtr create();
+    
+    
+    // Tree graph construction (with links)
+    public:
+    
+        //! Add a link to the list of children
+        void addLink(LinkPtr i_link);
     
 
     // Get/Set Methods

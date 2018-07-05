@@ -138,6 +138,41 @@ NodePtr Node::getParent()
 {
     return m_parent;
 }
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Check if a node is an ancestor (parent at any level) of this node.
+ 
+ \param[in]     i_node - the node to check as ancestor of this node
+ \return        flag indicating relationship status
+ */
+//---------------------------------------------------------------------
+bool Node::isAncestor(NodePtr i_node)
+{
+    NodePtr parent = getParent();
+    while ( parent != NULL) {
+        if (parent == i_node) {
+            return true;
+        }
+        parent = parent->getParent();
+    }
+    return false;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Check if a node is an descendant (child at any level) of this node.
+ 
+ \param[in]     i_node - the node to check as descendant of this node
+ \return        flag indicating relationship status
+ */
+//---------------------------------------------------------------------
+bool Node::isDescendent(NodePtr i_node)
+{
+    return i_node->isAncestor(shared_from_this());
+}
 
 
 //---------------------------------------------------------------------

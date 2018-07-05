@@ -40,12 +40,13 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#ifndef CR_LINK_HPP_
+#define CR_LINK_HPP_
 
-#include "LoopElement.hpp"
+#include "Frame.hpp"
+#include "RigidBody.hpp"
 #include "Node.hpp"
-#include "Item.hpp"
+#include <vector>
 #include <memory>
 
 //---------------------------------------------------------------------
@@ -53,78 +54,62 @@ POSSIBILITY OF SUCH DAMAGE.
 namespace cr {
 namespace world {
     
-//! Origin shared pointer
-class Origin;
-typedef std::shared_ptr<Origin> OriginPtr;
+//! Link shared pointer
+class Link;
+typedef std::shared_ptr<Link> LinkPtr;
     
     
 //---------------------------------------------------------------------
 /*!
- \class Origin
+ \class Link
  \ingroup world
  
  \brief
  
- 
+
  \details
  
  */
 //---------------------------------------------------------------------
-class Origin : public LoopElement, public Item
+class Link : public Node
 {
     
     // Constructor and Destructor
     public:
     
         //! Class constructor
-		Origin();
+        Link();
     
         //! Class destructor
-        ~Origin();
+        ~Link();
     
         //! Create a pointer
-        static OriginPtr create();
-
-
-	// ThreadLoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
+        static LinkPtr create();
     
     
-    // naming
+    // Link controls
     public:
     
-        //! set the name
-        virtual void setName(std::string i_name);
-
-
-	// Tree graph behaviors
-	public:
-
-		//! add a child to the list of children
-        void addChild(NodePtr i_item) { m_rootItem->addChild(i_item); }
+        //! set the rigid body parameters
+        void setRigidBody(const RigidBody& i_body) { m_body = i_body; }
     
-        //! remove a child from the list of children
-        void removeChild(NodePtr i_item) { m_rootItem->removeChild(i_item); }
+        //! return the rigid body parameters
+        RigidBody getRigidBody() { return m_body; }
     
     
     // Print details
     public:
     
-        //! print out the scene
+        //! print the scene
         virtual void print(std::ostream& i_stream);
-
     
-    // Private members
-    private:
     
-        //! add a world item
-        NodePtr m_rootItem;
+    // protected member data
+    protected:
+    
+        //! Rigid body
+        RigidBody m_body;
+    
     
 };
 
@@ -132,11 +117,5 @@ class Origin : public LoopElement, public Item
 }
 // end namespace
 //---------------------------------------------------------------------
-
-
-//! Origin display operator overload
-// std::ostream& operator<<(std::ostream&, const cr::Origin&);
-
-
 
 #endif
