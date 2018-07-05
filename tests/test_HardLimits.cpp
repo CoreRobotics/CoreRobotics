@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 using namespace cr;
 
-CREulerMode convention = CR_EULER_MODE_XYZ;
+EulerMode convention = CR_EULER_MODE_XYZ;
 
 Eigen::Matrix<bool, 6, 1> poseElements = (Eigen::Matrix<bool, 6, 1>() << 1, 1, 0, 0, 0, 0).finished();
 

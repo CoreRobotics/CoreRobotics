@@ -160,7 +160,7 @@ Eigen::MatrixXd Manipulator::getForwardKinematics(void)
  */
 //---------------------------------------------------------------------
 Eigen::MatrixXd Manipulator::jacobian(unsigned i_toolIndex,
-                                        CREulerMode i_mode)
+                                        EulerMode i_mode)
 {
     // Initialize the Jacobian matrix
     Eigen::MatrixXd J(6,m_listDriven.size());
@@ -226,7 +226,7 @@ Eigen::MatrixXd Manipulator::jacobian(unsigned i_toolIndex,
  */
 //---------------------------------------------------------------------
 Eigen::MatrixXd Manipulator::jacobian(unsigned i_toolIndex,
-                                        CREulerMode i_mode,
+                                        EulerMode i_mode,
                                         Eigen::Matrix<bool, 6, 1> i_poseElements)
 {
     
@@ -297,7 +297,7 @@ Eigen::MatrixXd Manipulator::jacobian(unsigned i_toolIndex,
  */
 //---------------------------------------------------------------------
 Eigen::MatrixXd Manipulator::jacobian(unsigned i_toolIndex,
-                                        CREulerMode i_mode,
+                                        EulerMode i_mode,
                                         Eigen::Matrix<int, 6, 1> i_poseElementsInt)
 {
 	Eigen::Matrix<bool, 6, 1> i_poseElements = i_poseElementsInt.cast<bool>();
@@ -323,7 +323,7 @@ correspond to the pose vector (x, y, z, a, b, g)^T.\n
 */
 //---------------------------------------------------------------------
 Eigen::MatrixXd Manipulator::hessian(unsigned i_toolIndex,
-										CREulerMode i_mode)
+										EulerMode i_mode)
 {
 	// Initialize the Hessian matrix
 	Eigen::MatrixXd H(6, m_listDriven.size());
@@ -394,7 +394,7 @@ defined by true elements of i_poseElements.\n
 */
 //---------------------------------------------------------------------
 Eigen::MatrixXd Manipulator::hessian(unsigned i_toolIndex,
-										CREulerMode i_mode,
+										EulerMode i_mode,
 										Eigen::Matrix<bool, 6, 1> i_poseElements)
 {
 
@@ -470,7 +470,7 @@ defined by nonzero elements of i_poseElementsInt.\n
 */
 //---------------------------------------------------------------------
 Eigen::MatrixXd Manipulator::hessian(unsigned i_toolIndex,
-	CREulerMode i_mode,
+	EulerMode i_mode,
 	Eigen::Matrix<int, 6, 1> i_poseElementsInt)
 {
 	Eigen::Matrix<bool, 6, 1> i_poseElements = i_poseElementsInt.cast<bool>();
@@ -588,7 +588,7 @@ void Manipulator::getLinkFrame(unsigned i_linkIndex, Frame& o_link)
  */
 //---------------------------------------------------------------------
 Eigen::Matrix<double, 6, 1> Manipulator::getToolPose(unsigned i_toolIndex,
-                                                       CREulerMode i_mode)
+                                                       EulerMode i_mode)
 {
     // return the frame
     this->getToolFrame(i_toolIndex, *this->m_tipFrame);
@@ -598,7 +598,7 @@ Eigen::Matrix<double, 6, 1> Manipulator::getToolPose(unsigned i_toolIndex,
 }
     
 Eigen::VectorXd Manipulator::getToolPose(unsigned i_toolIndex,
-                                           CREulerMode i_mode,
+                                           EulerMode i_mode,
                                            Eigen::Matrix<bool, 6, 1> i_poseElements)
 {
     // return the frame
@@ -609,7 +609,7 @@ Eigen::VectorXd Manipulator::getToolPose(unsigned i_toolIndex,
 }
 
 Eigen::VectorXd Manipulator::getToolPose(unsigned i_toolIndex,
-                                           CREulerMode i_mode,
+                                           EulerMode i_mode,
                                            Eigen::Matrix<int, 6, 1> i_poseElementsInt)
 {
 	Eigen::Matrix<bool, 6, 1> i_poseElements = i_poseElementsInt.cast<bool>();

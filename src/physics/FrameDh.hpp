@@ -77,10 +77,10 @@ namespace cr {
  Properties of the transform can be set with methods
  - FrameDh::setParameters sets the DH parameter values.
  - FrameDh::setMode sets the DH convention (options are in
- cr::CRDhMode).
+ cr::DhMode).
  
  The free variable can be specified by the FrameDh::m_freeVar member
- (options are in cr::CRDhFreeVariable).
+ (options are in cr::DhFreeVariable).
  
  ## Example
  This example creates a DH parameter frame class.
@@ -96,7 +96,7 @@ namespace cr {
  */
 //=====================================================================
 //! Enumerator for handling DH parameter free variable candidates
-enum CRDhFreeVariable {
+enum DhFreeVariable {
     CR_DH_FREE_NONE,
     CR_DH_FREE_R,
     CR_DH_FREE_ALPHA,
@@ -106,7 +106,7 @@ enum CRDhFreeVariable {
 
 
 //! Enumerator for handling DH conventions
-enum CRDhMode {
+enum DhMode {
     CR_DH_MODE_CLASSIC,
     CR_DH_MODE_MODIFIED,
 };
@@ -125,8 +125,8 @@ public:
               double i_alpha,
               double i_d,
               double i_theta,
-              CRDhMode i_mode,
-              CRDhFreeVariable i_free);
+              DhMode i_mode,
+              DhFreeVariable i_free);
     FrameDh();
 
 //---------------------------------------------------------------------
@@ -140,16 +140,16 @@ public:
     double getFreeValue(void);
     
     //! Set the free variable
-    void setFreeVariable(CRDhFreeVariable i_free) {m_freeVar = i_free;}
+    void setFreeVariable(DhFreeVariable i_free) {m_freeVar = i_free;}
     
     //! Get the free variable
-    CRDhFreeVariable getFreeVariable(void) {return m_freeVar;}
+    DhFreeVariable getFreeVariable(void) {return m_freeVar;}
     
     //! Set the DH convention
-    void setMode(CRDhMode i_mode);
+    void setMode(DhMode i_mode);
     
     //! Get the DH convention
-    CRDhMode getMode(void);
+    DhMode getMode(void);
     
     //! Set the DH parameter values
     void setParameters(double i_r,
@@ -176,10 +176,10 @@ public:
 private:
     
     //! free variable indicator
-    CRDhFreeVariable m_freeVar;
+    DhFreeVariable m_freeVar;
     
     //! DH convention mode
-    CRDhMode m_dhMode;
+    DhMode m_dhMode;
 
     //! r parameter
     double m_dhR;

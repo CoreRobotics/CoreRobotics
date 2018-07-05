@@ -65,8 +65,8 @@ FrameDh::FrameDh(double i_r,
                      double i_alpha,
                      double i_d,
                      double i_theta,
-                     CRDhMode i_mode,
-                     CRDhFreeVariable i_free)
+                     DhMode i_mode,
+                     DhFreeVariable i_free)
 {
     m_dhR = i_r;
     m_dhAlpha = i_alpha;
@@ -164,7 +164,7 @@ double FrameDh::getFreeValue()
  \param[in] i_mode - DH convention
  */
 //---------------------------------------------------------------------
-void FrameDh::setMode(CRDhMode i_mode)
+void FrameDh::setMode(DhMode i_mode)
 {
     m_dhMode = i_mode;
     this->setRotationAndTranslation();
@@ -179,7 +179,7 @@ void FrameDh::setMode(CRDhMode i_mode)
  \return - DH convention.
  */
 //---------------------------------------------------------------------
-CRDhMode FrameDh::getMode(void)
+DhMode FrameDh::getMode(void)
 {
     return m_dhMode;
 }

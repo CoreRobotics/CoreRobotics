@@ -70,8 +70,8 @@ FrameEuler::FrameEuler(double i_x,
                            double i_a,
                            double i_b,
                            double i_g,
-                           CREulerMode i_mode,
-                           CREulerFreeVariable i_free)
+                           EulerMode i_mode,
+                           EulerFreeVariable i_free)
 {
     m_posX = i_x;
     m_posY = i_y;
@@ -184,7 +184,7 @@ double FrameEuler::getFreeValue(void)
  \param[in]   i_mode   - Euler convention
  */
 //---------------------------------------------------------------------
-void FrameEuler::setMode(CREulerMode i_mode)
+void FrameEuler::setMode(EulerMode i_mode)
 {
     m_eulerMode = i_mode;
     this->setRotationAndTranslation();
@@ -199,7 +199,7 @@ void FrameEuler::setMode(CREulerMode i_mode)
  \return - Euler convention.
  */
 //---------------------------------------------------------------------
-CREulerMode FrameEuler::getMode(void)
+EulerMode FrameEuler::getMode(void)
 {
     return m_eulerMode;
 }

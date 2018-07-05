@@ -64,7 +64,7 @@ namespace cr {
 //---------------------------------------------------------------------
 NullSpace::NullSpace(const world::Manipulator& i_robot,
                          unsigned int i_toolIndex,
-                         CREulerMode i_eulerMode)
+                         EulerMode i_eulerMode)
 {
 	this->setRobot(i_robot);
 	this->setToolIndex(i_toolIndex);

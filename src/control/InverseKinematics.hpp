@@ -132,7 +132,7 @@ public:
     //! Class constructor
     InverseKinematics(const world::Manipulator& i_robot,
                         unsigned int i_toolIndex,
-                        CREulerMode i_eulerMode);
+                        EulerMode i_eulerMode);
     
 //---------------------------------------------------------------------
 // Get/Set Methods
@@ -152,10 +152,10 @@ public:
     
     //! Set the Euler angle convention of the IK solver.  This must match the
     //  Euler convention used to supply the set point in the solve() method.
-    void setEulerMode(CREulerMode i_eulerMode) {this->m_eulerMode = i_eulerMode;}
+    void setEulerMode(EulerMode i_eulerMode) {this->m_eulerMode = i_eulerMode;}
     
     //! Get the Euler convention
-    CREulerMode getEulerMode(void) {return this->m_eulerMode;}
+    EulerMode getEulerMode(void) {return this->m_eulerMode;}
     
     //! Set the algorithm convergence tolerance
     void setTolerance(double i_tolerance) {this->m_tolerance = i_tolerance;}
@@ -227,7 +227,7 @@ protected:
     unsigned int m_toolIndex;
     
     //! Euler Convention to use
-    CREulerMode m_eulerMode;
+    EulerMode m_eulerMode;
     
     //! Convergence threshold
     double m_tolerance;

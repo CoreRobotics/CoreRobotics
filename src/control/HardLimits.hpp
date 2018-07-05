@@ -136,11 +136,11 @@ public:
 	//! Class constructor
 	HardLimits(const world::Manipulator& i_robot,
 	             unsigned int i_toolIndex,
-	             CREulerMode i_eulerMode);
+	             EulerMode i_eulerMode);
 
 	HardLimits(const world::Manipulator& i_robot,
 	             unsigned int i_toolIndex,
-	             CREulerMode i_eulerMode,
+	             EulerMode i_eulerMode,
 	             bool i_useNullSpace);
 
 //---------------------------------------------------------------------

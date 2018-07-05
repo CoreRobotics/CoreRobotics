@@ -216,7 +216,7 @@ Source: https://www.geometrictools.com/Documentation/EulerAngles.pdf
 \return                     vector of Euler angles of the frame.
 */
 //---------------------------------------------------------------------
-Eigen::Vector3d Frame::getOrientation(CREulerMode i_mode)
+Eigen::Vector3d Frame::getOrientation(EulerMode i_mode)
 {
     double a, b, g;
     Eigen::Vector3d orientation;
@@ -530,7 +530,7 @@ This method returns a vector of the position and orientation.
 \return                     pose vector (x, y, z, a, b, g)^T
 */
 //---------------------------------------------------------------------
-Eigen::Matrix<double, 6, 1> Frame::getPose(CREulerMode i_mode)
+Eigen::Matrix<double, 6, 1> Frame::getPose(EulerMode i_mode)
 {
     
     Eigen::Matrix<double, 6, 1> pose;
@@ -558,7 +558,7 @@ Eigen::Matrix<double, 6, 1> Frame::getPose(CREulerMode i_mode)
                                 true elements in poseElements
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd Frame::getPose(CREulerMode i_mode,
+Eigen::VectorXd Frame::getPose(EulerMode i_mode,
                                  Eigen::Matrix<bool, 6, 1> i_poseElements)
 {
     

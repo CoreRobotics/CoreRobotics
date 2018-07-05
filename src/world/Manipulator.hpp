@@ -173,14 +173,14 @@ class Manipulator : public Node
     
         //! Get the pose for the specified tool index
         Eigen::Matrix<double, 6, 1> getToolPose(unsigned i_toolIndex,
-                                                CREulerMode i_mode);
+                                                EulerMode i_mode);
     
         Eigen::VectorXd getToolPose(unsigned i_toolIndex,
-                                    CREulerMode i_mode,
+                                    EulerMode i_mode,
                                     Eigen::Matrix<bool, 6, 1> i_poseElements);
 
         Eigen::VectorXd getToolPose(unsigned i_toolIndex,
-                                    CREulerMode i_mode,
+                                    EulerMode i_mode,
                                     Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
         //! Set the model type
@@ -192,14 +192,14 @@ class Manipulator : public Node
     
         //! Compute the instantaneous numerical Jacobian
         Eigen::MatrixXd jacobian(unsigned i_toolIndex,
-                                 CREulerMode i_mode);
+                                 EulerMode i_mode);
     
         Eigen::MatrixXd jacobian(unsigned i_toolIndex,
-                                 CREulerMode i_mode,
+                                 EulerMode i_mode,
                                  Eigen::Matrix<bool, 6, 1> i_poseElements);
 
         Eigen::MatrixXd jacobian(unsigned i_toolIndex,
-                                 CREulerMode i_mode,
+                                 EulerMode i_mode,
                                  Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
 
@@ -208,14 +208,14 @@ class Manipulator : public Node
 
         //! Compute the instantaneous numerical Hessian
         Eigen::MatrixXd hessian(unsigned i_toolIndex,
-            CREulerMode i_mode);
+            EulerMode i_mode);
 
         Eigen::MatrixXd hessian(unsigned i_toolIndex,
-            CREulerMode i_mode,
+            EulerMode i_mode,
             Eigen::Matrix<bool, 6, 1> i_poseElements);
 
         Eigen::MatrixXd hessian(unsigned i_toolIndex,
-            CREulerMode i_mode,
+            EulerMode i_mode,
             Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
 

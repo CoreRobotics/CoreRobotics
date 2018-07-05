@@ -101,7 +101,7 @@ namespace cr {
  */
 //=====================================================================
 //! Enumerator for handling Euler angle conventions
-enum CREulerMode {
+enum EulerMode {
     CR_EULER_MODE_ZXZ,
     CR_EULER_MODE_XYX,
     CR_EULER_MODE_YZY,
@@ -178,11 +178,11 @@ public:
     Eigen::Matrix3d getRotation() { return m_rotation; }
 
     //! Get a vector of the Euler angles
-    Eigen::Vector3d getOrientation(CREulerMode i_mode);
+    Eigen::Vector3d getOrientation(EulerMode i_mode);
 
     //! Get the pose vector where the Euler orientation convention is specified by mode
-    Eigen::Matrix<double, 6, 1> getPose(CREulerMode i_mode);
-    Eigen::VectorXd getPose(CREulerMode i_mode,
+    Eigen::Matrix<double, 6, 1> getPose(EulerMode i_mode);
+    Eigen::VectorXd getPose(EulerMode i_mode,
                             Eigen::Matrix<bool, 6, 1> i_poseElements);
     
 //---------------------------------------------------------------------

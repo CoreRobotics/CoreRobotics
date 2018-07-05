@@ -118,7 +118,7 @@ public:
 	//! Class constructor
 	NullSpace(const world::Manipulator& i_robot,
                 unsigned int i_toolIndex,
-                CREulerMode i_eulerMode);
+                EulerMode i_eulerMode);
 
 //---------------------------------------------------------------------
 // Get/Set Methods
@@ -132,10 +132,10 @@ public:
 
 	//! Set the Euler angle convention of the IK solver.  This must match the
     //  Euler convention used to supply the set point in the solve() method.
-	void setEulerMode(CREulerMode i_eulerMode) {this->m_eulerMode = i_eulerMode;}
+	void setEulerMode(EulerMode i_eulerMode) {this->m_eulerMode = i_eulerMode;}
 
 	//! Get the Euler convention
-	CREulerMode getEulerMode(void) {return this->m_eulerMode;}
+	EulerMode getEulerMode(void) {return this->m_eulerMode;}
 
 	//! Set the minimum threshold for a non-singular matrix
 	void setSingularThresh(double i_thresh) {this->m_svdTol = i_thresh;}
@@ -197,7 +197,7 @@ protected:
 	unsigned int m_toolIndex;
 
 	//! Euler Convention to use
-	CREulerMode m_eulerMode;
+	EulerMode m_eulerMode;
 
 	//! Tolerance for computing if a matrix is singular using SVD svals
 	double m_svdTol;

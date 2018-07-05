@@ -74,7 +74,7 @@ double CRMinJointRotation = -std::numeric_limits<double>::max();
 //---------------------------------------------------------------------
 HardLimits::HardLimits(const world::Manipulator& i_robot,
                            unsigned int i_toolIndex,
-                           CREulerMode i_eulerMode,
+                           EulerMode i_eulerMode,
                            bool i_useNullSpace) {
 	this->m_robot = i_robot;
 	this->m_IKSolver = new InverseKinematics(this->m_robot, i_toolIndex, i_eulerMode);
@@ -106,7 +106,7 @@ HardLimits::HardLimits(const world::Manipulator& i_robot,
 //---------------------------------------------------------------------
 HardLimits::HardLimits(const world::Manipulator& i_robot,
                            unsigned int i_toolIndex,
-                           CREulerMode i_eulerMode) {
+                           EulerMode i_eulerMode) {
 	this->m_robot = i_robot;
 	this->m_IKSolver = new InverseKinematics(this->m_robot, i_toolIndex, i_eulerMode);
 	this->m_useNullSpace = false;

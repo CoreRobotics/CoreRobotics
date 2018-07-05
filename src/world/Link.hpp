@@ -110,7 +110,6 @@ class Link : public Node
         //! Rigid body
         RigidBody m_body;
     
-    
 };
 
 }

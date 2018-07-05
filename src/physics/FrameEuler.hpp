@@ -77,10 +77,10 @@ namespace cr {
  - FrameEuler::setPosition, FrameEuler::setOrientation and
  FrameEuler::setPositionAndOrientation set transformation values.
  - FrameEuler::setMode sets the Euler angle convention (options are in
- cr::CREulerMode).
+ cr::EulerMode).
  
  The free variable can be specified by the FrameEuler::m_freeVar member
- (options are in cr::CREulerFreeVariable).
+ (options are in cr::EulerFreeVariable).
  
  ## Example
  This example creates an Euler frame class.
@@ -93,7 +93,7 @@ namespace cr {
  */
 //=====================================================================
 //! Enumerator for handling Euler angle free variable candidates
-enum CREulerFreeVariable {
+enum EulerFreeVariable {
     CR_EULER_FREE_NONE,
     CR_EULER_FREE_POS_X,
     CR_EULER_FREE_POS_Y,
@@ -118,8 +118,8 @@ public:
                  double i_a,
                  double i_b,
                  double i_g,
-                 CREulerMode i_mode,
-                 CREulerFreeVariable i_free);
+                 EulerMode i_mode,
+                 EulerFreeVariable i_free);
     FrameEuler();
 
 //---------------------------------------------------------------------
@@ -133,16 +133,16 @@ public:
     double getFreeValue(void);
     
     //! Set the free variable
-    void setFreeVariable(CREulerFreeVariable i_free) {m_freeVar = i_free;}
+    void setFreeVariable(EulerFreeVariable i_free) {m_freeVar = i_free;}
     
     //! Get the free variable
-    CREulerFreeVariable getFreeVariable(void) {return m_freeVar;}
+    EulerFreeVariable getFreeVariable(void) {return m_freeVar;}
     
     //! Set the Euler convention
-    void setMode(CREulerMode i_mode);
+    void setMode(EulerMode i_mode);
     
     //! Get the Euler convention
-    CREulerMode getMode(void);
+    EulerMode getMode(void);
     
     //! Set the position values
     void setPosition(double i_x, double i_y, double i_z);
@@ -188,10 +188,10 @@ public:
 private:
     
     //! free variable indicator
-    CREulerFreeVariable m_freeVar;
+    EulerFreeVariable m_freeVar;
     
     //! Euler convention
-    CREulerMode m_eulerMode;
+    EulerMode m_eulerMode;
 
     //! x position
     double m_posX;
