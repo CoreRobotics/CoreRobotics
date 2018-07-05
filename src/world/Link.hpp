@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef CR_LINK_HPP_
 #define CR_LINK_HPP_
 
-#include "Frame.hpp"
+#include "FrameEuler.hpp"
 #include "RigidBody.hpp"
 #include "Node.hpp"
 #include <vector>
