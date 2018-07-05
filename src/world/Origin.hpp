@@ -135,6 +135,7 @@ class Origin : public LoopElement, public Item
 
 
 //! Origin display operator overload
+// https://stackoverflow.com/questions/476272/how-to-properly-overload-the-operator-for-an-ostream
 // std::ostream& operator<<(std::ostream&, const cr::Origin&);
 
 
