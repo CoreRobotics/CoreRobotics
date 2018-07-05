@@ -101,7 +101,7 @@ void Origin::setName(std::string i_name)
 //---------------------------------------------------------------------
 void Origin::print(std::ostream& i_stream)
 {
-    i_stream << "\nTree graph structure from world::Origin:\n\n";
+    i_stream << "\nTree graph structure from world::Origin\n\n";
     m_rootItem->print(i_stream);
     i_stream << "\n";
 }

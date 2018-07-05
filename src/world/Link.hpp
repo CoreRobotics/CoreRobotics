@@ -120,7 +120,7 @@ class Link : public Node
         RigidBody m_body;
     
         //! Degree of freedom
-        EulerFreeVariable m_dof;
+        EulerFreeVariable m_dof = CR_EULER_FREE_NONE;
     
 };
 

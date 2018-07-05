@@ -735,7 +735,7 @@ void Robot::print(std::ostream& i_stream)
     } else if (isRoot()) {
         id = "R";
     }
-    i_stream << "+ cr::Manipulator [" << id << "] DOF = " <<
+    i_stream << "+ [" << id << "] cr::Manipulator #DOF = " <<
         getDegreesOfFreedom() << " '" << getName() << "'\n";
     for (int i = 0; i < m_children.size(); i++)
     {

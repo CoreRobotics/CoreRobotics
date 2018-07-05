@@ -94,7 +94,21 @@ void Link::print(std::ostream& i_stream)
     } else if (isRoot()) {
         id = "R";
     }
-    i_stream << "+ cr::Link [" << id << "] '" << getName() << "'\n";
+    std::string dof = "-";
+    if (getDegreeOfFreedom() == CR_EULER_FREE_ANG_A) {
+        dof = "A";
+    } else if (getDegreeOfFreedom() == CR_EULER_FREE_ANG_B) {
+        dof = "B";
+    } else if (getDegreeOfFreedom() == CR_EULER_FREE_ANG_G) {
+        dof = "G";
+    } else if (getDegreeOfFreedom() == CR_EULER_FREE_POS_X) {
+        dof = "X";
+    } else if (getDegreeOfFreedom() == CR_EULER_FREE_POS_Y) {
+        dof = "Y";
+    } else if (getDegreeOfFreedom() == CR_EULER_FREE_POS_Z) {
+        dof = "Z";
+    }
+    i_stream << "+ [" << id << "] cr::Link DOF = " << dof << " '" << getName() << "'\n";
     for (int i = 0; i < m_children.size(); i++)
     {
         m_children.at(i)->print(i_stream);
