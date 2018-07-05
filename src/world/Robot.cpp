@@ -116,7 +116,7 @@ int Robot::getDegreesOfFreedom()
 {
     int n = 0;
     for (int i = 0; i < m_links.size(); i++) {
-        if (m_links.at(i)->getLocalTransform().isDriven()) {
+        if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
             n++;
         }
     }

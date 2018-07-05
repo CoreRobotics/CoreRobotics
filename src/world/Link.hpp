@@ -96,6 +96,15 @@ class Link : public Node
         //! return the rigid body parameters
         RigidBody getRigidBody() { return m_body; }
     
+        //! set the degree of freedom
+        void setDegreeOfFreedom(EulerFreeVariable i_dof) { m_dof = i_dof; }
+    
+        //! return the degree of freedom
+        EulerFreeVariable getDegreeOfFreedom() { return m_dof; }
+    
+        //! set the driven angle
+        // void setFreeVariable(double i_value);
+    
     
     // Print details
     public:
@@ -109,6 +118,9 @@ class Link : public Node
     
         //! Rigid body
         RigidBody m_body;
+    
+        //! Degree of freedom
+        EulerFreeVariable m_dof;
     
 };
 
