@@ -123,7 +123,7 @@ typedef std::shared_ptr<Manipulator> ManipulatorPtr;
 
  */
 //---------------------------------------------------------------------
-class Manipulator : public Node
+class Manipulator
 {
     
 
