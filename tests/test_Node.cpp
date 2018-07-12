@@ -90,45 +90,45 @@ TEST(Node, transforms){
     Eigen::Vector3d p;
     
     // local transform of item1
-    p = item1->getLocalTransform().getPosition();
+    p = item1->getLocalTransform().getTranslation();
     EXPECT_DOUBLE_EQ(p(0), 1);
     EXPECT_DOUBLE_EQ(p(1), 0);
     EXPECT_DOUBLE_EQ(p(2), 0);
     
     // local transform of item2
-    p = item2->getLocalTransform().getPosition();
+    p = item2->getLocalTransform().getTranslation();
     EXPECT_DOUBLE_EQ(p(0), 0);
     EXPECT_DOUBLE_EQ(p(1), 2);
     EXPECT_DOUBLE_EQ(p(2), 0);
     
     // local transform of item3
-    p = item3->getLocalTransform().getPosition();
+    p = item3->getLocalTransform().getTranslation();
     EXPECT_DOUBLE_EQ(p(0), 0);
     EXPECT_DOUBLE_EQ(p(1), 0);
     EXPECT_DOUBLE_EQ(p(2), 3);
     
     
     // global transform of item1
-    p = item1->getGlobalTransform().getPosition();
+    p = item1->getGlobalTransform().getTranslation();
     EXPECT_DOUBLE_EQ(p(0), 1);
     EXPECT_DOUBLE_EQ(p(1), 0);
     EXPECT_DOUBLE_EQ(p(2), 0);
     
     // global transform of item2
-    p = item2->getGlobalTransform().getPosition();
+    p = item2->getGlobalTransform().getTranslation();
     EXPECT_DOUBLE_EQ(p(0), 1);
     EXPECT_DOUBLE_EQ(p(1), 2);
     EXPECT_DOUBLE_EQ(p(2), 0);
     
     // global transform of item3
-    p = item3->getGlobalTransform().getPosition();
+    p = item3->getGlobalTransform().getTranslation();
     EXPECT_DOUBLE_EQ(p(0), 0);
     EXPECT_DOUBLE_EQ(p(1), 0);
     EXPECT_DOUBLE_EQ(p(2), 3);
     
     
     // transform of item2 relative to item3
-    p = item2->getRelativeTransform(item3).getPosition();
+    p = item2->getRelativeTransform(item3).getTranslation();
     EXPECT_DOUBLE_EQ(p(0), 1);
     EXPECT_DOUBLE_EQ(p(1), 2);
     EXPECT_DOUBLE_EQ(p(2), -3);

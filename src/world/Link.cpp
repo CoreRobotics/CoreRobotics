@@ -79,6 +79,24 @@ LinkPtr Link::create(){
     
 //---------------------------------------------------------------------
 /*!
+ This function gets the local frame transformation (relative to
+ the parent frame).
+ 
+ \return        the local frame transformation
+ */
+//---------------------------------------------------------------------
+Frame Link::getLocalTransform()
+{
+    Frame f;
+    Eigen::Matrix3d r = m_frame.getRotation();
+    Eigen::Vector3d t = m_frame.getTranslation();
+    f.setRotationAndTranslation(r, t);
+    return f;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
  Print the children.\n
  */
 //---------------------------------------------------------------------
@@ -108,7 +126,7 @@ void Link::print(std::ostream& i_stream)
     } else if (getDegreeOfFreedom() == CR_EULER_FREE_POS_Z) {
         dof = "Z";
     }
-    i_stream << "+ [" << id << "] cr::Link DOF = " << dof << " '" << getName() << "'\n";
+    i_stream << "+ [" << id << "] world::Link DOF = " << dof << " '" << getName() << "'\n";
     for (int i = 0; i < m_children.size(); i++)
     {
         m_children.at(i)->print(i_stream);

@@ -133,14 +133,16 @@ int Robot::getDegreesOfFreedom()
  \param[in]     i_q         vector of configuration values
  */
 //---------------------------------------------------------------------
-    /*
 void Robot::setConfiguration(Eigen::VectorXd i_q)
 {
-    for (size_t i = 0; i < m_listDriven.size(); i++) {
-        m_listLinks.at(m_listDriven.at(i))->m_frame->setFreeValue(i_q(i));
+    int k = 0;
+    for (size_t i = 0; i < m_links.size(); i++) {
+        if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+            m_links.at(i)->setFreeVariable(i_q(k));
+            k++;
+        }
     }
 }
-    */
      
     
 //=====================================================================
@@ -152,16 +154,18 @@ void Robot::setConfiguration(Eigen::VectorXd i_q)
  \return    vector of configuration values
  */
 //---------------------------------------------------------------------
-    /*
-Eigen::VectorXd Robot::getConfiguration(void)
+Eigen::VectorXd Robot::getConfiguration()
 {
-    Eigen::VectorXd q(m_listDriven.size());
-    for (size_t i = 0; i < m_listDriven.size(); i++) {
-        q(i) = m_listLinks.at(m_listDriven.at(i))->m_frame->getFreeValue();
+    Eigen::VectorXd q(this->getDegreesOfFreedom());
+    int k = 0;
+    for (size_t i = 0; i < m_links.size(); i++) {
+        if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+            q(k) = m_links.at(i)->getFreeVariable();
+            k++;
+        }
     }
     return q;
 }
-     */
     
     
 //=====================================================================
@@ -735,7 +739,7 @@ void Robot::print(std::ostream& i_stream)
     } else if (isRoot()) {
         id = "R";
     }
-    i_stream << "+ [" << id << "] cr::Manipulator #DOF = " <<
+    i_stream << "+ [" << id << "] world::Manipulator #DOF = " <<
         getDegreesOfFreedom() << " '" << getName() << "'\n";
     for (int i = 0; i < m_children.size(); i++)
     {

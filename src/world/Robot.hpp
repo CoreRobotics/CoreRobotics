@@ -157,10 +157,10 @@ class Robot : public Node
         int getDegreesOfFreedom();
     
         //! Set the configuration (joint) space positions
-        // void setConfiguration(Eigen::VectorXd i_q);
+        void setConfiguration(Eigen::VectorXd i_q);
     
         //! Get the configuration (joint) space positions
-        // Eigen::VectorXd getConfiguration(void);
+        Eigen::VectorXd getConfiguration(void);
     
         //! Get the instantaneous forward kinematics
         // Eigen::MatrixXd getForwardKinematics(void);

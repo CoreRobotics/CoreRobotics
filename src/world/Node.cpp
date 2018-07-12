@@ -311,7 +311,7 @@ void Node::print(std::ostream& i_stream)
     } else if (isRoot()) {
         id = "R";
     }
-    i_stream << "+ [" << id << "] cr::Node '" << getName() << "'\n";
+    i_stream << "+ [" << id << "] world::Node '" << getName() << "'\n";
     for (int i = 0; i < m_children.size(); i++)
     {
         m_children.at(i)->print(i_stream);

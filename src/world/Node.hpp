@@ -126,13 +126,13 @@ class Node
         void setLocalTransform(const Frame& i_frame);
     
         //! return the local frame transformation
-        Frame getLocalTransform();
+        virtual Frame getLocalTransform();
     
         //! return the global frame transformation
-        Frame getGlobalTransform();
+        virtual Frame getGlobalTransform();
     
         //! return the relative frame transformation
-        Frame getRelativeTransform(NodePtr i_item);
+        virtual Frame getRelativeTransform(NodePtr i_item);
     
     
     // Print details

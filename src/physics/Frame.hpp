@@ -172,7 +172,7 @@ public:
     virtual bool isDriven(void);
 
 	//! Get the position vector
-	Eigen::Vector3d getPosition() { return m_translation; }
+	Eigen::Vector3d getTranslation() { return m_translation; }
     
     //! Get the rotation matrix
     Eigen::Matrix3d getRotation() { return m_rotation; }

@@ -97,13 +97,28 @@ class Link : public Node
         RigidBody getRigidBody() { return m_body; }
     
         //! set the degree of freedom
-        void setDegreeOfFreedom(EulerFreeVariable i_dof) { m_dof = i_dof; }
+        // void setDegreeOfFreedom(EulerFreeVariable i_dof) { m_dof = i_dof; }
+        void setDegreeOfFreedom(EulerFreeVariable i_dof) { m_frame.setFreeVariable(i_dof); }
     
         //! return the degree of freedom
-        EulerFreeVariable getDegreeOfFreedom() { return m_dof; }
+        // EulerFreeVariable getDegreeOfFreedom() { return m_dof; }
+        EulerFreeVariable getDegreeOfFreedom() { return m_frame.getFreeVariable(); }
     
         //! set the driven angle
-        // void setFreeVariable(double i_value);
+        void setFreeVariable(double i_value) { m_frame.setFreeValue(i_value); }
+    
+        //! get the driven angle
+        double getFreeVariable() { return m_frame.getFreeValue(); }
+    
+    
+    // Frame transformation controls
+    public:
+    
+        //! set the local frame transformation
+        void setLocalTransform(const FrameEuler& i_frame) { m_frame = i_frame; }
+    
+        //! return the local frame transformation
+        virtual Frame getLocalTransform();
     
     
     // Print details
@@ -119,8 +134,11 @@ class Link : public Node
         //! Rigid body
         RigidBody m_body;
     
+        //! euler frame 
+        FrameEuler m_frame;
+    
         //! Degree of freedom
-        EulerFreeVariable m_dof = CR_EULER_FREE_NONE;
+        // EulerFreeVariable m_dof = CR_EULER_FREE_NONE;
     
 };
 
