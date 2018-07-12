@@ -104,14 +104,18 @@ removed for compatability.
 
 %module CoreRobotics
 %{
+
 #define SWIG_FILE_WITH_INIT
 #include <Python.h>
 
 #include "CoreRobotics.hpp"
+
+typedef cr::world::LinkPtr LinkPtr;
 %}
 
 %include <typemaps.i>
 %include <std_vector.i>
+%include <std_shared_ptr.i>
 
 %template(vectorMatrixXd) std::vector<Eigen::MatrixXd>;
 %template(vectorVectorXd) std::vector<Eigen::VectorXd>;

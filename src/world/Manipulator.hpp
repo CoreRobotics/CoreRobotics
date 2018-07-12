@@ -144,7 +144,7 @@ class Manipulator
     public:
     
         //! Add a link to the list of children
-        void addLink(LinkPtr i_link);
+        //void addLink(LinkPtr i_link);
     
 
     // Get/Set Methods

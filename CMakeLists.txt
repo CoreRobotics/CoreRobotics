@@ -316,7 +316,7 @@ if(python OR all)
 			# Create SWIG Module
 			swig_add_module(${PROJECT_NAME} python
 				${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD})
 
 			# Link Module with Python
 			swig_link_libraries(${PROJECT_NAME} ${PYTHON_LIBRARIES} ${LINK_FLAGS})
