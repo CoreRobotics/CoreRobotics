@@ -97,6 +97,46 @@ Frame Link::getLocalTransform()
     
 //---------------------------------------------------------------------
 /*!
+ This function gets the global frame transformation (relative to
+ the world frame).
+ 
+ \return        the local frame transformation
+ */
+//---------------------------------------------------------------------
+Frame Link::getGlobalTransform()
+{
+    Eigen::Matrix4d T = m_frame.getTransformToParent();
+    NodePtr parent = m_parent;
+    while (parent != NULL){
+        T = parent->getLocalTransform().getTransformToParent() * T;
+        parent = parent->getParent();
+    }
+    Frame f;
+    f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
+    return f;
+}
+
+
+//---------------------------------------------------------------------
+/*!
+ This function gets a relative frame transformation (relative to
+ the frame of the intput item).
+ 
+ \return        the relative frame transformation
+ */
+//---------------------------------------------------------------------
+Frame Link::getRelativeTransform(NodePtr i_item)
+{
+    Eigen::Matrix4d T0 = this->getGlobalTransform().getTransformToParent();
+    Eigen::Matrix4d T = i_item->getGlobalTransform().getTransformToChild() * T0;
+    Frame f;
+    f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
+    return f;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
  Print the children.\n
  */
 //---------------------------------------------------------------------

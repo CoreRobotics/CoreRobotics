@@ -187,6 +187,7 @@ class Robot : public Node
     // Jacobian
     public:
     
+    
         //! Compute the instantaneous numerical Jacobian
         // Eigen::MatrixXd jacobian(unsigned i_toolIndex,
         //                         EulerMode i_mode);
