@@ -291,7 +291,7 @@ if(python OR all)
 
 			# Compile a shared library with the exsisting wrapper C++ file
 			add_library(_${PROJECT_NAME} SHARED
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS}
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD}
 				${CMAKE_SOURCE_DIR}/python/swig/${PROJECT_NAME}PYTHON_wrap.cxx)
 
 			# Link with Python
