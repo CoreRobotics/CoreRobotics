@@ -52,15 +52,15 @@ print("*************************************")
 print("Demonstration of CRManipulator.")
 
 # Create a new robot
-MyRobot = CRManipulator()
+MyRobot = Manipulator()
 
 # Create a couple of Euler frames and rigid body links
-F0 = CRFrameEuler()
-F1 = CRFrameEuler()
-F2 = CRFrameEuler()
-Link0 = CRRigidBody()
-Link1 = CRRigidBody()
-Link2 = CRRigidBody()
+F0 = FrameEuler()
+F1 = FrameEuler()
+F2 = FrameEuler()
+Link0 = RigidBody()
+Link1 = RigidBody()
+Link2 = RigidBody()
 
 # Set info for Link 0 and add to MyRobot
 F0.setFreeVariable(CR_EULER_FREE_ANG_G)
@@ -84,7 +84,7 @@ Link2.setFrame(F2)
 MyRobot.addLink(Link2)
 
 # Create a tool frame and add to MyRobot
-Tool = CRFrameEuler()
+Tool = FrameEuler()
 Tool.setMode(CR_EULER_MODE_XYZ)
 Tool.setPositionAndOrientation(0, 0, 0, 0, 0, 0)
 toolIndex = MyRobot.addTool(2, Tool)
@@ -117,7 +117,7 @@ print("Jacobian =")
 print(Jacobian)
 
 # Now get the transformation to the tool for the current configuration
-toolFrame = CRFrame()
+toolFrame = Frame()
 MyRobot.getToolFrame(toolIndex, toolFrame)
 T = toolFrame.getTransformToParent()
 print("MyRobot tool has a transformation of")

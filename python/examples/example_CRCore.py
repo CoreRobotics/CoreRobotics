@@ -64,7 +64,7 @@ t = time.time() - MyClock
 print("t =", t)
 
 # Open a shared memory object
-mem = CRSharedMemory(memoryName, CR_MANAGER_SERVER)
+mem = SharedMemory(memoryName, CR_MANAGER_SERVER)
 
 # Create a vector of data
 v = np.array([[0.0, 0.8]]).T
@@ -75,7 +75,7 @@ mem.addSignal("signal_1", v)
 # Callback for the first thread
 def callback1():
 	# Open some shared memory as client
-	mem = CRSharedMemory(memoryName, CR_MANAGER_CLIENT)
+	mem = SharedMemory(memoryName, CR_MANAGER_CLIENT)
 
 	dt = 0.1
 	for i in range(10):
@@ -88,7 +88,7 @@ def callback1():
 # Callback for the second thread
 def callback2():
 	# Open some shared memory as client
-	mem = CRSharedMemory(memoryName, CR_MANAGER_CLIENT)
+	mem = SharedMemory(memoryName, CR_MANAGER_CLIENT)
 	# Create a vector of data
 	v = np.array([[0.1, 0.4]]).T
 

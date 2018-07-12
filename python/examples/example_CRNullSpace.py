@@ -51,25 +51,25 @@ import numpy as np
 print("*************************************")
 print("Demonstration of CRNullSpace.")
 
-MyRobot = CRManipulator()
+MyRobot = Manipulator()
 
 # Initialize translation frames
-F0 = CRFrameEuler()
-F1 = CRFrameEuler()
-F2 = CRFrameEuler()
-F3 = CRFrameEuler()
-F4 = CRFrameEuler()
-F5 = CRFrameEuler()
-F6 = CRFrameEuler()
+F0 = FrameEuler()
+F1 = FrameEuler()
+F2 = FrameEuler()
+F3 = FrameEuler()
+F4 = FrameEuler()
+F5 = FrameEuler()
+F6 = FrameEuler()
 
 # Initialize links
-Link0 = CRRigidBody()
-Link1 = CRRigidBody()
-Link2 = CRRigidBody()
-Link3 = CRRigidBody()
-Link4 = CRRigidBody()
-Link5 = CRRigidBody()
-Link6 = CRRigidBody()
+Link0 = RigidBody()
+Link1 = RigidBody()
+Link2 = RigidBody()
+Link3 = RigidBody()
+Link4 = RigidBody()
+Link5 = RigidBody()
+Link6 = RigidBody()
 
 # Set translation frames and DH Modified
 F0.setMode(CR_EULER_MODE_XYZ)
@@ -130,14 +130,14 @@ linkIndex5 = MyRobot.addLink(Link5);
 linkIndex6 = MyRobot.addLink(Link6);
 
 # Create a tool frame and add to MyRobot
-Tool = CRFrameEuler()
+Tool = FrameEuler()
 Tool.setFreeVariable(CR_EULER_FREE_NONE)
 Tool.setMode(CR_EULER_MODE_XYZ)
 Tool.setPositionAndOrientation(90.21, 0.0, -107.43, -math.pi / 8.0, 0.0, 0.0)
 toolIndex = MyRobot.addTool(linkIndex6, Tool)
 
 # Initialize the solver
-nullSpaceSolver = CRNullSpace(MyRobot, toolIndex, CR_EULER_MODE_XYZ)
+nullSpaceSolver = NullSpace(MyRobot, toolIndex, CR_EULER_MODE_XYZ)
 
 # Set the robot orientation
 InitJoints = np.array([0.0, 2.0, 0.0, -2, 0.0, math.pi / 8.0])

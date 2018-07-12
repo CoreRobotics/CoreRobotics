@@ -52,10 +52,10 @@ print("**********************")
 print("Demonstration of CRFrameDh")
 
 # Create a new robot
-MyRobot = CRManipulator()
+MyRobot = Manipulator()
 
 # Create a Dh frame
-F = CRFrameDh()
+F = FrameDh()
 
 # Set the parameters of the Dh frames
 F.setParameters(1.0, math.pi/2.0, 1.0, 0.0)

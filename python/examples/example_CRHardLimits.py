@@ -55,19 +55,19 @@ print("Demonstration of CRHardLimits.")
 convention = CR_EULER_MODE_XYZ
 
 # Define a robot
-MyRobot = CRManipulator()
+MyRobot = Manipulator()
 
 # Define several frames
-F0 = CRFrameEuler(0, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G)
-F1 = CRFrameEuler(2, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G)
-F2 = CRFrameEuler(-4, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G)
-F3 = CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G)
+F0 = FrameEuler(0, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G)
+F1 = FrameEuler(2, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G)
+F2 = FrameEuler(-4, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G)
+F3 = FrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G)
 
 # Define the robot links
-Link0 = CRRigidBody(F0)
-Link1 = CRRigidBody(F1)
-Link2 = CRRigidBody(F2)
-Link3 = CRRigidBody(F3)
+Link0 = RigidBody(F0)
+Link1 = RigidBody(F1)
+Link2 = RigidBody(F2)
+Link3 = RigidBody(F3)
 
 # Add the links to the robot
 MyRobot.addLink(Link0)
@@ -76,11 +76,11 @@ MyRobot.addLink(Link2)
 linkIndex = MyRobot.addLink(Link3)
 
 # Create a tool and add it
-Tool = CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_NONE)
+Tool = FrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_NONE)
 toolIndex = MyRobot.addTool(linkIndex, Tool)
 
 # Initialize a Hard Limits solver with the ik solver and the nullspace solver
-solver = CRHardLimits(MyRobot, toolIndex, convention, True);
+solver = HardLimits(MyRobot, toolIndex, convention, True);
 
 # Change IK solver maximum iterations
 solver.getIKSolver().setMaxIter(20)
