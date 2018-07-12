@@ -160,6 +160,7 @@ class SwigPyIterator(_object):
 SwigPyIterator_swigregister = _CoreRobotics.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SHARED_PTR_DISOWN = _CoreRobotics.SHARED_PTR_DISOWN
 class vectorMatrixXd(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, vectorMatrixXd, name, value)
@@ -388,33 +389,33 @@ class vectorVectorXd(_object):
 vectorVectorXd_swigregister = _CoreRobotics.vectorVectorXd_swigregister
 vectorVectorXd_swigregister(vectorVectorXd)
 
-class CRClock(_object):
+class Clock(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRClock, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Clock, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRClock, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, Clock, name)
     __repr__ = _swig_repr
 
     def __init__(self):
-        this = _CoreRobotics.new_CRClock()
+        this = _CoreRobotics.new_Clock()
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _CoreRobotics.delete_CRClock
+    __swig_destroy__ = _CoreRobotics.delete_Clock
     def __del__(self):
         return None
 
     def startTimer(self):
-        return _CoreRobotics.CRClock_startTimer(self)
+        return _CoreRobotics.Clock_startTimer(self)
 
     def getElapsedTime(self):
-        return _CoreRobotics.CRClock_getElapsedTime(self)
+        return _CoreRobotics.Clock_getElapsedTime(self)
 
     def sleep(self, i_time):
-        return _CoreRobotics.CRClock_sleep(self, i_time)
-CRClock_swigregister = _CoreRobotics.CRClock_swigregister
-CRClock_swigregister(CRClock)
+        return _CoreRobotics.Clock_sleep(self, i_time)
+Clock_swigregister = _CoreRobotics.Clock_swigregister
+Clock_swigregister(Clock)
 
 CR_RESULT_SUCCESS = _CoreRobotics.CR_RESULT_SUCCESS
 CR_RESULT_SINGULAR = _CoreRobotics.CR_RESULT_SINGULAR
@@ -424,166 +425,166 @@ CR_RESULT_NOT_FOUND = _CoreRobotics.CR_RESULT_NOT_FOUND
 CR_RUN_STATE_RUNNING = _CoreRobotics.CR_RUN_STATE_RUNNING
 CR_RUN_STATE_STOPPED = _CoreRobotics.CR_RUN_STATE_STOPPED
 CR_RUN_STATE_PAUSED = _CoreRobotics.CR_RUN_STATE_PAUSED
-class CRConversion(_object):
+class Conversion(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRConversion, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Conversion, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRConversion, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, Conversion, name)
     __repr__ = _swig_repr
     if _newclass:
-        deg2rad = staticmethod(_CoreRobotics.CRConversion_deg2rad)
+        deg2rad = staticmethod(_CoreRobotics.Conversion_deg2rad)
     else:
-        deg2rad = _CoreRobotics.CRConversion_deg2rad
+        deg2rad = _CoreRobotics.Conversion_deg2rad
     if _newclass:
-        rad2deg = staticmethod(_CoreRobotics.CRConversion_rad2deg)
+        rad2deg = staticmethod(_CoreRobotics.Conversion_rad2deg)
     else:
-        rad2deg = _CoreRobotics.CRConversion_rad2deg
+        rad2deg = _CoreRobotics.Conversion_rad2deg
     if _newclass:
-        wrapToPi = staticmethod(_CoreRobotics.CRConversion_wrapToPi)
+        wrapToPi = staticmethod(_CoreRobotics.Conversion_wrapToPi)
     else:
-        wrapToPi = _CoreRobotics.CRConversion_wrapToPi
+        wrapToPi = _CoreRobotics.Conversion_wrapToPi
 
     def __init__(self):
-        this = _CoreRobotics.new_CRConversion()
+        this = _CoreRobotics.new_Conversion()
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _CoreRobotics.delete_CRConversion
+    __swig_destroy__ = _CoreRobotics.delete_Conversion
     def __del__(self):
         return None
-CRConversion_swigregister = _CoreRobotics.CRConversion_swigregister
-CRConversion_swigregister(CRConversion)
+Conversion_swigregister = _CoreRobotics.Conversion_swigregister
+Conversion_swigregister(Conversion)
 
-def CRConversion_deg2rad(i_deg):
-    return _CoreRobotics.CRConversion_deg2rad(i_deg)
-CRConversion_deg2rad = _CoreRobotics.CRConversion_deg2rad
+def Conversion_deg2rad(i_deg):
+    return _CoreRobotics.Conversion_deg2rad(i_deg)
+Conversion_deg2rad = _CoreRobotics.Conversion_deg2rad
 
-def CRConversion_rad2deg(i_rad):
-    return _CoreRobotics.CRConversion_rad2deg(i_rad)
-CRConversion_rad2deg = _CoreRobotics.CRConversion_rad2deg
+def Conversion_rad2deg(i_rad):
+    return _CoreRobotics.Conversion_rad2deg(i_rad)
+Conversion_rad2deg = _CoreRobotics.Conversion_rad2deg
 
-def CRConversion_wrapToPi(*args):
-    return _CoreRobotics.CRConversion_wrapToPi(*args)
-CRConversion_wrapToPi = _CoreRobotics.CRConversion_wrapToPi
+def Conversion_wrapToPi(*args):
+    return _CoreRobotics.Conversion_wrapToPi(*args)
+Conversion_wrapToPi = _CoreRobotics.Conversion_wrapToPi
 
-class CRIntegration(_object):
+class Integration(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRIntegration, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Integration, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRIntegration, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, Integration, name)
     __repr__ = _swig_repr
 
     def __init__(self):
-        this = _CoreRobotics.new_CRIntegration()
+        this = _CoreRobotics.new_Integration()
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _CoreRobotics.delete_CRIntegration
+    __swig_destroy__ = _CoreRobotics.delete_Integration
     def __del__(self):
         return None
-CRIntegration_swigregister = _CoreRobotics.CRIntegration_swigregister
-CRIntegration_swigregister(CRIntegration)
+Integration_swigregister = _CoreRobotics.Integration_swigregister
+Integration_swigregister(Integration)
 
-class CRMatrix(_object):
+class Matrix(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRMatrix, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Matrix, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRMatrix, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, Matrix, name)
     __repr__ = _swig_repr
     if _newclass:
-        reducedVector = staticmethod(_CoreRobotics.CRMatrix_reducedVector)
+        reducedVector = staticmethod(_CoreRobotics.Matrix_reducedVector)
     else:
-        reducedVector = _CoreRobotics.CRMatrix_reducedVector
+        reducedVector = _CoreRobotics.Matrix_reducedVector
     if _newclass:
-        reducedMatrix = staticmethod(_CoreRobotics.CRMatrix_reducedMatrix)
+        reducedMatrix = staticmethod(_CoreRobotics.Matrix_reducedMatrix)
     else:
-        reducedMatrix = _CoreRobotics.CRMatrix_reducedMatrix
+        reducedMatrix = _CoreRobotics.Matrix_reducedMatrix
     if _newclass:
-        svd = staticmethod(_CoreRobotics.CRMatrix_svd)
+        svd = staticmethod(_CoreRobotics.Matrix_svd)
     else:
-        svd = _CoreRobotics.CRMatrix_svd
+        svd = _CoreRobotics.Matrix_svd
     if _newclass:
-        svdInverse = staticmethod(_CoreRobotics.CRMatrix_svdInverse)
+        svdInverse = staticmethod(_CoreRobotics.Matrix_svdInverse)
     else:
-        svdInverse = _CoreRobotics.CRMatrix_svdInverse
+        svdInverse = _CoreRobotics.Matrix_svdInverse
     if _newclass:
-        rotAboutX = staticmethod(_CoreRobotics.CRMatrix_rotAboutX)
+        rotAboutX = staticmethod(_CoreRobotics.Matrix_rotAboutX)
     else:
-        rotAboutX = _CoreRobotics.CRMatrix_rotAboutX
+        rotAboutX = _CoreRobotics.Matrix_rotAboutX
     if _newclass:
-        rotAboutY = staticmethod(_CoreRobotics.CRMatrix_rotAboutY)
+        rotAboutY = staticmethod(_CoreRobotics.Matrix_rotAboutY)
     else:
-        rotAboutY = _CoreRobotics.CRMatrix_rotAboutY
+        rotAboutY = _CoreRobotics.Matrix_rotAboutY
     if _newclass:
-        rotAboutZ = staticmethod(_CoreRobotics.CRMatrix_rotAboutZ)
+        rotAboutZ = staticmethod(_CoreRobotics.Matrix_rotAboutZ)
     else:
-        rotAboutZ = _CoreRobotics.CRMatrix_rotAboutZ
+        rotAboutZ = _CoreRobotics.Matrix_rotAboutZ
     if _newclass:
-        normL1 = staticmethod(_CoreRobotics.CRMatrix_normL1)
+        normL1 = staticmethod(_CoreRobotics.Matrix_normL1)
     else:
-        normL1 = _CoreRobotics.CRMatrix_normL1
+        normL1 = _CoreRobotics.Matrix_normL1
     if _newclass:
-        normL2 = staticmethod(_CoreRobotics.CRMatrix_normL2)
+        normL2 = staticmethod(_CoreRobotics.Matrix_normL2)
     else:
-        normL2 = _CoreRobotics.CRMatrix_normL2
+        normL2 = _CoreRobotics.Matrix_normL2
     if _newclass:
-        normLinf = staticmethod(_CoreRobotics.CRMatrix_normLinf)
+        normLinf = staticmethod(_CoreRobotics.Matrix_normLinf)
     else:
-        normLinf = _CoreRobotics.CRMatrix_normLinf
+        normLinf = _CoreRobotics.Matrix_normLinf
 
     def __init__(self):
-        this = _CoreRobotics.new_CRMatrix()
+        this = _CoreRobotics.new_Matrix()
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _CoreRobotics.delete_CRMatrix
+    __swig_destroy__ = _CoreRobotics.delete_Matrix
     def __del__(self):
         return None
-CRMatrix_swigregister = _CoreRobotics.CRMatrix_swigregister
-CRMatrix_swigregister(CRMatrix)
+Matrix_swigregister = _CoreRobotics.Matrix_swigregister
+Matrix_swigregister(Matrix)
 
-def CRMatrix_reducedVector(i_x, i_indices):
-    return _CoreRobotics.CRMatrix_reducedVector(i_x, i_indices)
-CRMatrix_reducedVector = _CoreRobotics.CRMatrix_reducedVector
+def Matrix_reducedVector(i_x, i_indices):
+    return _CoreRobotics.Matrix_reducedVector(i_x, i_indices)
+Matrix_reducedVector = _CoreRobotics.Matrix_reducedVector
 
-def CRMatrix_reducedMatrix(i_x, i_rowIndices, i_colIndices):
-    return _CoreRobotics.CRMatrix_reducedMatrix(i_x, i_rowIndices, i_colIndices)
-CRMatrix_reducedMatrix = _CoreRobotics.CRMatrix_reducedMatrix
+def Matrix_reducedMatrix(i_x, i_rowIndices, i_colIndices):
+    return _CoreRobotics.Matrix_reducedMatrix(i_x, i_rowIndices, i_colIndices)
+Matrix_reducedMatrix = _CoreRobotics.Matrix_reducedMatrix
 
-def CRMatrix_svd(i_A, i_tol, o_U, o_Sigma, o_V):
-    return _CoreRobotics.CRMatrix_svd(i_A, i_tol, o_U, o_Sigma, o_V)
-CRMatrix_svd = _CoreRobotics.CRMatrix_svd
+def Matrix_svd(i_A, i_tol, o_U, o_Sigma, o_V):
+    return _CoreRobotics.Matrix_svd(i_A, i_tol, o_U, o_Sigma, o_V)
+Matrix_svd = _CoreRobotics.Matrix_svd
 
-def CRMatrix_svdInverse(i_A, i_tol, o_Ainv):
-    return _CoreRobotics.CRMatrix_svdInverse(i_A, i_tol, o_Ainv)
-CRMatrix_svdInverse = _CoreRobotics.CRMatrix_svdInverse
+def Matrix_svdInverse(i_A, i_tol, o_Ainv):
+    return _CoreRobotics.Matrix_svdInverse(i_A, i_tol, o_Ainv)
+Matrix_svdInverse = _CoreRobotics.Matrix_svdInverse
 
-def CRMatrix_rotAboutX(i_ang):
-    return _CoreRobotics.CRMatrix_rotAboutX(i_ang)
-CRMatrix_rotAboutX = _CoreRobotics.CRMatrix_rotAboutX
+def Matrix_rotAboutX(i_ang):
+    return _CoreRobotics.Matrix_rotAboutX(i_ang)
+Matrix_rotAboutX = _CoreRobotics.Matrix_rotAboutX
 
-def CRMatrix_rotAboutY(i_ang):
-    return _CoreRobotics.CRMatrix_rotAboutY(i_ang)
-CRMatrix_rotAboutY = _CoreRobotics.CRMatrix_rotAboutY
+def Matrix_rotAboutY(i_ang):
+    return _CoreRobotics.Matrix_rotAboutY(i_ang)
+Matrix_rotAboutY = _CoreRobotics.Matrix_rotAboutY
 
-def CRMatrix_rotAboutZ(i_ang):
-    return _CoreRobotics.CRMatrix_rotAboutZ(i_ang)
-CRMatrix_rotAboutZ = _CoreRobotics.CRMatrix_rotAboutZ
+def Matrix_rotAboutZ(i_ang):
+    return _CoreRobotics.Matrix_rotAboutZ(i_ang)
+Matrix_rotAboutZ = _CoreRobotics.Matrix_rotAboutZ
 
-def CRMatrix_normL1(x):
-    return _CoreRobotics.CRMatrix_normL1(x)
-CRMatrix_normL1 = _CoreRobotics.CRMatrix_normL1
+def Matrix_normL1(x):
+    return _CoreRobotics.Matrix_normL1(x)
+Matrix_normL1 = _CoreRobotics.Matrix_normL1
 
-def CRMatrix_normL2(x):
-    return _CoreRobotics.CRMatrix_normL2(x)
-CRMatrix_normL2 = _CoreRobotics.CRMatrix_normL2
+def Matrix_normL2(x):
+    return _CoreRobotics.Matrix_normL2(x)
+Matrix_normL2 = _CoreRobotics.Matrix_normL2
 
-def CRMatrix_normLinf(x):
-    return _CoreRobotics.CRMatrix_normLinf(x)
-CRMatrix_normLinf = _CoreRobotics.CRMatrix_normLinf
+def Matrix_normLinf(x):
+    return _CoreRobotics.Matrix_normLinf(x)
+Matrix_normLinf = _CoreRobotics.Matrix_normLinf
 
 CR_EULER_MODE_ZXZ = _CoreRobotics.CR_EULER_MODE_ZXZ
 CR_EULER_MODE_XYX = _CoreRobotics.CR_EULER_MODE_XYX
@@ -597,60 +598,63 @@ CR_EULER_MODE_ZXY = _CoreRobotics.CR_EULER_MODE_ZXY
 CR_EULER_MODE_XZY = _CoreRobotics.CR_EULER_MODE_XZY
 CR_EULER_MODE_ZYX = _CoreRobotics.CR_EULER_MODE_ZYX
 CR_EULER_MODE_YXZ = _CoreRobotics.CR_EULER_MODE_YXZ
-class CRFrame(_object):
+class Frame(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRFrame, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Frame, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRFrame, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, Frame, name)
     __repr__ = _swig_repr
 
     def __init__(self, *args):
-        this = _CoreRobotics.new_CRFrame(*args)
+        this = _CoreRobotics.new_Frame(*args)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def setFreeValue(self, i_q):
-        return _CoreRobotics.CRFrame_setFreeValue(self, i_q)
+        return _CoreRobotics.Frame_setFreeValue(self, i_q)
 
     def getFreeValue(self):
-        return _CoreRobotics.CRFrame_getFreeValue(self)
+        return _CoreRobotics.Frame_getFreeValue(self)
 
     def setRotationAndTranslation(self, i_rot, i_trans):
-        return _CoreRobotics.CRFrame_setRotationAndTranslation(self, i_rot, i_trans)
+        return _CoreRobotics.Frame_setRotationAndTranslation(self, i_rot, i_trans)
 
     def getRotationAndTranslation(self, o_rot, o_trans):
-        return _CoreRobotics.CRFrame_getRotationAndTranslation(self, o_rot, o_trans)
+        return _CoreRobotics.Frame_getRotationAndTranslation(self, o_rot, o_trans)
 
     def getTransformToParent(self):
-        return _CoreRobotics.CRFrame_getTransformToParent(self)
+        return _CoreRobotics.Frame_getTransformToParent(self)
 
     def getTransformToChild(self):
-        return _CoreRobotics.CRFrame_getTransformToChild(self)
+        return _CoreRobotics.Frame_getTransformToChild(self)
 
     def transformToParent(self, i_point):
-        return _CoreRobotics.CRFrame_transformToParent(self, i_point)
+        return _CoreRobotics.Frame_transformToParent(self, i_point)
 
     def transformToChild(self, i_point):
-        return _CoreRobotics.CRFrame_transformToChild(self, i_point)
+        return _CoreRobotics.Frame_transformToChild(self, i_point)
 
     def isDriven(self):
-        return _CoreRobotics.CRFrame_isDriven(self)
+        return _CoreRobotics.Frame_isDriven(self)
 
-    def getPosition(self):
-        return _CoreRobotics.CRFrame_getPosition(self)
+    def getTranslation(self):
+        return _CoreRobotics.Frame_getTranslation(self)
+
+    def getRotation(self):
+        return _CoreRobotics.Frame_getRotation(self)
 
     def getOrientation(self, i_mode):
-        return _CoreRobotics.CRFrame_getOrientation(self, i_mode)
+        return _CoreRobotics.Frame_getOrientation(self, i_mode)
 
     def getPose(self, *args):
-        return _CoreRobotics.CRFrame_getPose(self, *args)
-    __swig_destroy__ = _CoreRobotics.delete_CRFrame
+        return _CoreRobotics.Frame_getPose(self, *args)
+    __swig_destroy__ = _CoreRobotics.delete_Frame
     def __del__(self):
         return None
-CRFrame_swigregister = _CoreRobotics.CRFrame_swigregister
-CRFrame_swigregister(CRFrame)
+Frame_swigregister = _CoreRobotics.Frame_swigregister
+Frame_swigregister(Frame)
 
 CR_EULER_FREE_NONE = _CoreRobotics.CR_EULER_FREE_NONE
 CR_EULER_FREE_POS_X = _CoreRobotics.CR_EULER_FREE_POS_X
@@ -659,70 +663,70 @@ CR_EULER_FREE_POS_Z = _CoreRobotics.CR_EULER_FREE_POS_Z
 CR_EULER_FREE_ANG_A = _CoreRobotics.CR_EULER_FREE_ANG_A
 CR_EULER_FREE_ANG_B = _CoreRobotics.CR_EULER_FREE_ANG_B
 CR_EULER_FREE_ANG_G = _CoreRobotics.CR_EULER_FREE_ANG_G
-class CRFrameEuler(CRFrame):
+class FrameEuler(Frame):
     __swig_setmethods__ = {}
-    for _s in [CRFrame]:
+    for _s in [Frame]:
         __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRFrameEuler, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, FrameEuler, name, value)
     __swig_getmethods__ = {}
-    for _s in [CRFrame]:
+    for _s in [Frame]:
         __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, CRFrameEuler, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, FrameEuler, name)
     __repr__ = _swig_repr
 
     def __init__(self, *args):
-        this = _CoreRobotics.new_CRFrameEuler(*args)
+        this = _CoreRobotics.new_FrameEuler(*args)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def setFreeValue(self, i_q):
-        return _CoreRobotics.CRFrameEuler_setFreeValue(self, i_q)
+        return _CoreRobotics.FrameEuler_setFreeValue(self, i_q)
 
     def getFreeValue(self):
-        return _CoreRobotics.CRFrameEuler_getFreeValue(self)
+        return _CoreRobotics.FrameEuler_getFreeValue(self)
 
     def setFreeVariable(self, i_free):
-        return _CoreRobotics.CRFrameEuler_setFreeVariable(self, i_free)
+        return _CoreRobotics.FrameEuler_setFreeVariable(self, i_free)
 
     def getFreeVariable(self):
-        return _CoreRobotics.CRFrameEuler_getFreeVariable(self)
+        return _CoreRobotics.FrameEuler_getFreeVariable(self)
 
     def setMode(self, i_mode):
-        return _CoreRobotics.CRFrameEuler_setMode(self, i_mode)
+        return _CoreRobotics.FrameEuler_setMode(self, i_mode)
 
     def getMode(self):
-        return _CoreRobotics.CRFrameEuler_getMode(self)
+        return _CoreRobotics.FrameEuler_getMode(self)
 
     def setPosition(self, i_x, i_y, i_z):
-        return _CoreRobotics.CRFrameEuler_setPosition(self, i_x, i_y, i_z)
+        return _CoreRobotics.FrameEuler_setPosition(self, i_x, i_y, i_z)
 
     def getPosition(self, o_x, o_y, o_z):
-        return _CoreRobotics.CRFrameEuler_getPosition(self, o_x, o_y, o_z)
+        return _CoreRobotics.FrameEuler_getPosition(self, o_x, o_y, o_z)
 
     def setOrientation(self, i_a, i_b, i_g):
-        return _CoreRobotics.CRFrameEuler_setOrientation(self, i_a, i_b, i_g)
+        return _CoreRobotics.FrameEuler_setOrientation(self, i_a, i_b, i_g)
 
     def getOrientation(self, o_a, o_b, o_g):
-        return _CoreRobotics.CRFrameEuler_getOrientation(self, o_a, o_b, o_g)
+        return _CoreRobotics.FrameEuler_getOrientation(self, o_a, o_b, o_g)
 
     def setPositionAndOrientation(self, i_x, i_y, i_z, i_a, i_b, i_g):
-        return _CoreRobotics.CRFrameEuler_setPositionAndOrientation(self, i_x, i_y, i_z, i_a, i_b, i_g)
+        return _CoreRobotics.FrameEuler_setPositionAndOrientation(self, i_x, i_y, i_z, i_a, i_b, i_g)
 
     def getPositionAndOrientation(self, o_x, o_y, o_z, o_a, o_b, o_g):
-        return _CoreRobotics.CRFrameEuler_getPositionAndOrientation(self, o_x, o_y, o_z, o_a, o_b, o_g)
+        return _CoreRobotics.FrameEuler_getPositionAndOrientation(self, o_x, o_y, o_z, o_a, o_b, o_g)
 
     def setRotationAndTranslation(self, i_rot, i_trans):
-        return _CoreRobotics.CRFrameEuler_setRotationAndTranslation(self, i_rot, i_trans)
+        return _CoreRobotics.FrameEuler_setRotationAndTranslation(self, i_rot, i_trans)
 
     def isDriven(self):
-        return _CoreRobotics.CRFrameEuler_isDriven(self)
-    __swig_destroy__ = _CoreRobotics.delete_CRFrameEuler
+        return _CoreRobotics.FrameEuler_isDriven(self)
+    __swig_destroy__ = _CoreRobotics.delete_FrameEuler
     def __del__(self):
         return None
-CRFrameEuler_swigregister = _CoreRobotics.CRFrameEuler_swigregister
-CRFrameEuler_swigregister(CRFrameEuler)
+FrameEuler_swigregister = _CoreRobotics.FrameEuler_swigregister
+FrameEuler_swigregister(FrameEuler)
 
 CR_DH_FREE_NONE = _CoreRobotics.CR_DH_FREE_NONE
 CR_DH_FREE_R = _CoreRobotics.CR_DH_FREE_R
@@ -731,140 +735,162 @@ CR_DH_FREE_D = _CoreRobotics.CR_DH_FREE_D
 CR_DH_FREE_THETA = _CoreRobotics.CR_DH_FREE_THETA
 CR_DH_MODE_CLASSIC = _CoreRobotics.CR_DH_MODE_CLASSIC
 CR_DH_MODE_MODIFIED = _CoreRobotics.CR_DH_MODE_MODIFIED
-class CRFrameDh(CRFrame):
+class FrameDh(Frame):
     __swig_setmethods__ = {}
-    for _s in [CRFrame]:
+    for _s in [Frame]:
         __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRFrameDh, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, FrameDh, name, value)
     __swig_getmethods__ = {}
-    for _s in [CRFrame]:
+    for _s in [Frame]:
         __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, CRFrameDh, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, FrameDh, name)
     __repr__ = _swig_repr
 
     def __init__(self, *args):
-        this = _CoreRobotics.new_CRFrameDh(*args)
+        this = _CoreRobotics.new_FrameDh(*args)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def setFreeValue(self, i_q):
-        return _CoreRobotics.CRFrameDh_setFreeValue(self, i_q)
+        return _CoreRobotics.FrameDh_setFreeValue(self, i_q)
 
     def getFreeValue(self):
-        return _CoreRobotics.CRFrameDh_getFreeValue(self)
+        return _CoreRobotics.FrameDh_getFreeValue(self)
 
     def setFreeVariable(self, i_free):
-        return _CoreRobotics.CRFrameDh_setFreeVariable(self, i_free)
+        return _CoreRobotics.FrameDh_setFreeVariable(self, i_free)
 
     def getFreeVariable(self):
-        return _CoreRobotics.CRFrameDh_getFreeVariable(self)
+        return _CoreRobotics.FrameDh_getFreeVariable(self)
 
     def setMode(self, i_mode):
-        return _CoreRobotics.CRFrameDh_setMode(self, i_mode)
+        return _CoreRobotics.FrameDh_setMode(self, i_mode)
 
     def getMode(self):
-        return _CoreRobotics.CRFrameDh_getMode(self)
+        return _CoreRobotics.FrameDh_getMode(self)
 
     def setParameters(self, i_r, i_alpha, i_d, i_theta):
-        return _CoreRobotics.CRFrameDh_setParameters(self, i_r, i_alpha, i_d, i_theta)
+        return _CoreRobotics.FrameDh_setParameters(self, i_r, i_alpha, i_d, i_theta)
 
     def getParameters(self, o_r, o_alpha, o_d, o_theta):
-        return _CoreRobotics.CRFrameDh_getParameters(self, o_r, o_alpha, o_d, o_theta)
+        return _CoreRobotics.FrameDh_getParameters(self, o_r, o_alpha, o_d, o_theta)
 
     def isDriven(self):
-        return _CoreRobotics.CRFrameDh_isDriven(self)
-    __swig_destroy__ = _CoreRobotics.delete_CRFrameDh
+        return _CoreRobotics.FrameDh_isDriven(self)
+    __swig_destroy__ = _CoreRobotics.delete_FrameDh
     def __del__(self):
         return None
-CRFrameDh_swigregister = _CoreRobotics.CRFrameDh_swigregister
-CRFrameDh_swigregister(CRFrameDh)
+FrameDh_swigregister = _CoreRobotics.FrameDh_swigregister
+FrameDh_swigregister(FrameDh)
 
-class CRRigidBody(_object):
+class RigidBody(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRRigidBody, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, RigidBody, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRRigidBody, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, RigidBody, name)
     __repr__ = _swig_repr
 
     def __init__(self, *args):
-        this = _CoreRobotics.new_CRRigidBody(*args)
+        this = _CoreRobotics.new_RigidBody(*args)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+    __swig_destroy__ = _CoreRobotics.delete_RigidBody
+    def __del__(self):
+        return None
 
     def setFrame(self, i_frame):
-        return _CoreRobotics.CRRigidBody_setFrame(self, i_frame)
-    __swig_setmethods__["m_frame"] = _CoreRobotics.CRRigidBody_m_frame_set
-    __swig_getmethods__["m_frame"] = _CoreRobotics.CRRigidBody_m_frame_get
-    if _newclass:
-        m_frame = _swig_property(_CoreRobotics.CRRigidBody_m_frame_get, _CoreRobotics.CRRigidBody_m_frame_set)
-    __swig_destroy__ = _CoreRobotics.delete_CRRigidBody
-    def __del__(self):
-        return None
-CRRigidBody_swigregister = _CoreRobotics.CRRigidBody_swigregister
-CRRigidBody_swigregister(CRRigidBody)
+        return _CoreRobotics.RigidBody_setFrame(self, i_frame)
 
-CR_MANIPULATOR_MODE_POSITION = _CoreRobotics.CR_MANIPULATOR_MODE_POSITION
-class CRManipulator(_object):
+    def setCenterOfMass(self, i_com):
+        return _CoreRobotics.RigidBody_setCenterOfMass(self, i_com)
+
+    def getCenterOfMass(self):
+        return _CoreRobotics.RigidBody_getCenterOfMass(self)
+
+    def setInertiaTensor(self, i_inertia):
+        return _CoreRobotics.RigidBody_setInertiaTensor(self, i_inertia)
+
+    def getInertiaTensor(self):
+        return _CoreRobotics.RigidBody_getInertiaTensor(self)
+
+    def setMass(self, i_mass):
+        return _CoreRobotics.RigidBody_setMass(self, i_mass)
+
+    def getMass(self):
+        return _CoreRobotics.RigidBody_getMass(self)
+    __swig_setmethods__["m_frame"] = _CoreRobotics.RigidBody_m_frame_set
+    __swig_getmethods__["m_frame"] = _CoreRobotics.RigidBody_m_frame_get
+    if _newclass:
+        m_frame = _swig_property(_CoreRobotics.RigidBody_m_frame_get, _CoreRobotics.RigidBody_m_frame_set)
+RigidBody_swigregister = _CoreRobotics.RigidBody_swigregister
+RigidBody_swigregister(RigidBody)
+
+class Manipulator(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRManipulator, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Manipulator, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRManipulator, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, Manipulator, name)
     __repr__ = _swig_repr
 
-    def __init__(self, *args):
-        this = _CoreRobotics.new_CRManipulator(*args)
+    def __init__(self):
+        this = _CoreRobotics.new_Manipulator()
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-
-    def setConfiguration(self, i_q):
-        return _CoreRobotics.CRManipulator_setConfiguration(self, i_q)
-
-    def getConfiguration(self):
-        return _CoreRobotics.CRManipulator_getConfiguration(self)
-
-    def getForwardKinematics(self):
-        return _CoreRobotics.CRManipulator_getForwardKinematics(self)
-
-    def getNumberOfLinks(self):
-        return _CoreRobotics.CRManipulator_getNumberOfLinks(self)
-
-    def getDegreesOfFreedom(self):
-        return _CoreRobotics.CRManipulator_getDegreesOfFreedom(self)
-
-    def getToolFrame(self, i_toolIndex, o_tool):
-        return _CoreRobotics.CRManipulator_getToolFrame(self, i_toolIndex, o_tool)
-
-    def getLinkFrame(self, i_linkIndex, o_link):
-        return _CoreRobotics.CRManipulator_getLinkFrame(self, i_linkIndex, o_link)
-
-    def getToolPose(self, *args):
-        return _CoreRobotics.CRManipulator_getToolPose(self, *args)
-
-    def setModelType(self, type):
-        return _CoreRobotics.CRManipulator_setModelType(self, type)
-
-    def jacobian(self, *args):
-        return _CoreRobotics.CRManipulator_jacobian(self, *args)
-
-    def hessian(self, *args):
-        return _CoreRobotics.CRManipulator_hessian(self, *args)
-
-    def addLink(self, i_link):
-        return _CoreRobotics.CRManipulator_addLink(self, i_link)
-
-    def addTool(self, i_parentIndex, i_tool):
-        return _CoreRobotics.CRManipulator_addTool(self, i_parentIndex, i_tool)
-    __swig_destroy__ = _CoreRobotics.delete_CRManipulator
+    __swig_destroy__ = _CoreRobotics.delete_Manipulator
     def __del__(self):
         return None
-CRManipulator_swigregister = _CoreRobotics.CRManipulator_swigregister
-CRManipulator_swigregister(CRManipulator)
+    if _newclass:
+        create = staticmethod(_CoreRobotics.Manipulator_create)
+    else:
+        create = _CoreRobotics.Manipulator_create
+
+    def setConfiguration(self, i_q):
+        return _CoreRobotics.Manipulator_setConfiguration(self, i_q)
+
+    def getConfiguration(self):
+        return _CoreRobotics.Manipulator_getConfiguration(self)
+
+    def getForwardKinematics(self):
+        return _CoreRobotics.Manipulator_getForwardKinematics(self)
+
+    def getNumberOfLinks(self):
+        return _CoreRobotics.Manipulator_getNumberOfLinks(self)
+
+    def getDegreesOfFreedom(self):
+        return _CoreRobotics.Manipulator_getDegreesOfFreedom(self)
+
+    def getToolFrame(self, i_toolIndex, o_tool):
+        return _CoreRobotics.Manipulator_getToolFrame(self, i_toolIndex, o_tool)
+
+    def getLinkFrame(self, i_linkIndex, o_link):
+        return _CoreRobotics.Manipulator_getLinkFrame(self, i_linkIndex, o_link)
+
+    def getToolPose(self, *args):
+        return _CoreRobotics.Manipulator_getToolPose(self, *args)
+
+    def jacobian(self, *args):
+        return _CoreRobotics.Manipulator_jacobian(self, *args)
+
+    def hessian(self, *args):
+        return _CoreRobotics.Manipulator_hessian(self, *args)
+
+    def addLink(self, i_link):
+        return _CoreRobotics.Manipulator_addLink(self, i_link)
+
+    def addTool(self, i_parentIndex, i_tool):
+        return _CoreRobotics.Manipulator_addTool(self, i_parentIndex, i_tool)
+Manipulator_swigregister = _CoreRobotics.Manipulator_swigregister
+Manipulator_swigregister(Manipulator)
+
+def Manipulator_create():
+    return _CoreRobotics.Manipulator_create()
+Manipulator_create = _CoreRobotics.Manipulator_create
 
 class CRParamNoiseGeneric(_object):
     __swig_setmethods__ = {}
@@ -893,37 +919,37 @@ class CRParamNoiseGeneric(_object):
 CRParamNoiseGeneric_swigregister = _CoreRobotics.CRParamNoiseGeneric_swigregister
 CRParamNoiseGeneric_swigregister(CRParamNoiseGeneric)
 
-class CRNoiseModel(_object):
+class NoiseModel(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRNoiseModel, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, NoiseModel, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRNoiseModel, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, NoiseModel, name)
     __repr__ = _swig_repr
 
     def __init__(self, *args):
-        this = _CoreRobotics.new_CRNoiseModel(*args)
+        this = _CoreRobotics.new_NoiseModel(*args)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def setParameters(self, i_icd, i_prob):
-        return _CoreRobotics.CRNoiseModel_setParameters(self, i_icd, i_prob)
+        return _CoreRobotics.NoiseModel_setParameters(self, i_icd, i_prob)
 
     def sample(self):
-        return _CoreRobotics.CRNoiseModel_sample(self)
+        return _CoreRobotics.NoiseModel_sample(self)
 
     def probability(self, i_x):
-        return _CoreRobotics.CRNoiseModel_probability(self, i_x)
-    __swig_setmethods__["m_parameters"] = _CoreRobotics.CRNoiseModel_m_parameters_set
-    __swig_getmethods__["m_parameters"] = _CoreRobotics.CRNoiseModel_m_parameters_get
+        return _CoreRobotics.NoiseModel_probability(self, i_x)
+    __swig_setmethods__["m_parameters"] = _CoreRobotics.NoiseModel_m_parameters_set
+    __swig_getmethods__["m_parameters"] = _CoreRobotics.NoiseModel_m_parameters_get
     if _newclass:
-        m_parameters = _swig_property(_CoreRobotics.CRNoiseModel_m_parameters_get, _CoreRobotics.CRNoiseModel_m_parameters_set)
-    __swig_destroy__ = _CoreRobotics.delete_CRNoiseModel
+        m_parameters = _swig_property(_CoreRobotics.NoiseModel_m_parameters_get, _CoreRobotics.NoiseModel_m_parameters_set)
+    __swig_destroy__ = _CoreRobotics.delete_NoiseModel
     def __del__(self):
         return None
-CRNoiseModel_swigregister = _CoreRobotics.CRNoiseModel_swigregister
-CRNoiseModel_swigregister(CRNoiseModel)
+NoiseModel_swigregister = _CoreRobotics.NoiseModel_swigregister
+NoiseModel_swigregister(NoiseModel)
 
 class CRParamNoiseGaussian(_object):
     __swig_setmethods__ = {}
@@ -956,41 +982,41 @@ class CRParamNoiseGaussian(_object):
 CRParamNoiseGaussian_swigregister = _CoreRobotics.CRParamNoiseGaussian_swigregister
 CRParamNoiseGaussian_swigregister(CRParamNoiseGaussian)
 
-class CRNoiseGaussian(CRNoiseModel):
+class NoiseGaussian(NoiseModel):
     __swig_setmethods__ = {}
-    for _s in [CRNoiseModel]:
+    for _s in [NoiseModel]:
         __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRNoiseGaussian, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, NoiseGaussian, name, value)
     __swig_getmethods__ = {}
-    for _s in [CRNoiseModel]:
+    for _s in [NoiseModel]:
         __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, CRNoiseGaussian, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, NoiseGaussian, name)
     __repr__ = _swig_repr
 
     def __init__(self, *args):
-        this = _CoreRobotics.new_CRNoiseGaussian(*args)
+        this = _CoreRobotics.new_NoiseGaussian(*args)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def setParameters(self, *args):
-        return _CoreRobotics.CRNoiseGaussian_setParameters(self, *args)
+        return _CoreRobotics.NoiseGaussian_setParameters(self, *args)
 
     def sample(self):
-        return _CoreRobotics.CRNoiseGaussian_sample(self)
+        return _CoreRobotics.NoiseGaussian_sample(self)
 
     def probability(self, i_x):
-        return _CoreRobotics.CRNoiseGaussian_probability(self, i_x)
-    __swig_setmethods__["m_parameters"] = _CoreRobotics.CRNoiseGaussian_m_parameters_set
-    __swig_getmethods__["m_parameters"] = _CoreRobotics.CRNoiseGaussian_m_parameters_get
+        return _CoreRobotics.NoiseGaussian_probability(self, i_x)
+    __swig_setmethods__["m_parameters"] = _CoreRobotics.NoiseGaussian_m_parameters_set
+    __swig_getmethods__["m_parameters"] = _CoreRobotics.NoiseGaussian_m_parameters_get
     if _newclass:
-        m_parameters = _swig_property(_CoreRobotics.CRNoiseGaussian_m_parameters_get, _CoreRobotics.CRNoiseGaussian_m_parameters_set)
-    __swig_destroy__ = _CoreRobotics.delete_CRNoiseGaussian
+        m_parameters = _swig_property(_CoreRobotics.NoiseGaussian_m_parameters_get, _CoreRobotics.NoiseGaussian_m_parameters_set)
+    __swig_destroy__ = _CoreRobotics.delete_NoiseGaussian
     def __del__(self):
         return None
-CRNoiseGaussian_swigregister = _CoreRobotics.CRNoiseGaussian_swigregister
-CRNoiseGaussian_swigregister(CRNoiseGaussian)
+NoiseGaussian_swigregister = _CoreRobotics.NoiseGaussian_swigregister
+NoiseGaussian_swigregister(NoiseGaussian)
 
 class CRParamNoiseUniform(_object):
     __swig_setmethods__ = {}
@@ -1019,41 +1045,41 @@ class CRParamNoiseUniform(_object):
 CRParamNoiseUniform_swigregister = _CoreRobotics.CRParamNoiseUniform_swigregister
 CRParamNoiseUniform_swigregister(CRParamNoiseUniform)
 
-class CRNoiseUniform(CRNoiseModel):
+class NoiseUniform(NoiseModel):
     __swig_setmethods__ = {}
-    for _s in [CRNoiseModel]:
+    for _s in [NoiseModel]:
         __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRNoiseUniform, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, NoiseUniform, name, value)
     __swig_getmethods__ = {}
-    for _s in [CRNoiseModel]:
+    for _s in [NoiseModel]:
         __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, CRNoiseUniform, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, NoiseUniform, name)
     __repr__ = _swig_repr
 
     def __init__(self, *args):
-        this = _CoreRobotics.new_CRNoiseUniform(*args)
+        this = _CoreRobotics.new_NoiseUniform(*args)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def setParameters(self, *args):
-        return _CoreRobotics.CRNoiseUniform_setParameters(self, *args)
+        return _CoreRobotics.NoiseUniform_setParameters(self, *args)
 
     def sample(self):
-        return _CoreRobotics.CRNoiseUniform_sample(self)
+        return _CoreRobotics.NoiseUniform_sample(self)
 
     def probability(self, i_x):
-        return _CoreRobotics.CRNoiseUniform_probability(self, i_x)
-    __swig_setmethods__["m_parameters"] = _CoreRobotics.CRNoiseUniform_m_parameters_set
-    __swig_getmethods__["m_parameters"] = _CoreRobotics.CRNoiseUniform_m_parameters_get
+        return _CoreRobotics.NoiseUniform_probability(self, i_x)
+    __swig_setmethods__["m_parameters"] = _CoreRobotics.NoiseUniform_m_parameters_set
+    __swig_getmethods__["m_parameters"] = _CoreRobotics.NoiseUniform_m_parameters_get
     if _newclass:
-        m_parameters = _swig_property(_CoreRobotics.CRNoiseUniform_m_parameters_get, _CoreRobotics.CRNoiseUniform_m_parameters_set)
-    __swig_destroy__ = _CoreRobotics.delete_CRNoiseUniform
+        m_parameters = _swig_property(_CoreRobotics.NoiseUniform_m_parameters_get, _CoreRobotics.NoiseUniform_m_parameters_set)
+    __swig_destroy__ = _CoreRobotics.delete_NoiseUniform
     def __del__(self):
         return None
-CRNoiseUniform_swigregister = _CoreRobotics.CRNoiseUniform_swigregister
-CRNoiseUniform_swigregister(CRNoiseUniform)
+NoiseUniform_swigregister = _CoreRobotics.NoiseUniform_swigregister
+NoiseUniform_swigregister(NoiseUniform)
 
 class CRParamNoiseMixture(_object):
     __swig_setmethods__ = {}
@@ -1082,315 +1108,315 @@ class CRParamNoiseMixture(_object):
 CRParamNoiseMixture_swigregister = _CoreRobotics.CRParamNoiseMixture_swigregister
 CRParamNoiseMixture_swigregister(CRParamNoiseMixture)
 
-class CRNoiseMixture(CRNoiseModel):
+class NoiseMixture(NoiseModel):
     __swig_setmethods__ = {}
-    for _s in [CRNoiseModel]:
+    for _s in [NoiseModel]:
         __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRNoiseMixture, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, NoiseMixture, name, value)
     __swig_getmethods__ = {}
-    for _s in [CRNoiseModel]:
+    for _s in [NoiseModel]:
         __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, CRNoiseMixture, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, NoiseMixture, name)
     __repr__ = _swig_repr
 
     def __init__(self, *args):
-        this = _CoreRobotics.new_CRNoiseMixture(*args)
+        this = _CoreRobotics.new_NoiseMixture(*args)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def add(self, i_model, i_weight):
-        return _CoreRobotics.CRNoiseMixture_add(self, i_model, i_weight)
+        return _CoreRobotics.NoiseMixture_add(self, i_model, i_weight)
 
     def sample(self):
-        return _CoreRobotics.CRNoiseMixture_sample(self)
+        return _CoreRobotics.NoiseMixture_sample(self)
 
     def probability(self, i_x):
-        return _CoreRobotics.CRNoiseMixture_probability(self, i_x)
-    __swig_setmethods__["m_parameters"] = _CoreRobotics.CRNoiseMixture_m_parameters_set
-    __swig_getmethods__["m_parameters"] = _CoreRobotics.CRNoiseMixture_m_parameters_get
+        return _CoreRobotics.NoiseMixture_probability(self, i_x)
+    __swig_setmethods__["m_parameters"] = _CoreRobotics.NoiseMixture_m_parameters_set
+    __swig_getmethods__["m_parameters"] = _CoreRobotics.NoiseMixture_m_parameters_get
     if _newclass:
-        m_parameters = _swig_property(_CoreRobotics.CRNoiseMixture_m_parameters_get, _CoreRobotics.CRNoiseMixture_m_parameters_set)
-    __swig_destroy__ = _CoreRobotics.delete_CRNoiseMixture
+        m_parameters = _swig_property(_CoreRobotics.NoiseMixture_m_parameters_get, _CoreRobotics.NoiseMixture_m_parameters_set)
+    __swig_destroy__ = _CoreRobotics.delete_NoiseMixture
     def __del__(self):
         return None
-CRNoiseMixture_swigregister = _CoreRobotics.CRNoiseMixture_swigregister
-CRNoiseMixture_swigregister(CRNoiseMixture)
+NoiseMixture_swigregister = _CoreRobotics.NoiseMixture_swigregister
+NoiseMixture_swigregister(NoiseMixture)
 
-class CRSensorLinear(_object):
+class SensorLinear(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRSensorLinear, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SensorLinear, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRSensorLinear, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, SensorLinear, name)
     __repr__ = _swig_repr
 
     def __init__(self, i_H, i_x0):
-        this = _CoreRobotics.new_CRSensorLinear(i_H, i_x0)
+        this = _CoreRobotics.new_SensorLinear(i_H, i_x0)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def setObservation(self, i_H):
-        return _CoreRobotics.CRSensorLinear_setObservation(self, i_H)
+        return _CoreRobotics.SensorLinear_setObservation(self, i_H)
 
     def measurement(self):
-        return _CoreRobotics.CRSensorLinear_measurement(self)
-    __swig_destroy__ = _CoreRobotics.delete_CRSensorLinear
+        return _CoreRobotics.SensorLinear_measurement(self)
+    __swig_destroy__ = _CoreRobotics.delete_SensorLinear
     def __del__(self):
         return None
-CRSensorLinear_swigregister = _CoreRobotics.CRSensorLinear_swigregister
-CRSensorLinear_swigregister(CRSensorLinear)
+SensorLinear_swigregister = _CoreRobotics.SensorLinear_swigregister
+SensorLinear_swigregister(SensorLinear)
 
-class CRInverseKinematics(_object):
+class InverseKinematics(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRInverseKinematics, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, InverseKinematics, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRInverseKinematics, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, InverseKinematics, name)
     __repr__ = _swig_repr
 
     def __init__(self, i_robot, i_toolIndex, i_eulerMode):
-        this = _CoreRobotics.new_CRInverseKinematics(i_robot, i_toolIndex, i_eulerMode)
+        this = _CoreRobotics.new_InverseKinematics(i_robot, i_toolIndex, i_eulerMode)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def setRobot(self, i_robot):
-        return _CoreRobotics.CRInverseKinematics_setRobot(self, i_robot)
+        return _CoreRobotics.InverseKinematics_setRobot(self, i_robot)
 
     def getRobot(self):
-        return _CoreRobotics.CRInverseKinematics_getRobot(self)
+        return _CoreRobotics.InverseKinematics_getRobot(self)
 
     def setToolIndex(self, i_toolIndex):
-        return _CoreRobotics.CRInverseKinematics_setToolIndex(self, i_toolIndex)
+        return _CoreRobotics.InverseKinematics_setToolIndex(self, i_toolIndex)
 
     def getToolIndex(self):
-        return _CoreRobotics.CRInverseKinematics_getToolIndex(self)
+        return _CoreRobotics.InverseKinematics_getToolIndex(self)
 
     def setEulerMode(self, i_eulerMode):
-        return _CoreRobotics.CRInverseKinematics_setEulerMode(self, i_eulerMode)
+        return _CoreRobotics.InverseKinematics_setEulerMode(self, i_eulerMode)
 
     def getEulerMode(self):
-        return _CoreRobotics.CRInverseKinematics_getEulerMode(self)
+        return _CoreRobotics.InverseKinematics_getEulerMode(self)
 
     def setTolerance(self, i_tolerance):
-        return _CoreRobotics.CRInverseKinematics_setTolerance(self, i_tolerance)
+        return _CoreRobotics.InverseKinematics_setTolerance(self, i_tolerance)
 
     def getTolerance(self):
-        return _CoreRobotics.CRInverseKinematics_getTolerance(self)
+        return _CoreRobotics.InverseKinematics_getTolerance(self)
 
     def setMaxIter(self, i_maxIter):
-        return _CoreRobotics.CRInverseKinematics_setMaxIter(self, i_maxIter)
+        return _CoreRobotics.InverseKinematics_setMaxIter(self, i_maxIter)
 
     def getMaxIter(self):
-        return _CoreRobotics.CRInverseKinematics_getMaxIter(self)
+        return _CoreRobotics.InverseKinematics_getMaxIter(self)
 
     def setStepSize(self, i_stepSize):
-        return _CoreRobotics.CRInverseKinematics_setStepSize(self, i_stepSize)
+        return _CoreRobotics.InverseKinematics_setStepSize(self, i_stepSize)
 
     def getStepSize(self):
-        return _CoreRobotics.CRInverseKinematics_getStepSize(self)
+        return _CoreRobotics.InverseKinematics_getStepSize(self)
 
     def setDampingFactor(self, i_dampingFactor):
-        return _CoreRobotics.CRInverseKinematics_setDampingFactor(self, i_dampingFactor)
+        return _CoreRobotics.InverseKinematics_setDampingFactor(self, i_dampingFactor)
 
     def getDampingFactor(self):
-        return _CoreRobotics.CRInverseKinematics_getDampingFactor(self)
+        return _CoreRobotics.InverseKinematics_getDampingFactor(self)
 
     def setSingularThresh(self, i_thresh):
-        return _CoreRobotics.CRInverseKinematics_setSingularThresh(self, i_thresh)
+        return _CoreRobotics.InverseKinematics_setSingularThresh(self, i_thresh)
 
     def getSingularThresh(self):
-        return _CoreRobotics.CRInverseKinematics_getSingularThresh(self)
+        return _CoreRobotics.InverseKinematics_getSingularThresh(self)
 
     def getJacInv(self, i_jac, o_jacInv):
-        return _CoreRobotics.CRInverseKinematics_getJacInv(self, i_jac, o_jacInv)
+        return _CoreRobotics.InverseKinematics_getJacInv(self, i_jac, o_jacInv)
 
     def solve(self, *args):
-        return _CoreRobotics.CRInverseKinematics_solve(self, *args)
-    __swig_destroy__ = _CoreRobotics.delete_CRInverseKinematics
+        return _CoreRobotics.InverseKinematics_solve(self, *args)
+    __swig_destroy__ = _CoreRobotics.delete_InverseKinematics
     def __del__(self):
         return None
-CRInverseKinematics_swigregister = _CoreRobotics.CRInverseKinematics_swigregister
-CRInverseKinematics_swigregister(CRInverseKinematics)
+InverseKinematics_swigregister = _CoreRobotics.InverseKinematics_swigregister
+InverseKinematics_swigregister(InverseKinematics)
 
-class CRNullSpace(_object):
+class NullSpace(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRNullSpace, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, NullSpace, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRNullSpace, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, NullSpace, name)
     __repr__ = _swig_repr
 
     def __init__(self, i_robot, i_toolIndex, i_eulerMode):
-        this = _CoreRobotics.new_CRNullSpace(i_robot, i_toolIndex, i_eulerMode)
+        this = _CoreRobotics.new_NullSpace(i_robot, i_toolIndex, i_eulerMode)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def setRobot(self, i_robot):
-        return _CoreRobotics.CRNullSpace_setRobot(self, i_robot)
+        return _CoreRobotics.NullSpace_setRobot(self, i_robot)
 
     def setToolIndex(self, i_toolIndex):
-        return _CoreRobotics.CRNullSpace_setToolIndex(self, i_toolIndex)
+        return _CoreRobotics.NullSpace_setToolIndex(self, i_toolIndex)
 
     def setEulerMode(self, i_eulerMode):
-        return _CoreRobotics.CRNullSpace_setEulerMode(self, i_eulerMode)
+        return _CoreRobotics.NullSpace_setEulerMode(self, i_eulerMode)
 
     def getEulerMode(self):
-        return _CoreRobotics.CRNullSpace_getEulerMode(self)
+        return _CoreRobotics.NullSpace_getEulerMode(self)
 
     def setSingularThresh(self, i_thresh):
-        return _CoreRobotics.CRNullSpace_setSingularThresh(self, i_thresh)
+        return _CoreRobotics.NullSpace_setSingularThresh(self, i_thresh)
 
     def getSingularThresh(self):
-        return _CoreRobotics.CRNullSpace_getSingularThresh(self)
+        return _CoreRobotics.NullSpace_getSingularThresh(self)
 
     def setMinStepSize(self, i_stepSize):
-        return _CoreRobotics.CRNullSpace_setMinStepSize(self, i_stepSize)
+        return _CoreRobotics.NullSpace_setMinStepSize(self, i_stepSize)
 
     def getMinStepSize(self):
-        return _CoreRobotics.CRNullSpace_getMinStepSize(self)
+        return _CoreRobotics.NullSpace_getMinStepSize(self)
 
     def setMaxIter(self, i_maxIter):
-        return _CoreRobotics.CRNullSpace_setMaxIter(self, i_maxIter)
+        return _CoreRobotics.NullSpace_setMaxIter(self, i_maxIter)
 
     def getMaxIter(self):
-        return _CoreRobotics.CRNullSpace_getMaxIter(self)
+        return _CoreRobotics.NullSpace_getMaxIter(self)
 
     def setTrivialTolerance(self, i_trivialTolerance):
-        return _CoreRobotics.CRNullSpace_setTrivialTolerance(self, i_trivialTolerance)
+        return _CoreRobotics.NullSpace_setTrivialTolerance(self, i_trivialTolerance)
 
     def getTrivialTolerance(self):
-        return _CoreRobotics.CRNullSpace_getTrivialTolerance(self)
+        return _CoreRobotics.NullSpace_getTrivialTolerance(self)
 
     def solve(self, *args):
-        return _CoreRobotics.CRNullSpace_solve(self, *args)
-    __swig_destroy__ = _CoreRobotics.delete_CRNullSpace
+        return _CoreRobotics.NullSpace_solve(self, *args)
+    __swig_destroy__ = _CoreRobotics.delete_NullSpace
     def __del__(self):
         return None
-CRNullSpace_swigregister = _CoreRobotics.CRNullSpace_swigregister
-CRNullSpace_swigregister(CRNullSpace)
+NullSpace_swigregister = _CoreRobotics.NullSpace_swigregister
+NullSpace_swigregister(NullSpace)
 
-class CRHardLimits(_object):
+class HardLimits(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRHardLimits, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, HardLimits, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRHardLimits, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, HardLimits, name)
     __repr__ = _swig_repr
 
     def __init__(self, *args):
-        this = _CoreRobotics.new_CRHardLimits(*args)
+        this = _CoreRobotics.new_HardLimits(*args)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def getIKSolver(self):
-        return _CoreRobotics.CRHardLimits_getIKSolver(self)
+        return _CoreRobotics.HardLimits_getIKSolver(self)
 
     def getNullSpaceSolver(self):
-        return _CoreRobotics.CRHardLimits_getNullSpaceSolver(self)
+        return _CoreRobotics.HardLimits_getNullSpaceSolver(self)
 
     def useNullSpace(self, i_useNullSpace):
-        return _CoreRobotics.CRHardLimits_useNullSpace(self, i_useNullSpace)
+        return _CoreRobotics.HardLimits_useNullSpace(self, i_useNullSpace)
 
     def nullSpaceStatus(self):
-        return _CoreRobotics.CRHardLimits_nullSpaceStatus(self)
+        return _CoreRobotics.HardLimits_nullSpaceStatus(self)
 
     def setPoseElements(self, *args):
-        return _CoreRobotics.CRHardLimits_setPoseElements(self, *args)
+        return _CoreRobotics.HardLimits_setPoseElements(self, *args)
 
     def getPoseElements(self):
-        return _CoreRobotics.CRHardLimits_getPoseElements(self)
+        return _CoreRobotics.HardLimits_getPoseElements(self)
 
     def setJointUpperLimit(self, i_jointIndex, i_upperLimit):
-        return _CoreRobotics.CRHardLimits_setJointUpperLimit(self, i_jointIndex, i_upperLimit)
+        return _CoreRobotics.HardLimits_setJointUpperLimit(self, i_jointIndex, i_upperLimit)
 
     def setJointLowerLimit(self, i_jointIndex, i_lowerLimit):
-        return _CoreRobotics.CRHardLimits_setJointLowerLimit(self, i_jointIndex, i_lowerLimit)
+        return _CoreRobotics.HardLimits_setJointLowerLimit(self, i_jointIndex, i_lowerLimit)
 
     def getJointUpperLimit(self, i_jointIndex):
-        return _CoreRobotics.CRHardLimits_getJointUpperLimit(self, i_jointIndex)
+        return _CoreRobotics.HardLimits_getJointUpperLimit(self, i_jointIndex)
 
     def getJointLowerLimit(self, i_jointIndex):
-        return _CoreRobotics.CRHardLimits_getJointLowerLimit(self, i_jointIndex)
+        return _CoreRobotics.HardLimits_getJointLowerLimit(self, i_jointIndex)
 
     def setJointLimits(self, *args):
-        return _CoreRobotics.CRHardLimits_setJointLimits(self, *args)
+        return _CoreRobotics.HardLimits_setJointLimits(self, *args)
 
     def setJointUpperLimits(self, i_upperLimits):
-        return _CoreRobotics.CRHardLimits_setJointUpperLimits(self, i_upperLimits)
+        return _CoreRobotics.HardLimits_setJointUpperLimits(self, i_upperLimits)
 
     def setJointLowerLimits(self, i_lowerLimits):
-        return _CoreRobotics.CRHardLimits_setJointLowerLimits(self, i_lowerLimits)
+        return _CoreRobotics.HardLimits_setJointLowerLimits(self, i_lowerLimits)
 
     def getJointUpperLimits(self):
-        return _CoreRobotics.CRHardLimits_getJointUpperLimits(self)
+        return _CoreRobotics.HardLimits_getJointUpperLimits(self)
 
     def getJointLowerLimits(self):
-        return _CoreRobotics.CRHardLimits_getJointLowerLimits(self)
+        return _CoreRobotics.HardLimits_getJointLowerLimits(self)
 
     def setQ0(self, i_q0):
-        return _CoreRobotics.CRHardLimits_setQ0(self, i_q0)
+        return _CoreRobotics.HardLimits_setQ0(self, i_q0)
 
     def getQ0(self):
-        return _CoreRobotics.CRHardLimits_getQ0(self)
+        return _CoreRobotics.HardLimits_getQ0(self)
 
     def setToolPose(self, i_setPoint):
-        return _CoreRobotics.CRHardLimits_setToolPose(self, i_setPoint)
+        return _CoreRobotics.HardLimits_setToolPose(self, i_setPoint)
 
     def getToolPose(self):
-        return _CoreRobotics.CRHardLimits_getToolPose(self)
+        return _CoreRobotics.HardLimits_getToolPose(self)
 
     def setJointMotion(self, i_jointMotion):
-        return _CoreRobotics.CRHardLimits_setJointMotion(self, i_jointMotion)
+        return _CoreRobotics.HardLimits_setJointMotion(self, i_jointMotion)
 
     def getJointMotion(self):
-        return _CoreRobotics.CRHardLimits_getJointMotion(self)
+        return _CoreRobotics.HardLimits_getJointMotion(self)
 
     def solve(self, o_qSolved):
-        return _CoreRobotics.CRHardLimits_solve(self, o_qSolved)
-    __swig_destroy__ = _CoreRobotics.delete_CRHardLimits
+        return _CoreRobotics.HardLimits_solve(self, o_qSolved)
+    __swig_destroy__ = _CoreRobotics.delete_HardLimits
     def __del__(self):
         return None
-CRHardLimits_swigregister = _CoreRobotics.CRHardLimits_swigregister
-CRHardLimits_swigregister(CRHardLimits)
+HardLimits_swigregister = _CoreRobotics.HardLimits_swigregister
+HardLimits_swigregister(HardLimits)
 
 CR_MANAGER_SERVER = _CoreRobotics.CR_MANAGER_SERVER
 CR_MANAGER_CLIENT = _CoreRobotics.CR_MANAGER_CLIENT
-class CRSharedMemory(_object):
+class SharedMemory(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRSharedMemory, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SharedMemory, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRSharedMemory, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, SharedMemory, name)
     __repr__ = _swig_repr
 
     def __init__(self, i_memoryName, i_role):
-        this = _CoreRobotics.new_CRSharedMemory(i_memoryName, i_role)
+        this = _CoreRobotics.new_SharedMemory(i_memoryName, i_role)
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _CoreRobotics.delete_CRSharedMemory
+    __swig_destroy__ = _CoreRobotics.delete_SharedMemory
     def __del__(self):
         return None
 
     def addSignal(self, i_signalName, i_data):
-        return _CoreRobotics.CRSharedMemory_addSignal(self, i_signalName, i_data)
+        return _CoreRobotics.SharedMemory_addSignal(self, i_signalName, i_data)
 
     def removeSignal(self, i_signalName):
-        return _CoreRobotics.CRSharedMemory_removeSignal(self, i_signalName)
+        return _CoreRobotics.SharedMemory_removeSignal(self, i_signalName)
 
     def set(self, i_signalName, i_data):
-        return _CoreRobotics.CRSharedMemory_set(self, i_signalName, i_data)
+        return _CoreRobotics.SharedMemory_set(self, i_signalName, i_data)
 
     def get(self, i_signalName):
-        return _CoreRobotics.CRSharedMemory_get(self, i_signalName)
-CRSharedMemory_swigregister = _CoreRobotics.CRSharedMemory_swigregister
-CRSharedMemory_swigregister(CRSharedMemory)
+        return _CoreRobotics.SharedMemory_get(self, i_signalName)
+SharedMemory_swigregister = _CoreRobotics.SharedMemory_swigregister
+SharedMemory_swigregister(SharedMemory)
 
 class CRWaypoint(_object):
     __swig_setmethods__ = {}
@@ -1431,30 +1457,30 @@ class CRWaypoint(_object):
 CRWaypoint_swigregister = _CoreRobotics.CRWaypoint_swigregister
 CRWaypoint_swigregister(CRWaypoint)
 
-class CRTrajectoryGenerator(_object):
+class TrajectoryGenerator(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, CRTrajectoryGenerator, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, TrajectoryGenerator, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, CRTrajectoryGenerator, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, TrajectoryGenerator, name)
     __repr__ = _swig_repr
 
     def __init__(self):
-        this = _CoreRobotics.new_CRTrajectoryGenerator()
+        this = _CoreRobotics.new_TrajectoryGenerator()
         try:
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
 
     def solve(self, *args):
-        return _CoreRobotics.CRTrajectoryGenerator_solve(self, *args)
+        return _CoreRobotics.TrajectoryGenerator_solve(self, *args)
 
     def step(self, *args):
-        return _CoreRobotics.CRTrajectoryGenerator_step(self, *args)
-    __swig_destroy__ = _CoreRobotics.delete_CRTrajectoryGenerator
+        return _CoreRobotics.TrajectoryGenerator_step(self, *args)
+    __swig_destroy__ = _CoreRobotics.delete_TrajectoryGenerator
     def __del__(self):
         return None
-CRTrajectoryGenerator_swigregister = _CoreRobotics.CRTrajectoryGenerator_swigregister
-CRTrajectoryGenerator_swigregister(CRTrajectoryGenerator)
+TrajectoryGenerator_swigregister = _CoreRobotics.TrajectoryGenerator_swigregister
+TrajectoryGenerator_swigregister(TrajectoryGenerator)
 
 # This file is compatible with both classic and new-style classes.
 

@@ -7,20 +7,20 @@ classdef CRParamNoiseGeneric < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(156, self);
+        varargout{1} = CoreRoboticsMEX(163, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(157, self, varargin{1});
+        CoreRoboticsMEX(164, self, varargin{1});
       end
     end
     function varargout = probFunction(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(158, self);
+        varargout{1} = CoreRoboticsMEX(165, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(159, self, varargin{1});
+        CoreRoboticsMEX(166, self, varargin{1});
       end
     end
     function self = CRParamNoiseGeneric(varargin)
@@ -29,14 +29,14 @@ classdef CRParamNoiseGeneric < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(160, varargin{:});
+        tmp = CoreRoboticsMEX(167, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(161, self);
+        CoreRoboticsMEX(168, self);
         self.swigPtr=[];
       end
     end
