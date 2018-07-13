@@ -7,50 +7,50 @@ classdef CRWaypoint < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(286, self);
+        varargout{1} = CoreRoboticsMEX(289, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(287, self, varargin{1});
+        CoreRoboticsMEX(290, self, varargin{1});
       end
     end
     function varargout = position(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(288, self);
+        varargout{1} = CoreRoboticsMEX(291, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(289, self, varargin{1});
+        CoreRoboticsMEX(292, self, varargin{1});
       end
     end
     function varargout = velocity(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(290, self);
+        varargout{1} = CoreRoboticsMEX(293, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(291, self, varargin{1});
+        CoreRoboticsMEX(294, self, varargin{1});
       end
     end
     function varargout = acceleration(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(292, self);
+        varargout{1} = CoreRoboticsMEX(295, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(293, self, varargin{1});
+        CoreRoboticsMEX(296, self, varargin{1});
       end
     end
     function varargout = jerk(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(294, self);
+        varargout{1} = CoreRoboticsMEX(297, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(295, self, varargin{1});
+        CoreRoboticsMEX(298, self, varargin{1});
       end
     end
     function self = CRWaypoint(varargin)
@@ -59,14 +59,14 @@ classdef CRWaypoint < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(296, varargin{:});
+        tmp = CoreRoboticsMEX(299, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(297, self);
+        CoreRoboticsMEX(300, self);
         self.swigPtr=[];
       end
     end

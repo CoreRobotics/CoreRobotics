@@ -618,6 +618,12 @@ class Frame(_object):
     def getFreeValue(self):
         return _CoreRobotics.Frame_getFreeValue(self)
 
+    def setRotation(self, i_rot):
+        return _CoreRobotics.Frame_setRotation(self, i_rot)
+
+    def setTranslation(self, i_trans):
+        return _CoreRobotics.Frame_setTranslation(self, i_trans)
+
     def setRotationAndTranslation(self, i_rot, i_trans):
         return _CoreRobotics.Frame_setRotationAndTranslation(self, i_rot, i_trans)
 
@@ -822,6 +828,9 @@ class RigidBody(_object):
 
     def getMass(self):
         return _CoreRobotics.RigidBody_getMass(self)
+
+    def getMassMatrix(self):
+        return _CoreRobotics.RigidBody_getMassMatrix(self)
     __swig_setmethods__["m_frame"] = _CoreRobotics.RigidBody_m_frame_set
     __swig_getmethods__["m_frame"] = _CoreRobotics.RigidBody_m_frame_get
     if _newclass:

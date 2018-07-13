@@ -3004,55 +3004,56 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t swig_types[0]
-#define SWIGTYPE_p_Eigen__MatrixXd swig_types[1]
-#define SWIGTYPE_p_Eigen__VectorXd swig_types[2]
-#define SWIGTYPE_p_Eigen__VectorXi swig_types[3]
-#define SWIGTYPE_p_allocator_type swig_types[4]
-#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[5]
-#define SWIGTYPE_p_boost__interprocess__vectorT_double_cr__ShmemAllocator_t swig_types[6]
-#define SWIGTYPE_p_char swig_types[7]
-#define SWIGTYPE_p_cr__CRParamNoiseGaussian swig_types[8]
-#define SWIGTYPE_p_cr__CRParamNoiseGeneric swig_types[9]
-#define SWIGTYPE_p_cr__CRParamNoiseMixture swig_types[10]
-#define SWIGTYPE_p_cr__CRParamNoiseUniform swig_types[11]
-#define SWIGTYPE_p_cr__CRWaypoint swig_types[12]
-#define SWIGTYPE_p_cr__Clock swig_types[13]
-#define SWIGTYPE_p_cr__Conversion swig_types[14]
-#define SWIGTYPE_p_cr__Frame swig_types[15]
-#define SWIGTYPE_p_cr__FrameDh swig_types[16]
-#define SWIGTYPE_p_cr__FrameEuler swig_types[17]
-#define SWIGTYPE_p_cr__HardLimits swig_types[18]
-#define SWIGTYPE_p_cr__Integration swig_types[19]
-#define SWIGTYPE_p_cr__InverseKinematics swig_types[20]
-#define SWIGTYPE_p_cr__Matrix swig_types[21]
-#define SWIGTYPE_p_cr__NoiseGaussian swig_types[22]
-#define SWIGTYPE_p_cr__NoiseMixture swig_types[23]
-#define SWIGTYPE_p_cr__NoiseModel swig_types[24]
-#define SWIGTYPE_p_cr__NoiseUniform swig_types[25]
-#define SWIGTYPE_p_cr__NullSpace swig_types[26]
-#define SWIGTYPE_p_cr__RigidBody swig_types[27]
-#define SWIGTYPE_p_cr__SensorLinear swig_types[28]
-#define SWIGTYPE_p_cr__SharedMemory swig_types[29]
-#define SWIGTYPE_p_cr__TrajectoryGenerator swig_types[30]
-#define SWIGTYPE_p_cr__world__Manipulator swig_types[31]
-#define SWIGTYPE_p_difference_type swig_types[32]
-#define SWIGTYPE_p_double swig_types[33]
-#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[34]
-#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[35]
-#define SWIGTYPE_p_p_PyObject swig_types[36]
-#define SWIGTYPE_p_size_type swig_types[37]
-#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[38]
-#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[39]
-#define SWIGTYPE_p_std__invalid_argument swig_types[40]
-#define SWIGTYPE_p_std__shared_ptrT_cr__world__Manipulator_t swig_types[41]
-#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[42]
-#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[43]
-#define SWIGTYPE_p_std__vectorT_cr__NoiseModel_p_std__allocatorT_cr__NoiseModel_p_t_t swig_types[44]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[45]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[46]
-#define SWIGTYPE_p_value_type swig_types[47]
-static swig_type_info *swig_types[49];
-static swig_module_info swig_module = {swig_types, 48, 0, 0, 0, 0};
+#define SWIGTYPE_p_Eigen__MatrixT_double_6_6_t swig_types[1]
+#define SWIGTYPE_p_Eigen__MatrixXd swig_types[2]
+#define SWIGTYPE_p_Eigen__VectorXd swig_types[3]
+#define SWIGTYPE_p_Eigen__VectorXi swig_types[4]
+#define SWIGTYPE_p_allocator_type swig_types[5]
+#define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[6]
+#define SWIGTYPE_p_boost__interprocess__vectorT_double_cr__ShmemAllocator_t swig_types[7]
+#define SWIGTYPE_p_char swig_types[8]
+#define SWIGTYPE_p_cr__CRParamNoiseGaussian swig_types[9]
+#define SWIGTYPE_p_cr__CRParamNoiseGeneric swig_types[10]
+#define SWIGTYPE_p_cr__CRParamNoiseMixture swig_types[11]
+#define SWIGTYPE_p_cr__CRParamNoiseUniform swig_types[12]
+#define SWIGTYPE_p_cr__CRWaypoint swig_types[13]
+#define SWIGTYPE_p_cr__Clock swig_types[14]
+#define SWIGTYPE_p_cr__Conversion swig_types[15]
+#define SWIGTYPE_p_cr__Frame swig_types[16]
+#define SWIGTYPE_p_cr__FrameDh swig_types[17]
+#define SWIGTYPE_p_cr__FrameEuler swig_types[18]
+#define SWIGTYPE_p_cr__HardLimits swig_types[19]
+#define SWIGTYPE_p_cr__Integration swig_types[20]
+#define SWIGTYPE_p_cr__InverseKinematics swig_types[21]
+#define SWIGTYPE_p_cr__Matrix swig_types[22]
+#define SWIGTYPE_p_cr__NoiseGaussian swig_types[23]
+#define SWIGTYPE_p_cr__NoiseMixture swig_types[24]
+#define SWIGTYPE_p_cr__NoiseModel swig_types[25]
+#define SWIGTYPE_p_cr__NoiseUniform swig_types[26]
+#define SWIGTYPE_p_cr__NullSpace swig_types[27]
+#define SWIGTYPE_p_cr__RigidBody swig_types[28]
+#define SWIGTYPE_p_cr__SensorLinear swig_types[29]
+#define SWIGTYPE_p_cr__SharedMemory swig_types[30]
+#define SWIGTYPE_p_cr__TrajectoryGenerator swig_types[31]
+#define SWIGTYPE_p_cr__world__Manipulator swig_types[32]
+#define SWIGTYPE_p_difference_type swig_types[33]
+#define SWIGTYPE_p_double swig_types[34]
+#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[35]
+#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[36]
+#define SWIGTYPE_p_p_PyObject swig_types[37]
+#define SWIGTYPE_p_size_type swig_types[38]
+#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[39]
+#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[40]
+#define SWIGTYPE_p_std__invalid_argument swig_types[41]
+#define SWIGTYPE_p_std__shared_ptrT_cr__world__Manipulator_t swig_types[42]
+#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[43]
+#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[44]
+#define SWIGTYPE_p_std__vectorT_cr__NoiseModel_p_std__allocatorT_cr__NoiseModel_p_t_t swig_types[45]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[46]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[47]
+#define SWIGTYPE_p_value_type swig_types[48]
+static swig_type_info *swig_types[50];
+static swig_module_info swig_module = {swig_types, 49, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -11465,6 +11466,64 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Frame_setRotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  cr::Frame *arg1 = (cr::Frame *) 0 ;
+  Eigen::Matrix3d arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::Matrix3d temp2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Frame_setRotation",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_cr__Frame, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Frame_setRotation" "', argument " "1"" of type '" "cr::Frame *""'"); 
+  }
+  arg1 = reinterpret_cast< cr::Frame * >(argp1);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::Matrix3d >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  (arg1)->setRotation(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Frame_setTranslation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  cr::Frame *arg1 = (cr::Frame *) 0 ;
+  Eigen::Vector3d arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  Eigen::Vector3d temp2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Frame_setTranslation",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_cr__Frame, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Frame_setTranslation" "', argument " "1"" of type '" "cr::Frame *""'"); 
+  }
+  arg1 = reinterpret_cast< cr::Frame * >(argp1);
+  {
+    if (!ConvertFromNumpyToEigenMatrix<Eigen::Vector3d >(&temp2, obj1))
+    SWIG_fail;
+    arg2 = temp2;
+  }
+  (arg1)->setTranslation(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Frame_setRotationAndTranslation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   cr::Frame *arg1 = (cr::Frame *) 0 ;
@@ -13499,6 +13558,28 @@ SWIGINTERN PyObject *_wrap_RigidBody_getMass(PyObject *SWIGUNUSEDPARM(self), PyO
   arg1 = reinterpret_cast< cr::RigidBody * >(argp1);
   result = (double)(arg1)->getMass();
   resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RigidBody_getMassMatrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  cr::RigidBody *arg1 = (cr::RigidBody *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Eigen::Matrix< double,6,6 > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:RigidBody_getMassMatrix",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_cr__RigidBody, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RigidBody_getMassMatrix" "', argument " "1"" of type '" "cr::RigidBody *""'"); 
+  }
+  arg1 = reinterpret_cast< cr::RigidBody * >(argp1);
+  result = (arg1)->getMassMatrix();
+  resultobj = SWIG_NewPointerObj((new Eigen::Matrix< double,6,6 >(static_cast< const Eigen::Matrix< double,6,6 >& >(result))), SWIGTYPE_p_Eigen__MatrixT_double_6_6_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -20476,6 +20557,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_Frame", _wrap_new_Frame, METH_VARARGS, NULL},
 	 { (char *)"Frame_setFreeValue", _wrap_Frame_setFreeValue, METH_VARARGS, NULL},
 	 { (char *)"Frame_getFreeValue", _wrap_Frame_getFreeValue, METH_VARARGS, NULL},
+	 { (char *)"Frame_setRotation", _wrap_Frame_setRotation, METH_VARARGS, NULL},
+	 { (char *)"Frame_setTranslation", _wrap_Frame_setTranslation, METH_VARARGS, NULL},
 	 { (char *)"Frame_setRotationAndTranslation", _wrap_Frame_setRotationAndTranslation, METH_VARARGS, NULL},
 	 { (char *)"Frame_getRotationAndTranslation", _wrap_Frame_getRotationAndTranslation, METH_VARARGS, NULL},
 	 { (char *)"Frame_getTransformToParent", _wrap_Frame_getTransformToParent, METH_VARARGS, NULL},
@@ -20527,6 +20610,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RigidBody_getInertiaTensor", _wrap_RigidBody_getInertiaTensor, METH_VARARGS, NULL},
 	 { (char *)"RigidBody_setMass", _wrap_RigidBody_setMass, METH_VARARGS, NULL},
 	 { (char *)"RigidBody_getMass", _wrap_RigidBody_getMass, METH_VARARGS, NULL},
+	 { (char *)"RigidBody_getMassMatrix", _wrap_RigidBody_getMassMatrix, METH_VARARGS, NULL},
 	 { (char *)"RigidBody_m_frame_set", _wrap_RigidBody_m_frame_set, METH_VARARGS, NULL},
 	 { (char *)"RigidBody_m_frame_get", _wrap_RigidBody_m_frame_get, METH_VARARGS, NULL},
 	 { (char *)"RigidBody_swigregister", RigidBody_swigregister, METH_VARARGS, NULL},
@@ -20722,6 +20806,7 @@ static void *_p_cr__NoiseMixtureTo_p_cr__NoiseModel(void *x, int *SWIGUNUSEDPARM
     return (void *)((cr::NoiseModel *)  ((cr::NoiseMixture *) x));
 }
 static swig_type_info _swigt__p_Eigen__MatrixT_bool_6_1_t = {"_p_Eigen__MatrixT_bool_6_1_t", "Eigen::Matrix< bool,6,1 > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Eigen__MatrixT_double_6_6_t = {"_p_Eigen__MatrixT_double_6_6_t", "Eigen::Matrix< double,6,6 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__MatrixXd = {"_p_Eigen__MatrixXd", "std::vector< Eigen::MatrixXd >::value_type *|Eigen::MatrixXd *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__VectorXd = {"_p_Eigen__VectorXd", "Eigen::VectorXd *|std::vector< Eigen::VectorXd >::value_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__VectorXi = {"_p_Eigen__VectorXi", "Eigen::VectorXi *", 0, 0, (void*)0, 0};
@@ -20772,6 +20857,7 @@ static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Eigen__MatrixT_bool_6_1_t,
+  &_swigt__p_Eigen__MatrixT_double_6_6_t,
   &_swigt__p_Eigen__MatrixXd,
   &_swigt__p_Eigen__VectorXd,
   &_swigt__p_Eigen__VectorXi,
@@ -20822,6 +20908,7 @@ static swig_type_info *swig_type_initial[] = {
 };
 
 static swig_cast_info _swigc__p_Eigen__MatrixT_bool_6_1_t[] = {  {&_swigt__p_Eigen__MatrixT_bool_6_1_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Eigen__MatrixT_double_6_6_t[] = {  {&_swigt__p_Eigen__MatrixT_double_6_6_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__MatrixXd[] = {  {&_swigt__p_Eigen__MatrixXd, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__VectorXd[] = {  {&_swigt__p_Eigen__VectorXd, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Eigen__VectorXi[] = {  {&_swigt__p_Eigen__VectorXi, 0, 0, 0},{0, 0, 0, 0}};
@@ -20872,6 +20959,7 @@ static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Eigen__MatrixT_bool_6_1_t,
+  _swigc__p_Eigen__MatrixT_double_6_6_t,
   _swigc__p_Eigen__MatrixXd,
   _swigc__p_Eigen__VectorXd,
   _swigc__p_Eigen__VectorXi,

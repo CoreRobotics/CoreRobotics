@@ -20,42 +20,48 @@ classdef Frame < SwigRef
     function varargout = getFreeValue(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(97, self, varargin{:});
     end
-    function varargout = setRotationAndTranslation(self,varargin)
+    function varargout = setRotation(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(98, self, varargin{:});
     end
-    function varargout = getRotationAndTranslation(self,varargin)
+    function varargout = setTranslation(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(99, self, varargin{:});
     end
-    function varargout = getTransformToParent(self,varargin)
+    function varargout = setRotationAndTranslation(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(100, self, varargin{:});
     end
-    function varargout = getTransformToChild(self,varargin)
+    function varargout = getRotationAndTranslation(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(101, self, varargin{:});
     end
-    function varargout = transformToParent(self,varargin)
+    function varargout = getTransformToParent(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(102, self, varargin{:});
     end
-    function varargout = transformToChild(self,varargin)
+    function varargout = getTransformToChild(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(103, self, varargin{:});
     end
-    function varargout = isDriven(self,varargin)
+    function varargout = transformToParent(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(104, self, varargin{:});
     end
-    function varargout = getTranslation(self,varargin)
+    function varargout = transformToChild(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(105, self, varargin{:});
     end
-    function varargout = getRotation(self,varargin)
+    function varargout = isDriven(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(106, self, varargin{:});
     end
-    function varargout = getOrientation(self,varargin)
+    function varargout = getTranslation(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(107, self, varargin{:});
     end
-    function varargout = getPose(self,varargin)
+    function varargout = getRotation(self,varargin)
       [varargout{1:nargout}] = CoreRoboticsMEX(108, self, varargin{:});
+    end
+    function varargout = getOrientation(self,varargin)
+      [varargout{1:nargout}] = CoreRoboticsMEX(109, self, varargin{:});
+    end
+    function varargout = getPose(self,varargin)
+      [varargout{1:nargout}] = CoreRoboticsMEX(110, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(109, self);
+        CoreRoboticsMEX(111, self);
         self.swigPtr=[];
       end
     end

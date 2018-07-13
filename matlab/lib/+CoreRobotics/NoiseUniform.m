@@ -7,33 +7,33 @@ classdef NoiseUniform < CoreRobotics.NoiseModel
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(197, varargin{:});
+        tmp = CoreRoboticsMEX(200, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function varargout = setParameters(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(198, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(201, self, varargin{:});
     end
     function varargout = sample(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(199, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(202, self, varargin{:});
     end
     function varargout = probability(self,varargin)
-      [varargout{1:nargout}] = CoreRoboticsMEX(200, self, varargin{:});
+      [varargout{1:nargout}] = CoreRoboticsMEX(203, self, varargin{:});
     end
     function varargout = m_parameters(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(201, self);
+        varargout{1} = CoreRoboticsMEX(204, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(202, self, varargin{1});
+        CoreRoboticsMEX(205, self, varargin{1});
       end
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(203, self);
+        CoreRoboticsMEX(206, self);
         self.swigPtr=[];
       end
     end
