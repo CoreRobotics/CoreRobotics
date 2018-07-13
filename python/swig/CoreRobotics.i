@@ -109,8 +109,6 @@ removed for compatability.
 #include <Python.h>
 
 #include "CoreRobotics.hpp"
-
-typedef cr::world::LinkPtr LinkPtr;
 %}
 
 %include <typemaps.i>
