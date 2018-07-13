@@ -411,7 +411,7 @@ if(matlab OR all)
 
 			# Compile a shared library with the existing C++ wrapper files
 			add_library(${Matlab_PROJECT_NAME} SHARED
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS}
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD}
 				${CMAKE_SOURCE_DIR}/matlab/swig/${PROJECT_NAME}MATLAB_wrap.cxx)
 
 			# Link with Matlab
@@ -430,7 +430,7 @@ if(matlab OR all)
 			# Create SWIG Module
 			swig_add_module(${Matlab_PROJECT_NAME} matlab
 				${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD})
 
 			# Link Module with Matlab
 			swig_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES} ${LINK_FLAGS})
