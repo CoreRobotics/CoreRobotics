@@ -46,7 +46,7 @@ disp('*************************************');
 disp('Demonstration of CRTrajectoryGenerator.');
 
 % Define a trajectory generator
-trajGen = CRTrajectoryGenerator();
+trajGen = TrajectoryGenerator();
 
 % Initial and Final conditions
 tf = 1.2;

@@ -56,7 +56,7 @@ t = toc;
 fprintf('t = %f\n', t);
 
 % Open a shared memory object
-mem = CRSharedMemory(memoryName, CR_MANAGER_SERVER);
+mem = SharedMemory(memoryName, CR_MANAGER_SERVER);
 
 % Create a vector of data
 v = [0.1 0.4]';
@@ -65,7 +65,7 @@ v = [0.1 0.4]';
 mem.addSignal('signal_1', v);
 
 % Open a shared memory object as client
-mem2 = CRSharedMemory(memoryName, CR_MANAGER_CLIENT);
+mem2 = SharedMemory(memoryName, CR_MANAGER_CLIENT);
 	
 dt = 0.1;
 i = 0;
