@@ -52,8 +52,8 @@ namespace world {
  Constructor to the world item.\n
  */
 //---------------------------------------------------------------------
-Link::Link(){
-    
+Link::Link() : m_comItem( std::make_shared<Node>() ) {
+    m_comItem->setName("COM");
 }
     
     
@@ -63,7 +63,7 @@ Link::Link(){
  */
 //---------------------------------------------------------------------
 Link::~Link(){
-    // delete m_parent;
+    
 }
     
     
@@ -74,6 +74,23 @@ Link::~Link(){
 //---------------------------------------------------------------------
 LinkPtr Link::create(){
     return std::make_shared<Link>();
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This function sets the rigid body parameters and updates internal data.
+ 
+ \param[in]        i_body - the RigidBody data
+ */
+//---------------------------------------------------------------------
+void Link::setRigidBody(const RigidBody& i_body)
+{
+    addChild(m_comItem);
+    m_body = i_body;
+    Frame f;
+    f.setTranslation( m_body.getCenterOfMass() );
+    m_comItem->setLocalTransform(f);
 }
     
     

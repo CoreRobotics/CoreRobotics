@@ -52,9 +52,9 @@ namespace world {
  The constructor sets up the world.\n
  */
 //---------------------------------------------------------------------
-Origin::Origin()
+Origin::Origin() : m_rootItem( std::make_shared<Node>() )
 {
-    m_rootItem = std::make_shared<Node>();
+    // m_rootItem = std::make_shared<Node>();
 }
 
 

@@ -90,8 +90,11 @@ class Link : public Node
     // Link controls
     public:
     
+        //! get the pointer to the center of mass node
+        NodePtr getCenterOfMass() { return m_comItem; }
+    
         //! set the rigid body parameters
-        void setRigidBody(const RigidBody& i_body) { m_body = i_body; }
+        void setRigidBody(const RigidBody& i_body);
     
         //! return the rigid body parameters
         RigidBody getRigidBody() { return m_body; }
@@ -102,11 +105,17 @@ class Link : public Node
         //! return the degree of freedom
         EulerFreeVariable getDegreeOfFreedom() { return m_frame.getFreeVariable(); }
     
-        //! set the driven angle
+        //! set the driven vale
         void setFreeVariable(double i_value) { m_frame.setFreeValue(i_value); }
     
-        //! get the driven angle
+        //! return the driven value
         double getFreeVariable() { return m_frame.getFreeValue(); }
+    
+        //! set euler mode
+        void setEulerMode(EulerMode i_mode) { m_frame.setMode(i_mode); }
+    
+        //! get euler mode
+        EulerMode getEulerMode() { return m_frame.getMode(); }
     
     
     // Frame transformation controls
@@ -140,6 +149,9 @@ class Link : public Node
     
         //! frame - overloaded from Node::m_frame
         FrameEuler m_frame;
+    
+        //! center of mass node
+        NodePtr m_comItem;
     
 };
 

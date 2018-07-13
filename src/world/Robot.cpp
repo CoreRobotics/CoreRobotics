@@ -124,7 +124,7 @@ int Robot::getDegreesOfFreedom()
 }
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method sets the configuration space positions. If the robot is 
  fully defined by revolute joints, then this operation corresponds to
@@ -145,7 +145,7 @@ void Robot::setConfiguration(Eigen::VectorXd i_q)
 }
      
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method gets the configuration space positions. If the robot is
  fully defined by revolute joints, then this operation corresponds to
@@ -165,6 +165,114 @@ Eigen::VectorXd Robot::getConfiguration()
         }
     }
     return q;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This method computes the Jacobian of the manipulator in the world frame
+ w.r.t. the specified child node.
+ 
+ The size of the returned Jacobian is 6 x N where N is the number of
+ free variables in the manipulator.  The rows of the Jacobian
+ correspond to the pose vector (x, y, z, a, b, g)^T.\n
+ 
+ \param[in]     i_node     child node to query
+ \param[in]     i_mode     the Euler convention for the orientation.
+ \return                   (6 x N) jacobian matrix
+ */
+//---------------------------------------------------------------------
+Eigen::MatrixXd Robot::jacobian(NodePtr i_node, EulerMode i_mode)
+{
+    // Initialize the Jacobian matrix
+    Eigen::MatrixXd J(6, getDegreesOfFreedom());
+    
+    // pertubation size (see http://www.maths.lth.se/na/courses/FMN081/FMN081-06/lecture7.pdf)
+    double delta = 1.0e-8;        // was 1.0e-9 - can improve this (adaptive?)
+    
+    // set up the variables
+    Eigen::VectorXd q0;                        // operating point
+    Eigen::VectorXd qd;                        // perturbed vector
+    Eigen::Matrix<double, 6, 1> poseFwd;    // forward perturbation result
+    Eigen::Matrix<double, 6, 1> poseBwd;    // backward perturbation result
+    
+    // intialize the configuration
+    q0 = getConfiguration();
+    
+    // step through each link
+    int i = 0;
+    for (size_t k = 0; k < m_links.size(); k++) {
+        
+        // if free variable
+        if (m_links.at(k)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+        
+            // set the configuration operating point
+            qd.setZero(q0.size(),1);
+            
+            // define which free variable is being perturbed
+            qd(i) = delta;
+            
+            // perturb forward
+            this->setConfiguration(q0+qd);
+            poseFwd = i_node->getGlobalTransform().getPose(i_mode);
+            
+            // perturb backward
+            this->setConfiguration(q0-qd);
+            poseBwd = i_node->getGlobalTransform().getPose(i_mode);
+            
+            // central difference
+            J.col(i) = (poseFwd - poseBwd) / (2.0 * delta);
+            
+            // iterate the free var counter
+            i++;
+        }
+    }
+    this->setConfiguration(q0);
+    
+    // return the jacobian matrix
+    return J;
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This method computes the generalized mass matrix in the world frame,
+ i.e. the mass w.r.t. the generalized coordinates (free variables). \n
+ 
+ \return    n x n generalized mass matrix - where n is the DOF
+ */
+//---------------------------------------------------------------------
+Eigen::MatrixXd Robot::generalizedMass()
+{
+    int n = getDegreesOfFreedom();
+    Eigen::MatrixXd M(n,n);
+    M.setZero();
+    
+    // step through each link
+    int i = 0;
+    for (size_t k = 0; k < m_links.size(); k++) {
+        
+        // if free variable
+        if (m_links.at(k)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+            
+            // get the Euler mode
+            EulerMode mode = CR_EULER_MODE_XYZ;
+            
+            // compute the Jacobian of the link Center of Mass
+            Eigen::MatrixXd J = jacobian(m_links.at(k)->getCenterOfMass(), mode);
+            
+            // get the mass matrix
+            Eigen::Matrix<double, 6, 6> Mc = m_links.at(k)->getRigidBody().getMassMatrix();
+            
+            // update the mass matrix
+            M += J.transpose() * Mc * J;
+            
+            // iterate the free var counter
+            i++;
+        }
+        
+    }
+    return M;
 }
     
     

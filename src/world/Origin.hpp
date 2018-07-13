@@ -86,7 +86,7 @@ class Origin : public LoopElement, public Item
         static OriginPtr create();
 
 
-	// ThreadLoopElement behaviors
+	// LoopElement behaviors
 	public:
 
 		//! step()

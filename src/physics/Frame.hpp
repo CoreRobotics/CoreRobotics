@@ -140,6 +140,12 @@ public:
     //! Get the value of the free variable
     virtual double getFreeValue(void);
     
+    //! Set the rotation
+    void setRotation(Eigen::Matrix3d i_rot) { m_rotation = i_rot; }
+    
+    //! Set the translation
+    void setTranslation(Eigen::Vector3d i_trans) { m_translation = i_trans; }
+    
     //! Set the rotation and translation
     void setRotationAndTranslation(Eigen::Matrix3d i_rot,
                                    Eigen::Vector3d i_trans){

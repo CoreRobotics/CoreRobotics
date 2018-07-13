@@ -81,6 +81,7 @@ class RigidBody {
     
         //! Class constructor
         RigidBody();
+        // DEPRECATE
         RigidBody(Frame* i_frame);
     
         //! Class destructor
@@ -90,7 +91,7 @@ class RigidBody {
     // Get/Set Methods
     public:
     
-        //! Sets the pointer to the frame class for the transformation
+        //! DEPRECTATE Sets the pointer to the frame class for the transformation
         void setFrame(Frame* i_frame) {this->m_frame = i_frame;}
     
         //! Set the center of mass
@@ -105,17 +106,20 @@ class RigidBody {
         //! Get the inertia tensor
         Eigen::Matrix3d getInertiaTensor() { return m_inertia; }
     
-        //! Set the center of mass
+        //! Set the mass value
         void setMass(const double& i_mass) { m_mass = i_mass; }
     
-        //! Get the center of mass
+        //! Get the mass value
         double getMass() { return m_mass; }
+    
+        //! get the mass matrix
+        Eigen::Matrix<double, 6, 6> getMassMatrix();
     
 
     // Public Members
     public:
     
-        //! Pointer to the rigid body frame transformation
+        //! DEPRECATE Pointer to the rigid body frame transformation
         cr::Frame* m_frame;
     
     

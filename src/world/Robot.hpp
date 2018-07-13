@@ -183,10 +183,28 @@ class Robot : public Node
         //                             EulerMode i_mode,
         //                             Eigen::Matrix<int, 6, 1> i_poseElementsInt);
     
+    
+    // Kinematics
+    public:
+    
+        //! compute the jacobian for the indicated child node
+        Eigen::MatrixXd jacobian(NodePtr i_node, EulerMode i_mode);
+    
+    
+    
+    // Dynamics
+    public:
+    
+        //! compute the generalized mass matrix (in the world frame)
+        Eigen::MatrixXd generalizedMass();
+    
 
     // Jacobian
     public:
     
+        //! Compute the link Jacobian (of the COM)
+    
+        
     
         //! Compute the instantaneous numerical Jacobian
         // Eigen::MatrixXd jacobian(unsigned i_toolIndex,
@@ -210,7 +228,6 @@ class Robot : public Node
         // Eigen::MatrixXd hessian(unsigned i_toolIndex, EulerMode i_mode, Eigen::Matrix<bool, 6, 1> i_poseElements);
 
         // Eigen::MatrixXd hessian(unsigned i_toolIndex, EulerMode i_mode, Eigen::Matrix<int, 6, 1> i_poseElementsInt);
-
 
 
     // Add link/tool Methods
