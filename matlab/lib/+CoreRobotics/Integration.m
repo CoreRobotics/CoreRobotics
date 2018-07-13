@@ -11,13 +11,13 @@ classdef Integration < SwigRef
       else
         tmp = CoreRoboticsMEX(81, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(82, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

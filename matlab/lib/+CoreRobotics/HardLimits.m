@@ -11,7 +11,7 @@ classdef HardLimits < SwigRef
       else
         tmp = CoreRoboticsMEX(259, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = getIKSolver(self,varargin)
@@ -83,7 +83,7 @@ classdef HardLimits < SwigRef
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(282, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

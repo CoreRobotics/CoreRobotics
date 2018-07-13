@@ -1,7 +1,7 @@
-function v = CR_EULER_MODE_YXZ()
+function v = SHARED_PTR_DISOWN()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = CoreRoboticsMEX(0, 20);
+    vInitialized = CoreRoboticsMEX(0, 0);
   end
   v = vInitialized;
 end

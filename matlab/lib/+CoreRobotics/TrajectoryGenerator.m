@@ -11,7 +11,7 @@ classdef TrajectoryGenerator < SwigRef
       else
         tmp = CoreRoboticsMEX(301, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = solve(self,varargin)
@@ -23,7 +23,7 @@ classdef TrajectoryGenerator < SwigRef
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(304, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

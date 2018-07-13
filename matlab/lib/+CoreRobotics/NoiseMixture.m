@@ -1,7 +1,9 @@
-classdef NoiseMixture < CoreRobotics.NoiseModel
+classdef NoiseMixture < SwigRef
   methods
+    function this = swig_this(self)
+      this = CoreRoboticsMEX(3, self);
+    end
     function self = NoiseMixture(varargin)
-      self@CoreRobotics.NoiseModel(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
@@ -9,7 +11,7 @@ classdef NoiseMixture < CoreRobotics.NoiseModel
       else
         tmp = CoreRoboticsMEX(213, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = add(self,varargin)
@@ -34,7 +36,7 @@ classdef NoiseMixture < CoreRobotics.NoiseModel
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(219, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

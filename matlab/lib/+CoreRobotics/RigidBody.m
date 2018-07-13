@@ -11,13 +11,13 @@ classdef RigidBody < SwigRef
       else
         tmp = CoreRoboticsMEX(139, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(140, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = setFrame(self,varargin)

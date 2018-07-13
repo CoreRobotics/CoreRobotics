@@ -1,7 +1,7 @@
 function v = CR_RESULT_SUCCESS()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = CoreRoboticsMEX(0, 0);
+    vInitialized = CoreRoboticsMEX(0, 1);
   end
   v = vInitialized;
 end
