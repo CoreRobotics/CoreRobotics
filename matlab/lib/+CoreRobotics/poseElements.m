@@ -1,3 +1,3 @@
 function varargout = poseElements(varargin)
-  [varargout{1:nargout}] = CoreRoboticsMEX(302, varargin{:});
+  [varargout{1:nargout}] = CoreRoboticsMEX(305, varargin{:});
 end

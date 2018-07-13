@@ -7,20 +7,20 @@ classdef CRParamNoiseMixture < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(204, self);
+        varargout{1} = CoreRoboticsMEX(207, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(205, self, varargin{1});
+        CoreRoboticsMEX(208, self, varargin{1});
       end
     end
     function varargout = weights(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = CoreRoboticsMEX(206, self);
+        varargout{1} = CoreRoboticsMEX(209, self);
       else
         nargoutchk(0, 0)
-        CoreRoboticsMEX(207, self, varargin{1});
+        CoreRoboticsMEX(210, self, varargin{1});
       end
     end
     function self = CRParamNoiseMixture(varargin)
@@ -29,14 +29,14 @@ classdef CRParamNoiseMixture < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = CoreRoboticsMEX(208, varargin{:});
+        tmp = CoreRoboticsMEX(211, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        CoreRoboticsMEX(209, self);
+        CoreRoboticsMEX(212, self);
         self.swigPtr=[];
       end
     end
