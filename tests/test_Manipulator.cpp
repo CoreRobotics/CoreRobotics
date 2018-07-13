@@ -45,6 +45,314 @@ POSSIBILITY OF SUCH DAMAGE.
 // Use the CoreRobotics namespace
 using namespace cr;
 
+
+//
+// setup the manipulator
+//
+TEST(Manipulator, Setup){
+    
+    cr::world::OriginPtr simWorld = cr::world::Origin::create();
+    cr::world::RobotPtr robot = cr::world::Robot::create();
+    simWorld->addChild(robot);
+    
+    // Define an inertia tensor matrix and com vector
+    Eigen::Matrix3d I;
+    Eigen::Vector3d COM;
+    
+    // Create a rigid body
+    cr::RigidBody rb;
+    
+    // Create a frame for writing the data
+    cr::FrameEuler fe;
+    fe.setMode(cr::CR_EULER_MODE_XYZ);
+    
+    // Setup the rigid body link items
+    cr::world::LinkPtr link[3];
+    
+    fe.setPositionAndOrientation(0, 0, 1, 0, 0, M_PI / 3.0);
+    link[0] = cr::world::Link::create();
+    link[0]->setLocalTransform(fe);
+    link[0]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
+    robot->addChild(link[0]);
+    
+    fe.setPositionAndOrientation(1, 0, 0, 0, 0, -M_PI / 4.0);
+    I << 0, 0, 0, 0, 0, 0, 0, 0, 1;
+    COM << 0.25, 0, 0;
+    rb.setMass(1);
+    rb.setInertiaTensor(I);
+    rb.setCenterOfMass(COM);
+    link[1] = cr::world::Link::create();
+    link[1]->setLocalTransform(fe);
+    link[1]->setRigidBody(rb);
+    link[1]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
+    link[0]->addChild(link[1]);
+    
+    fe.setPositionAndOrientation(2, 0, 0, 0, 0, 0);
+    I << 0, 0, 0, 0, 0, 0, 0, 0, 2;
+    COM << 0.5, 0, 0;
+    rb.setMass(2);
+    rb.setInertiaTensor(I);
+    rb.setCenterOfMass(COM);
+    link[2] = cr::world::Link::create();
+    link[2]->setLocalTransform(fe);
+    link[2]->setRigidBody(rb);
+    link[2]->setDegreeOfFreedom(cr::CR_EULER_FREE_NONE);
+    link[1]->addChild(link[2]);
+    
+    // set the links
+    robot->addLink(link[0]);
+    robot->addLink(link[1]);
+    robot->addLink(link[2]);
+    
+    
+    // make sure the scene graph worked
+    EXPECT_EQ(link[0]->getParent(), robot);
+    EXPECT_EQ(link[1]->getParent(), link[0]);
+    EXPECT_EQ(link[2]->getParent(), link[1]);
+    
+    // check degrees of freedom and links
+    EXPECT_EQ(robot->getNumberOfLinks(), 3);
+    EXPECT_EQ(robot->getDegreesOfFreedom(), 2);
+    
+    // check configuration
+    Eigen::VectorXd q;
+    q = robot->getConfiguration();
+    EXPECT_EQ(q.size(), 2);
+    EXPECT_DOUBLE_EQ(q(0), M_PI / 3.0);
+    EXPECT_DOUBLE_EQ(q(1), -M_PI / 4.0);
+}
+
+
+//
+// setup the manipulator
+//
+TEST(Manipulator, Kinematics){
+    
+    cr::world::OriginPtr simWorld = cr::world::Origin::create();
+    cr::world::RobotPtr robot = cr::world::Robot::create();
+    simWorld->addChild(robot);
+    
+    // Define an inertia tensor matrix and com vector
+    Eigen::Matrix3d I;
+    Eigen::Vector3d COM;
+    
+    // Create a rigid body
+    cr::RigidBody rb;
+    
+    // Create a frame for writing the data
+    cr::FrameEuler fe;
+    fe.setMode(cr::CR_EULER_MODE_XYZ);
+    
+    // Setup the rigid body link items
+    cr::world::LinkPtr link[3];
+    
+    fe.setPositionAndOrientation(0, 0, 1, 0, 0, M_PI / 3.0);
+    link[0] = cr::world::Link::create();
+    link[0]->setLocalTransform(fe);
+    link[0]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
+    robot->addChild(link[0]);
+    
+    fe.setPositionAndOrientation(1, 0, 0, 0, 0, -M_PI / 4.0);
+    I << 0, 0, 0, 0, 0, 0, 0, 0, 1;
+    COM << 0.25, 0, 0;
+    rb.setMass(1);
+    rb.setInertiaTensor(I);
+    rb.setCenterOfMass(COM);
+    link[1] = cr::world::Link::create();
+    link[1]->setLocalTransform(fe);
+    link[1]->setRigidBody(rb);
+    link[1]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
+    link[0]->addChild(link[1]);
+    
+    fe.setPositionAndOrientation(2, 0, 0, 0, 0, 0);
+    I << 0, 0, 0, 0, 0, 0, 0, 0, 2;
+    COM << 0.5, 0, 0;
+    rb.setMass(2);
+    rb.setInertiaTensor(I);
+    rb.setCenterOfMass(COM);
+    link[2] = cr::world::Link::create();
+    link[2]->setLocalTransform(fe);
+    link[2]->setRigidBody(rb);
+    link[2]->setDegreeOfFreedom(cr::CR_EULER_FREE_NONE);
+    link[1]->addChild(link[2]);
+    
+    // set the links
+    robot->addLink(link[0]);
+    robot->addLink(link[1]);
+    robot->addLink(link[2]);
+    
+    
+    // get the global positions
+    Eigen::Matrix<double, 6, 1> p;
+    p = link[0]->getGlobalTransform().getPose(CR_EULER_MODE_XYZ);
+    EXPECT_DOUBLE_EQ(p(0), 0);
+    EXPECT_DOUBLE_EQ(p(1), 0);
+    EXPECT_DOUBLE_EQ(p(2), 1);
+    EXPECT_DOUBLE_EQ(p(3), 0);
+    EXPECT_DOUBLE_EQ(p(4), 0);
+    EXPECT_DOUBLE_EQ(p(5), M_PI / 3.0);
+    
+    p = link[1]->getGlobalTransform().getPose(CR_EULER_MODE_XYZ);
+    EXPECT_DOUBLE_EQ(p(0), 1 * cos (M_PI / 3.0) );
+    EXPECT_DOUBLE_EQ(p(1), 1 * sin (M_PI / 3.0) );
+    EXPECT_DOUBLE_EQ(p(2), 1);
+    EXPECT_DOUBLE_EQ(p(3), 0);
+    EXPECT_DOUBLE_EQ(p(4), 0);
+    EXPECT_DOUBLE_EQ(p(5), M_PI / 3.0 - M_PI / 4.0);
+    
+    p = link[2]->getGlobalTransform().getPose(CR_EULER_MODE_XYZ);
+    EXPECT_DOUBLE_EQ(p(0), 2 * cos (M_PI / 3.0 - M_PI / 4.0) + 1 * cos (M_PI / 3.0));
+    EXPECT_DOUBLE_EQ(p(1), 2 * sin (M_PI / 3.0 - M_PI / 4.0) + 1 * sin (M_PI / 3.0));
+    EXPECT_DOUBLE_EQ(p(2), 1);
+    EXPECT_DOUBLE_EQ(p(3), 0);
+    EXPECT_DOUBLE_EQ(p(4), 0);
+    EXPECT_DOUBLE_EQ(p(5), M_PI / 3.0 - M_PI / 4.0);
+
+}
+
+
+//
+// Get Jacobian
+//
+/*
+TEST(Manipulator, Jacobian){
+    world::Manipulator MyRobot;
+    int toolIndex = setupRobot(MyRobot);
+    
+    Eigen::MatrixXd J;
+    J = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ);
+    EXPECT_EQ(6, J.rows());
+    EXPECT_EQ(2, J.cols());
+    EXPECT_DOUBLE_EQ(0, J(0, 0));
+    EXPECT_DOUBLE_EQ(3, J(1, 0));
+    EXPECT_DOUBLE_EQ(0, J(2, 0));
+    EXPECT_DOUBLE_EQ(0, J(3, 0));
+    EXPECT_DOUBLE_EQ(0, J(4, 0));
+    EXPECT_DOUBLE_EQ(1, J(5, 0));
+    EXPECT_DOUBLE_EQ(0, J(0, 1));
+    EXPECT_DOUBLE_EQ(2, J(1, 1));
+    EXPECT_DOUBLE_EQ(0, J(2, 1));
+    EXPECT_DOUBLE_EQ(0, J(3, 1));
+    EXPECT_DOUBLE_EQ(0, J(4, 1));
+    EXPECT_DOUBLE_EQ(1, J(5, 1));
+    
+    Eigen::Matrix<bool, 6, 1> pe;
+    pe << true, true, false, false, false, true;
+    J = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ, pe);
+    EXPECT_EQ(3, J.rows());
+    EXPECT_EQ(2, J.cols());
+    EXPECT_DOUBLE_EQ(0, J(0, 0));
+    EXPECT_DOUBLE_EQ(3, J(1, 0));
+    EXPECT_DOUBLE_EQ(1, J(2, 0));
+    EXPECT_DOUBLE_EQ(0, J(0, 1));
+    EXPECT_DOUBLE_EQ(2, J(1, 1));
+    EXPECT_DOUBLE_EQ(1, J(2, 1));
+}
+ */
+
+
+//
+// Get Hessian
+//
+/*
+TEST(Manipulator, Hessian){
+    world::Manipulator MyRobot;
+    int toolIndex = setupRobot(MyRobot);
+    
+    // NOTE: the numerical hessian is noisy!
+    Eigen::MatrixXd H;
+    H = MyRobot.hessian(toolIndex, CR_EULER_MODE_XYZ);
+    EXPECT_EQ(6, H.rows());
+    EXPECT_EQ(2, H.cols());
+    EXPECT_NEAR(-3, H(0, 0), 1e-3);
+    EXPECT_DOUBLE_EQ(0, H(1, 0));
+    EXPECT_DOUBLE_EQ(0, H(2, 0));
+    EXPECT_DOUBLE_EQ(0, H(3, 0));
+    EXPECT_DOUBLE_EQ(0, H(4, 0));
+    EXPECT_DOUBLE_EQ(0, H(5, 0));
+    EXPECT_NEAR(-2, H(0, 1), 1e-3);
+    EXPECT_DOUBLE_EQ(0, H(1, 1));
+    EXPECT_DOUBLE_EQ(0, H(2, 1));
+    EXPECT_DOUBLE_EQ(0, H(3, 1));
+    EXPECT_DOUBLE_EQ(0, H(4, 1));
+    EXPECT_DOUBLE_EQ(0, H(5, 1));
+    
+    Eigen::Matrix<bool, 6, 1> pe;
+    pe << true, true, false, false, false, true;
+    H = MyRobot.hessian(toolIndex, CR_EULER_MODE_XYZ, pe);
+    EXPECT_EQ(3, H.rows());
+    EXPECT_EQ(2, H.cols());
+    EXPECT_NEAR(-3, H(0, 0), 1e-3);
+    EXPECT_DOUBLE_EQ(0, H(1, 0));
+    EXPECT_DOUBLE_EQ(0, H(2, 0));
+    EXPECT_NEAR(-2, H(0, 1), 1e-3);
+    EXPECT_DOUBLE_EQ(0, H(1, 1));
+    EXPECT_DOUBLE_EQ(0, H(2, 1));
+}
+ */
+
+
+
+//
+// Get tool/link frames
+//
+/*
+TEST(Manipulator, GetFrames){
+    world::Manipulator MyRobot;
+    int toolIndex = setupRobot(MyRobot);
+    
+    // now get the transformation to the tool for the current configuration
+    Eigen::Matrix4d T;
+    Frame toolFrame;
+    MyRobot.getToolFrame(toolIndex, toolFrame);
+    T = toolFrame.getTransformToParent();
+    EXPECT_DOUBLE_EQ(1, T(0, 0));
+    EXPECT_DOUBLE_EQ(0, T(0, 1));
+    EXPECT_DOUBLE_EQ(0, T(0, 2));
+    EXPECT_DOUBLE_EQ(3, T(0, 3));
+    EXPECT_DOUBLE_EQ(0, T(1, 0));
+    EXPECT_DOUBLE_EQ(1, T(1, 1));
+    EXPECT_DOUBLE_EQ(0, T(1, 2));
+    EXPECT_DOUBLE_EQ(0, T(1, 3));
+    EXPECT_DOUBLE_EQ(0, T(2, 0));
+    EXPECT_DOUBLE_EQ(0, T(2, 1));
+    EXPECT_DOUBLE_EQ(1, T(2, 2));
+    EXPECT_DOUBLE_EQ(0.5, T(2, 3));
+    
+    Eigen::VectorXd p = MyRobot.getToolPose(toolIndex, CR_EULER_MODE_XYZ);
+    EXPECT_EQ(6, p.size());
+    EXPECT_DOUBLE_EQ(3, p(0));
+    EXPECT_DOUBLE_EQ(0, p(1));
+    EXPECT_DOUBLE_EQ(0.5, p(2));
+    EXPECT_DOUBLE_EQ(0, p(3));
+    EXPECT_DOUBLE_EQ(0, p(4));
+    EXPECT_DOUBLE_EQ(0, p(5));
+    
+    // get link frame
+    Frame linkFrame;
+    MyRobot.getLinkFrame(0, linkFrame);
+    T = linkFrame.getTransformToParent();
+    EXPECT_DOUBLE_EQ(1, T(0, 0));
+    EXPECT_DOUBLE_EQ(0, T(0, 1));
+    EXPECT_DOUBLE_EQ(0, T(0, 2));
+    EXPECT_DOUBLE_EQ(0, T(0, 3));
+    EXPECT_DOUBLE_EQ(0, T(1, 0));
+    EXPECT_DOUBLE_EQ(1, T(1, 1));
+    EXPECT_DOUBLE_EQ(0, T(1, 2));
+    EXPECT_DOUBLE_EQ(0, T(1, 3));
+    EXPECT_DOUBLE_EQ(0, T(2, 0));
+    EXPECT_DOUBLE_EQ(0, T(2, 1));
+    EXPECT_DOUBLE_EQ(1, T(2, 2));
+    EXPECT_DOUBLE_EQ(0.5, T(2, 3));
+}
+ */
+
+
+
+//
+// OLD - DEPRECTATED MANIPULATOR CLASS
+//
+/*
 // Setup the Manipulator robot and return the toolIndex
 int setupRobot(world::Manipulator& MyRobot){
     FrameEuler* F0 = new FrameEuler();
@@ -310,3 +618,4 @@ TEST(Manipulator, GetFrames){
     EXPECT_DOUBLE_EQ(1, T(2, 2));
     EXPECT_DOUBLE_EQ(0.5, T(2, 3));
 }
+*/
