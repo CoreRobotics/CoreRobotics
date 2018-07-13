@@ -115,6 +115,7 @@ removed for compatability.
 
 %include <typemaps.i>
 %include <std_vector.i>
+%include <std_shared_ptr.i>
 
 %template(vectorMatrixXd) std::vector<Eigen::MatrixXd>;
 %template(vectorVectorXd) std::vector<Eigen::VectorXd>;
