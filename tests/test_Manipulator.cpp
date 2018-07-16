@@ -62,10 +62,10 @@ void setupRobot(cr::world::RobotPtr myRobot, cr::world::LinkPtr myLink[3])
     cr::FrameEuler fe;
     fe.setMode(cr::CR_EULER_MODE_XYZ);
     
-    fe.setPositionAndOrientation(0, 0, 1, 0, 0, M_PI / 2.0);
-    I << 0, 0, 0, 0, 0, 0, 0, 0, 1;
+    fe.setPositionAndOrientation(0, 0, 1, 0, 0, M_PI / 3.0);
+    I << 0, 0, 0, 0, 0, 0, 0, 0, 0.1;
     COM << 0.25, 0, 0;
-    rb.setMass(1);
+    rb.setMass(1.1);
     rb.setInertiaTensor(I);
     rb.setCenterOfMass(COM);
     myLink[0] = cr::world::Link::create();
@@ -74,10 +74,10 @@ void setupRobot(cr::world::RobotPtr myRobot, cr::world::LinkPtr myLink[3])
     myLink[0]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
     myRobot->addChild(myLink[0]);
     
-    fe.setPositionAndOrientation(1, 0, 0, 0, 0, -M_PI / 2.0);
-    I << 0, 0, 0, 0, 0, 0, 0, 0, 2;
-    COM << 0.5, 0, 0;
-    rb.setMass(2);
+    fe.setPositionAndOrientation(1, 0, 0, 0, 0, -M_PI / 4.0);
+    I << 0, 0, 0, 0, 0, 0, 0, 0, 0.2;
+    COM << 0.6, 0, 0;
+    rb.setMass(1.8);
     rb.setInertiaTensor(I);
     rb.setCenterOfMass(COM);
     myLink[1] = cr::world::Link::create();
@@ -129,8 +129,8 @@ TEST(Manipulator, Setup){
     Eigen::VectorXd q;
     q = robot->getConfiguration();
     EXPECT_EQ(q.size(), 2);
-    EXPECT_DOUBLE_EQ(q(0), M_PI / 2.0);
-    EXPECT_DOUBLE_EQ(q(1), -M_PI / 2.0);
+    EXPECT_DOUBLE_EQ(q(0), M_PI / 3.0);
+    EXPECT_DOUBLE_EQ(q(1), -M_PI / 4.0);
 }
 
 
@@ -221,6 +221,51 @@ TEST(Manipulator, Jacobian){
     EXPECT_NEAR(J(4, 1), 0, 1e-6);
     EXPECT_NEAR(J(5, 0), 1, 1e-6);
     EXPECT_NEAR(J(5, 1), 1, 1e-6);
+}
+
+
+//
+// Get Mass
+//
+TEST(Manipulator, Mass){
+    
+    // setup the world and robot
+    cr::world::OriginPtr simWorld = cr::world::Origin::create();
+    cr::world::RobotPtr robot = cr::world::Robot::create();
+    simWorld->addChild(robot);
+    
+    // Setup the rigid body link items
+    cr::world::LinkPtr link[3];
+    
+    // initialize the robot
+    setupRobot(robot, link);
+    
+    // get the configuration
+    Eigen::VectorXd q = robot->getConfiguration();
+    
+    // compute the mass matrix
+    Eigen::MatrixXd M;
+    M = robot->mass();
+    EXPECT_EQ(2, M.rows());
+    EXPECT_EQ(2, M.cols());
+    
+    // compute the analytic intermediate parameters
+    double I1 = 0.1;
+    double I2 = 0.2;
+    double m1 = 1.1;
+    double m2 = 1.8;
+    double r1 = 0.25;
+    double r2 = 0.6;
+    double l1 = 1.0;
+    double a = I1 + I2 + m1*r1*r1 + m2*(l1*l1 + r2*r2);
+    double b = m2*l1*r2;
+    double d = I2 + m2*r2*r2;
+    
+    // test to the analytic solution
+    EXPECT_NEAR(M(0, 0), a + 2 * b * cos ( q(1) ), 1e-6);
+    EXPECT_NEAR(M(0, 1), d + b * cos ( q(1) ), 1e-6);
+    EXPECT_NEAR(M(1, 0), d + b * cos ( q(1) ), 1e-6);
+    EXPECT_NEAR(M(1, 1), d, 1e-6);
 }
 
 
