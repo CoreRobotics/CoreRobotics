@@ -239,10 +239,16 @@ Eigen::MatrixXd Robot::jacobian(NodePtr i_node, EulerMode i_mode)
  This method computes the generalized mass matrix in the world frame,
  i.e. the mass w.r.t. the generalized coordinates (free variables). \n
  
+ The generalized mass produces:
+ 
+ \f$ M(q) \ddot{q} = \sum f_{ext} \f$
+ 
+ where q is the configuration space vector
+ 
  \return    n x n generalized mass matrix - where n is the DOF
  */
 //---------------------------------------------------------------------
-Eigen::MatrixXd Robot::generalizedMass()
+Eigen::MatrixXd Robot::mass()
 {
     int n = getDegreesOfFreedom();
     Eigen::MatrixXd M(n,n);

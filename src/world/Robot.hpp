@@ -195,8 +195,8 @@ class Robot : public Node
     // Dynamics
     public:
     
-        //! compute the generalized mass matrix (in the world frame)
-        Eigen::MatrixXd generalizedMass();
+        //! compute the generalized mass matrix (w.r.t. the free variables)
+        Eigen::MatrixXd mass();
     
 
     // Jacobian
