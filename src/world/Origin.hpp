@@ -43,7 +43,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef CR_WORLD_HPP_
 #define CR_WORLD_HPP_
 
-#include "LoopElement.hpp"
 #include "Node.hpp"
 #include "Item.hpp"
 #include <memory>
@@ -70,7 +69,7 @@ typedef std::shared_ptr<Origin> OriginPtr;
  
  */
 //---------------------------------------------------------------------
-class Origin : public LoopElement, public Item
+class Origin : public Item
 {
     
     // Constructor and Destructor
@@ -84,16 +83,6 @@ class Origin : public LoopElement, public Item
     
         //! Create a pointer
         static OriginPtr create();
-
-
-	// LoopElement behaviors
-	public:
-
-		//! step()
-        virtual void step() {};
-
-		//! reset()
-        virtual void reset() {};
     
     
     // naming

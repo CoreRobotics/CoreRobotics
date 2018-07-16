@@ -46,11 +46,17 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <thread>
 #include "Clock.hpp"
 #include "Types.hpp"
+#include "Step.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
 
+    
+//! Smart pointer to Loop
+class Loop;
+typedef std::shared_ptr<Loop> LoopPtr;
+    
     
 //---------------------------------------------------------------------
 /*!
@@ -65,22 +71,21 @@ namespace cr {
  Loop implements a thread loop controller class, which includes
  the following methods:
  
- - Loop::start starts the thread loop element.
- - Loop::pause pauses the loop element execution, but does not
- exit the thread of execution.
+ - Loop::start starts the thread loop.
+ - Loop::pause pauses the loop execution, but does not exit the
+ thread of execution.
  - Loop::stop exits the thread of execution.
  - Loop::stop stops the thread execution.
  */
 //---------------------------------------------------------------------
-class LoopElement;
-class Loop {
+class Loop : public Step {
     
     // Constructor and Destructor
     public:
     
         //! Class constructor
-        Loop(LoopElement* i_member);
-		Loop(LoopElement* i_member, double i_updateRate);
+        Loop();
+        Loop(double i_updateRate);
     
         //! Class destructor
         virtual ~Loop();
@@ -118,9 +123,6 @@ class Loop {
     // Private members
     private:
     
-        //! thread member
-        LoopElement* m_element;
-    
         //! simulation state
         RunState m_runState = CR_RUN_STATE_STOPPED;
     
@@ -141,14 +143,6 @@ class Loop {
         double m_tPaused = 0;
     
 };
-    
-    
-//---------------------------------------------------------------------
-/*!
- Smart pointer to Loop.
- */
-//---------------------------------------------------------------------
-typedef std::shared_ptr<Loop> LoopPtr;
     
     
 

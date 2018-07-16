@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "Loop.hpp"
-#include "LoopElement.hpp"
+// #include "LoopElement.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -53,10 +53,9 @@ namespace cr {
  The constructor sets up the thread loop without a specific update 
  rate.  The loop will attempt to execute each step as quickly as 
  possible.\n
- 
- \param[in]     i_element     element to be executed by the thread
  */
 //---------------------------------------------------------------------
+    /*
 Loop::Loop(LoopElement* i_element){
     
     // Set the element pointer
@@ -65,6 +64,10 @@ Loop::Loop(LoopElement* i_element){
     // Set this thread loop as the caller
     m_element->setCaller(this);
 }
+     */
+Loop::Loop(){
+    
+}
 
 
 //---------------------------------------------------------------------
@@ -72,16 +75,23 @@ Loop::Loop(LoopElement* i_element){
 The constructor sets up the thread loop with a specific update 
  rate.  The loop will attempt to execute each step at the rate
  specified by i_updateRate.\n
-
-\param[in]     i_element     element to be executed by the thread
+ 
 \param[in]	   i_updateRate	 this sets a constant update rate (s)
 */
 //---------------------------------------------------------------------
+    /*
 Loop::Loop(LoopElement* i_element, double i_updateRate)
     : Loop(i_element) {
 
 	// Set the thread update rate (s)
 	m_updateRate = i_updateRate;
+}
+     */
+Loop::Loop(double i_updateRate)
+{
+    
+    // Set the thread update rate (s)
+    m_updateRate = i_updateRate;
 }
 
 
@@ -114,7 +124,7 @@ void Loop::start(){
     {
         
         // reset initial conditions
-        m_element->reset();
+        this->reset();
         
         // reset the pause offsets
         m_t0 = 0;
@@ -198,7 +208,7 @@ void Loop::callback(){
         if (m_runState == CR_RUN_STATE_RUNNING){
             
             // step the thread member
-            m_element->step();
+            this->step();
         }
         
         // update the frequency counter

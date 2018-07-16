@@ -367,10 +367,10 @@ project includes all the CoreRobotics modules.
 #include "Clock.hpp"
 #include "Mutex.hpp"
 #include "Thread.hpp"
+#include "Step.hpp"
+#include "Loop.hpp"
 #include "Signal.hpp"
 #include "Slot.hpp"
-#include "Loop.hpp"
-#include "LoopElement.hpp"
 #include "SharedMemory.hpp"
 
 

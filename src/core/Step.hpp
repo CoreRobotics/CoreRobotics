@@ -40,74 +40,59 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_LOOP_ELEMENT_HPP_
-#define CR_LOOP_ELEMENT_HPP_
+#ifndef CR_STEP_HPP_
+#define CR_STEP_HPP_
 
-#include <vector>
-#include "Loop.hpp"
+#include <memory>
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
 
+//! Step shared pointer
+class Step;
+typedef std::shared_ptr<Step> StepPtr;
+
     
 //---------------------------------------------------------------------
 /*!
- \class LoopElement
+ \class Step
  \ingroup core
  
- \brief This abstract class defines the methods needed to derive a
- root call element for a Loop.
+ \brief This abstract class defines a ::step() method function call
+ that is used by loop functions.
  
  \details
  ## Description
- This abstract class defines the methods needed to derive a
- call for the root element of a LoopElement.  The primary methods
- to be implemented are:
+ This abstract class defines the base ::step() method needed to derive
+ a call for a Loop class:
  
- - LoopElement::step() is called on each iteration of the Loop
- while the thread is running.
+ - Step::step() is called on each iteration of the Loop while the
+ thread is running.
  */
 //---------------------------------------------------------------------
-class LoopElement {
+class Step
+    : public std::enable_shared_from_this<Step>
+{
     
     // Constructor and destructor
     public:
     
         //! constructor
-		LoopElement() {}
+		Step() {}
     
         //! destructor
-        ~LoopElement() {
-            delete m_caller;
-        }
+        ~Step() {}
     
     
-    // Primary LoopRoot functions that must be implemented
+    // Functions to be implemented
     public:
     
-        //! Step the element - called on each iteration of the thread while running
+        //! The step function must be implemented in derived classes
         virtual void step() = 0;
     
-        //! Reset the element - called on ThreadLoop::start())
+        //! The reset function must be implemented in derived classes
         virtual void reset() = 0;
-    
-    
-    // LoopElement graph methods
-    public:
-    
-        //! set the pointer to the LoopElement parent caller
-        void setCaller(Loop* i_caller) { m_caller = i_caller; }
-    
-        //! return the pointer to the parent caller (NULL value indicates no caller)
-        Loop* getCaller() { return m_caller; }
-    
-    
-    // Protected members
-    protected:
-    
-        //! thread caller
-        Loop* m_caller = NULL;
 };
     
 }
