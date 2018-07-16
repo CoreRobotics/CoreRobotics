@@ -47,14 +47,10 @@ using namespace cr;
 
 
 //
-// setup the manipulator
+// Setup robot convenience function
 //
-TEST(Manipulator, Setup){
-    
-    cr::world::OriginPtr simWorld = cr::world::Origin::create();
-    cr::world::RobotPtr robot = cr::world::Robot::create();
-    simWorld->addChild(robot);
-    
+void setupRobot(cr::world::RobotPtr myRobot, cr::world::LinkPtr myLink[3])
+{
     // Define an inertia tensor matrix and com vector
     Eigen::Matrix3d I;
     Eigen::Vector3d COM;
@@ -66,44 +62,59 @@ TEST(Manipulator, Setup){
     cr::FrameEuler fe;
     fe.setMode(cr::CR_EULER_MODE_XYZ);
     
-    // Setup the rigid body link items
-    cr::world::LinkPtr link[3];
-    
-    fe.setPositionAndOrientation(0, 0, 1, 0, 0, M_PI / 3.0);
-    link[0] = cr::world::Link::create();
-    link[0]->setLocalTransform(fe);
-    link[0]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
-    robot->addChild(link[0]);
-    
-    fe.setPositionAndOrientation(1, 0, 0, 0, 0, -M_PI / 4.0);
+    fe.setPositionAndOrientation(0, 0, 1, 0, 0, M_PI / 2.0);
     I << 0, 0, 0, 0, 0, 0, 0, 0, 1;
     COM << 0.25, 0, 0;
     rb.setMass(1);
     rb.setInertiaTensor(I);
     rb.setCenterOfMass(COM);
-    link[1] = cr::world::Link::create();
-    link[1]->setLocalTransform(fe);
-    link[1]->setRigidBody(rb);
-    link[1]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
-    link[0]->addChild(link[1]);
+    myLink[0] = cr::world::Link::create();
+    myLink[0]->setLocalTransform(fe);
+    myLink[0]->setRigidBody(rb);
+    myLink[0]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
+    myRobot->addChild(myLink[0]);
     
-    fe.setPositionAndOrientation(2, 0, 0, 0, 0, 0);
+    fe.setPositionAndOrientation(1, 0, 0, 0, 0, -M_PI / 2.0);
     I << 0, 0, 0, 0, 0, 0, 0, 0, 2;
     COM << 0.5, 0, 0;
     rb.setMass(2);
     rb.setInertiaTensor(I);
     rb.setCenterOfMass(COM);
-    link[2] = cr::world::Link::create();
-    link[2]->setLocalTransform(fe);
-    link[2]->setRigidBody(rb);
-    link[2]->setDegreeOfFreedom(cr::CR_EULER_FREE_NONE);
-    link[1]->addChild(link[2]);
+    myLink[1] = cr::world::Link::create();
+    myLink[1]->setLocalTransform(fe);
+    myLink[1]->setRigidBody(rb);
+    myLink[1]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
+    myLink[0]->addChild(myLink[1]);
+    
+    fe.setPositionAndOrientation(2, 0, 0, 0, 0, 0);
+    myLink[2] = cr::world::Link::create();
+    myLink[2]->setLocalTransform(fe);
+    myLink[2]->setDegreeOfFreedom(cr::CR_EULER_FREE_NONE);
+    myLink[1]->addChild(myLink[2]);
     
     // set the links
-    robot->addLink(link[0]);
-    robot->addLink(link[1]);
-    robot->addLink(link[2]);
+    myRobot->addLink(myLink[0]);
+    myRobot->addLink(myLink[1]);
+    myRobot->addLink(myLink[2]);
+}
+
+
+
+//
+// setup the manipulator
+//
+TEST(Manipulator, Setup){
     
+    // setup the world and robot
+    cr::world::OriginPtr simWorld = cr::world::Origin::create();
+    cr::world::RobotPtr robot = cr::world::Robot::create();
+    simWorld->addChild(robot);
+    
+    // Setup the rigid body link items
+    cr::world::LinkPtr link[3];
+    
+    // initialize the robot
+    setupRobot(robot, link);
     
     // make sure the scene graph worked
     EXPECT_EQ(link[0]->getParent(), robot);
@@ -118,8 +129,8 @@ TEST(Manipulator, Setup){
     Eigen::VectorXd q;
     q = robot->getConfiguration();
     EXPECT_EQ(q.size(), 2);
-    EXPECT_DOUBLE_EQ(q(0), M_PI / 3.0);
-    EXPECT_DOUBLE_EQ(q(1), -M_PI / 4.0);
+    EXPECT_DOUBLE_EQ(q(0), M_PI / 2.0);
+    EXPECT_DOUBLE_EQ(q(1), -M_PI / 2.0);
 }
 
 
@@ -128,59 +139,19 @@ TEST(Manipulator, Setup){
 //
 TEST(Manipulator, Kinematics){
     
+    // setup the world and robot
     cr::world::OriginPtr simWorld = cr::world::Origin::create();
     cr::world::RobotPtr robot = cr::world::Robot::create();
     simWorld->addChild(robot);
     
-    // Define an inertia tensor matrix and com vector
-    Eigen::Matrix3d I;
-    Eigen::Vector3d COM;
-    
-    // Create a rigid body
-    cr::RigidBody rb;
-    
-    // Create a frame for writing the data
-    cr::FrameEuler fe;
-    fe.setMode(cr::CR_EULER_MODE_XYZ);
-    
     // Setup the rigid body link items
     cr::world::LinkPtr link[3];
     
-    fe.setPositionAndOrientation(0, 0, 1, 0, 0, M_PI / 3.0);
-    link[0] = cr::world::Link::create();
-    link[0]->setLocalTransform(fe);
-    link[0]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
-    robot->addChild(link[0]);
+    // initialize the robot
+    setupRobot(robot, link);
     
-    fe.setPositionAndOrientation(1, 0, 0, 0, 0, -M_PI / 4.0);
-    I << 0, 0, 0, 0, 0, 0, 0, 0, 1;
-    COM << 0.25, 0, 0;
-    rb.setMass(1);
-    rb.setInertiaTensor(I);
-    rb.setCenterOfMass(COM);
-    link[1] = cr::world::Link::create();
-    link[1]->setLocalTransform(fe);
-    link[1]->setRigidBody(rb);
-    link[1]->setDegreeOfFreedom(cr::CR_EULER_FREE_ANG_G);
-    link[0]->addChild(link[1]);
-    
-    fe.setPositionAndOrientation(2, 0, 0, 0, 0, 0);
-    I << 0, 0, 0, 0, 0, 0, 0, 0, 2;
-    COM << 0.5, 0, 0;
-    rb.setMass(2);
-    rb.setInertiaTensor(I);
-    rb.setCenterOfMass(COM);
-    link[2] = cr::world::Link::create();
-    link[2]->setLocalTransform(fe);
-    link[2]->setRigidBody(rb);
-    link[2]->setDegreeOfFreedom(cr::CR_EULER_FREE_NONE);
-    link[1]->addChild(link[2]);
-    
-    // set the links
-    robot->addLink(link[0]);
-    robot->addLink(link[1]);
-    robot->addLink(link[2]);
-    
+    // get the configuration
+    Eigen::VectorXd q = robot->getConfiguration();
     
     // get the global positions
     Eigen::Matrix<double, 6, 1> p;
@@ -190,23 +161,23 @@ TEST(Manipulator, Kinematics){
     EXPECT_DOUBLE_EQ(p(2), 1);
     EXPECT_DOUBLE_EQ(p(3), 0);
     EXPECT_DOUBLE_EQ(p(4), 0);
-    EXPECT_DOUBLE_EQ(p(5), M_PI / 3.0);
+    EXPECT_DOUBLE_EQ(p(5), q(0));
     
     p = link[1]->getGlobalTransform().getPose(CR_EULER_MODE_XYZ);
-    EXPECT_DOUBLE_EQ(p(0), 1 * cos (M_PI / 3.0) );
-    EXPECT_DOUBLE_EQ(p(1), 1 * sin (M_PI / 3.0) );
+    EXPECT_DOUBLE_EQ(p(0), 1 * cos ( q(0) ) );
+    EXPECT_DOUBLE_EQ(p(1), 1 * sin ( q(0) ) );
     EXPECT_DOUBLE_EQ(p(2), 1);
     EXPECT_DOUBLE_EQ(p(3), 0);
     EXPECT_DOUBLE_EQ(p(4), 0);
-    EXPECT_DOUBLE_EQ(p(5), M_PI / 3.0 - M_PI / 4.0);
+    EXPECT_DOUBLE_EQ(p(5), q(0) + q(1));
     
     p = link[2]->getGlobalTransform().getPose(CR_EULER_MODE_XYZ);
-    EXPECT_DOUBLE_EQ(p(0), 2 * cos (M_PI / 3.0 - M_PI / 4.0) + 1 * cos (M_PI / 3.0));
-    EXPECT_DOUBLE_EQ(p(1), 2 * sin (M_PI / 3.0 - M_PI / 4.0) + 1 * sin (M_PI / 3.0));
+    EXPECT_DOUBLE_EQ(p(0), 2 * cos ( q(0) + q(1) ) + 1 * cos ( q(0) ));
+    EXPECT_DOUBLE_EQ(p(1), 2 * sin ( q(0) + q(1) ) + 1 * sin ( q(0) ));
     EXPECT_DOUBLE_EQ(p(2), 1);
     EXPECT_DOUBLE_EQ(p(3), 0);
     EXPECT_DOUBLE_EQ(p(4), 0);
-    EXPECT_DOUBLE_EQ(p(5), M_PI / 3.0 - M_PI / 4.0);
+    EXPECT_DOUBLE_EQ(p(5), q(0) + q(1));
 
 }
 
@@ -214,41 +185,43 @@ TEST(Manipulator, Kinematics){
 //
 // Get Jacobian
 //
-/*
 TEST(Manipulator, Jacobian){
-    world::Manipulator MyRobot;
-    int toolIndex = setupRobot(MyRobot);
     
+    // setup the world and robot
+    cr::world::OriginPtr simWorld = cr::world::Origin::create();
+    cr::world::RobotPtr robot = cr::world::Robot::create();
+    simWorld->addChild(robot);
+    
+    // Setup the rigid body link items
+    cr::world::LinkPtr link[3];
+    
+    // initialize the robot
+    setupRobot(robot, link);
+    
+    // get the configuration
+    Eigen::VectorXd q = robot->getConfiguration();
+    
+    // compute the jacobian
     Eigen::MatrixXd J;
-    J = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ);
+    J = robot->jacobian(link[2], cr::CR_EULER_MODE_XYZ);
     EXPECT_EQ(6, J.rows());
     EXPECT_EQ(2, J.cols());
-    EXPECT_DOUBLE_EQ(0, J(0, 0));
-    EXPECT_DOUBLE_EQ(3, J(1, 0));
-    EXPECT_DOUBLE_EQ(0, J(2, 0));
-    EXPECT_DOUBLE_EQ(0, J(3, 0));
-    EXPECT_DOUBLE_EQ(0, J(4, 0));
-    EXPECT_DOUBLE_EQ(1, J(5, 0));
-    EXPECT_DOUBLE_EQ(0, J(0, 1));
-    EXPECT_DOUBLE_EQ(2, J(1, 1));
-    EXPECT_DOUBLE_EQ(0, J(2, 1));
-    EXPECT_DOUBLE_EQ(0, J(3, 1));
-    EXPECT_DOUBLE_EQ(0, J(4, 1));
-    EXPECT_DOUBLE_EQ(1, J(5, 1));
     
-    Eigen::Matrix<bool, 6, 1> pe;
-    pe << true, true, false, false, false, true;
-    J = MyRobot.jacobian(toolIndex, CR_EULER_MODE_XYZ, pe);
-    EXPECT_EQ(3, J.rows());
-    EXPECT_EQ(2, J.cols());
-    EXPECT_DOUBLE_EQ(0, J(0, 0));
-    EXPECT_DOUBLE_EQ(3, J(1, 0));
-    EXPECT_DOUBLE_EQ(1, J(2, 0));
-    EXPECT_DOUBLE_EQ(0, J(0, 1));
-    EXPECT_DOUBLE_EQ(2, J(1, 1));
-    EXPECT_DOUBLE_EQ(1, J(2, 1));
+    // test the jacobian (to known exact) - we use near 1e-6 small angle theorem
+    // due to the numerical centeral difference method for the computation
+    EXPECT_NEAR(J(0, 0), - 1 * sin ( q(0) ) - 2 * sin ( q(0) + q(1) ), 1e-6);
+    EXPECT_NEAR(J(0, 1), - 2 * sin( q(0) + q(1) ), 1e-6);
+    EXPECT_NEAR(J(1, 0), + 1 * cos ( q(0) ) + 2 * cos ( q(0) + q(1) ), 1e-6);
+    EXPECT_NEAR(J(1, 1), + 2 * cos ( q(0) + q(1) ), 1e-6);
+    EXPECT_NEAR(J(2, 0), 0, 1e-6);
+    EXPECT_NEAR(J(2, 1), 0, 1e-6);
+    EXPECT_NEAR(J(3, 0), 0, 1e-6);
+    EXPECT_NEAR(J(3, 1), 0, 1e-6);
+    EXPECT_NEAR(J(4, 0), 0, 1e-6);
+    EXPECT_NEAR(J(4, 1), 0, 1e-6);
+    EXPECT_NEAR(J(5, 0), 1, 1e-6);
+    EXPECT_NEAR(J(5, 1), 1, 1e-6);
 }
- */
 
 
 //
