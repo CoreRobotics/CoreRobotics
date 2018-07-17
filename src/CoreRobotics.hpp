@@ -359,7 +359,7 @@ project includes all the CoreRobotics modules.
 //---------------------------------------------------------------------------
 //! \defgroup core Core
 //! \brief This module implements the core functionality of the library,
-//! such as timing, signals, communication, common types, and thread control.
+//! such as timing, common types, and thread loop control.
 //---------------------------------------------------------------------------
 #include "Types.hpp"
 #include "Item.hpp"
@@ -369,9 +369,16 @@ project includes all the CoreRobotics modules.
 #include "Thread.hpp"
 #include "Step.hpp"
 #include "Loop.hpp"
-#include "Signal.hpp"
-#include "Slot.hpp"
+#include "DirectedGraph.hpp"
 #include "SharedMemory.hpp"
+
+
+//---------------------------------------------------------------------------
+//! \defgroup signal Signal
+//! \brief This module implements a signal framework.
+//---------------------------------------------------------------------------
+#include "Signal.hpp"
+#include "Connection.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -383,7 +390,6 @@ project includes all the CoreRobotics modules.
 #include "Link.hpp"
 #include "Manipulator.hpp"
 #include "Robot.hpp"
-// #include "Sensor.hpp"
 
 
 //---------------------------------------------------------------------------

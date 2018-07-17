@@ -53,10 +53,6 @@ POSSIBILITY OF SUCH DAMAGE.
 namespace cr {
 
     
-//! Smart pointer to Loop
-class Loop;
-typedef std::shared_ptr<Loop> LoopPtr;
-    
     
 //---------------------------------------------------------------------
 /*!
@@ -143,6 +139,10 @@ class Loop : public Step {
         double m_tPaused = 0;
     
 };
+    
+    
+//! Smart pointer to Loop
+typedef std::shared_ptr<Loop> LoopPtr;
     
     
 

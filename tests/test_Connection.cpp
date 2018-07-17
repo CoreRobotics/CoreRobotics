@@ -37,68 +37,53 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_STEP_HPP_
-#define CR_STEP_HPP_
+#include <iostream>
+#include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
-#include <memory>
 
-//---------------------------------------------------------------------
-// Begin namespace
-namespace cr {
+// Use the CoreRobotics namespace
+using namespace cr::world;
+using namespace cr::signal;
 
+//
+// Test signal-slot connection
+//
+TEST(Connection, Step){
     
-//---------------------------------------------------------------------
-/*!
- \class Step
- \ingroup core
- 
- \brief This abstract class defines a ::step() method function call
- that is used by loop functions.
- 
- \details
- ## Description
- This abstract class defines the base ::step() method needed to derive
- a call for a Loop class:
- 
- - Step::step() is called on each iteration of the Loop while the
- thread is running.
- */
-//---------------------------------------------------------------------
-class Step
-    : public std::enable_shared_from_this<Step>
-{
+    // set up 2 links
+    Link* myLink1 = new Link();
+    Link* myLink2 = new Link();
     
-    // Constructor and destructor
-    public:
+    myLink1->setDegreeOfFreedom(cr::CR_EULER_FREE_POS_X);
+    myLink1->setFreeVariable(0.71);
     
-        //! constructor
-		Step() {}
+    myLink2->setDegreeOfFreedom(cr::CR_EULER_FREE_POS_X);
+    myLink2->setFreeVariable(0);
     
-        //! destructor
-        ~Step() {}
+    EXPECT_DOUBLE_EQ(0.71, myLink1->getFreeVariable());
+    EXPECT_DOUBLE_EQ(0, myLink2->getFreeVariable());
     
+    // create the slot
+    Connection<double, Link, Link> mySlot(myLink1,
+                                          &Link::getFreeVariable,
+                                          myLink2,
+                                          &Link::setFreeVariable);
     
-    // Functions to be implemented
-    public:
+    // now make sure the emitters and receivers are identical
+    EXPECT_EQ(myLink1, mySlot.getEmitter());
+    EXPECT_EQ(myLink2, mySlot.getReceiver());
     
-        //! The step function must be implemented in derived classes
-        virtual void step() = 0;
+    // perform the step
+    mySlot.step();
     
-        //! The reset function must be implemented in derived classes
-        // virtual void reset() = 0;
-};
-    
-    
-    
-//! Step shared pointer
-typedef std::shared_ptr<Step> StepPtr;
-    
-    
+    // and check the data value
+    EXPECT_DOUBLE_EQ(0.71, mySlot.request());
+    EXPECT_DOUBLE_EQ(0.71, myLink2->getFreeVariable() );
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+
+
+

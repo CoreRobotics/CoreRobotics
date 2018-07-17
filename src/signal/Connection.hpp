@@ -40,18 +40,22 @@
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_SLOT_HPP_
-#define CR_SLOT_HPP_
+#ifndef CR_CONNECTION_HPP_
+#define CR_CONNECTION_HPP_
+
+#include "Step.hpp"
+#include <memory>
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
+namespace signal {
 
     
 //---------------------------------------------------------------------
 /*!
- \class Signal
- \ingroup core
+ \class Connection
+ \ingroup signal
  
  \brief
  
@@ -59,38 +63,72 @@ namespace cr {
  
  */
 //---------------------------------------------------------------------
-template <typename DataType, typename ParentType>
-class Slot
+template <typename DataType, typename EmitterType, typename ReceiverType>
+class Connection : public Step
 {
     
-//! Constructor and public access functions
+//! Constructor
 public:
     
     //! constructor
-    Slot(ParentType* i_parent,
-         DataType(ParentType::*i_callback)());
+    Connection(EmitterType* i_emitter,
+               DataType(EmitterType::*i_emitterCallback)(),
+               ReceiverType* i_receiver,
+               void(ReceiverType::*i_receiverCallback)(DataType)) {
+        
+        m_emitter = static_cast<void*>(i_emitter);
+        m_receiver = static_cast<void*>(i_receiver);
+        m_emitterCallback = reinterpret_cast<void*(EmitterType::*)()>(i_emitterCallback);
+        m_receiverCallback = reinterpret_cast<void(ReceiverType::*)(void*)>(i_receiverCallback);
+    }
     
-    //! destructor
-    ~Slot();
     
-    //! get the parent
-    ParentType* getParent();
+// public access functions
+public:
+    
+    //! get the emitter
+    EmitterType* getEmitter() { return static_cast<EmitterType*>(m_emitter); }
+    
+    //! get the receiver
+    ReceiverType* getReceiver() { return static_cast<ReceiverType*>(m_receiver); }
     
     //! request data
-    DataType request();
+    DataType request() {
+        EmitterType* c = static_cast<EmitterType*>(m_emitter);
+        DataType(EmitterType::*fcn)() = reinterpret_cast<DataType(EmitterType::*)()>(m_emitterCallback);
+        return (c->*fcn)();
+    }
+    
+    //! step the data push
+    void step() {
+        ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
+        void(ReceiverType::*fcn)(DataType) = reinterpret_cast<void(ReceiverType::*)(DataType)>(m_receiverCallback);
+        (c->*fcn)( request() );
+    }
+    
+    //! reset does nothing
+    void reset() {};
     
     
 //! Inherited access members
-protected:
+private:
     
-    //! Parent
-    void* m_parent;
+    //! Emitter
+    void* m_emitter;
+        
+    //! Receiver
+    void* m_receiver;
+        
+    //! callback request functions
+    void*(EmitterType::*m_emitterCallback)();
     
     //! callback request functions
-    void*(ParentType::*m_callback)();
+    void(ReceiverType::*m_receiverCallback)(void*);
     
 };
+    
 
+}
 }
 // end namespace
 //---------------------------------------------------------------------

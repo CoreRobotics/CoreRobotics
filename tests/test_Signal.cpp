@@ -37,68 +37,37 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_STEP_HPP_
-#define CR_STEP_HPP_
+#include <iostream>
+#include "CoreRobotics.hpp"
+#include "gtest/gtest.h"
 
-#include <memory>
 
-//---------------------------------------------------------------------
-// Begin namespace
-namespace cr {
+// Use the CoreRobotics namespace
+using namespace cr;
 
+
+//
+// Test signal connection
+//
+TEST(Signal, Request){
     
-//---------------------------------------------------------------------
-/*!
- \class Step
- \ingroup core
- 
- \brief This abstract class defines a ::step() method function call
- that is used by loop functions.
- 
- \details
- ## Description
- This abstract class defines the base ::step() method needed to derive
- a call for a Loop class:
- 
- - Step::step() is called on each iteration of the Loop while the
- thread is running.
- */
-//---------------------------------------------------------------------
-class Step
-    : public std::enable_shared_from_this<Step>
-{
+    // set up a Frame
+    FrameEuler* myClass = new FrameEuler();
+    myClass->setFreeVariable(CR_EULER_FREE_POS_X);
+    myClass->setFreeValue(0.71);
     
-    // Constructor and destructor
-    public:
+    // create the emitter
+    cr::signal::Signal<double, FrameEuler> mySignal(myClass, &FrameEuler::getFreeValue);
     
-        //! constructor
-		Step() {}
+    // now make sure the parent is identical
+    EXPECT_EQ(myClass, mySignal.getParent());
     
-        //! destructor
-        ~Step() {}
-    
-    
-    // Functions to be implemented
-    public:
-    
-        //! The step function must be implemented in derived classes
-        virtual void step() = 0;
-    
-        //! The reset function must be implemented in derived classes
-        // virtual void reset() = 0;
-};
-    
-    
-    
-//! Step shared pointer
-typedef std::shared_ptr<Step> StepPtr;
-    
-    
+    // and check the data value
+    EXPECT_DOUBLE_EQ(0.71, mySignal.request());
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+
+
+

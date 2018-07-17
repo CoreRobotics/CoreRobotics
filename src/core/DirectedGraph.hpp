@@ -38,40 +38,93 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //---------------------------------------------------------------------
+// Begin header definition
 
-#include "Signal.hpp"
+#ifndef CR_DIRECTED_GRAPH_HPP_
+#define CR_DIRECTED_GRAPH_HPP_
+
+#include "Loop.hpp"
+#include "Step.hpp"
+#include <vector>
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
 
     
+//! Manipulator shared pointer
+class DirectedGraph;
+typedef std::shared_ptr<DirectedGraph> DirectedGraphPtr;
+    
     
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the signal.\n
+ \class DirectedGraph
+ \ingroup core
+ 
+ \brief
+ This class implements a directed graph thread loop.
+ 
+ \details
+ ## Description
+ This class implements a directed graph thread loop.  One step
+ of the entire graph is performed for each loop iteration.  The step
+ classes are executed in the order in which they have been added to the
+ list of Steps();
+ 
+ - Loop::start starts the thread loop.
+ - Loop::pause pauses the loop execution, but does not exit the
+ thread of execution.
+ - Loop::stop exits the thread of execution.
+ - Loop::stop stops the thread execution.
  */
 //---------------------------------------------------------------------
-/*
-Signal::Signal(){
+class DirectedGraph : public Loop {
     
-}
-*/
+    // Constructor and Destructor
+    public:
+    
+        //! Class constructor
+        DirectedGraph();
+        DirectedGraph(double i_updateRate);
+    
+        //! Class destructor
+        virtual ~DirectedGraph();
+    
+        //! Create
+        static DirectedGraphPtr create();
+        static DirectedGraphPtr create(double i_updateRate);
+    
+    
+    // Step member control
+    public:
+    
+        //! Add a step item to the list of vertices
+        void add(Step* i_vertex);
+    
+    
+    // Derived step function
+    public:
+    
+        //! step the graph
+        void step();
+    
 
-
-//---------------------------------------------------------------------
-/*!
- The destructor deletes the signal.\n
- */
-//---------------------------------------------------------------------
-    /*
-Signal::~Signal(){
-}
-     */
-
+    // Private members
+    private:
+    
+        //! list of step vertices
+        std::vector<Step*> m_vertices;
+    
+};
+    
+    
+//! Smart pointer to DirectedGraph
+typedef std::shared_ptr<DirectedGraph> DirectedGraphPtr;
+    
 
 }
 // end namespace
 //---------------------------------------------------------------------
 
-
+#endif

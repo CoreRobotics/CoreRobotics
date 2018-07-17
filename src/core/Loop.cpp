@@ -55,16 +55,6 @@ namespace cr {
  possible.\n
  */
 //---------------------------------------------------------------------
-    /*
-Loop::Loop(LoopElement* i_element){
-    
-    // Set the element pointer
-    m_element = i_element;
-    
-    // Set this thread loop as the caller
-    m_element->setCaller(this);
-}
-     */
 Loop::Loop(){
     
 }
@@ -79,14 +69,6 @@ The constructor sets up the thread loop with a specific update
 \param[in]	   i_updateRate	 this sets a constant update rate (s)
 */
 //---------------------------------------------------------------------
-    /*
-Loop::Loop(LoopElement* i_element, double i_updateRate)
-    : Loop(i_element) {
-
-	// Set the thread update rate (s)
-	m_updateRate = i_updateRate;
-}
-     */
 Loop::Loop(double i_updateRate)
 {
     
@@ -122,9 +104,6 @@ void Loop::start(){
     // check the thread state
     if (m_runState == CR_RUN_STATE_STOPPED)
     {
-        
-        // reset initial conditions
-        this->reset();
         
         // reset the pause offsets
         m_t0 = 0;

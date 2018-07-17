@@ -37,94 +37,97 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//---------------------------------------------------------------------
-// Begin header definition
+//=====================================================================
 
-#ifndef CR_SIGNAL_HPP_
-#define CR_SIGNAL_HPP_
+#include "DirectedGraph.hpp"
 
-//---------------------------------------------------------------------
-// Begin namespace
+//=====================================================================
+// CoreRobotics namespace
 namespace cr {
 
     
-//---------------------------------------------------------------------
-/*!
- \class Signal
- \ingroup core
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-class Signal {
-    
-    // Constructor and Destructor
-    public:
-    
-        //! Class constructor
-        Signal();
-    
-        //! Class destructor
-        ~Signal();
-    
-};
-    
     
 //---------------------------------------------------------------------
 /*!
- \class State
- \ingroup core
- 
- \brief
- 
- \details
- ## Description
- 
+ The constructor sets up the thread loop without a specific update 
+ rate.  The loop will attempt to execute each step as quickly as 
+ possible.\n
  */
 //---------------------------------------------------------------------
-class State : public Signal {
-        
-    // Constructor and Destructor
-    public:
+DirectedGraph::DirectedGraph(){
     
-        //! Class constructor
-        State();
-    
-        //! Class destructor
-        ~State();
-        
-};
-
-//---------------------------------------------------------------------
-/*!
- \class Action
- \ingroup core
- 
- \brief
- 
- \details
- ## Description
- 
- */
-//---------------------------------------------------------------------
-class Action : public Signal {
-        
-    // Constructor and Destructor
-    public:
-        
-        //! Class constructor
-        Action();
-        
-        //! Class destructor
-        ~Action();
-        
-};
-
 }
-// end namespace
-//---------------------------------------------------------------------
 
-#endif
+
+//---------------------------------------------------------------------
+/*!
+The constructor sets up the thread loop with a specific update 
+ rate.  The loop will attempt to execute each step at the rate
+ specified by i_updateRate.\n
+ 
+\param[in]	   i_updateRate	 this sets a constant update rate (s)
+*/
+//---------------------------------------------------------------------
+DirectedGraph::DirectedGraph(double i_updateRate)
+    : cr::Loop(i_updateRate)
+{
+    
+}
+
+
+//---------------------------------------------------------------------
+/*!
+ The destructor closes the thread loop.\n
+ */
+//---------------------------------------------------------------------
+DirectedGraph::~DirectedGraph(){
+    
+    m_vertices.clear();
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Create a new directed graph.\n
+ 
+ \param[in]       i_updateRate     this sets a constant update rate (s)
+ */
+//---------------------------------------------------------------------
+DirectedGraphPtr DirectedGraph::create(){
+    return std::make_shared<DirectedGraph>();
+}
+DirectedGraphPtr DirectedGraph::create(double i_updateRate){
+    return std::make_shared<DirectedGraph>(i_updateRate);
+}
+
+
+//---------------------------------------------------------------------
+/*!
+ This function adds a step pointer to the list of vertices.\n
+ */
+//---------------------------------------------------------------------
+void DirectedGraph::add(Step* i_vertex)
+{
+    m_vertices.push_back(i_vertex);
+}
+    
+
+//---------------------------------------------------------------------
+/*!
+ This function executes the .\n
+ */
+//---------------------------------------------------------------------
+void DirectedGraph::step(){
+    
+    // step each of the vertices
+    for (int i = 0; i < m_vertices.size(); i++){
+        m_vertices.at(i)->step();
+    }
+}
+
+
+//=====================================================================
+// End namespace
+}
+
+

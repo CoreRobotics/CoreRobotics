@@ -160,7 +160,7 @@ class Robot : public Node
         void setConfiguration(Eigen::VectorXd i_q);
     
         //! Get the configuration (joint) space positions
-        Eigen::VectorXd getConfiguration(void);
+        Eigen::VectorXd getConfiguration();
     
         //! Get the instantaneous forward kinematics
         // Eigen::MatrixXd getForwardKinematics(void);

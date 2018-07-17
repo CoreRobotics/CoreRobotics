@@ -38,63 +38,74 @@
  
  */
 //---------------------------------------------------------------------
+// Begin header definition
 
-#include "Slot.hpp"
+#ifndef CR_SIGNAL_HPP_
+#define CR_SIGNAL_HPP_
+
+#include <memory>
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
-
+namespace signal {
     
     
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the slot.\n
+ \class Signal
+ \ingroup signal
+ 
+ \brief
+ 
+ \details
+ 
  */
 //---------------------------------------------------------------------
-template <typename DataType, typename ParentType>
-Slot<DataType, ParentType>::Slot(ParentType* i_parent,
-           DataType(ParentType::*i_callback)())
+template <typename DataType, typename EmitterType>
+class Signal
 {
-    m_parent = static_cast<void*>(i_parent);
-    m_callback = reinterpret_cast<void*(ParentType::*)()>(i_callback);
-}
-
-//--------------------------------------------------------------------------
-/*!
- The destructor closes the slot.\n
- */
-//--------------------------------------------------------------------------
-template <typename DataType, typename ParentType>
-Slot<DataType, ParentType>::~Slot(){
-    delete m_parent;
-    delete m_callback;
-}
-
-//--------------------------------------------------------------------------
-/*!
- This function returns the pointer to the parent.\n
- */
-//--------------------------------------------------------------------------
-template <typename DataType, typename ParentType>
-ParentType* Slot<DataType, ParentType>::getParent(){
-    return static_cast<ParentType*>(m_parent);
-}
-
-//--------------------------------------------------------------------------
-/*!
- This function requests signal data.\n
- */
-//--------------------------------------------------------------------------
-template <typename DataType, typename ParentType>
-DataType Slot<DataType, ParentType>::request()
-{
-    ParentType* p = static_cast<ParentType*>(m_parent);
-    DataType(ParentType::*fcn)() = reinterpret_cast<DataType(ParentType::*)()>(m_callback);
-    return (p->*fcn)();
-}
     
-         
+// Constructor public access functions
+public:
+    
+    //! constructor
+    Signal(EmitterType* i_parent,
+           DataType(EmitterType::*i_callback)()) {
+        m_parent = static_cast<void*>(i_parent);
+        m_callback = reinterpret_cast<void*(EmitterType::*)()>(i_callback);
+    }
+    
+// public access functions
+public:
+    
+    //! get the parent
+    EmitterType* getParent() { return static_cast<EmitterType*>(m_parent); }
+    
+    //! request data
+    DataType request() {
+        EmitterType* p = static_cast<EmitterType*>(m_parent);
+        DataType(EmitterType::*fcn)() = reinterpret_cast<DataType(EmitterType::*)()>(m_callback);
+        return (p->*fcn)();
+    }
+    
+//! private members
+private:
+    
+    //! Parent
+    void* m_parent;
+    
+    //! callback request functions
+    void*(EmitterType::*m_callback)();
+    
+};
+
+    
+    
 }
-// End namespace
-//------------------------------------------------------------------------------
+}
+// end namespace
+//---------------------------------------------------------------------
+
+#endif
+
