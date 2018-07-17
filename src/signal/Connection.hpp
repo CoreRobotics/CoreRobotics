@@ -44,6 +44,7 @@
 #define CR_CONNECTION_HPP_
 
 #include "Step.hpp"
+#include "Mutex.hpp"
 #include <memory>
 
 //---------------------------------------------------------------------
@@ -103,7 +104,9 @@ public:
     void step() {
         ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
         void(ReceiverType::*fcn)(DataType) = reinterpret_cast<void(ReceiverType::*)(DataType)>(m_receiverCallback);
+        m_mutex.lock();
         (c->*fcn)( request() );
+        m_mutex.unlock();
     }
     
     //! reset does nothing
@@ -124,6 +127,9 @@ private:
     
     //! callback request functions
     void(ReceiverType::*m_receiverCallback)(void*);
+    
+    //! mutex member
+    std::recursive_mutex m_mutex;
     
 };
     
