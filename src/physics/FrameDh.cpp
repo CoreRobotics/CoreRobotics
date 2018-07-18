@@ -101,12 +101,12 @@ FrameDh::FrameDh()
  \return - Result flag indicating if the parameter is writable
  */
 //---------------------------------------------------------------------
-Result FrameDh::setFreeValue(double i_q)
+core::Result FrameDh::setFreeValue(double i_q)
 {
-    Result result = CR_RESULT_SUCCESS;
+    core::Result result = core::CR_RESULT_SUCCESS;
     switch (m_freeVar){
         case CR_DH_FREE_NONE:
-            result = CR_RESULT_UNWRITABLE;
+            result = core::CR_RESULT_UNWRITABLE;
             break;
         case CR_DH_FREE_R:
             m_dhR = i_q;

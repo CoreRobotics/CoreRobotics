@@ -65,7 +65,7 @@ namespace signal {
  */
 //---------------------------------------------------------------------
 template <typename DataType, typename EmitterType, typename ReceiverType>
-class Connection : public Step
+class Connection : public core::Step
 {
     
 //! Constructor

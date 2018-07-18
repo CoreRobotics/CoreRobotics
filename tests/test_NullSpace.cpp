@@ -43,7 +43,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
 
+// Use the CoreRobotics namespace
 using namespace cr;
+using namespace cr::core;
 
 struct testData {
 	Eigen::VectorXd initialToolPose;

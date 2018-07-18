@@ -86,14 +86,15 @@ InverseKinematics::InverseKinematics(const world::Manipulator& i_robot,
  \return        cr::Result result of the inversion operation
  */
 //---------------------------------------------------------------------
-Result InverseKinematics::getJacInv(Eigen::MatrixXd i_jac, Eigen::MatrixXd &o_jacInv)
+core::Result InverseKinematics::getJacInv(Eigen::MatrixXd i_jac,
+                                          Eigen::MatrixXd &o_jacInv)
 {
     // SVD matrices
     Eigen::MatrixXd U, V, E;
     Eigen::VectorXd Sigma;
     
     // Compute the SVD
-    Result result = Matrix::svd(i_jac, this->m_svdTol, U, Sigma, V);
+    core::Result result = Matrix::svd(i_jac, this->m_svdTol, U, Sigma, V);
     // result = CRMath::svdInverse(J, this->m_svdTol, Jinv);
     
     // compute the Damped singular values (E)
@@ -121,13 +122,13 @@ Result InverseKinematics::getJacInv(Eigen::MatrixXd i_jac, Eigen::MatrixXd &o_ja
  \return        cr::Result result of the inversion operation
  */
 //---------------------------------------------------------------------
-Result InverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoint,
-                                    Eigen::VectorXd i_q0,
-                                    Eigen::VectorXd &o_qSolved)
+core::Result InverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoint,
+                                      Eigen::VectorXd i_q0,
+                                      Eigen::VectorXd &o_qSolved)
 {
     
     // indicator if solution is singular
-    Result result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
+    core::Result result = core::CR_RESULT_SUCCESS;         // break the algorithm if it is singular
     
     // set up variables
     Eigen::Matrix<double, 6, 1> error;  // error (setPoint - fk(q))
@@ -151,7 +152,7 @@ Result InverseKinematics::solve(const Eigen::Matrix<double, 6, 1>& i_setPoint,
     // optimization routine
     while ((error.norm() >= this->m_tolerance) &&
            (iter < this->m_maxIter) &&
-           (result != CR_RESULT_SINGULAR)) {
+           (result != core::CR_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
         J = this->m_robot.jacobian(this->m_toolIndex,
@@ -202,14 +203,14 @@ singular and no solution can be found.\n
 operation encountered a singularity
 */
 //---------------------------------------------------------------------
-Result InverseKinematics::solve(Eigen::VectorXd& i_setPoint,
-                                    Eigen::Matrix<bool, 6, 1> i_poseElements,
-                                    Eigen::VectorXd i_q0,
-                                    Eigen::VectorXd &o_qSolved)
+core::Result InverseKinematics::solve(Eigen::VectorXd& i_setPoint,
+                                      Eigen::Matrix<bool, 6, 1> i_poseElements,
+                                      Eigen::VectorXd i_q0,
+                                      Eigen::VectorXd &o_qSolved)
 {
     
     // indicator if solution is singular
-    Result result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
+    core::Result result = core::CR_RESULT_SUCCESS;         // break the algorithm if it is singular
     
     // set up variables
     Eigen::VectorXd error;          // error (setPoint - fk(q))
@@ -236,7 +237,7 @@ Result InverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     // optimization routine
     while ((error.norm() >= this->m_tolerance) &&
            (iter < this->m_maxIter) &&
-           (result != CR_RESULT_SINGULAR)) {
+           (result != core::CR_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
         J = this->m_robot.jacobian(this->m_toolIndex,
@@ -292,15 +293,15 @@ singular and no solution can be found.\n
 operation encountered a singularity
 */
 //---------------------------------------------------------------------
-Result InverseKinematics::solve(Eigen::VectorXd& i_setPoint,
-                                    Eigen::Matrix<bool, 6, 1> i_poseElements,
-                                    Eigen::VectorXd i_q0,
-                                    Eigen::MatrixXd i_w,
-                                    Eigen::VectorXd &o_qSolved)
+core::Result InverseKinematics::solve(Eigen::VectorXd& i_setPoint,
+                                      Eigen::Matrix<bool, 6, 1> i_poseElements,
+                                      Eigen::VectorXd i_q0,
+                                      Eigen::MatrixXd i_w,
+                                      Eigen::VectorXd &o_qSolved)
 {
     
     // indicator if solution is singular
-    Result result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
+    core::Result result = core::CR_RESULT_SUCCESS;         // break the algorithm if it is singular
     
     // set up variables
     Eigen::VectorXd error;          // error (setPoint - fk(q))
@@ -327,7 +328,7 @@ Result InverseKinematics::solve(Eigen::VectorXd& i_setPoint,
     // optimization routine
     while ((error.norm() >= this->m_tolerance) &&
            (iter < this->m_maxIter) &&
-           (result != CR_RESULT_SINGULAR)) {
+           (result != core::CR_RESULT_SINGULAR)) {
         
         // Get the Jacobian in J
         J = this->m_robot.jacobian(this->m_toolIndex,
@@ -384,10 +385,10 @@ singular and no solution can be found.\n
 operation encountered a singularity
 */
 //---------------------------------------------------------------------
-Result InverseKinematics::solve(Eigen::VectorXd& i_setPoint,
-                                    Eigen::Matrix<int, 6, 1> i_poseElementsInt,
-                                    Eigen::VectorXd i_q0,
-                                    Eigen::VectorXd &o_qSolved)
+core::Result InverseKinematics::solve(Eigen::VectorXd& i_setPoint,
+                                      Eigen::Matrix<int, 6, 1> i_poseElementsInt,
+                                      Eigen::VectorXd i_q0,
+                                      Eigen::VectorXd &o_qSolved)
 {
 	Eigen::Matrix<bool, 6, 1> i_poseElements = i_poseElementsInt.cast<bool>();
 	return InverseKinematics::solve(i_setPoint, i_poseElements, i_q0, o_qSolved);

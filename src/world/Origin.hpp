@@ -69,7 +69,7 @@ typedef std::shared_ptr<Origin> OriginPtr;
  
  */
 //---------------------------------------------------------------------
-class Origin : public Item
+class Origin : public core::Item
 {
     
     // Constructor and Destructor

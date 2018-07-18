@@ -110,11 +110,11 @@ public:
 public:
 
 	//! Singular Value decomposition (SVD)
-	static Result svd(Eigen::MatrixXd i_A,
-						double i_tol,
-						Eigen::MatrixXd& o_U,
-						Eigen::VectorXd& o_Sigma,
-						Eigen::MatrixXd& o_V);
+	static core::Result svd(Eigen::MatrixXd i_A,
+                            double i_tol,
+                            Eigen::MatrixXd& o_U,
+                            Eigen::VectorXd& o_Sigma,
+                            Eigen::MatrixXd& o_V);
 
     
 //---------------------------------------------------------------------
@@ -122,9 +122,9 @@ public:
 public:
     
     //! SVD-based matrix inverse
-    static Result svdInverse(Eigen::MatrixXd i_A,
-                               double i_tol,
-                               Eigen::MatrixXd& o_Ainv);
+    static core::Result svdInverse(Eigen::MatrixXd i_A,
+                                   double i_tol,
+                                   Eigen::MatrixXd& o_Ainv);
 
 
 //---------------------------------------------------------------------

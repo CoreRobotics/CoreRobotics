@@ -166,25 +166,25 @@ public:
 public:
 
 	//! Solve for the joint velocities that yield no tool motion, or tool motion only in the degrees of freedom specified in i_poseElements
-	Result solve(Eigen::VectorXd i_jointMotion,
-                   Eigen::VectorXd i_q0,
-                   Eigen::VectorXd &o_nullSpaceJointMotion);
+    core::Result solve(Eigen::VectorXd i_jointMotion,
+                       Eigen::VectorXd i_q0,
+                       Eigen::VectorXd &o_nullSpaceJointMotion);
 
-	Result solve(Eigen::VectorXd i_jointMotion,
-                   Eigen::VectorXd i_q0,
-                   Eigen::Matrix<bool, 6, 1> i_poseElements,
-                   Eigen::VectorXd &o_nullSpaceJointMotion);
+    core::Result solve(Eigen::VectorXd i_jointMotion,
+                       Eigen::VectorXd i_q0,
+                       Eigen::Matrix<bool, 6, 1> i_poseElements,
+                       Eigen::VectorXd &o_nullSpaceJointMotion);
 
-	Result solve(Eigen::VectorXd i_jointMotion,
-                   Eigen::VectorXd i_q0,
-                   Eigen::Matrix<bool, 6, 1> i_poseElements,
-                   Eigen::MatrixXd i_w,
-                   Eigen::VectorXd &o_nullSpaceJointMotion);
+    core::Result solve(Eigen::VectorXd i_jointMotion,
+                       Eigen::VectorXd i_q0,
+                       Eigen::Matrix<bool, 6, 1> i_poseElements,
+                       Eigen::MatrixXd i_w,
+                       Eigen::VectorXd &o_nullSpaceJointMotion);
 
-	Result solve(Eigen::VectorXd i_jointMotion,
-                   Eigen::VectorXd i_q0,
-                   Eigen::Matrix<int, 6, 1> i_poseElementsInt,
-                   Eigen::VectorXd &o_nullSpaceJointMotion);
+	core::Result solve(Eigen::VectorXd i_jointMotion,
+                       Eigen::VectorXd i_q0,
+                       Eigen::Matrix<int, 6, 1> i_poseElementsInt,
+                       Eigen::VectorXd &o_nullSpaceJointMotion);
 
 //---------------------------------------------------------------------
 // Protected Members

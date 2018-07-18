@@ -127,7 +127,7 @@ public:
 public:
     
     //! Set the value of the free variable
-    Result setFreeValue(double i_q);
+    core::Result setFreeValue(double i_q);
     
     //! Get the value of the free variable
     double getFreeValue(void);

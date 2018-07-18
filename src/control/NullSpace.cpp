@@ -92,9 +92,9 @@ NullSpace::NullSpace(const world::Manipulator& i_robot,
                                          motion was sucessfully found
  */
 //---------------------------------------------------------------------
-Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
-                            Eigen::VectorXd i_q0,
-                            Eigen::VectorXd &o_nullSpaceJointMotion)
+core::Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
+                              Eigen::VectorXd i_q0,
+                              Eigen::VectorXd &o_nullSpaceJointMotion)
 {
 	double maxVal = i_jointMotion.lpNorm<Eigen::Infinity>();
 	int iter;
@@ -106,7 +106,7 @@ Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
 	Eigen::MatrixXd J, Jinv;
 	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
                                                   this->m_robot.getDegreesOfFreedom());
-	Result result = CR_RESULT_SUCCESS;
+	core::Result result = core::CR_RESULT_SUCCESS;
 	for(int i = 0; i < iter; i++)
 	{
 		this->m_robot.setConfiguration(q);
@@ -114,7 +114,7 @@ Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
                                     this->m_eulerMode);
 		result = Matrix::svdInverse(J, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
-		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < m_trivTol)
+		if(result != core::CR_RESULT_SUCCESS || (q - i_q0).norm() < m_trivTol)
 		{
 			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot.getDegreesOfFreedom());
 			return result;
@@ -145,10 +145,10 @@ Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
                                          motion was sucessfully found
  */
 //---------------------------------------------------------------------
-Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
-                            Eigen::VectorXd i_q0,
-                            Eigen::Matrix<bool, 6, 1> i_poseElements,
-                            Eigen::VectorXd &o_nullSpaceJointMotion)
+core::Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
+                              Eigen::VectorXd i_q0,
+                              Eigen::Matrix<bool, 6, 1> i_poseElements,
+                              Eigen::VectorXd &o_nullSpaceJointMotion)
 {
 	double maxVal = i_jointMotion.lpNorm<Eigen::Infinity>();
 	int iter;
@@ -160,7 +160,7 @@ Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
 	Eigen::MatrixXd J, Jinv;
 	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
                                                   this->m_robot.getDegreesOfFreedom());
-	Result result = CR_RESULT_SUCCESS;
+	core::Result result = core::CR_RESULT_SUCCESS;
 	for(int i = 0; i < iter; i++)
 	{
 		this->m_robot.setConfiguration(q);
@@ -169,7 +169,7 @@ Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
                                     i_poseElements);
 		result = Matrix::svdInverse(J, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
-		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
+		if(result != core::CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
 		{
 			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot.getDegreesOfFreedom());
 			return result;
@@ -202,11 +202,11 @@ Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
                                          motion was sucessfully found
  */
 //---------------------------------------------------------------------
-Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
-                            Eigen::VectorXd i_q0,
-                            Eigen::Matrix<bool, 6, 1> i_poseElements,
-                            Eigen::MatrixXd i_w,
-                            Eigen::VectorXd &o_nullSpaceJointMotion)
+core::Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
+                              Eigen::VectorXd i_q0,
+                              Eigen::Matrix<bool, 6, 1> i_poseElements,
+                              Eigen::MatrixXd i_w,
+                              Eigen::VectorXd &o_nullSpaceJointMotion)
 {
 	double maxVal = i_jointMotion.lpNorm<Eigen::Infinity>();
 	int iter;
@@ -218,7 +218,7 @@ Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
 	Eigen::MatrixXd J, Jinv;
 	Eigen::MatrixXd I = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
                                                   this->m_robot.getDegreesOfFreedom());
-	Result result = CR_RESULT_SUCCESS;
+	core::Result result = core::CR_RESULT_SUCCESS;
 	for(int i = 0; i < iter; i++)
 	{
 		this->m_robot.setConfiguration(q);
@@ -227,7 +227,7 @@ Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
                                     i_poseElements);
 		result = Matrix::svdInverse(J * i_w, this->m_svdTol, Jinv);
 		q += (I - Jinv * J) * step;
-		if(result != CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
+		if(result != core::CR_RESULT_SUCCESS || (q - i_q0).norm() < this->m_trivTol)
 		{
 			o_nullSpaceJointMotion = Eigen::VectorXd::Zero(this->m_robot.getDegreesOfFreedom());
 			return result;
@@ -258,10 +258,10 @@ Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
                                          motion was sucessfully found
  */
 //---------------------------------------------------------------------
-Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
-                            Eigen::VectorXd i_q0,
-                            Eigen::Matrix<int, 6, 1> i_poseElementsInt,
-                            Eigen::VectorXd &o_nullSpaceJointMotion)
+core::Result NullSpace::solve(Eigen::VectorXd i_jointMotion,
+                              Eigen::VectorXd i_q0,
+                              Eigen::Matrix<int, 6, 1> i_poseElementsInt,
+                              Eigen::VectorXd &o_nullSpaceJointMotion)
 {
 	Eigen::Matrix<bool, 6, 1> i_poseElements = i_poseElementsInt.cast<bool>();
 	return NullSpace::solve(i_jointMotion, i_q0, i_poseElements, o_nullSpaceJointMotion);

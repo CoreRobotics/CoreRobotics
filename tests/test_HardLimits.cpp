@@ -43,7 +43,10 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
 
+// Use the CoreRobotics namespace
 using namespace cr;
+using namespace cr::core;
+
 
 EulerMode convention = CR_EULER_MODE_XYZ;
 

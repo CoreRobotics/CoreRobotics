@@ -74,17 +74,17 @@ TrajectoryGenerator::TrajectoryGenerator()
  \return        cr::Result indicator
  */
 //---------------------------------------------------------------------
-Result TrajectoryGenerator::solve(Eigen::VectorXd i_x0,
-                                      Eigen::VectorXd i_v0,
-                                      Eigen::VectorXd i_a0,
-                                      Eigen::VectorXd i_xf,
-                                      Eigen::VectorXd i_vf,
-                                      Eigen::VectorXd i_af,
-                                      double i_tf)
+core::Result TrajectoryGenerator::solve(Eigen::VectorXd i_x0,
+                                        Eigen::VectorXd i_v0,
+                                        Eigen::VectorXd i_a0,
+                                        Eigen::VectorXd i_xf,
+                                        Eigen::VectorXd i_vf,
+                                        Eigen::VectorXd i_af,
+                                        double i_tf)
 {
     
     // indicator if solution is singular
-    Result result = CR_RESULT_SUCCESS;         // break the algorithm if it is singular
+    core::Result result = core::CR_RESULT_SUCCESS;         // break the algorithm if it is singular
     
     // Set the internal time to the specified final time
     this->m_tf = i_tf;
@@ -126,8 +126,8 @@ Result TrajectoryGenerator::solve(Eigen::VectorXd i_x0,
  \return        cr::Result indicator
  */
 //---------------------------------------------------------------------
-Result TrajectoryGenerator::solve(CRWaypoint i_wp0,
-                                      CRWaypoint i_wpf)
+core::Result TrajectoryGenerator::solve(CRWaypoint i_wp0,
+                                        CRWaypoint i_wpf)
 {
     // define the vectors
     Eigen::VectorXd x0 = i_wp0.position;

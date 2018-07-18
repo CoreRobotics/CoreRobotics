@@ -48,6 +48,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
+namespace core {
     
     
 //! Step shared pointer
@@ -94,6 +95,7 @@ class Step
 };
     
     
+}
 }
 // end namespace
 //---------------------------------------------------------------------

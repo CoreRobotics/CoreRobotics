@@ -239,7 +239,7 @@ public:
 public:
 
 	//! Solve the IK and NullSpace control problems with the hard joint limits specified.
-	Result solve(Eigen::VectorXd &o_qSolved);
+	core::Result solve(Eigen::VectorXd &o_qSolved);
 
 //---------------------------------------------------------------------
 // Protected Members

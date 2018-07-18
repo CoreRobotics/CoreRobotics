@@ -188,7 +188,7 @@ public:
     double getSingularThresh(void) {return this->m_svdTol;}
     
     //! Get the DLS jacobian inverse
-    Result getJacInv(Eigen::MatrixXd i_jac, Eigen::MatrixXd &o_jacInv);
+    core::Result getJacInv(Eigen::MatrixXd i_jac, Eigen::MatrixXd &o_jacInv);
 
     
 //---------------------------------------------------------------------
@@ -196,25 +196,25 @@ public:
 public:
     
     //! Solve for the joint angles (q) that yield the desired setPoint
-    Result solve(const Eigen::Matrix<double, 6, 1>& i_setPoint,
-				   Eigen::VectorXd i_q0,
-				   Eigen::VectorXd &o_qSolved);
+    core::Result solve(const Eigen::Matrix<double, 6, 1>& i_setPoint,
+                       Eigen::VectorXd i_q0,
+                       Eigen::VectorXd &o_qSolved);
     
-    Result solve(Eigen::VectorXd& i_setPoint,
-				   Eigen::Matrix<bool, 6, 1> i_poseElements,
-				   Eigen::VectorXd i_q0,
-				   Eigen::VectorXd &o_qSolved);
+    core::Result solve(Eigen::VectorXd& i_setPoint,
+                       Eigen::Matrix<bool, 6, 1> i_poseElements,
+                       Eigen::VectorXd i_q0,
+                       Eigen::VectorXd &o_qSolved);
 
-	Result solve(Eigen::VectorXd& i_setPoint,
-                   Eigen::Matrix<bool, 6, 1> i_poseElements,
-                   Eigen::VectorXd i_q0,
-                   Eigen::MatrixXd i_w,
-                   Eigen::VectorXd &o_qSolved);
+    core::Result solve(Eigen::VectorXd& i_setPoint,
+                       Eigen::Matrix<bool, 6, 1> i_poseElements,
+                       Eigen::VectorXd i_q0,
+                       Eigen::MatrixXd i_w,
+                       Eigen::VectorXd &o_qSolved);
 
-	Result solve(Eigen::VectorXd& i_setPoint,
-				   Eigen::Matrix<int, 6, 1> i_poseElementsInt,
-				   Eigen::VectorXd i_q0,
-				   Eigen::VectorXd &o_qSolved);
+    core::Result solve(Eigen::VectorXd& i_setPoint,
+                       Eigen::Matrix<int, 6, 1> i_poseElementsInt,
+                       Eigen::VectorXd i_q0,
+                       Eigen::VectorXd &o_qSolved);
     
 //---------------------------------------------------------------------
 // Protected Members

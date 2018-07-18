@@ -100,17 +100,17 @@ void Node::addChild(NodePtr i_item)
                 (CR_RESULT_SUCCESS or CR_RESULT_NOT_FOUND)
  */
 //---------------------------------------------------------------------
-Result Node::removeChild(NodePtr i_item)
+core::Result Node::removeChild(NodePtr i_item)
 {
     for (int k = 0; k < m_children.size(); k++){
         if (m_children.at(k) == i_item)
         {
             m_children.erase(m_children.begin()+k);
             i_item->setParent(NULL);
-            return CR_RESULT_SUCCESS;
+            return core::CR_RESULT_SUCCESS;
         }
     }
-    return CR_RESULT_NOT_FOUND;
+    return core::CR_RESULT_NOT_FOUND;
 }
     
     

@@ -116,17 +116,17 @@ public:
 public:
     
     //! Solve for the coefficients needed to achieve the trajectory
-    Result solve(Eigen::VectorXd i_x0,
-                   Eigen::VectorXd i_v0,
-                   Eigen::VectorXd m_a0,
-                   Eigen::VectorXd m_xf,
-                   Eigen::VectorXd m_vf,
-                   Eigen::VectorXd m_af,
-                   double i_tf);
+    core::Result solve(Eigen::VectorXd i_x0,
+                       Eigen::VectorXd i_v0,
+                       Eigen::VectorXd m_a0,
+                       Eigen::VectorXd m_xf,
+                       Eigen::VectorXd m_vf,
+                       Eigen::VectorXd m_af,
+                       double i_tf);
     
     //! Solve for the coefficients needed to achieve the trajectory
-    Result solve(CRWaypoint i_wp0,
-                   CRWaypoint i_wpf);
+    core::Result solve(CRWaypoint i_wp0,
+                       CRWaypoint i_wpf);
     
     //! Get the trajectory at time t
     CRWaypoint step(double i_t);
@@ -145,7 +145,7 @@ protected:
     Eigen::Matrix<double, 6, Eigen::Dynamic> m_X;
     
     //! An internal clock for keeping track of time
-    Clock m_timer;
+    core::Clock m_timer;
     
 };
 

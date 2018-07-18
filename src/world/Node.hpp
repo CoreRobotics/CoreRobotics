@@ -72,7 +72,7 @@ typedef std::shared_ptr<Node> NodePtr;
  */
 //---------------------------------------------------------------------
 class Node
-    : public std::enable_shared_from_this<Node>, public Item
+    : public std::enable_shared_from_this<Node>, public core::Item
 {
     
     // Constructor and Destructor
@@ -95,7 +95,7 @@ class Node
         void addChild(NodePtr i_item);
     
         //! remove a child from the list of children
-        Result removeChild(NodePtr i_item);
+        core::Result removeChild(NodePtr i_item);
     
         //! set the parent of the item
         void setParent(NodePtr i_item);

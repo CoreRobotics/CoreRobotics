@@ -128,8 +128,8 @@ HardLimits::HardLimits(const world::Manipulator& i_robot,
                                 operation encountered a singularity
  */
 //---------------------------------------------------------------------
-Result HardLimits::solve(Eigen::VectorXd &o_qSolved) {
-	Result result = CR_RESULT_SUCCESS;
+core::Result HardLimits::solve(Eigen::VectorXd &o_qSolved) {
+	core::Result result = core::CR_RESULT_SUCCESS;
 	Eigen::MatrixXd W = Eigen::MatrixXd::Identity(this->m_robot.getDegreesOfFreedom(),
                                                   this->m_robot.getDegreesOfFreedom());
 	Eigen::VectorXd q(this->m_robot.getDegreesOfFreedom());
@@ -140,7 +140,7 @@ Result HardLimits::solve(Eigen::VectorXd &o_qSolved) {
 	limits << (this->m_q0 - this->m_upperLimits), (this->m_lowerLimits - this->m_q0);
 	if (0 < limits.maxCoeff()) {
 		o_qSolved = this->m_q0;
-		return CR_RESULT_BAD_IC;
+		return core::CR_RESULT_BAD_IC;
 	}
 	bool limits_broken = true;
 	while (limits_broken) {
@@ -157,7 +157,7 @@ Result HardLimits::solve(Eigen::VectorXd &o_qSolved) {
 		                                            qNull);
 			qSolved += qNull;
 		}
-		if (result == CR_RESULT_SINGULAR) {
+		if (result == core::CR_RESULT_SINGULAR) {
 			o_qSolved = this->m_q0;
 			return result;
 		}

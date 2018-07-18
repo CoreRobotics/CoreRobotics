@@ -128,13 +128,13 @@ singular values were below the specified tolerance (i.e. singular)
 
 */
 //---------------------------------------------------------------------
-Result Matrix::svd(Eigen::MatrixXd i_A,
-					 double i_tol,
-					 Eigen::MatrixXd& o_U,
-					 Eigen::VectorXd& o_Sigma,
-					 Eigen::MatrixXd& o_V)
+core::Result Matrix::svd(Eigen::MatrixXd i_A,
+                         double i_tol,
+                         Eigen::MatrixXd& o_U,
+                         Eigen::VectorXd& o_Sigma,
+                         Eigen::MatrixXd& o_V)
 {
-	Result result = CR_RESULT_SUCCESS;
+	core::Result result = core::CR_RESULT_SUCCESS;
 
 	// Compute the SVD of A
 	Eigen::JacobiSVD<Eigen::MatrixXd> svd(i_A, Eigen::ComputeThinU | Eigen::ComputeThinV);
@@ -145,7 +145,7 @@ Result Matrix::svd(Eigen::MatrixXd i_A,
 	// check for singular condition
 	for (int i = 0; i < sVals.size(); i++) {
 		if (sVals(i) <= i_tol) {
-			result = CR_RESULT_SINGULAR;
+			result = core::CR_RESULT_SINGULAR;
 			break;
 		}
 	}
@@ -188,9 +188,11 @@ Result Matrix::svd(Eigen::MatrixXd i_A,
  
  */
 //---------------------------------------------------------------------
-Result Matrix::svdInverse(Eigen::MatrixXd i_A, double i_tol, Eigen::MatrixXd& o_Ainv)
+core::Result Matrix::svdInverse(Eigen::MatrixXd i_A,
+                                double i_tol,
+                                Eigen::MatrixXd& o_Ainv)
 {
-    Result result = CR_RESULT_SUCCESS;
+    core::Result result = core::CR_RESULT_SUCCESS;
     
     // Compute the SVD of A
     Eigen::JacobiSVD<Eigen::MatrixXd> svd(i_A, Eigen::ComputeThinU | Eigen::ComputeThinV);
@@ -201,7 +203,7 @@ Result Matrix::svdInverse(Eigen::MatrixXd i_A, double i_tol, Eigen::MatrixXd& o_
     // check for singular condition
     for (int i = 0; i < sVals.size(); i++){
         if (sVals(i) <= i_tol){
-            result = CR_RESULT_SINGULAR;
+            result = core::CR_RESULT_SINGULAR;
             break;
         }
     }

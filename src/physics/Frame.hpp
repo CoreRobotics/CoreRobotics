@@ -135,7 +135,7 @@ public:
 public:
 
     //! Set the value of the free variable
-    virtual Result setFreeValue(double i_q);
+    virtual core::Result setFreeValue(double i_q);
     
     //! Get the value of the free variable
     virtual double getFreeValue(void);

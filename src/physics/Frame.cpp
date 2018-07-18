@@ -91,9 +91,9 @@ Frame::Frame()
                         value to write
  */
 //---------------------------------------------------------------------
-Result Frame::setFreeValue(double i_q)
+core::Result Frame::setFreeValue(double i_q)
 {
-    return CR_RESULT_UNWRITABLE;
+    return core::CR_RESULT_UNWRITABLE;
 }
 
 
