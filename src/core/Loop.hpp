@@ -113,8 +113,8 @@ class Loop {
     // Set/get functions
     public:
     
-        //! Set the step element
-        void setStep(StepPtr i_element) { m_element = i_element; }
+        //! Attach the step element
+        void attach(StepPtr i_element) { m_element = i_element; }
     
         //! Set the update rate
         void setUpdateRate(const double a_updateRate) {m_updateRate = a_updateRate;}

@@ -48,6 +48,11 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
+    
+    
+//! Step shared pointer
+class Step;
+typedef std::shared_ptr<Step> StepPtr;
 
     
 //---------------------------------------------------------------------
@@ -87,11 +92,6 @@ class Step
         //! The step function must be implemented in derived classes
         virtual void step() = 0;
 };
-    
-    
-    
-//! Step shared pointer
-typedef std::shared_ptr<Step> StepPtr;
     
     
 }

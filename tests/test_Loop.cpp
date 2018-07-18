@@ -106,7 +106,7 @@ TEST(Loop, reset){
     
     // add the step function
     std::shared_ptr<simpleStep> myStep = std::make_shared<simpleStep>(0.01);
-    myLoop->setStep(myStep);
+    myLoop->attach(myStep);
     
     // Query the internal state to make sure the reset call happened
     EXPECT_DOUBLE_EQ(myStep->x, myStep->x0);
@@ -129,7 +129,7 @@ TEST(Loop, execution){
     
     // add the step function
     std::shared_ptr<simpleStep> myStep = std::make_shared<simpleStep>(dt);
-    myLoop->setStep(myStep);
+    myLoop->attach(myStep);
     
     // check the update rate
     myLoop->setUpdateRate(dt);

@@ -90,8 +90,8 @@ class StepList : public Step {
     // Step member control
     public:
     
-        //! Add a step item to the list of vertices
-        void add(StepPtr i_vertex);
+        //! Attach a step item to the list of vertices
+        void attach(StepPtr i_vertex);
     
     
     // Derived step function

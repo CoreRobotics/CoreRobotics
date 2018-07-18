@@ -83,7 +83,7 @@ StepListPtr StepList::create(){
  This function adds a step element to the list.\n
  */
 //---------------------------------------------------------------------
-void StepList::add(StepPtr i_element)
+void StepList::attach(StepPtr i_element)
 {
     m_vertices.push_back(i_element);
 }
