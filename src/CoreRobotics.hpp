@@ -369,7 +369,7 @@ project includes all the CoreRobotics modules.
 #include "Thread.hpp"
 #include "Step.hpp"
 #include "Loop.hpp"
-#include "DirectedGraph.hpp"
+#include "StepList.hpp"
 #include "SharedMemory.hpp"
 
 

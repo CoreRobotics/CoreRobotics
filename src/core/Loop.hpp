@@ -53,6 +53,10 @@ POSSIBILITY OF SUCH DAMAGE.
 namespace cr {
 
     
+//! Smart pointer to Loop
+class Loop;
+typedef std::shared_ptr<Loop> LoopPtr;
+    
     
 //---------------------------------------------------------------------
 /*!
@@ -74,7 +78,7 @@ namespace cr {
  - Loop::stop stops the thread execution.
  */
 //---------------------------------------------------------------------
-class Loop : public Step {
+class Loop {
     
     // Constructor and Destructor
     public:
@@ -85,6 +89,9 @@ class Loop : public Step {
     
         //! Class destructor
         virtual ~Loop();
+    
+        //! Create a pointer
+        static LoopPtr create();
     
     
     // Primary control functions
@@ -105,6 +112,9 @@ class Loop : public Step {
     
     // Set/get functions
     public:
+    
+        //! Set the step element
+        void setStep(StepPtr i_element) { m_element = i_element; }
     
         //! Set the update rate
         void setUpdateRate(const double a_updateRate) {m_updateRate = a_updateRate;}
@@ -138,11 +148,10 @@ class Loop : public Step {
         //! time at last pause() call
         double m_tPaused = 0;
     
+        //! element to step
+        StepPtr m_element;
+    
 };
-    
-    
-//! Smart pointer to Loop
-typedef std::shared_ptr<Loop> LoopPtr;
     
     
 

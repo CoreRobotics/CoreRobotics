@@ -86,9 +86,6 @@ class Step
     
         //! The step function must be implemented in derived classes
         virtual void step() = 0;
-    
-        //! The reset function must be implemented in derived classes
-        // virtual void reset() = 0;
 };
     
     

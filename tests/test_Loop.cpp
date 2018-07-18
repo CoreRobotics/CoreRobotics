@@ -42,6 +42,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
+#include <memory>
 
 
 // Use the CoreRobotics namespace
@@ -49,32 +50,28 @@ using namespace cr;
 
 
 //---------------------------------------------------------------------
-// Define a simple loop element.
+// Define a simple step element.
 //---------------------------------------------------------------------
-class simpleLoop : public Loop
+class simpleStep : public Step
 {
     
     // init
     public:
     
         // constructor
-        simpleLoop(){
-            reset();
+        simpleStep(double dt) {
+            m_dt = dt;
+            x = x0;
         }
     
     // Primary ThreadElement functions
     public:
     
-        //! Step the thread element (called on each iteration of the thread)
+        //! Step (called on each iteration of the thread)
         virtual void step() {
             
             // this is a simple low pass system with forward euler discretiation
-            x = (1 - this->getUpdateRate() / m_tau) * x;
-        };
-    
-        //! Reset the thread element (called on Thread::start())
-        virtual void reset() {
-            x = x0;
+            x = (1 - m_dt / m_tau) * x;
         };
     
     
@@ -90,6 +87,9 @@ class simpleLoop : public Loop
         //! internal parameter
         double m_tau = 0.5;
     
+        //! sample rate
+        double m_dt = 0.01;
+    
 };
 
 
@@ -102,16 +102,14 @@ class simpleLoop : public Loop
 TEST(Loop, reset){
     
     // Create the thread element smart pointer
-    simpleLoop* myLoop = new simpleLoop();
+    LoopPtr myLoop = Loop::create();
     
-    // Create a thread and attach the thread element
-    // LoopPtr myThread(new Loop(myElemRaw));
+    // add the step function
+    std::shared_ptr<simpleStep> myStep = std::make_shared<simpleStep>(0.01);
+    myLoop->setStep(myStep);
     
     // Query the internal state to make sure the reset call happened
-    EXPECT_DOUBLE_EQ(myLoop->x, myLoop->x0);
-    
-    // destroy memory
-    delete myLoop;
+    EXPECT_DOUBLE_EQ(myStep->x, myStep->x0);
 }
 
 
@@ -124,10 +122,16 @@ TEST(Loop, reset){
 TEST(Loop, execution){
     
     // Create the thread element smart pointer
-    simpleLoop* myLoop = new simpleLoop();
+    LoopPtr myLoop = Loop::create();
     
     // Set the update rate to be super slow - 20 Hz
     double dt = 0.05;
+    
+    // add the step function
+    std::shared_ptr<simpleStep> myStep = std::make_shared<simpleStep>(dt);
+    myLoop->setStep(myStep);
+    
+    // check the update rate
     myLoop->setUpdateRate(dt);
     EXPECT_DOUBLE_EQ(myLoop->getUpdateRate(), dt);
     
@@ -147,13 +151,13 @@ TEST(Loop, execution){
     myLoop->pause();
     
     EXPECT_NEAR(myLoop->getCurrentTime(), 1.0, dt); // within dt
-    EXPECT_NEAR(myLoop->x, 0, 0.4 * myLoop->x0);  // 1 time constant
+    EXPECT_NEAR(myStep->x, 0, 0.4 * myStep->x0);  // 1 time constant
     
     // wait for 1 second
     timer.sleep(1.0);
     
     EXPECT_NEAR(myLoop->getCurrentTime(), 1.0, dt); // within dt
-    EXPECT_NEAR(myLoop->x, 0, 0.4 * myLoop->x0);  // 1 time constant
+    EXPECT_NEAR(myStep->x, 0, 0.4 * myStep->x0);  // 1 time constant
     
     // start the thread
     // std::cout << "Start() call\n";
@@ -167,7 +171,7 @@ TEST(Loop, execution){
     myLoop->pause();
     
     EXPECT_NEAR(myLoop->getCurrentTime(), 2.0, dt); // within dt
-    EXPECT_NEAR(myLoop->x, 0, 0.28 * myLoop->x0);  // 2 time constants
+    EXPECT_NEAR(myStep->x, 0, 0.28 * myStep->x0);  // 2 time constants
     
     // wait for 1 second
     timer.sleep(1.0);
@@ -184,7 +188,7 @@ TEST(Loop, execution){
     myLoop->stop();
     
     EXPECT_NEAR(myLoop->getCurrentTime(), 3.0, 2 * dt); // within 2dt
-    EXPECT_NEAR(myLoop->x, 0, 0.07 * myLoop->x0);  // 3 time constants
+    EXPECT_NEAR(myStep->x, 0, 0.07 * myStep->x0);  // 3 time constants
     
     // wait for 1 second
     timer.sleep(1.0);
@@ -201,6 +205,6 @@ TEST(Loop, execution){
     myLoop->stop();
     
     EXPECT_NEAR(myLoop->getCurrentTime(), 1.0, 2 * dt); // within 2dt
-    EXPECT_NEAR(myLoop->x, 0, 0.4 * myLoop->x0);  // 1 time constant
+    EXPECT_NEAR(myStep->x, 0, 0.4 * myStep->x0);  // 1 time constant
 }
 

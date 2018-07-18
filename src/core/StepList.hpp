@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_DIRECTED_GRAPH_HPP_
-#define CR_DIRECTED_GRAPH_HPP_
+#ifndef CR_STEP_LIST_HPP_
+#define CR_STEP_LIST_HPP_
 
 #include "Loop.hpp"
 #include "Step.hpp"
@@ -53,8 +53,8 @@ namespace cr {
 
     
 //! Manipulator shared pointer
-class DirectedGraph;
-typedef std::shared_ptr<DirectedGraph> DirectedGraphPtr;
+class StepList;
+typedef std::shared_ptr<StepList> StepListPtr;
     
     
 //---------------------------------------------------------------------
@@ -63,44 +63,35 @@ typedef std::shared_ptr<DirectedGraph> DirectedGraphPtr;
  \ingroup core
  
  \brief
- This class implements a directed graph thread loop.
+ This class implements a list of individual step() classes (i.e. a
+ a directed graph when signals are included)
  
  \details
  ## Description
- This class implements a directed graph thread loop.  One step
- of the entire graph is performed for each loop iteration.  The step
- classes are executed in the order in which they have been added to the
- list of Steps();
- 
- - Loop::start starts the thread loop.
- - Loop::pause pauses the loop execution, but does not exit the
- thread of execution.
- - Loop::stop exits the thread of execution.
- - Loop::stop stops the thread execution.
+ This class implements a step list.  Individual Step() classes are
+ executed in the order in which they have been added to the list.
  */
 //---------------------------------------------------------------------
-class DirectedGraph : public Loop {
+class StepList : public Step {
     
     // Constructor and Destructor
     public:
     
         //! Class constructor
-        DirectedGraph();
-        DirectedGraph(double i_updateRate);
+        StepList();
     
         //! Class destructor
-        virtual ~DirectedGraph();
+        virtual ~StepList();
     
         //! Create
-        static DirectedGraphPtr create();
-        static DirectedGraphPtr create(double i_updateRate);
+        static StepListPtr create();
     
     
     // Step member control
     public:
     
         //! Add a step item to the list of vertices
-        void add(Step* i_vertex);
+        void add(StepPtr i_vertex);
     
     
     // Derived step function
@@ -113,14 +104,10 @@ class DirectedGraph : public Loop {
     // Private members
     private:
     
-        //! list of step vertices
-        std::vector<Step*> m_vertices;
+        //! list of step elements
+        std::vector<StepPtr> m_vertices;
     
 };
-    
-    
-//! Smart pointer to DirectedGraph
-typedef std::shared_ptr<DirectedGraph> DirectedGraphPtr;
     
 
 }

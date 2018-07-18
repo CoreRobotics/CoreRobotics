@@ -39,7 +39,7 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#include "DirectedGraph.hpp"
+#include "StepList.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -49,38 +49,20 @@ namespace cr {
     
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the thread loop without a specific update 
- rate.  The loop will attempt to execute each step as quickly as 
- possible.\n
+ The constructor sets up the StepList.\n
  */
 //---------------------------------------------------------------------
-DirectedGraph::DirectedGraph(){
+StepList::StepList(){
     
 }
 
 
 //---------------------------------------------------------------------
 /*!
-The constructor sets up the thread loop with a specific update 
- rate.  The loop will attempt to execute each step at the rate
- specified by i_updateRate.\n
- 
-\param[in]	   i_updateRate	 this sets a constant update rate (s)
-*/
-//---------------------------------------------------------------------
-DirectedGraph::DirectedGraph(double i_updateRate)
-    : cr::Loop(i_updateRate)
-{
-    
-}
-
-
-//---------------------------------------------------------------------
-/*!
- The destructor closes the thread loop.\n
+ The destructor closes the StepList.\n
  */
 //---------------------------------------------------------------------
-DirectedGraph::~DirectedGraph(){
+StepList::~StepList(){
     
     m_vertices.clear();
 }
@@ -88,36 +70,31 @@ DirectedGraph::~DirectedGraph(){
     
 //---------------------------------------------------------------------
 /*!
- Create a new directed graph.\n
- 
- \param[in]       i_updateRate     this sets a constant update rate (s)
+ Create a new StepList.\n
  */
 //---------------------------------------------------------------------
-DirectedGraphPtr DirectedGraph::create(){
-    return std::make_shared<DirectedGraph>();
-}
-DirectedGraphPtr DirectedGraph::create(double i_updateRate){
-    return std::make_shared<DirectedGraph>(i_updateRate);
+StepListPtr StepList::create(){
+    return std::make_shared<StepList>();
 }
 
 
 //---------------------------------------------------------------------
 /*!
- This function adds a step pointer to the list of vertices.\n
+ This function adds a step element to the list.\n
  */
 //---------------------------------------------------------------------
-void DirectedGraph::add(Step* i_vertex)
+void StepList::add(StepPtr i_element)
 {
-    m_vertices.push_back(i_vertex);
+    m_vertices.push_back(i_element);
 }
     
 
 //---------------------------------------------------------------------
 /*!
- This function executes the .\n
+ This function steps the list of elements.\n
  */
 //---------------------------------------------------------------------
-void DirectedGraph::step(){
+void StepList::step(){
     
     // step each of the vertices
     for (int i = 0; i < m_vertices.size(); i++){

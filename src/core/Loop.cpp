@@ -92,6 +92,16 @@ Loop::~Loop(){
     // delete pointers
     delete m_thread;
 }
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Create a new Loop in memory.\n
+ */
+//---------------------------------------------------------------------
+LoopPtr Loop::create(){
+    return std::make_shared<Loop>();
+}
 
 
 //---------------------------------------------------------------------
@@ -186,8 +196,8 @@ void Loop::callback(){
         // if the thread is running
         if (m_runState == CR_RUN_STATE_RUNNING){
             
-            // step the thread member
-            this->step();
+            // step the element
+            m_element->step();
         }
         
         // update the frequency counter
