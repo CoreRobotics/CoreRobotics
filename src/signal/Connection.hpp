@@ -44,7 +44,7 @@
 #define CR_CONNECTION_HPP_
 
 #include "Step.hpp"
-#include "Mutex.hpp"
+#include <mutex>
 #include <memory>
 
 //---------------------------------------------------------------------

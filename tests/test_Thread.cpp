@@ -98,8 +98,6 @@ TEST(Thread, Start){
     v << 1.0;
     server.addSignal("signal_3", v);
     
-    Mutex threadMutex;
-    
     // Create a thread
     Thread myThread;
     myThread.setCallback(*callback1);
