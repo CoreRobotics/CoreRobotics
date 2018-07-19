@@ -83,6 +83,16 @@ public:
         m_receiverCallback = reinterpret_cast<void(ReceiverType::*)(void*)>(i_receiverCallback);
     }
     
+    //! Create a new connection
+    static std::shared_ptr<Connection<DataType, EmitterType, ReceiverType>> create(
+                    EmitterType* i_emitter,
+                    DataType(EmitterType::*i_emitterCallback)(),
+                    ReceiverType* i_receiver,
+                    void(ReceiverType::*i_receiverCallback)(DataType)) {
+        return std::make_shared<Connection<DataType, EmitterType, ReceiverType>>(
+                    i_emitter, i_emitterCallback, i_receiver, i_receiverCallback);
+    }
+    
     
 // public access functions
 public:
