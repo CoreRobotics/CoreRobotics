@@ -80,6 +80,17 @@ Eigen::VectorXd Integration::forwardEulerStep(Eigen::VectorXd(i_dynamicSystem)(d
     return i_x + i_dt*i_dynamicSystem(i_t,i_x,i_u);
 }
     
+Eigen::VectorXd Integration::forwardEulerStep(std::function<Eigen::VectorXd(double,
+                                                                            Eigen::VectorXd,
+                                                                            Eigen::VectorXd)> i_dynamicSystem,
+                                              double i_t,
+                                              Eigen::VectorXd i_x,
+                                              Eigen::VectorXd i_u,
+                                              double i_dt){
+    // forward integration step
+    return i_x + i_dt*i_dynamicSystem(i_t,i_x,i_u);
+}
+    
     
 //=====================================================================
 /*!
@@ -115,6 +126,21 @@ Eigen::VectorXd Integration::rungeKuttaStep(Eigen::VectorXd(i_dynamicSystem)(dou
     Eigen::VectorXd f2 = i_dynamicSystem(i_t+i_dt/2,i_x+i_dt*f1/2,i_u);
     Eigen::VectorXd f3 = i_dynamicSystem(i_t+i_dt/2,i_x+i_dt*f2/2,i_u);
     Eigen::VectorXd f4 = i_dynamicSystem(i_t+i_dt,i_x+i_dt*f3,i_u);
+    return i_x + i_dt/6*(f1 + 2*f2 + 2*f3 + f4);
+}
+    
+Eigen::VectorXd Integration::rungeKuttaStep(std::function<Eigen::VectorXd(double,
+                                                                          Eigen::VectorXd,
+                                                                          Eigen::VectorXd)> i_dynamicSystem,
+                                            double i_t,
+                                            Eigen::VectorXd i_x,
+                                            Eigen::VectorXd i_u,
+                                            double i_dt){
+    // RK4 step
+    Eigen::VectorXd f1 = i_dynamicSystem(i_t, i_x, i_u);
+    Eigen::VectorXd f2 = i_dynamicSystem(i_t+i_dt/2, i_x+i_dt*f1/2, i_u);
+    Eigen::VectorXd f3 = i_dynamicSystem(i_t+i_dt/2, i_x+i_dt*f2/2, i_u);
+    Eigen::VectorXd f4 = i_dynamicSystem(i_t+i_dt, i_x+i_dt*f3, i_u);
     return i_x + i_dt/6*(f1 + 2*f2 + 2*f3 + f4);
 }
 
