@@ -60,10 +60,10 @@ TEST(Signal, Request){
     myClass->setFreeVariable(CR_EULER_FREE_POS_X);
     myClass->setFreeValue(0.71);
     
-    // create the emitter
+    // create the signal
     std::shared_ptr<Signal<double, FrameEuler>> mySignal = Signal<double, FrameEuler>::create(myClass, &FrameEuler::getFreeValue);
     
-    // now make sure the parent is identical
+    // now check the emitter
     EXPECT_EQ(myClass, mySignal->getEmitter());
     
     // and check the data value

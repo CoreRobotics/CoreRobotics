@@ -63,10 +63,12 @@ namespace signal {
  */
 //---------------------------------------------------------------------
 template <typename DataType>
-class Request : public std::enable_shared_from_this<Request<DataType>> {
-    
-    // request function
+class Requester : public std::enable_shared_from_this<Requester<DataType>> {
+
     public:
+    
+        //! constructor
+        Requester() {};
     
         //! request function to implement
         virtual DataType request() = 0;
@@ -87,7 +89,7 @@ class Request : public std::enable_shared_from_this<Request<DataType>> {
  */
 //---------------------------------------------------------------------
 template <typename DataType, typename EmitterType>
-class Signal : public Request<DataType>
+class Signal : public Requester<DataType>
 {
     
 // Constructor public access functions
@@ -106,6 +108,7 @@ public:
         DataType(EmitterType::*i_callback)()) {
             return std::make_shared<Signal<DataType, EmitterType>>(i_emitter, i_callback);
     }
+    
     
 // public access functions
 public:

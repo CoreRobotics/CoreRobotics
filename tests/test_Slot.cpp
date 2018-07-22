@@ -47,38 +47,45 @@ POSSIBILITY OF SUCH DAMAGE.
 // Use the CoreRobotics namespace
 using namespace cr;
 using namespace cr::core;
+using namespace cr::world;
 using namespace cr::signal;
-
 
 //
 // Test Slot connection
 //
 TEST(Slot, Step){
     
-    // set up a Frame
-    FrameEuler* myClass1 = new FrameEuler();
-    myClass1->setFreeVariable(CR_EULER_FREE_POS_X);
-    myClass1->setFreeValue(0.71);
+    // set up 2 links
+    Link* myLink1 = new Link();
+    Link* myLink2 = new Link();
     
-    // create the emitter
-    std::shared_ptr<Signal<double, FrameEuler>> mySignal = Signal<double, FrameEuler>::create(myClass1, &FrameEuler::getFreeValue);
+    myLink1->setDegreeOfFreedom(cr::CR_EULER_FREE_POS_X);
+    myLink1->setFreeVariable(0.71);
     
+    myLink2->setDegreeOfFreedom(cr::CR_EULER_FREE_POS_X);
+    myLink2->setFreeVariable(0);
     
-    // now make sure the parent is identical
-    EXPECT_EQ(myClass1, mySignal->getEmitter());
-    EXPECT_DOUBLE_EQ(0.71, mySignal->request());
+    EXPECT_DOUBLE_EQ(0.71, myLink1->getFreeVariable());
+    EXPECT_DOUBLE_EQ(0, myLink2->getFreeVariable());
     
+    // create the signal
+    std::shared_ptr<Signal<double, Link>> mySignal = Signal<double, Link>::create(myLink1, &Link::getFreeVariable);
     
-    // now create the slot
-    FrameEuler* myClass2 = new FrameEuler();
-    myClass2->setFreeVariable(CR_EULER_FREE_POS_X);
-    myClass2->setFreeValue(0);
+    // check the emitter
+    EXPECT_EQ(myLink1, mySignal->getEmitter());
     
-    // now create the slot
-    // Slot<double, FrameEuler> mySlot(mySignal, myClass2, &FrameEuler::setFreeValue);
-    // EXPECT_DOUBLE_EQ(0.71, mySlot.request());
+    // create the slot
+    std::shared_ptr<Slot<double, Link>> mySlot = Slot<double, Link>::create(mySignal, myLink2, &Link::setFreeVariable);
     
-    // step the slot
+    // check the receiver
+    EXPECT_EQ(myLink2, mySlot->getReceiver());
+    
+    // perform the step
+    mySlot->step();
+    
+    // check the data value
+    EXPECT_DOUBLE_EQ(myLink1->getFreeVariable(), mySignal->request());
+    EXPECT_DOUBLE_EQ(myLink1->getFreeVariable(), myLink2->getFreeVariable() );
     
 }
 

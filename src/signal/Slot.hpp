@@ -69,11 +69,11 @@ template <typename DataType, typename ReceiverType>
 class Slot : public core::Step
 {
     
-//! Constructor
+//! constructor
 public:
     
     //! constructor
-    Slot(std::shared_ptr<Request<DataType>> i_signal,
+    Slot(std::shared_ptr<Requester<DataType>> i_signal,
          ReceiverType* i_receiver,
          void(ReceiverType::*i_callback)(DataType)) {
         m_signal = i_signal;
@@ -81,16 +81,13 @@ public:
         m_callback = reinterpret_cast<void(ReceiverType::*)(void*)>(i_callback);
     }
     
-    //! Create a new connection
-    /*
+    //! Create a new slot
     static std::shared_ptr<Slot<DataType, ReceiverType>> create(
-        i_signal,
-        i_receiver,
-        i_callback) {
-            return std::make_shared<Slot<DataType, ReceiverType>>(
-                    i_signal, i_receiver, i_callback);
+            std::shared_ptr<Requester<DataType>> i_signal,
+            ReceiverType* i_receiver,
+            void(ReceiverType::*i_callback)(DataType)) {
+        return std::make_shared<Slot<DataType, ReceiverType>>(i_signal, i_receiver, i_callback);
     }
-     */
     
     
 // public access functions
@@ -100,7 +97,7 @@ public:
     ReceiverType* getReceiver() { return static_cast<ReceiverType*>(m_receiver); }
     
     //! step the data push
-    void step() {
+    virtual void step() {
         ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
         void(ReceiverType::*fcn)(DataType) = reinterpret_cast<void(ReceiverType::*)(DataType)>(m_callback);
         m_mutex.lock();
@@ -112,23 +109,17 @@ public:
     void reset() {};
     
     
-//! Inherited access members
+// inherited access members
 private:
-    
-    //! Emitter
-    // void* m_emitter;
         
     //! Receiver
     void* m_receiver;
-        
-    //! callback request functions
-    // void*(EmitterType::*m_emitterCallback)();
     
     //! callback request functions
     void(ReceiverType::*m_callback)(void*);
     
     //! signal
-    std::shared_ptr<Request<DataType>> m_signal;
+    std::shared_ptr<Requester<DataType>> m_signal;
     
     //! mutex member
     std::recursive_mutex m_mutex;
