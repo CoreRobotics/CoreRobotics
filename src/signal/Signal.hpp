@@ -120,7 +120,10 @@ public:
     virtual DataType request() {
         EmitterType* p = static_cast<EmitterType*>(m_emitter);
         DataType(EmitterType::*fcn)() = reinterpret_cast<DataType(EmitterType::*)()>(m_callback);
-        return (p->*fcn)();
+        m_mutex.lock();
+        DataType d = (p->*fcn)();
+        m_mutex.unlock();
+        return d;
     }
     
 //! private members
@@ -131,6 +134,9 @@ private:
     
     //! callback request functions
     void*(EmitterType::*m_callback)();
+    
+    //! mutex member
+    std::recursive_mutex m_mutex;
     
 };
 

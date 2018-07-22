@@ -100,13 +100,11 @@ public:
     virtual void step() {
         ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
         void(ReceiverType::*fcn)(DataType) = reinterpret_cast<void(ReceiverType::*)(DataType)>(m_callback);
+        DataType d = m_signal->request();
         m_mutex.lock();
-        (c->*fcn)( m_signal->request() );
+        (c->*fcn)( d );
         m_mutex.unlock();
     }
-    
-    //! reset does nothing
-    void reset() {};
     
     
 // inherited access members
