@@ -103,6 +103,7 @@ file(GLOB CR_INCLUDE_DIRS
     ${CMAKE_SOURCE_DIR}/src/control
     ${CMAKE_SOURCE_DIR}/src/world
     ${CMAKE_SOURCE_DIR}/src/signal
+    ${CMAKE_SOURCE_DIR}/src/noise
     ${EIGEN3_INCLUDE_DIR}
     ${Boost_INCLUDE_DIR}
     ${OPENSCENEGRAPH_INCLUDE_DIRS}
@@ -117,6 +118,7 @@ file(GLOB HEADERS_PHYSICS src/physics/*.hpp )
 file(GLOB HEADERS_CONTROLLERS src/control/*.hpp )
 file(GLOB HEADERS_WORLD src/world/*.hpp )
 file(GLOB HEADERS_SIGNAL src/signal/*.hpp )
+file(GLOB HEADERS_NOISE src/noise/*.hpp )
 
 # Source files
 file(GLOB SOURCES_CORE src/core/*.cpp )
@@ -126,6 +128,7 @@ file(GLOB SOURCES_PHYSICS src/physics/*.cpp )
 file(GLOB SOURCES_CONTROLLERS src/control/*.cpp )
 file(GLOB SOURCES_WORLD src/world/*.cpp )
 file(GLOB SOURCES_SIGNAL src/signal/*.cpp )
+file(GLOB SOURCES_NOISE src/noise/*.cpp )
 
 # If building on linux add pthread and rt
 if(UNIX AND NOT APPLE) # This may be useful for apple too
@@ -140,7 +143,7 @@ endif()
 if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 
 	# Create static (or shared) library
-add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${HEADERS_WORLD} ${HEADERS_SIGNAL} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD} ${SOURCES_SIGNAL})
+add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${HEADERS_WORLD} ${HEADERS_SIGNAL} ${HEADERS_NOISE} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD} ${SOURCES_SIGNAL} ${SOURCES_NOISE})
 
 	# Set the output directory
     set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
@@ -157,6 +160,7 @@ add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${H
 	source_group( "control" FILES ${HEADERS_CONTROLLERS} ${SOURCES_CONTROLLERS})
     source_group( "world" FILES ${HEADERS_WORLD} ${SOURCES_WORLD})
     source_group( "signal" FILES ${HEADERS_SIGNAL} ${SOURCES_SIGNAL})
+    source_group( "noise" FILES ${HEADERS_NOISE} ${SOURCES_NOISE})
 
 
     # =====================================================================

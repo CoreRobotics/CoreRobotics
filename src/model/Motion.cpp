@@ -38,105 +38,70 @@
  
  */
 //---------------------------------------------------------------------
-// Begin header definition
 
-#ifndef CR_SIGNAL_HPP_
-#define CR_SIGNAL_HPP_
-
-#include <memory>
+#include "Motion.hpp"
+#include "Integration.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
-namespace signal {
+namespace model {
     
     
 //---------------------------------------------------------------------
 /*!
- \class Request
- \ingroup signal
+ The constructor creates a motion model.\n
  
- \brief
- 
- \details
- 
+ \param[in] i_x0 - the initial state.
+ \param[in] i_u0 - the initial action.
+ \param[in] i_timeStep - the time step of the system
  */
 //---------------------------------------------------------------------
-template <typename DataType>
-class Request : public std::enable_shared_from_this<Request<DataType>> {
-    
-    // request function
-    public:
-    
-        //! request function to implement
-        virtual DataType request() = 0;
-    
-};
-    
-    
-    
-//---------------------------------------------------------------------
-/*!
- \class Signal
- \ingroup signal
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-template <typename DataType, typename EmitterType>
-class Signal : public Request<DataType>
+Motion::Motion(Eigen::VectorXd i_x0,
+               Eigen::VectorXd i_u0,
+               double i_dt)
 {
-    
-// Constructor public access functions
-public:
-    
-    //! constructor
-    Signal(EmitterType* i_emitter,
-           DataType(EmitterType::*i_callback)()) {
-        m_emitter = static_cast<void*>(i_emitter);
-        m_callback = reinterpret_cast<void*(EmitterType::*)()>(i_callback);
-    }
-    
-    //! Create a new signal
-    static std::shared_ptr<Signal<DataType, EmitterType>> create(
-        EmitterType* i_emitter,
-        DataType(EmitterType::*i_callback)()) {
-            return std::make_shared<Signal<DataType, EmitterType>>(i_emitter, i_callback);
-    }
-    
-// public access functions
-public:
-    
-    //! get the parent
-    EmitterType* getEmitter() { return static_cast<EmitterType*>(m_emitter); }
-    
-    //! request data
-    virtual DataType request() {
-        EmitterType* p = static_cast<EmitterType*>(m_emitter);
-        DataType(EmitterType::*fcn)() = reinterpret_cast<DataType(EmitterType::*)()>(m_callback);
-        return (p->*fcn)();
-    }
-    
-//! private members
-private:
-    
-    //! Parent
-    void* m_emitter;
-    
-    //! callback request functions
-    void*(EmitterType::*m_callback)();
-    
-};
+    m_time = 0;
+    m_state = i_x0;
+    m_action = i_u0;
+    m_dt = i_dt;
+}
 
+
+//---------------------------------------------------------------------
+/*!
+ This method steps the motion model, updating the internal state.
+ */
+//---------------------------------------------------------------------
+void Motion::step()
+{
+    // m_state = Integration::rungeKuttaStep([this] { callback(double, Eigen::VectorXd, Eigen::VectorXd); }, m_time, m_state, m_action, m_dt);
+    
+    /*
+    double t = this->m_time;
+    double dt = this->m_dt;
+
+    if (this->m_type == CR_MOTION_DISCRETE) {
+        // update the state
+        m_state = (this->m_dynPredictFcn)(t, m_state, i_u);
+        
+    } else if (this->m_type == CR_MOTION_CONTINUOUS) {
+        // update the state
+        m_state = this->rk4step(t, m_state, i_u, dt);
+    }
+    
+    // update the time
+    this->m_time = t+dt;
+    
+    // return the new state
+    return this->m_state;
+     */
     
     
+}
+
+
 }
 }
 // end namespace
 //---------------------------------------------------------------------
-
-#endif
-

@@ -40,20 +40,23 @@
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_SIGNAL_HPP_
-#define CR_SIGNAL_HPP_
+#ifndef CR_SLOT_HPP_
+#define CR_SLOT_HPP_
 
+#include "Signal.hpp"
+#include "Step.hpp"
+#include <mutex>
 #include <memory>
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
 namespace signal {
-    
+
     
 //---------------------------------------------------------------------
 /*!
- \class Request
+ \class Slot
  \ingroup signal
  
  \brief
@@ -62,81 +65,80 @@ namespace signal {
  
  */
 //---------------------------------------------------------------------
-template <typename DataType>
-class Request : public std::enable_shared_from_this<Request<DataType>> {
-    
-    // request function
-    public:
-    
-        //! request function to implement
-        virtual DataType request() = 0;
-    
-};
-    
-    
-    
-//---------------------------------------------------------------------
-/*!
- \class Signal
- \ingroup signal
- 
- \brief
- 
- \details
- 
- */
-//---------------------------------------------------------------------
-template <typename DataType, typename EmitterType>
-class Signal : public Request<DataType>
+template <typename DataType, typename ReceiverType>
+class Slot : public core::Step
 {
     
-// Constructor public access functions
+//! Constructor
 public:
     
     //! constructor
-    Signal(EmitterType* i_emitter,
-           DataType(EmitterType::*i_callback)()) {
-        m_emitter = static_cast<void*>(i_emitter);
-        m_callback = reinterpret_cast<void*(EmitterType::*)()>(i_callback);
+    Slot(std::shared_ptr<Request<DataType>> i_signal,
+         ReceiverType* i_receiver,
+         void(ReceiverType::*i_callback)(DataType)) {
+        m_signal = i_signal;
+        m_receiver = static_cast<void*>(i_receiver);
+        m_callback = reinterpret_cast<void(ReceiverType::*)(void*)>(i_callback);
     }
     
-    //! Create a new signal
-    static std::shared_ptr<Signal<DataType, EmitterType>> create(
-        EmitterType* i_emitter,
-        DataType(EmitterType::*i_callback)()) {
-            return std::make_shared<Signal<DataType, EmitterType>>(i_emitter, i_callback);
+    //! Create a new connection
+    /*
+    static std::shared_ptr<Slot<DataType, ReceiverType>> create(
+        i_signal,
+        i_receiver,
+        i_callback) {
+            return std::make_shared<Slot<DataType, ReceiverType>>(
+                    i_signal, i_receiver, i_callback);
     }
+     */
+    
     
 // public access functions
 public:
     
-    //! get the parent
-    EmitterType* getEmitter() { return static_cast<EmitterType*>(m_emitter); }
+    //! get the receiver
+    ReceiverType* getReceiver() { return static_cast<ReceiverType*>(m_receiver); }
     
-    //! request data
-    virtual DataType request() {
-        EmitterType* p = static_cast<EmitterType*>(m_emitter);
-        DataType(EmitterType::*fcn)() = reinterpret_cast<DataType(EmitterType::*)()>(m_callback);
-        return (p->*fcn)();
+    //! step the data push
+    void step() {
+        ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
+        void(ReceiverType::*fcn)(DataType) = reinterpret_cast<void(ReceiverType::*)(DataType)>(m_callback);
+        m_mutex.lock();
+        (c->*fcn)( m_signal->request() );
+        m_mutex.unlock();
     }
     
-//! private members
+    //! reset does nothing
+    void reset() {};
+    
+    
+//! Inherited access members
 private:
     
-    //! Parent
-    void* m_emitter;
+    //! Emitter
+    // void* m_emitter;
+        
+    //! Receiver
+    void* m_receiver;
+        
+    //! callback request functions
+    // void*(EmitterType::*m_emitterCallback)();
     
     //! callback request functions
-    void*(EmitterType::*m_callback)();
+    void(ReceiverType::*m_callback)(void*);
+    
+    //! signal
+    std::shared_ptr<Request<DataType>> m_signal;
+    
+    //! mutex member
+    std::recursive_mutex m_mutex;
     
 };
+    
 
-    
-    
 }
 }
 // end namespace
 //---------------------------------------------------------------------
 
 #endif
-

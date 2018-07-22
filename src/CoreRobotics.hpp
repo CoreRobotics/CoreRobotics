@@ -363,9 +363,7 @@ project includes all the CoreRobotics modules.
 //---------------------------------------------------------------------------
 #include "Types.hpp"
 #include "Item.hpp"
-// #include "CRProperties.hpp"
 #include "Clock.hpp"
-// #include "Mutex.hpp"
 #include "Thread.hpp"
 #include "Step.hpp"
 #include "Loop.hpp"
@@ -378,6 +376,7 @@ project includes all the CoreRobotics modules.
 //! \brief This module implements a signal framework.
 //---------------------------------------------------------------------------
 #include "Signal.hpp"
+#include "Slot.hpp"
 #include "Connection.hpp"
 
 
@@ -388,7 +387,6 @@ project includes all the CoreRobotics modules.
 #include "Origin.hpp"
 #include "Node.hpp"
 #include "Link.hpp"
-#include "Manipulator.hpp"
 #include "Robot.hpp"
 
 
@@ -413,21 +411,27 @@ project includes all the CoreRobotics modules.
 
 
 //---------------------------------------------------------------------------
-//! \defgroup model Model
-//! \brief This module implements generic model (sensor, motion, and
-//! noise) representations.
+//! \defgroup noise Noise
+//! \brief This module implements noise models.
 //---------------------------------------------------------------------------
 #include "NoiseModel.hpp"
 #include "NoiseGaussian.hpp"
 #include "NoiseUniform.hpp"
 #include "NoiseMixture.hpp"
 #include "Gmm.hpp"
-#include "SensorModel.hpp"
-#include "SensorLinear.hpp"
-#include "SensorProbabilistic.hpp"
-#include "MotionModel.hpp"
-#include "MotionLinear.hpp"
-#include "MotionProbabilistic.hpp"
+
+
+//---------------------------------------------------------------------------
+//! \defgroup model Model
+//! \brief This module implements model (sensor and motion) representations.
+//---------------------------------------------------------------------------
+#include "Motion.hpp"
+// #include "SensorModel.hpp"
+// #include "SensorLinear.hpp"
+// #include "SensorProbabilistic.hpp"
+// #include "MotionModel.hpp"
+// #include "MotionLinear.hpp"
+// #include "MotionProbabilistic.hpp"
 
 
 //---------------------------------------------------------------------------
@@ -436,10 +440,10 @@ project includes all the CoreRobotics modules.
 //! motion and actions.
 //---------------------------------------------------------------------------
 // #include "Policy.hpp"
-#include "InverseKinematics.hpp"
-#include "NullSpace.hpp"
-#include "HardLimits.hpp"
-#include "TrajectoryGenerator.hpp"
+// #include "InverseKinematics.hpp"
+// #include "NullSpace.hpp"
+// #include "HardLimits.hpp"
+// #include "TrajectoryGenerator.hpp"
 
 
 #endif

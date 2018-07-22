@@ -51,23 +51,35 @@ using namespace cr::signal;
 
 
 //
-// Test signal connection
+// Test Slot connection
 //
-TEST(Signal, Request){
+TEST(Slot, Step){
     
     // set up a Frame
-    FrameEuler* myClass = new FrameEuler();
-    myClass->setFreeVariable(CR_EULER_FREE_POS_X);
-    myClass->setFreeValue(0.71);
+    FrameEuler* myClass1 = new FrameEuler();
+    myClass1->setFreeVariable(CR_EULER_FREE_POS_X);
+    myClass1->setFreeValue(0.71);
     
     // create the emitter
-    std::shared_ptr<Signal<double, FrameEuler>> mySignal = Signal<double, FrameEuler>::create(myClass, &FrameEuler::getFreeValue);
+    std::shared_ptr<Signal<double, FrameEuler>> mySignal = Signal<double, FrameEuler>::create(myClass1, &FrameEuler::getFreeValue);
+    
     
     // now make sure the parent is identical
-    EXPECT_EQ(myClass, mySignal->getEmitter());
-    
-    // and check the data value
+    EXPECT_EQ(myClass1, mySignal->getEmitter());
     EXPECT_DOUBLE_EQ(0.71, mySignal->request());
+    
+    
+    // now create the slot
+    FrameEuler* myClass2 = new FrameEuler();
+    myClass2->setFreeVariable(CR_EULER_FREE_POS_X);
+    myClass2->setFreeValue(0);
+    
+    // now create the slot
+    // Slot<double, FrameEuler> mySlot(mySignal, myClass2, &FrameEuler::setFreeValue);
+    // EXPECT_DOUBLE_EQ(0.71, mySlot.request());
+    
+    // step the slot
+    
 }
 
 
