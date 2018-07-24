@@ -269,6 +269,9 @@ class Robot : public Node
         //! Arbitrary frame for computing tip position
         // cr::Frame* m_tipFrame;
     
+        //! type (read only)
+        std::string m_type = "Robot";
+    
 };
 
     

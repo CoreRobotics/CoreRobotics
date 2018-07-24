@@ -90,8 +90,14 @@ class Step
     // Functions to be implemented
     public:
     
-        //! The step function must be implemented in derived classes
+        //! The onStep function must be implemented in derived classes
         virtual void step() = 0;
+    
+        //! The onStart function can be implemented in derived classes
+        virtual void onStart() {};
+    
+        //! The onStop function can be implemented in derived classes
+        virtual void onStop() {};
 };
     
     

@@ -153,6 +153,9 @@ class Link : public Node
         //! center of mass node
         NodePtr m_comItem;
     
+        //! type (read only)
+        std::string m_type = "Link";
+    
 };
 
 }

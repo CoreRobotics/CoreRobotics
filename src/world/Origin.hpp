@@ -115,6 +115,9 @@ class Origin : public core::Item
         //! add a world item
         NodePtr m_rootItem;
     
+        //! type (read only)
+        std::string m_type = "Origin";
+    
 };
 
 }

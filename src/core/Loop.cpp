@@ -121,6 +121,9 @@ void Loop::start(){
         // Setup the clock
         m_timer.startTimer();
         
+        // Start the element
+        m_element->onStart();
+        
         // set run flag (before assigning the callback)
         m_runState = CR_RUN_STATE_RUNNING;
         
@@ -167,6 +170,9 @@ void Loop::stop(){
     // check the thread state
     if (m_runState != CR_RUN_STATE_STOPPED)
     {
+        // stop the element
+        m_element->onStop();
+        
         // set run flag
         m_runState = CR_RUN_STATE_STOPPED;
         

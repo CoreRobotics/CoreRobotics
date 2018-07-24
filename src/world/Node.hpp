@@ -154,6 +154,8 @@ class Node
         //! list of children
         std::vector<NodePtr> m_children;
     
+        //! type (read only)
+        std::string m_type = "Node";
     
     
 };

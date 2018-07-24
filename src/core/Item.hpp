@@ -87,6 +87,9 @@ class Item {
 		//! return the item icon
 		std::string getIcon() { return m_icon; }
     
+        //! return the item type
+        std::string getType() { return m_type; }
+    
     
     // Protected members
     protected:
@@ -96,6 +99,9 @@ class Item {
 
 		//! icon
 		std::string m_icon;
+    
+        //! type (read only)
+        std::string m_type = "Generic";
 };
     
 }
