@@ -377,6 +377,7 @@ project includes all the CoreRobotics modules.
 //---------------------------------------------------------------------------
 #include "Signal.hpp"
 #include "Slot.hpp"
+#include "Log.hpp"
 
 
 //---------------------------------------------------------------------------

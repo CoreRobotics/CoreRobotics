@@ -69,58 +69,58 @@ template <typename DataType, typename ReceiverType>
 class Slot : public core::Step
 {
     
-//! constructor
-public:
+    // constructor
+    public:
     
-    //! constructor
-    Slot(std::shared_ptr<Requester<DataType>> i_signal,
-         ReceiverType* i_receiver,
-         void(ReceiverType::*i_callback)(DataType)) {
-        m_signal = i_signal;
-        m_receiver = static_cast<void*>(i_receiver);
-        m_callback = reinterpret_cast<void(ReceiverType::*)(void*)>(i_callback);
-    }
+        //! constructor
+        Slot(std::shared_ptr<Requester<DataType>> i_signal,
+             ReceiverType* i_receiver,
+             void(ReceiverType::*i_callback)(DataType)) {
+            m_signal = i_signal;
+            m_receiver = static_cast<void*>(i_receiver);
+            m_callback = reinterpret_cast<void(ReceiverType::*)(void*)>(i_callback);
+        }
     
-    //! Create a new slot
-    static std::shared_ptr<Slot<DataType, ReceiverType>> create(
-            std::shared_ptr<Requester<DataType>> i_signal,
-            ReceiverType* i_receiver,
-            void(ReceiverType::*i_callback)(DataType)) {
-        return std::make_shared<Slot<DataType, ReceiverType>>(i_signal, i_receiver, i_callback);
-    }
-    
-    
-// public access functions
-public:
-    
-    //! get the receiver
-    ReceiverType* getReceiver() { return static_cast<ReceiverType*>(m_receiver); }
-    
-    //! step the data push
-    virtual void step() {
-        ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
-        void(ReceiverType::*fcn)(DataType) = reinterpret_cast<void(ReceiverType::*)(DataType)>(m_callback);
-        DataType d = m_signal->request();
-        m_mutex.lock();
-        (c->*fcn)( d );
-        m_mutex.unlock();
-    }
+        //! Create a new slot
+        static std::shared_ptr<Slot<DataType, ReceiverType>> create(
+                std::shared_ptr<Requester<DataType>> i_signal,
+                ReceiverType* i_receiver,
+                void(ReceiverType::*i_callback)(DataType)) {
+            return std::make_shared<Slot<DataType, ReceiverType>>(i_signal, i_receiver, i_callback);
+        }
     
     
-// inherited access members
-private:
-        
-    //! Receiver
-    void* m_receiver;
+    // public access functions
+    public:
     
-    //! callback request functions
-    void(ReceiverType::*m_callback)(void*);
+        //! get the receiver
+        ReceiverType* getReceiver() { return static_cast<ReceiverType*>(m_receiver); }
     
-    //! signal
-    std::shared_ptr<Requester<DataType>> m_signal;
+        //! step the data push
+        virtual void step() {
+            ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
+            void(ReceiverType::*fcn)(DataType) = reinterpret_cast<void(ReceiverType::*)(DataType)>(m_callback);
+            DataType d = m_signal->request();
+            m_mutex.lock();
+            (c->*fcn)( d );
+            m_mutex.unlock();
+        }
     
-    //! mutex member
-    std::recursive_mutex m_mutex;
+    
+    // inherited access members
+    private:
+    
+        //! Receiver
+        void* m_receiver;
+    
+        //! callback request functions
+        void(ReceiverType::*m_callback)(void*);
+    
+        //! signal
+        std::shared_ptr<Requester<DataType>> m_signal;
+    
+        //! mutex member
+        std::recursive_mutex m_mutex;
     
 };
     

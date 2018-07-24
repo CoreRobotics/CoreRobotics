@@ -38,57 +38,114 @@
  
  */
 //---------------------------------------------------------------------
+// Begin header definition
 
-#include "Motion.hpp"
-#include "Integration.hpp"
+#ifndef CR_LOG_HPP_
+#define CR_LOG_HPP_
+
+#include "Step.hpp"
+#include "Clock.hpp"
+#include "Signal.hpp"
+#include "Eigen/Dense"
+#include <fstream>
+#include <string>
+#include <vector>
+#include <boost/variant.hpp>
+
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
-namespace model {
+namespace signal {
+
+
+//! Node shared pointer
+class Log;
+typedef std::shared_ptr<Log> LogPtr;
     
     
+    
+//! Supported signal list
+typedef boost::variant<Requester<double>, Requester<bool>, Requester<int>, Requester<Eigen::VectorXd>> SupportedSignals;
+    
+    
+    
+
 //---------------------------------------------------------------------
 /*!
- The constructor creates a motion model.\n
+ \class Log
+ \ingroup signal
  
- \param[in] i_x0 - the initial state.
- \param[in] i_u0 - the initial action.
- \param[in] i_timeStep - the time step of the system
+ \brief This class implements a signal logger.
+ 
+ \details
+ ## Description
+ 
  */
 //---------------------------------------------------------------------
-Motion::Motion(Eigen::VectorXd i_x0,
-               Eigen::VectorXd i_u0,
-               double i_dt)
+class Log
+    : public core::Step, public core::Item
 {
-    m_time = 0;
-    m_state = i_x0;
-    m_action = i_u0;
-    m_dt = i_dt;
-}
 
+    // Constructor and Destructor
+    public:
+    
+        //! Class constructor
+        Log();
+    
+        //! destructor
+        ~Log() {};
+    
+        //! create a new log
+        static LogPtr create();
+    
 
-//---------------------------------------------------------------------
-/*!
- This method steps the motion model, updating the internal state.
- */
-//---------------------------------------------------------------------
-void Motion::step()
-{
+    // signal log controls
+    public:
     
-    // use the bound member function pointer
-    // https://stackoverflow.com/questions/7582546/using-generic-stdfunction-objects-with-member-functions-in-one-class
-    //
-    // (lambdas create a memory leak with shared pointers!
-    // http://floating.io/2017/07/lambda-shared_ptr-memory-leak/)
-    m_state = Integration::rungeKuttaStep(m_fcn, m_time, m_state, m_action, m_dt);
+        // add a raw signal pointer to the list
+        void add(SupportedSignals i_signal);
     
-    // update the time
-    m_time = m_time + m_dt;
-}
+    
+    // Step method
+    public:
+    
+        //! step the signal log
+        virtual void step();
+    
+        //! start the signal log
+        virtual void onStart();
+    
+        //! stop the signal log
+        virtual void onStop();
+    
+
+    // Protected members
+    protected:
+    
+        //! list of signals to log
+        std::vector<SupportedSignals> m_signals;
+    
+        //! filename
+        std::string m_filename;
+    
+        //! timer
+        core::Clock m_timer;
+    
+        // ofstream object
+        std::ofstream m_logFile;
+    
+        //! type (read only)
+        std::string m_type = "Log";
+    
+};
 
 
 }
 }
 // end namespace
 //---------------------------------------------------------------------
+
+
+#endif
+

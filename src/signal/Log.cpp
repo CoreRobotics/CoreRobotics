@@ -39,52 +39,65 @@
  */
 //---------------------------------------------------------------------
 
-#include "Motion.hpp"
-#include "Integration.hpp"
+#include "Log.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
-namespace model {
+namespace signal {
     
     
 //---------------------------------------------------------------------
 /*!
- The constructor creates a motion model.\n
- 
- \param[in] i_x0 - the initial state.
- \param[in] i_u0 - the initial action.
- \param[in] i_timeStep - the time step of the system
+ The constructor creates a log.\n
  */
 //---------------------------------------------------------------------
-Motion::Motion(Eigen::VectorXd i_x0,
-               Eigen::VectorXd i_u0,
-               double i_dt)
+Log::Log()
 {
-    m_time = 0;
-    m_state = i_x0;
-    m_action = i_u0;
-    m_dt = i_dt;
+    
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ Create a new signal log item.\n
+ */
+//---------------------------------------------------------------------
+LogPtr Log::create(){
+    return std::make_shared<Log>();
 }
 
 
 //---------------------------------------------------------------------
 /*!
- This method steps the motion model, updating the internal state.
+ This method steps the signal log.
  */
 //---------------------------------------------------------------------
-void Motion::step()
+void Log::step()
 {
     
-    // use the bound member function pointer
-    // https://stackoverflow.com/questions/7582546/using-generic-stdfunction-objects-with-member-functions-in-one-class
-    //
-    // (lambdas create a memory leak with shared pointers!
-    // http://floating.io/2017/07/lambda-shared_ptr-memory-leak/)
-    m_state = Integration::rungeKuttaStep(m_fcn, m_time, m_state, m_action, m_dt);
+}
     
-    // update the time
-    m_time = m_time + m_dt;
+    
+//---------------------------------------------------------------------
+/*!
+ This method starts the signal log.
+ */
+//---------------------------------------------------------------------
+void Log::onStart()
+{
+    m_logFile.open( m_filename.append(".csv") );
+}
+    
+    
+//---------------------------------------------------------------------
+/*!
+ This method stops the signal log.
+ */
+//---------------------------------------------------------------------
+void Log::onStop()
+{
+    m_logFile.close();
 }
 
 

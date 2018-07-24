@@ -46,6 +46,8 @@
 #include "Step.hpp"
 #include "Eigen/Dense"
 
+using namespace std::placeholders;
+
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
@@ -104,7 +106,7 @@ typedef std::shared_ptr<Motion> MotionPtr;
  */
 //---------------------------------------------------------------------
 class Motion
-    : public std::enable_shared_from_this<Motion>, core::Step
+    : public core::Step
 {
 
     // Constructor and Destructor
@@ -143,7 +145,7 @@ class Motion
     public:
     
         //! step the motion (i.e. update the internal state)
-        void step();
+        virtual void step();
     
 
     // Public Methods
@@ -157,6 +159,9 @@ class Motion
 
     // Protected Members
     protected:
+    
+        //! bound callback function
+        std::function<Eigen::VectorXd(double,Eigen::VectorXd,Eigen::VectorXd)> m_fcn = std::bind(&Motion::callback, this, _1, _2, _3);
     
         //! Sample rate (s)
         double m_dt;
