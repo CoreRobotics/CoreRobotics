@@ -122,7 +122,7 @@ void Log::onStart()
     for (int i = 0; i < m_signals.size(); i++) {
         unsigned n = m_signals.at(i)->size();
         for (int j = 0; j < n; j++) {
-            std::string index = "[" + std::to_string(n) + "]";
+            std::string index = "[" + std::to_string(j) + "]";
             Utility::write(m_logFile, m_signals.at(i)->getName().append(index));
         }
     }
