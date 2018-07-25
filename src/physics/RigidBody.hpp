@@ -81,8 +81,6 @@ class RigidBody {
     
         //! Class constructor
         RigidBody();
-        // DEPRECATE
-        RigidBody(Frame* i_frame);
     
         //! Class destructor
         virtual ~RigidBody();
@@ -90,9 +88,6 @@ class RigidBody {
 
     // Get/Set Methods
     public:
-    
-        //! DEPRECTATE Sets the pointer to the frame class for the transformation
-        void setFrame(Frame* i_frame) {this->m_frame = i_frame;}
     
         //! Set the center of mass
         void setCenterOfMass(const Eigen::Vector3d& i_com) { m_com = i_com; }
@@ -114,13 +109,6 @@ class RigidBody {
     
         //! get the mass matrix
         Eigen::Matrix<double, 6, 6> getMassMatrix();
-    
-
-    // Public Members
-    public:
-    
-        //! DEPRECATE Pointer to the rigid body frame transformation
-        cr::Frame* m_frame;
     
     
     // Private Members

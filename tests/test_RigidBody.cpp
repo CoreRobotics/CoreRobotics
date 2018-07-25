@@ -48,10 +48,12 @@ using namespace cr;
 //
 // Test the set frame method
 //
+/*
 TEST(RigidBody, SetFrame){
     Frame frame;
     RigidBody link;
     link.setFrame(&frame);
     EXPECT_EQ(link.m_frame, &frame);
 }
+ */
 

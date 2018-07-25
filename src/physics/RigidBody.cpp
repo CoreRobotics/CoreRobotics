@@ -57,14 +57,6 @@ RigidBody::RigidBody()
     m_mass = 0;
     m_inertia.setZero();
 }
-    
-RigidBody::RigidBody(Frame* i_frame)
-{
-    m_com << 0, 0, 0;
-    m_mass = 0;
-    m_inertia.setZero();
-    m_frame = i_frame;
-}
 
 
 //---------------------------------------------------------------------
