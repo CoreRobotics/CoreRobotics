@@ -38,8 +38,17 @@
  
  */
 //---------------------------------------------------------------------
+// Begin header definition
 
-#include "Log.hpp"
+#ifndef CR_UTILITY_HPP_
+#define CR_UTILITY_HPP_
+
+
+#include "Eigen/Dense"
+#include <iostream>
+#include <string>
+#include <boost/variant.hpp>
+
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -47,107 +56,96 @@ namespace cr {
 namespace signal {
     
     
+//! Supported signal types list
+typedef boost::variant<std::string, bool, int, float, double, Eigen::VectorXd> SupportedSignalTypes;
+    
+    
+//! Enumerator for signal types
+enum SignalType {
+    TYPE_STRING,
+    TYPE_BOOL,
+    TYPE_INT,
+    TYPE_FLOAT,
+    TYPE_DOUBLE,
+    TYPE_VECTOR,
+};
+    
+    
+
 //---------------------------------------------------------------------
 /*!
- The constructor creates a log.\n
- */
-//---------------------------------------------------------------------
-Log::Log()
-{
-    
-}
-    
-    
-//---------------------------------------------------------------------
-/*!
- Create a new signal log item.\n
- */
-//---------------------------------------------------------------------
-LogPtr Log::create(){
-    return std::make_shared<Log>();
-}
-    
-    
-//---------------------------------------------------------------------
-/*!
- This method adds a signal to the list.
+ \class Utility
+ \ingroup signal
  
- \param[in]     i_signal - the signal to add
+ \brief This static class provides utilities for supported signal types
+ 
+ \details
+ ## Description
+ 
  */
 //---------------------------------------------------------------------
-void Log::add(std::shared_ptr<SignalBase> i_signal)
+class Utility
 {
-    m_signals.push_back(i_signal);
-}
+    
+    
+    // Static methods for writing data
+    public:
+    
 
+        //! write a supported signal type
+        // static void write(std::ostream& i_log, SupportedSignalTypes i_x);
+    
+        //! write string
+        static void write(std::ostream& i_log, std::string i_x);
+    
+        //! write bool
+        static void write(std::ostream& i_log, bool i_x);
+    
+        //! write int
+        static void write(std::ostream& i_log, int i_x);
+    
+        //! write float
+        static void write(std::ostream& i_log, float i_x);
+    
+        //! write double
+        static void write(std::ostream& i_log, double i_x);
+    
+        //! write vector
+        static void write(std::ostream& i_log, Eigen::VectorXd i_x);
+    
+    
+    // Static methods for getting data size
+    public:
+    
+        //! size of the supported signal types
+        // static unsigned size(SupportedSignalTypes i_x);
+    
+        //! size string
+        static unsigned size(std::string i_x) { return 1; }
 
-//---------------------------------------------------------------------
-/*!
- This method steps the signal log.
- */
-//---------------------------------------------------------------------
-void Log::step()
-{
-    // get the time
-    double t = m_timer.getElapsedTime();
-    
-    // write the time
-    Utility::write(m_logFile, t);
-    
-    // now write each signal value
-    for (int i = 0; i < m_signals.size(); i++) {
-        m_signals.at(i)->print(m_logFile);
-    }
-    
-    // write the new line
-    m_logFile << "\n";
-}
-    
-    
-//---------------------------------------------------------------------
-/*!
- This method starts the signal log.
- */
-//---------------------------------------------------------------------
-void Log::onStart()
-{
-    // open the file
-    m_logFile.open( m_name );
-    
-    // write the time signal
-    std::string str = "time";
-    Utility::write(m_logFile, str);
-    
-    // write each signal header
-    for (int i = 0; i < m_signals.size(); i++) {
-        unsigned n = m_signals.at(i)->size();
-        for (int j = 0; j < n; j++) {
-            std::string index = "[" + std::to_string(n) + "]";
-            Utility::write(m_logFile, m_signals.at(i)->getName().append(index));
-        }
-    }
-    
-    // write the new line
-    m_logFile << "\n";
-    
-    // start the internal clock
-    m_timer.startTimer();
-}
-    
-    
-//---------------------------------------------------------------------
-/*!
- This method stops the signal log.
- */
-//---------------------------------------------------------------------
-void Log::onStop()
-{
-    m_logFile.close();
-}
-    
+        //! size bool
+        static unsigned size(bool i_x) { return 1; }
+
+        //! size int
+        static unsigned size(int i_x) { return 1; }
+
+        //! size float
+        static unsigned size(float i_x) { return 1; }
+
+        //! size double
+        static unsigned size(double i_x) { return 1; }
+
+        //! size vector
+        static unsigned size(Eigen::VectorXd i_x) { return i_x.size(); }
+
+};
 
 
 }
 }
 // end namespace
 //---------------------------------------------------------------------
+
+
+#endif
+

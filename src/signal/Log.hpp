@@ -46,11 +46,9 @@
 #include "Step.hpp"
 #include "Clock.hpp"
 #include "Signal.hpp"
-#include "Eigen/Dense"
 #include <fstream>
 #include <string>
 #include <vector>
-#include <boost/variant.hpp>
 
 
 //---------------------------------------------------------------------
@@ -62,13 +60,6 @@ namespace signal {
 //! Node shared pointer
 class Log;
 typedef std::shared_ptr<Log> LogPtr;
-    
-    
-    
-//! Supported signal list
-typedef boost::variant<Requester<double>, Requester<bool>, Requester<int>, Requester<Eigen::VectorXd>> SupportedSignals;
-    
-    
     
 
 //---------------------------------------------------------------------
@@ -103,8 +94,8 @@ class Log
     // signal log controls
     public:
     
-        // add a raw signal pointer to the list
-        void add(SupportedSignals i_signal);
+        //! add a signal to the list
+        void add(std::shared_ptr<SignalBase> i_signal);
     
     
     // Step method
@@ -124,7 +115,8 @@ class Log
     protected:
     
         //! list of signals to log
-        std::vector<SupportedSignals> m_signals;
+        // std::vector<Requester<SupportedSignalTypes>*> m_signals;
+        std::vector<std::shared_ptr<SignalBase>> m_signals;
     
         //! filename
         std::string m_filename;

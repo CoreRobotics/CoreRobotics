@@ -44,12 +44,15 @@
 #define CR_SIGNAL_HPP_
 
 #include "Item.hpp"
+#include "Utility.hpp"
 #include <memory>
+#include <fstream>
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
 namespace signal {
+    
     
     
 //---------------------------------------------------------------------
@@ -63,21 +66,35 @@ namespace signal {
  
  */
 //---------------------------------------------------------------------
-class SignalBase {
+class SignalBase : public core::Item
+{
     
-public:
+    // public methods
+    public:
     
-    //! constructor
-    SignalBase() {};
+        //! constructor
+        SignalBase() {};
+    
+        //! get the signal dimension
+        virtual unsigned size() = 0;
+    
+        //! print signal value to ostream
+        virtual void print(std::ostream& i_log) = 0;
+    
+    
+    // private members
+    private:
+    
+        //! type (read only)
+        std::string m_type = "Signal";
     
 };
     
     
     
-    
 //---------------------------------------------------------------------
 /*!
- \class Request
+ \class Requester
  \ingroup signal
  
  \brief
@@ -87,7 +104,7 @@ public:
  */
 //---------------------------------------------------------------------
 template <typename DataType>
-class Requester : public std::enable_shared_from_this<Requester<DataType>>, public core::Item
+class Requester : public std::enable_shared_from_this<Requester<DataType>>, public SignalBase
 {
 
     // public methods
@@ -98,13 +115,6 @@ class Requester : public std::enable_shared_from_this<Requester<DataType>>, publ
     
         //! request function to implement
         virtual DataType request() = 0;
-    
-    
-    // private members
-    private:
-    
-        //! type (read only)
-        std::string m_type = "Signal";
     
 };
     
@@ -158,6 +168,24 @@ class Signal : public Requester<DataType>
             m_mutex.unlock();
             return d;
         }
+    
+    
+    // signal base functions
+    public:
+    
+        //! get the signal dimension
+        virtual unsigned size() {
+            DataType d = request();
+            return Utility::size(d);
+        }
+    
+        //! print signal value to ostream
+        virtual void print(std::ostream& i_log) {
+            DataType d = request();
+            Utility::write(i_log, d);
+        }
+    
+    
     
     //! private members
     private:
