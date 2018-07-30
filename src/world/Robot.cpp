@@ -98,9 +98,9 @@ void Robot::addLink(LinkPtr i_link){
  \return    number of rigid body links in the manipulator
  */
 //---------------------------------------------------------------------
-int Robot::getNumberOfLinks()
+unsigned Robot::getNumberOfLinks()
 {
-    return (int)m_links.size();
+    return (unsigned)m_links.size();
 }
 
 
@@ -112,10 +112,10 @@ int Robot::getNumberOfLinks()
  \return    degrees of freedom (DOF)
  */
 //---------------------------------------------------------------------
-int Robot::getDegreesOfFreedom()
+unsigned Robot::getDegreesOfFreedom()
 {
-    int n = 0;
-    for (int i = 0; i < m_links.size(); i++) {
+	unsigned n = 0;
+    for (size_t i = 0; i < m_links.size(); i++) {
         if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
             n++;
         }
@@ -138,7 +138,7 @@ void Robot::setConfiguration(const Eigen::VectorXd& i_q)
     int k = 0;
     for (size_t i = 0; i < m_links.size(); i++) {
         if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
-            m_links.at(i)->setFreeVariable(i_q(k));
+            m_links.at(i)->setFreeValue(i_q(k));
             k++;
         }
     }
@@ -157,14 +157,58 @@ void Robot::setConfiguration(const Eigen::VectorXd& i_q)
 Eigen::VectorXd Robot::getConfiguration()
 {
     Eigen::VectorXd q(this->getDegreesOfFreedom());
-    int k = 0;
+	unsigned k = 0;
     for (size_t i = 0; i < m_links.size(); i++) {
         if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
-            q(k) = m_links.at(i)->getFreeVariable();
+            q(k) = m_links.at(i)->getFreeValue();
             k++;
         }
     }
     return q;
+}
+
+
+//---------------------------------------------------------------------
+/*!
+This method sets the configuration space velocities. If the robot is
+fully defined by revolute joints, then this operation corresponds to
+setting the joint angle velocities.\n
+
+\param[in]     i_qDot         vector of configuration velocities
+*/
+//---------------------------------------------------------------------
+void Robot::setVelocity(const Eigen::VectorXd& i_qDot)
+{
+	unsigned k = 0;
+	for (size_t i = 0; i < m_links.size(); i++) {
+		if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+			m_links.at(i)->setFreeVelocity(i_qDot(k));
+			k++;
+		}
+	}
+}
+
+
+//---------------------------------------------------------------------
+/*!
+This method gets the configuration space velocities. If the robot is
+fully defined by revolute joints, then this operation corresponds to
+getting the joint angle velocities.\n
+
+\return    vector of configuration velocities
+*/
+//---------------------------------------------------------------------
+Eigen::VectorXd Robot::getVelocity()
+{
+	Eigen::VectorXd q(this->getDegreesOfFreedom());
+	unsigned k = 0;
+	for (size_t i = 0; i < m_links.size(); i++) {
+		if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+			q(k) = m_links.at(i)->getFreeVelocity();
+			k++;
+		}
+	}
+	return q;
 }
     
     
@@ -200,7 +244,7 @@ Eigen::MatrixXd Robot::jacobian(NodePtr i_node, EulerMode i_mode)
     q0 = getConfiguration();
     
     // step through each link
-    int i = 0;
+	unsigned i = 0;
     for (size_t k = 0; k < m_links.size(); k++) {
         
         // if free variable
@@ -237,7 +281,7 @@ Eigen::MatrixXd Robot::jacobian(NodePtr i_node, EulerMode i_mode)
 //---------------------------------------------------------------------
 /*!
  This method computes the generalized mass matrix in the world frame,
- i.e. the mass w.r.t. the generalized coordinates (free variables). \n
+ i.e. the mass matrix in the configuration space. \n
  
  The generalized mass produces:
  
@@ -250,12 +294,12 @@ Eigen::MatrixXd Robot::jacobian(NodePtr i_node, EulerMode i_mode)
 //---------------------------------------------------------------------
 Eigen::MatrixXd Robot::mass()
 {
-    int n = getDegreesOfFreedom();
+	unsigned n = getDegreesOfFreedom();
     Eigen::MatrixXd M(n,n);
     M.setZero();
     
     // step through each link
-    int i = 0;
+	unsigned i = 0;
     for (size_t k = 0; k < m_links.size(); k++) {
         
         // if free variable
@@ -844,7 +888,7 @@ int Robot::addTool(unsigned i_parentIndex, Frame* i_tool)
 void Robot::print(std::ostream& i_stream)
 {
     unsigned d = getDepth();
-    for (int i = 0; i < d; i++){
+    for (size_t i = 0; i < d; i++){
         i_stream << "  ";
     }
     std::string id = "N";
@@ -855,7 +899,7 @@ void Robot::print(std::ostream& i_stream)
     }
     i_stream << "+ [" << id << "] world::Manipulator #DOF = " <<
         getDegreesOfFreedom() << " '" << getName() << "'\n";
-    for (int i = 0; i < m_children.size(); i++)
+    for (size_t i = 0; i < m_children.size(); i++)
     {
         m_children.at(i)->print(i_stream);
     }

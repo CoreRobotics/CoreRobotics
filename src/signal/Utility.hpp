@@ -47,7 +47,7 @@
 #include "Eigen/Dense"
 #include <iostream>
 #include <string>
-#include <boost/variant.hpp>
+// #include <boost/variant.hpp>
 
 
 //---------------------------------------------------------------------
@@ -57,7 +57,7 @@ namespace signal {
     
     
 //! Supported signal types list
-typedef boost::variant<std::string, bool, int, float, double, Eigen::VectorXd> SupportedSignalTypes;
+// typedef boost::variant<std::string, bool, int, float, double, Eigen::VectorXd> SupportedSignalTypes;
     
     
 //! Enumerator for signal types

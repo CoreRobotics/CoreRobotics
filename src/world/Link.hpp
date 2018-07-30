@@ -105,11 +105,17 @@ class Link : public Node
         //! return the degree of freedom
         EulerFreeVariable getDegreeOfFreedom() { return m_frame.getFreeVariable(); }
     
-        //! set the driven vale
-        void setFreeVariable(const double& i_value) { m_frame.setFreeValue(i_value); }
+        //! set the driven value
+        void setFreeValue(const double& i_value) { m_frame.setFreeValue(i_value); }
     
         //! return the driven value
-        double getFreeVariable() { return m_frame.getFreeValue(); }
+        double getFreeValue() { return m_frame.getFreeValue(); }
+
+		//! set the driven velocity
+		void setFreeVelocity(const double& i_velocity) { m_velocity = i_velocity; }
+
+		//! return the driven velocity
+		double getFreeVelocity() { return m_velocity; }
     
         //! set euler mode
         void setEulerMode(const EulerMode& i_mode) { m_frame.setMode(i_mode); }
@@ -149,6 +155,9 @@ class Link : public Node
     
         //! frame - overloaded from Node::m_frame
         FrameEuler m_frame;
+
+		//! free value velocity
+		double m_velocity = 0;
     
         //! center of mass node
         NodePtr m_comItem;

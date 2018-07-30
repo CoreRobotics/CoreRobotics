@@ -151,16 +151,22 @@ class Robot : public Node
     public:
     
         //! Get the number of links in the list
-        int getNumberOfLinks();
+		unsigned getNumberOfLinks();
     
         //! Get the number of driven links (degrees of freedom: DOF)
-        int getDegreesOfFreedom();
+		unsigned getDegreesOfFreedom();
     
         //! Set the configuration (joint) space positions
         void setConfiguration(const Eigen::VectorXd& i_q);
     
         //! Get the configuration (joint) space positions
         Eigen::VectorXd getConfiguration();
+
+		//! Set the configuration (joint) space velocities
+		void setVelocity(const Eigen::VectorXd& i_qDot);
+
+		//! Get the configuration (joint) space velocities
+		Eigen::VectorXd getVelocity();
     
         //! Get the instantaneous forward kinematics
         // Eigen::MatrixXd getForwardKinematics(void);

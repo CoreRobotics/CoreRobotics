@@ -112,7 +112,8 @@ void Log::step()
 void Log::onStart()
 {
     // open the file
-    m_logFile.open( m_name );
+	m_logFile.open( m_name );
+	std::cout << "Log::open() called\n";
     
     // write the time signal
     std::string str = "time";
@@ -143,6 +144,7 @@ void Log::onStart()
 void Log::onStop()
 {
     m_logFile.close();
+	std::cout << "Log::close() called\n";
 }
     
 
