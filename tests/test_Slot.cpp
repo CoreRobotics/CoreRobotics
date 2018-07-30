@@ -56,8 +56,8 @@ using namespace cr::signal;
 TEST(Slot, Step){
     
     // set up 2 links
-    Link* myLink1 = new Link();
-    Link* myLink2 = new Link();
+    LinkPtr myLink1 = Link::create();
+    LinkPtr myLink2 = Link::create();
     
     myLink1->setDegreeOfFreedom(cr::CR_EULER_FREE_POS_X);
     myLink1->setFreeVariable(0.71);

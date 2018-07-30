@@ -74,17 +74,18 @@ class Slot : public core::Step
     
         //! constructor
         Slot(std::shared_ptr<Requester<DataType>> i_signal,
-             ReceiverType* i_receiver,
+             std::shared_ptr<ReceiverType> i_receiver,
              void(ReceiverType::*i_callback)(const DataType&)) {
             m_signal = i_signal;
-            m_receiver = static_cast<void*>(i_receiver);
+            // m_receiver = static_cast<void*>(i_receiver);
+            m_receiver = i_receiver;
             m_callback = reinterpret_cast<void(ReceiverType::*)(void*)>(i_callback);
         }
     
         //! Create a new slot
         static std::shared_ptr<Slot<DataType, ReceiverType>> create(
                 std::shared_ptr<Requester<DataType>> i_signal,
-                ReceiverType* i_receiver,
+                std::shared_ptr<ReceiverType> i_receiver,
                 void(ReceiverType::*i_callback)(const DataType&)) {
             return std::make_shared<Slot<DataType, ReceiverType>>(i_signal, i_receiver, i_callback);
         }
@@ -94,15 +95,17 @@ class Slot : public core::Step
     public:
     
         //! get the receiver
-        ReceiverType* getReceiver() { return static_cast<ReceiverType*>(m_receiver); }
+        // ReceiverType* getReceiver() { return static_cast<ReceiverType*>(m_receiver); }
+        std::shared_ptr<ReceiverType> getReceiver() { return m_receiver; }
     
         //! step the data push
         virtual void step() {
-            ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
+            // ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
             void(ReceiverType::*fcn)(const DataType&) = reinterpret_cast<void(ReceiverType::*)(const DataType&)>(m_callback);
             DataType d = m_signal->request();
             m_mutex.lock();
-            (c->*fcn)( d );
+            // (c->*fcn)( d );
+            (m_receiver.get()->*fcn)( d );
             m_mutex.unlock();
         }
     
@@ -111,7 +114,8 @@ class Slot : public core::Step
     private:
     
         //! Receiver
-        void* m_receiver;
+        // void* m_receiver;
+        std::shared_ptr<ReceiverType> m_receiver;
     
         //! callback request functions
         void(ReceiverType::*m_callback)(void*);

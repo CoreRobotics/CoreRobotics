@@ -140,15 +140,16 @@ class Signal : public Requester<DataType>
     public:
     
         //! constructor
-        Signal(EmitterType* i_emitter,
+        Signal(std::shared_ptr<EmitterType> i_emitter,
                DataType(EmitterType::*i_callback)()) {
-            m_emitter = static_cast<void*>(i_emitter);
+            // m_emitter = static_cast<void*>(i_emitter);
+            m_emitter = i_emitter;
             m_callback = reinterpret_cast<void*(EmitterType::*)()>(i_callback);
         }
     
         //! Create a new signal
         static std::shared_ptr<Signal<DataType, EmitterType>> create(
-            EmitterType* i_emitter,
+            std::shared_ptr<EmitterType> i_emitter,
             DataType(EmitterType::*i_callback)()) {
                 return std::make_shared<Signal<DataType, EmitterType>>(i_emitter, i_callback);
         }
@@ -158,14 +159,16 @@ class Signal : public Requester<DataType>
     public:
     
         //! get the parent
-        EmitterType* getEmitter() { return static_cast<EmitterType*>(m_emitter); }
+        // EmitterType* getEmitter() { return static_cast<EmitterType*>(m_emitter); }
+        std::shared_ptr<EmitterType> getEmitter() { return m_emitter; }
     
         //! request data
         virtual DataType request() {
-            EmitterType* p = static_cast<EmitterType*>(m_emitter);
+            // EmitterType* p = static_cast<EmitterType*>(m_emitter);
             DataType(EmitterType::*fcn)() = reinterpret_cast<DataType(EmitterType::*)()>(m_callback);
             m_mutex.lock();
-            DataType d = (p->*fcn)();
+            // DataType d = (p->*fcn)();
+            DataType d = (m_emitter.get()->*fcn)();
             m_mutex.unlock();
             return d;
         }
@@ -192,7 +195,8 @@ class Signal : public Requester<DataType>
     private:
     
         //! Parent
-        void* m_emitter;
+        // void* m_emitter;
+        std::shared_ptr<EmitterType> m_emitter;
     
         //! callback request functions
         void*(EmitterType::*m_callback)();

@@ -56,7 +56,7 @@ using namespace cr::signal;
 TEST(Signal, Request){
     
     // set up a Frame
-    FrameEuler* myClass = new FrameEuler();
+    std::shared_ptr<FrameEuler> myClass = std::make_shared<FrameEuler>();
     myClass->setFreeVariable(CR_EULER_FREE_POS_X);
     myClass->setFreeValue(0.71);
     
