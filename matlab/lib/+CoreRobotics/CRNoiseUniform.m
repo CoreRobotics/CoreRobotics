@@ -1,7 +1,9 @@
-classdef CRNoiseUniform < CoreRobotics.CRNoiseModel
+classdef CRNoiseUniform < SwigRef
   methods
+    function this = swig_this(self)
+      this = CoreRoboticsMEX(3, self);
+    end
     function self = CRNoiseUniform(varargin)
-      self@CoreRobotics.CRNoiseModel(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
@@ -9,7 +11,7 @@ classdef CRNoiseUniform < CoreRobotics.CRNoiseModel
       else
         tmp = CoreRoboticsMEX(190, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = setParameters(self,varargin)
@@ -34,7 +36,7 @@ classdef CRNoiseUniform < CoreRobotics.CRNoiseModel
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(196, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

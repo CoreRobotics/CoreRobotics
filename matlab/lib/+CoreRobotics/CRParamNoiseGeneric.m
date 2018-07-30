@@ -31,13 +31,13 @@ classdef CRParamNoiseGeneric < SwigRef
       else
         tmp = CoreRoboticsMEX(160, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(161, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

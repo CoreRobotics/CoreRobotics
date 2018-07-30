@@ -11,7 +11,7 @@ classdef CRManipulator < SwigRef
       else
         tmp = CoreRoboticsMEX(141, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = setConfiguration(self,varargin)
@@ -56,7 +56,7 @@ classdef CRManipulator < SwigRef
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(155, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

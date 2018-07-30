@@ -11,7 +11,7 @@ classdef CRFrame < SwigRef
       else
         tmp = CoreRoboticsMEX(95, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = setFreeValue(self,varargin)
@@ -53,7 +53,7 @@ classdef CRFrame < SwigRef
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(108, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

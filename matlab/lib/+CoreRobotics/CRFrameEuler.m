@@ -1,7 +1,9 @@
-classdef CRFrameEuler < CoreRobotics.CRFrame
+classdef CRFrameEuler < SwigRef
   methods
+    function this = swig_this(self)
+      this = CoreRoboticsMEX(3, self);
+    end
     function self = CRFrameEuler(varargin)
-      self@CoreRobotics.CRFrame(SwigRef.Null);
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
@@ -9,7 +11,7 @@ classdef CRFrameEuler < CoreRobotics.CRFrame
       else
         tmp = CoreRoboticsMEX(109, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = setFreeValue(self,varargin)
@@ -57,7 +59,7 @@ classdef CRFrameEuler < CoreRobotics.CRFrame
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(124, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

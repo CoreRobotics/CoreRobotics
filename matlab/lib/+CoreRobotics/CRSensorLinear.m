@@ -11,7 +11,7 @@ classdef CRSensorLinear < SwigRef
       else
         tmp = CoreRoboticsMEX(210, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function varargout = setObservation(self,varargin)
@@ -23,7 +23,7 @@ classdef CRSensorLinear < SwigRef
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(213, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
   end

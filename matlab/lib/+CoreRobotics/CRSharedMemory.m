@@ -11,13 +11,13 @@ classdef CRSharedMemory < SwigRef
       else
         tmp = CoreRoboticsMEX(273, varargin{:});
         self.swigPtr = tmp.swigPtr;
-        tmp.swigPtr = [];
+        tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
         CoreRoboticsMEX(274, self);
-        self.swigPtr=[];
+        self.SwigClear();
       end
     end
     function varargout = addSignal(self,varargin)
