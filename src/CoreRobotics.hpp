@@ -247,7 +247,7 @@ library, test routines, and example code:
 \code
 > mkdir build
 > cd build
-> cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 2015" DEIGEN3_INCLUDE_DIR=<path to eigen3> -DBoost_INCLUDE_DIR=<path to boost> ../
+> cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 2015" -DEIGEN3_INCLUDE_DIR=<path to eigen3> -DBoost_INCLUDE_DIR=<path to boost> ../
 > CoreRobotics.sln
 \endcode
 
