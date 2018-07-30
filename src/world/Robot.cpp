@@ -133,7 +133,7 @@ int Robot::getDegreesOfFreedom()
  \param[in]     i_q         vector of configuration values
  */
 //---------------------------------------------------------------------
-void Robot::setConfiguration(Eigen::VectorXd i_q)
+void Robot::setConfiguration(const Eigen::VectorXd& i_q)
 {
     int k = 0;
     for (size_t i = 0; i < m_links.size(); i++) {

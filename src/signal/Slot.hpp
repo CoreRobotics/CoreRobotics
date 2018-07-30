@@ -75,7 +75,7 @@ class Slot : public core::Step
         //! constructor
         Slot(std::shared_ptr<Requester<DataType>> i_signal,
              ReceiverType* i_receiver,
-             void(ReceiverType::*i_callback)(DataType)) {
+             void(ReceiverType::*i_callback)(const DataType&)) {
             m_signal = i_signal;
             m_receiver = static_cast<void*>(i_receiver);
             m_callback = reinterpret_cast<void(ReceiverType::*)(void*)>(i_callback);
@@ -85,7 +85,7 @@ class Slot : public core::Step
         static std::shared_ptr<Slot<DataType, ReceiverType>> create(
                 std::shared_ptr<Requester<DataType>> i_signal,
                 ReceiverType* i_receiver,
-                void(ReceiverType::*i_callback)(DataType)) {
+                void(ReceiverType::*i_callback)(const DataType&)) {
             return std::make_shared<Slot<DataType, ReceiverType>>(i_signal, i_receiver, i_callback);
         }
     
@@ -99,7 +99,7 @@ class Slot : public core::Step
         //! step the data push
         virtual void step() {
             ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
-            void(ReceiverType::*fcn)(DataType) = reinterpret_cast<void(ReceiverType::*)(DataType)>(m_callback);
+            void(ReceiverType::*fcn)(const DataType&) = reinterpret_cast<void(ReceiverType::*)(const DataType&)>(m_callback);
             DataType d = m_signal->request();
             m_mutex.lock();
             (c->*fcn)( d );

@@ -106,13 +106,13 @@ class Link : public Node
         EulerFreeVariable getDegreeOfFreedom() { return m_frame.getFreeVariable(); }
     
         //! set the driven vale
-        void setFreeVariable(double i_value) { m_frame.setFreeValue(i_value); }
+        void setFreeVariable(const double& i_value) { m_frame.setFreeValue(i_value); }
     
         //! return the driven value
         double getFreeVariable() { return m_frame.getFreeValue(); }
     
         //! set euler mode
-        void setEulerMode(EulerMode i_mode) { m_frame.setMode(i_mode); }
+        void setEulerMode(const EulerMode& i_mode) { m_frame.setMode(i_mode); }
     
         //! get euler mode
         EulerMode getEulerMode() { return m_frame.getMode(); }

@@ -157,7 +157,7 @@ class Robot : public Node
         int getDegreesOfFreedom();
     
         //! Set the configuration (joint) space positions
-        void setConfiguration(Eigen::VectorXd i_q);
+        void setConfiguration(const Eigen::VectorXd& i_q);
     
         //! Get the configuration (joint) space positions
         Eigen::VectorXd getConfiguration();
