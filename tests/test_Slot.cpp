@@ -60,22 +60,22 @@ TEST(Slot, Step){
     LinkPtr myLink2 = Link::create();
     
     myLink1->setDegreeOfFreedom(cr::CR_EULER_FREE_POS_X);
-    myLink1->setFreeVariable(0.71);
+    myLink1->setFreeValue(0.71);
     
     myLink2->setDegreeOfFreedom(cr::CR_EULER_FREE_POS_X);
-    myLink2->setFreeVariable(0);
+    myLink2->setFreeValue(0);
     
-    EXPECT_DOUBLE_EQ(0.71, myLink1->getFreeVariable());
-    EXPECT_DOUBLE_EQ(0, myLink2->getFreeVariable());
+    EXPECT_DOUBLE_EQ(0.71, myLink1->getFreeValue());
+    EXPECT_DOUBLE_EQ(0, myLink2->getFreeValue());
     
     // create the signal
-    std::shared_ptr<Signal<double, Link>> mySignal = Signal<double, Link>::create(myLink1, &Link::getFreeVariable);
+    std::shared_ptr<Signal<double, Link>> mySignal = Signal<double, Link>::create(myLink1, &Link::getFreeValue);
     
     // check the emitter
     EXPECT_EQ(myLink1, mySignal->getEmitter());
     
     // create the slot
-    std::shared_ptr<Slot<double, Link>> mySlot = Slot<double, Link>::create(mySignal, myLink2, &Link::setFreeVariable);
+    std::shared_ptr<Slot<double, Link>> mySlot = Slot<double, Link>::create(mySignal, myLink2, &Link::setFreeValue);
     
     // check the receiver
     EXPECT_EQ(myLink2, mySlot->getReceiver());
@@ -84,8 +84,8 @@ TEST(Slot, Step){
     mySlot->step();
     
     // check the data value
-    EXPECT_DOUBLE_EQ(myLink1->getFreeVariable(), mySignal->request());
-    EXPECT_DOUBLE_EQ(myLink1->getFreeVariable(), myLink2->getFreeVariable() );
+    EXPECT_DOUBLE_EQ(myLink1->getFreeValue(), mySignal->request());
+    EXPECT_DOUBLE_EQ(myLink1->getFreeValue(), myLink2->getFreeValue() );
     
 }
 
