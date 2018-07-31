@@ -1216,48 +1216,40 @@ namespace swig {
 #define SWIGTYPE_p_Eigen__VectorXi swig_types[4]
 #define SWIGTYPE_p_allocator_type swig_types[5]
 #define SWIGTYPE_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t swig_types[6]
-#define SWIGTYPE_p_boost__interprocess__vectorT_double_cr__ShmemAllocator_t swig_types[7]
+#define SWIGTYPE_p_boost__interprocess__vectorT_double_cr__core__ShmemAllocator_t swig_types[7]
 #define SWIGTYPE_p_char swig_types[8]
 #define SWIGTYPE_p_cr__CRParamNoiseGaussian swig_types[9]
 #define SWIGTYPE_p_cr__CRParamNoiseGeneric swig_types[10]
 #define SWIGTYPE_p_cr__CRParamNoiseMixture swig_types[11]
 #define SWIGTYPE_p_cr__CRParamNoiseUniform swig_types[12]
-#define SWIGTYPE_p_cr__CRWaypoint swig_types[13]
-#define SWIGTYPE_p_cr__Clock swig_types[14]
-#define SWIGTYPE_p_cr__Conversion swig_types[15]
-#define SWIGTYPE_p_cr__Frame swig_types[16]
-#define SWIGTYPE_p_cr__FrameDh swig_types[17]
-#define SWIGTYPE_p_cr__FrameEuler swig_types[18]
-#define SWIGTYPE_p_cr__HardLimits swig_types[19]
-#define SWIGTYPE_p_cr__Integration swig_types[20]
-#define SWIGTYPE_p_cr__InverseKinematics swig_types[21]
-#define SWIGTYPE_p_cr__Matrix swig_types[22]
-#define SWIGTYPE_p_cr__NoiseGaussian swig_types[23]
-#define SWIGTYPE_p_cr__NoiseMixture swig_types[24]
-#define SWIGTYPE_p_cr__NoiseModel swig_types[25]
-#define SWIGTYPE_p_cr__NoiseUniform swig_types[26]
-#define SWIGTYPE_p_cr__NullSpace swig_types[27]
-#define SWIGTYPE_p_cr__RigidBody swig_types[28]
-#define SWIGTYPE_p_cr__SensorLinear swig_types[29]
-#define SWIGTYPE_p_cr__SharedMemory swig_types[30]
-#define SWIGTYPE_p_cr__TrajectoryGenerator swig_types[31]
-#define SWIGTYPE_p_cr__world__Manipulator swig_types[32]
-#define SWIGTYPE_p_difference_type swig_types[33]
-#define SWIGTYPE_p_double swig_types[34]
-#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[35]
-#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[36]
-#define SWIGTYPE_p_size_type swig_types[37]
-#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[38]
-#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[39]
-#define SWIGTYPE_p_std__shared_ptrT_cr__world__Manipulator_t swig_types[40]
-#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[41]
-#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[42]
-#define SWIGTYPE_p_std__vectorT_cr__NoiseModel_p_std__allocatorT_cr__NoiseModel_p_t_t swig_types[43]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[44]
-#define SWIGTYPE_p_swig__MatlabSwigIterator swig_types[45]
-#define SWIGTYPE_p_value_type swig_types[46]
-static swig_type_info *swig_types[48];
-static swig_module_info swig_module = {swig_types, 47, 0, 0, 0, 0};
+#define SWIGTYPE_p_cr__Conversion swig_types[13]
+#define SWIGTYPE_p_cr__Frame swig_types[14]
+#define SWIGTYPE_p_cr__FrameDh swig_types[15]
+#define SWIGTYPE_p_cr__FrameEuler swig_types[16]
+#define SWIGTYPE_p_cr__Integration swig_types[17]
+#define SWIGTYPE_p_cr__Matrix swig_types[18]
+#define SWIGTYPE_p_cr__NoiseGaussian swig_types[19]
+#define SWIGTYPE_p_cr__NoiseMixture swig_types[20]
+#define SWIGTYPE_p_cr__NoiseModel swig_types[21]
+#define SWIGTYPE_p_cr__NoiseUniform swig_types[22]
+#define SWIGTYPE_p_cr__RigidBody swig_types[23]
+#define SWIGTYPE_p_cr__core__Clock swig_types[24]
+#define SWIGTYPE_p_cr__core__SharedMemory swig_types[25]
+#define SWIGTYPE_p_difference_type swig_types[26]
+#define SWIGTYPE_p_double swig_types[27]
+#define SWIGTYPE_p_f_Eigen__VectorXd__double swig_types[28]
+#define SWIGTYPE_p_f_double__Eigen__VectorXd swig_types[29]
+#define SWIGTYPE_p_size_type swig_types[30]
+#define SWIGTYPE_p_std__allocatorT_Eigen__MatrixXd_t swig_types[31]
+#define SWIGTYPE_p_std__allocatorT_Eigen__VectorXd_t swig_types[32]
+#define SWIGTYPE_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t swig_types[33]
+#define SWIGTYPE_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t swig_types[34]
+#define SWIGTYPE_p_std__vectorT_cr__NoiseModel_p_std__allocatorT_cr__NoiseModel_p_t_t swig_types[35]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[36]
+#define SWIGTYPE_p_swig__MatlabSwigIterator swig_types[37]
+#define SWIGTYPE_p_value_type swig_types[38]
+static swig_type_info *swig_types[40];
+static swig_module_info swig_module = {swig_types, 39, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2856,22 +2848,6 @@ SWIG_AsVal_unsigned_SS_int (mxArray* obj, unsigned int *val)
 }
 
 
-SWIGINTERNINLINE mxArray*
-SWIG_From_unsigned_SS_int  (unsigned int value)
-{    
-  return SWIG_From_unsigned_SS_long  (value);
-}
-
-
-SWIGINTERN int
-SWIG_AsVal_bool (mxArray* pm, bool *val)
-{
-   if(!mxIsLogicalScalar(pm)) return SWIG_TypeError;
-   if (val) *val = mxIsLogicalScalarTrue(pm);
-   return SWIG_OK;
-}
-
-
 SWIGINTERN int
 SWIG_AsCharPtrAndSize(mxArray* pm, char** cptr, size_t* psize, int *alloc)
 {
@@ -2893,6 +2869,15 @@ SWIG_AsCharPtrAndSize(mxArray* pm, char** cptr, size_t* psize, int *alloc)
 
 
 
+
+
+SWIGINTERN int
+SWIG_AsVal_bool (mxArray* pm, bool *val)
+{
+   if(!mxIsLogicalScalar(pm)) return SWIG_TypeError;
+   if (val) *val = mxIsLogicalScalarTrue(pm);
+   return SWIG_OK;
+}
 
 int _wrap_delete_MatlabSwigIterator(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   swig::MatlabSwigIterator *arg1 = (swig::MatlabSwigIterator *) 0 ;
@@ -6011,14 +5996,14 @@ fail:
 
 int _wrap_new_Clock(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   mxArray * _out;
-  cr::Clock *result = 0 ;
+  cr::core::Clock *result = 0 ;
   
   if (!SWIG_check_num_args("new_Clock",argc,0,0,0)) {
     SWIG_fail;
   }
   (void)argv;
-  result = (cr::Clock *)new cr::Clock();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__Clock, 1 |  0 );
+  result = (cr::core::Clock *)new cr::core::Clock();
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__core__Clock, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -6027,7 +6012,7 @@ fail:
 
 
 int _wrap_delete_Clock(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::Clock *arg1 = (cr::Clock *) 0 ;
+  cr::core::Clock *arg1 = (cr::core::Clock *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
@@ -6037,11 +6022,11 @@ int _wrap_delete_Clock(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
     SWIG_fail;
   }
   is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__Clock, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__core__Clock, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Clock" "', argument " "1"" of type '" "cr::Clock *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Clock" "', argument " "1"" of type '" "cr::core::Clock *""'"); 
   }
-  arg1 = reinterpret_cast< cr::Clock * >(argp1);
+  arg1 = reinterpret_cast< cr::core::Clock * >(argp1);
   if (is_owned) {
     delete arg1;
   }
@@ -6054,7 +6039,7 @@ fail:
 
 
 int _wrap_Clock_startTimer(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::Clock *arg1 = (cr::Clock *) 0 ;
+  cr::core::Clock *arg1 = (cr::core::Clock *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
@@ -6062,11 +6047,11 @@ int _wrap_Clock_startTimer(int resc, mxArray *resv[], int argc, mxArray *argv[])
   if (!SWIG_check_num_args("Clock_startTimer",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__Clock, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__core__Clock, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Clock_startTimer" "', argument " "1"" of type '" "cr::Clock *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Clock_startTimer" "', argument " "1"" of type '" "cr::core::Clock *""'"); 
   }
-  arg1 = reinterpret_cast< cr::Clock * >(argp1);
+  arg1 = reinterpret_cast< cr::core::Clock * >(argp1);
   (arg1)->startTimer();
   _out = (mxArray*)0;
   if (_out) --resc, *resv++ = _out;
@@ -6077,7 +6062,7 @@ fail:
 
 
 int _wrap_Clock_getElapsedTime(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::Clock *arg1 = (cr::Clock *) 0 ;
+  cr::core::Clock *arg1 = (cr::core::Clock *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
@@ -6086,11 +6071,11 @@ int _wrap_Clock_getElapsedTime(int resc, mxArray *resv[], int argc, mxArray *arg
   if (!SWIG_check_num_args("Clock_getElapsedTime",argc,1,1,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__Clock, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__core__Clock, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Clock_getElapsedTime" "', argument " "1"" of type '" "cr::Clock *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Clock_getElapsedTime" "', argument " "1"" of type '" "cr::core::Clock *""'"); 
   }
-  arg1 = reinterpret_cast< cr::Clock * >(argp1);
+  arg1 = reinterpret_cast< cr::core::Clock * >(argp1);
   result = (double)(arg1)->getElapsedTime();
   _out = SWIG_From_double(static_cast< double >(result));
   if (_out) --resc, *resv++ = _out;
@@ -6101,7 +6086,7 @@ fail:
 
 
 int _wrap_Clock_sleep(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::Clock *arg1 = (cr::Clock *) 0 ;
+  cr::core::Clock *arg1 = (cr::core::Clock *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -6112,11 +6097,11 @@ int _wrap_Clock_sleep(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (!SWIG_check_num_args("Clock_sleep",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__Clock, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__core__Clock, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Clock_sleep" "', argument " "1"" of type '" "cr::Clock *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Clock_sleep" "', argument " "1"" of type '" "cr::core::Clock *""'"); 
   }
-  arg1 = reinterpret_cast< cr::Clock * >(argp1);
+  arg1 = reinterpret_cast< cr::core::Clock * >(argp1);
   ecode2 = SWIG_AsVal_double(argv[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Clock_sleep" "', argument " "2"" of type '" "double""'");
@@ -6453,7 +6438,7 @@ int _wrap_Matrix_svd(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   Eigen::VectorXd temp4 ;
   Eigen::MatrixXd temp5 ;
   mxArray * _out;
-  cr::Result result;
+  cr::core::Result result;
   
   if (!SWIG_check_num_args("Matrix_svd",argc,5,5,0)) {
     SWIG_fail;
@@ -6489,7 +6474,7 @@ int _wrap_Matrix_svd(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
     
     arg5 = &temp5;
   }
-  result = (cr::Result)cr::Matrix::svd(arg1,arg2,*arg3,*arg4,*arg5);
+  result = (cr::core::Result)cr::Matrix::svd(arg1,arg2,*arg3,*arg4,*arg5);
   _out = SWIG_From_int(static_cast< int >(result));
   if (_out) --resc, *resv++ = _out;
   {
@@ -6522,7 +6507,7 @@ int _wrap_Matrix_svdInverse(int resc, mxArray *resv[], int argc, mxArray *argv[]
   int ecode2 = 0 ;
   Eigen::MatrixXd temp3 ;
   mxArray * _out;
-  cr::Result result;
+  cr::core::Result result;
   
   if (!SWIG_check_num_args("Matrix_svdInverse",argc,3,3,0)) {
     SWIG_fail;
@@ -6544,7 +6529,7 @@ int _wrap_Matrix_svdInverse(int resc, mxArray *resv[], int argc, mxArray *argv[]
     
     arg3 = &temp3;
   }
-  result = (cr::Result)cr::Matrix::svdInverse(arg1,arg2,*arg3);
+  result = (cr::core::Result)cr::Matrix::svdInverse(arg1,arg2,*arg3);
   _out = SWIG_From_int(static_cast< int >(result));
   if (_out) --resc, *resv++ = _out;
   {
@@ -6834,7 +6819,7 @@ int _wrap_Frame_setFreeValue(int resc, mxArray *resv[], int argc, mxArray *argv[
   double val2 ;
   int ecode2 = 0 ;
   mxArray * _out;
-  cr::Result result;
+  cr::core::Result result;
   
   if (!SWIG_check_num_args("Frame_setFreeValue",argc,2,2,0)) {
     SWIG_fail;
@@ -6849,7 +6834,7 @@ int _wrap_Frame_setFreeValue(int resc, mxArray *resv[], int argc, mxArray *argv[
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Frame_setFreeValue" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  result = (cr::Result)(arg1)->setFreeValue(arg2);
+  result = (cr::core::Result)(arg1)->setFreeValue(arg2);
   _out = SWIG_From_int(static_cast< int >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -7591,7 +7576,7 @@ int _wrap_FrameEuler_setFreeValue(int resc, mxArray *resv[], int argc, mxArray *
   double val2 ;
   int ecode2 = 0 ;
   mxArray * _out;
-  cr::Result result;
+  cr::core::Result result;
   
   if (!SWIG_check_num_args("FrameEuler_setFreeValue",argc,2,2,0)) {
     SWIG_fail;
@@ -7606,7 +7591,7 @@ int _wrap_FrameEuler_setFreeValue(int resc, mxArray *resv[], int argc, mxArray *
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FrameEuler_setFreeValue" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  result = (cr::Result)(arg1)->setFreeValue(arg2);
+  result = (cr::core::Result)(arg1)->setFreeValue(arg2);
   _out = SWIG_From_int(static_cast< int >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -8345,7 +8330,7 @@ int _wrap_FrameDh_setFreeValue(int resc, mxArray *resv[], int argc, mxArray *arg
   double val2 ;
   int ecode2 = 0 ;
   mxArray * _out;
-  cr::Result result;
+  cr::core::Result result;
   
   if (!SWIG_check_num_args("FrameDh_setFreeValue",argc,2,2,0)) {
     SWIG_fail;
@@ -8360,7 +8345,7 @@ int _wrap_FrameDh_setFreeValue(int resc, mxArray *resv[], int argc, mxArray *arg
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FrameDh_setFreeValue" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  result = (cr::Result)(arg1)->setFreeValue(arg2);
+  result = (cr::core::Result)(arg1)->setFreeValue(arg2);
   _out = SWIG_From_int(static_cast< int >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -8676,7 +8661,7 @@ fail:
 }
 
 
-int _wrap_new_RigidBody__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+int _wrap_new_RigidBody(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   mxArray * _out;
   cr::RigidBody *result = 0 ;
   
@@ -8689,52 +8674,6 @@ int _wrap_new_RigidBody__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *ar
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
-  return 1;
-}
-
-
-int _wrap_new_RigidBody__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::Frame *arg1 = (cr::Frame *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  cr::RigidBody *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_RigidBody",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__Frame, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_RigidBody" "', argument " "1"" of type '" "cr::Frame *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::Frame * >(argp1);
-  result = (cr::RigidBody *)new cr::RigidBody(arg1);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__RigidBody, 1 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_RigidBody(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 0) {
-    return _wrap_new_RigidBody__SWIG_0(resc,resv,argc,argv);
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__Frame, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_new_RigidBody__SWIG_1(resc,resv,argc,argv);
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'new_RigidBody'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::RigidBody::RigidBody()\n"
-    "    cr::RigidBody::RigidBody(cr::Frame *)\n");
   return 1;
 }
 
@@ -8758,37 +8697,6 @@ int _wrap_delete_RigidBody(int resc, mxArray *resv[], int argc, mxArray *argv[])
   if (is_owned) {
     delete arg1;
   }
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RigidBody_setFrame(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::RigidBody *arg1 = (cr::RigidBody *) 0 ;
-  cr::Frame *arg2 = (cr::Frame *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("RigidBody_setFrame",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__RigidBody, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RigidBody_setFrame" "', argument " "1"" of type '" "cr::RigidBody *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::RigidBody * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_cr__Frame, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RigidBody_setFrame" "', argument " "2"" of type '" "cr::Frame *""'"); 
-  }
-  arg2 = reinterpret_cast< cr::Frame * >(argp2);
-  (arg1)->setFrame(arg2);
   _out = (mxArray*)0;
   if (_out) --resc, *resv++ = _out;
   return 0;
@@ -8989,1112 +8897,6 @@ int _wrap_RigidBody_getMassMatrix(int resc, mxArray *resv[], int argc, mxArray *
   arg1 = reinterpret_cast< cr::RigidBody * >(argp1);
   result = (arg1)->getMassMatrix();
   _out = SWIG_NewPointerObj((new Eigen::Matrix< double,6,6 >(static_cast< const Eigen::Matrix< double,6,6 >& >(result))), SWIGTYPE_p_Eigen__MatrixT_double_6_6_t, SWIG_POINTER_OWN |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RigidBody_m_frame_set(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::RigidBody *arg1 = (cr::RigidBody *) 0 ;
-  cr::Frame *arg2 = (cr::Frame *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("RigidBody_m_frame_set",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__RigidBody, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RigidBody_m_frame_set" "', argument " "1"" of type '" "cr::RigidBody *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::RigidBody * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_cr__Frame, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RigidBody_m_frame_set" "', argument " "2"" of type '" "cr::Frame *""'"); 
-  }
-  arg2 = reinterpret_cast< cr::Frame * >(argp2);
-  if (arg1) (arg1)->m_frame = arg2;
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_RigidBody_m_frame_get(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::RigidBody *arg1 = (cr::RigidBody *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  cr::Frame *result = 0 ;
-  
-  if (!SWIG_check_num_args("RigidBody_m_frame_get",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__RigidBody, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RigidBody_m_frame_get" "', argument " "1"" of type '" "cr::RigidBody *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::RigidBody * >(argp1);
-  result = (cr::Frame *) ((arg1)->m_frame);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__Frame, 0 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_Manipulator(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  cr::world::Manipulator *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_Manipulator",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  (void)argv;
-  result = (cr::world::Manipulator *)new cr::world::Manipulator();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__world__Manipulator, 1 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_Manipulator(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  int is_owned;
-  if (!SWIG_check_num_args("delete_Manipulator",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Manipulator" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  if (is_owned) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_create(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  SwigValueWrapper< std::shared_ptr< cr::world::Manipulator > > result;
-  
-  if (!SWIG_check_num_args("Manipulator_create",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  (void)argv;
-  result = cr::world::Manipulator::create();
-  _out = SWIG_NewPointerObj((new cr::world::ManipulatorPtr(static_cast< const cr::world::ManipulatorPtr& >(result))), SWIGTYPE_p_std__shared_ptrT_cr__world__Manipulator_t, SWIG_POINTER_OWN |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_setConfiguration(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  Eigen::VectorXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("Manipulator_setConfiguration",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_setConfiguration" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  (arg1)->setConfiguration(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_getConfiguration(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("Manipulator_getConfiguration",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_getConfiguration" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  result = (arg1)->getConfiguration();
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_getForwardKinematics(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::MatrixXd result;
-  
-  if (!SWIG_check_num_args("Manipulator_getForwardKinematics",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_getForwardKinematics" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  result = (arg1)->getForwardKinematics();
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_getNumberOfLinks(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  int result;
-  
-  if (!SWIG_check_num_args("Manipulator_getNumberOfLinks",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_getNumberOfLinks" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  result = (int)(arg1)->getNumberOfLinks();
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_getDegreesOfFreedom(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  int result;
-  
-  if (!SWIG_check_num_args("Manipulator_getDegreesOfFreedom",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_getDegreesOfFreedom" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  result = (int)(arg1)->getDegreesOfFreedom();
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_getToolFrame(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::Frame *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("Manipulator_getToolFrame",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_getToolFrame" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_getToolFrame" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_cr__Frame,  0 );
-  if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Manipulator_getToolFrame" "', argument " "3"" of type '" "cr::Frame &""'"); 
-  }
-  if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Manipulator_getToolFrame" "', argument " "3"" of type '" "cr::Frame &""'"); 
-  }
-  arg3 = reinterpret_cast< cr::Frame * >(argp3);
-  (arg1)->getToolFrame(arg2,*arg3);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_getLinkFrame(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::Frame *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("Manipulator_getLinkFrame",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_getLinkFrame" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_getLinkFrame" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_cr__Frame,  0 );
-  if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Manipulator_getLinkFrame" "', argument " "3"" of type '" "cr::Frame &""'"); 
-  }
-  if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Manipulator_getLinkFrame" "', argument " "3"" of type '" "cr::Frame &""'"); 
-  }
-  arg3 = reinterpret_cast< cr::Frame * >(argp3);
-  (arg1)->getLinkFrame(arg2,*arg3);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_getToolPose__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  mxArray * _out;
-  Eigen::Matrix< double,6,1 > result;
-  
-  if (!SWIG_check_num_args("Manipulator_getToolPose",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_getToolPose" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_getToolPose" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Manipulator_getToolPose" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  result = (arg1)->getToolPose(arg2,arg3);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::Matrix<double,6,1> >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_getToolPose__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  Eigen::Matrix< bool,6,1 > arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  void *argp4 ;
-  int res4 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("Manipulator_getToolPose",argc,4,4,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_getToolPose" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_getToolPose" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Manipulator_getToolPose" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  {
-    res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t,  0 );
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Manipulator_getToolPose" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'"); 
-    }  
-    if (!argp4) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Manipulator_getToolPose" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'");
-    } else {
-      arg4 = *(reinterpret_cast< Eigen::Matrix< bool,6,1 > * >(argp4));
-    }
-  }
-  result = (arg1)->getToolPose(arg2,arg3,arg4);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_getToolPose__SWIG_2(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  Eigen::Matrix< int,6,1 > arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  Eigen::Matrix< int,6,1 > temp4 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("Manipulator_getToolPose",argc,4,4,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_getToolPose" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_getToolPose" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Manipulator_getToolPose" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::Matrix<int,6,1> >(&temp4, argv[3]))
-    SWIG_fail;
-    arg4 = temp4;
-  }
-  result = (arg1)->getToolPose(arg2,arg3,arg4);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_getToolPose(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          return _wrap_Manipulator_getToolPose__SWIG_0(resc,resv,argc,argv);
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          void *vptr = 0;
-          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t, 0);
-          _v = SWIG_CheckState(res);
-          if (_v) {
-            return _wrap_Manipulator_getToolPose__SWIG_1(resc,resv,argc,argv);
-          }
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            _v = mxIsNumeric(argv[3]);
-          }
-          if (_v) {
-            return _wrap_Manipulator_getToolPose__SWIG_2(resc,resv,argc,argv);
-          }
-        }
-      }
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'Manipulator_getToolPose'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::world::Manipulator::getToolPose(unsigned int,cr::EulerMode)\n"
-    "    cr::world::Manipulator::getToolPose(unsigned int,cr::EulerMode,Eigen::Matrix< bool,6,1 >)\n"
-    "    cr::world::Manipulator::getToolPose(unsigned int,cr::EulerMode,Eigen::Matrix< int,6,1 >)\n");
-  return 1;
-}
-
-
-int _wrap_Manipulator_jacobian__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  mxArray * _out;
-  Eigen::MatrixXd result;
-  
-  if (!SWIG_check_num_args("Manipulator_jacobian",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_jacobian" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_jacobian" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Manipulator_jacobian" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  result = (arg1)->jacobian(arg2,arg3);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_jacobian__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  Eigen::Matrix< bool,6,1 > arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  void *argp4 ;
-  int res4 = 0 ;
-  mxArray * _out;
-  Eigen::MatrixXd result;
-  
-  if (!SWIG_check_num_args("Manipulator_jacobian",argc,4,4,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_jacobian" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_jacobian" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Manipulator_jacobian" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  {
-    res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t,  0 );
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Manipulator_jacobian" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'"); 
-    }  
-    if (!argp4) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Manipulator_jacobian" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'");
-    } else {
-      arg4 = *(reinterpret_cast< Eigen::Matrix< bool,6,1 > * >(argp4));
-    }
-  }
-  result = (arg1)->jacobian(arg2,arg3,arg4);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_jacobian__SWIG_2(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  Eigen::Matrix< int,6,1 > arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  Eigen::Matrix< int,6,1 > temp4 ;
-  mxArray * _out;
-  Eigen::MatrixXd result;
-  
-  if (!SWIG_check_num_args("Manipulator_jacobian",argc,4,4,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_jacobian" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_jacobian" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Manipulator_jacobian" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::Matrix<int,6,1> >(&temp4, argv[3]))
-    SWIG_fail;
-    arg4 = temp4;
-  }
-  result = (arg1)->jacobian(arg2,arg3,arg4);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_jacobian(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          return _wrap_Manipulator_jacobian__SWIG_0(resc,resv,argc,argv);
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          void *vptr = 0;
-          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t, 0);
-          _v = SWIG_CheckState(res);
-          if (_v) {
-            return _wrap_Manipulator_jacobian__SWIG_1(resc,resv,argc,argv);
-          }
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            _v = mxIsNumeric(argv[3]);
-          }
-          if (_v) {
-            return _wrap_Manipulator_jacobian__SWIG_2(resc,resv,argc,argv);
-          }
-        }
-      }
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'Manipulator_jacobian'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::world::Manipulator::jacobian(unsigned int,cr::EulerMode)\n"
-    "    cr::world::Manipulator::jacobian(unsigned int,cr::EulerMode,Eigen::Matrix< bool,6,1 >)\n"
-    "    cr::world::Manipulator::jacobian(unsigned int,cr::EulerMode,Eigen::Matrix< int,6,1 >)\n");
-  return 1;
-}
-
-
-int _wrap_Manipulator_hessian__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  mxArray * _out;
-  Eigen::MatrixXd result;
-  
-  if (!SWIG_check_num_args("Manipulator_hessian",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_hessian" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_hessian" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Manipulator_hessian" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  result = (arg1)->hessian(arg2,arg3);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_hessian__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  Eigen::Matrix< bool,6,1 > arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  void *argp4 ;
-  int res4 = 0 ;
-  mxArray * _out;
-  Eigen::MatrixXd result;
-  
-  if (!SWIG_check_num_args("Manipulator_hessian",argc,4,4,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_hessian" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_hessian" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Manipulator_hessian" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  {
-    res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t,  0 );
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Manipulator_hessian" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'"); 
-    }  
-    if (!argp4) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Manipulator_hessian" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'");
-    } else {
-      arg4 = *(reinterpret_cast< Eigen::Matrix< bool,6,1 > * >(argp4));
-    }
-  }
-  result = (arg1)->hessian(arg2,arg3,arg4);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_hessian__SWIG_2(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  Eigen::Matrix< int,6,1 > arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  Eigen::Matrix< int,6,1 > temp4 ;
-  mxArray * _out;
-  Eigen::MatrixXd result;
-  
-  if (!SWIG_check_num_args("Manipulator_hessian",argc,4,4,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_hessian" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_hessian" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Manipulator_hessian" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::Matrix<int,6,1> >(&temp4, argv[3]))
-    SWIG_fail;
-    arg4 = temp4;
-  }
-  result = (arg1)->hessian(arg2,arg3,arg4);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::MatrixXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_hessian(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          return _wrap_Manipulator_hessian__SWIG_0(resc,resv,argc,argv);
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          void *vptr = 0;
-          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t, 0);
-          _v = SWIG_CheckState(res);
-          if (_v) {
-            return _wrap_Manipulator_hessian__SWIG_1(resc,resv,argc,argv);
-          }
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            _v = mxIsNumeric(argv[3]);
-          }
-          if (_v) {
-            return _wrap_Manipulator_hessian__SWIG_2(resc,resv,argc,argv);
-          }
-        }
-      }
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'Manipulator_hessian'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::world::Manipulator::hessian(unsigned int,cr::EulerMode)\n"
-    "    cr::world::Manipulator::hessian(unsigned int,cr::EulerMode,Eigen::Matrix< bool,6,1 >)\n"
-    "    cr::world::Manipulator::hessian(unsigned int,cr::EulerMode,Eigen::Matrix< int,6,1 >)\n");
-  return 1;
-}
-
-
-int _wrap_Manipulator_addLink(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  cr::RigidBody *arg2 = (cr::RigidBody *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  int result;
-  
-  if (!SWIG_check_num_args("Manipulator_addLink",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_addLink" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_cr__RigidBody, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Manipulator_addLink" "', argument " "2"" of type '" "cr::RigidBody *""'"); 
-  }
-  arg2 = reinterpret_cast< cr::RigidBody * >(argp2);
-  result = (int)(arg1)->addLink(arg2);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_Manipulator_addTool(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = (cr::world::Manipulator *) 0 ;
-  unsigned int arg2 ;
-  cr::Frame *arg3 = (cr::Frame *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  mxArray * _out;
-  int result;
-  
-  if (!SWIG_check_num_args("Manipulator_addTool",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__world__Manipulator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Manipulator_addTool" "', argument " "1"" of type '" "cr::world::Manipulator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Manipulator_addTool" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  res3 = SWIG_ConvertPtr(argv[2], &argp3,SWIGTYPE_p_cr__Frame, 0 |  0 );
-  if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Manipulator_addTool" "', argument " "3"" of type '" "cr::Frame *""'"); 
-  }
-  arg3 = reinterpret_cast< cr::Frame * >(argp3);
-  result = (int)(arg1)->addTool(arg2,arg3);
-  _out = SWIG_From_int(static_cast< int >(result));
   if (_out) --resc, *resv++ = _out;
   return 0;
 fail:
@@ -12055,2893 +10857,16 @@ fail:
 }
 
 
-int _wrap_new_SensorLinear(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  Eigen::MatrixXd arg1 ;
-  Eigen::VectorXd arg2 ;
-  Eigen::MatrixXd temp1 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  cr::SensorLinear *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_SensorLinear",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp1, argv[0]))
-    SWIG_fail;
-    arg1 = temp1;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  result = (cr::SensorLinear *)new cr::SensorLinear(arg1,arg2);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__SensorLinear, 1 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_SensorLinear_setObservation(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::SensorLinear *arg1 = (cr::SensorLinear *) 0 ;
-  Eigen::MatrixXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::MatrixXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("SensorLinear_setObservation",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__SensorLinear, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorLinear_setObservation" "', argument " "1"" of type '" "cr::SensorLinear *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::SensorLinear * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  (arg1)->setObservation(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_SensorLinear_measurement(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::SensorLinear *arg1 = (cr::SensorLinear *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("SensorLinear_measurement",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__SensorLinear, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SensorLinear_measurement" "', argument " "1"" of type '" "cr::SensorLinear *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::SensorLinear * >(argp1);
-  result = (arg1)->measurement();
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_SensorLinear(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::SensorLinear *arg1 = (cr::SensorLinear *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  int is_owned;
-  if (!SWIG_check_num_args("delete_SensorLinear",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__SensorLinear, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SensorLinear" "', argument " "1"" of type '" "cr::SensorLinear *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::SensorLinear * >(argp1);
-  if (is_owned) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_InverseKinematics(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  mxArray * _out;
-  cr::InverseKinematics *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_InverseKinematics",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_cr__world__Manipulator,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_InverseKinematics" "', argument " "1"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InverseKinematics" "', argument " "1"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_InverseKinematics" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_InverseKinematics" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  result = (cr::InverseKinematics *)new cr::InverseKinematics((cr::world::Manipulator const &)*arg1,arg2,arg3);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__InverseKinematics, 1 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_setRobot(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  cr::world::Manipulator *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("InverseKinematics_setRobot",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_setRobot" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_cr__world__Manipulator,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InverseKinematics_setRobot" "', argument " "2"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InverseKinematics_setRobot" "', argument " "2"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  arg2 = reinterpret_cast< cr::world::Manipulator * >(argp2);
-  (arg1)->setRobot((cr::world::Manipulator const &)*arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_getRobot(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  cr::world::Manipulator result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_getRobot",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_getRobot" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  result = (arg1)->getRobot();
-  _out = SWIG_NewPointerObj((new cr::world::Manipulator(static_cast< const cr::world::Manipulator& >(result))), SWIGTYPE_p_cr__world__Manipulator, SWIG_POINTER_OWN |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_setToolIndex(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  unsigned int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("InverseKinematics_setToolIndex",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_setToolIndex" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InverseKinematics_setToolIndex" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  (arg1)->setToolIndex(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_getToolIndex(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  unsigned int result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_getToolIndex",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_getToolIndex" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  result = (unsigned int)(arg1)->getToolIndex();
-  _out = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_setEulerMode(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  cr::EulerMode arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("InverseKinematics_setEulerMode",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_setEulerMode" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  ecode2 = SWIG_AsVal_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InverseKinematics_setEulerMode" "', argument " "2"" of type '" "cr::EulerMode""'");
-  } 
-  arg2 = static_cast< cr::EulerMode >(val2);
-  (arg1)->setEulerMode(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_getEulerMode(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  cr::EulerMode result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_getEulerMode",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_getEulerMode" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  result = (cr::EulerMode)(arg1)->getEulerMode();
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_setTolerance(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("InverseKinematics_setTolerance",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_setTolerance" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  ecode2 = SWIG_AsVal_double(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InverseKinematics_setTolerance" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  (arg1)->setTolerance(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_getTolerance(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_getTolerance",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_getTolerance" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  result = (double)(arg1)->getTolerance();
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_setMaxIter(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  unsigned int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("InverseKinematics_setMaxIter",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_setMaxIter" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InverseKinematics_setMaxIter" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  (arg1)->setMaxIter(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_getMaxIter(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  unsigned int result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_getMaxIter",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_getMaxIter" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  result = (unsigned int)(arg1)->getMaxIter();
-  _out = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_setStepSize(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("InverseKinematics_setStepSize",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_setStepSize" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  ecode2 = SWIG_AsVal_double(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InverseKinematics_setStepSize" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  (arg1)->setStepSize(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_getStepSize(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_getStepSize",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_getStepSize" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  result = (double)(arg1)->getStepSize();
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_setDampingFactor(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("InverseKinematics_setDampingFactor",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_setDampingFactor" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  ecode2 = SWIG_AsVal_double(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InverseKinematics_setDampingFactor" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  (arg1)->setDampingFactor(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_getDampingFactor(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_getDampingFactor",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_getDampingFactor" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  result = (double)(arg1)->getDampingFactor();
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_setSingularThresh(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("InverseKinematics_setSingularThresh",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_setSingularThresh" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  ecode2 = SWIG_AsVal_double(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InverseKinematics_setSingularThresh" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  (arg1)->setSingularThresh(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_getSingularThresh(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_getSingularThresh",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_getSingularThresh" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  result = (double)(arg1)->getSingularThresh();
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_getJacInv(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  Eigen::MatrixXd arg2 ;
-  Eigen::MatrixXd *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::MatrixXd temp2 ;
-  Eigen::MatrixXd temp3 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_getJacInv",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_getJacInv" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp3, argv[2]))
-    SWIG_fail;
-    
-    arg3 = &temp3;
-  }
-  result = (cr::Result)(arg1)->getJacInv(arg2,*arg3);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::MatrixXd >(argv[2], arg3))
-    SWIG_fail;
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_solve__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  Eigen::Matrix< double,6,1 > *arg2 = 0 ;
-  Eigen::VectorXd arg3 ;
-  Eigen::VectorXd *arg4 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::Matrix< double,6,1 > temp2 ;
-  Eigen::VectorXd temp3 ;
-  Eigen::VectorXd temp4 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_solve",argc,4,4,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_solve" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  {
-    // In: const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::Matrix<double,6,1> >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = &temp2;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
-    SWIG_fail;
-    arg3 = temp3;
-  }
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp4, argv[3]))
-    SWIG_fail;
-    
-    arg4 = &temp4;
-  }
-  result = (cr::Result)(arg1)->solve((Eigen::Matrix< double,6,1 > const &)*arg2,arg3,*arg4);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[3], arg4))
-    SWIG_fail;
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_solve__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  Eigen::VectorXd *arg2 = 0 ;
-  Eigen::Matrix< bool,6,1 > arg3 ;
-  Eigen::VectorXd arg4 ;
-  Eigen::VectorXd *arg5 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  Eigen::VectorXd temp4 ;
-  Eigen::VectorXd temp5 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_solve",argc,5,5,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_solve" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    
-    arg2 = &temp2;
-  }
-  {
-    res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t,  0 );
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InverseKinematics_solve" "', argument " "3"" of type '" "Eigen::Matrix< bool,6,1 >""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InverseKinematics_solve" "', argument " "3"" of type '" "Eigen::Matrix< bool,6,1 >""'");
-    } else {
-      arg3 = *(reinterpret_cast< Eigen::Matrix< bool,6,1 > * >(argp3));
-    }
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp4, argv[3]))
-    SWIG_fail;
-    arg4 = temp4;
-  }
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp5, argv[4]))
-    SWIG_fail;
-    
-    arg5 = &temp5;
-  }
-  result = (cr::Result)(arg1)->solve(*arg2,arg3,arg4,*arg5);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[1], arg2))
-    SWIG_fail;
-  }
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[4], arg5))
-    SWIG_fail;
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_solve__SWIG_2(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  Eigen::VectorXd *arg2 = 0 ;
-  Eigen::Matrix< bool,6,1 > arg3 ;
-  Eigen::VectorXd arg4 ;
-  Eigen::MatrixXd arg5 ;
-  Eigen::VectorXd *arg6 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  Eigen::VectorXd temp4 ;
-  Eigen::MatrixXd temp5 ;
-  Eigen::VectorXd temp6 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_solve",argc,6,6,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_solve" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    
-    arg2 = &temp2;
-  }
-  {
-    res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t,  0 );
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InverseKinematics_solve" "', argument " "3"" of type '" "Eigen::Matrix< bool,6,1 >""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InverseKinematics_solve" "', argument " "3"" of type '" "Eigen::Matrix< bool,6,1 >""'");
-    } else {
-      arg3 = *(reinterpret_cast< Eigen::Matrix< bool,6,1 > * >(argp3));
-    }
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp4, argv[3]))
-    SWIG_fail;
-    arg4 = temp4;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp5, argv[4]))
-    SWIG_fail;
-    arg5 = temp5;
-  }
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp6, argv[5]))
-    SWIG_fail;
-    
-    arg6 = &temp6;
-  }
-  result = (cr::Result)(arg1)->solve(*arg2,arg3,arg4,arg5,*arg6);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[1], arg2))
-    SWIG_fail;
-  }
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[5], arg6))
-    SWIG_fail;
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_solve__SWIG_3(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  Eigen::VectorXd *arg2 = 0 ;
-  Eigen::Matrix< int,6,1 > arg3 ;
-  Eigen::VectorXd arg4 ;
-  Eigen::VectorXd *arg5 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  Eigen::Matrix< int,6,1 > temp3 ;
-  Eigen::VectorXd temp4 ;
-  Eigen::VectorXd temp5 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("InverseKinematics_solve",argc,5,5,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InverseKinematics_solve" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    
-    arg2 = &temp2;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::Matrix<int,6,1> >(&temp3, argv[2]))
-    SWIG_fail;
-    arg3 = temp3;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp4, argv[3]))
-    SWIG_fail;
-    arg4 = temp4;
-  }
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp5, argv[4]))
-    SWIG_fail;
-    
-    arg5 = &temp5;
-  }
-  result = (cr::Result)(arg1)->solve(*arg2,arg3,arg4,*arg5);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[1], arg2))
-    SWIG_fail;
-  }
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[4], arg5))
-    SWIG_fail;
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_InverseKinematics_solve(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__InverseKinematics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        {
-          _v = mxIsNumeric(argv[2]);
-        }
-        if (_v) {
-          {
-            _v = mxIsNumeric(argv[3]);
-          }
-          if (_v) {
-            return _wrap_InverseKinematics_solve__SWIG_0(resc,resv,argc,argv);
-          }
-        }
-      }
-    }
-  }
-  if (argc == 5) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__InverseKinematics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t, 0);
-        _v = SWIG_CheckState(res);
-        if (_v) {
-          {
-            _v = mxIsNumeric(argv[3]);
-          }
-          if (_v) {
-            {
-              _v = mxIsNumeric(argv[4]);
-            }
-            if (_v) {
-              return _wrap_InverseKinematics_solve__SWIG_1(resc,resv,argc,argv);
-            }
-          }
-        }
-      }
-    }
-  }
-  if (argc == 5) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__InverseKinematics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        {
-          _v = mxIsNumeric(argv[2]);
-        }
-        if (_v) {
-          {
-            _v = mxIsNumeric(argv[3]);
-          }
-          if (_v) {
-            {
-              _v = mxIsNumeric(argv[4]);
-            }
-            if (_v) {
-              return _wrap_InverseKinematics_solve__SWIG_3(resc,resv,argc,argv);
-            }
-          }
-        }
-      }
-    }
-  }
-  if (argc == 6) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__InverseKinematics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t, 0);
-        _v = SWIG_CheckState(res);
-        if (_v) {
-          {
-            _v = mxIsNumeric(argv[3]);
-          }
-          if (_v) {
-            {
-              _v = mxIsNumeric(argv[4]);
-            }
-            if (_v) {
-              {
-                _v = mxIsNumeric(argv[5]);
-              }
-              if (_v) {
-                return _wrap_InverseKinematics_solve__SWIG_2(resc,resv,argc,argv);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'InverseKinematics_solve'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::InverseKinematics::solve(Eigen::Matrix< double,6,1 > const &,Eigen::VectorXd,Eigen::VectorXd &)\n"
-    "    cr::InverseKinematics::solve(Eigen::VectorXd &,Eigen::Matrix< bool,6,1 >,Eigen::VectorXd,Eigen::VectorXd &)\n"
-    "    cr::InverseKinematics::solve(Eigen::VectorXd &,Eigen::Matrix< bool,6,1 >,Eigen::VectorXd,Eigen::MatrixXd,Eigen::VectorXd &)\n"
-    "    cr::InverseKinematics::solve(Eigen::VectorXd &,Eigen::Matrix< int,6,1 >,Eigen::VectorXd,Eigen::VectorXd &)\n");
-  return 1;
-}
-
-
-int _wrap_delete_InverseKinematics(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::InverseKinematics *arg1 = (cr::InverseKinematics *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  int is_owned;
-  if (!SWIG_check_num_args("delete_InverseKinematics",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__InverseKinematics, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InverseKinematics" "', argument " "1"" of type '" "cr::InverseKinematics *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::InverseKinematics * >(argp1);
-  if (is_owned) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_NullSpace(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  mxArray * _out;
-  cr::NullSpace *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_NullSpace",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_cr__world__Manipulator,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_NullSpace" "', argument " "1"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_NullSpace" "', argument " "1"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_NullSpace" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_NullSpace" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  result = (cr::NullSpace *)new cr::NullSpace((cr::world::Manipulator const &)*arg1,arg2,arg3);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__NullSpace, 1 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_setRobot(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  cr::world::Manipulator *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("NullSpace_setRobot",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_setRobot" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_cr__world__Manipulator,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "NullSpace_setRobot" "', argument " "2"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NullSpace_setRobot" "', argument " "2"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  arg2 = reinterpret_cast< cr::world::Manipulator * >(argp2);
-  (arg1)->setRobot((cr::world::Manipulator const &)*arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_setToolIndex(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  unsigned int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("NullSpace_setToolIndex",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_setToolIndex" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NullSpace_setToolIndex" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  (arg1)->setToolIndex(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_setEulerMode(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  cr::EulerMode arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("NullSpace_setEulerMode",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_setEulerMode" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  ecode2 = SWIG_AsVal_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NullSpace_setEulerMode" "', argument " "2"" of type '" "cr::EulerMode""'");
-  } 
-  arg2 = static_cast< cr::EulerMode >(val2);
-  (arg1)->setEulerMode(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_getEulerMode(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  cr::EulerMode result;
-  
-  if (!SWIG_check_num_args("NullSpace_getEulerMode",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_getEulerMode" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  result = (cr::EulerMode)(arg1)->getEulerMode();
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_setSingularThresh(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("NullSpace_setSingularThresh",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_setSingularThresh" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  ecode2 = SWIG_AsVal_double(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NullSpace_setSingularThresh" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  (arg1)->setSingularThresh(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_getSingularThresh(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("NullSpace_getSingularThresh",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_getSingularThresh" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  result = (double)(arg1)->getSingularThresh();
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_setMinStepSize(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("NullSpace_setMinStepSize",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_setMinStepSize" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  ecode2 = SWIG_AsVal_double(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NullSpace_setMinStepSize" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  (arg1)->setMinStepSize(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_getMinStepSize(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("NullSpace_getMinStepSize",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_getMinStepSize" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  result = (double)(arg1)->getMinStepSize();
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_setMaxIter(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("NullSpace_setMaxIter",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_setMaxIter" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  ecode2 = SWIG_AsVal_double(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NullSpace_setMaxIter" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  (arg1)->setMaxIter(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_getMaxIter(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("NullSpace_getMaxIter",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_getMaxIter" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  result = (double)(arg1)->getMaxIter();
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_setTrivialTolerance(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("NullSpace_setTrivialTolerance",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_setTrivialTolerance" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  ecode2 = SWIG_AsVal_double(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NullSpace_setTrivialTolerance" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  (arg1)->setTrivialTolerance(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_getTrivialTolerance(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("NullSpace_getTrivialTolerance",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_getTrivialTolerance" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  result = (double)(arg1)->getTrivialTolerance();
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_solve__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  Eigen::VectorXd arg2 ;
-  Eigen::VectorXd arg3 ;
-  Eigen::VectorXd *arg4 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  Eigen::VectorXd temp3 ;
-  Eigen::VectorXd temp4 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("NullSpace_solve",argc,4,4,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_solve" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
-    SWIG_fail;
-    arg3 = temp3;
-  }
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp4, argv[3]))
-    SWIG_fail;
-    
-    arg4 = &temp4;
-  }
-  result = (cr::Result)(arg1)->solve(arg2,arg3,*arg4);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[3], arg4))
-    SWIG_fail;
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_solve__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  Eigen::VectorXd arg2 ;
-  Eigen::VectorXd arg3 ;
-  Eigen::Matrix< bool,6,1 > arg4 ;
-  Eigen::VectorXd *arg5 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  Eigen::VectorXd temp3 ;
-  void *argp4 ;
-  int res4 = 0 ;
-  Eigen::VectorXd temp5 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("NullSpace_solve",argc,5,5,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_solve" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
-    SWIG_fail;
-    arg3 = temp3;
-  }
-  {
-    res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t,  0 );
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "NullSpace_solve" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'"); 
-    }  
-    if (!argp4) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NullSpace_solve" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'");
-    } else {
-      arg4 = *(reinterpret_cast< Eigen::Matrix< bool,6,1 > * >(argp4));
-    }
-  }
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp5, argv[4]))
-    SWIG_fail;
-    
-    arg5 = &temp5;
-  }
-  result = (cr::Result)(arg1)->solve(arg2,arg3,arg4,*arg5);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[4], arg5))
-    SWIG_fail;
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_solve__SWIG_2(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  Eigen::VectorXd arg2 ;
-  Eigen::VectorXd arg3 ;
-  Eigen::Matrix< bool,6,1 > arg4 ;
-  Eigen::MatrixXd arg5 ;
-  Eigen::VectorXd *arg6 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  Eigen::VectorXd temp3 ;
-  void *argp4 ;
-  int res4 = 0 ;
-  Eigen::MatrixXd temp5 ;
-  Eigen::VectorXd temp6 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("NullSpace_solve",argc,6,6,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_solve" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
-    SWIG_fail;
-    arg3 = temp3;
-  }
-  {
-    res4 = SWIG_ConvertPtr(argv[3], &argp4, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t,  0 );
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "NullSpace_solve" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'"); 
-    }  
-    if (!argp4) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NullSpace_solve" "', argument " "4"" of type '" "Eigen::Matrix< bool,6,1 >""'");
-    } else {
-      arg4 = *(reinterpret_cast< Eigen::Matrix< bool,6,1 > * >(argp4));
-    }
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::MatrixXd >(&temp5, argv[4]))
-    SWIG_fail;
-    arg5 = temp5;
-  }
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp6, argv[5]))
-    SWIG_fail;
-    
-    arg6 = &temp6;
-  }
-  result = (cr::Result)(arg1)->solve(arg2,arg3,arg4,arg5,*arg6);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[5], arg6))
-    SWIG_fail;
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_solve__SWIG_3(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  Eigen::VectorXd arg2 ;
-  Eigen::VectorXd arg3 ;
-  Eigen::Matrix< int,6,1 > arg4 ;
-  Eigen::VectorXd *arg5 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  Eigen::VectorXd temp3 ;
-  Eigen::Matrix< int,6,1 > temp4 ;
-  Eigen::VectorXd temp5 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("NullSpace_solve",argc,5,5,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NullSpace_solve" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
-    SWIG_fail;
-    arg3 = temp3;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::Matrix<int,6,1> >(&temp4, argv[3]))
-    SWIG_fail;
-    arg4 = temp4;
-  }
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp5, argv[4]))
-    SWIG_fail;
-    
-    arg5 = &temp5;
-  }
-  result = (cr::Result)(arg1)->solve(arg2,arg3,arg4,*arg5);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[4], arg5))
-    SWIG_fail;
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_NullSpace_solve(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__NullSpace, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        {
-          _v = mxIsNumeric(argv[2]);
-        }
-        if (_v) {
-          {
-            _v = mxIsNumeric(argv[3]);
-          }
-          if (_v) {
-            return _wrap_NullSpace_solve__SWIG_0(resc,resv,argc,argv);
-          }
-        }
-      }
-    }
-  }
-  if (argc == 5) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__NullSpace, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        {
-          _v = mxIsNumeric(argv[2]);
-        }
-        if (_v) {
-          void *vptr = 0;
-          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t, 0);
-          _v = SWIG_CheckState(res);
-          if (_v) {
-            {
-              _v = mxIsNumeric(argv[4]);
-            }
-            if (_v) {
-              return _wrap_NullSpace_solve__SWIG_1(resc,resv,argc,argv);
-            }
-          }
-        }
-      }
-    }
-  }
-  if (argc == 5) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__NullSpace, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        {
-          _v = mxIsNumeric(argv[2]);
-        }
-        if (_v) {
-          {
-            _v = mxIsNumeric(argv[3]);
-          }
-          if (_v) {
-            {
-              _v = mxIsNumeric(argv[4]);
-            }
-            if (_v) {
-              return _wrap_NullSpace_solve__SWIG_3(resc,resv,argc,argv);
-            }
-          }
-        }
-      }
-    }
-  }
-  if (argc == 6) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__NullSpace, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        {
-          _v = mxIsNumeric(argv[2]);
-        }
-        if (_v) {
-          void *vptr = 0;
-          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t, 0);
-          _v = SWIG_CheckState(res);
-          if (_v) {
-            {
-              _v = mxIsNumeric(argv[4]);
-            }
-            if (_v) {
-              {
-                _v = mxIsNumeric(argv[5]);
-              }
-              if (_v) {
-                return _wrap_NullSpace_solve__SWIG_2(resc,resv,argc,argv);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'NullSpace_solve'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::NullSpace::solve(Eigen::VectorXd,Eigen::VectorXd,Eigen::VectorXd &)\n"
-    "    cr::NullSpace::solve(Eigen::VectorXd,Eigen::VectorXd,Eigen::Matrix< bool,6,1 >,Eigen::VectorXd &)\n"
-    "    cr::NullSpace::solve(Eigen::VectorXd,Eigen::VectorXd,Eigen::Matrix< bool,6,1 >,Eigen::MatrixXd,Eigen::VectorXd &)\n"
-    "    cr::NullSpace::solve(Eigen::VectorXd,Eigen::VectorXd,Eigen::Matrix< int,6,1 >,Eigen::VectorXd &)\n");
-  return 1;
-}
-
-
-int _wrap_delete_NullSpace(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::NullSpace *arg1 = (cr::NullSpace *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  int is_owned;
-  if (!SWIG_check_num_args("delete_NullSpace",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__NullSpace, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_NullSpace" "', argument " "1"" of type '" "cr::NullSpace *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::NullSpace * >(argp1);
-  if (is_owned) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_HardLimits__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  mxArray * _out;
-  cr::HardLimits *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_HardLimits",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_cr__world__Manipulator,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HardLimits" "', argument " "1"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HardLimits" "', argument " "1"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_HardLimits" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_HardLimits" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  result = (cr::HardLimits *)new cr::HardLimits((cr::world::Manipulator const &)*arg1,arg2,arg3);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__HardLimits, 1 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_HardLimits__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::world::Manipulator *arg1 = 0 ;
-  unsigned int arg2 ;
-  cr::EulerMode arg3 ;
-  bool arg4 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
-  int val3 ;
-  int ecode3 = 0 ;
-  bool val4 ;
-  int ecode4 = 0 ;
-  mxArray * _out;
-  cr::HardLimits *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_HardLimits",argc,4,4,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_cr__world__Manipulator,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HardLimits" "', argument " "1"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HardLimits" "', argument " "1"" of type '" "cr::world::Manipulator const &""'"); 
-  }
-  arg1 = reinterpret_cast< cr::world::Manipulator * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_HardLimits" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  ecode3 = SWIG_AsVal_int(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_HardLimits" "', argument " "3"" of type '" "cr::EulerMode""'");
-  } 
-  arg3 = static_cast< cr::EulerMode >(val3);
-  ecode4 = SWIG_AsVal_bool(argv[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_HardLimits" "', argument " "4"" of type '" "bool""'");
-  } 
-  arg4 = static_cast< bool >(val4);
-  result = (cr::HardLimits *)new cr::HardLimits((cr::world::Manipulator const &)*arg1,arg2,arg3,arg4);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__HardLimits, 1 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_HardLimits(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          return _wrap_new_HardLimits__SWIG_0(resc,resv,argc,argv);
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__world__Manipulator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_unsigned_SS_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_int(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            int res = SWIG_AsVal_bool(argv[3], NULL);
-            _v = SWIG_CheckState(res);
-          }
-          if (_v) {
-            return _wrap_new_HardLimits__SWIG_1(resc,resv,argc,argv);
-          }
-        }
-      }
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'new_HardLimits'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::HardLimits::HardLimits(cr::world::Manipulator const &,unsigned int,cr::EulerMode)\n"
-    "    cr::HardLimits::HardLimits(cr::world::Manipulator const &,unsigned int,cr::EulerMode,bool)\n");
-  return 1;
-}
-
-
-int _wrap_HardLimits_getIKSolver(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  cr::InverseKinematics *result = 0 ;
-  
-  if (!SWIG_check_num_args("HardLimits_getIKSolver",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_getIKSolver" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  result = (cr::InverseKinematics *)(arg1)->getIKSolver();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__InverseKinematics, 0 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_getNullSpaceSolver(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  cr::NullSpace *result = 0 ;
-  
-  if (!SWIG_check_num_args("HardLimits_getNullSpaceSolver",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_getNullSpaceSolver" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  result = (cr::NullSpace *)(arg1)->getNullSpaceSolver();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__NullSpace, 0 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_useNullSpace(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_useNullSpace",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_useNullSpace" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  ecode2 = SWIG_AsVal_bool(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "HardLimits_useNullSpace" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  (arg1)->useNullSpace(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_nullSpaceStatus(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  bool result;
-  
-  if (!SWIG_check_num_args("HardLimits_nullSpaceStatus",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_nullSpaceStatus" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  result = (bool)(arg1)->nullSpaceStatus();
-  _out = SWIG_From_bool(static_cast< bool >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setPoseElements__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  Eigen::Matrix< bool,6,1 > arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setPoseElements",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setPoseElements" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "HardLimits_setPoseElements" "', argument " "2"" of type '" "Eigen::Matrix< bool,6,1 >""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "HardLimits_setPoseElements" "', argument " "2"" of type '" "Eigen::Matrix< bool,6,1 >""'");
-    } else {
-      arg2 = *(reinterpret_cast< Eigen::Matrix< bool,6,1 > * >(argp2));
-    }
-  }
-  (arg1)->setPoseElements(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setPoseElements__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  Eigen::Matrix< int,6,1 > arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::Matrix< int,6,1 > temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setPoseElements",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setPoseElements" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::Matrix<int,6,1> >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  (arg1)->setPoseElements(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setPoseElements(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__HardLimits, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_HardLimits_setPoseElements__SWIG_0(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__HardLimits, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        return _wrap_HardLimits_setPoseElements__SWIG_1(resc,resv,argc,argv);
-      }
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'HardLimits_setPoseElements'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::HardLimits::setPoseElements(Eigen::Matrix< bool,6,1 >)\n"
-    "    cr::HardLimits::setPoseElements(Eigen::Matrix< int,6,1 >)\n");
-  return 1;
-}
-
-
-int _wrap_HardLimits_getPoseElements(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::Matrix< bool,6,1 > result;
-  
-  if (!SWIG_check_num_args("HardLimits_getPoseElements",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_getPoseElements" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  result = (arg1)->getPoseElements();
-  _out = SWIG_NewPointerObj((new Eigen::Matrix< bool,6,1 >(static_cast< const Eigen::Matrix< bool,6,1 >& >(result))), SWIGTYPE_p_Eigen__MatrixT_bool_6_1_t, SWIG_POINTER_OWN |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setJointLimits__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  int arg2 ;
-  double arg3 ;
-  double arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setJointLimits",argc,4,4,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setJointLimits" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  ecode2 = SWIG_AsVal_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "HardLimits_setJointLimits" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_double(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "HardLimits_setJointLimits" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(argv[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "HardLimits_setJointLimits" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
-  (arg1)->setJointLimits(arg2,arg3,arg4);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setJointUpperLimit(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  int arg2 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setJointUpperLimit",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setJointUpperLimit" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  ecode2 = SWIG_AsVal_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "HardLimits_setJointUpperLimit" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_double(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "HardLimits_setJointUpperLimit" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  (arg1)->setJointUpperLimit(arg2,arg3);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setJointLowerLimit(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  int arg2 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setJointLowerLimit",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setJointLowerLimit" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  ecode2 = SWIG_AsVal_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "HardLimits_setJointLowerLimit" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_double(argv[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "HardLimits_setJointLowerLimit" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  (arg1)->setJointLowerLimit(arg2,arg3);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_getJointUpperLimit(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("HardLimits_getJointUpperLimit",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_getJointUpperLimit" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  ecode2 = SWIG_AsVal_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "HardLimits_getJointUpperLimit" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  result = (double)(arg1)->getJointUpperLimit(arg2);
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_getJointLowerLimit(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("HardLimits_getJointLowerLimit",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_getJointLowerLimit" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  ecode2 = SWIG_AsVal_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "HardLimits_getJointLowerLimit" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  result = (double)(arg1)->getJointLowerLimit(arg2);
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setJointLimits__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  Eigen::VectorXd arg2 ;
-  Eigen::VectorXd arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  Eigen::VectorXd temp3 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setJointLimits",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setJointLimits" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
-    SWIG_fail;
-    arg3 = temp3;
-  }
-  (arg1)->setJointLimits(arg2,arg3);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setJointLimits(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__HardLimits, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        {
-          _v = mxIsNumeric(argv[2]);
-        }
-        if (_v) {
-          return _wrap_HardLimits_setJointLimits__SWIG_1(resc,resv,argc,argv);
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__HardLimits, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        {
-          int res = SWIG_AsVal_double(argv[2], NULL);
-          _v = SWIG_CheckState(res);
-        }
-        if (_v) {
-          {
-            int res = SWIG_AsVal_double(argv[3], NULL);
-            _v = SWIG_CheckState(res);
-          }
-          if (_v) {
-            return _wrap_HardLimits_setJointLimits__SWIG_0(resc,resv,argc,argv);
-          }
-        }
-      }
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'HardLimits_setJointLimits'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::HardLimits::setJointLimits(int,double,double)\n"
-    "    cr::HardLimits::setJointLimits(Eigen::VectorXd,Eigen::VectorXd)\n");
-  return 1;
-}
-
-
-int _wrap_HardLimits_setJointUpperLimits(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  Eigen::VectorXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setJointUpperLimits",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setJointUpperLimits" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  (arg1)->setJointUpperLimits(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setJointLowerLimits(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  Eigen::VectorXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setJointLowerLimits",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setJointLowerLimits" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  (arg1)->setJointLowerLimits(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_getJointUpperLimits(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("HardLimits_getJointUpperLimits",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_getJointUpperLimits" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  result = (arg1)->getJointUpperLimits();
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_getJointLowerLimits(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("HardLimits_getJointLowerLimits",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_getJointLowerLimits" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  result = (arg1)->getJointLowerLimits();
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setQ0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  Eigen::VectorXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setQ0",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setQ0" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  (arg1)->setQ0(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_getQ0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("HardLimits_getQ0",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_getQ0" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  result = (arg1)->getQ0();
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setToolPose(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  Eigen::VectorXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setToolPose",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setToolPose" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  (arg1)->setToolPose(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_getToolPose(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("HardLimits_getToolPose",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_getToolPose" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  result = (arg1)->getToolPose();
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_setJointMotion(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  Eigen::VectorXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("HardLimits_setJointMotion",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_setJointMotion" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  (arg1)->setJointMotion(arg2);
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_getJointMotion(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("HardLimits_getJointMotion",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_getJointMotion" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  result = (arg1)->getJointMotion();
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_HardLimits_solve(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  Eigen::VectorXd *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("HardLimits_solve",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HardLimits_solve" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  {
-    // In: non-const&
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    
-    arg2 = &temp2;
-  }
-  result = (cr::Result)(arg1)->solve(*arg2);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  {
-    // Argout: &
-    if (!CopyFromEigenToMatlabMatrix<Eigen::VectorXd >(argv[1], arg2))
-    SWIG_fail;
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_HardLimits(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::HardLimits *arg1 = (cr::HardLimits *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  int is_owned;
-  if (!SWIG_check_num_args("delete_HardLimits",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__HardLimits, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_HardLimits" "', argument " "1"" of type '" "cr::HardLimits *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::HardLimits * >(argp1);
-  if (is_owned) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
 int _wrap_new_SharedMemory(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   char *arg1 = (char *) 0 ;
-  cr::ManagerRole arg2 ;
+  cr::core::ManagerRole arg2 ;
   int res1 ;
   char *buf1 = 0 ;
   int alloc1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
   mxArray * _out;
-  cr::SharedMemory *result = 0 ;
+  cr::core::SharedMemory *result = 0 ;
   
   if (!SWIG_check_num_args("new_SharedMemory",argc,2,2,0)) {
     SWIG_fail;
@@ -14953,11 +10878,11 @@ int _wrap_new_SharedMemory(int resc, mxArray *resv[], int argc, mxArray *argv[])
   arg1 = reinterpret_cast< char * >(buf1);
   ecode2 = SWIG_AsVal_int(argv[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SharedMemory" "', argument " "2"" of type '" "cr::ManagerRole""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SharedMemory" "', argument " "2"" of type '" "cr::core::ManagerRole""'");
   } 
-  arg2 = static_cast< cr::ManagerRole >(val2);
-  result = (cr::SharedMemory *)new cr::SharedMemory((char const *)arg1,arg2);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__SharedMemory, 1 |  0 );
+  arg2 = static_cast< cr::core::ManagerRole >(val2);
+  result = (cr::core::SharedMemory *)new cr::core::SharedMemory((char const *)arg1,arg2);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__core__SharedMemory, 1 |  0 );
   if (_out) --resc, *resv++ = _out;
   if (alloc1 == SWIG_NEWOBJ) delete[] buf1;
   return 0;
@@ -14968,7 +10893,7 @@ fail:
 
 
 int _wrap_delete_SharedMemory(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::SharedMemory *arg1 = (cr::SharedMemory *) 0 ;
+  cr::core::SharedMemory *arg1 = (cr::core::SharedMemory *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   mxArray * _out;
@@ -14978,11 +10903,11 @@ int _wrap_delete_SharedMemory(int resc, mxArray *resv[], int argc, mxArray *argv
     SWIG_fail;
   }
   is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__SharedMemory, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__core__SharedMemory, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SharedMemory" "', argument " "1"" of type '" "cr::SharedMemory *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SharedMemory" "', argument " "1"" of type '" "cr::core::SharedMemory *""'"); 
   }
-  arg1 = reinterpret_cast< cr::SharedMemory * >(argp1);
+  arg1 = reinterpret_cast< cr::core::SharedMemory * >(argp1);
   if (is_owned) {
     delete arg1;
   }
@@ -14995,7 +10920,7 @@ fail:
 
 
 int _wrap_SharedMemory_addSignal(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::SharedMemory *arg1 = (cr::SharedMemory *) 0 ;
+  cr::core::SharedMemory *arg1 = (cr::core::SharedMemory *) 0 ;
   char *arg2 = (char *) 0 ;
   Eigen::VectorXd arg3 ;
   void *argp1 = 0 ;
@@ -15009,11 +10934,11 @@ int _wrap_SharedMemory_addSignal(int resc, mxArray *resv[], int argc, mxArray *a
   if (!SWIG_check_num_args("SharedMemory_addSignal",argc,3,3,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__SharedMemory, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__core__SharedMemory, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SharedMemory_addSignal" "', argument " "1"" of type '" "cr::SharedMemory *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SharedMemory_addSignal" "', argument " "1"" of type '" "cr::core::SharedMemory *""'"); 
   }
-  arg1 = reinterpret_cast< cr::SharedMemory * >(argp1);
+  arg1 = reinterpret_cast< cr::core::SharedMemory * >(argp1);
   res2 = SWIG_AsCharPtrAndSize(argv[1], &buf2, NULL, &alloc2);
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SharedMemory_addSignal" "', argument " "2"" of type '" "char const *""'");
@@ -15036,7 +10961,7 @@ fail:
 
 
 int _wrap_SharedMemory_removeSignal(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::SharedMemory *arg1 = (cr::SharedMemory *) 0 ;
+  cr::core::SharedMemory *arg1 = (cr::core::SharedMemory *) 0 ;
   char *arg2 = (char *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -15048,11 +10973,11 @@ int _wrap_SharedMemory_removeSignal(int resc, mxArray *resv[], int argc, mxArray
   if (!SWIG_check_num_args("SharedMemory_removeSignal",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__SharedMemory, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__core__SharedMemory, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SharedMemory_removeSignal" "', argument " "1"" of type '" "cr::SharedMemory *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SharedMemory_removeSignal" "', argument " "1"" of type '" "cr::core::SharedMemory *""'"); 
   }
-  arg1 = reinterpret_cast< cr::SharedMemory * >(argp1);
+  arg1 = reinterpret_cast< cr::core::SharedMemory * >(argp1);
   res2 = SWIG_AsCharPtrAndSize(argv[1], &buf2, NULL, &alloc2);
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SharedMemory_removeSignal" "', argument " "2"" of type '" "char const *""'");
@@ -15070,7 +10995,7 @@ fail:
 
 
 int _wrap_SharedMemory_set(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::SharedMemory *arg1 = (cr::SharedMemory *) 0 ;
+  cr::core::SharedMemory *arg1 = (cr::core::SharedMemory *) 0 ;
   char *arg2 = (char *) 0 ;
   Eigen::VectorXd arg3 ;
   void *argp1 = 0 ;
@@ -15084,11 +11009,11 @@ int _wrap_SharedMemory_set(int resc, mxArray *resv[], int argc, mxArray *argv[])
   if (!SWIG_check_num_args("SharedMemory_set",argc,3,3,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__SharedMemory, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__core__SharedMemory, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SharedMemory_set" "', argument " "1"" of type '" "cr::SharedMemory *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SharedMemory_set" "', argument " "1"" of type '" "cr::core::SharedMemory *""'"); 
   }
-  arg1 = reinterpret_cast< cr::SharedMemory * >(argp1);
+  arg1 = reinterpret_cast< cr::core::SharedMemory * >(argp1);
   res2 = SWIG_AsCharPtrAndSize(argv[1], &buf2, NULL, &alloc2);
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SharedMemory_set" "', argument " "2"" of type '" "char const *""'");
@@ -15111,7 +11036,7 @@ fail:
 
 
 int _wrap_SharedMemory_get(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::SharedMemory *arg1 = (cr::SharedMemory *) 0 ;
+  cr::core::SharedMemory *arg1 = (cr::core::SharedMemory *) 0 ;
   char *arg2 = (char *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -15124,11 +11049,11 @@ int _wrap_SharedMemory_get(int resc, mxArray *resv[], int argc, mxArray *argv[])
   if (!SWIG_check_num_args("SharedMemory_get",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__SharedMemory, 0 |  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__core__SharedMemory, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SharedMemory_get" "', argument " "1"" of type '" "cr::SharedMemory *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SharedMemory_get" "', argument " "1"" of type '" "cr::core::SharedMemory *""'"); 
   }
-  arg1 = reinterpret_cast< cr::SharedMemory * >(argp1);
+  arg1 = reinterpret_cast< cr::core::SharedMemory * >(argp1);
   res2 = SWIG_AsCharPtrAndSize(argv[1], &buf2, NULL, &alloc2);
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SharedMemory_get" "', argument " "2"" of type '" "char const *""'");
@@ -15144,667 +11069,6 @@ int _wrap_SharedMemory_get(int resc, mxArray *resv[], int argc, mxArray *argv[])
   return 0;
 fail:
   if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
-  return 1;
-}
-
-
-int _wrap_CRWaypoint_time_set(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("CRWaypoint_time_set",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_time_set" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  ecode2 = SWIG_AsVal_double(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "CRWaypoint_time_set" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->time = arg2;
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_CRWaypoint_time_get(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  double result;
-  
-  if (!SWIG_check_num_args("CRWaypoint_time_get",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_time_get" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  result = (double) ((arg1)->time);
-  _out = SWIG_From_double(static_cast< double >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_CRWaypoint_position_set(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  Eigen::VectorXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("CRWaypoint_position_set",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_position_set" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  if (arg1) (arg1)->position = arg2;
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_CRWaypoint_position_get(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("CRWaypoint_position_get",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_position_get" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  result =  ((arg1)->position);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_CRWaypoint_velocity_set(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  Eigen::VectorXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("CRWaypoint_velocity_set",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_velocity_set" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  if (arg1) (arg1)->velocity = arg2;
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_CRWaypoint_velocity_get(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("CRWaypoint_velocity_get",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_velocity_get" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  result =  ((arg1)->velocity);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_CRWaypoint_acceleration_set(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  Eigen::VectorXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("CRWaypoint_acceleration_set",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_acceleration_set" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  if (arg1) (arg1)->acceleration = arg2;
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_CRWaypoint_acceleration_get(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("CRWaypoint_acceleration_get",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_acceleration_get" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  result =  ((arg1)->acceleration);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_CRWaypoint_jerk_set(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  Eigen::VectorXd arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("CRWaypoint_jerk_set",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_jerk_set" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  if (arg1) (arg1)->jerk = arg2;
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_CRWaypoint_jerk_get(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  Eigen::VectorXd result;
-  
-  if (!SWIG_check_num_args("CRWaypoint_jerk_get",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CRWaypoint_jerk_get" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  result =  ((arg1)->jerk);
-  {
-    if (!ConvertFromEigenToMatlabMatrix<Eigen::VectorXd >(&_out, &result))
-    SWIG_fail;
-  }
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_CRWaypoint(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  cr::CRWaypoint *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_CRWaypoint",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  (void)argv;
-  result = (cr::CRWaypoint *)new cr::CRWaypoint();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__CRWaypoint, 1 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_delete_CRWaypoint(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::CRWaypoint *arg1 = (cr::CRWaypoint *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  int is_owned;
-  if (!SWIG_check_num_args("delete_CRWaypoint",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__CRWaypoint, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CRWaypoint" "', argument " "1"" of type '" "cr::CRWaypoint *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::CRWaypoint * >(argp1);
-  if (is_owned) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_new_TrajectoryGenerator(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  mxArray * _out;
-  cr::TrajectoryGenerator *result = 0 ;
-  
-  if (!SWIG_check_num_args("new_TrajectoryGenerator",argc,0,0,0)) {
-    SWIG_fail;
-  }
-  (void)argv;
-  result = (cr::TrajectoryGenerator *)new cr::TrajectoryGenerator();
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_cr__TrajectoryGenerator, 1 |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_TrajectoryGenerator_solve__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::TrajectoryGenerator *arg1 = (cr::TrajectoryGenerator *) 0 ;
-  Eigen::VectorXd arg2 ;
-  Eigen::VectorXd arg3 ;
-  Eigen::VectorXd arg4 ;
-  Eigen::VectorXd arg5 ;
-  Eigen::VectorXd arg6 ;
-  Eigen::VectorXd arg7 ;
-  double arg8 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  Eigen::VectorXd temp2 ;
-  Eigen::VectorXd temp3 ;
-  Eigen::VectorXd temp4 ;
-  Eigen::VectorXd temp5 ;
-  Eigen::VectorXd temp6 ;
-  Eigen::VectorXd temp7 ;
-  double val8 ;
-  int ecode8 = 0 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("TrajectoryGenerator_solve",argc,8,8,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__TrajectoryGenerator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TrajectoryGenerator_solve" "', argument " "1"" of type '" "cr::TrajectoryGenerator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::TrajectoryGenerator * >(argp1);
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp2, argv[1]))
-    SWIG_fail;
-    arg2 = temp2;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp3, argv[2]))
-    SWIG_fail;
-    arg3 = temp3;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp4, argv[3]))
-    SWIG_fail;
-    arg4 = temp4;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp5, argv[4]))
-    SWIG_fail;
-    arg5 = temp5;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp6, argv[5]))
-    SWIG_fail;
-    arg6 = temp6;
-  }
-  {
-    if (!ConvertFromMatlabToEigenMatrix<Eigen::VectorXd >(&temp7, argv[6]))
-    SWIG_fail;
-    arg7 = temp7;
-  }
-  ecode8 = SWIG_AsVal_double(argv[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "TrajectoryGenerator_solve" "', argument " "8"" of type '" "double""'");
-  } 
-  arg8 = static_cast< double >(val8);
-  result = (cr::Result)(arg1)->solve(arg2,arg3,arg4,arg5,arg6,arg7,arg8);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_TrajectoryGenerator_solve__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::TrajectoryGenerator *arg1 = (cr::TrajectoryGenerator *) 0 ;
-  cr::CRWaypoint arg2 ;
-  cr::CRWaypoint arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  mxArray * _out;
-  cr::Result result;
-  
-  if (!SWIG_check_num_args("TrajectoryGenerator_solve",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__TrajectoryGenerator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TrajectoryGenerator_solve" "', argument " "1"" of type '" "cr::TrajectoryGenerator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::TrajectoryGenerator * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_cr__CRWaypoint,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TrajectoryGenerator_solve" "', argument " "2"" of type '" "cr::CRWaypoint""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TrajectoryGenerator_solve" "', argument " "2"" of type '" "cr::CRWaypoint""'");
-    } else {
-      arg2 = *(reinterpret_cast< cr::CRWaypoint * >(argp2));
-    }
-  }
-  {
-    res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_cr__CRWaypoint,  0 );
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TrajectoryGenerator_solve" "', argument " "3"" of type '" "cr::CRWaypoint""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TrajectoryGenerator_solve" "', argument " "3"" of type '" "cr::CRWaypoint""'");
-    } else {
-      arg3 = *(reinterpret_cast< cr::CRWaypoint * >(argp3));
-    }
-  }
-  result = (cr::Result)(arg1)->solve(arg2,arg3);
-  _out = SWIG_From_int(static_cast< int >(result));
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_TrajectoryGenerator_solve(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__TrajectoryGenerator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_cr__CRWaypoint, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_cr__CRWaypoint, 0);
-        _v = SWIG_CheckState(res);
-        if (_v) {
-          return _wrap_TrajectoryGenerator_solve__SWIG_1(resc,resv,argc,argv);
-        }
-      }
-    }
-  }
-  if (argc == 8) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__TrajectoryGenerator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        _v = mxIsNumeric(argv[1]);
-      }
-      if (_v) {
-        {
-          _v = mxIsNumeric(argv[2]);
-        }
-        if (_v) {
-          {
-            _v = mxIsNumeric(argv[3]);
-          }
-          if (_v) {
-            {
-              _v = mxIsNumeric(argv[4]);
-            }
-            if (_v) {
-              {
-                _v = mxIsNumeric(argv[5]);
-              }
-              if (_v) {
-                {
-                  _v = mxIsNumeric(argv[6]);
-                }
-                if (_v) {
-                  {
-                    int res = SWIG_AsVal_double(argv[7], NULL);
-                    _v = SWIG_CheckState(res);
-                  }
-                  if (_v) {
-                    return _wrap_TrajectoryGenerator_solve__SWIG_0(resc,resv,argc,argv);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'TrajectoryGenerator_solve'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::TrajectoryGenerator::solve(Eigen::VectorXd,Eigen::VectorXd,Eigen::VectorXd,Eigen::VectorXd,Eigen::VectorXd,Eigen::VectorXd,double)\n"
-    "    cr::TrajectoryGenerator::solve(cr::CRWaypoint,cr::CRWaypoint)\n");
-  return 1;
-}
-
-
-int _wrap_TrajectoryGenerator_step__SWIG_0(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::TrajectoryGenerator *arg1 = (cr::TrajectoryGenerator *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  mxArray * _out;
-  cr::CRWaypoint result;
-  
-  if (!SWIG_check_num_args("TrajectoryGenerator_step",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__TrajectoryGenerator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TrajectoryGenerator_step" "', argument " "1"" of type '" "cr::TrajectoryGenerator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::TrajectoryGenerator * >(argp1);
-  ecode2 = SWIG_AsVal_double(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "TrajectoryGenerator_step" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  result = (arg1)->step(arg2);
-  _out = SWIG_NewPointerObj((new cr::CRWaypoint(static_cast< const cr::CRWaypoint& >(result))), SWIGTYPE_p_cr__CRWaypoint, SWIG_POINTER_OWN |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_TrajectoryGenerator_step__SWIG_1(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::TrajectoryGenerator *arg1 = (cr::TrajectoryGenerator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  cr::CRWaypoint result;
-  
-  if (!SWIG_check_num_args("TrajectoryGenerator_step",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__TrajectoryGenerator, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TrajectoryGenerator_step" "', argument " "1"" of type '" "cr::TrajectoryGenerator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::TrajectoryGenerator * >(argp1);
-  result = (arg1)->step();
-  _out = SWIG_NewPointerObj((new cr::CRWaypoint(static_cast< const cr::CRWaypoint& >(result))), SWIGTYPE_p_cr__CRWaypoint, SWIG_POINTER_OWN |  0 );
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
-  return 1;
-}
-
-
-int _wrap_TrajectoryGenerator_step(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__TrajectoryGenerator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_TrajectoryGenerator_step__SWIG_1(resc,resv,argc,argv);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_cr__TrajectoryGenerator, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_double(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        return _wrap_TrajectoryGenerator_step__SWIG_0(resc,resv,argc,argv);
-      }
-    }
-  }
-  
-  SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'TrajectoryGenerator_step'."
-    "  Possible C/C++ prototypes are:\n"
-    "    cr::TrajectoryGenerator::step(double)\n"
-    "    cr::TrajectoryGenerator::step()\n");
-  return 1;
-}
-
-
-int _wrap_delete_TrajectoryGenerator(int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  cr::TrajectoryGenerator *arg1 = (cr::TrajectoryGenerator *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  
-  int is_owned;
-  if (!SWIG_check_num_args("delete_TrajectoryGenerator",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  is_owned = SWIG_Matlab_isOwned(argv[0]);
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_cr__TrajectoryGenerator, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TrajectoryGenerator" "', argument " "1"" of type '" "cr::TrajectoryGenerator *""'"); 
-  }
-  arg1 = reinterpret_cast< cr::TrajectoryGenerator * >(argp1);
-  if (is_owned) {
-    delete arg1;
-  }
-  _out = (mxArray*)0;
-  if (_out) --resc, *resv++ = _out;
-  return 0;
-fail:
   return 1;
 }
 
@@ -15897,33 +11161,26 @@ static swig_type_info _swigt__p_Eigen__MatrixXd = {"_p_Eigen__MatrixXd", "std::v
 static swig_type_info _swigt__p_Eigen__VectorXd = {"_p_Eigen__VectorXd", "Eigen::VectorXd *|std::vector< Eigen::VectorXd >::value_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Eigen__VectorXi = {"_p_Eigen__VectorXi", "Eigen::VectorXi *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t = {"_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t", "cr::ShmemAllocator *|boost::interprocess::allocator< double,boost::interprocess::managed_shared_memory::segment_manager > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__interprocess__vectorT_double_cr__ShmemAllocator_t = {"_p_boost__interprocess__vectorT_double_cr__ShmemAllocator_t", "cr::ShmemData *|boost::interprocess::vector< double,cr::ShmemAllocator > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t = {"_p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t", "cr::core::ShmemAllocator *|boost::interprocess::allocator< double,boost::interprocess::managed_shared_memory::segment_manager > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__interprocess__vectorT_double_cr__core__ShmemAllocator_t = {"_p_boost__interprocess__vectorT_double_cr__core__ShmemAllocator_t", "cr::core::ShmemData *|boost::interprocess::vector< double,cr::core::ShmemAllocator > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_cr__CRParamNoiseGaussian = {"_p_cr__CRParamNoiseGaussian", "cr::CRParamNoiseGaussian *", 0, 0, (void*)"CoreRobotics.CRParamNoiseGaussian", 0};
 static swig_type_info _swigt__p_cr__CRParamNoiseGeneric = {"_p_cr__CRParamNoiseGeneric", "cr::CRParamNoiseGeneric *", 0, 0, (void*)"CoreRobotics.CRParamNoiseGeneric", 0};
 static swig_type_info _swigt__p_cr__CRParamNoiseMixture = {"_p_cr__CRParamNoiseMixture", "cr::CRParamNoiseMixture *", 0, 0, (void*)"CoreRobotics.CRParamNoiseMixture", 0};
 static swig_type_info _swigt__p_cr__CRParamNoiseUniform = {"_p_cr__CRParamNoiseUniform", "cr::CRParamNoiseUniform *", 0, 0, (void*)"CoreRobotics.CRParamNoiseUniform", 0};
-static swig_type_info _swigt__p_cr__CRWaypoint = {"_p_cr__CRWaypoint", "cr::CRWaypoint *", 0, 0, (void*)"CoreRobotics.CRWaypoint", 0};
-static swig_type_info _swigt__p_cr__Clock = {"_p_cr__Clock", "cr::Clock *", 0, 0, (void*)"CoreRobotics.Clock", 0};
 static swig_type_info _swigt__p_cr__Conversion = {"_p_cr__Conversion", "cr::Conversion *", 0, 0, (void*)"CoreRobotics.Conversion", 0};
 static swig_type_info _swigt__p_cr__Frame = {"_p_cr__Frame", "cr::Frame *", 0, 0, (void*)"CoreRobotics.Frame", 0};
 static swig_type_info _swigt__p_cr__FrameDh = {"_p_cr__FrameDh", "cr::FrameDh *", 0, 0, (void*)"CoreRobotics.FrameDh", 0};
 static swig_type_info _swigt__p_cr__FrameEuler = {"_p_cr__FrameEuler", "cr::FrameEuler *", 0, 0, (void*)"CoreRobotics.FrameEuler", 0};
-static swig_type_info _swigt__p_cr__HardLimits = {"_p_cr__HardLimits", "cr::HardLimits *", 0, 0, (void*)"CoreRobotics.HardLimits", 0};
 static swig_type_info _swigt__p_cr__Integration = {"_p_cr__Integration", "cr::Integration *", 0, 0, (void*)"CoreRobotics.Integration", 0};
-static swig_type_info _swigt__p_cr__InverseKinematics = {"_p_cr__InverseKinematics", "cr::InverseKinematics *", 0, 0, (void*)"CoreRobotics.InverseKinematics", 0};
 static swig_type_info _swigt__p_cr__Matrix = {"_p_cr__Matrix", "cr::Matrix *", 0, 0, (void*)"CoreRobotics.Matrix", 0};
 static swig_type_info _swigt__p_cr__NoiseGaussian = {"_p_cr__NoiseGaussian", "cr::NoiseGaussian *", 0, 0, (void*)"CoreRobotics.NoiseGaussian", 0};
 static swig_type_info _swigt__p_cr__NoiseMixture = {"_p_cr__NoiseMixture", "cr::NoiseMixture *", 0, 0, (void*)"CoreRobotics.NoiseMixture", 0};
 static swig_type_info _swigt__p_cr__NoiseModel = {"_p_cr__NoiseModel", "cr::NoiseModel *", 0, 0, (void*)"CoreRobotics.NoiseModel", 0};
 static swig_type_info _swigt__p_cr__NoiseUniform = {"_p_cr__NoiseUniform", "cr::NoiseUniform *", 0, 0, (void*)"CoreRobotics.NoiseUniform", 0};
-static swig_type_info _swigt__p_cr__NullSpace = {"_p_cr__NullSpace", "cr::NullSpace *", 0, 0, (void*)"CoreRobotics.NullSpace", 0};
 static swig_type_info _swigt__p_cr__RigidBody = {"_p_cr__RigidBody", "cr::RigidBody *", 0, 0, (void*)"CoreRobotics.RigidBody", 0};
-static swig_type_info _swigt__p_cr__SensorLinear = {"_p_cr__SensorLinear", "cr::SensorLinear *", 0, 0, (void*)"CoreRobotics.SensorLinear", 0};
-static swig_type_info _swigt__p_cr__SharedMemory = {"_p_cr__SharedMemory", "cr::SharedMemory *", 0, 0, (void*)"CoreRobotics.SharedMemory", 0};
-static swig_type_info _swigt__p_cr__TrajectoryGenerator = {"_p_cr__TrajectoryGenerator", "cr::TrajectoryGenerator *", 0, 0, (void*)"CoreRobotics.TrajectoryGenerator", 0};
-static swig_type_info _swigt__p_cr__world__Manipulator = {"_p_cr__world__Manipulator", "cr::world::Manipulator *", 0, 0, (void*)"CoreRobotics.Manipulator", 0};
+static swig_type_info _swigt__p_cr__core__Clock = {"_p_cr__core__Clock", "cr::core::Clock *", 0, 0, (void*)"CoreRobotics.Clock", 0};
+static swig_type_info _swigt__p_cr__core__SharedMemory = {"_p_cr__core__SharedMemory", "cr::core::SharedMemory *", 0, 0, (void*)"CoreRobotics.SharedMemory", 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_f_Eigen__VectorXd__double = {"_p_f_Eigen__VectorXd__double", "double (*)(Eigen::VectorXd)", 0, 0, (void*)0, 0};
@@ -15931,7 +11188,6 @@ static swig_type_info _swigt__p_f_double__Eigen__VectorXd = {"_p_f_double__Eigen
 static swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_Eigen__MatrixXd_t = {"_p_std__allocatorT_Eigen__MatrixXd_t", "std::vector< Eigen::MatrixXd >::allocator_type *|std::allocator< Eigen::MatrixXd > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_Eigen__VectorXd_t = {"_p_std__allocatorT_Eigen__VectorXd_t", "std::vector< Eigen::VectorXd >::allocator_type *|std::allocator< Eigen::VectorXd > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__shared_ptrT_cr__world__Manipulator_t = {"_p_std__shared_ptrT_cr__world__Manipulator_t", "std::shared_ptr< cr::world::Manipulator > *|cr::world::ManipulatorPtr *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t = {"_p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t", "std::vector< Eigen::MatrixXd,std::allocator< Eigen::MatrixXd > > *|std::vector< Eigen::MatrixXd > *", 0, 0, (void*)"CoreRobotics.vectorMatrixXd", 0};
 static swig_type_info _swigt__p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t = {"_p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t", "std::vector< Eigen::VectorXd,std::allocator< Eigen::VectorXd > > *|std::vector< Eigen::VectorXd > *", 0, 0, (void*)"CoreRobotics.vectorVectorXd", 0};
 static swig_type_info _swigt__p_std__vectorT_cr__NoiseModel_p_std__allocatorT_cr__NoiseModel_p_t_t = {"_p_std__vectorT_cr__NoiseModel_p_std__allocatorT_cr__NoiseModel_p_t_t", "std::vector< cr::NoiseModel *,std::allocator< cr::NoiseModel * > > *", 0, 0, (void*)0, 0};
@@ -15947,32 +11203,25 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Eigen__VectorXi,
   &_swigt__p_allocator_type,
   &_swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t,
-  &_swigt__p_boost__interprocess__vectorT_double_cr__ShmemAllocator_t,
+  &_swigt__p_boost__interprocess__vectorT_double_cr__core__ShmemAllocator_t,
   &_swigt__p_char,
   &_swigt__p_cr__CRParamNoiseGaussian,
   &_swigt__p_cr__CRParamNoiseGeneric,
   &_swigt__p_cr__CRParamNoiseMixture,
   &_swigt__p_cr__CRParamNoiseUniform,
-  &_swigt__p_cr__CRWaypoint,
-  &_swigt__p_cr__Clock,
   &_swigt__p_cr__Conversion,
   &_swigt__p_cr__Frame,
   &_swigt__p_cr__FrameDh,
   &_swigt__p_cr__FrameEuler,
-  &_swigt__p_cr__HardLimits,
   &_swigt__p_cr__Integration,
-  &_swigt__p_cr__InverseKinematics,
   &_swigt__p_cr__Matrix,
   &_swigt__p_cr__NoiseGaussian,
   &_swigt__p_cr__NoiseMixture,
   &_swigt__p_cr__NoiseModel,
   &_swigt__p_cr__NoiseUniform,
-  &_swigt__p_cr__NullSpace,
   &_swigt__p_cr__RigidBody,
-  &_swigt__p_cr__SensorLinear,
-  &_swigt__p_cr__SharedMemory,
-  &_swigt__p_cr__TrajectoryGenerator,
-  &_swigt__p_cr__world__Manipulator,
+  &_swigt__p_cr__core__Clock,
+  &_swigt__p_cr__core__SharedMemory,
   &_swigt__p_difference_type,
   &_swigt__p_double,
   &_swigt__p_f_Eigen__VectorXd__double,
@@ -15980,7 +11229,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_size_type,
   &_swigt__p_std__allocatorT_Eigen__MatrixXd_t,
   &_swigt__p_std__allocatorT_Eigen__VectorXd_t,
-  &_swigt__p_std__shared_ptrT_cr__world__Manipulator_t,
   &_swigt__p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t,
   &_swigt__p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t,
   &_swigt__p_std__vectorT_cr__NoiseModel_p_std__allocatorT_cr__NoiseModel_p_t_t,
@@ -15996,32 +11244,25 @@ static swig_cast_info _swigc__p_Eigen__VectorXd[] = {  {&_swigt__p_Eigen__Vector
 static swig_cast_info _swigc__p_Eigen__VectorXi[] = {  {&_swigt__p_Eigen__VectorXi, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t[] = {  {&_swigt__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__interprocess__vectorT_double_cr__ShmemAllocator_t[] = {  {&_swigt__p_boost__interprocess__vectorT_double_cr__ShmemAllocator_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__interprocess__vectorT_double_cr__core__ShmemAllocator_t[] = {  {&_swigt__p_boost__interprocess__vectorT_double_cr__core__ShmemAllocator_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__CRParamNoiseGaussian[] = {  {&_swigt__p_cr__CRParamNoiseGaussian, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__CRParamNoiseGeneric[] = {  {&_swigt__p_cr__CRParamNoiseGeneric, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__CRParamNoiseMixture[] = {  {&_swigt__p_cr__CRParamNoiseMixture, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__CRParamNoiseUniform[] = {  {&_swigt__p_cr__CRParamNoiseUniform, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_cr__CRWaypoint[] = {  {&_swigt__p_cr__CRWaypoint, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_cr__Clock[] = {  {&_swigt__p_cr__Clock, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__Conversion[] = {  {&_swigt__p_cr__Conversion, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__Frame[] = {  {&_swigt__p_cr__Frame, 0, 0, 0},  {&_swigt__p_cr__FrameEuler, _p_cr__FrameEulerTo_p_cr__Frame, 0, 0},  {&_swigt__p_cr__FrameDh, _p_cr__FrameDhTo_p_cr__Frame, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__FrameDh[] = {  {&_swigt__p_cr__FrameDh, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__FrameEuler[] = {  {&_swigt__p_cr__FrameEuler, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_cr__HardLimits[] = {  {&_swigt__p_cr__HardLimits, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__Integration[] = {  {&_swigt__p_cr__Integration, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_cr__InverseKinematics[] = {  {&_swigt__p_cr__InverseKinematics, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__Matrix[] = {  {&_swigt__p_cr__Matrix, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__NoiseGaussian[] = {  {&_swigt__p_cr__NoiseGaussian, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__NoiseMixture[] = {  {&_swigt__p_cr__NoiseMixture, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__NoiseModel[] = {  {&_swigt__p_cr__NoiseModel, 0, 0, 0},  {&_swigt__p_cr__NoiseUniform, _p_cr__NoiseUniformTo_p_cr__NoiseModel, 0, 0},  {&_swigt__p_cr__NoiseGaussian, _p_cr__NoiseGaussianTo_p_cr__NoiseModel, 0, 0},  {&_swigt__p_cr__NoiseMixture, _p_cr__NoiseMixtureTo_p_cr__NoiseModel, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__NoiseUniform[] = {  {&_swigt__p_cr__NoiseUniform, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_cr__NullSpace[] = {  {&_swigt__p_cr__NullSpace, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_cr__RigidBody[] = {  {&_swigt__p_cr__RigidBody, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_cr__SensorLinear[] = {  {&_swigt__p_cr__SensorLinear, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_cr__SharedMemory[] = {  {&_swigt__p_cr__SharedMemory, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_cr__TrajectoryGenerator[] = {  {&_swigt__p_cr__TrajectoryGenerator, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_cr__world__Manipulator[] = {  {&_swigt__p_cr__world__Manipulator, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_cr__core__Clock[] = {  {&_swigt__p_cr__core__Clock, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_cr__core__SharedMemory[] = {  {&_swigt__p_cr__core__SharedMemory, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_f_Eigen__VectorXd__double[] = {  {&_swigt__p_f_Eigen__VectorXd__double, 0, 0, 0},{0, 0, 0, 0}};
@@ -16029,7 +11270,6 @@ static swig_cast_info _swigc__p_f_double__Eigen__VectorXd[] = {  {&_swigt__p_f_d
 static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_Eigen__MatrixXd_t[] = {  {&_swigt__p_std__allocatorT_Eigen__MatrixXd_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_Eigen__VectorXd_t[] = {  {&_swigt__p_std__allocatorT_Eigen__VectorXd_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__shared_ptrT_cr__world__Manipulator_t[] = {  {&_swigt__p_std__shared_ptrT_cr__world__Manipulator_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t[] = {  {&_swigt__p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t[] = {  {&_swigt__p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_cr__NoiseModel_p_std__allocatorT_cr__NoiseModel_p_t_t[] = {  {&_swigt__p_std__vectorT_cr__NoiseModel_p_std__allocatorT_cr__NoiseModel_p_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -16045,32 +11285,25 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Eigen__VectorXi,
   _swigc__p_allocator_type,
   _swigc__p_boost__interprocess__allocatorT_double_boost__interprocess__managed_shared_memory__segment_manager_t,
-  _swigc__p_boost__interprocess__vectorT_double_cr__ShmemAllocator_t,
+  _swigc__p_boost__interprocess__vectorT_double_cr__core__ShmemAllocator_t,
   _swigc__p_char,
   _swigc__p_cr__CRParamNoiseGaussian,
   _swigc__p_cr__CRParamNoiseGeneric,
   _swigc__p_cr__CRParamNoiseMixture,
   _swigc__p_cr__CRParamNoiseUniform,
-  _swigc__p_cr__CRWaypoint,
-  _swigc__p_cr__Clock,
   _swigc__p_cr__Conversion,
   _swigc__p_cr__Frame,
   _swigc__p_cr__FrameDh,
   _swigc__p_cr__FrameEuler,
-  _swigc__p_cr__HardLimits,
   _swigc__p_cr__Integration,
-  _swigc__p_cr__InverseKinematics,
   _swigc__p_cr__Matrix,
   _swigc__p_cr__NoiseGaussian,
   _swigc__p_cr__NoiseMixture,
   _swigc__p_cr__NoiseModel,
   _swigc__p_cr__NoiseUniform,
-  _swigc__p_cr__NullSpace,
   _swigc__p_cr__RigidBody,
-  _swigc__p_cr__SensorLinear,
-  _swigc__p_cr__SharedMemory,
-  _swigc__p_cr__TrajectoryGenerator,
-  _swigc__p_cr__world__Manipulator,
+  _swigc__p_cr__core__Clock,
+  _swigc__p_cr__core__SharedMemory,
   _swigc__p_difference_type,
   _swigc__p_double,
   _swigc__p_f_Eigen__VectorXd__double,
@@ -16078,7 +11311,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_size_type,
   _swigc__p_std__allocatorT_Eigen__MatrixXd_t,
   _swigc__p_std__allocatorT_Eigen__VectorXd_t,
-  _swigc__p_std__shared_ptrT_cr__world__Manipulator_t,
   _swigc__p_std__vectorT_Eigen__MatrixXd_std__allocatorT_Eigen__MatrixXd_t_t,
   _swigc__p_std__vectorT_Eigen__VectorXd_std__allocatorT_Eigen__VectorXd_t_t,
   _swigc__p_std__vectorT_cr__NoiseModel_p_std__allocatorT_cr__NoiseModel_p_t_t,
@@ -16411,14 +11643,14 @@ SWIGINTERN int swigConstant(int SWIGUNUSEDPARM(resc), mxArray *resv[], int argc,
   int con_id = (int)mxGetScalar(*argv++);
   switch (con_id) {
   case 0: *resv = SWIG_Matlab_SetConstant(module_ns,"SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));; break;
-  case 1: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RESULT_SUCCESS",SWIG_From_int(static_cast< int >(cr::CR_RESULT_SUCCESS)));; break;
-  case 2: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RESULT_SINGULAR",SWIG_From_int(static_cast< int >(cr::CR_RESULT_SINGULAR)));; break;
-  case 3: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RESULT_UNWRITABLE",SWIG_From_int(static_cast< int >(cr::CR_RESULT_UNWRITABLE)));; break;
-  case 4: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RESULT_BAD_IC",SWIG_From_int(static_cast< int >(cr::CR_RESULT_BAD_IC)));; break;
-  case 5: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RESULT_NOT_FOUND",SWIG_From_int(static_cast< int >(cr::CR_RESULT_NOT_FOUND)));; break;
-  case 6: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RUN_STATE_RUNNING",SWIG_From_int(static_cast< int >(cr::CR_RUN_STATE_RUNNING)));; break;
-  case 7: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RUN_STATE_STOPPED",SWIG_From_int(static_cast< int >(cr::CR_RUN_STATE_STOPPED)));; break;
-  case 8: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RUN_STATE_PAUSED",SWIG_From_int(static_cast< int >(cr::CR_RUN_STATE_PAUSED)));; break;
+  case 1: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RESULT_SUCCESS",SWIG_From_int(static_cast< int >(cr::core::CR_RESULT_SUCCESS)));; break;
+  case 2: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RESULT_SINGULAR",SWIG_From_int(static_cast< int >(cr::core::CR_RESULT_SINGULAR)));; break;
+  case 3: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RESULT_UNWRITABLE",SWIG_From_int(static_cast< int >(cr::core::CR_RESULT_UNWRITABLE)));; break;
+  case 4: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RESULT_BAD_IC",SWIG_From_int(static_cast< int >(cr::core::CR_RESULT_BAD_IC)));; break;
+  case 5: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RESULT_NOT_FOUND",SWIG_From_int(static_cast< int >(cr::core::CR_RESULT_NOT_FOUND)));; break;
+  case 6: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RUN_STATE_RUNNING",SWIG_From_int(static_cast< int >(cr::core::CR_RUN_STATE_RUNNING)));; break;
+  case 7: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RUN_STATE_STOPPED",SWIG_From_int(static_cast< int >(cr::core::CR_RUN_STATE_STOPPED)));; break;
+  case 8: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_RUN_STATE_PAUSED",SWIG_From_int(static_cast< int >(cr::core::CR_RUN_STATE_PAUSED)));; break;
   case 9: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_EULER_MODE_ZXZ",SWIG_From_int(static_cast< int >(cr::CR_EULER_MODE_ZXZ)));; break;
   case 10: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_EULER_MODE_XYX",SWIG_From_int(static_cast< int >(cr::CR_EULER_MODE_XYX)));; break;
   case 11: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_EULER_MODE_YZY",SWIG_From_int(static_cast< int >(cr::CR_EULER_MODE_YZY)));; break;
@@ -16445,8 +11677,8 @@ SWIGINTERN int swigConstant(int SWIGUNUSEDPARM(resc), mxArray *resv[], int argc,
   case 32: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_DH_FREE_THETA",SWIG_From_int(static_cast< int >(cr::CR_DH_FREE_THETA)));; break;
   case 33: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_DH_MODE_CLASSIC",SWIG_From_int(static_cast< int >(cr::CR_DH_MODE_CLASSIC)));; break;
   case 34: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_DH_MODE_MODIFIED",SWIG_From_int(static_cast< int >(cr::CR_DH_MODE_MODIFIED)));; break;
-  case 35: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_MANAGER_SERVER",SWIG_From_int(static_cast< int >(cr::CR_MANAGER_SERVER)));; break;
-  case 36: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_MANAGER_CLIENT",SWIG_From_int(static_cast< int >(cr::CR_MANAGER_CLIENT)));; break;
+  case 35: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_MANAGER_SERVER",SWIG_From_int(static_cast< int >(cr::core::CR_MANAGER_SERVER)));; break;
+  case 36: *resv = SWIG_Matlab_SetConstant(module_ns,"CR_MANAGER_CLIENT",SWIG_From_int(static_cast< int >(cr::core::CR_MANAGER_CLIENT)));; break;
   default:
     SWIG_Error(SWIG_RuntimeError, "No such constant.");
     return 1;
@@ -16597,171 +11829,74 @@ SWIGINTERN const char* SwigFunctionName(int fcn_id) {
   case 138: return "delete_FrameDh";
   case 139: return "new_RigidBody";
   case 140: return "delete_RigidBody";
-  case 141: return "RigidBody_setFrame";
-  case 142: return "RigidBody_setCenterOfMass";
-  case 143: return "RigidBody_getCenterOfMass";
-  case 144: return "RigidBody_setInertiaTensor";
-  case 145: return "RigidBody_getInertiaTensor";
-  case 146: return "RigidBody_setMass";
-  case 147: return "RigidBody_getMass";
-  case 148: return "RigidBody_getMassMatrix";
-  case 149: return "RigidBody_m_frame_get";
-  case 150: return "RigidBody_m_frame_set";
-  case 151: return "new_Manipulator";
-  case 152: return "delete_Manipulator";
-  case 153: return "Manipulator_create";
-  case 154: return "Manipulator_setConfiguration";
-  case 155: return "Manipulator_getConfiguration";
-  case 156: return "Manipulator_getForwardKinematics";
-  case 157: return "Manipulator_getNumberOfLinks";
-  case 158: return "Manipulator_getDegreesOfFreedom";
-  case 159: return "Manipulator_getToolFrame";
-  case 160: return "Manipulator_getLinkFrame";
-  case 161: return "Manipulator_getToolPose";
-  case 162: return "Manipulator_jacobian";
-  case 163: return "Manipulator_hessian";
-  case 164: return "Manipulator_addLink";
-  case 165: return "Manipulator_addTool";
-  case 166: return "CRParamNoiseGeneric_icdFunction_get";
-  case 167: return "CRParamNoiseGeneric_icdFunction_set";
-  case 168: return "CRParamNoiseGeneric_probFunction_get";
-  case 169: return "CRParamNoiseGeneric_probFunction_set";
-  case 170: return "new_CRParamNoiseGeneric";
-  case 171: return "delete_CRParamNoiseGeneric";
-  case 172: return "new_NoiseModel";
-  case 173: return "NoiseModel_setParameters";
-  case 174: return "NoiseModel_sample";
-  case 175: return "NoiseModel_probability";
-  case 176: return "NoiseModel_m_parameters_get";
-  case 177: return "NoiseModel_m_parameters_set";
-  case 178: return "delete_NoiseModel";
-  case 179: return "CRParamNoiseGaussian_cov_get";
-  case 180: return "CRParamNoiseGaussian_cov_set";
-  case 181: return "CRParamNoiseGaussian_covInv_get";
-  case 182: return "CRParamNoiseGaussian_covInv_set";
-  case 183: return "CRParamNoiseGaussian_mean_get";
-  case 184: return "CRParamNoiseGaussian_mean_set";
-  case 185: return "new_CRParamNoiseGaussian";
-  case 186: return "delete_CRParamNoiseGaussian";
-  case 187: return "new_NoiseGaussian";
-  case 188: return "NoiseGaussian_setParameters";
-  case 189: return "NoiseGaussian_sample";
-  case 190: return "NoiseGaussian_probability";
-  case 191: return "NoiseGaussian_m_parameters_get";
-  case 192: return "NoiseGaussian_m_parameters_set";
-  case 193: return "delete_NoiseGaussian";
-  case 194: return "CRParamNoiseUniform_a_get";
-  case 195: return "CRParamNoiseUniform_a_set";
-  case 196: return "CRParamNoiseUniform_b_get";
-  case 197: return "CRParamNoiseUniform_b_set";
-  case 198: return "new_CRParamNoiseUniform";
-  case 199: return "delete_CRParamNoiseUniform";
-  case 200: return "new_NoiseUniform";
-  case 201: return "NoiseUniform_setParameters";
-  case 202: return "NoiseUniform_sample";
-  case 203: return "NoiseUniform_probability";
-  case 204: return "NoiseUniform_m_parameters_get";
-  case 205: return "NoiseUniform_m_parameters_set";
-  case 206: return "delete_NoiseUniform";
-  case 207: return "CRParamNoiseMixture_models_get";
-  case 208: return "CRParamNoiseMixture_models_set";
-  case 209: return "CRParamNoiseMixture_weights_get";
-  case 210: return "CRParamNoiseMixture_weights_set";
-  case 211: return "new_CRParamNoiseMixture";
-  case 212: return "delete_CRParamNoiseMixture";
-  case 213: return "new_NoiseMixture";
-  case 214: return "NoiseMixture_add";
-  case 215: return "NoiseMixture_sample";
-  case 216: return "NoiseMixture_probability";
-  case 217: return "NoiseMixture_m_parameters_get";
-  case 218: return "NoiseMixture_m_parameters_set";
-  case 219: return "delete_NoiseMixture";
-  case 220: return "new_SensorLinear";
-  case 221: return "SensorLinear_setObservation";
-  case 222: return "SensorLinear_measurement";
-  case 223: return "delete_SensorLinear";
-  case 224: return "new_InverseKinematics";
-  case 225: return "InverseKinematics_setRobot";
-  case 226: return "InverseKinematics_getRobot";
-  case 227: return "InverseKinematics_setToolIndex";
-  case 228: return "InverseKinematics_getToolIndex";
-  case 229: return "InverseKinematics_setEulerMode";
-  case 230: return "InverseKinematics_getEulerMode";
-  case 231: return "InverseKinematics_setTolerance";
-  case 232: return "InverseKinematics_getTolerance";
-  case 233: return "InverseKinematics_setMaxIter";
-  case 234: return "InverseKinematics_getMaxIter";
-  case 235: return "InverseKinematics_setStepSize";
-  case 236: return "InverseKinematics_getStepSize";
-  case 237: return "InverseKinematics_setDampingFactor";
-  case 238: return "InverseKinematics_getDampingFactor";
-  case 239: return "InverseKinematics_setSingularThresh";
-  case 240: return "InverseKinematics_getSingularThresh";
-  case 241: return "InverseKinematics_getJacInv";
-  case 242: return "InverseKinematics_solve";
-  case 243: return "delete_InverseKinematics";
-  case 244: return "new_NullSpace";
-  case 245: return "NullSpace_setRobot";
-  case 246: return "NullSpace_setToolIndex";
-  case 247: return "NullSpace_setEulerMode";
-  case 248: return "NullSpace_getEulerMode";
-  case 249: return "NullSpace_setSingularThresh";
-  case 250: return "NullSpace_getSingularThresh";
-  case 251: return "NullSpace_setMinStepSize";
-  case 252: return "NullSpace_getMinStepSize";
-  case 253: return "NullSpace_setMaxIter";
-  case 254: return "NullSpace_getMaxIter";
-  case 255: return "NullSpace_setTrivialTolerance";
-  case 256: return "NullSpace_getTrivialTolerance";
-  case 257: return "NullSpace_solve";
-  case 258: return "delete_NullSpace";
-  case 259: return "new_HardLimits";
-  case 260: return "HardLimits_getIKSolver";
-  case 261: return "HardLimits_getNullSpaceSolver";
-  case 262: return "HardLimits_useNullSpace";
-  case 263: return "HardLimits_nullSpaceStatus";
-  case 264: return "HardLimits_setPoseElements";
-  case 265: return "HardLimits_getPoseElements";
-  case 266: return "HardLimits_setJointUpperLimit";
-  case 267: return "HardLimits_setJointLowerLimit";
-  case 268: return "HardLimits_getJointUpperLimit";
-  case 269: return "HardLimits_getJointLowerLimit";
-  case 270: return "HardLimits_setJointLimits";
-  case 271: return "HardLimits_setJointUpperLimits";
-  case 272: return "HardLimits_setJointLowerLimits";
-  case 273: return "HardLimits_getJointUpperLimits";
-  case 274: return "HardLimits_getJointLowerLimits";
-  case 275: return "HardLimits_setQ0";
-  case 276: return "HardLimits_getQ0";
-  case 277: return "HardLimits_setToolPose";
-  case 278: return "HardLimits_getToolPose";
-  case 279: return "HardLimits_setJointMotion";
-  case 280: return "HardLimits_getJointMotion";
-  case 281: return "HardLimits_solve";
-  case 282: return "delete_HardLimits";
-  case 283: return "new_SharedMemory";
-  case 284: return "delete_SharedMemory";
-  case 285: return "SharedMemory_addSignal";
-  case 286: return "SharedMemory_removeSignal";
-  case 287: return "SharedMemory_set";
-  case 288: return "SharedMemory_get";
-  case 289: return "CRWaypoint_time_get";
-  case 290: return "CRWaypoint_time_set";
-  case 291: return "CRWaypoint_position_get";
-  case 292: return "CRWaypoint_position_set";
-  case 293: return "CRWaypoint_velocity_get";
-  case 294: return "CRWaypoint_velocity_set";
-  case 295: return "CRWaypoint_acceleration_get";
-  case 296: return "CRWaypoint_acceleration_set";
-  case 297: return "CRWaypoint_jerk_get";
-  case 298: return "CRWaypoint_jerk_set";
-  case 299: return "new_CRWaypoint";
-  case 300: return "delete_CRWaypoint";
-  case 301: return "new_TrajectoryGenerator";
-  case 302: return "TrajectoryGenerator_solve";
-  case 303: return "TrajectoryGenerator_step";
-  case 304: return "delete_TrajectoryGenerator";
-  case 305: return "_wrap_poseElements";
+  case 141: return "RigidBody_setCenterOfMass";
+  case 142: return "RigidBody_getCenterOfMass";
+  case 143: return "RigidBody_setInertiaTensor";
+  case 144: return "RigidBody_getInertiaTensor";
+  case 145: return "RigidBody_setMass";
+  case 146: return "RigidBody_getMass";
+  case 147: return "RigidBody_getMassMatrix";
+  case 148: return "CRParamNoiseGeneric_icdFunction_get";
+  case 149: return "CRParamNoiseGeneric_icdFunction_set";
+  case 150: return "CRParamNoiseGeneric_probFunction_get";
+  case 151: return "CRParamNoiseGeneric_probFunction_set";
+  case 152: return "new_CRParamNoiseGeneric";
+  case 153: return "delete_CRParamNoiseGeneric";
+  case 154: return "new_NoiseModel";
+  case 155: return "NoiseModel_setParameters";
+  case 156: return "NoiseModel_sample";
+  case 157: return "NoiseModel_probability";
+  case 158: return "NoiseModel_m_parameters_get";
+  case 159: return "NoiseModel_m_parameters_set";
+  case 160: return "delete_NoiseModel";
+  case 161: return "CRParamNoiseGaussian_cov_get";
+  case 162: return "CRParamNoiseGaussian_cov_set";
+  case 163: return "CRParamNoiseGaussian_covInv_get";
+  case 164: return "CRParamNoiseGaussian_covInv_set";
+  case 165: return "CRParamNoiseGaussian_mean_get";
+  case 166: return "CRParamNoiseGaussian_mean_set";
+  case 167: return "new_CRParamNoiseGaussian";
+  case 168: return "delete_CRParamNoiseGaussian";
+  case 169: return "new_NoiseGaussian";
+  case 170: return "NoiseGaussian_setParameters";
+  case 171: return "NoiseGaussian_sample";
+  case 172: return "NoiseGaussian_probability";
+  case 173: return "NoiseGaussian_m_parameters_get";
+  case 174: return "NoiseGaussian_m_parameters_set";
+  case 175: return "delete_NoiseGaussian";
+  case 176: return "CRParamNoiseUniform_a_get";
+  case 177: return "CRParamNoiseUniform_a_set";
+  case 178: return "CRParamNoiseUniform_b_get";
+  case 179: return "CRParamNoiseUniform_b_set";
+  case 180: return "new_CRParamNoiseUniform";
+  case 181: return "delete_CRParamNoiseUniform";
+  case 182: return "new_NoiseUniform";
+  case 183: return "NoiseUniform_setParameters";
+  case 184: return "NoiseUniform_sample";
+  case 185: return "NoiseUniform_probability";
+  case 186: return "NoiseUniform_m_parameters_get";
+  case 187: return "NoiseUniform_m_parameters_set";
+  case 188: return "delete_NoiseUniform";
+  case 189: return "CRParamNoiseMixture_models_get";
+  case 190: return "CRParamNoiseMixture_models_set";
+  case 191: return "CRParamNoiseMixture_weights_get";
+  case 192: return "CRParamNoiseMixture_weights_set";
+  case 193: return "new_CRParamNoiseMixture";
+  case 194: return "delete_CRParamNoiseMixture";
+  case 195: return "new_NoiseMixture";
+  case 196: return "NoiseMixture_add";
+  case 197: return "NoiseMixture_sample";
+  case 198: return "NoiseMixture_probability";
+  case 199: return "NoiseMixture_m_parameters_get";
+  case 200: return "NoiseMixture_m_parameters_set";
+  case 201: return "delete_NoiseMixture";
+  case 202: return "new_SharedMemory";
+  case 203: return "delete_SharedMemory";
+  case 204: return "SharedMemory_addSignal";
+  case 205: return "SharedMemory_removeSignal";
+  case 206: return "SharedMemory_set";
+  case 207: return "SharedMemory_get";
+  case 208: return "_wrap_poseElements";
   default: return 0;
   }
 }
@@ -16959,171 +12094,74 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 138: flag=_wrap_delete_FrameDh(resc,resv,argc,(mxArray**)(argv)); break;
   case 139: flag=_wrap_new_RigidBody(resc,resv,argc,(mxArray**)(argv)); break;
   case 140: flag=_wrap_delete_RigidBody(resc,resv,argc,(mxArray**)(argv)); break;
-  case 141: flag=_wrap_RigidBody_setFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 142: flag=_wrap_RigidBody_setCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
-  case 143: flag=_wrap_RigidBody_getCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
-  case 144: flag=_wrap_RigidBody_setInertiaTensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 145: flag=_wrap_RigidBody_getInertiaTensor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 146: flag=_wrap_RigidBody_setMass(resc,resv,argc,(mxArray**)(argv)); break;
-  case 147: flag=_wrap_RigidBody_getMass(resc,resv,argc,(mxArray**)(argv)); break;
-  case 148: flag=_wrap_RigidBody_getMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
-  case 149: flag=_wrap_RigidBody_m_frame_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 150: flag=_wrap_RigidBody_m_frame_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 151: flag=_wrap_new_Manipulator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 152: flag=_wrap_delete_Manipulator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 153: flag=_wrap_Manipulator_create(resc,resv,argc,(mxArray**)(argv)); break;
-  case 154: flag=_wrap_Manipulator_setConfiguration(resc,resv,argc,(mxArray**)(argv)); break;
-  case 155: flag=_wrap_Manipulator_getConfiguration(resc,resv,argc,(mxArray**)(argv)); break;
-  case 156: flag=_wrap_Manipulator_getForwardKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 157: flag=_wrap_Manipulator_getNumberOfLinks(resc,resv,argc,(mxArray**)(argv)); break;
-  case 158: flag=_wrap_Manipulator_getDegreesOfFreedom(resc,resv,argc,(mxArray**)(argv)); break;
-  case 159: flag=_wrap_Manipulator_getToolFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 160: flag=_wrap_Manipulator_getLinkFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 161: flag=_wrap_Manipulator_getToolPose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 162: flag=_wrap_Manipulator_jacobian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 163: flag=_wrap_Manipulator_hessian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 164: flag=_wrap_Manipulator_addLink(resc,resv,argc,(mxArray**)(argv)); break;
-  case 165: flag=_wrap_Manipulator_addTool(resc,resv,argc,(mxArray**)(argv)); break;
-  case 166: flag=_wrap_CRParamNoiseGeneric_icdFunction_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 167: flag=_wrap_CRParamNoiseGeneric_icdFunction_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 168: flag=_wrap_CRParamNoiseGeneric_probFunction_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 169: flag=_wrap_CRParamNoiseGeneric_probFunction_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 170: flag=_wrap_new_CRParamNoiseGeneric(resc,resv,argc,(mxArray**)(argv)); break;
-  case 171: flag=_wrap_delete_CRParamNoiseGeneric(resc,resv,argc,(mxArray**)(argv)); break;
-  case 172: flag=_wrap_new_NoiseModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 173: flag=_wrap_NoiseModel_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 174: flag=_wrap_NoiseModel_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 175: flag=_wrap_NoiseModel_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 176: flag=_wrap_NoiseModel_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 177: flag=_wrap_NoiseModel_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 178: flag=_wrap_delete_NoiseModel(resc,resv,argc,(mxArray**)(argv)); break;
-  case 179: flag=_wrap_CRParamNoiseGaussian_cov_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 180: flag=_wrap_CRParamNoiseGaussian_cov_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 181: flag=_wrap_CRParamNoiseGaussian_covInv_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 182: flag=_wrap_CRParamNoiseGaussian_covInv_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 183: flag=_wrap_CRParamNoiseGaussian_mean_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 184: flag=_wrap_CRParamNoiseGaussian_mean_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 185: flag=_wrap_new_CRParamNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 186: flag=_wrap_delete_CRParamNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 187: flag=_wrap_new_NoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 188: flag=_wrap_NoiseGaussian_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 189: flag=_wrap_NoiseGaussian_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 190: flag=_wrap_NoiseGaussian_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 191: flag=_wrap_NoiseGaussian_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 192: flag=_wrap_NoiseGaussian_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 193: flag=_wrap_delete_NoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
-  case 194: flag=_wrap_CRParamNoiseUniform_a_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 195: flag=_wrap_CRParamNoiseUniform_a_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 196: flag=_wrap_CRParamNoiseUniform_b_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 197: flag=_wrap_CRParamNoiseUniform_b_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 198: flag=_wrap_new_CRParamNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 199: flag=_wrap_delete_CRParamNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 200: flag=_wrap_new_NoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 201: flag=_wrap_NoiseUniform_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
-  case 202: flag=_wrap_NoiseUniform_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 203: flag=_wrap_NoiseUniform_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 204: flag=_wrap_NoiseUniform_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 205: flag=_wrap_NoiseUniform_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 206: flag=_wrap_delete_NoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 207: flag=_wrap_CRParamNoiseMixture_models_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 208: flag=_wrap_CRParamNoiseMixture_models_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 209: flag=_wrap_CRParamNoiseMixture_weights_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 210: flag=_wrap_CRParamNoiseMixture_weights_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 211: flag=_wrap_new_CRParamNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
-  case 212: flag=_wrap_delete_CRParamNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
-  case 213: flag=_wrap_new_NoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
-  case 214: flag=_wrap_NoiseMixture_add(resc,resv,argc,(mxArray**)(argv)); break;
-  case 215: flag=_wrap_NoiseMixture_sample(resc,resv,argc,(mxArray**)(argv)); break;
-  case 216: flag=_wrap_NoiseMixture_probability(resc,resv,argc,(mxArray**)(argv)); break;
-  case 217: flag=_wrap_NoiseMixture_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 218: flag=_wrap_NoiseMixture_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 219: flag=_wrap_delete_NoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
-  case 220: flag=_wrap_new_SensorLinear(resc,resv,argc,(mxArray**)(argv)); break;
-  case 221: flag=_wrap_SensorLinear_setObservation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 222: flag=_wrap_SensorLinear_measurement(resc,resv,argc,(mxArray**)(argv)); break;
-  case 223: flag=_wrap_delete_SensorLinear(resc,resv,argc,(mxArray**)(argv)); break;
-  case 224: flag=_wrap_new_InverseKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 225: flag=_wrap_InverseKinematics_setRobot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 226: flag=_wrap_InverseKinematics_getRobot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 227: flag=_wrap_InverseKinematics_setToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 228: flag=_wrap_InverseKinematics_getToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 229: flag=_wrap_InverseKinematics_setEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 230: flag=_wrap_InverseKinematics_getEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 231: flag=_wrap_InverseKinematics_setTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 232: flag=_wrap_InverseKinematics_getTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 233: flag=_wrap_InverseKinematics_setMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 234: flag=_wrap_InverseKinematics_getMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 235: flag=_wrap_InverseKinematics_setStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 236: flag=_wrap_InverseKinematics_getStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 237: flag=_wrap_InverseKinematics_setDampingFactor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 238: flag=_wrap_InverseKinematics_getDampingFactor(resc,resv,argc,(mxArray**)(argv)); break;
-  case 239: flag=_wrap_InverseKinematics_setSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 240: flag=_wrap_InverseKinematics_getSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 241: flag=_wrap_InverseKinematics_getJacInv(resc,resv,argc,(mxArray**)(argv)); break;
-  case 242: flag=_wrap_InverseKinematics_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 243: flag=_wrap_delete_InverseKinematics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 244: flag=_wrap_new_NullSpace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 245: flag=_wrap_NullSpace_setRobot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 246: flag=_wrap_NullSpace_setToolIndex(resc,resv,argc,(mxArray**)(argv)); break;
-  case 247: flag=_wrap_NullSpace_setEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 248: flag=_wrap_NullSpace_getEulerMode(resc,resv,argc,(mxArray**)(argv)); break;
-  case 249: flag=_wrap_NullSpace_setSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 250: flag=_wrap_NullSpace_getSingularThresh(resc,resv,argc,(mxArray**)(argv)); break;
-  case 251: flag=_wrap_NullSpace_setMinStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 252: flag=_wrap_NullSpace_getMinStepSize(resc,resv,argc,(mxArray**)(argv)); break;
-  case 253: flag=_wrap_NullSpace_setMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 254: flag=_wrap_NullSpace_getMaxIter(resc,resv,argc,(mxArray**)(argv)); break;
-  case 255: flag=_wrap_NullSpace_setTrivialTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 256: flag=_wrap_NullSpace_getTrivialTolerance(resc,resv,argc,(mxArray**)(argv)); break;
-  case 257: flag=_wrap_NullSpace_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 258: flag=_wrap_delete_NullSpace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 259: flag=_wrap_new_HardLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 260: flag=_wrap_HardLimits_getIKSolver(resc,resv,argc,(mxArray**)(argv)); break;
-  case 261: flag=_wrap_HardLimits_getNullSpaceSolver(resc,resv,argc,(mxArray**)(argv)); break;
-  case 262: flag=_wrap_HardLimits_useNullSpace(resc,resv,argc,(mxArray**)(argv)); break;
-  case 263: flag=_wrap_HardLimits_nullSpaceStatus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 264: flag=_wrap_HardLimits_setPoseElements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 265: flag=_wrap_HardLimits_getPoseElements(resc,resv,argc,(mxArray**)(argv)); break;
-  case 266: flag=_wrap_HardLimits_setJointUpperLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 267: flag=_wrap_HardLimits_setJointLowerLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 268: flag=_wrap_HardLimits_getJointUpperLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 269: flag=_wrap_HardLimits_getJointLowerLimit(resc,resv,argc,(mxArray**)(argv)); break;
-  case 270: flag=_wrap_HardLimits_setJointLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 271: flag=_wrap_HardLimits_setJointUpperLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 272: flag=_wrap_HardLimits_setJointLowerLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 273: flag=_wrap_HardLimits_getJointUpperLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 274: flag=_wrap_HardLimits_getJointLowerLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 275: flag=_wrap_HardLimits_setQ0(resc,resv,argc,(mxArray**)(argv)); break;
-  case 276: flag=_wrap_HardLimits_getQ0(resc,resv,argc,(mxArray**)(argv)); break;
-  case 277: flag=_wrap_HardLimits_setToolPose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 278: flag=_wrap_HardLimits_getToolPose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 279: flag=_wrap_HardLimits_setJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
-  case 280: flag=_wrap_HardLimits_getJointMotion(resc,resv,argc,(mxArray**)(argv)); break;
-  case 281: flag=_wrap_HardLimits_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 282: flag=_wrap_delete_HardLimits(resc,resv,argc,(mxArray**)(argv)); break;
-  case 283: flag=_wrap_new_SharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
-  case 284: flag=_wrap_delete_SharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
-  case 285: flag=_wrap_SharedMemory_addSignal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 286: flag=_wrap_SharedMemory_removeSignal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 287: flag=_wrap_SharedMemory_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 288: flag=_wrap_SharedMemory_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 289: flag=_wrap_CRWaypoint_time_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 290: flag=_wrap_CRWaypoint_time_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 291: flag=_wrap_CRWaypoint_position_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 292: flag=_wrap_CRWaypoint_position_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 293: flag=_wrap_CRWaypoint_velocity_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 294: flag=_wrap_CRWaypoint_velocity_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 295: flag=_wrap_CRWaypoint_acceleration_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 296: flag=_wrap_CRWaypoint_acceleration_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 297: flag=_wrap_CRWaypoint_jerk_get(resc,resv,argc,(mxArray**)(argv)); break;
-  case 298: flag=_wrap_CRWaypoint_jerk_set(resc,resv,argc,(mxArray**)(argv)); break;
-  case 299: flag=_wrap_new_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 300: flag=_wrap_delete_CRWaypoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 301: flag=_wrap_new_TrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 302: flag=_wrap_TrajectoryGenerator_solve(resc,resv,argc,(mxArray**)(argv)); break;
-  case 303: flag=_wrap_TrajectoryGenerator_step(resc,resv,argc,(mxArray**)(argv)); break;
-  case 304: flag=_wrap_delete_TrajectoryGenerator(resc,resv,argc,(mxArray**)(argv)); break;
-  case 305: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
+  case 141: flag=_wrap_RigidBody_setCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
+  case 142: flag=_wrap_RigidBody_getCenterOfMass(resc,resv,argc,(mxArray**)(argv)); break;
+  case 143: flag=_wrap_RigidBody_setInertiaTensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 144: flag=_wrap_RigidBody_getInertiaTensor(resc,resv,argc,(mxArray**)(argv)); break;
+  case 145: flag=_wrap_RigidBody_setMass(resc,resv,argc,(mxArray**)(argv)); break;
+  case 146: flag=_wrap_RigidBody_getMass(resc,resv,argc,(mxArray**)(argv)); break;
+  case 147: flag=_wrap_RigidBody_getMassMatrix(resc,resv,argc,(mxArray**)(argv)); break;
+  case 148: flag=_wrap_CRParamNoiseGeneric_icdFunction_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 149: flag=_wrap_CRParamNoiseGeneric_icdFunction_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 150: flag=_wrap_CRParamNoiseGeneric_probFunction_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 151: flag=_wrap_CRParamNoiseGeneric_probFunction_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 152: flag=_wrap_new_CRParamNoiseGeneric(resc,resv,argc,(mxArray**)(argv)); break;
+  case 153: flag=_wrap_delete_CRParamNoiseGeneric(resc,resv,argc,(mxArray**)(argv)); break;
+  case 154: flag=_wrap_new_NoiseModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 155: flag=_wrap_NoiseModel_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 156: flag=_wrap_NoiseModel_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 157: flag=_wrap_NoiseModel_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 158: flag=_wrap_NoiseModel_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 159: flag=_wrap_NoiseModel_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 160: flag=_wrap_delete_NoiseModel(resc,resv,argc,(mxArray**)(argv)); break;
+  case 161: flag=_wrap_CRParamNoiseGaussian_cov_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 162: flag=_wrap_CRParamNoiseGaussian_cov_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 163: flag=_wrap_CRParamNoiseGaussian_covInv_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 164: flag=_wrap_CRParamNoiseGaussian_covInv_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 165: flag=_wrap_CRParamNoiseGaussian_mean_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 166: flag=_wrap_CRParamNoiseGaussian_mean_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 167: flag=_wrap_new_CRParamNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 168: flag=_wrap_delete_CRParamNoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 169: flag=_wrap_new_NoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 170: flag=_wrap_NoiseGaussian_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 171: flag=_wrap_NoiseGaussian_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 172: flag=_wrap_NoiseGaussian_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 173: flag=_wrap_NoiseGaussian_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 174: flag=_wrap_NoiseGaussian_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 175: flag=_wrap_delete_NoiseGaussian(resc,resv,argc,(mxArray**)(argv)); break;
+  case 176: flag=_wrap_CRParamNoiseUniform_a_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 177: flag=_wrap_CRParamNoiseUniform_a_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 178: flag=_wrap_CRParamNoiseUniform_b_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 179: flag=_wrap_CRParamNoiseUniform_b_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 180: flag=_wrap_new_CRParamNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 181: flag=_wrap_delete_CRParamNoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 182: flag=_wrap_new_NoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 183: flag=_wrap_NoiseUniform_setParameters(resc,resv,argc,(mxArray**)(argv)); break;
+  case 184: flag=_wrap_NoiseUniform_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 185: flag=_wrap_NoiseUniform_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 186: flag=_wrap_NoiseUniform_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 187: flag=_wrap_NoiseUniform_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 188: flag=_wrap_delete_NoiseUniform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 189: flag=_wrap_CRParamNoiseMixture_models_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 190: flag=_wrap_CRParamNoiseMixture_models_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 191: flag=_wrap_CRParamNoiseMixture_weights_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 192: flag=_wrap_CRParamNoiseMixture_weights_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 193: flag=_wrap_new_CRParamNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 194: flag=_wrap_delete_CRParamNoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 195: flag=_wrap_new_NoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 196: flag=_wrap_NoiseMixture_add(resc,resv,argc,(mxArray**)(argv)); break;
+  case 197: flag=_wrap_NoiseMixture_sample(resc,resv,argc,(mxArray**)(argv)); break;
+  case 198: flag=_wrap_NoiseMixture_probability(resc,resv,argc,(mxArray**)(argv)); break;
+  case 199: flag=_wrap_NoiseMixture_m_parameters_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 200: flag=_wrap_NoiseMixture_m_parameters_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 201: flag=_wrap_delete_NoiseMixture(resc,resv,argc,(mxArray**)(argv)); break;
+  case 202: flag=_wrap_new_SharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
+  case 203: flag=_wrap_delete_SharedMemory(resc,resv,argc,(mxArray**)(argv)); break;
+  case 204: flag=_wrap_SharedMemory_addSignal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 205: flag=_wrap_SharedMemory_removeSignal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 206: flag=_wrap_SharedMemory_set(resc,resv,argc,(mxArray**)(argv)); break;
+  case 207: flag=_wrap_SharedMemory_get(resc,resv,argc,(mxArray**)(argv)); break;
+  case 208: flag=_wrap_poseElements(resc,resv,argc,(mxArray**)(argv)); break;
   default: flag=1, SWIG_Error(SWIG_RuntimeError, "No function id %d.", fcn_id);
   }
   if (flag) {
