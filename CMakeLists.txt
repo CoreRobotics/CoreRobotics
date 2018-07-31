@@ -299,7 +299,7 @@ if(python OR all)
 
 			# Compile a shared library with the exsisting wrapper C++ file
 			add_library(_${PROJECT_NAME} SHARED
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD}
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD} ${SOURCES_NOISE}
 				${CMAKE_SOURCE_DIR}/python/swig/${PROJECT_NAME}PYTHON_wrap.cxx)
 
 			# Link with Python
@@ -324,7 +324,7 @@ if(python OR all)
 			# Create SWIG Module
 			swig_add_module(${PROJECT_NAME} python
 				${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD})
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD} ${SOURCES_NOISE})
 
 			# Link Module with Python
 			swig_link_libraries(${PROJECT_NAME} ${PYTHON_LIBRARIES} ${LINK_FLAGS})
@@ -419,7 +419,7 @@ if(matlab OR all)
 
 			# Compile a shared library with the existing C++ wrapper files
 			add_library(${Matlab_PROJECT_NAME} SHARED
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD}
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD} ${SOURCES_NOISE}
 				${CMAKE_SOURCE_DIR}/matlab/swig/${PROJECT_NAME}MATLAB_wrap.cxx)
 
 			# Link with Matlab
@@ -438,7 +438,7 @@ if(matlab OR all)
 			# Create SWIG Module
 			swig_add_module(${Matlab_PROJECT_NAME} matlab
 				${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i
-				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD})
+				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD} ${SOURCES_NOISE})
 
 			# Link Module with Matlab
 			swig_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES} ${LINK_FLAGS})
