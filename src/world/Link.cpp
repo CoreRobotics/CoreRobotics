@@ -160,7 +160,7 @@ Frame Link::getRelativeTransform(NodePtr i_item)
 void Link::print(std::ostream& i_stream)
 {
     unsigned d = getDepth();
-    for (int i = 0; i < d; i++){
+    for (unsigned i = 0; i < d; i++){
         i_stream << "  ";
     }
     std::string id = "N";
@@ -184,7 +184,7 @@ void Link::print(std::ostream& i_stream)
         dof = "Z";
     }
     i_stream << "+ [" << id << "] world::Link DOF = " << dof << " '" << getName() << "'\n";
-    for (int i = 0; i < m_children.size(); i++)
+    for (unsigned i = 0; i < m_children.size(); i++)
     {
         m_children.at(i)->print(i_stream);
     }

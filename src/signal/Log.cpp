@@ -95,7 +95,7 @@ void Log::step()
     Utility::write(m_logFile, t);
     
     // now write each signal value
-    for (int i = 0; i < m_signals.size(); i++) {
+    for (unsigned i = 0; i < m_signals.size(); i++) {
         m_signals.at(i)->print(m_logFile);
     }
     
@@ -120,9 +120,9 @@ void Log::onStart()
     Utility::write(m_logFile, str);
     
     // write each signal header
-    for (int i = 0; i < m_signals.size(); i++) {
+    for (unsigned i = 0; i < m_signals.size(); i++) {
         unsigned n = m_signals.at(i)->size();
-        for (int j = 0; j < n; j++) {
+        for (unsigned j = 0; j < n; j++) {
             std::string index = "[" + std::to_string(j) + "]";
             Utility::write(m_logFile, m_signals.at(i)->getName().append(index));
         }

@@ -102,7 +102,7 @@ void Node::addChild(NodePtr i_item)
 //---------------------------------------------------------------------
 core::Result Node::removeChild(NodePtr i_item)
 {
-    for (int k = 0; k < m_children.size(); k++){
+    for (unsigned k = 0; k < m_children.size(); k++){
         if (m_children.at(k) == i_item)
         {
             m_children.erase(m_children.begin()+k);
@@ -302,7 +302,7 @@ Frame Node::getRelativeTransform(NodePtr i_item)
 void Node::print(std::ostream& i_stream)
 {
     unsigned d = getDepth();
-    for (int i = 0; i < d; i++){
+    for (unsigned i = 0; i < d; i++){
         i_stream << "  ";
     }
     std::string id = "N";
@@ -312,7 +312,7 @@ void Node::print(std::ostream& i_stream)
         id = "R";
     }
     i_stream << "+ [" << id << "] world::Node '" << getName() << "'\n";
-    for (int i = 0; i < m_children.size(); i++)
+    for (unsigned i = 0; i < m_children.size(); i++)
     {
         m_children.at(i)->print(i_stream);
     }

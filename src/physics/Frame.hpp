@@ -201,6 +201,12 @@ protected:
     //! Translation vector data
     Eigen::Vector3d m_translation;
 
+
+// Fix the static size matrices to be 128-bit aligned
+// https://eigen.tuxfamily.org/dox/group__TopicStructHavingEigenMembers.html
+public:
+	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
 };
     
 //=====================================================================

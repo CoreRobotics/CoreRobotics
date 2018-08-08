@@ -97,7 +97,7 @@ void StepList::attach(StepPtr i_element)
 void StepList::step(){
     
     // step each of the vertices
-    for (int i = 0; i < m_vertices.size(); i++){
+    for (unsigned i = 0; i < m_vertices.size(); i++){
         m_vertices.at(i)->step();
     }
 }
