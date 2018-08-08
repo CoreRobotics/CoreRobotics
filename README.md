@@ -7,7 +7,7 @@
 #### College of Engineering
 
 Created: 2016   
-Version: 1.1.0
+Version: 2.0
 
 - C++ Platforms: Windows 8.1/10, Mac OS X 10, and Linux.
 
@@ -22,7 +22,7 @@ The best way to get involved is to read this document, check out the library, an
 
 
 ## General Structure:
-- *doc/* contains the doxygen Doxyfile for generating html documentation.  Please install [doxygen](http://www.stack.nl/~dimitri/doxygen/) and run the doxyfile to generate.  The main documentation page will be *doc/html/index.html*
+- *doc/* contains the doxygen Doxyfile for generating html documentation.  Please install [doxygen](http://www.stack.nl/~dimitri/doxygen/), [graphviz](https://www.graphviz.org/), and run `doxygen` in the doc folder to generate.  The main documentation page will be *doc/html/index.html*
 - *python/* contains code for the python wrapper.
 - *src/* contains the library source and headers.  "CoreRobotics.hpp" is the main header for the project.  Classes and functions are organized into sub folders.
 - *tests/* contains code for testing library functionality (Using GTest).  Binaries are compiled to tests/bin.  Tests for each class are broken out into test_<classname> and should test functionality of each method.  The test binary gets written to *./bin*  These scripts are also useful for seeing examples of how to use a particular function of the library.
