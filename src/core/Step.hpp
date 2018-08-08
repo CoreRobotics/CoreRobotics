@@ -61,16 +61,18 @@ typedef std::shared_ptr<Step> StepPtr;
  \class Step
  \ingroup core
  
- \brief This abstract class defines a ::step() method function call
- that is used by loop functions.
+ \brief This abstract class defines callback functions that are used
+ in the cr::core::Loop class.
  
  \details
  ## Description
- This abstract class defines the base ::step() method needed to derive
+ This abstract class defines the base callback methods needed to derive
  a call for a Loop class:
  
- - Step::step() is called on each iteration of the Loop while the
- thread is running.
+ - Step::step() is called on each iteration of core::Loop while the
+ thread is running.  This function must be implemented in derived classes
+ - Step::onStart() is called on the start of core::Loop.  It is optional.
+ - Step::onStop() is called on the stop of core::Loop.  It is optional.
  */
 //---------------------------------------------------------------------
 class Step

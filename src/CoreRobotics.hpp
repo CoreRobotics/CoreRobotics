@@ -358,8 +358,8 @@ project includes all the CoreRobotics modules.
 
 //---------------------------------------------------------------------------
 //! \defgroup core Core
-//! \brief This module implements the core functionality of the library,
-//! such as timing, common types, and thread loop control.
+//! \brief This module implements core functionality such as timing, common
+//! types, and thread loop control.
 //---------------------------------------------------------------------------
 #include "Types.hpp"
 #include "Item.hpp"

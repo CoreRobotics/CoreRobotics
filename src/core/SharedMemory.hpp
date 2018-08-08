@@ -78,8 +78,7 @@ typedef boost::interprocess::vector<double, ShmemAllocator> ShmemData;
  \ingroup core
  
  \brief This class implements interprocess shared memory to easily write
- and read data across processes.  This is a simple method for
- communicating between sensors and different programming languages.
+ and read data across processes.
  
  \details
  ## Description

@@ -60,7 +60,7 @@ typedef std::shared_ptr<StepList> StepListPtr;
     
 //---------------------------------------------------------------------
 /*!
- \class DirectedGraph
+ \class StepList
  \ingroup core
  
  \brief

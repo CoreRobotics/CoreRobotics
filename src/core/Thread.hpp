@@ -76,8 +76,8 @@ enum ThreadPriority {
  
  - Thread::setCallback sets the callback function.
  - Thread::setPriority sets the priority of the thread.
- - Thread::start starts the thread execution.
- - Thread::stop stops the thread execution.
+ - Thread::join waits for the thread to join the main thread.
+ - Thread::stop detach detaches the thread from the main thread.
  
  ## Example
  This example creates and runs a simple Thread.

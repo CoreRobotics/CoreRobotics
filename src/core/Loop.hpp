@@ -72,6 +72,7 @@ typedef std::shared_ptr<Loop> LoopPtr;
  Loop implements a thread loop controller class, which includes
  the following methods:
  
+ - Loop::attach attaches a StepPtr element to be executed
  - Loop::start starts the thread loop.
  - Loop::pause pauses the loop execution, but does not exit the
  thread of execution.
