@@ -166,10 +166,10 @@ class Signal : public Requester<DataType>
         virtual DataType request() {
             // EmitterType* p = static_cast<EmitterType*>(m_emitter);
             DataType(EmitterType::*fcn)() = reinterpret_cast<DataType(EmitterType::*)()>(m_callback);
-            m_mutex.lock();
+            // m_mutex.lock();
             // DataType d = (p->*fcn)();
             DataType d = (m_emitter.get()->*fcn)();
-            m_mutex.unlock();
+            // m_mutex.unlock();
             return d;
         }
     
@@ -202,7 +202,7 @@ class Signal : public Requester<DataType>
         void*(EmitterType::*m_callback)();
     
         //! mutex member
-        std::recursive_mutex m_mutex;
+        // std::recursive_mutex m_mutex;
     
 };
 
