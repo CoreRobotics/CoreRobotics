@@ -204,8 +204,8 @@ protected:
 
 // Fix the static size matrices to be 128-bit aligned
 // https://eigen.tuxfamily.org/dox/group__TopicStructHavingEigenMembers.html
-public:
-	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+// public:
+//	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
 };
     
