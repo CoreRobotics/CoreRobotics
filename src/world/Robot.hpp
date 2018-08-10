@@ -53,59 +53,20 @@ POSSIBILITY OF SUCH DAMAGE.
 namespace cr {
 namespace world {
     
-//! Manipulator shared pointer
+//! Robot shared pointer
 class Robot;
 typedef std::shared_ptr<Robot> RobotPtr;
 
 
 //---------------------------------------------------------------------
 /*!
- \class Manipulator
+ \class Robot
  \ingroup world
  
  \brief This class implements a robotic manipulator composed of a
- series of rigid bodies.  Currently only supports serial manipulators.
+ series of links.  Currently only supports serial manipulators.
  
  \details
- ## Description
- Manipulator implements a robot manipulator as a series of rigid body
- links.  The free variables of the frames contained in the rigid bodies
- determine the degrees of freedom of the robot.
- 
- These methods are used to build the manipulator:
- - Manipulator::addLink adds a link to the kinematic chain.  Note that
- as of now, only serial manipulators are supported.
- - Manipulator::addTool adds a tool to the chain relative to a link
- frame in the kinematic chain
- - Manipulator::setModelType sets how the manipulator is driven.
- Available options are defined in cr::ManipulatorType.
- 
- These methods operate on the configuration space (i.e. joint space) 
- of the robot:
- - Manipulator::getConfiguration outputs the vector of configuration
- values (i.e. joint angles for purely revolute joints).
- - Manipulator::setConfiguration sets the configuration of the
- manipulator.
- - Manipulator::getLinkFrame returns the specified link frame for the
- current manipulator configuration.
- - Manipulator::getToolFrame returns the specified tool frame for the
- current manipulator configuration.
- - Manipulator::getToolPose returns the pose of the specified tool.
- - Manipulator::getDegreesOfFreedom returns the number of free
- configuration variables.
- - Manipulator::getNumberOfLinks returns the number of frames in the
- tree.
- 
- These methods return useful information for control:
- - Manipulator::getForwardKinematics returns a matrix of the Euclidean
- poses at each frame (starting with the base frame and moving out to the
- tool frame) for the current configuration.
- - Manipulator::jacobian returns the Jacobian for a specified tool.
- 
- ## Example
- This example shows use of Manipulator.
-
- \include example_Manipulator.cpp
  
  ## References
  [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,

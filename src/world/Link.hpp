@@ -65,7 +65,8 @@ typedef std::shared_ptr<Link> LinkPtr;
  \ingroup world
  
  \brief
- 
+ This class implements a link item for capturing driven manipulator
+ kinematics and dynamics.
 
  \details
  

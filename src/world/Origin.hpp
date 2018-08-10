@@ -63,7 +63,8 @@ typedef std::shared_ptr<Origin> OriginPtr;
  \ingroup world
  
  \brief
- 
+ This class implements a scene graph node that represents the world
+ origin, and thus cannot have a parent.
  
  \details
  
