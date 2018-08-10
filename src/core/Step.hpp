@@ -65,7 +65,6 @@ typedef std::shared_ptr<Step> StepPtr;
  in the cr::core::Loop class.
  
  \details
- ## Description
  This abstract class defines the base callback methods needed to derive
  a call for a Loop class:
  

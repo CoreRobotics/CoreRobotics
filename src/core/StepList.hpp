@@ -68,7 +68,6 @@ typedef std::shared_ptr<StepList> StepListPtr;
  a directed graph when signals are included)
  
  \details
- ## Description
  This class implements a step list.  Individual Step() classes are
  executed in the order in which they have been added to the list.
  */

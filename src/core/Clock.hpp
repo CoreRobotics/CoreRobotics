@@ -56,22 +56,15 @@ namespace core {
  \class Clock
  \ingroup core
  
- \brief This class implements a clock for timing code sections and
- control loop rates.
+ \brief This class implements a clock for timing and sleeping.
  
  \details
- ## Description
- Clock implements a simple clock interface for timing the 
- execution of code.
+ Clock implements a simple clock interface for timing and sleeping.
  
  - Clock::startTimer starts the clock.
  - Clock::getElapsedTime returns the elapsed time (s) since the most
  recent call of startTimer().
  - Clock::sleep sleeps the current thread (s).
- 
- ## Example
- This example creates and runs a simple Clock.
- \include example_Core.cpp
  */
 //---------------------------------------------------------------------
 class Clock {

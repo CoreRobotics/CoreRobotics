@@ -77,11 +77,10 @@ typedef boost::interprocess::vector<double, ShmemAllocator> ShmemData;
  \class SharedMemory
  \ingroup core
  
- \brief This class implements interprocess shared memory to easily write
+ \brief This class implements interprocess shared memory to write
  and read data across processes.
  
  \details
- ## Description
  SharedMemory implements a simple shared memory interface with the
  following methods available.
  
@@ -89,10 +88,6 @@ typedef boost::interprocess::vector<double, ShmemAllocator> ShmemData;
  - SharedMemory::removeSignal removes a signal from the memory
  - SharedMemory::set sets the value in shared memory
  - SharedMemory::get returns the value from shared memory
- 
- ## Example
- This example shows use of the SharedMemory class.
- \include example_Core.cpp
  */
 //---------------------------------------------------------------------
 class SharedMemory {

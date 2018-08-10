@@ -47,6 +47,7 @@
 #include "Clock.hpp"
 #include "Types.hpp"
 #include "Step.hpp"
+#include "Thread.hpp"
 
 //---------------------------------------------------------------------
 // Begin namespace
@@ -68,11 +69,12 @@ typedef std::shared_ptr<Loop> LoopPtr;
  soft real-time control and start/stop functionality.
  
  \details
- ## Description
  Loop implements a thread loop controller class, which includes
  the following methods:
  
- - Loop::attach attaches a StepPtr element to be executed
+ - Loop::attach attaches a StepPtr element to be executed.  Only one
+ StepPtr element can be owned by a Loop.  For graphs of StepPtr elements,
+ use a core::StepList.
  - Loop::start starts the thread loop.
  - Loop::pause pauses the loop execution, but does not exit the
  thread of execution.
@@ -111,12 +113,15 @@ class Loop {
         //! Thread callback
         void callback();
     
+        //! Attach the step element
+        void attach(StepPtr i_element) { m_element = i_element; }
+    
     
     // Set/get functions
     public:
     
-        //! Attach the step element
-        void attach(StepPtr i_element) { m_element = i_element; }
+        //! Set the internal thread priority
+        void setPriority(ThreadPriority i_priority);
     
         //! Set the update rate
         void setUpdateRate(const double a_updateRate) {m_updateRate = a_updateRate;}

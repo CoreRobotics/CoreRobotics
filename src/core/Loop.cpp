@@ -41,6 +41,15 @@
 
 #include "Loop.hpp"
 
+// platform specific includes
+#if defined(WIN32) || defined(WIN64)
+#include <windows.h>
+#endif
+
+#if defined(__linux__) || defined(__APPLE__)
+#include <pthread.h>
+#endif
+
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
@@ -213,6 +222,81 @@ void Loop::callback(){
 			m_timer.sleep(m_updateRate - et);
 		}
     }
+}
+    
+//---------------------------------------------------------------------
+/*!
+ This method sets the internal thread priority.
+ 
+ \param[in] i_priority - the thread priority, see cr::ThreadPriority
+ */
+//---------------------------------------------------------------------
+void Loop::setPriority(ThreadPriority i_priority) {
+    
+    // Windows
+#if defined(WIN32) || defined(WIN64)
+    
+    // get the thread handle
+    HANDLE hThread = m_thread->native_handle();
+    
+    // get the process
+    HANDLE process = GetCurrentProcess();
+    SetPriorityClass(process, HIGH_PRIORITY_CLASS);
+    
+    int tPriority = THREAD_PRIORITY_NORMAL;
+    switch (i_priority) {
+        case CR_PRIORITY_LOWEST:    // 11
+            tPriority = THREAD_PRIORITY_LOWEST;
+            break;
+        case CR_PRIORITY_LOW:        // 12
+            tPriority = THREAD_PRIORITY_BELOW_NORMAL;
+            break;
+        case CR_PRIORITY_NORMAL:    // 13
+            tPriority = THREAD_PRIORITY_NORMAL;
+            break;
+        case CR_PRIORITY_HIGH:        // 14
+            tPriority = THREAD_PRIORITY_ABOVE_NORMAL;
+            break;
+        case CR_PRIORITY_HIGHEST:   // 15
+            tPriority = THREAD_PRIORITY_HIGHEST;
+            break;
+    }
+    SetThreadPriority(hThread, tPriority);
+    
+#endif
+    
+    
+#if defined(__linux__) || defined(__APPLE__)
+    
+    // get the thread handle
+    pthread_t hThread = m_thread->native_handle();
+    
+    // return the policy and params for the thread
+    struct sched_param sch;
+    int tPolicy;
+    pthread_getschedparam(hThread, &tPolicy, &sch);
+    
+    switch (i_priority) {
+        case CR_PRIORITY_LOWEST:
+            sch.sched_priority = 1;
+            break;
+        case CR_PRIORITY_LOW:
+            sch.sched_priority = 25;
+            break;
+        case CR_PRIORITY_NORMAL:
+            sch.sched_priority = 50;
+            break;
+        case CR_PRIORITY_HIGH:
+            sch.sched_priority = 75;
+            break;
+        case CR_PRIORITY_HIGHEST:
+            sch.sched_priority = 99;
+            break;
+    }
+    pthread_setschedparam(hThread, SCHED_FIFO, &sch);
+    
+#endif
+    
 }
 
 //---------------------------------------------------------------------

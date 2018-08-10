@@ -66,11 +66,9 @@ enum ThreadPriority {
  \class Thread
  \ingroup core
  
- \brief This class implements threads to enable running multiple
- control loops within a single application.
+ \brief This class implements threading.
  
  \details
- ## Description
  Thread implements a simple thread interface for setting a callback
  and starting and stopping thread execution.
  
@@ -78,10 +76,6 @@ enum ThreadPriority {
  - Thread::setPriority sets the priority of the thread.
  - Thread::join waits for the thread to join the main thread.
  - Thread::stop detach detaches the thread from the main thread.
- 
- ## Example
- This example creates and runs a simple Thread.
- \include example_Core.cpp
  */
 //---------------------------------------------------------------------
 class Thread {
