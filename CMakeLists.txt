@@ -77,7 +77,7 @@ set(EIGEN_VERSION 3.3.3)
 find_package (Eigen3 ${EIGEN_VERSION})
 find_package (Boost 1.48)
 find_package (GTest)
-find_package (OpenSceneGraph)
+find_package (OpenSceneGraph 3.6)
 
 if(NOT Boost_INCLUDE_DIR)
     message(FATAL_ERROR "Boost_INCLUDE_DIR not found - please define the path to boost")
@@ -90,7 +90,9 @@ else()
 endif()
 
 if(OpenSceneGraph_FOUND)
+    find_package (OpenSceneGraph 3.6 REQUIRED osgDB osgUtil osg osgViewer osgGA osgShadow)
     add_definitions(-DUSE_OSG) # macro to use OSG
+    message(STATUS "OSG libraries" ${OPENSCENEGRAPH_LIBRARIES})
 endif()
 
 # Include headers

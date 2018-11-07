@@ -43,6 +43,14 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CoreRobotics.hpp"
 
 #ifdef USE_OSG
+/*
+#include <osg/Node>
+#include <osg/Geode>
+#include <osg/ShapeDrawable>
+#include <osgViewer/Viewer>
+#include <osgViewer/ViewerEventHandlers>
+ */
+
 #include <osg/ref_ptr>
 #include <osgViewer/GraphicsWindow>
 #include <osgViewer/Viewer>
@@ -66,23 +74,42 @@ int main( int argc, char **argv )
     // https://github.com/openscenegraph/OpenSceneGraph/blob/master/examples/osgpoints/osgpoints.cpp
     // https://gist.github.com/vicrucann/874ec3c0a7ba4a814bd84756447bc798
     
+    // Create a primative shape
+    osg::ref_ptr<osg::Geode> myGeode = new osg::Geode;
+    myGeode->addDrawable(new osg::ShapeDrawable(new  osg::Sphere()));
+    
+    // create a node from file
+    // osg::ref_ptr<osg::Node> myNode = osgDB::readNodeFile("MyModel.obj");
+    
+    //
+    osgViewer::Viewer viewer;
+    // viewer.setSceneData(root.get());
+    // viewer.addEventHandler(new osgViewer::StatsHandler);
+    // viewer.addEventHandler(new osgViewer::WindowSizeHandler);
+    // viewer.addEventHandler(new osgGA::StateSetManipulator(viewer.getCamera()->getOrCreateStateSet()));
+    viewer.setCameraManipulator(new osgGA::TrackballManipulator());
+    viewer.realize();
+    
+    
     
     // Set up the OpenSceneGraph
     // osg::Node* model = osgDB::readNodeFile(argv[1]);
-    // osg::ref_ptr<osgViewer::Viewer> viewer;
-    // viewer->setCameraManipulator(new osgGA::TrackballManipulator());
-    // osg::ref_ptr<osgViewer::GraphicsWindow> graphicsWindow;
-    
     /*
-    osg::Geode* geode = dynamic_cast<osg::Geode*>(viewer->getSceneData());
-    osg::StateSet* stateSet = geode->getOrCreateStateSet();
-    osg::Material* material = new osg::Material;
-    material->setColorMode( osg::Material::AMBIENT_AND_DIFFUSE );
-    stateSet->setAttributeAndModes( material, osg::StateAttribute::ON );
-    stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
+    osg::ref_ptr<osgViewer::Viewer> viewer;
+    viewer->setCameraManipulator(new osgGA::TrackballManipulator());
+    osg::ref_ptr<osgViewer::GraphicsWindow> graphicsWindow;
+    viewer->realize();
     */
+    
+    // osg::Geode* geode = dynamic_cast<osg::Geode*>(viewer->getSceneData());
+    // osg::StateSet* stateSet = geode->getOrCreateStateSet();
+    // osg::Material* material = new osg::Material;
+    // material->setColorMode( osg::Material::AMBIENT_AND_DIFFUSE );
+    // stateSet->setAttributeAndModes( material, osg::StateAttribute::ON );
+    // stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
+    
      
-    // return viewer->run();
-    return 0;
+    return viewer.run();
+    // return 0;
     
 }
