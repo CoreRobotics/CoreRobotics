@@ -143,6 +143,8 @@ public:
 	             CREulerMode i_eulerMode,
 	             bool i_useNullSpace);
 
+	CRHardLimits(void);
+
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
