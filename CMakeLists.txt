@@ -90,12 +90,12 @@ endif()
 
 # Include headers
 file(GLOB CR_INCLUDE_DIRS
-    ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/src/core
-    ${CMAKE_SOURCE_DIR}/src/math
-    ${CMAKE_SOURCE_DIR}/src/models
-    ${CMAKE_SOURCE_DIR}/src/physics
-    ${CMAKE_SOURCE_DIR}/src/controllers
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/math
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/models
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/physics
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/controllers
     ${EIGEN3_INCLUDE_DIR}
     ${Boost_INCLUDE_DIR}
 )
@@ -132,8 +132,8 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 
 	# Set the output directory
     set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
-        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
+        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
     )
 
 	# Sort into a group structure
@@ -162,7 +162,7 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
     # package definitions
     set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
     set (CONF_LIBRARIES    ${LIB_TARGET_NAME})
-    set (CONF_LIBRARY_DIRS ${CMAKE_SOURCE_DIR}/lib)
+    set (CONF_LIBRARY_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib)
     set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
 
     # package configuration and version files
@@ -181,7 +181,7 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 
 	# set the path to the CoreRobotics static library
     set(COREROBOTICS_LIB
-        ${CMAKE_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib/${CMAKE_CFG_INTDIR}/$<TARGET_FILE_NAME:${PROJECT_NAME}>
     )
 
     if(NOT GTEST_FOUND)
@@ -198,7 +198,7 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 
         # Set the output directory
         set_target_properties( ${TEST_TARGET_NAME} PROPERTIES
-            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/tests/bin
+            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests/bin
         )
 
         # Add the library as a build dependency
@@ -220,7 +220,7 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 		message(${EXAMPLE_TARGET})
 		add_executable(${EXAMPLE_TARGET} ${EXAMPLE})
 		set_target_properties( ${EXAMPLE_TARGET} PROPERTIES
-            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/examples/bin
+            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/examples/bin
         )
 		add_dependencies(${EXAMPLE_TARGET} ${LIB_TARGET_NAME})
 		target_link_libraries(${EXAMPLE_TARGET} ${COREROBOTICS_LIB} ${LINK_FLAGS})
@@ -251,7 +251,7 @@ if(python OR all)
 		include(${SWIG_USE_FILE})
 
 		# Get the Include Directories
-		get_property(INCLUDE_DIRECTORIES DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+		get_property(INCLUDE_DIRECTORIES DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 
 		# Create a list of arguments to pass to swig by appending -I in front of each path
 		set(PYTHON_SWIG_INCLUDE_ARGS "")
@@ -262,10 +262,10 @@ if(python OR all)
 		# Add a custom target to generate the wrapper files
 		add_custom_target(PythonWrappers ALL
 			${SWIG_EXECUTABLE} -c++ -python
-				-outdir ${CMAKE_SOURCE_DIR}/python/lib
-				-o ${CMAKE_SOURCE_DIR}/python/swig/CoreRoboticsPYTHON_wrap.cxx
+				-outdir ${CMAKE_CURRENT_SOURCE_DIR}/python/lib
+				-o ${CMAKE_CURRENT_SOURCE_DIR}/python/swig/CoreRoboticsPYTHON_wrap.cxx
 				${PYTHON_SWIG_INCLUDE_ARGS}
-				${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i)
+				${CMAKE_CURRENT_SOURCE_DIR}/python/swig/CoreRobotics.i)
 
 	# Check if Python was found and skip if not found
 	elseif(PythonLibs_FOUND)
@@ -289,7 +289,7 @@ if(python OR all)
 			# Compile a shared library with the exsisting wrapper C++ file
 			add_library(_${PROJECT_NAME} SHARED
 				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS}
-				${CMAKE_SOURCE_DIR}/python/swig/${PROJECT_NAME}PYTHON_wrap.cxx)
+				${CMAKE_CURRENT_SOURCE_DIR}/python/swig/${PROJECT_NAME}PYTHON_wrap.cxx)
 
 			# Link with Python
 			target_link_libraries(_${PROJECT_NAME} ${PYTHON_LIBRARIES} ${LINK_FLAGS})
@@ -297,8 +297,8 @@ if(python OR all)
 			# Rename to remove the lib prefix
 			add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E rename
-					${CMAKE_SOURCE_DIR}/python/lib/$<TARGET_FILE_NAME:_${PROJECT_NAME}>
-					${CMAKE_SOURCE_DIR}/python/lib/_${PROJECT_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX})
+					${CMAKE_CURRENT_SOURCE_DIR}/python/lib/$<TARGET_FILE_NAME:_${PROJECT_NAME}>
+					${CMAKE_CURRENT_SOURCE_DIR}/python/lib/_${PROJECT_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX})
 
 		# If using SWIG
 		else()
@@ -308,11 +308,11 @@ if(python OR all)
 
 			# Set SWIG to use C++
 			set(CMAKE_SWIG_FLAGS "")
-			set_source_files_properties(${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i PROPERTIES CPLUSPLUS ON)
+			set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/python/swig/CoreRobotics.i PROPERTIES CPLUSPLUS ON)
 
 			# Create SWIG Module
 			swig_add_module(${PROJECT_NAME} python
-				${CMAKE_SOURCE_DIR}/python/swig/CoreRobotics.i
+				${CMAKE_CURRENT_SOURCE_DIR}/python/swig/CoreRobotics.i
 				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
 			# Link Module with Python
@@ -321,28 +321,28 @@ if(python OR all)
 			# Copy Python file to the Python lib folder
 			add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E copy
-					${CMAKE_BINARY_DIR}/${PROJECT_NAME}.py
-					${CMAKE_SOURCE_DIR}/python/lib/)
+					${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.py
+					${CMAKE_CURRENT_SOURCE_DIR}/python/lib/)
 
 			# Copy C++ wrapper file to the Python swig folder
 			add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E copy
-					${CMAKE_BINARY_DIR}/${PROJECT_NAME}PYTHON_wrap.cxx
-					${CMAKE_SOURCE_DIR}/python/swig/)
+					${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}PYTHON_wrap.cxx
+					${CMAKE_CURRENT_SOURCE_DIR}/python/swig/)
 
 		endif()
 
 		# Set the shared library output directory
 		set_target_properties(_${PROJECT_NAME} PROPERTIES
-			LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/python/lib
-			LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/python/lib
-			LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/python/lib)
+			LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python/lib
+			LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/python/lib
+			LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/python/lib)
 
 		# Copy the contents of the Python lib folder to the Python examples folder
 		add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy_directory
-				${CMAKE_SOURCE_DIR}/python/lib
-				${CMAKE_SOURCE_DIR}/python/examples)
+				${CMAKE_CURRENT_SOURCE_DIR}/python/lib
+				${CMAKE_CURRENT_SOURCE_DIR}/python/examples)
 	endif()
 endif()
 
@@ -353,7 +353,7 @@ if(matlab OR all)
 	find_package(Matlab OPTIONAL_COMPONENTS MX_LIBRARY)
 
 	# Include the Matlab src directory
-	include_directories(${CMAKE_SOURCE_DIR}/matlab/src)
+	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/matlab/src)
 
 	# Attempt to find SWIG
 	find_package(SWIG)
@@ -373,7 +373,7 @@ if(matlab OR all)
 	if(${matlab} MATCHES "only-swig" AND SWIG_FOUND)
 
 		# Get the Include Directories
-		get_property(INCLUDE_DIRECTORIES DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+		get_property(INCLUDE_DIRECTORIES DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 
 		# Create a list of arguments to pass to swig by appending -I in front of each path
 		set(Matlab_SWIG_INCLUDE_ARGS "")
@@ -384,10 +384,10 @@ if(matlab OR all)
 		# Add a custom target to generate the wrapper files
 		add_custom_target(MatlabWrappers ALL
 			${SWIG_EXECUTABLE} -c++ -matlab
-				-outdir ${CMAKE_SOURCE_DIR}/matlab/lib
-				-o ${CMAKE_SOURCE_DIR}/matlab/swig/CoreRoboticsMATLAB_wrap.cxx
+				-outdir ${CMAKE_CURRENT_SOURCE_DIR}/matlab/lib
+				-o ${CMAKE_CURRENT_SOURCE_DIR}/matlab/swig/CoreRoboticsMATLAB_wrap.cxx
 				${Matlab_SWIG_INCLUDE_ARGS}
-				${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i)
+				${CMAKE_CURRENT_SOURCE_DIR}/matlab/swig/CoreRobotics.i)
 
 	# If Matlab was found
 	elseif(Matlab_FOUND AND Matlab_MX_LIBRARY)
@@ -400,7 +400,7 @@ if(matlab OR all)
 
 		# If building on Windows remove the threading library from Core
 		if(WIN32)
-			list(REMOVE_ITEM SOURCES_CORE ${CMAKE_SOURCE_DIR}/src/core/CRThread.cpp)
+			list(REMOVE_ITEM SOURCES_CORE ${CMAKE_CURRENT_SOURCE_DIR}/src/core/CRThread.cpp)
 		endif()
 
 		# If no Matlab support or noswig defined
@@ -409,7 +409,7 @@ if(matlab OR all)
 			# Compile a shared library with the existing C++ wrapper files
 			add_library(${Matlab_PROJECT_NAME} SHARED
 				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS}
-				${CMAKE_SOURCE_DIR}/matlab/swig/${PROJECT_NAME}MATLAB_wrap.cxx)
+				${CMAKE_CURRENT_SOURCE_DIR}/matlab/swig/${PROJECT_NAME}MATLAB_wrap.cxx)
 
 			# Link with Matlab
 			target_link_libraries(${Matlab_PROJECT_NAME} ${Matlab_LIBRARIES} ${LINK_FLAGS})
@@ -422,11 +422,11 @@ if(matlab OR all)
 
 			# Set SWIG to use C++
 			set(CMAKE_SWIG_FLAGS "")
-			set_source_files_properties(${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i PROPERTIES CPLUSPLUS ON)
+			set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/matlab/swig/CoreRobotics.i PROPERTIES CPLUSPLUS ON)
 
 			# Create SWIG Module
 			swig_add_module(${Matlab_PROJECT_NAME} matlab
-				${CMAKE_SOURCE_DIR}/matlab/swig/CoreRobotics.i
+				${CMAKE_CURRENT_SOURCE_DIR}/matlab/swig/CoreRobotics.i
 				${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 
 			# Link Module with Matlab
@@ -439,40 +439,40 @@ if(matlab OR all)
 			foreach(matlab_file ${matlab_files})
 				add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
 					COMMAND ${CMAKE_COMMAND} -E copy
-						${CMAKE_BINARY_DIR}/${matlab_file}
-						${CMAKE_SOURCE_DIR}/matlab/lib)
+						${CMAKE_CURRENT_BINARY_DIR}/${matlab_file}
+						${CMAKE_CURRENT_SOURCE_DIR}/matlab/lib)
 			endforeach()
 
 			# Copy the Matlab package folder to the lib directory
 			add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E copy_directory
-					${CMAKE_BINARY_DIR}/+${PROJECT_NAME}
-					${CMAKE_SOURCE_DIR}/matlab/lib/+${PROJECT_NAME})
+					${CMAKE_CURRENT_BINARY_DIR}/+${PROJECT_NAME}
+					${CMAKE_CURRENT_SOURCE_DIR}/matlab/lib/+${PROJECT_NAME})
 
 			# Copy the C++ wrapper code to the Matlab swig folder for compiling without SWIG
 			add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E copy
-					${CMAKE_BINARY_DIR}/${PROJECT_NAME}MATLAB_wrap.cxx
-					${CMAKE_SOURCE_DIR}/matlab/swig)
+					${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}MATLAB_wrap.cxx
+					${CMAKE_CURRENT_SOURCE_DIR}/matlab/swig)
 
 		endif()
 
 		# Set the library output directory
 		set_target_properties(${Matlab_PROJECT_NAME} PROPERTIES
-			LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
-			LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}
-			LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR})
+			LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+			LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR}
+			LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_BINARY_DIR})
 
 		# Copy the shared library to the lib directory and rename
 		add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy
-				${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:${Matlab_PROJECT_NAME}>
-				${CMAKE_SOURCE_DIR}/matlab/lib/${PROJECT_NAME}MEX.${Matlab_MEX_EXTENSION})
+				${CMAKE_CURRENT_BINARY_DIR}/$<TARGET_FILE_NAME:${Matlab_PROJECT_NAME}>
+				${CMAKE_CURRENT_SOURCE_DIR}/matlab/lib/${PROJECT_NAME}MEX.${Matlab_MEX_EXTENSION})
 
 		# Copy the lib folder to the examples folder
 		add_custom_command(TARGET ${Matlab_PROJECT_NAME} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy_directory
-				${CMAKE_SOURCE_DIR}/matlab/lib
-				${CMAKE_SOURCE_DIR}/matlab/examples)
+				${CMAKE_CURRENT_SOURCE_DIR}/matlab/lib
+				${CMAKE_CURRENT_SOURCE_DIR}/matlab/examples)
 	endif()
 endif()
