@@ -44,11 +44,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include "Eigen/Dense"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -104,13 +105,13 @@ namespace CoreRobotics {
 //=====================================================================
 //! Enumerator for specifying whether the specified dynamic model is
 //  either continuous or discrete.
-enum CRMotionModelType {
+enum [[deprecated(CR_DEPRECATED_2P0)]] CRMotionModelType {
     CR_MOTION_CONTINUOUS,
     CR_MOTION_DISCRETE
 };
 
 //=====================================================================
-class CRMotionModel {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRMotionModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

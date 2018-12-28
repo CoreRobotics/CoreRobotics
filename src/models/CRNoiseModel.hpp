@@ -44,12 +44,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include "Eigen/Dense"
 #include <random>
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -100,13 +101,13 @@ namespace CoreRobotics {
  */
 //=====================================================================
 // ICDF Paramter structure declaration
-struct CRParamNoiseGeneric{
+struct [[deprecated(CR_DEPRECATED_2P0)]] CRParamNoiseGeneric{
     Eigen::VectorXd(*icdFunction)(double);
     double(*probFunction)(Eigen::VectorXd);
 };
     
 //=====================================================================
-class CRNoiseModel {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRNoiseModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

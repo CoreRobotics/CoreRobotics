@@ -44,6 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include "Eigen/Dense"
 #include <random>
 #include <vector>
@@ -51,7 +52,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -92,13 +93,13 @@ namespace CoreRobotics {
  */
 //=====================================================================
 // Paramter structure declaration
-struct CRParamNoiseMixture{
+struct [[deprecated(CR_DEPRECATED_2P0)]] CRParamNoiseMixture{
     std::vector<CoreRobotics::CRNoiseModel*> models;
     std::vector<double> weights;
 };
     
 //=====================================================================
-class CRNoiseMixture : public CRNoiseModel {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRNoiseMixture : public CRNoiseModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

@@ -44,6 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include "CRManipulator.hpp"
 #include "CRTypes.hpp"
 #include "CRInverseKinematics.hpp"
@@ -52,7 +53,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
 
 //=====================================================================
 /*!
@@ -127,7 +128,7 @@ namespace CoreRobotics {
  
  */
 //=====================================================================
-class CRHardLimits {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRHardLimits {
 
 //---------------------------------------------------------------------
 // Constructor and Destructor

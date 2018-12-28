@@ -44,12 +44,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include <chrono>
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -79,7 +80,7 @@ namespace CoreRobotics {
  \include example_CRCore.cpp
  */
 //=====================================================================
-class CRClock {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRClock {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

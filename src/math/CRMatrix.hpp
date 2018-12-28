@@ -44,13 +44,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include "Eigen/Dense"
 #include "CRTypes.hpp"
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
 
 //=====================================================================
 /*!
@@ -90,7 +91,7 @@ John Wiley & Sons, 2011.
 */
 
 //=====================================================================
-class CRMatrix {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRMatrix {
     
 //---------------------------------------------------------------------
 // Matrix downselection

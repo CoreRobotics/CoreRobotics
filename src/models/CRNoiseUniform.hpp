@@ -44,13 +44,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include "Eigen/Dense"
 #include <random>
 #include "CRNoiseModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -92,13 +93,13 @@ namespace CoreRobotics {
  */
 //=====================================================================
 // Paramter structure declaration
-struct CRParamNoiseUniform{
+struct [[deprecated(CR_DEPRECATED_2P0)]] CRParamNoiseUniform{
     Eigen::VectorXd a;
     Eigen::VectorXd b;
 };
     
 //=====================================================================
-class CRNoiseUniform : public CRNoiseModel {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRNoiseUniform : public CRNoiseModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

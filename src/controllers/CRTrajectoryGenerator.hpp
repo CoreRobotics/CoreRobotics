@@ -44,13 +44,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include "Eigen/Dense"
 #include "CRTypes.hpp"
 #include "CRClock.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -92,7 +93,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Structure defining a waypoint (i.e. the output)
-struct CRWaypoint {
+struct [[deprecated(CR_DEPRECATED_2P0)]] CRWaypoint {
     double time;
     Eigen::VectorXd position;
     Eigen::VectorXd velocity;
@@ -101,7 +102,7 @@ struct CRWaypoint {
 };
 
 //=====================================================================
-class CRTrajectoryGenerator {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRTrajectoryGenerator {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

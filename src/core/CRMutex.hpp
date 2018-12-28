@@ -44,11 +44,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include <mutex>
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -73,7 +74,7 @@ namespace CoreRobotics {
  */
 
 //=====================================================================
-class CRMutex {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRMutex {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

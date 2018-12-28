@@ -44,12 +44,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include "CRManipulator.hpp"
 #include "CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
 
 //=====================================================================
 /*!
@@ -109,7 +110,7 @@ namespace CoreRobotics {
  
  */
 //=====================================================================
-class CRNullSpace {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRNullSpace {
 
 //---------------------------------------------------------------------
 // Constructor and Destructor

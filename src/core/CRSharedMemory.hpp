@@ -44,6 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "Settings.hpp"
 #include "CRTypes.hpp"
 #include "Eigen/Dense"
 
@@ -55,7 +56,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED_2P0)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -87,7 +88,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for specifying thread priority
-enum CRManagerRole {
+enum [[deprecated(CR_DEPRECATED_2P0)]] CRManagerRole {
     CR_MANAGER_SERVER,
     CR_MANAGER_CLIENT,
 };
@@ -96,7 +97,7 @@ enum CRManagerRole {
 typedef boost::interprocess::allocator<double, boost::interprocess::managed_shared_memory::segment_manager>  ShmemAllocator;
 typedef boost::interprocess::vector<double, ShmemAllocator> Signal;
 //=====================================================================
-class CRSharedMemory {
+class [[deprecated(CR_DEPRECATED_2P0)]] CRSharedMemory {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
