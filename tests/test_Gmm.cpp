@@ -60,12 +60,14 @@ TEST(Gmm, Predict){
     // Add a couple Gaussians
     cov.diagonal() << 1.0, 2.0, 0.1, 4.0;
     mean << 1, 2, 3, 4;
-    NoiseGaussian* g1 = new NoiseGaussian(cov, mean);
+    // NoiseGaussian* g1 = new NoiseGaussian(cov, mean);
+    NoiseGaussian g1(cov, mean);
     gmm.add(g1, 0.5);
     
     cov.diagonal() << 0.1, 0.2, 4, 5;
     mean << 5, 6, 7, 8;
-    NoiseGaussian* g2 = new NoiseGaussian(cov, mean);
+    // NoiseGaussian* g2 = new NoiseGaussian(cov, mean);
+    NoiseGaussian g2(cov, mean);
     gmm.add(g2, 0.3);
     
     // cov.diagonal()  << 0.1, 0.2, 4, 5;
@@ -74,7 +76,8 @@ TEST(Gmm, Predict){
            0, 0, 4.0, -0.1,
            0.2, 0, -0.1, 5.0;
     mean << 9, 10, 11, 12;
-    NoiseGaussian* g3 = new NoiseGaussian(cov, mean);
+    // NoiseGaussian* g3 = new NoiseGaussian(cov, mean);
+    NoiseGaussian g3(cov, mean);
     gmm.add(g3, 0.2);
     
     // Construct the input/output booleans

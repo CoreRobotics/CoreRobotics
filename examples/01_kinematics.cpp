@@ -37,29 +37,21 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
 
 #include <iostream>
 #include "CoreRobotics.hpp"
 
 #ifdef USE_OSG
-/*
-#include <osg/Node>
-#include <osg/Geode>
-#include <osg/ShapeDrawable>
-#include <osgViewer/Viewer>
-#include <osgViewer/ViewerEventHandlers>
- */
-
 #include <osg/ref_ptr>
-#include <osgViewer/GraphicsWindow>
+#include <osgViewer/ViewerEventHandlers>
 #include <osgViewer/Viewer>
-#include <osg/Camera>
 #include <osg/ShapeDrawable>
+#include <osg/PositionAttitudeTransform>
 #include <osg/StateSet>
 #include <osg/Material>
-#include <osgGA/EventQueue>
 #include <osgGA/TrackballManipulator>
+#include <osgDB/ReadFile>
 #endif
 
 
@@ -71,45 +63,59 @@ using namespace cr;
 int main( int argc, char **argv )
 {
     // examples:
+    // https://www.cs.vassar.edu/~cs378/SampleCode.pdf
     // https://github.com/openscenegraph/OpenSceneGraph/blob/master/examples/osgpoints/osgpoints.cpp
     // https://gist.github.com/vicrucann/874ec3c0a7ba4a814bd84756447bc798
     
     // Create a primative shape
-    osg::ref_ptr<osg::Geode> myGeode = new osg::Geode;
-    myGeode->addDrawable(new osg::ShapeDrawable(new  osg::Sphere()));
+    // osg::ref_ptr<osg::Geode> myGeode = new osg::Geode;
+    // myGeode->addDrawable(new osg::ShapeDrawable(new  osg::Sphere()));
+    
+    // create a root node
+    osg::ref_ptr<osg::Group> myRoot = new osg::Group;
+    
+    // create a floor
+    // osg::ref_ptr<osg::Geode> myFloor = new osg::Geode;
+    // myFloor->addDrawable(new osg::ShapeDrawable(new osg::InfinitePlane()));
+    // myRoot->addChild(myFloor.get());
+    
+    // create a cylinder
+    osg::ref_ptr<osg::Geode> mySphere = new osg::Geode;
+    mySphere->addDrawable(new osg::ShapeDrawable(new osg::Cylinder()));
+    
+    // change the sphere material and states
+    osg::StateSet* stateSet = mySphere->getOrCreateStateSet();
+    osg::Material* material = new osg::Material;
+    material->setColorMode( osg::Material::AMBIENT_AND_DIFFUSE );
+    stateSet->setAttributeAndModes( material, osg::StateAttribute::ON );
+    stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
+    
+    // change the sphere position
+    double xdist = 0.0;
+    double ydist = 1.0;
+    double zdist = 1.0;
+    osg::ref_ptr<osg::PositionAttitudeTransform> mySphereTransform = new osg::PositionAttitudeTransform;
+    mySphereTransform->setPosition(osg::Vec3(xdist, ydist, zdist));
+    // mySphereTransform->setScale(osg::Vec3(1.0, 1.0, 1.0));
+    // mySphereTransform->setAttitude(osg::Quat(angle_in_rads, axis_of_rot_vec));
+    mySphereTransform->addChild(mySphere.get());
+    myRoot->addChild(mySphereTransform.get());
     
     // create a node from file
-    // osg::ref_ptr<osg::Node> myNode = osgDB::readNodeFile("MyModel.obj");
+    osg::ref_ptr<osg::Node> myNode = osgDB::readNodeFile("Tool.obj");
     
-    //
+    // change the node position
+    myRoot->addChild(myNode.get());
+    
+    // create the open scene graph viewer
     osgViewer::Viewer viewer;
-    // viewer.setSceneData(root.get());
-    // viewer.addEventHandler(new osgViewer::StatsHandler);
-    // viewer.addEventHandler(new osgViewer::WindowSizeHandler);
+    viewer.setSceneData(myRoot);
+    viewer.addEventHandler(new osgViewer::StatsHandler);
+    viewer.addEventHandler(new osgViewer::WindowSizeHandler);
     // viewer.addEventHandler(new osgGA::StateSetManipulator(viewer.getCamera()->getOrCreateStateSet()));
     viewer.setCameraManipulator(new osgGA::TrackballManipulator());
-    viewer.realize();
-    
-    
-    
-    // Set up the OpenSceneGraph
-    // osg::Node* model = osgDB::readNodeFile(argv[1]);
-    /*
-    osg::ref_ptr<osgViewer::Viewer> viewer;
-    viewer->setCameraManipulator(new osgGA::TrackballManipulator());
-    osg::ref_ptr<osgViewer::GraphicsWindow> graphicsWindow;
-    viewer->realize();
-    */
-    
-    // osg::Geode* geode = dynamic_cast<osg::Geode*>(viewer->getSceneData());
-    // osg::StateSet* stateSet = geode->getOrCreateStateSet();
-    // osg::Material* material = new osg::Material;
-    // material->setColorMode( osg::Material::AMBIENT_AND_DIFFUSE );
-    // stateSet->setAttributeAndModes( material, osg::StateAttribute::ON );
-    // stateSet->setMode( GL_DEPTH_TEST, osg::StateAttribute::ON );
+    // viewer.realize();
     
      
     return viewer.run();
-    // return 0;
-    
 }

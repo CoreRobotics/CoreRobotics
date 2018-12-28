@@ -39,125 +39,120 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#ifndef Gmm_hpp
-#define Gmm_hpp
+#ifndef TrajectoryGenerator_hpp
+#define TrajectoryGenerator_hpp
 
 //=====================================================================
 // Includes
-#include <random>
-#include <vector>
 #include "Eigen/Dense"
-#include "NoiseMixture.hpp"
-#include "NoiseGaussian.hpp"
+#include "Types.hpp"
+#include "Clock.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
 namespace cr {
+namespace control {
     
 //=====================================================================
 /*!
- \file Gmm.hpp
- \brief Implements a class for Gaussian mixture models.
+ \file TrajectoryGenerator.hpp
+ \brief Implements a class to generate minimum jerk trajectories.
  */
 //---------------------------------------------------------------------
 /*!
- \class Gmm
- \ingroup models
+ \class TrajectoryGenerator
+ \ingroup controllers
  
- \brief Implements a class for Gaussian mixture models.
+ \brief This class provides methods for generating minimum jerk
+ trajectories from initial and final conditions.
  
  \details
  ## Description
- Gmm implements methods for sampling and modeling noise as a
- mixture of Gaussian distributions [2-3].  Each specified Gaussian
- is also accompanied by a weight, indicating the probability of that
- distribution being selected for sampling of the noise.
+ TrajectoryGenerator implements the minimum-jerk trajectory generation
+ technique from a set of initial condititions, final conditions, and their
+ 1st and 2nd derivatives.
  
- - Gmm::add adds a noise model to the mixture
- - Gmm::sample samples from the noise model
- - Gmm::probability evaluates the probability
- - Gmm::regression performs Gaussian mixture regression
+ 
+ These methods are available with the trajectory generator:
+ - TrajectoryGenerator::solve computes the minimum jerk trajectory for
+ the specified initial and final conditions and stores the representation
+ of the trajectory internally.
+ - TrajectoryGenerator::step computes the values of the trajectory for
+ a specified time (if specified) or for the time elapsed since the solve
+ method was called (if time is not specified).
  
  ## Example
- This example demonstrates use of the Gmm class.
- 
- \include example_Gmm.cpp
+ This example demonstrates use of the TrajectoryGenerator class.
+ \include example_TrajectoryGenerator.cpp
  
  ## References
- [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
- Ed. 2, CRC Press, 2012. \n\n
+ [1] N. Hogan, "Adaptive control of mechanical impedance by coactivation of
+     antagonist muscles," IEEE Trans. on Automatic Control AC-29: 681-690,
+     1984. \n\n
  
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
- 2006. \n\n
- 
- [3] H. Sung, "Gaussian Mixture Regression and Classification", PhD Thesis,
- Rice University, 2004. \n\n
  */
 //=====================================================================
-// Paramter structure declaration
-struct CRParamGaussianMixture{
-    std::vector<cr::NoiseGaussian> models;
-    std::vector<double> weights;
+//! Structure defining a waypoint (i.e. the output)
+struct Waypoint {
+    double time;
+    Eigen::VectorXd position;
+    Eigen::VectorXd velocity;
+    Eigen::VectorXd acceleration;
+    Eigen::VectorXd jerk;
 };
-    
+
 //=====================================================================
-class Gmm : public NoiseMixture {
+class TrajectoryGenerator {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    Gmm(unsigned i_seed);
-    Gmm();
-
-	//! Class destructor
-	~Gmm();
+    TrajectoryGenerator();
     
-//---------------------------------------------------------------------
-// Add models to the mixture
-public:
-    
-    //! Add a distribution to the mixture model
-    void add(NoiseGaussian i_model, double i_weight);
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
-    //! Sample a noise vector from the density
-    using NoiseMixture::sample;
-    Eigen::VectorXd sample(void);
+    //! Solve for the coefficients needed to achieve the trajectory
+    core::Result solve(Eigen::VectorXd i_x0,
+                       Eigen::VectorXd i_v0,
+                       Eigen::VectorXd m_a0,
+                       Eigen::VectorXd m_xf,
+                       Eigen::VectorXd m_vf,
+                       Eigen::VectorXd m_af,
+                       double i_tf);
     
-    //! Evaluate the probability from the density
-    using NoiseMixture::probability;
-    double probability(Eigen::VectorXd i_x);
+    //! Solve for the coefficients needed to achieve the trajectory
+    core::Result solve(Waypoint i_wp0,
+                       Waypoint i_wpf);
     
-    //! Perform Gaussian Mixture Regression (GMR)
-    void regression(Eigen::VectorXd i_x,
-                    Eigen::VectorXi i_inputIndices,
-                    Eigen::VectorXi i_outputIndices,
-                    Eigen::VectorXd& o_mean,
-                    Eigen::MatrixXd& o_covariance);
+    //! Get the trajectory at time t
+    Waypoint step(double i_t);
+    
+    //! Step the next trajectory reference
+    Waypoint step(void);
     
 //---------------------------------------------------------------------
-// Public Members
-public:
+// Protected Members
+protected:
     
-    //! Noise model parameters
-    CRParamGaussianMixture m_parameters;
+    //! Final time
+    double m_tf = 1.0;
     
-private:
+    //! Polynomial coefficient matrix
+    Eigen::Matrix<double, 6, Eigen::Dynamic> m_X;
     
-    //! Evaluate the multivariate normal dist
-    double mvnpdf(Eigen::VectorXd i_x,
-                  Eigen::VectorXd i_mean,
-                  Eigen::MatrixXd i_covariance);
+    //! An internal clock for keeping track of time
+    core::Clock m_timer;
     
 };
 
 //=====================================================================
 // End namespace
+}
 }
 
 

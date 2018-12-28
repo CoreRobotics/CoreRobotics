@@ -110,6 +110,7 @@ public:
     NoiseGaussian(Eigen::MatrixXd i_cov,
                     Eigen::VectorXd i_mean);
     NoiseGaussian();
+    ~NoiseGaussian() {};
     
 //---------------------------------------------------------------------
 // Get/Set Methods

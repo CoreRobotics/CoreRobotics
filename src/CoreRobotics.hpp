@@ -444,7 +444,7 @@ project includes all the CoreRobotics modules.
 // #include "InverseKinematics.hpp"
 // #include "NullSpace.hpp"
 // #include "HardLimits.hpp"
-// #include "TrajectoryGenerator.hpp"
+#include "TrajectoryGenerator.hpp"
 
 
 #endif

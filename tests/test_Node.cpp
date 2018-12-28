@@ -65,53 +65,217 @@ TEST(Node, transforms){
     NodePtr item2 = Node::create();
     NodePtr item3 = Node::create();
     
+    // assign a simple scene graph
+    myOrigin->addChild(item1);
+    item1->addChild(item2);
+    item1->addChild(item3);
+    
     // define 3 unique frame transforms
     Frame f1, f2, f3;
     Eigen::Matrix3d R;
-    R.setIdentity();
     Eigen::Vector3d T;
-    T << 1, 0, 0;
-    f1.setRotationAndTranslation(R, T);
-    T << 0, 2, 0;
-    f2.setRotationAndTranslation(R, T);
-    T << 0, 0, 3;
-    f3.setRotationAndTranslation(R, T);
+    R.setIdentity();
+    T.setZero();
     
-    // assign frame transforms to each
+    // We're going to start by setting the first item at (1, 2, 3)
+    T << 1, 2, 3;
+    f1.setRotationAndTranslation(R, T);
     item1->setLocalTransform(f1);
+    
+    // The next item we're going to set +1 in the x direction
+    T << 1, 0, 0;
+    f2.setRotationAndTranslation(R, T);
     item2->setLocalTransform(f2);
+    
+    // The last item we're going to set +1 in the y direction
+    T << 0, 1, 0;
+    f3.setRotationAndTranslation(R, T);
     item3->setLocalTransform(f3);
     
-    // assign a simple scene graph
-    // !!! THIS IS WHERE THE SEG FAULT HAPPENS
-    item1->addChild(item2);
-    myOrigin->addChild(item1);
-    myOrigin->addChild(item3);
-    
+    // Now let's test the make sure the local transformations were written
     // return the frame transformation locations
     Eigen::Vector3d p;
+    Eigen::Matrix3d r;
     
     // local transform of item1
     p = item1->getLocalTransform().getTranslation();
+    r = item1->getLocalTransform().getRotation();
     EXPECT_DOUBLE_EQ(p(0), 1);
-    EXPECT_DOUBLE_EQ(p(1), 0);
-    EXPECT_DOUBLE_EQ(p(2), 0);
+    EXPECT_DOUBLE_EQ(p(1), 2);
+    EXPECT_DOUBLE_EQ(p(2), 3);
+    EXPECT_DOUBLE_EQ(r(0,0), 1);
+    EXPECT_DOUBLE_EQ(r(0,1), 0);
+    EXPECT_DOUBLE_EQ(r(0,2), 0);
+    EXPECT_DOUBLE_EQ(r(1,0), 0);
+    EXPECT_DOUBLE_EQ(r(1,1), 1);
+    EXPECT_DOUBLE_EQ(r(1,2), 0);
+    EXPECT_DOUBLE_EQ(r(2,0), 0);
+    EXPECT_DOUBLE_EQ(r(2,1), 0);
+    EXPECT_DOUBLE_EQ(r(2,2), 1);
     
     // local transform of item2
     p = item2->getLocalTransform().getTranslation();
-    EXPECT_DOUBLE_EQ(p(0), 0);
-    EXPECT_DOUBLE_EQ(p(1), 2);
+    r = item2->getLocalTransform().getRotation();
+    EXPECT_DOUBLE_EQ(p(0), 1);
+    EXPECT_DOUBLE_EQ(p(1), 0);
     EXPECT_DOUBLE_EQ(p(2), 0);
+    EXPECT_DOUBLE_EQ(r(0,0), 1);
+    EXPECT_DOUBLE_EQ(r(0,1), 0);
+    EXPECT_DOUBLE_EQ(r(0,2), 0);
+    EXPECT_DOUBLE_EQ(r(1,0), 0);
+    EXPECT_DOUBLE_EQ(r(1,1), 1);
+    EXPECT_DOUBLE_EQ(r(1,2), 0);
+    EXPECT_DOUBLE_EQ(r(2,0), 0);
+    EXPECT_DOUBLE_EQ(r(2,1), 0);
+    EXPECT_DOUBLE_EQ(r(2,2), 1);
     
     // local transform of item3
     p = item3->getLocalTransform().getTranslation();
+    r = item3->getLocalTransform().getRotation();
     EXPECT_DOUBLE_EQ(p(0), 0);
-    EXPECT_DOUBLE_EQ(p(1), 0);
-    EXPECT_DOUBLE_EQ(p(2), 3);
+    EXPECT_DOUBLE_EQ(p(1), 1);
+    EXPECT_DOUBLE_EQ(p(2), 0);
+    EXPECT_DOUBLE_EQ(r(0,0), 1);
+    EXPECT_DOUBLE_EQ(r(0,1), 0);
+    EXPECT_DOUBLE_EQ(r(0,2), 0);
+    EXPECT_DOUBLE_EQ(r(1,0), 0);
+    EXPECT_DOUBLE_EQ(r(1,1), 1);
+    EXPECT_DOUBLE_EQ(r(1,2), 0);
+    EXPECT_DOUBLE_EQ(r(2,0), 0);
+    EXPECT_DOUBLE_EQ(r(2,1), 0);
+    EXPECT_DOUBLE_EQ(r(2,2), 1);
     
+    
+    // Now let's test to make sure the global transformations work
     
     // global transform of item1
     p = item1->getGlobalTransform().getTranslation();
+    r = item1->getGlobalTransform().getRotation();
+    EXPECT_DOUBLE_EQ(p(0), 1);
+    EXPECT_DOUBLE_EQ(p(1), 2);
+    EXPECT_DOUBLE_EQ(p(2), 3);
+    EXPECT_DOUBLE_EQ(r(0,0), 1);
+    EXPECT_DOUBLE_EQ(r(0,1), 0);
+    EXPECT_DOUBLE_EQ(r(0,2), 0);
+    EXPECT_DOUBLE_EQ(r(1,0), 0);
+    EXPECT_DOUBLE_EQ(r(1,1), 1);
+    EXPECT_DOUBLE_EQ(r(1,2), 0);
+    EXPECT_DOUBLE_EQ(r(2,0), 0);
+    EXPECT_DOUBLE_EQ(r(2,1), 0);
+    EXPECT_DOUBLE_EQ(r(2,2), 1);
+    
+    // global transform of item2
+    p = item2->getGlobalTransform().getTranslation();
+    r = item2->getGlobalTransform().getRotation();
+    EXPECT_DOUBLE_EQ(p(0), 2);
+    EXPECT_DOUBLE_EQ(p(1), 2);
+    EXPECT_DOUBLE_EQ(p(2), 3);
+    EXPECT_DOUBLE_EQ(r(0,0), 1);
+    EXPECT_DOUBLE_EQ(r(0,1), 0);
+    EXPECT_DOUBLE_EQ(r(0,2), 0);
+    EXPECT_DOUBLE_EQ(r(1,0), 0);
+    EXPECT_DOUBLE_EQ(r(1,1), 1);
+    EXPECT_DOUBLE_EQ(r(1,2), 0);
+    EXPECT_DOUBLE_EQ(r(2,0), 0);
+    EXPECT_DOUBLE_EQ(r(2,1), 0);
+    EXPECT_DOUBLE_EQ(r(2,2), 1);
+    
+    // global transform of item3
+    p = item3->getGlobalTransform().getTranslation();
+    r = item3->getGlobalTransform().getRotation();
+    EXPECT_DOUBLE_EQ(p(0), 1);
+    EXPECT_DOUBLE_EQ(p(1), 3);
+    EXPECT_DOUBLE_EQ(p(2), 3);
+    EXPECT_DOUBLE_EQ(r(0,0), 1);
+    EXPECT_DOUBLE_EQ(r(0,1), 0);
+    EXPECT_DOUBLE_EQ(r(0,2), 0);
+    EXPECT_DOUBLE_EQ(r(1,0), 0);
+    EXPECT_DOUBLE_EQ(r(1,1), 1);
+    EXPECT_DOUBLE_EQ(r(1,2), 0);
+    EXPECT_DOUBLE_EQ(r(2,0), 0);
+    EXPECT_DOUBLE_EQ(r(2,1), 0);
+    EXPECT_DOUBLE_EQ(r(2,2), 1);
+    
+    
+    // Now let's test to make sure the rotations transformations work
+    // let's rotate item1 by +pi/2 radians (90 degrees)
+    T << 1, 2, 3;
+    R << 0, -1, 0, 1, 0, 0, 0, 0, 1;
+    f1.setRotationAndTranslation(R, T);
+    item1->setLocalTransform(f1);
+    
+    // global transform of item1
+    p = item1->getGlobalTransform().getTranslation();
+    r = item1->getGlobalTransform().getRotation();
+    EXPECT_DOUBLE_EQ(p(0), 1);
+    EXPECT_DOUBLE_EQ(p(1), 2);
+    EXPECT_DOUBLE_EQ(p(2), 3);
+    EXPECT_DOUBLE_EQ(r(0,0), 0);
+    EXPECT_DOUBLE_EQ(r(0,1), -1);
+    EXPECT_DOUBLE_EQ(r(0,2), 0);
+    EXPECT_DOUBLE_EQ(r(1,0), 1);
+    EXPECT_DOUBLE_EQ(r(1,1), 0);
+    EXPECT_DOUBLE_EQ(r(1,2), 0);
+    EXPECT_DOUBLE_EQ(r(2,0), 0);
+    EXPECT_DOUBLE_EQ(r(2,1), 0);
+    EXPECT_DOUBLE_EQ(r(2,2), 1);
+    
+    // local transform of item2
+    p = item2->getGlobalTransform().getTranslation();
+    r = item2->getGlobalTransform().getRotation();
+    EXPECT_DOUBLE_EQ(p(0), 1);
+    EXPECT_DOUBLE_EQ(p(1), 3);
+    EXPECT_DOUBLE_EQ(p(2), 3);
+    EXPECT_DOUBLE_EQ(r(0,0), 0);
+    EXPECT_DOUBLE_EQ(r(0,1), -1);
+    EXPECT_DOUBLE_EQ(r(0,2), 0);
+    EXPECT_DOUBLE_EQ(r(1,0), 1);
+    EXPECT_DOUBLE_EQ(r(1,1), 0);
+    EXPECT_DOUBLE_EQ(r(1,2), 0);
+    EXPECT_DOUBLE_EQ(r(2,0), 0);
+    EXPECT_DOUBLE_EQ(r(2,1), 0);
+    EXPECT_DOUBLE_EQ(r(2,2), 1);
+    
+    // local transform of item3
+    p = item3->getGlobalTransform().getTranslation();
+    r = item3->getGlobalTransform().getRotation();
+    EXPECT_DOUBLE_EQ(p(0), 0);
+    EXPECT_DOUBLE_EQ(p(1), 2);
+    EXPECT_DOUBLE_EQ(p(2), 3);
+    EXPECT_DOUBLE_EQ(r(0,0), 0);
+    EXPECT_DOUBLE_EQ(r(0,1), -1);
+    EXPECT_DOUBLE_EQ(r(0,2), 0);
+    EXPECT_DOUBLE_EQ(r(1,0), 1);
+    EXPECT_DOUBLE_EQ(r(1,1), 0);
+    EXPECT_DOUBLE_EQ(r(1,2), 0);
+    EXPECT_DOUBLE_EQ(r(2,0), 0);
+    EXPECT_DOUBLE_EQ(r(2,1), 0);
+    EXPECT_DOUBLE_EQ(r(2,2), 1);
+    
+    
+    
+    // Now let's test to make sure the relative transformation works
+    // The function returns item3 relative to item2 frame
+    p = item3->getRelativeTransform(item2).getTranslation();
+    r = item3->getRelativeTransform(item2).getRotation();
+    EXPECT_DOUBLE_EQ(p(0), -1);
+    EXPECT_DOUBLE_EQ(p(1), 1);
+    EXPECT_DOUBLE_EQ(p(2), 0);
+    EXPECT_DOUBLE_EQ(r(0,0), 1);
+    EXPECT_DOUBLE_EQ(r(0,1), 0);
+    EXPECT_DOUBLE_EQ(r(0,2), 0);
+    EXPECT_DOUBLE_EQ(r(1,0), 0);
+    EXPECT_DOUBLE_EQ(r(1,1), 1);
+    EXPECT_DOUBLE_EQ(r(1,2), 0);
+    EXPECT_DOUBLE_EQ(r(2,0), 0);
+    EXPECT_DOUBLE_EQ(r(2,1), 0);
+    EXPECT_DOUBLE_EQ(r(2,2), 1);
+    
+    
+    /*
+    // global transform of item1
+    p = item1->getGlobalTransform().getTranslation();
+    r = item1->getLocalTransform().getRotation();
     EXPECT_DOUBLE_EQ(p(0), 1);
     EXPECT_DOUBLE_EQ(p(1), 0);
     EXPECT_DOUBLE_EQ(p(2), 0);
@@ -134,6 +298,7 @@ TEST(Node, transforms){
     EXPECT_DOUBLE_EQ(p(0), 1);
     EXPECT_DOUBLE_EQ(p(1), 2);
     EXPECT_DOUBLE_EQ(p(2), -3);
+    */
 }
      
 

@@ -81,7 +81,7 @@ Destructor.\n
 //---------------------------------------------------------------------
 Gmm::~Gmm() {
 	for (unsigned k = 0; k < m_parameters.models.size(); k++) {
-		delete m_parameters.models.at(k);
+		// delete m_parameters.models.at(k); // this causes malloc errors
 	}
 	m_parameters.models.clear();
 	m_parameters.weights.clear();
@@ -96,7 +96,7 @@ Gmm::~Gmm() {
  \param[in] i_weight - the corresponding weight of the added distribution.
  */
 //---------------------------------------------------------------------
-void Gmm::add(NoiseGaussian* i_model, double i_weight)
+void Gmm::add(NoiseGaussian i_model, double i_weight)
 {
     
     this->m_parameters.models.push_back(i_model);
@@ -147,7 +147,7 @@ Eigen::VectorXd Gmm::sample(void)
     }
     
     // Finally sample from the distribution specified by index
-    return this->m_parameters.models[index]->sample();
+    return this->m_parameters.models[index].sample();
     
 }
     
@@ -176,7 +176,7 @@ double Gmm::probability(Eigen::VectorXd i_x)
     
     for (size_t i = 0; i < m_parameters.weights.size(); i++) {
         double weight = this->m_parameters.weights[i]/sum_of_weights;
-        p += weight*this->m_parameters.models[i]->probability(i_x);
+        p += weight*this->m_parameters.models[i].probability(i_x);
     }
     
     return p;
@@ -206,7 +206,7 @@ void Gmm::regression(Eigen::VectorXd i_x,
                        Eigen::MatrixXd& o_covariance)
 {
 	// Define the smallest number of double precision
-	double realmin = 2.225073858507202e-308;
+	double realmin = sqrt(2.225073858507202e-308); // sqrt because we have to square w later
 
     // Get cluster/input/output dimensions
     int NK = m_parameters.models.size();
@@ -225,20 +225,19 @@ void Gmm::regression(Eigen::VectorXd i_x,
     for (int k = 0; k < NK; k++){
         
         // Get matrices we need
-        Eigen::MatrixXd SigmaYY = Matrix::reducedMatrix(m_parameters.models.at(k)->m_parameters.cov, i_outputIndices, i_outputIndices);
-        Eigen::MatrixXd SigmaYX = Matrix::reducedMatrix(m_parameters.models.at(k)->m_parameters.cov, i_outputIndices, i_inputIndices);
-        Eigen::MatrixXd SigmaXY = Matrix::reducedMatrix(m_parameters.models.at(k)->m_parameters.cov, i_inputIndices, i_outputIndices);
-        Eigen::MatrixXd SigmaXX = Matrix::reducedMatrix(m_parameters.models.at(k)->m_parameters.cov, i_inputIndices, i_inputIndices);
+        Eigen::MatrixXd SigmaYY = Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_outputIndices, i_outputIndices);
+        Eigen::MatrixXd SigmaYX = Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_outputIndices, i_inputIndices);
+        Eigen::MatrixXd SigmaXY = Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_inputIndices, i_outputIndices);
+        Eigen::MatrixXd SigmaXX = Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_inputIndices, i_inputIndices);
         Eigen::MatrixXd SigmaXXInv = SigmaXX.inverse();
 		// Eigen::MatrixXd SigmaXXInv;
 		// Matrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv);
-		/*
-		if (Matrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv) == CR_RESULT_SINGULAR) {
-			printf("\n\nSingular SigmaXX inverse!!!!\n\n");
-		}
-		*/
-        Eigen::VectorXd MuY = Matrix::reducedVector(m_parameters.models.at(k)->m_parameters.mean, i_outputIndices);
-        Eigen::VectorXd MuX = Matrix::reducedVector(m_parameters.models.at(k)->m_parameters.mean, i_inputIndices);
+        
+		//if (Matrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv) == core::CR_RESULT_SINGULAR) {
+        //  printf("\n\nSingular SigmaXX inverse!!!!\n\n");
+		//}
+        Eigen::VectorXd MuY = Matrix::reducedVector(m_parameters.models.at(k).m_parameters.mean, i_outputIndices);
+        Eigen::VectorXd MuX = Matrix::reducedVector(m_parameters.models.at(k).m_parameters.mean, i_inputIndices);
         
         // Return the mean, covariance, and weight
         Eigen::VectorXd Mu = MuY + SigmaYX * SigmaXXInv * (i_x - MuX);
@@ -270,10 +269,15 @@ double Gmm::mvnpdf(Eigen::VectorXd i_x,
     Eigen::MatrixXd cov2pi = 2*M_PI*i_covariance;
     Eigen::VectorXd error = i_x - i_mean;
     
-    // define the arguments (gain k and arg of exponent)
-    double k = 1/sqrt(cov2pi.determinant());
-    double arg = -0.5*error.transpose() * i_covariance.inverse() *error;
-    return k*exp(arg);
+    Eigen::MatrixXd SigInv;
+    if (Matrix::svdInverse(i_covariance, 1e-8, SigInv) == core::CR_RESULT_SINGULAR) {
+        return 0;
+    } else {
+        // define the arguments (gain k and arg of exponent)
+        double k = 1/sqrt(cov2pi.determinant());
+        double arg = -0.5*error.transpose() * i_covariance.inverse() *error;
+        return k*exp(arg);
+    }
 }
 
 //=====================================================================
