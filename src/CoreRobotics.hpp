@@ -361,90 +361,51 @@ project includes all the CoreRobotics modules.
 //! \brief This module implements core functionality such as timing, common
 //! types, and thread loop control.
 //---------------------------------------------------------------------------
-#include "Types.hpp"
-#include "Item.hpp"
-#include "Clock.hpp"
-#include "Thread.hpp"
-#include "Step.hpp"
-#include "Loop.hpp"
-#include "StepList.hpp"
-#include "SharedMemory.hpp"
-
+#include <CoreRobotics/Core>
 
 //---------------------------------------------------------------------------
 //! \defgroup signal Signal
 //! \brief This module implements a signal framework.
 //---------------------------------------------------------------------------
-#include "Signal.hpp"
-#include "Slot.hpp"
-#include "Log.hpp"
-#include "Utility.hpp"
-
+#include <CoreRobotics/Signal>
 
 //---------------------------------------------------------------------------
 //! \defgroup world World
 //! \brief This module implements a kinematic tree graph.
 //---------------------------------------------------------------------------
-#include "Origin.hpp"
-#include "Node.hpp"
-#include "Link.hpp"
-#include "Robot.hpp"
-
+#include <CoreRobotics/World>
 
 //---------------------------------------------------------------------------
 //! \defgroup math Math
 //! \brief This module implements math components.
 //---------------------------------------------------------------------------
-#include "Conversion.hpp"
-#include "Integration.hpp"
-#include "Matrix.hpp"
-
+#include <CoreRobotics/Math>
 
 //---------------------------------------------------------------------------
 //! \defgroup physics Physics
 //! \brief This module implements physics representations for computing
 //! kinematics and dynamics.
 //---------------------------------------------------------------------------
-#include "Frame.hpp"
-#include "FrameEuler.hpp"
-#include "FrameDh.hpp"
-#include "RigidBody.hpp"
-
+#include <CoreRobotics/Physics>
 
 //---------------------------------------------------------------------------
 //! \defgroup noise Noise
 //! \brief This module implements noise models.
 //---------------------------------------------------------------------------
-#include "NoiseModel.hpp"
-#include "NoiseGaussian.hpp"
-#include "NoiseUniform.hpp"
-#include "NoiseMixture.hpp"
-#include "Gmm.hpp"
-
+#include <CoreRobotics/Noise>
 
 //---------------------------------------------------------------------------
 //! \defgroup model Model
 //! \brief This module implements model (sensor and motion) representations.
 //---------------------------------------------------------------------------
-#include "Motion.hpp"
-// #include "SensorModel.hpp"
-// #include "SensorLinear.hpp"
-// #include "SensorProbabilistic.hpp"
-// #include "MotionModel.hpp"
-// #include "MotionLinear.hpp"
-// #include "MotionProbabilistic.hpp"
-
+#include <CoreRobotics/Model>
 
 //---------------------------------------------------------------------------
 //! \defgroup control Control
 //! \brief This module implements control policies for regulating
 //! motion and actions.
 //---------------------------------------------------------------------------
-// #include "Policy.hpp"
-// #include "InverseKinematics.hpp"
-// #include "NullSpace.hpp"
-// #include "HardLimits.hpp"
-#include "TrajectoryGenerator.hpp"
+#include <CoreRobotics/Control>
 
 
 #endif

@@ -43,8 +43,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef CR_NODE_HPP_
 #define CR_NODE_HPP_
 
-#include "Frame.hpp"
-#include "Item.hpp"
+#include "physics/Frame.hpp"
+#include "core/Item.hpp"
 #include <vector>
 #include <memory>
 

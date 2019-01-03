@@ -44,7 +44,7 @@
 #define CR_SLOT_HPP_
 
 #include "Signal.hpp"
-#include "Step.hpp"
+#include "core/Step.hpp"
 #include <mutex>
 #include <memory>
 

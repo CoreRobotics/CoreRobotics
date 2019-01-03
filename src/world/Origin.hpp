@@ -40,11 +40,11 @@ POSSIBILITY OF SUCH DAMAGE.
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_WORLD_HPP_
-#define CR_WORLD_HPP_
+#ifndef CR_ORIGIN_HPP_
+#define CR_ORIGIN_HPP_
 
 #include "Node.hpp"
-#include "Item.hpp"
+#include "core/Item.hpp"
 #include <memory>
 
 //---------------------------------------------------------------------

@@ -45,8 +45,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include "Types.hpp"
-#include "Clock.hpp"
+#include "core/Types.hpp"
+#include "core/Clock.hpp"
 
 //=====================================================================
 // CoreRobotics namespace

@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "FrameEuler.hpp"
-#include "Matrix.hpp"
+#include "math/Matrix.hpp"
 #include "Eigen/Dense"
 
 

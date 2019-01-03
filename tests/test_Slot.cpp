@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 // Use the CoreRobotics namespace
-using namespace cr;
+// using namespace cr;
 using namespace cr::core;
 using namespace cr::world;
 using namespace cr::signal;
@@ -88,7 +88,6 @@ TEST(Slot, Step){
     EXPECT_DOUBLE_EQ(myLink1->getFreeValue(), myLink2->getFreeValue() );
     
 }
-
 
 
 

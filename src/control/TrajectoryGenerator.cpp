@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "TrajectoryGenerator.hpp"
-#include "Matrix.hpp"
+#include "math/Matrix.hpp"
 #include <math.h>
 #include <iostream>
 

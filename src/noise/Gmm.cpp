@@ -44,7 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <iostream>
 #include "Eigen/Dense"
 #include "Gmm.hpp"
-#include "Matrix.hpp"
+#include "math/Matrix.hpp"
 
 
 //=====================================================================

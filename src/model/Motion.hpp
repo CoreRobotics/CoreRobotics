@@ -43,7 +43,7 @@
 #ifndef CR_MOTION_HPP_
 #define CR_MOTION_HPP_
 
-#include "Step.hpp"
+#include "core/Step.hpp"
 #include "Eigen/Dense"
 
 using namespace std::placeholders;

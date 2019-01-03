@@ -40,10 +40,10 @@
 //---------------------------------------------------------------------
 // Begin header definition
 
-#ifndef CR_SIGNAL_HPP_
-#define CR_SIGNAL_HPP_
+#ifndef CR_SIG_HPP_
+#define CR_SIG_HPP_
 
-#include "Item.hpp"
+#include "core/Item.hpp"
 #include "Utility.hpp"
 #include <memory>
 #include <mutex>

@@ -52,7 +52,7 @@ set (PROJECT_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${RELEASE_VERSION})
 cmake_policy(SET CMP0054 NEW)
 
 # Require C++11
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Specify the configuration
@@ -64,7 +64,7 @@ set(LIB_TARGET_NAME ${PROJECT_NAME})
 set(TEST_TARGET_NAME "TestModules")
 
 # project title
-project( ${PROJECT_NAME} )
+project(${PROJECT_NAME})
 
 # =====================================================================
 # 1. Setup the library target
@@ -98,14 +98,14 @@ endif()
 # Include headers
 file(GLOB CR_INCLUDE_DIRS
     ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/src/core
-    ${CMAKE_SOURCE_DIR}/src/math
-    ${CMAKE_SOURCE_DIR}/src/model
-    ${CMAKE_SOURCE_DIR}/src/physics
-    ${CMAKE_SOURCE_DIR}/src/control
-    ${CMAKE_SOURCE_DIR}/src/world
-    ${CMAKE_SOURCE_DIR}/src/signal
-    ${CMAKE_SOURCE_DIR}/src/noise
+#    ${CMAKE_SOURCE_DIR}/src/core
+#    ${CMAKE_SOURCE_DIR}/src/math
+#    ${CMAKE_SOURCE_DIR}/src/model
+#    ${CMAKE_SOURCE_DIR}/src/physics
+#    ${CMAKE_SOURCE_DIR}/src/control
+#    ${CMAKE_SOURCE_DIR}/src/world
+#    ${CMAKE_SOURCE_DIR}/src/signal
+#    ${CMAKE_SOURCE_DIR}/src/noise
     ${EIGEN3_INCLUDE_DIR}
     ${Boost_INCLUDE_DIR}
     ${OPENSCENEGRAPH_INCLUDE_DIRS}
@@ -144,8 +144,8 @@ endif()
 # If "all" and python version specified build c++ library
 if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 
-	# Create static (or shared) library
-add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${HEADERS_WORLD} ${HEADERS_SIGNAL} ${HEADERS_NOISE} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD} ${SOURCES_SIGNAL} ${SOURCES_NOISE})
+# Create static (or shared) library
+add_library(${LIB_TARGET_NAME} STATIC src/CoreRobotics.hpp ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${HEADERS_WORLD} ${HEADERS_SIGNAL} ${HEADERS_NOISE} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD} ${SOURCES_SIGNAL} ${SOURCES_NOISE})
 
 	# Set the output directory
     set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
@@ -154,7 +154,7 @@ add_library(${LIB_TARGET_NAME} STATIC "src/CoreRobotics.hpp" ${HEADERS_CORE} ${H
     )
 
 	# Sort into a group structure
-    source_group( "\\" FILES "src/CoreRobotics.hpp")
+    source_group( "\\" FILES src/CoreRobotics.hpp)
 	source_group( "core" FILES ${HEADERS_CORE} ${SOURCES_CORE})
 	source_group( "math" FILES ${HEADERS_MATH} ${SOURCES_MATH})
 	source_group( "model" FILES ${HEADERS_MODELS} ${SOURCES_MODELS})

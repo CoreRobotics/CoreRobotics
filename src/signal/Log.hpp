@@ -43,8 +43,8 @@
 #ifndef CR_LOG_HPP_
 #define CR_LOG_HPP_
 
-#include "Step.hpp"
-#include "Clock.hpp"
+#include "core/Step.hpp"
+#include "core/Clock.hpp"
 #include "Signal.hpp"
 #include <fstream>
 #include <string>

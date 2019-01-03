@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include "Types.hpp"
+#include "core/Types.hpp"
 
 
 //=====================================================================
