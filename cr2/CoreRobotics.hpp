@@ -361,51 +361,51 @@ project includes all the CoreRobotics modules.
 //! \brief This module implements core functionality such as timing, common
 //! types, and thread loop control.
 //---------------------------------------------------------------------------
-#include <CoreRobotics/Core>
+#include <cr2/Core>
 
 //---------------------------------------------------------------------------
 //! \defgroup signal Signal
 //! \brief This module implements a signal framework.
 //---------------------------------------------------------------------------
-#include <CoreRobotics/Signal>
+#include <cr2/Signal>
 
 //---------------------------------------------------------------------------
 //! \defgroup world World
 //! \brief This module implements a kinematic tree graph.
 //---------------------------------------------------------------------------
-#include <CoreRobotics/World>
+#include <cr2/World>
 
 //---------------------------------------------------------------------------
 //! \defgroup math Math
 //! \brief This module implements math components.
 //---------------------------------------------------------------------------
-#include <CoreRobotics/Math>
+#include <cr2/Math>
 
 //---------------------------------------------------------------------------
 //! \defgroup physics Physics
 //! \brief This module implements physics representations for computing
 //! kinematics and dynamics.
 //---------------------------------------------------------------------------
-#include <CoreRobotics/Physics>
+#include <cr2/Physics>
 
 //---------------------------------------------------------------------------
 //! \defgroup noise Noise
 //! \brief This module implements noise models.
 //---------------------------------------------------------------------------
-#include <CoreRobotics/Noise>
+#include <cr2/Noise>
 
 //---------------------------------------------------------------------------
 //! \defgroup model Model
 //! \brief This module implements model (sensor and motion) representations.
 //---------------------------------------------------------------------------
-#include <CoreRobotics/Model>
+#include <cr2/Model>
 
 //---------------------------------------------------------------------------
 //! \defgroup control Control
 //! \brief This module implements control policies for regulating
 //! motion and actions.
 //---------------------------------------------------------------------------
-#include <CoreRobotics/Control>
+#include <cr2/Control>
 
 
 #endif

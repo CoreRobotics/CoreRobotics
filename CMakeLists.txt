@@ -51,7 +51,7 @@ set (PROJECT_VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${RELEASE_VERSION})
 # Set CMAKE policy
 cmake_policy(SET CMP0054 NEW)
 
-# Require C++11
+# Require C++14
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -97,7 +97,7 @@ endif()
 
 # Include headers
 file(GLOB CR_INCLUDE_DIRS
-    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/cr2
 #    ${CMAKE_SOURCE_DIR}/src/core
 #    ${CMAKE_SOURCE_DIR}/src/math
 #    ${CMAKE_SOURCE_DIR}/src/model
@@ -113,24 +113,24 @@ file(GLOB CR_INCLUDE_DIRS
 include_directories( ${CR_INCLUDE_DIRS} )
 
 # Header files
-file(GLOB HEADERS_CORE src/core/*.hpp )
-file(GLOB HEADERS_MATH src/math/*.hpp )
-file(GLOB HEADERS_MODELS src/model/*.hpp )
-file(GLOB HEADERS_PHYSICS src/physics/*.hpp )
-file(GLOB HEADERS_CONTROLLERS src/control/*.hpp )
-file(GLOB HEADERS_WORLD src/world/*.hpp )
-file(GLOB HEADERS_SIGNAL src/signal/*.hpp )
-file(GLOB HEADERS_NOISE src/noise/*.hpp )
+file(GLOB HEADERS_CORE cr2/core/*.hpp )
+file(GLOB HEADERS_MATH cr2/math/*.hpp )
+file(GLOB HEADERS_MODELS cr2/model/*.hpp )
+file(GLOB HEADERS_PHYSICS cr2/physics/*.hpp )
+file(GLOB HEADERS_CONTROLLERS cr2/control/*.hpp )
+file(GLOB HEADERS_WORLD cr2/world/*.hpp )
+file(GLOB HEADERS_SIGNAL cr2/signal/*.hpp )
+file(GLOB HEADERS_NOISE cr2/noise/*.hpp )
 
 # Source files
-file(GLOB SOURCES_CORE src/core/*.cpp )
-file(GLOB SOURCES_MATH src/math/*.cpp )
-file(GLOB SOURCES_MODELS src/model/*.cpp )
-file(GLOB SOURCES_PHYSICS src/physics/*.cpp )
-file(GLOB SOURCES_CONTROLLERS src/control/*.cpp )
-file(GLOB SOURCES_WORLD src/world/*.cpp )
-file(GLOB SOURCES_SIGNAL src/signal/*.cpp )
-file(GLOB SOURCES_NOISE src/noise/*.cpp )
+file(GLOB SOURCES_CORE cr2/core/*.cpp )
+file(GLOB SOURCES_MATH cr2/math/*.cpp )
+file(GLOB SOURCES_MODELS cr2/model/*.cpp )
+file(GLOB SOURCES_PHYSICS cr2/physics/*.cpp )
+file(GLOB SOURCES_CONTROLLERS cr2/control/*.cpp )
+file(GLOB SOURCES_WORLD cr2/world/*.cpp )
+file(GLOB SOURCES_SIGNAL cr2/signal/*.cpp )
+file(GLOB SOURCES_NOISE cr2/noise/*.cpp )
 
 # If building on linux add pthread and rt
 if(UNIX AND NOT APPLE) # This may be useful for apple too
@@ -145,7 +145,7 @@ endif()
 if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
 
 # Create static (or shared) library
-add_library(${LIB_TARGET_NAME} STATIC src/CoreRobotics.hpp ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${HEADERS_WORLD} ${HEADERS_SIGNAL} ${HEADERS_NOISE} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD} ${SOURCES_SIGNAL} ${SOURCES_NOISE})
+add_library(${LIB_TARGET_NAME} STATIC cr2/CoreRobotics.hpp ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${HEADERS_WORLD} ${HEADERS_SIGNAL} ${HEADERS_NOISE} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS} ${SOURCES_WORLD} ${SOURCES_SIGNAL} ${SOURCES_NOISE})
 
 	# Set the output directory
     set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
@@ -154,7 +154,7 @@ add_library(${LIB_TARGET_NAME} STATIC src/CoreRobotics.hpp ${HEADERS_CORE} ${HEA
     )
 
 	# Sort into a group structure
-    source_group( "\\" FILES src/CoreRobotics.hpp)
+    source_group( "\\" FILES cr2/CoreRobotics.hpp)
 	source_group( "core" FILES ${HEADERS_CORE} ${SOURCES_CORE})
 	source_group( "math" FILES ${HEADERS_MATH} ${SOURCES_MATH})
 	source_group( "model" FILES ${HEADERS_MODELS} ${SOURCES_MODELS})
