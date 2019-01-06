@@ -49,6 +49,13 @@ find_package(CoreRobotics REQUIRED)
 include_directories(${CR_INCLUDE_DIRS})
 link_directories(${CR_LIBRARY_DIRS})
 
+# If building on linux add pthread and rt
+if(UNIX AND NOT APPLE) # This may be useful for apple too
+    set(LINK_FLAGS pthread rt)
+else()
+    set(LINK_FLAGS "")
+endif()
+
 # Get the example name and source
 file(GLOB source *.cpp)
 get_filename_component(example ${source} NAME_WE)
