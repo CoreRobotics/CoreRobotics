@@ -61,13 +61,6 @@ file(GLOB SOURCES_MODELS ${CMAKE_CURRENT_SOURCE_DIR}/../models/*.cpp )
 file(GLOB SOURCES_PHYSICS ${CMAKE_CURRENT_SOURCE_DIR}/../physics/*.cpp )
 file(GLOB SOURCES_CONTROLLERS ${CMAKE_CURRENT_SOURCE_DIR}/../controllers/*.cpp )
 
-# If building on linux add pthread and rt
-if(UNIX AND NOT APPLE) # This may be useful for apple too
-    set(LINK_FLAGS pthread rt)
-else()
-    set(LINK_FLAGS "")
-endif()
-
 # Create static (or shared) library
 add_library(${LIB_TARGET_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/../CoreRobotics.hpp ${HEADERS_CORE} ${HEADERS_MATH} ${HEADERS_MODELS} ${HEADERS_PHYSICS} ${HEADERS_CONTROLLERS} ${SOURCES_CORE} ${SOURCES_MATH} ${SOURCES_MODELS} ${SOURCES_PHYSICS} ${SOURCES_CONTROLLERS})
 

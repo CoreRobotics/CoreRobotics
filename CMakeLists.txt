@@ -68,6 +68,13 @@ else()
     message(STATUS "Eigen found at ${EIGEN3_INCLUDE_DIR}")
 endif()
 
+# If building on linux add pthread and rt
+if(UNIX AND NOT APPLE) # This may be useful for apple too
+    set(LINK_FLAGS pthread rt)
+else()
+    set(LINK_FLAGS "")
+endif()
+
 
 # =====================================================================
 # Setup the library targets
