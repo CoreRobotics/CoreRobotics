@@ -361,58 +361,58 @@ project includes all the CoreRobotics modules.
 //! \brief This module implements the core functionality of the library,
 //! such as timing, loop definitions and threading.
 //---------------------------------------------------------------------------
-#include "CRTypes.hpp"
-#include "CRClock.hpp"
-#include "CRThread.hpp"
-#include "CRMutex.hpp"
-#include "CRSharedMemory.hpp"
+#include "core/CRTypes.hpp"
+#include "core/CRClock.hpp"
+#include "core/CRThread.hpp"
+#include "core/CRMutex.hpp"
+#include "core/CRSharedMemory.hpp"
 
 
 //---------------------------------------------------------------------------
 //! \defgroup math Math
 //! \brief Implements math components.
 //---------------------------------------------------------------------------
-#include "CRConversion.hpp"
-#include "CRIntegration.hpp"
-#include "CRMatrix.hpp"
+#include "math/CRConversion.hpp"
+#include "math/CRIntegration.hpp"
+#include "math/CRMatrix.hpp"
 
 
 //---------------------------------------------------------------------------
 //! \defgroup physics Physics
 //! \brief Implements physics (kinematics and dynamics) representations.
 //---------------------------------------------------------------------------
-#include "CRFrame.hpp"
-#include "CRFrameEuler.hpp"
-#include "CRFrameDh.hpp"
-#include "CRRigidBody.hpp"
+#include "physics/CRFrame.hpp"
+#include "physics/CRFrameEuler.hpp"
+#include "physics/CRFrameDh.hpp"
+#include "physics/CRRigidBody.hpp"
 
 
 //---------------------------------------------------------------------------
 //! \defgroup models Models
 //! \brief Implements model (sensor, motion, and noise) representations.
 //---------------------------------------------------------------------------
-#include "CRManipulator.hpp"
-#include "CRNoiseModel.hpp"
-#include "CRNoiseGaussian.hpp"
-#include "CRNoiseUniform.hpp"
-#include "CRNoiseMixture.hpp"
-#include "CRGmm.hpp"
-#include "CRSensorModel.hpp"
-#include "CRSensorLinear.hpp"
-#include "CRSensorProbabilistic.hpp"
-#include "CRMotionModel.hpp"
-#include "CRMotionLinear.hpp"
-#include "CRMotionProbabilistic.hpp"
+#include "models/CRManipulator.hpp"
+#include "models/CRNoiseModel.hpp"
+#include "models/CRNoiseGaussian.hpp"
+#include "models/CRNoiseUniform.hpp"
+#include "models/CRNoiseMixture.hpp"
+#include "models/CRGmm.hpp"
+#include "models/CRSensorModel.hpp"
+#include "models/CRSensorLinear.hpp"
+#include "models/CRSensorProbabilistic.hpp"
+#include "models/CRMotionModel.hpp"
+#include "models/CRMotionLinear.hpp"
+#include "models/CRMotionProbabilistic.hpp"
 
 
 //---------------------------------------------------------------------------
 //! \defgroup controllers Controllers
 //! \brief Implements controllers and policies for regulating motion and actions.
 //---------------------------------------------------------------------------
-#include "CRInverseKinematics.hpp"
-#include "CRNullSpace.hpp"
-#include "CRHardLimits.hpp"
-#include "CRTrajectoryGenerator.hpp"
+#include "controllers/CRInverseKinematics.hpp"
+#include "controllers/CRNullSpace.hpp"
+#include "controllers/CRHardLimits.hpp"
+#include "controllers/CRTrajectoryGenerator.hpp"
 
 
 #endif

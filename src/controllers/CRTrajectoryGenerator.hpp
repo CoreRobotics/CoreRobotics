@@ -45,8 +45,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include "CRTypes.hpp"
-#include "CRClock.hpp"
+#include "core/CRTypes.hpp"
+#include "core/CRClock.hpp"
 
 //=====================================================================
 // CoreRobotics namespace

@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include "CRTypes.hpp"
+#include "core/CRTypes.hpp"
 
 
 //=====================================================================

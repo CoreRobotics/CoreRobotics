@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 // Includes
 #include <vector>
-#include "CRRigidBody.hpp"
+#include "physics/CRRigidBody.hpp"
 
 //=====================================================================
 // CoreRobotics namespace

@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "CRFrameEuler.hpp"
-#include "CRMatrix.hpp"
+#include "math/CRMatrix.hpp"
 #include "Eigen/Dense"
 
 

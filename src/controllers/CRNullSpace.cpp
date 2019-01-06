@@ -40,8 +40,8 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "CRNullSpace.hpp"
-#include "CRMatrix.hpp"
-#include "CRTypes.hpp"
+#include "math/CRMatrix.hpp"
+#include "core/CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace

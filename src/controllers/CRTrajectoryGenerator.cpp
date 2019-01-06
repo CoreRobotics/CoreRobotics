@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "CRTrajectoryGenerator.hpp"
-#include "CRMatrix.hpp"
+#include "math/CRMatrix.hpp"
 #include <math.h>
 #include <iostream>
 

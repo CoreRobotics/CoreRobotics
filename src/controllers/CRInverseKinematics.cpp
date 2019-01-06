@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include "CRInverseKinematics.hpp"
-#include "CRMatrix.hpp"
+#include "math/CRMatrix.hpp"
 
 //=====================================================================
 // CoreRobotics namespace

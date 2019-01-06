@@ -44,8 +44,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "CRManipulator.hpp"
-#include "CRTypes.hpp"
+#include "models/CRManipulator.hpp"
+#include "core/CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
