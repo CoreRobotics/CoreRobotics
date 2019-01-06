@@ -56,6 +56,13 @@ include_directories(${GTEST_INCLUDE_DIRS})
 # set the test target name
 set(TEST_TARGET_NAME TestModules)
 
+# If building on linux add pthread and rt
+if(UNIX AND NOT APPLE) # This may be useful for apple too
+    set(LINK_FLAGS pthread rt)
+else()
+    set(LINK_FLAGS "")
+endif()
+
 # Setup the test target
 file(GLOB CR_TESTS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 add_executable(${TEST_TARGET_NAME} ${CR_TESTS})
