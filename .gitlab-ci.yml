@@ -104,7 +104,7 @@ build-lib:
 #      - $CI_PROJECT_DIR/python/examples/_CoreRobotics.so
 #     expire_in: 1 week
 
-test-cpp:
+test-lib:
   stage: test
   script:
    - mkdir build
@@ -115,14 +115,18 @@ test-cpp:
   dependencies:
    - build-lib
 
-# test-cpp-examples:
-#  stage: test
-#  script:
-#   - for file in $CI_PROJECT_DIR/bin/*; do
-#   - $file
-#   - done
-#  dependencies:
-#   - build-cpp
+test-examples:
+  stage: test
+  script:
+   - mkdir build
+   - cd build
+   - cmake -Dexamples=true ..
+   - make
+   - for file in $CI_PROJECT_DIR/bin/*; do
+   - $file
+   - done
+  dependencies:
+   - build-lib
 
 # test-python2:
 #   stage: test

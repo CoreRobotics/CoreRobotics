@@ -52,10 +52,17 @@ link_directories(${CR_LIBRARY_DIRS})
 file(GLOB source *.cpp)
 get_filename_component(example ${source} NAME_WE)
 
+# If building on linux add pthread and rt
+if(UNIX AND NOT APPLE) # This may be useful for apple too
+    set(link_flags pthread rt)
+else()
+    set(link_flags "")
+endif()
+
 # Add the executable target
 set(target cr-${example})
 add_executable(${target} ${source})
-target_link_libraries(${target} ${CR_LIBRARIES})
+target_link_libraries(${target} ${CR_LIBRARIES} ${link_flags})
 set_target_properties(${target}
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin

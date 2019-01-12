@@ -199,6 +199,6 @@ configure_file (CoreRoboticsConfigVersion.cmake.in "${PROJECT_BINARY_DIR}/CoreRo
 # ---------------------------------------------------------------------
 # Setup the example targets
 # ---------------------------------------------------------------------
-# if (examples OR all)
-#     add_subdirectory(${PROJECT_SOURCE_DIR}/examples)
-# endif()
+if (examples OR all)
+    add_subdirectory(${PROJECT_SOURCE_DIR}/examples)
+endif()
