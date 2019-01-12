@@ -42,22 +42,24 @@
 foreach(p ${CR_LIB_MODULES})
 
     set(TARGET_NAME ${CR_LIB_PREFIX}${p})
-    add_library(${TARGET_NAME} STATIC
+    add_library(${TARGET_NAME} SHARED
         ${CR_HEADERS_${p}} ${CR_SOURCES_${p}})
     set_target_properties(${TARGET_NAME} PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
         ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
         PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/CoreRobotics.hpp)
 
-    # target dependencies
+    # target-specific dependencies
     if (${p} STREQUAL "math")
         add_dependencies(${TARGET_NAME} ${CR_LIB_PREFIX}core)
     elseif (${p} STREQUAL "physics")
         add_dependencies(${TARGET_NAME} ${CR_LIB_PREFIX}core)
-    elseif (${p} STREQUAL "control")
-        add_dependencies(${TARGET_NAME} ${CR_LIB_PREFIX}core ${CR_LIB_PREFIX}math)
     elseif (${p} STREQUAL "model")
-        add_dependencies(${TARGET_NAME} ${CR_LIB_PREFIX}physics)
+        add_dependencies(${TARGET_NAME} ${CR_LIB_PREFIX}core ${CR_LIB_PREFIX}math ${CR_LIB_PREFIX}physics)
+        target_link_libraries(${TARGET_NAME} ${CR_LIB_PREFIX}core ${CR_LIB_PREFIX}math ${CR_LIB_PREFIX}physics)
+    elseif (${p} STREQUAL "control")
+        add_dependencies(${TARGET_NAME} ${CR_LIB_PREFIX}core ${CR_LIB_PREFIX}math ${CR_LIB_PREFIX}model)
+        target_link_libraries(${TARGET_NAME} ${CR_LIB_PREFIX}core ${CR_LIB_PREFIX}math ${CR_LIB_PREFIX}model)
     endif()
 
     # IMPORTANT: Add the library to the "export-set"
