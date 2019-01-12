@@ -42,10 +42,9 @@
 cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-cmake_policy(SET CMP0054 NEW)
 
 # Find CoreRobotics
-find_package(CoreRobotics REQUIRED)
+find_package(CoreRobotics REQUIRED 2.0.0)
 include_directories(${CR_INCLUDE_DIRS})
 link_directories(${CR_LIBRARY_DIRS})
 

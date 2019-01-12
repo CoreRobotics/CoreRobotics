@@ -39,7 +39,7 @@
 # =====================================================================
 
 
-set(PACKAGE_VERSION "@PROJECT_VERSION@")
+set(PACKAGE_VERSION "@CR_VERSION@")
  
 # check whether the requested PACKAGE_FIND_VERSION is compatible
 if("${PACKAGE_VERSION}" VERSION_LESS "${PACKAGE_FIND_VERSION}")

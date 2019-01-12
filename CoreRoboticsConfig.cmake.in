@@ -39,7 +39,7 @@
 # =====================================================================
 
 
-# options
+# compute paths
 get_filename_component(CR_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 set(CR_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
 set(CR_LIBRARIES "@CONF_LIBRARIES@")
@@ -48,5 +48,5 @@ set(CR_SOURCE_DIR @CONF_SOURCE_DIR@)
 
 # library dependencies (contains definitions for IMPORTED targets)
 # if(NOT TARGET CoreRobotics AND NOT CR_BINARY_DIR)
-#   include("${CHAI3D_CMAKE_DIR}/CoreRoboticsTargets.cmake")
+#    include("${CR_CMAKE_DIR}/CoreRoboticsTargets.cmake")
 # endif()
