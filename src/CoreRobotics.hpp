@@ -391,28 +391,28 @@ project includes all the CoreRobotics modules.
 //! \defgroup models Models
 //! \brief Implements model (sensor, motion, and noise) representations.
 //---------------------------------------------------------------------------
-#include "models/CRManipulator.hpp"
-#include "models/CRNoiseModel.hpp"
-#include "models/CRNoiseGaussian.hpp"
-#include "models/CRNoiseUniform.hpp"
-#include "models/CRNoiseMixture.hpp"
-#include "models/CRGmm.hpp"
-#include "models/CRSensorModel.hpp"
-#include "models/CRSensorLinear.hpp"
-#include "models/CRSensorProbabilistic.hpp"
-#include "models/CRMotionModel.hpp"
-#include "models/CRMotionLinear.hpp"
-#include "models/CRMotionProbabilistic.hpp"
+#include "model/CRManipulator.hpp"
+#include "model/CRNoiseModel.hpp"
+#include "model/CRNoiseGaussian.hpp"
+#include "model/CRNoiseUniform.hpp"
+#include "model/CRNoiseMixture.hpp"
+#include "model/CRGmm.hpp"
+#include "model/CRSensorModel.hpp"
+#include "model/CRSensorLinear.hpp"
+#include "model/CRSensorProbabilistic.hpp"
+#include "model/CRMotionModel.hpp"
+#include "model/CRMotionLinear.hpp"
+#include "model/CRMotionProbabilistic.hpp"
 
 
 //---------------------------------------------------------------------------
 //! \defgroup controllers Controllers
 //! \brief Implements controllers and policies for regulating motion and actions.
 //---------------------------------------------------------------------------
-#include "controllers/CRInverseKinematics.hpp"
-#include "controllers/CRNullSpace.hpp"
-#include "controllers/CRHardLimits.hpp"
-#include "controllers/CRTrajectoryGenerator.hpp"
+#include "control/CRInverseKinematics.hpp"
+#include "control/CRNullSpace.hpp"
+#include "control/CRHardLimits.hpp"
+#include "control/CRTrajectoryGenerator.hpp"
 
 
 #endif

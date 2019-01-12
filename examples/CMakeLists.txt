@@ -38,12 +38,13 @@
 #
 # =====================================================================
 
-# create the test target
-set(TEST_TARGET_NAME TestModules)
-file(GLOB CR_TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-add_executable(${TEST_TARGET_NAME} ${CR_TEST_SOURCES})
-add_dependencies(${TEST_TARGET_NAME} ${CR_LIB_TARGETS})
-target_link_libraries(${TEST_TARGET_NAME} ${CR_LIB_TARGETS} ${CR_LINK_FLAGS} ${GTEST_LIBRARIES})
-set_target_properties(${TEST_TARGET_NAME}
-    PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
-)
+# find the example folders
+file(GLOB file_list ${CMAKE_CURRENT_SOURCE_DIR}/*)
+foreach(file_in ${file_list})
+    if(IS_DIRECTORY ${file_in})
+        file(GLOB source ${file_in}/*.cpp)
+        if (NOT source STREQUAL "")
+            add_subdirectory(${file_in})
+        endif()
+    endif()
+endforeach()

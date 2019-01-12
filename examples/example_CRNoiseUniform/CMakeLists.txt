@@ -38,12 +38,25 @@
 #
 # =====================================================================
 
-# create the test target
-set(TEST_TARGET_NAME TestModules)
-file(GLOB CR_TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-add_executable(${TEST_TARGET_NAME} ${CR_TEST_SOURCES})
-add_dependencies(${TEST_TARGET_NAME} ${CR_LIB_TARGETS})
-target_link_libraries(${TEST_TARGET_NAME} ${CR_LIB_TARGETS} ${CR_LINK_FLAGS} ${GTEST_LIBRARIES})
-set_target_properties(${TEST_TARGET_NAME}
-    PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
+# cmake settings
+cmake_minimum_required(VERSION 3.5)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+cmake_policy(SET CMP0054 NEW)
+
+# Find CoreRobotics
+find_package(CoreRobotics REQUIRED)
+include_directories(${CR_INCLUDE_DIRS})
+link_directories(${CR_LIBRARY_DIRS})
+
+# Get the example name and source
+file(GLOB source *.cpp)
+get_filename_component(example ${source} NAME_WE)
+
+# Add the executable target
+add_executable(${example} ${source})
+target_link_libraries(${example} ${CR_LIBRARIES})
+set_target_properties(${example}
+    PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
 )

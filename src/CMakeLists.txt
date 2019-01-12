@@ -38,12 +38,12 @@
 #
 # =====================================================================
 
-# create the test target
-set(TEST_TARGET_NAME TestModules)
-file(GLOB CR_TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-add_executable(${TEST_TARGET_NAME} ${CR_TEST_SOURCES})
-add_dependencies(${TEST_TARGET_NAME} ${CR_LIB_TARGETS})
-target_link_libraries(${TEST_TARGET_NAME} ${CR_LIB_TARGETS} ${CR_LINK_FLAGS} ${GTEST_LIBRARIES})
-set_target_properties(${TEST_TARGET_NAME}
-    PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
-)
+# Create target libraries
+foreach(p ${CR_LIB_MODULES})
+    set(TARGET_NAME ${CR_LIB_PREFIX}-${p})
+    add_library(${TARGET_NAME} STATIC
+        ${CR_HEADERS_${p}} ${CR_SOURCES_${p}})
+    set_target_properties(${TARGET_NAME} PROPERTIES
+        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+endforeach()
