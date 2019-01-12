@@ -38,7 +38,7 @@ build-cpp:
   script: 
    - mkdir build
    - cd build
-   - cmake ..
+   - cmake -Dall=true ..
    - make
   dependencies: []
   artifacts:
