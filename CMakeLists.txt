@@ -149,7 +149,7 @@ endif()
 # If "all" build c++ static library
 # If "python" or "matlab" do not build c++ library
 # If "all" and python version specified build c++ library
-if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
+if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib)
     add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 endif()
 
