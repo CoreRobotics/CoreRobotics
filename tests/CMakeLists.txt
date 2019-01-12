@@ -39,7 +39,7 @@
 # =====================================================================
 
 # create the test target
-set(TEST_TARGET_NAME TestModules)
+set(TEST_TARGET_NAME ${CR_LIB_PREFIX}tests)
 file(GLOB CR_TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 add_executable(${TEST_TARGET_NAME} ${CR_TEST_SOURCES})
 add_dependencies(${TEST_TARGET_NAME} ${CR_LIB_TARGETS})
@@ -47,3 +47,9 @@ target_link_libraries(${TEST_TARGET_NAME} ${CR_LIB_TARGETS} ${CR_LINK_FLAGS} ${G
 set_target_properties(${TEST_TARGET_NAME}
     PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
 )
+
+# install the test
+install(TARGETS ${TEST_TARGET_NAME}
+  # IMPORTANT: Add the executable to the "export-set"
+  EXPORT CoreRoboticsTargets
+  RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin)

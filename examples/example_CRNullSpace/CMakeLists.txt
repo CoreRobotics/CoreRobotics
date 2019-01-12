@@ -53,9 +53,10 @@ file(GLOB source *.cpp)
 get_filename_component(example ${source} NAME_WE)
 
 # Add the executable target
-add_executable(${example} ${source})
-target_link_libraries(${example} ${CR_LIBRARIES})
-set_target_properties(${example}
+set(target cr-${example})
+add_executable(${target} ${source})
+target_link_libraries(${target} ${CR_LIBRARIES})
+set_target_properties(${target}
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
 )

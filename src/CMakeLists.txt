@@ -40,10 +40,18 @@
 
 # Create target libraries
 foreach(p ${CR_LIB_MODULES})
-    set(TARGET_NAME ${CR_LIB_PREFIX}-${p})
+    set(TARGET_NAME ${CR_LIB_PREFIX}${p})
     add_library(${TARGET_NAME} STATIC
         ${CR_HEADERS_${p}} ${CR_SOURCES_${p}})
     set_target_properties(${TARGET_NAME} PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+        PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/CoreRobotics.hpp)
+    # IMPORTANT: Add the library to the "export-set"
+    install(TARGETS ${TARGET_NAME}
+        EXPORT CoreRoboticsTargets
+        LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT shlib
+        ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
+        PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}"
+    COMPONENT dev)
 endforeach()

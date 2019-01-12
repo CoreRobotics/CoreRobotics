@@ -53,6 +53,28 @@ set(CR_MINOR_VERSION 0)
 set(CR_PATCH_VERSION 0)
 set(CR_VERSION ${CR_MAJOR_VERSION}.${CR_MINOR_VERSION}.${CR_PATCH_VERSION})
 
+# Offer the user the choice of overriding the installation directories
+set(INSTALL_LIB_DIR lib CACHE PATH "Installation directory for libraries")
+set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
+set(INSTALL_INCLUDE_DIR include CACHE PATH
+  "Installation directory for header files")
+if(WIN32 AND NOT CYGWIN)
+  set(DEF_INSTALL_CMAKE_DIR CMake)
+else()
+  set(DEF_INSTALL_CMAKE_DIR lib/CMake/CoreRobotics)
+endif()
+set(INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH
+  "Installation directory for CMake files")
+
+# Make relative paths absolute (needed later on)
+foreach(p LIB BIN INCLUDE CMAKE)
+  set(var INSTALL_${p}_DIR)
+  if(NOT IS_ABSOLUTE "${${var}}")
+    set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
+  endif()
+endforeach()
+
+
 
 # ---------------------------------------------------------------------
 # Find depdendencies
@@ -95,7 +117,7 @@ file(GLOB CR_SOURCE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # define modules and target prefix
 set(CR_LIB_MODULES core math model physics control)
-set(CR_LIB_PREFIX "cr")
+set(CR_LIB_PREFIX "cr-")
 
 # create individual header and source files
 foreach(p ${CR_LIB_MODULES})
@@ -106,7 +128,7 @@ endforeach()
 # define list of targets
 set(CR_LIB_TARGETS "")
 foreach(p ${CR_LIB_MODULES})
-    list(APPEND CR_LIB_TARGETS ${CR_LIB_PREFIX}-${p})
+    list(APPEND CR_LIB_TARGETS ${CR_LIB_PREFIX}${p})
 endforeach()
 
 # If building on linux add pthread and rt
