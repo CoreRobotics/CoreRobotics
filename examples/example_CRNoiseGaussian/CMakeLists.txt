@@ -62,6 +62,7 @@ endif()
 # Add the executable target
 set(target cr-${example})
 add_executable(${target} ${source})
+add_dependencies(${target} ${CR_LIB_TARGETS})
 target_link_libraries(${target} ${CR_LIBRARIES} ${link_flags})
 set_target_properties(${target}
     PROPERTIES
