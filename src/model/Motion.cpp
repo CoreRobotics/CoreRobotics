@@ -1,7 +1,7 @@
 //=====================================================================
 /*
  Software License Agreement (BSD-3-Clause License)
- Copyright (c) 2017, CoreRobotics.
+ Copyright (c) 2019, CoreRobotics.
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
@@ -80,7 +80,7 @@ void Motion::step()
     // https://stackoverflow.com/questions/7582546/using-generic-stdfunction-objects-with-member-functions-in-one-class
     //
     // (lambdas create a memory leak with shared pointers!
-    // http://floating.io/2017/07/lambda-shared_ptr-memory-leak/)
+    // http://floating.io/2019/07/lambda-shared_ptr-memory-leak/)
     m_state = Integration::rungeKuttaStep(m_fcn, m_time, m_state, m_action, m_dt);
     
     // update the time

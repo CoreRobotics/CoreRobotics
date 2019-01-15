@@ -1,7 +1,7 @@
 # =====================================================================
 #
 # Software License Agreement (BSD-3-Clause License)
-# Copyright (c) 2017, CoreRobotics.
+# Copyright (c) 2019, CoreRobotics.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
