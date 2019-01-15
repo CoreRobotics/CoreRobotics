@@ -39,14 +39,16 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#ifndef CRNoiseModel_hpp
-#define CRNoiseModel_hpp
+#ifndef CRNoiseMixture_hpp
+#define CRNoiseMixture_hpp
 
 //=====================================================================
 // Includes
 #include "core/CRTypes.hpp"
 #include "Eigen/Dense"
 #include <random>
+#include <vector>
+#include "CRNoiseModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -54,41 +56,31 @@ namespace CoreRobotics  {
     
 //=====================================================================
 /*!
- \file CRNoiseModel.hpp
- \brief Implements a class for modeling noise.
+ \file CRNoiseMixture.hpp
+ \brief Implements a class for modeling noise as a mixture of distributions.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRNoiseModel
- \ingroup models
+ \class CRNoiseMixture
+ \ingroup noise
  
- \brief This class implements a noise model.
+ \brief Implements a class for modeling noise as a mixture of distributions.
  
  \details
  ## Description
- CRNoiseModel implements methods for sampling from a distribution and
- serves as a base class to specfic distributions.  CRNoiseModel uses
- inverse transform sampling [3] to generate a state.  This requires the
- user to define an inverse cumulative density according to
+ CRNoiseMixture implements methods for sampling and modeling noise as a
+ mixture of probability distributions [2-3].  Each specified noise model
+ is also accompanied by a weight, indicating the probability of that
+ distribution being selected for sampling of the noise.
  
- \f$ x = F^{-1}(P) \f$
- 
- where \f$F^{-1}\f$ is the inverse cumulative density.
- 
- Additionally, the CRNoiseModel uses a probability density function to 
- return the probability of a state x.  Thus the user must also specify 
- a density function of the type
- 
- \f$ p = f(x) \f$.
- 
- - CRNoiseModel::setParameters sets the noise model callback
- - CRNoiseModel::sample samples from the noise model
- - CRNoiseModel::probability evaluates the probability
+ - CRNoiseMixture::add adds a noise model to the mixture
+ - CRNoiseMixture::sample samples from the noise model
+ - CRNoiseMixture::probability evaluates the probability
  
  ## Example
- This example demonstrates use of the CRNoiseModel class.
+ This example demonstrates use of the CRNoiseMixture class.
  
- \include example_CRNoiseModel.cpp
+ \include example_CRNoiseMixture.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
@@ -97,67 +89,58 @@ namespace CoreRobotics  {
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
  
- [3] en.wikipedia.org/wiki/Inverse_transform_sampling
+ [3] en.wikipedia.org/wiki/Mixture_model
  */
 //=====================================================================
-// ICDF Paramter structure declaration
-struct [[deprecated(CR_DEPRECATED)]]CRParamNoiseGeneric{
-    Eigen::VectorXd(*icdFunction)(double);
-    double(*probFunction)(Eigen::VectorXd);
+// Paramter structure declaration
+struct [[deprecated(CR_DEPRECATED)]]CRParamNoiseMixture{
+    std::vector<CoreRobotics::CRNoiseModel*> models;
+    std::vector<double> weights;
 };
     
 //=====================================================================
-class [[deprecated(CR_DEPRECATED)]] CRNoiseModel {
+class [[deprecated(CR_DEPRECATED)]] CRNoiseMixture : public CRNoiseModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRNoiseModel(unsigned i_seed);
-    CRNoiseModel();
+    CRNoiseMixture(unsigned i_seed);
+    CRNoiseMixture();
     
 //---------------------------------------------------------------------
-// Get/Set Methods
+// Add models to the mixture
 public:
     
-    //! Set the parameters that describe the distribution
-    virtual void setParameters(Eigen::VectorXd(*i_icd)(double),
-                               double(*i_prob)(Eigen::VectorXd));
+    //! Add a distribution to the mixture model
+    void add(CRNoiseModel* i_model, double i_weight);
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
-    //! Sample a vector from the density
-    virtual Eigen::VectorXd sample(void);
+    //! Sample a noise vector from the density
+    using CRNoiseModel::sample;
+    Eigen::VectorXd sample(void);
     
     //! Evaluate the probability from the density
-    virtual double probability(Eigen::VectorXd i_x);
-
-//---------------------------------------------------------------------
-// Protected Methods
-protected:
-    
-    //! Random seed generator
-    void randomSeed(void);
+    using CRNoiseModel::probability;
+    double probability(Eigen::VectorXd i_x);
     
 //---------------------------------------------------------------------
 // Public Members
 public:
     
     //! Noise model parameters
-    CRParamNoiseGeneric m_parameters;
+    CRParamNoiseMixture m_parameters;
     
-//---------------------------------------------------------------------
-// Protected Members
-protected:
     
-    //! Seed value
-    unsigned m_seed;
+private:
     
-    //! Random number generator
-    std::default_random_engine m_generator;
+    //! hide the setParameters method and make it do nothing
+    using CRNoiseModel::setParameters;
+    void setParameters(void) {};
     
 };
 

@@ -60,7 +60,7 @@ namespace CoreRobotics  {
 //---------------------------------------------------------------------
 /*!
  \class CRSensorLinear
- \ingroup models
+ \ingroup model
  
  \brief This class implements a sensor model.
  

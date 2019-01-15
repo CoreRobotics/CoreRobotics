@@ -62,7 +62,7 @@ namespace cr {
 //---------------------------------------------------------------------
 /*!
  \class Gmm
- \ingroup models
+ \ingroup noise
  
  \brief Implements a class for Gaussian mixture models.
  

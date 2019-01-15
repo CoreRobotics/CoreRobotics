@@ -39,15 +39,14 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#ifndef CRNoiseGaussian_hpp
-#define CRNoiseGaussian_hpp
+#ifndef CRNoiseModel_hpp
+#define CRNoiseModel_hpp
 
 //=====================================================================
 // Includes
 #include "core/CRTypes.hpp"
 #include "Eigen/Dense"
 #include <random>
-#include "CRNoiseModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -55,30 +54,41 @@ namespace CoreRobotics  {
     
 //=====================================================================
 /*!
- \file CRNoiseGaussian.hpp
- \brief Implements a class for modeling Gaussian noise.
+ \file CRNoiseModel.hpp
+ \brief Implements a class for modeling noise.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRNoiseGaussian
- \ingroup models
+ \class CRNoiseModel
+ \ingroup noise
  
- \brief Implements a class for modeling Gaussian noise.
+ \brief This class implements a noise model.
  
  \details
  ## Description
- CRNoiseGaussian implements methods for sampling from and modeling 
- multivariate Gaussian noise (see [1-3]). The Gaussian is completely
- defined by a mean \f$\mu\f$ and covariance \f$\Sigma\f$.
+ CRNoiseModel implements methods for sampling from a distribution and
+ serves as a base class to specfic distributions.  CRNoiseModel uses
+ inverse transform sampling [3] to generate a state.  This requires the
+ user to define an inverse cumulative density according to
  
- - CRNoiseGaussian::setParameters sets the parameters of the noise model
- - CRNoiseGaussian::sample samples from the noise model
- - CRNoiseGaussian::probability evaluates the probability
+ \f$ x = F^{-1}(P) \f$
+ 
+ where \f$F^{-1}\f$ is the inverse cumulative density.
+ 
+ Additionally, the CRNoiseModel uses a probability density function to 
+ return the probability of a state x.  Thus the user must also specify 
+ a density function of the type
+ 
+ \f$ p = f(x) \f$.
+ 
+ - CRNoiseModel::setParameters sets the noise model callback
+ - CRNoiseModel::sample samples from the noise model
+ - CRNoiseModel::probability evaluates the probability
  
  ## Example
- This example demonstrates use of the CRNoiseGaussian class.
+ This example demonstrates use of the CRNoiseModel class.
  
- \include example_CRNoiseGaussian.cpp
+ \include example_CRNoiseModel.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
@@ -87,58 +97,67 @@ namespace CoreRobotics  {
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
  
- [3] en.wikipedia.org/wiki/Multivariate_normal_distribution
+ [3] en.wikipedia.org/wiki/Inverse_transform_sampling
  */
 //=====================================================================
-// Paramter structure declaration
-struct [[deprecated(CR_DEPRECATED)]]CRParamNoiseGaussian{
-    Eigen::MatrixXd cov;
-    Eigen::MatrixXd covInv;
-    Eigen::VectorXd mean;
+// ICDF Paramter structure declaration
+struct [[deprecated(CR_DEPRECATED)]]CRParamNoiseGeneric{
+    Eigen::VectorXd(*icdFunction)(double);
+    double(*probFunction)(Eigen::VectorXd);
 };
     
 //=====================================================================
-class [[deprecated(CR_DEPRECATED)]] CRNoiseGaussian : public CRNoiseModel {
+class [[deprecated(CR_DEPRECATED)]] CRNoiseModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRNoiseGaussian(Eigen::MatrixXd i_cov,
-                    Eigen::VectorXd i_mean,
-                    unsigned i_seed);
-    CRNoiseGaussian(Eigen::MatrixXd i_cov,
-                    Eigen::VectorXd i_mean);
-    CRNoiseGaussian();
+    CRNoiseModel(unsigned i_seed);
+    CRNoiseModel();
     
 //---------------------------------------------------------------------
 // Get/Set Methods
 public:
     
     //! Set the parameters that describe the distribution
-    using CRNoiseModel::setParameters;
-    void setParameters(Eigen::MatrixXd i_cov,
-                       Eigen::VectorXd i_mean);
+    virtual void setParameters(Eigen::VectorXd(*i_icd)(double),
+                               double(*i_prob)(Eigen::VectorXd));
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
-    //! Sample a noise vector from the density
-    using CRNoiseModel::sample;
-    Eigen::VectorXd sample(void);
+    //! Sample a vector from the density
+    virtual Eigen::VectorXd sample(void);
     
     //! Evaluate the probability from the density
-    using CRNoiseModel::probability;
-    double probability(Eigen::VectorXd i_x);
+    virtual double probability(Eigen::VectorXd i_x);
+
+//---------------------------------------------------------------------
+// Protected Methods
+protected:
+    
+    //! Random seed generator
+    void randomSeed(void);
     
 //---------------------------------------------------------------------
 // Public Members
 public:
     
     //! Noise model parameters
-    CRParamNoiseGaussian m_parameters;
+    CRParamNoiseGeneric m_parameters;
+    
+//---------------------------------------------------------------------
+// Protected Members
+protected:
+    
+    //! Seed value
+    unsigned m_seed;
+    
+    //! Random number generator
+    std::default_random_engine m_generator;
     
 };
 

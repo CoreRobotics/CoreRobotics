@@ -61,7 +61,7 @@ namespace cr {
 //---------------------------------------------------------------------
 /*!
  \class NoiseMixture
- \ingroup models
+ \ingroup noise
  
  \brief Implements a class for modeling noise as a mixture of distributions.
  

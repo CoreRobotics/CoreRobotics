@@ -60,7 +60,7 @@ namespace cr {
 //---------------------------------------------------------------------
 /*!
  \class NoiseGaussian
- \ingroup models
+ \ingroup noise
  
  \brief Implements a class for modeling Gaussian noise.
  

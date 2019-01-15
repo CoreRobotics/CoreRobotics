@@ -61,7 +61,7 @@ namespace CoreRobotics  {
 //---------------------------------------------------------------------
 /*!
  \class CRNoiseUniform
- \ingroup models
+ \ingroup noise
  
  \brief Implements a class for modeling uniform noise.
  

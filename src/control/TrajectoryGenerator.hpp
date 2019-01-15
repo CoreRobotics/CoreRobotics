@@ -61,7 +61,7 @@ namespace control {
 //---------------------------------------------------------------------
 /*!
  \class TrajectoryGenerator
- \ingroup controllers
+ \ingroup control
  
  \brief This class provides methods for generating minimum jerk
  trajectories from initial and final conditions.

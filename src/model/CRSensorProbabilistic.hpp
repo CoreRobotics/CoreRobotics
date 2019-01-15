@@ -60,7 +60,7 @@ namespace CoreRobotics  {
 //---------------------------------------------------------------------
 /*!
  \class CRSensorProbabilistic
- \ingroup models
+ \ingroup model
  
  \brief This class implements a probabilistic sensor model.
  

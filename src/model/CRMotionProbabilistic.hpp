@@ -60,7 +60,7 @@ namespace CoreRobotics  {
 //---------------------------------------------------------------------
 /*!
  \class CRMotionProbabilistic
- \ingroup models
+ \ingroup model
  
  \brief This class implements a probabilistic motion model.
  

@@ -39,17 +39,15 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#ifndef CRGmm_hpp
-#define CRGmm_hpp
+#ifndef CRNoiseGaussian_hpp
+#define CRNoiseGaussian_hpp
 
 //=====================================================================
 // Includes
 #include "core/CRTypes.hpp"
-#include <random>
-#include <vector>
 #include "Eigen/Dense"
-#include "CRNoiseMixture.hpp"
-#include "CRNoiseGaussian.hpp"
+#include <random>
+#include "CRNoiseModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
@@ -57,32 +55,30 @@ namespace CoreRobotics  {
     
 //=====================================================================
 /*!
- \file CRGmm.hpp
- \brief Implements a class for Gaussian mixture models.
+ \file CRNoiseGaussian.hpp
+ \brief Implements a class for modeling Gaussian noise.
  */
 //---------------------------------------------------------------------
 /*!
- \class CRGmm
- \ingroup models
+ \class CRNoiseGaussian
+ \ingroup noise
  
- \brief Implements a class for Gaussian mixture models.
+ \brief Implements a class for modeling Gaussian noise.
  
  \details
  ## Description
- CRGmm implements methods for sampling and modeling noise as a
- mixture of Gaussian distributions [2-3].  Each specified Gaussian
- is also accompanied by a weight, indicating the probability of that
- distribution being selected for sampling of the noise.
+ CRNoiseGaussian implements methods for sampling from and modeling 
+ multivariate Gaussian noise (see [1-3]). The Gaussian is completely
+ defined by a mean \f$\mu\f$ and covariance \f$\Sigma\f$.
  
- - CRGmm::add adds a noise model to the mixture
- - CRGmm::sample samples from the noise model
- - CRGmm::probability evaluates the probability
- - CRGmm::regression performs Gaussian mixture regression
+ - CRNoiseGaussian::setParameters sets the parameters of the noise model
+ - CRNoiseGaussian::sample samples from the noise model
+ - CRNoiseGaussian::probability evaluates the probability
  
  ## Example
- This example demonstrates use of the CRGmm class.
+ This example demonstrates use of the CRNoiseGaussian class.
  
- \include example_CRGmm.cpp
+ \include example_CRNoiseGaussian.cpp
  
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
@@ -91,69 +87,58 @@ namespace CoreRobotics  {
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
  
- [3] H. Sung, "Gaussian Mixture Regression and Classification", PhD Thesis,
- Rice University, 2004. \n\n
+ [3] en.wikipedia.org/wiki/Multivariate_normal_distribution
  */
 //=====================================================================
 // Paramter structure declaration
-struct [[deprecated(CR_DEPRECATED)]]CRParamGaussianMixture{
-    std::vector<CoreRobotics::CRNoiseGaussian*> models;
-    std::vector<double> weights;
+struct [[deprecated(CR_DEPRECATED)]]CRParamNoiseGaussian{
+    Eigen::MatrixXd cov;
+    Eigen::MatrixXd covInv;
+    Eigen::VectorXd mean;
 };
     
 //=====================================================================
-class [[deprecated(CR_DEPRECATED)]] CRGmm : public CRNoiseMixture {
+class [[deprecated(CR_DEPRECATED)]] CRNoiseGaussian : public CRNoiseModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRGmm(unsigned i_seed);
-    CRGmm();
-
-	//! Class destructor
-	~CRGmm();
+    CRNoiseGaussian(Eigen::MatrixXd i_cov,
+                    Eigen::VectorXd i_mean,
+                    unsigned i_seed);
+    CRNoiseGaussian(Eigen::MatrixXd i_cov,
+                    Eigen::VectorXd i_mean);
+    CRNoiseGaussian();
     
 //---------------------------------------------------------------------
-// Add models to the mixture
+// Get/Set Methods
 public:
     
-    //! Add a distribution to the mixture model
-    void add(CRNoiseGaussian* i_model, double i_weight);
+    //! Set the parameters that describe the distribution
+    using CRNoiseModel::setParameters;
+    void setParameters(Eigen::MatrixXd i_cov,
+                       Eigen::VectorXd i_mean);
     
 //---------------------------------------------------------------------
 // Public Methods
 public:
     
     //! Sample a noise vector from the density
-    using CRNoiseMixture::sample;
+    using CRNoiseModel::sample;
     Eigen::VectorXd sample(void);
     
     //! Evaluate the probability from the density
-    using CRNoiseMixture::probability;
+    using CRNoiseModel::probability;
     double probability(Eigen::VectorXd i_x);
-    
-    //! Perform Gaussian Mixture Regression (GMR)
-    void regression(Eigen::VectorXd i_x,
-                    Eigen::VectorXi i_inputIndices,
-                    Eigen::VectorXi i_outputIndices,
-                    Eigen::VectorXd& o_mean,
-                    Eigen::MatrixXd& o_covariance);
     
 //---------------------------------------------------------------------
 // Public Members
 public:
     
     //! Noise model parameters
-    CRParamGaussianMixture m_parameters;
-    
-private:
-    
-    //! Evaluate the multivariate normal dist
-    double mvnpdf(Eigen::VectorXd i_x,
-                  Eigen::VectorXd i_mean,
-                  Eigen::MatrixXd i_covariance);
+    CRParamNoiseGaussian m_parameters;
     
 };
 

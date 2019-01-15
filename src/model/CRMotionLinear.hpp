@@ -60,7 +60,7 @@ namespace CoreRobotics  {
 //---------------------------------------------------------------------
 /*!
  \class CRMotionLinear
- \ingroup models
+ \ingroup model
  
  \brief This class implements a linear motion model.
  

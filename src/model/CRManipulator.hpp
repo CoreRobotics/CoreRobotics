@@ -60,7 +60,7 @@ namespace CoreRobotics  {
 //---------------------------------------------------------------------
 /*!
  \class CRManipulator
- \ingroup models
+ \ingroup model
  
  \brief This class implements a robotic manipulator composed of a
  series of rigid bodies.  Currently only supports serial manipulators.

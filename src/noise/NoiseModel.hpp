@@ -59,7 +59,7 @@ namespace cr {
 //---------------------------------------------------------------------
 /*!
  \class NoiseModel
- \ingroup models
+ \ingroup noise
  
  \brief This class implements a noise model.
  
