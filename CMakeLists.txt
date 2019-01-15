@@ -117,19 +117,30 @@ file(GLOB CR_SOURCE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # define modules and target prefix
 set(CR_LIB_MODULES core math model physics control)
-set(CR_LIB_PREFIX "cr-")
+set(CR_LIB_PREFIX "cr_")
 
 # create individual header and source files
+set(CR_HEADERS "")
+set(CR_SOURCES "")
+set(CR_LIB_TARGETS "")
 foreach(p ${CR_LIB_MODULES})
     file(GLOB CR_HEADERS_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/*.hpp)
     file(GLOB CR_SOURCES_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/*.cpp)
+    list(APPEND CR_HEADERS ${CR_HEADERS_${p}})
+    list(APPEND CR_SOURCES ${CR_SOURCES_${p}})
+
+    # what if we build here?
+    set(TARGET_NAME ${CR_LIB_PREFIX}${p})
+    list(APPEND CR_LIB_TARGETS ${TARGET_NAME})
+    add_library(${TARGET_NAME} ${CR_SOURCES_${p}} ${CR_HEADERS_${p}})
 endforeach()
 
-# define list of targets
-set(CR_LIB_TARGETS "")
-foreach(p ${CR_LIB_MODULES})
-    list(APPEND CR_LIB_TARGETS ${CR_LIB_PREFIX}${p})
-endforeach()
+# define list of target
+# set(CR_LIB_TARGETS CoreRobotics)
+# set(CR_LIB_TARGETS "")
+# foreach(p ${CR_LIB_MODULES})
+#     list(APPEND CR_LIB_TARGETS ${CR_LIB_PREFIX}${p})
+# endforeach()
 
 # If building on linux add pthread and rt
 if(UNIX AND NOT APPLE) # This may be useful for apple too
@@ -150,7 +161,12 @@ endif()
 # If "python" or "matlab" do not build c++ library
 # If "all" and python version specified build c++ library
 if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib)
-    add_subdirectory(${PROJECT_SOURCE_DIR}/src)
+#     add_subdirectory(${PROJECT_SOURCE_DIR}/src)
+#    add_library(${CR_LIB_TARGETS} ${CR_SOURCES} ${CR_HEADERS})
+#    set_target_properties(${CR_LIB_TARGETS} PROPERTIES
+#        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+#        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+#        PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/src/CoreRobotics.hpp)
 endif()
 
 
