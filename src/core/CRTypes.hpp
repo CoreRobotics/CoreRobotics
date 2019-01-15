@@ -42,7 +42,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef CRTypes_hpp
 #define CRTypes_hpp
 
-#define CR_DEPRECATED "not supported as of cr-2.0"
+#define CR_DEPRECATED "Not supported as of Core Robotics 2.0"
 
 //=====================================================================
 // CoreRobotics namespace
