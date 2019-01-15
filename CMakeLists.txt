@@ -116,7 +116,7 @@ include_directories(${CR_INCLUDE_DIRS})
 file(GLOB CR_SOURCE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # define modules and target prefix
-set(CR_LIB_MODULES core math model physics control)
+set(CR_LIB_MODULES control core math model noise physics signal world)
 set(CR_LIB_PREFIX "cr-")
 
 # create individual header and source files

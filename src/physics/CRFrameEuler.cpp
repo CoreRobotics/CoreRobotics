@@ -46,7 +46,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
+namespace CoreRobotics  {
 
 
 //=====================================================================
