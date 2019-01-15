@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
-using namespace cr;
+using namespace cr::noise;
 
 // declare an inverse cumulative distribution - this is the invserse
 // CDF for a triangular distribution from [0,1].

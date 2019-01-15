@@ -1,43 +1,44 @@
 //=====================================================================
 /*
-Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2019, CoreRobotics.
-All rights reserved.
+ Software License Agreement (BSD-3-Clause License)
+ Copyright (c) 2019, CoreRobotics.
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 
+ * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+ 
+ * Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in the
+ documentation and/or other materials provided with the distribution.
+ 
+ * Neither the name of CoreRobotics nor the names of its contributors
+ may be used to endorse or promote products derived from this
+ software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+ 
+ \project CoreRobotics Project
+ \url     www.corerobotics.org
+ \author  Parker Owan
+ 
+ */
+//---------------------------------------------------------------------
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-
-* Redistributions of source code must retain the above copyright
-notice, this list of conditions and the following disclaimer.
-
-* Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-
-* Neither the name of CoreRobotics nor the names of its contributors
-may be used to endorse or promote products derived from this
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-\project CoreRobotics Project
-\url     www.corerobotics.org
-\author  Parker Owan
-
-*/
-//=====================================================================
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <chrono>
@@ -47,12 +48,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "math/Matrix.hpp"
 
 
-//=====================================================================
-// CoreRobotics namespace
+//---------------------------------------------------------------------
+// Begin namespace
 namespace cr {
+namespace noise {
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  The constructor creates a noise model.\n
  
@@ -74,7 +76,7 @@ Gmm::Gmm() {
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
 Destructor.\n
 */
@@ -88,7 +90,7 @@ Gmm::~Gmm() {
 }
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method adds a distribution to the mixture model.
  
@@ -105,7 +107,7 @@ void Gmm::add(NoiseGaussian i_model, double i_weight)
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method samples a random number from the mixture model.\n
  
@@ -152,7 +154,7 @@ Eigen::VectorXd Gmm::sample(void)
 }
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method returns the probability of x.\n
  
@@ -183,7 +185,7 @@ double Gmm::probability(Eigen::VectorXd i_x)
 }
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method performs the regression y = f(x) + e using by conditioning
  on the learned Gaussian Mixture Model.\n
@@ -206,7 +208,7 @@ void Gmm::regression(Eigen::VectorXd i_x,
                        Eigen::MatrixXd& o_covariance)
 {
 	// Define the smallest number of double precision
-	double realmin = sqrt(2.225073858507202e-308); // sqrt because we have to square w later
+    double realmin = sqrt(2.225073858507202e-308);
 
     // Get cluster/input/output dimensions
     int NK = m_parameters.models.size();
@@ -225,19 +227,20 @@ void Gmm::regression(Eigen::VectorXd i_x,
     for (int k = 0; k < NK; k++){
         
         // Get matrices we need
-        Eigen::MatrixXd SigmaYY = Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_outputIndices, i_outputIndices);
-        Eigen::MatrixXd SigmaYX = Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_outputIndices, i_inputIndices);
-        Eigen::MatrixXd SigmaXY = Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_inputIndices, i_outputIndices);
-        Eigen::MatrixXd SigmaXX = Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_inputIndices, i_inputIndices);
+        Eigen::MatrixXd SigmaYY = math::Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_outputIndices, i_outputIndices);
+        Eigen::MatrixXd SigmaYX = math::Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_outputIndices, i_inputIndices);
+        Eigen::MatrixXd SigmaXY = math::Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_inputIndices, i_outputIndices);
+        Eigen::MatrixXd SigmaXX = math::Matrix::reducedMatrix(m_parameters.models.at(k).m_parameters.cov, i_inputIndices, i_inputIndices);
         Eigen::MatrixXd SigmaXXInv = SigmaXX.inverse();
-		// Eigen::MatrixXd SigmaXXInv;
-		// Matrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv);
-        
-		//if (Matrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv) == core::CR_RESULT_SINGULAR) {
-        //  printf("\n\nSingular SigmaXX inverse!!!!\n\n");
-		//}
-        Eigen::VectorXd MuY = Matrix::reducedVector(m_parameters.models.at(k).m_parameters.mean, i_outputIndices);
-        Eigen::VectorXd MuX = Matrix::reducedVector(m_parameters.models.at(k).m_parameters.mean, i_inputIndices);
+        // Eigen::MatrixXd SigmaXXInv;
+        // CRMatrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv);
+        /*
+        if (CRMatrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv) == CR_RESULT_SINGULAR) {
+            printf("\n\nSingular SigmaXX inverse!!!!\n\n");
+        }
+        */
+        Eigen::VectorXd MuY = math::Matrix::reducedVector(m_parameters.models.at(k).m_parameters.mean, i_outputIndices);
+        Eigen::VectorXd MuX = math::Matrix::reducedVector(m_parameters.models.at(k).m_parameters.mean, i_inputIndices);
         
         // Return the mean, covariance, and weight
         Eigen::VectorXd Mu = MuY + SigmaYX * SigmaXXInv * (i_x - MuX);
@@ -270,7 +273,7 @@ double Gmm::mvnpdf(Eigen::VectorXd i_x,
     Eigen::VectorXd error = i_x - i_mean;
     
     Eigen::MatrixXd SigInv;
-    if (Matrix::svdInverse(i_covariance, 1e-8, SigInv) == core::CR_RESULT_SINGULAR) {
+    if (math::Matrix::svdInverse(i_covariance, 1e-8, SigInv) == core::CR_RESULT_SINGULAR) {
         return 0;
     } else {
         // define the arguments (gain k and arg of exponent)
@@ -280,6 +283,8 @@ double Gmm::mvnpdf(Eigen::VectorXd i_x,
     }
 }
 
-//=====================================================================
-// End namespace
+
 }
+}
+// end namespace
+//---------------------------------------------------------------------

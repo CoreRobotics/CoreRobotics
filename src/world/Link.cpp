@@ -84,11 +84,11 @@ LinkPtr Link::create(){
  \param[in]        i_body - the RigidBody data
  */
 //---------------------------------------------------------------------
-void Link::setRigidBody(const RigidBody& i_body)
+void Link::setRigidBody(const physics::RigidBody& i_body)
 {
     addChild(m_comItem);
     m_body = i_body;
-    Frame f;
+    physics::Frame f;
     f.setTranslation( m_body.getCenterOfMass() );
     m_comItem->setLocalTransform(f);
 }
@@ -102,9 +102,9 @@ void Link::setRigidBody(const RigidBody& i_body)
  \return        the local frame transformation
  */
 //---------------------------------------------------------------------
-Frame Link::getLocalTransform()
+physics::Frame Link::getLocalTransform()
 {
-    Frame f;
+    physics::Frame f;
     Eigen::Matrix3d r = m_frame.getRotation();
     Eigen::Vector3d t = m_frame.getTranslation();
     f.setRotationAndTranslation(r, t);
@@ -120,7 +120,7 @@ Frame Link::getLocalTransform()
  \return        the local frame transformation
  */
 //---------------------------------------------------------------------
-Frame Link::getGlobalTransform()
+physics::Frame Link::getGlobalTransform()
 {
     Eigen::Matrix4d T = m_frame.getTransformToParent();
     NodePtr parent = m_parent;
@@ -128,7 +128,7 @@ Frame Link::getGlobalTransform()
         T = parent->getLocalTransform().getTransformToParent() * T;
         parent = parent->getParent();
     }
-    Frame f;
+    physics::Frame f;
     f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
     return f;
 }
@@ -142,11 +142,11 @@ Frame Link::getGlobalTransform()
  \return        the relative frame transformation
  */
 //---------------------------------------------------------------------
-Frame Link::getRelativeTransform(NodePtr i_item)
+physics::Frame Link::getRelativeTransform(NodePtr i_item)
 {
     Eigen::Matrix4d T0 = this->getGlobalTransform().getTransformToParent();
     Eigen::Matrix4d T = i_item->getGlobalTransform().getTransformToChild() * T0;
-    Frame f;
+    physics::Frame f;
     f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
     return f;
 }
@@ -170,17 +170,17 @@ void Link::print(std::ostream& i_stream)
         id = "R";
     }
     std::string dof = "-";
-    if (getDegreeOfFreedom() == CR_EULER_FREE_ANG_A) {
+    if (getDegreeOfFreedom() == physics::CR_EULER_FREE_ANG_A) {
         dof = "A";
-    } else if (getDegreeOfFreedom() == CR_EULER_FREE_ANG_B) {
+    } else if (getDegreeOfFreedom() == physics::CR_EULER_FREE_ANG_B) {
         dof = "B";
-    } else if (getDegreeOfFreedom() == CR_EULER_FREE_ANG_G) {
+    } else if (getDegreeOfFreedom() == physics::CR_EULER_FREE_ANG_G) {
         dof = "G";
-    } else if (getDegreeOfFreedom() == CR_EULER_FREE_POS_X) {
+    } else if (getDegreeOfFreedom() == physics::CR_EULER_FREE_POS_X) {
         dof = "X";
-    } else if (getDegreeOfFreedom() == CR_EULER_FREE_POS_Y) {
+    } else if (getDegreeOfFreedom() == physics::CR_EULER_FREE_POS_Y) {
         dof = "Y";
-    } else if (getDegreeOfFreedom() == CR_EULER_FREE_POS_Z) {
+    } else if (getDegreeOfFreedom() == physics::CR_EULER_FREE_POS_Z) {
         dof = "Z";
     }
     i_stream << "+ [" << id << "] world::Link DOF = " << dof << " '" << getName() << "'\n";

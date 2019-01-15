@@ -42,6 +42,7 @@
 #include "Motion.hpp"
 #include "math/Integration.hpp"
 
+
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
@@ -81,7 +82,7 @@ void Motion::step()
     //
     // (lambdas create a memory leak with shared pointers!
     // http://floating.io/2019/07/lambda-shared_ptr-memory-leak/)
-    m_state = Integration::rungeKuttaStep(m_fcn, m_time, m_state, m_action, m_dt);
+    m_state = math::Integration::rungeKuttaStep(m_fcn, m_time, m_state, m_action, m_dt);
     
     // update the time
     m_time = m_time + m_dt;

@@ -52,7 +52,7 @@ using namespace cr;
 // Test the rotation and translation on construct
 //
 TEST(Frame, Construct){
-    Frame frame;
+    physics::Frame frame;
     Eigen::Matrix3d rot;
     Eigen::Vector3d trans;
     frame.getRotationAndTranslation(rot, trans);
@@ -75,7 +75,7 @@ TEST(Frame, Construct){
 // Test the rotation and translation on construct
 //
 TEST(Frame, GetFreeValue){
-    Frame frame;
+    physics::Frame frame;
     double value = frame.getFreeValue();
     EXPECT_EQ(NULL, value);
 }
@@ -85,7 +85,7 @@ TEST(Frame, GetFreeValue){
 // Get the vector of orientation angles
 //
 TEST(Frame, GetOrientation){
-    Frame frame;
+    physics::Frame frame;
     Eigen::Matrix3d rot;
     rot << 0, 1, 0, 0, 0, 1, 1, 0, 0;
     Eigen::Vector3d trans;
@@ -93,7 +93,7 @@ TEST(Frame, GetOrientation){
     frame.setRotationAndTranslation(rot, trans);
     
     Eigen::Vector3d o;
-    o = frame.getOrientation(CR_EULER_MODE_ZYX);
+    o = frame.getOrientation(physics::CR_EULER_MODE_ZYX);
     EXPECT_DOUBLE_EQ(-M_PI / 2, o(0));
     EXPECT_DOUBLE_EQ(-M_PI / 2, o(1));
     EXPECT_DOUBLE_EQ(0, o(2));
@@ -104,7 +104,7 @@ TEST(Frame, GetOrientation){
 // Get the pose
 //
 TEST(Frame, GetPose){
-    Frame frame;
+    physics::Frame frame;
     Eigen::Matrix3d rot;
     rot << 0, 1, 0, 0, 0, 1, 1, 0, 0;
     Eigen::Vector3d trans;
@@ -112,7 +112,7 @@ TEST(Frame, GetPose){
     frame.setRotationAndTranslation(rot, trans);
     
     Eigen::VectorXd p;
-    p = frame.getPose(CR_EULER_MODE_ZYX);
+    p = frame.getPose(physics::CR_EULER_MODE_ZYX);
     EXPECT_EQ(6, p.size());
     EXPECT_DOUBLE_EQ(0.1, p(0));
     EXPECT_DOUBLE_EQ(0.2, p(1));
@@ -124,7 +124,7 @@ TEST(Frame, GetPose){
     // now try a reduced pose
     Eigen::Matrix<bool, 6, 1> pe;
     pe << true, true, true, true, false, false;
-    p = frame.getPose(CR_EULER_MODE_XYZ, pe);
+    p = frame.getPose(physics::CR_EULER_MODE_XYZ, pe);
     EXPECT_EQ(4, p.size());
     EXPECT_DOUBLE_EQ(0.1, p(0));
     EXPECT_DOUBLE_EQ(0.2, p(1));
@@ -137,7 +137,7 @@ TEST(Frame, GetPose){
 // Get the transform to child
 //
 TEST(Frame, GetTransformToChild){
-    Frame frame;
+    physics::Frame frame;
     Eigen::Matrix3d rot;
     rot << 0, 1, 0, 0, 0, 1, 1, 0, 0;
     Eigen::Vector3d trans;
@@ -172,7 +172,7 @@ TEST(Frame, GetTransformToChild){
 // Get the transform to parent
 //
 TEST(Frame, GetTransformToParent){
-    Frame frame;
+    physics::Frame frame;
     Eigen::Matrix3d rot;
     rot << 0, 1, 0, 0, 0, 1, 1, 0, 0;
     Eigen::Vector3d trans;
@@ -205,7 +205,7 @@ TEST(Frame, GetTransformToParent){
 // Get if the frame is driven
 //
 TEST(Frame, IsDriven){
-    Frame frame;
+    physics::Frame frame;
     EXPECT_FALSE(frame.isDriven());
 }
 
@@ -216,7 +216,7 @@ TEST(Frame, IsDriven){
 // transform point to child
 //
 TEST(Frame, TransformToChild){
-    Frame frame;
+    physics::Frame frame;
     Eigen::Matrix3d rot;
     rot << 0, 1, 0, 0, 0, 1, 1, 0, 0;
     Eigen::Vector3d trans;
@@ -239,7 +239,7 @@ TEST(Frame, TransformToChild){
 // transform point to parent
 //
 TEST(Frame, TransformToParent){
-    Frame frame;
+    physics::Frame frame;
     Eigen::Matrix3d rot;
     rot << 0, 1, 0, 0, 0, 1, 1, 0, 0;
     Eigen::Vector3d trans;

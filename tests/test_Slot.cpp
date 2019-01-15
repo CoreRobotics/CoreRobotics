@@ -45,10 +45,10 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 // Use the CoreRobotics namespace
-// using namespace cr;
 using namespace cr::core;
 using namespace cr::world;
 using namespace cr::signal;
+using namespace cr::physics;
 
 //
 // Test Slot connection
@@ -59,10 +59,10 @@ TEST(Slot, Step){
     LinkPtr myLink1 = Link::create();
     LinkPtr myLink2 = Link::create();
     
-    myLink1->setDegreeOfFreedom(cr::CR_EULER_FREE_POS_X);
+    myLink1->setDegreeOfFreedom(CR_EULER_FREE_POS_X);
     myLink1->setFreeValue(0.71);
     
-    myLink2->setDegreeOfFreedom(cr::CR_EULER_FREE_POS_X);
+    myLink2->setDegreeOfFreedom(CR_EULER_FREE_POS_X);
     myLink2->setFreeValue(0);
     
     EXPECT_DOUBLE_EQ(0.71, myLink1->getFreeValue());

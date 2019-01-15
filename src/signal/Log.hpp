@@ -38,7 +38,6 @@
  
  */
 //---------------------------------------------------------------------
-// Begin header definition
 
 #ifndef CR_LOG_HPP_
 #define CR_LOG_HPP_
@@ -74,8 +73,7 @@ typedef std::shared_ptr<Log> LogPtr;
  
  */
 //---------------------------------------------------------------------
-class Log
-    : public core::Step, public core::Item
+class Log : public core::Step, public core::Item
 {
 
     // Constructor and Destructor

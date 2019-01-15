@@ -37,7 +37,7 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
 
 #define _USE_MATH_DEFINES
 #include <cmath>
@@ -46,12 +46,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "math/Matrix.hpp"
 
 
-//=====================================================================
-// CoreRobotics namespace
+//---------------------------------------------------------------------
+// Begin namespace
 namespace cr {
+namespace physics {
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  The constructor sets the rotation and translation parameters upon
  construction, with defaults listed in parenthesis.\n
@@ -73,7 +74,7 @@ Frame::Frame()
     
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  The destructor frees up memory.\n
  */
@@ -81,7 +82,7 @@ Frame::Frame()
 // Frame::~Frame(){ }
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method sets the value of the free variable.  The method returns a
  false if there is no free variable.\n
@@ -112,7 +113,7 @@ double Frame::getFreeValue(void)
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method returns a 4x4 homogeneous matrix of the frame 
  transformation to the parent frame (i-1). \n
@@ -137,7 +138,7 @@ Eigen::Matrix4d Frame::getTransformToParent(void) {
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method returns a 4x4 homogeneous matrix of the frame 
  transformation to the child frame (i). \n
@@ -162,7 +163,7 @@ Eigen::Matrix4d Frame::getTransformToChild(void) {
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method transforms points \f$p\f$ in the child frame to points 
  \f$y\f$ in the parent frame.\n
@@ -192,7 +193,7 @@ Eigen::Vector3d Frame::transformToChild(Eigen::Vector3d i_point) {
 }
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method returns a true if the frame is driven (i.e. has a free
  variable) or a false if the frame is not driven.\n
@@ -206,7 +207,7 @@ bool Frame::isDriven(void) {
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
 This method gets a vector of Euler angles from the frame.
 
@@ -522,7 +523,7 @@ Eigen::Vector3d Frame::getOrientation(EulerMode i_mode)
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
 This method returns a vector of the position and orientation.
 
@@ -547,7 +548,7 @@ Eigen::Matrix<double, 6, 1> Frame::getPose(EulerMode i_mode)
     return pose;
 }
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method returns a vector of the position and orientation.
  
@@ -585,6 +586,7 @@ Eigen::VectorXd Frame::getPose(EulerMode i_mode,
 }
 
 
-//=====================================================================
-// End namespace
 }
+}
+// end namespace
+//---------------------------------------------------------------------

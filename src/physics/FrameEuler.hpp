@@ -1,63 +1,70 @@
 //=====================================================================
 /*
-Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2019, CoreRobotics.
-All rights reserved.
+ Software License Agreement (BSD-3-Clause License)
+ Copyright (c) 2019, CoreRobotics.
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 
+ * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+ 
+ * Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in the
+ documentation and/or other materials provided with the distribution.
+ 
+ * Neither the name of CoreRobotics nor the names of its contributors
+ may be used to endorse or promote products derived from this
+ software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+ 
+ \project CoreRobotics Project
+ \url     www.corerobotics.org
+ \author  Parker Owan
+ 
+ */
+//---------------------------------------------------------------------
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
+#ifndef CR_FRAMEEULER_HPP_
+#define CR_FRAMEEULER_HPP_
 
-* Redistributions of source code must retain the above copyright
-notice, this list of conditions and the following disclaimer.
 
-* Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-
-* Neither the name of CoreRobotics nor the names of its contributors
-may be used to endorse or promote products derived from this
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-\project CoreRobotics Project
-\url     www.corerobotics.org
-\author  Parker Owan
-
-*/
-//=====================================================================
-
-#ifndef FrameEuler_hpp
-#define FrameEuler_hpp
-
-//=====================================================================
-// Includes
 #include "Eigen/Dense"
 #include "Frame.hpp"
 
 
-//=====================================================================
-// CoreRobotics namespace
+//---------------------------------------------------------------------
+// Begin namespace
 namespace cr {
-    
-//=====================================================================
-/*!
- \file FrameEuler.hpp
- \brief Implements a derived frame class for handling Euler rotations
- in a 3D affine transformation.
- */
+namespace physics {
+
+
+//! Enumerator for handling Euler angle free variable candidates
+enum EulerFreeVariable {
+    CR_EULER_FREE_NONE,
+    CR_EULER_FREE_POS_X,
+    CR_EULER_FREE_POS_Y,
+    CR_EULER_FREE_POS_Z,
+    CR_EULER_FREE_ANG_A,
+    CR_EULER_FREE_ANG_B,
+    CR_EULER_FREE_ANG_G,
+};
+
+
 //---------------------------------------------------------------------
 /*!
  \class FrameEuler
@@ -91,23 +98,11 @@ namespace cr {
  Pearson, 2004.
  
  */
-//=====================================================================
-//! Enumerator for handling Euler angle free variable candidates
-enum EulerFreeVariable {
-    CR_EULER_FREE_NONE,
-    CR_EULER_FREE_POS_X,
-    CR_EULER_FREE_POS_Y,
-    CR_EULER_FREE_POS_Z,
-    CR_EULER_FREE_ANG_A,
-    CR_EULER_FREE_ANG_B,
-    CR_EULER_FREE_ANG_G,
-};
+//---------------------------------------------------------------------
 
-
-//=====================================================================
 class FrameEuler : public Frame  {
 
-//---------------------------------------------------------------------
+
 // Constructor and Destructor
 public:
 
@@ -122,7 +117,7 @@ public:
                  EulerFreeVariable i_free);
     FrameEuler();
 
-//---------------------------------------------------------------------
+
 // Get/Set Methods
 public:
     
@@ -176,14 +171,14 @@ public:
     void setRotationAndTranslation(Eigen::Matrix3d i_rot,
                                    Eigen::Vector3d i_trans);
 
-//---------------------------------------------------------------------
+
 // Public Methods
 public:
     
     //! Query if the frame is driven, i.e. has a free variable
     bool isDriven(void);
 
-//---------------------------------------------------------------------
+
 // Private Members
 private:
     
@@ -211,7 +206,7 @@ private:
     //! gamma angle [rad]
     double m_angG;
     
-//---------------------------------------------------------------------
+
 // Private Methods
 private:
     
@@ -221,8 +216,10 @@ private:
 
 };
 
-//=====================================================================
-// End namespace
 }
+}
+// end namespace
+//---------------------------------------------------------------------
+
 
 #endif

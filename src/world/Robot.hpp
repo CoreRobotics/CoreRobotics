@@ -155,7 +155,7 @@ class Robot : public Node
     public:
     
         //! compute the jacobian for the indicated child node
-        Eigen::MatrixXd jacobian(NodePtr i_node, EulerMode i_mode);
+        Eigen::MatrixXd jacobian(NodePtr i_node, physics::EulerMode i_mode);
     
     
     

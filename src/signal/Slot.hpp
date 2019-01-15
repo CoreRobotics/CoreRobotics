@@ -38,7 +38,6 @@
  
  */
 //---------------------------------------------------------------------
-// Begin header definition
 
 #ifndef CR_SLOT_HPP_
 #define CR_SLOT_HPP_

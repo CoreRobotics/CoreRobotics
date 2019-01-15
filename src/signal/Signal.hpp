@@ -38,7 +38,6 @@
  
  */
 //---------------------------------------------------------------------
-// Begin header definition
 
 #ifndef CR_SIG_HPP_
 #define CR_SIG_HPP_

@@ -95,16 +95,16 @@ class Link : public Node
         NodePtr getCenterOfMass() { return m_comItem; }
     
         //! set the rigid body parameters
-        void setRigidBody(const RigidBody& i_body);
+        void setRigidBody(const physics::RigidBody& i_body);
     
         //! return the rigid body parameters
-        RigidBody getRigidBody() { return m_body; }
+        physics::RigidBody getRigidBody() { return m_body; }
     
         //! set the degree of freedom
-        void setDegreeOfFreedom(EulerFreeVariable i_dof) { m_frame.setFreeVariable(i_dof); }
+        void setDegreeOfFreedom(physics::EulerFreeVariable i_dof) { m_frame.setFreeVariable(i_dof); }
     
         //! return the degree of freedom
-        EulerFreeVariable getDegreeOfFreedom() { return m_frame.getFreeVariable(); }
+        physics::EulerFreeVariable getDegreeOfFreedom() { return m_frame.getFreeVariable(); }
     
         //! set the driven value
         void setFreeValue(const double& i_value) { m_frame.setFreeValue(i_value); }
@@ -119,26 +119,26 @@ class Link : public Node
 		double getFreeVelocity() { return m_velocity; }
     
         //! set euler mode
-        void setEulerMode(const EulerMode& i_mode) { m_frame.setMode(i_mode); }
+        void setEulerMode(const physics::EulerMode& i_mode) { m_frame.setMode(i_mode); }
     
         //! get euler mode
-        EulerMode getEulerMode() { return m_frame.getMode(); }
+        physics::EulerMode getEulerMode() { return m_frame.getMode(); }
     
     
     // Frame transformation controls
     public:
     
         //! set the local frame transformation
-        void setLocalTransform(const FrameEuler& i_frame) { m_frame = i_frame; }
+        void setLocalTransform(const physics::FrameEuler& i_frame) { m_frame = i_frame; }
     
         //! return the local frame transformation
-        virtual Frame getLocalTransform();
+        virtual physics::Frame getLocalTransform();
     
         //! return the global frame transformation
-        virtual Frame getGlobalTransform();
+        virtual physics::Frame getGlobalTransform();
     
         //! return the relative frame transformation
-        virtual Frame getRelativeTransform(NodePtr i_item);
+        virtual physics::Frame getRelativeTransform(NodePtr i_item);
     
     
     // Print details
@@ -152,10 +152,10 @@ class Link : public Node
     protected:
     
         //! Rigid body
-        RigidBody m_body;
+        physics::RigidBody m_body;
     
         //! frame - overloaded from Node::m_frame
-        FrameEuler m_frame;
+        physics::FrameEuler m_frame;
 
 		//! free value velocity
 		double m_velocity = 0;

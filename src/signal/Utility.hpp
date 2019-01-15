@@ -38,7 +38,6 @@
  
  */
 //---------------------------------------------------------------------
-// Begin header definition
 
 #ifndef CR_UTILITY_HPP_
 #define CR_UTILITY_HPP_

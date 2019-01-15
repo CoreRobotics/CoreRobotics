@@ -52,8 +52,8 @@ using namespace cr;
 // constructor
 //
 TEST(FrameDh, Construct){
-    FrameDh frame;
-    Eigen::VectorXd p = frame.getPose(CR_EULER_MODE_XYZ);
+    physics::FrameDh frame;
+    Eigen::VectorXd p = frame.getPose(physics::CR_EULER_MODE_XYZ);
     EXPECT_DOUBLE_EQ(0, p(0));
     EXPECT_DOUBLE_EQ(0, p(1));
     EXPECT_DOUBLE_EQ(0, p(2));
@@ -74,7 +74,8 @@ TEST(FrameDh, ClassicTransformation){
     double alpha = M_PI / 3;
     double d = 0.2;
     double theta = M_PI / 6;
-    FrameDh frame(r, alpha, d, theta, CR_DH_MODE_CLASSIC, CR_DH_FREE_NONE);
+    physics::FrameDh frame(r, alpha, d, theta,
+        physics::CR_DH_MODE_CLASSIC, physics::CR_DH_FREE_NONE);
     
     Eigen::Matrix3d R;
     Eigen::Vector3d T;
@@ -110,7 +111,8 @@ TEST(FrameDh, ModifiedTransformation){
     double alpha = M_PI / 3;
     double d = 0.2;
     double theta = M_PI / 6;
-    FrameDh frame(r, alpha, d, theta, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
+    physics::FrameDh frame(r, alpha, d, theta,
+        physics::CR_DH_MODE_MODIFIED, physics::CR_DH_FREE_NONE);
     
     Eigen::Matrix3d R;
     Eigen::Vector3d T;
@@ -139,10 +141,11 @@ TEST(FrameDh, ModifiedTransformation){
 // SetFreeValue/GetFreeValue
 //
 TEST(FrameDh, GetFreeValue){
-    FrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
+    physics::FrameDh frame(0, 0, 0, M_PI / 2,
+        physics::CR_DH_MODE_MODIFIED, physics::CR_DH_FREE_NONE);
     EXPECT_EQ(NULL, frame.getFreeValue());
     
-    frame.setFreeVariable(CR_DH_FREE_THETA);
+    frame.setFreeVariable(physics::CR_DH_FREE_THETA);
     EXPECT_DOUBLE_EQ(M_PI / 2, frame.getFreeValue());
     
     frame.setFreeValue(0);
@@ -154,12 +157,13 @@ TEST(FrameDh, GetFreeValue){
 // SetFreeVariable/GetFreeVariable
 //
 TEST(FrameDh, GetFreeVariable){
-    FrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
-    EXPECT_EQ(CR_DH_FREE_NONE, frame.getFreeVariable());
+    physics::FrameDh frame(0, 0, 0, M_PI / 2,
+        physics::CR_DH_MODE_MODIFIED, physics::CR_DH_FREE_NONE);
+    EXPECT_EQ(physics::CR_DH_FREE_NONE, frame.getFreeVariable());
     EXPECT_FALSE(frame.isDriven());
     
-    frame.setFreeVariable(CR_DH_FREE_THETA);
-    EXPECT_EQ(CR_DH_FREE_THETA, frame.getFreeVariable());
+    frame.setFreeVariable(physics::CR_DH_FREE_THETA);
+    EXPECT_EQ(physics::CR_DH_FREE_THETA, frame.getFreeVariable());
     EXPECT_TRUE(frame.isDriven());
 }
 
@@ -168,12 +172,13 @@ TEST(FrameDh, GetFreeVariable){
 // SetMode/GetMode
 //
 TEST(FrameDh, GetMode){
-    FrameDh frame(0, 0, 0, M_PI / 2, CR_DH_MODE_CLASSIC, CR_DH_FREE_NONE);
-    EXPECT_EQ(CR_DH_MODE_CLASSIC, frame.getMode());
+    physics::FrameDh frame(0, 0, 0, M_PI / 2,
+        physics::CR_DH_MODE_CLASSIC, physics::CR_DH_FREE_NONE);
+    EXPECT_EQ(physics::CR_DH_MODE_CLASSIC, frame.getMode());
     
-    frame.setFreeVariable(CR_DH_FREE_THETA);
-    frame.setMode(CR_DH_MODE_MODIFIED);
-    EXPECT_EQ(CR_DH_MODE_MODIFIED, frame.getMode());
+    frame.setFreeVariable(physics::CR_DH_FREE_THETA);
+    frame.setMode(physics::CR_DH_MODE_MODIFIED);
+    EXPECT_EQ(physics::CR_DH_MODE_MODIFIED, frame.getMode());
 }
 
 
@@ -181,7 +186,8 @@ TEST(FrameDh, GetMode){
 // GetParameters
 //
 TEST(FrameDh, GetParameters){
-    FrameDh frame(0.1, 0.2, 0.3, M_PI / 2, CR_DH_MODE_MODIFIED, CR_DH_FREE_NONE);
+    physics::FrameDh frame(0.1, 0.2, 0.3, M_PI / 2,
+        physics::CR_DH_MODE_MODIFIED, physics::CR_DH_FREE_NONE);
     double r, alpha, d, theta;
     frame.getParameters(r, alpha, d, theta);
     

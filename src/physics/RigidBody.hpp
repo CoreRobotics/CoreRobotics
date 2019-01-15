@@ -38,18 +38,20 @@
  
  */
 //---------------------------------------------------------------------
-// Begin header definition
 
 #ifndef CR_RIGIDBODY_HPP_
 #define CR_RIGIDBODY_HPP_
 
+
 #include "Frame.hpp"
+
 
 //---------------------------------------------------------------------
 // Begin namespace
 namespace cr {
+namespace physics {
 
-    
+
 //---------------------------------------------------------------------
 /*!
  \class RigidBody
@@ -126,7 +128,9 @@ class RigidBody {
     };
 
 }
+}
 // end namespace
 //---------------------------------------------------------------------
+
 
 #endif

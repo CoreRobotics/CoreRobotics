@@ -123,16 +123,16 @@ class Node
     public:
     
         //! set the local frame transformation
-        void setLocalTransform(const Frame& i_frame);
+        void setLocalTransform(const physics::Frame& i_frame);
     
         //! return the local frame transformation
-        virtual Frame getLocalTransform();
+        virtual physics::Frame getLocalTransform();
     
         //! return the global frame transformation
-        virtual Frame getGlobalTransform();
+        virtual physics::Frame getGlobalTransform();
     
         //! return the relative frame transformation
-        virtual Frame getRelativeTransform(NodePtr i_item);
+        virtual physics::Frame getRelativeTransform(NodePtr i_item);
     
     
     // Print details
@@ -146,7 +146,7 @@ class Node
     protected:
     
         //! Transformation
-        Frame m_frame;
+        physics::Frame m_frame;
     
         //! parent item
         NodePtr m_parent = NULL;

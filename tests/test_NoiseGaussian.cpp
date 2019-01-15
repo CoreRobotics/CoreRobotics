@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
-using namespace cr;
+using namespace cr::noise;
 
 //
 // Sample from the distribution and check the histogram

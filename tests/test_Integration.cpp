@@ -43,7 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
-using namespace cr;
+using namespace cr::math;
 
 // Declare a continuous dynamical system - xdot = fcn(t,x,u)
 // The exact solution of this system is y = exp(-t) for u = 0

@@ -37,18 +37,19 @@ POSSIBILITY OF SUCH DAMAGE.
 \author  Parker Owan, Tony Piaskowy
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
 
 #include "FrameDh.hpp"
 #include "Eigen/Dense"
 
 
-//=====================================================================
-// CoreRobotics namespace
+//---------------------------------------------------------------------
+// Begin namespace
 namespace cr {
+namespace physics {
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  The constructor sets the rotation and translation parameters upon 
  construction, with defaults listed in parenthesis.\n
@@ -60,7 +61,7 @@ namespace cr {
  \param[in]   i_mode   - DH convention (CR_DH_MODE_MODIFIED)
  \param[in]   i_free   - free variable (CR_DH_FREE_NONE)
  */
-//=====================================================================
+//---------------------------------------------------------------------
 FrameDh::FrameDh(double i_r,
                      double i_alpha,
                      double i_d,
@@ -91,7 +92,7 @@ FrameDh::FrameDh()
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method sets the value of the free variable.  The method returns a
  true if the value was written and a false if m_freeVar is set to 
@@ -127,7 +128,7 @@ core::Result FrameDh::setFreeValue(double i_q)
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method get the value of the free variable.  The method returns 
  q = NULL if m_freeVar is set to CR_DH_FREE_NONE.\n
@@ -157,7 +158,7 @@ double FrameDh::getFreeValue()
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method sets the the DH convention.\n
  
@@ -172,7 +173,7 @@ void FrameDh::setMode(DhMode i_mode)
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method gets the DH convention.\n
  
@@ -185,7 +186,7 @@ DhMode FrameDh::getMode(void)
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method sets the DH parameter values.\n
  
@@ -209,7 +210,7 @@ void FrameDh::setParameters(double i_r,
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method gets the DH parameter values.\n
  
@@ -232,7 +233,7 @@ void FrameDh::getParameters(double& o_r,
     
     
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method returns a true if the frame is driven (i.e. has a free
  variable) or a false if the frame is not driven.\n
@@ -251,7 +252,7 @@ bool FrameDh::isDriven(void) {
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 // Private Methods:
     
 //! sets the private rotation and translation members - Note that
@@ -317,8 +318,9 @@ void FrameDh::setRotationAndTranslation()
 }
 
 
-//=====================================================================
-// End namespace
 }
+}
+// end namespace
+//---------------------------------------------------------------------
 
 

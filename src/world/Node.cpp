@@ -234,7 +234,7 @@ unsigned Node::getDepth()
  \param[in]     i_frame - the local frame transformation
  */
 //---------------------------------------------------------------------
-void Node::setLocalTransform(const Frame& i_frame)
+void Node::setLocalTransform(const physics::Frame& i_frame)
 {
     m_frame = i_frame;
 }
@@ -248,7 +248,7 @@ void Node::setLocalTransform(const Frame& i_frame)
  \return        the local frame transformation
  */
 //---------------------------------------------------------------------
-Frame Node::getLocalTransform()
+physics::Frame Node::getLocalTransform()
 {
     return m_frame;
 }
@@ -262,7 +262,7 @@ Frame Node::getLocalTransform()
  \return        the local frame transformation
  */
 //---------------------------------------------------------------------
-Frame Node::getGlobalTransform()
+physics::Frame Node::getGlobalTransform()
 {
     Eigen::Matrix4d T = m_frame.getTransformToParent();
     NodePtr parent = m_parent;
@@ -270,7 +270,7 @@ Frame Node::getGlobalTransform()
         T = parent->getLocalTransform().getTransformToParent() * T;
         parent = parent->getParent();
     }
-    Frame f;
+    physics::Frame f;
     f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
     return f;
 }
@@ -284,11 +284,11 @@ Frame Node::getGlobalTransform()
  \return        the relative frame transformation
  */
 //---------------------------------------------------------------------
-Frame Node::getRelativeTransform(NodePtr i_item)
+physics::Frame Node::getRelativeTransform(NodePtr i_item)
 {
     Eigen::Matrix4d T0 = this->getGlobalTransform().getTransformToParent();
     Eigen::Matrix4d T = i_item->getGlobalTransform().getTransformToChild() * T0;
-    Frame f;
+    physics::Frame f;
     f.setRotationAndTranslation(T.topLeftCorner(3, 3), T.topRightCorner(3, 1));
     return f;
 }

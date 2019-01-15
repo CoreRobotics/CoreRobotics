@@ -116,7 +116,7 @@ unsigned Robot::getDegreesOfFreedom()
 {
 	unsigned n = 0;
     for (size_t i = 0; i < m_links.size(); i++) {
-        if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+        if (m_links.at(i)->getDegreeOfFreedom() != physics::CR_EULER_FREE_NONE) {
             n++;
         }
     }
@@ -137,7 +137,7 @@ void Robot::setConfiguration(const Eigen::VectorXd& i_q)
 {
     int k = 0;
     for (size_t i = 0; i < m_links.size(); i++) {
-        if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+        if (m_links.at(i)->getDegreeOfFreedom() != physics::CR_EULER_FREE_NONE) {
             m_links.at(i)->setFreeValue(i_q(k));
             k++;
         }
@@ -159,7 +159,7 @@ Eigen::VectorXd Robot::getConfiguration()
     Eigen::VectorXd q(this->getDegreesOfFreedom());
 	unsigned k = 0;
     for (size_t i = 0; i < m_links.size(); i++) {
-        if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+        if (m_links.at(i)->getDegreeOfFreedom() != physics::CR_EULER_FREE_NONE) {
             q(k) = m_links.at(i)->getFreeValue();
             k++;
         }
@@ -181,7 +181,7 @@ void Robot::setVelocity(const Eigen::VectorXd& i_qDot)
 {
 	unsigned k = 0;
 	for (size_t i = 0; i < m_links.size(); i++) {
-		if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+		if (m_links.at(i)->getDegreeOfFreedom() != physics::CR_EULER_FREE_NONE) {
 			m_links.at(i)->setFreeVelocity(i_qDot(k));
 			k++;
 		}
@@ -203,7 +203,7 @@ Eigen::VectorXd Robot::getVelocity()
 	Eigen::VectorXd q(this->getDegreesOfFreedom());
 	unsigned k = 0;
 	for (size_t i = 0; i < m_links.size(); i++) {
-		if (m_links.at(i)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+		if (m_links.at(i)->getDegreeOfFreedom() != physics::CR_EULER_FREE_NONE) {
 			q(k) = m_links.at(i)->getFreeVelocity();
 			k++;
 		}
@@ -226,7 +226,7 @@ Eigen::VectorXd Robot::getVelocity()
  \return                   (6 x N) jacobian matrix
  */
 //---------------------------------------------------------------------
-Eigen::MatrixXd Robot::jacobian(NodePtr i_node, EulerMode i_mode)
+Eigen::MatrixXd Robot::jacobian(NodePtr i_node, physics::EulerMode i_mode)
 {
     // Initialize the Jacobian matrix
     Eigen::MatrixXd J(6, getDegreesOfFreedom());
@@ -248,7 +248,7 @@ Eigen::MatrixXd Robot::jacobian(NodePtr i_node, EulerMode i_mode)
     for (size_t k = 0; k < m_links.size(); k++) {
         
         // if free variable
-        if (m_links.at(k)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+        if (m_links.at(k)->getDegreeOfFreedom() != physics::CR_EULER_FREE_NONE) {
         
             // set the configuration operating point
             qd.setZero(q0.size(),1);
@@ -303,10 +303,10 @@ Eigen::MatrixXd Robot::mass()
     for (size_t k = 0; k < m_links.size(); k++) {
         
         // if free variable
-        if (m_links.at(k)->getDegreeOfFreedom() != CR_EULER_FREE_NONE) {
+        if (m_links.at(k)->getDegreeOfFreedom() != physics::CR_EULER_FREE_NONE) {
             
             // get the Euler mode
-            EulerMode mode = CR_EULER_MODE_XYZ;
+            physics::EulerMode mode = physics::CR_EULER_MODE_XYZ;
             
             // compute the Jacobian of the link Center of Mass
             Eigen::MatrixXd J = jacobian(m_links.at(k)->getCenterOfMass(), mode);

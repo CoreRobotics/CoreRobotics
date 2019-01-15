@@ -1,62 +1,67 @@
 //=====================================================================
 /*
-Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2019, CoreRobotics.
-All rights reserved.
+ Software License Agreement (BSD-3-Clause License)
+ Copyright (c) 2019, CoreRobotics.
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 
+ * Redistributions of source code must retain the above copyright
+ notice, this list of conditions and the following disclaimer.
+ 
+ * Redistributions in binary form must reproduce the above copyright
+ notice, this list of conditions and the following disclaimer in the
+ documentation and/or other materials provided with the distribution.
+ 
+ * Neither the name of CoreRobotics nor the names of its contributors
+ may be used to endorse or promote products derived from this
+ software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+ 
+ \project CoreRobotics Project
+ \url     www.corerobotics.org
+ \author  Parker Owan
+ 
+ */
+//---------------------------------------------------------------------
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
+#ifndef CR_NOISEGAUSSIAN_HPP_
+#define CR_NOISEGAUSSIAN_HPP_
 
-* Redistributions of source code must retain the above copyright
-notice, this list of conditions and the following disclaimer.
 
-* Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-
-* Neither the name of CoreRobotics nor the names of its contributors
-may be used to endorse or promote products derived from this
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-\project CoreRobotics Project
-\url     www.corerobotics.org
-\author  Parker Owan
-
-*/
-//=====================================================================
-
-#ifndef NoiseGaussian_hpp
-#define NoiseGaussian_hpp
-
-//=====================================================================
-// Includes
 #include "Eigen/Dense"
 #include <random>
 #include "NoiseModel.hpp"
 
-//=====================================================================
-// CoreRobotics namespace
+
+//---------------------------------------------------------------------
+// Begin namespace
 namespace cr {
+namespace noise {
+
+
+//! Gaussian paramter structure
+struct ParamNoiseGaussian{
+    Eigen::MatrixXd cov;
+    Eigen::MatrixXd covInv;
+    Eigen::VectorXd mean;
+};
     
-//=====================================================================
-/*!
- \file NoiseGaussian.hpp
- \brief Implements a class for modeling Gaussian noise.
- */
+
 //---------------------------------------------------------------------
 /*!
  \class NoiseGaussian
@@ -88,18 +93,10 @@ namespace cr {
  
  [3] en.wikipedia.org/wiki/Multivariate_normal_distribution
  */
-//=====================================================================
-// Paramter structure declaration
-struct CRParamNoiseGaussian{
-    Eigen::MatrixXd cov;
-    Eigen::MatrixXd covInv;
-    Eigen::VectorXd mean;
-};
-    
-//=====================================================================
+//---------------------------------------------------------------------
 class NoiseGaussian : public NoiseModel {
     
-//---------------------------------------------------------------------
+
 // Constructor and Destructor
 public:
     
@@ -112,7 +109,7 @@ public:
     NoiseGaussian();
     ~NoiseGaussian() {};
     
-//---------------------------------------------------------------------
+
 // Get/Set Methods
 public:
     
@@ -121,7 +118,7 @@ public:
     void setParameters(Eigen::MatrixXd i_cov,
                        Eigen::VectorXd i_mean);
     
-//---------------------------------------------------------------------
+
 // Public Methods
 public:
     
@@ -133,18 +130,19 @@ public:
     using NoiseModel::probability;
     double probability(Eigen::VectorXd i_x);
     
-//---------------------------------------------------------------------
+
 // Public Members
 public:
     
     //! Noise model parameters
-    CRParamNoiseGaussian m_parameters;
+    ParamNoiseGaussian m_parameters;
     
 };
 
-//=====================================================================
-// End namespace
 }
+}
+// end namespace
+//---------------------------------------------------------------------
 
 
 #endif

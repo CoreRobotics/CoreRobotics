@@ -34,22 +34,23 @@ POSSIBILITY OF SUCH DAMAGE.
 
 \project CoreRobotics Project
 \url     www.corerobotics.org
-\author  Parker Owan
+\author  Parker Owan, Tony Piaskowy
 
 */
-//=====================================================================
+//---------------------------------------------------------------------
 
 #include "FrameEuler.hpp"
 #include "math/Matrix.hpp"
 #include "Eigen/Dense"
 
 
-//=====================================================================
-// CoreRobotics namespace
+//---------------------------------------------------------------------
+// Begin namespace
 namespace cr {
+namespace physics {
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  The constructor sets the rotation and translation parameters upon
  construction, with defaults listed in parenthesis.\n
@@ -98,7 +99,7 @@ FrameEuler::FrameEuler()
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method sets the value of the free variable.  The method returns
  a true if the value was written and a false if m_freeVar is set to 
@@ -140,7 +141,7 @@ core::Result FrameEuler::setFreeValue(double i_q)
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method get the value of the free variable.  The method returns 
  q = NULL if m_freeVar is set to CR_EULER_FREE_NONE.\n
@@ -177,7 +178,7 @@ double FrameEuler::getFreeValue(void)
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method sets the value of the Euler convention.\n
  
@@ -192,7 +193,7 @@ void FrameEuler::setMode(EulerMode i_mode)
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method gets the value of the Euler convention.\n
  
@@ -206,7 +207,7 @@ EulerMode FrameEuler::getMode(void)
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method sets the position values of the frame transformation.\n
  
@@ -224,7 +225,7 @@ void FrameEuler::setPosition(double i_x, double i_y, double i_z)
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method gets the position values of the frame transformation.\n
  
@@ -242,7 +243,7 @@ void FrameEuler::getPosition(double& o_x, double& o_y, double& o_z)
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method sets the orientation values of the frame transformation.\n
  
@@ -260,7 +261,7 @@ void FrameEuler::setOrientation(double i_a, double i_b, double i_g)
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method gets the orientation values of the frame transformation.\n
  
@@ -278,7 +279,7 @@ void FrameEuler::getOrientation(double& o_a, double& o_b, double& o_g)
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method sets the position and orientation values of the frame 
  transformation.\n
@@ -302,7 +303,7 @@ void FrameEuler::setPositionAndOrientation(double i_x,
 }
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  TThis method gets the position and orientation values of the frame 
  transformation.\n
@@ -328,7 +329,7 @@ void FrameEuler::getPositionAndOrientation(double& o_x,
     
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  NOT RECCOMENDED!
  This method sets the rotation and translation matrices for the frame
@@ -349,7 +350,7 @@ void FrameEuler::setRotationAndTranslation(Eigen::Matrix3d i_rot,
     
     
     
-//=====================================================================
+//---------------------------------------------------------------------
 /*!
  This method returns a true if the frame is driven (i.e. has a free 
  variable) or a false if the frame is not driven.\n
@@ -368,7 +369,7 @@ bool FrameEuler::isDriven(void) {
 
 
 
-//=====================================================================
+//---------------------------------------------------------------------
 // Private Methods:
     
 //! sets the private rotation and translation members - Note that
@@ -383,64 +384,64 @@ void FrameEuler::setRotationAndTranslation()
     
     switch (m_eulerMode){
         case CR_EULER_MODE_ZXZ:
-			r1 = Matrix::rotAboutZ(m_angA);
-			r2 = Matrix::rotAboutX(m_angB);
-			r3 = Matrix::rotAboutZ(m_angG);
+			r1 = math::Matrix::rotAboutZ(m_angA);
+			r2 = math::Matrix::rotAboutX(m_angB);
+			r3 = math::Matrix::rotAboutZ(m_angG);
             break;
         case CR_EULER_MODE_XYX:
-			r1 = Matrix::rotAboutX(m_angA);
-			r2 = Matrix::rotAboutY(m_angB);
-			r3 = Matrix::rotAboutX(m_angG);
+			r1 = math::Matrix::rotAboutX(m_angA);
+			r2 = math::Matrix::rotAboutY(m_angB);
+			r3 = math::Matrix::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_YZY:
-			r1 = Matrix::rotAboutY(m_angA);
-			r2 = Matrix::rotAboutZ(m_angB);
-			r3 = Matrix::rotAboutY(m_angG);
+			r1 = math::Matrix::rotAboutY(m_angA);
+			r2 = math::Matrix::rotAboutZ(m_angB);
+			r3 = math::Matrix::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_ZYZ:
-			r1 = Matrix::rotAboutZ(m_angA);
-			r2 = Matrix::rotAboutY(m_angB);
-			r3 = Matrix::rotAboutZ(m_angG);
+			r1 = math::Matrix::rotAboutZ(m_angA);
+			r2 = math::Matrix::rotAboutY(m_angB);
+			r3 = math::Matrix::rotAboutZ(m_angG);
             break;
         case CR_EULER_MODE_XZX:
-			r1 = Matrix::rotAboutX(m_angA);
-			r2 = Matrix::rotAboutZ(m_angB);
-			r3 = Matrix::rotAboutX(m_angG);
+			r1 = math::Matrix::rotAboutX(m_angA);
+			r2 = math::Matrix::rotAboutZ(m_angB);
+			r3 = math::Matrix::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_YXY:
-			r1 = Matrix::rotAboutY(m_angA);
-			r2 = Matrix::rotAboutX(m_angB);
-			r3 = Matrix::rotAboutY(m_angG);
+			r1 = math::Matrix::rotAboutY(m_angA);
+			r2 = math::Matrix::rotAboutX(m_angB);
+			r3 = math::Matrix::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_XYZ:
-			r1 = Matrix::rotAboutX(m_angA);
-			r2 = Matrix::rotAboutY(m_angB);
-			r3 = Matrix::rotAboutZ(m_angG);
+			r1 = math::Matrix::rotAboutX(m_angA);
+			r2 = math::Matrix::rotAboutY(m_angB);
+			r3 = math::Matrix::rotAboutZ(m_angG);
             break;
         case CR_EULER_MODE_YZX:
-			r1 = Matrix::rotAboutY(m_angA);
-			r2 = Matrix::rotAboutZ(m_angB);
-			r3 = Matrix::rotAboutX(m_angG);
+			r1 = math::Matrix::rotAboutY(m_angA);
+			r2 = math::Matrix::rotAboutZ(m_angB);
+			r3 = math::Matrix::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_ZXY:
-			r1 = Matrix::rotAboutZ(m_angA);
-			r2 = Matrix::rotAboutX(m_angB);
-			r3 = Matrix::rotAboutY(m_angG);
+			r1 = math::Matrix::rotAboutZ(m_angA);
+			r2 = math::Matrix::rotAboutX(m_angB);
+			r3 = math::Matrix::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_XZY:
-			r1 = Matrix::rotAboutX(m_angA);
-			r2 = Matrix::rotAboutZ(m_angB);
-			r3 = Matrix::rotAboutY(m_angG);
+			r1 = math::Matrix::rotAboutX(m_angA);
+			r2 = math::Matrix::rotAboutZ(m_angB);
+			r3 = math::Matrix::rotAboutY(m_angG);
             break;
         case CR_EULER_MODE_ZYX:
-			r1 = Matrix::rotAboutZ(m_angA);
-			r2 = Matrix::rotAboutY(m_angB);
-			r3 = Matrix::rotAboutX(m_angG);
+			r1 = math::Matrix::rotAboutZ(m_angA);
+			r2 = math::Matrix::rotAboutY(m_angB);
+			r3 = math::Matrix::rotAboutX(m_angG);
             break;
         case CR_EULER_MODE_YXZ:
-			r1 = Matrix::rotAboutY(m_angA);
-			r2 = Matrix::rotAboutX(m_angB);
-			r3 = Matrix::rotAboutZ(m_angG);
+			r1 = math::Matrix::rotAboutY(m_angA);
+			r2 = math::Matrix::rotAboutX(m_angB);
+			r3 = math::Matrix::rotAboutZ(m_angG);
             break;
     }
     m_rotation = r1*r2*r3;
@@ -448,8 +449,8 @@ void FrameEuler::setRotationAndTranslation()
 }
 
 
-//=====================================================================
-// End namespace
 }
-
+}
+// end namespace
+//---------------------------------------------------------------------
 

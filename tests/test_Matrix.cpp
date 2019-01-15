@@ -44,7 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 // Use the CoreRobotics namespace
-using namespace cr;
+using namespace cr::math;
 using namespace cr::core;
 
 
