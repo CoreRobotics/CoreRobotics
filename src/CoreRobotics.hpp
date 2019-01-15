@@ -111,8 +111,8 @@ POSSIBILITY OF SUCH DAMAGE.
 \page install Installation
 
 The CoreRobotics Library comes with CMakeLists ready to generate the project
-for your IDE of choice.  CMake is a tool for generating platform-specific 
-IDE files from cross-platform source code.  We highly recommend the use of 
+for your IDE of choice.  CMake is a tool for generating platform-specific
+IDE files from cross-platform source code.  We highly recommend the use of
 CMake to build your first program.  Instructions for how to build CoreRobotics
 for your specific platform using CMake are presented below.
 - \subpage install_dependencies
@@ -202,11 +202,11 @@ command line use, and run one of the methods in the command line.
  
 ### Step 2.
 Once CMake is set up for command line use, open terminal and cd into
-the root folder of CoreRobotics.  There should be subfolders named doc, src, 
+the root folder of CoreRobotics.  There should be subfolders named doc, src,
 utils, etc.  Run the following commands one at a time to build the CoreRobotics
 library, test routines, and example code:
  
-\code 
+\code
 $ mkdir build
 $ cd build
 $ cmake "Xcode" ../
@@ -247,7 +247,7 @@ library, test routines, and example code:
 \code
 > mkdir build
 > cd build
-> cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 2015" -DEIGEN3_INCLUDE_DIR=<path to eigen3> -DBoost_INCLUDE_DIR=<path to boost> ../
+> cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 2015" DEIGEN3_INCLUDE_DIR=<path to eigen3> -DBoost_INCLUDE_DIR=<path to boost> ../
 > CoreRobotics.sln
 \endcode
 
@@ -326,18 +326,18 @@ included in the class descriptions.
 /*!
 \page references References
 
- [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3, 
+ [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
      Pearson, 2004. \n\n
  
- [2] J. Denavit and R. Hartenberg, "A kinematic notation for lower-pair 
+ [2] J. Denavit and R. Hartenberg, "A kinematic notation for lower-pair
      mechanisms based on matrices". Trans ASME J. Appl. Mech. 23, pp. 215-221, 1955. \n\n
  
- [3] R. Murray, Z. Li, and S. Sastry, "A Mathematical Introduction to Robot 
-     Manipulation", Ed. 1, CRC Press, 1993. 
+ [3] R. Murray, Z. Li, and S. Sastry, "A Mathematical Introduction to Robot
+     Manipulation", Ed. 1, CRC Press, 1993.
      <a href="http://www.cds.caltech.edu/~murray/mlswiki/index.php/Main_Page">
      Available online.</a> \n\n
  
- [4] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems", 
+ [4] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
      Ed. 2, CRC Press, 2012. \n\n
  
  [5] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press, 2006. \n\n
@@ -358,39 +358,59 @@ project includes all the CoreRobotics modules.
 
 //---------------------------------------------------------------------------
 //! \defgroup core Core
-//! \brief This module implements the core functionality of the library,
-//! such as timing, loop definitions and threading.
+//! \brief This module implements core functionality such as timing, common
+//! types, and thread loop control.
 //---------------------------------------------------------------------------
+#include <cr/Core>
 #include "core/CRTypes.hpp"
 #include "core/CRClock.hpp"
 #include "core/CRThread.hpp"
 #include "core/CRMutex.hpp"
 #include "core/CRSharedMemory.hpp"
 
+//---------------------------------------------------------------------------
+//! \defgroup signal Signal
+//! \brief This module implements a signal framework.
+//---------------------------------------------------------------------------
+#include <cr/Signal>
+
+//---------------------------------------------------------------------------
+//! \defgroup world World
+//! \brief This module implements a kinematic tree graph.
+//---------------------------------------------------------------------------
+#include <cr/World>
 
 //---------------------------------------------------------------------------
 //! \defgroup math Math
-//! \brief Implements math components.
+//! \brief This module implements math components.
 //---------------------------------------------------------------------------
+#include <cr/Math>
 #include "math/CRConversion.hpp"
 #include "math/CRIntegration.hpp"
 #include "math/CRMatrix.hpp"
 
-
 //---------------------------------------------------------------------------
 //! \defgroup physics Physics
-//! \brief Implements physics (kinematics and dynamics) representations.
+//! \brief This module implements physics representations for computing
+//! kinematics and dynamics.
 //---------------------------------------------------------------------------
+#include <cr/Physics>
 #include "physics/CRFrame.hpp"
 #include "physics/CRFrameEuler.hpp"
 #include "physics/CRFrameDh.hpp"
 #include "physics/CRRigidBody.hpp"
 
+//---------------------------------------------------------------------------
+//! \defgroup noise Noise
+//! \brief This module implements noise models.
+//---------------------------------------------------------------------------
+#include <cr/Noise>
 
 //---------------------------------------------------------------------------
-//! \defgroup models Models
-//! \brief Implements model (sensor, motion, and noise) representations.
+//! \defgroup model Model
+//! \brief This module implements model (sensor and motion) representations.
 //---------------------------------------------------------------------------
+#include <cr/Model>
 #include "model/CRManipulator.hpp"
 #include "model/CRNoiseModel.hpp"
 #include "model/CRNoiseGaussian.hpp"
@@ -404,11 +424,12 @@ project includes all the CoreRobotics modules.
 #include "model/CRMotionLinear.hpp"
 #include "model/CRMotionProbabilistic.hpp"
 
-
 //---------------------------------------------------------------------------
-//! \defgroup controllers Controllers
-//! \brief Implements controllers and policies for regulating motion and actions.
+//! \defgroup control Control
+//! \brief This module implements control policies for regulating
+//! motion and actions.
 //---------------------------------------------------------------------------
+#include <cr/Control>
 #include "control/CRInverseKinematics.hpp"
 #include "control/CRNullSpace.hpp"
 #include "control/CRHardLimits.hpp"
