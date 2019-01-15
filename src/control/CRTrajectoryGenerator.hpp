@@ -50,7 +50,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -92,7 +92,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Structure defining a waypoint (i.e. the output)
-struct CRWaypoint {
+struct [[deprecated(CR_DEPRECATED)]]CRWaypoint {
     double time;
     Eigen::VectorXd position;
     Eigen::VectorXd velocity;
@@ -101,7 +101,7 @@ struct CRWaypoint {
 };
 
 //=====================================================================
-class CRTrajectoryGenerator {
+class [[deprecated(CR_DEPRECATED)]] CRTrajectoryGenerator {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

@@ -47,11 +47,12 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CRFrame.hpp"
 #include "CRFrameDh.hpp"
 #include "CRFrameEuler.hpp"
+#include "core/CRTypes.hpp"
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -82,7 +83,7 @@ namespace CoreRobotics {
  Pearson, 2004.
  */
 //=====================================================================
-class CRRigidBody {
+class [[deprecated(CR_DEPRECATED)]] CRRigidBody {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

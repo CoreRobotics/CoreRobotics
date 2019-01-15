@@ -44,12 +44,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "core/CRTypes.hpp"
 #include <vector>
 #include "physics/CRRigidBody.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -122,7 +123,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for specifying how the manipulator is driven
-enum CRManipulatorType {
+enum [[deprecated(CR_DEPRECATED)]] CRManipulatorType {
 	// TODO: add several modes of control for the driving values
     CR_MANIPULATOR_MODE_POSITION,
     // CR_MANIPULATOR_MODE_VELOCITY,
@@ -130,7 +131,7 @@ enum CRManipulatorType {
 };
     
 //=====================================================================
-class CRManipulator {
+class [[deprecated(CR_DEPRECATED)]] CRManipulator {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

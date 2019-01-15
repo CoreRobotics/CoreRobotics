@@ -52,7 +52,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
 
 //=====================================================================
 /*!
@@ -127,7 +127,7 @@ namespace CoreRobotics {
  
  */
 //=====================================================================
-class CRHardLimits {
+class [[deprecated(CR_DEPRECATED)]] CRHardLimits {
 
 //---------------------------------------------------------------------
 // Constructor and Destructor

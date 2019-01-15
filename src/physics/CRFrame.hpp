@@ -50,7 +50,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -101,7 +101,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for handling Euler angle conventions
-enum CREulerMode {
+enum [[deprecated(CR_DEPRECATED)]] CREulerMode {
     CR_EULER_MODE_ZXZ,
     CR_EULER_MODE_XYX,
     CR_EULER_MODE_YZY,
@@ -117,7 +117,7 @@ enum CREulerMode {
 };
     
 //=====================================================================
-class CRFrame {
+class [[deprecated(CR_DEPRECATED)]] CRFrame {
 
 //---------------------------------------------------------------------
 // Constructor and Destructor

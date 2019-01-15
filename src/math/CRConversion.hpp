@@ -50,7 +50,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
 
 //=====================================================================
 /*!
@@ -83,7 +83,7 @@ John Wiley & Sons, 2011.
 */
 
 //=====================================================================
-class CRConversion {
+class [[deprecated(CR_DEPRECATED)]] CRConversion {
 
 //---------------------------------------------------------------------
 // Static conversion methods

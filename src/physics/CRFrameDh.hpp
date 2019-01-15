@@ -46,11 +46,12 @@ POSSIBILITY OF SUCH DAMAGE.
 // Includes
 #include "Eigen/Dense"
 #include "CRFrame.hpp"
+#include "core/CRTypes.hpp"
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -96,7 +97,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for handling DH parameter free variable candidates
-enum CRDhFreeVariable {
+enum [[deprecated(CR_DEPRECATED)]] CRDhFreeVariable {
     CR_DH_FREE_NONE,
     CR_DH_FREE_R,
     CR_DH_FREE_ALPHA,
@@ -106,14 +107,14 @@ enum CRDhFreeVariable {
 
 
 //! Enumerator for handling DH conventions
-enum CRDhMode {
+enum [[deprecated(CR_DEPRECATED)]] CRDhMode {
     CR_DH_MODE_CLASSIC,
     CR_DH_MODE_MODIFIED,
 };
 
 
 //=====================================================================
-class CRFrameDh : public CRFrame  {
+class [[deprecated(CR_DEPRECATED)]] CRFrameDh : public CRFrame  {
     
 
 //---------------------------------------------------------------------

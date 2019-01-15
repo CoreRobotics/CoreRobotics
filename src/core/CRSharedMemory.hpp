@@ -55,7 +55,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -87,7 +87,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for specifying thread priority
-enum CRManagerRole {
+enum [[deprecated(CR_DEPRECATED)]] CRManagerRole {
     CR_MANAGER_SERVER,
     CR_MANAGER_CLIENT,
 };
@@ -96,7 +96,7 @@ enum CRManagerRole {
 typedef boost::interprocess::allocator<double, boost::interprocess::managed_shared_memory::segment_manager>  ShmemAllocator;
 typedef boost::interprocess::vector<double, ShmemAllocator> Signal;
 //=====================================================================
-class CRSharedMemory {
+class [[deprecated(CR_DEPRECATED)]] CRSharedMemory {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

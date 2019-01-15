@@ -50,7 +50,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
 
 //=====================================================================
 /*!
@@ -82,7 +82,7 @@ John Wiley & Sons, 2011.
 */
 
 //=====================================================================
-class CRIntegration {
+class [[deprecated(CR_DEPRECATED)]] CRIntegration {
     
 #ifndef SWIG
 //---------------------------------------------------------------------

@@ -44,12 +44,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "core/CRTypes.hpp"
 #include "Eigen/Dense"
 #include "CRMotionModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -104,7 +105,7 @@ namespace CoreRobotics {
  \n\n
  */
 //=====================================================================
-class CRMotionLinear : public CRMotionModel {
+class [[deprecated(CR_DEPRECATED)]] CRMotionLinear : public CRMotionModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

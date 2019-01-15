@@ -44,12 +44,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "CRTypes.hpp"
 #include <thread>
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -80,7 +81,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for specifying thread priority
-enum CRThreadPriority {
+enum [[deprecated(CR_DEPRECATED)]] CRThreadPriority {
 	CR_PRIORITY_LOWEST,
 	CR_PRIORITY_LOW,
 	CR_PRIORITY_NORMAL,
@@ -89,7 +90,7 @@ enum CRThreadPriority {
 };
 
 //=====================================================================
-class CRThread {
+class [[deprecated(CR_DEPRECATED)]] CRThread {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

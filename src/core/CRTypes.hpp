@@ -42,9 +42,11 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef CRTypes_hpp
 #define CRTypes_hpp
 
+#define CR_DEPRECATED "not supported as of cr-2.0"
+
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -53,7 +55,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for signal types
-enum CRSignalType {
+enum [[deprecated(CR_DEPRECATED)]] CRSignalType {
     CR_SIGNAL_FORCE,
     CR_SIGNAL_POSITION,
     CR_SIGNAL_VELOCITY,
@@ -62,7 +64,7 @@ enum CRSignalType {
 };
 //=====================================================================
 //! Result enumerator for consistent operation result flags.
-enum CRResult {
+enum [[deprecated(CR_DEPRECATED)]] CRResult {
     CR_RESULT_SUCCESS,
     CR_RESULT_SINGULAR,
     CR_RESULT_UNWRITABLE,

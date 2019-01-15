@@ -44,12 +44,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "core/CRTypes.hpp"
 #include "Eigen/Dense"
 #include "CRSensorModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -93,7 +94,7 @@ namespace CoreRobotics {
  2006. \n\n
  */
 //=====================================================================
-class CRSensorLinear : public CRSensorModel {
+class [[deprecated(CR_DEPRECATED)]] CRSensorLinear : public CRSensorModel {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

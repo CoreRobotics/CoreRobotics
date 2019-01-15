@@ -44,6 +44,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "core/CRTypes.hpp"
 #include <random>
 #include <vector>
 #include "Eigen/Dense"
@@ -52,7 +53,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -95,13 +96,13 @@ namespace CoreRobotics {
  */
 //=====================================================================
 // Paramter structure declaration
-struct CRParamGaussianMixture{
+struct [[deprecated(CR_DEPRECATED)]]CRParamGaussianMixture{
     std::vector<CoreRobotics::CRNoiseGaussian*> models;
     std::vector<double> weights;
 };
     
 //=====================================================================
-class CRGmm : public CRNoiseMixture {
+class [[deprecated(CR_DEPRECATED)]] CRGmm : public CRNoiseMixture {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

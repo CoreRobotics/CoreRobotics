@@ -46,11 +46,12 @@ POSSIBILITY OF SUCH DAMAGE.
 // Includes
 #include "Eigen/Dense"
 #include "CRFrame.hpp"
+#include "core/CRTypes.hpp"
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace [[deprecated(CR_DEPRECATED)]] CoreRobotics {
     
 //=====================================================================
 /*!
@@ -93,7 +94,7 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for handling Euler angle free variable candidates
-enum CREulerFreeVariable {
+enum [[deprecated(CR_DEPRECATED)]] CREulerFreeVariable {
     CR_EULER_FREE_NONE,
     CR_EULER_FREE_POS_X,
     CR_EULER_FREE_POS_Y,
@@ -105,7 +106,7 @@ enum CREulerFreeVariable {
 
 
 //=====================================================================
-class CRFrameEuler : public CRFrame  {
+class [[deprecated(CR_DEPRECATED)]] CRFrameEuler : public CRFrame  {
 
 //---------------------------------------------------------------------
 // Constructor and Destructor
