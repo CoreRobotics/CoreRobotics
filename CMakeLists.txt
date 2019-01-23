@@ -38,6 +38,15 @@
 #
 # =====================================================================
 
+#
+# Settings:
+#   -Dall = [true,false]            all targets
+#   -Dsplit = [true,false]          split up CoreRobotics libraries
+#   -Dfull = [true,false]           use only 2.0 source
+#   -Dlib = [true,false]            c++ lib
+#   -Dtests = [true,false]          c++ tests
+#   -Dpython = [true,false,2,3]     python binding
+
 # cmake settings
 cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 14)
@@ -45,7 +54,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 cmake_policy(SET CMP0054 NEW)
 
 # Define the project name and other CoreRobotics parameters
-project(CoreRobotics)
+set(PROJECT_NAME CoreRobotics)
+project(${PROJECT_NAME})
 
 # Set the project version
 set(CR_MAJOR_VERSION 2)
@@ -61,7 +71,7 @@ set(INSTALL_INCLUDE_DIR include CACHE PATH
 if(WIN32 AND NOT CYGWIN)
   set(DEF_INSTALL_CMAKE_DIR CMake)
 else()
-  set(DEF_INSTALL_CMAKE_DIR lib/CMake/CoreRobotics)
+  set(DEF_INSTALL_CMAKE_DIR lib/CMake/${PROJECT_NAME})
 endif()
 set(INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH
   "Installation directory for CMake files")
@@ -86,6 +96,7 @@ find_package (Eigen3 ${EIGEN_VERSION})
 find_package (Boost 1.48)
 find_package (GTest)
 find_package (OpenSceneGraph)
+find_package (SWIG)
 
 if(NOT Boost_INCLUDE_DIR)
      message(FATAL_ERROR "Boost_INCLUDE_DIR not found - please define the path to boost")
@@ -125,6 +136,16 @@ set(CR_SOURCES "")
 foreach(p ${CR_LIB_MODULES})
     file(GLOB CR_HEADERS_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/*.hpp)
     file(GLOB CR_SOURCES_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/*.cpp)
+    file(GLOB CR_HEADERS_SKIP ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/CR*.hpp)
+    file(GLOB CR_SOURCES_SKIP ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/CR*.cpp)
+    if (NOT full)
+        foreach(f ${CR_HEADERS_SKIP})
+            list(REMOVE_ITEM CR_HEADERS_${p} "${f}")
+        endforeach()
+        foreach(f ${CR_SOURCES_SKIP})
+            list(REMOVE_ITEM CR_SOURCES_${p} "${f}")
+        endforeach()
+    endif()
     list(APPEND CR_HEADERS ${CR_HEADERS_${p}})
     list(APPEND CR_SOURCES ${CR_SOURCES_${p}})
 endforeach()
@@ -157,7 +178,7 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib)
         add_subdirectory(${PROJECT_SOURCE_DIR}/src)
     # otherwise we just make "CoreRobotics"
     else()
-        set(CR_LIB_TARGETS CoreRobotics)
+        set(CR_LIB_TARGETS ${PROJECT_NAME})
         add_library(${CR_LIB_TARGETS} ${CR_SOURCES} ${CR_HEADERS})
         set_target_properties(${CR_LIB_TARGETS} PROPERTIES
             LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
@@ -178,9 +199,9 @@ endif()
 # ---------------------------------------------------------------------
 # Setup the python target
 # ---------------------------------------------------------------------
-# if(python OR all)
-#     add_subdirectory(${PROJECT_SOURCE_DIR}/python)
-# endif()
+if(python OR all)
+    add_subdirectory(${PROJECT_SOURCE_DIR}/python)
+endif()
 
 
 # ---------------------------------------------------------------------

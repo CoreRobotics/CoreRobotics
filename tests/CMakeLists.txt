@@ -41,6 +41,12 @@
 # create the test target
 set(TEST_TARGET_NAME ${CR_LIB_PREFIX}tests)
 file(GLOB CR_TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+file(GLOB CR_TEST_SKIP ${CMAKE_CURRENT_SOURCE_DIR}/test_CR*.cpp)
+if (NOT full)
+    foreach(f ${CR_TEST_SKIP})
+        list(REMOVE_ITEM CR_TEST_SOURCES "${f}")
+    endforeach()
+endif()
 add_executable(${TEST_TARGET_NAME} ${CR_TEST_SOURCES})
 add_dependencies(${TEST_TARGET_NAME} ${CR_LIB_TARGETS})
 target_link_libraries(${TEST_TARGET_NAME} ${CR_LIB_TARGETS} ${CR_LINK_FLAGS} ${GTEST_LIBRARIES})

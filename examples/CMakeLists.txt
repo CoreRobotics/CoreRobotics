@@ -40,6 +40,12 @@
 
 # find the example folders
 file(GLOB file_list ${CMAKE_CURRENT_SOURCE_DIR}/*)
+file(GLOB file_skip ${CMAKE_CURRENT_SOURCE_DIR}/example_CR*)
+if (NOT full)
+    foreach(f ${file_skip})
+        list(REMOVE_ITEM file_list "${f}")
+    endforeach()
+endif()
 foreach(file_in ${file_list})
     if(IS_DIRECTORY ${file_in})
         file(GLOB source ${file_in}/*.cpp)
