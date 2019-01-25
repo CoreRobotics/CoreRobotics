@@ -109,7 +109,7 @@ test-lib:
   script:
    - mkdir build
    - cd build
-   - cmake -Dtests=true ..
+   - cmake -Dfull=true -Dtests=true ..
    - make
    - $CI_PROJECT_DIR/bin/cr-tests
   dependencies:
@@ -120,7 +120,7 @@ test-examples:
   script:
    - mkdir build
    - cd build
-   - cmake -Dexamples=true ..
+   - cmake -Dfull=true -Dexamples=true ..
    - make
    - for file in $CI_PROJECT_DIR/bin/*; do
    - $file
