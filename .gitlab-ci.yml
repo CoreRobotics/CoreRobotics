@@ -38,7 +38,7 @@ build-lib:
   script: 
    - mkdir build
    - cd build
-   - cmake ..
+   - cmake -Dfull=true ..
    - make
   dependencies: []
   artifacts:
