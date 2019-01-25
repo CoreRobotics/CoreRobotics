@@ -83,7 +83,11 @@ John Wiley & Sons, 2011.
 */
 
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRConversion {
+#else
+class CRConversion {
+#endif
 
 //---------------------------------------------------------------------
 // Static conversion methods

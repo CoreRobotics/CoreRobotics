@@ -123,7 +123,11 @@ namespace CoreRobotics  {
  
  */
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRInverseKinematics {
+#else
+class CRInverseKinematics {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

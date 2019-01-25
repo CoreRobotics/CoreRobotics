@@ -74,7 +74,11 @@ namespace CoreRobotics  {
  */
 
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRMutex {
+#else
+class CRMutex {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

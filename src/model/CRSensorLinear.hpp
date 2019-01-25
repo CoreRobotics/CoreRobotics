@@ -94,7 +94,11 @@ namespace CoreRobotics  {
  2006. \n\n
  */
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRSensorLinear : public CRSensorModel {
+#else
+class CRSensorLinear : public CRSensorModel {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

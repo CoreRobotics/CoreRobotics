@@ -123,7 +123,11 @@ namespace CoreRobotics  {
  */
 //=====================================================================
 //! Enumerator for specifying how the manipulator is driven
+#ifndef SWIG
 enum [[deprecated(CR_DEPRECATED)]] CRManipulatorType {
+#else
+enum CRManipulatorType {
+#endif
 	// TODO: add several modes of control for the driving values
     CR_MANIPULATOR_MODE_POSITION,
     // CR_MANIPULATOR_MODE_VELOCITY,
@@ -131,7 +135,11 @@ enum [[deprecated(CR_DEPRECATED)]] CRManipulatorType {
 };
     
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRManipulator {
+#else
+class CRManipulator {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

@@ -83,7 +83,11 @@ namespace CoreRobotics  {
  Pearson, 2004.
  */
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRRigidBody {
+#else
+class CRRigidBody {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

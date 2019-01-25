@@ -81,7 +81,11 @@ namespace CoreRobotics  {
  */
 //=====================================================================
 //! Enumerator for specifying thread priority
+#ifndef SWIG
 enum [[deprecated(CR_DEPRECATED)]] CRThreadPriority {
+#else
+enum CRThreadPriority {
+#endif
 	CR_PRIORITY_LOWEST,
 	CR_PRIORITY_LOW,
 	CR_PRIORITY_NORMAL,
@@ -90,7 +94,11 @@ enum [[deprecated(CR_DEPRECATED)]] CRThreadPriority {
 };
 
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRThread {
+#else
+class CRThread {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

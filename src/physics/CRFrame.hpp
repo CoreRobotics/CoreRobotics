@@ -101,7 +101,11 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for handling Euler angle conventions
+#ifndef SWIG
 enum [[deprecated(CR_DEPRECATED)]] CREulerMode {
+#else
+enum CREulerMode {
+#endif
     CR_EULER_MODE_ZXZ,
     CR_EULER_MODE_XYX,
     CR_EULER_MODE_YZY,
@@ -117,7 +121,11 @@ enum [[deprecated(CR_DEPRECATED)]] CREulerMode {
 };
     
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRFrame {
+#else
+class CRFrame {
+#endif
 
 //---------------------------------------------------------------------
 // Constructor and Destructor

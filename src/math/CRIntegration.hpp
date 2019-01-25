@@ -82,7 +82,11 @@ John Wiley & Sons, 2011.
 */
 
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRIntegration {
+#else
+class CRIntegration {
+#endif
     
 #ifndef SWIG
 //---------------------------------------------------------------------

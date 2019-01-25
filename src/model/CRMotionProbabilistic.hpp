@@ -106,7 +106,11 @@ namespace CoreRobotics  {
  2006. \n\n
  */
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRMotionProbabilistic : public CRMotionModel {
+#else
+class CRMotionProbabilistic : public CRMotionModel {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

@@ -93,13 +93,21 @@ namespace CoreRobotics  {
  */
 //=====================================================================
 // Paramter structure declaration
-struct [[deprecated(CR_DEPRECATED)]]CRParamNoiseUniform{
+#ifndef SWIG
+struct [[deprecated(CR_DEPRECATED)]] CRParamNoiseUniform{
+#else
+struct CRParamNoiseUniform{
+#endif
     Eigen::VectorXd a;
     Eigen::VectorXd b;
 };
     
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRNoiseUniform : public CRNoiseModel {
+#else
+class CRNoiseUniform : public CRNoiseModel {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

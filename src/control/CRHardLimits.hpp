@@ -127,7 +127,11 @@ namespace CoreRobotics  {
  
  */
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRHardLimits {
+#else
+class CRHardLimits {
+#endif
 
 //---------------------------------------------------------------------
 // Constructor and Destructor

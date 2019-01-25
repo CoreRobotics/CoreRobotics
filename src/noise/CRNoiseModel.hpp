@@ -101,13 +101,21 @@ namespace CoreRobotics  {
  */
 //=====================================================================
 // ICDF Paramter structure declaration
-struct [[deprecated(CR_DEPRECATED)]]CRParamNoiseGeneric{
+#ifndef SWIG
+struct [[deprecated(CR_DEPRECATED)]] CRParamNoiseGeneric{
+#else
+struct CRParamNoiseGeneric{
+#endif
     Eigen::VectorXd(*icdFunction)(double);
     double(*probFunction)(Eigen::VectorXd);
 };
     
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRNoiseModel {
+#else
+class CRNoiseModel {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

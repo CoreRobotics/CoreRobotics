@@ -109,7 +109,11 @@ namespace CoreRobotics  {
  
  */
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRNullSpace {
+#else
+class CRNullSpace {
+#endif
 
 //---------------------------------------------------------------------
 // Constructor and Destructor

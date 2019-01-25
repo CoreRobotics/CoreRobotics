@@ -102,7 +102,11 @@ namespace CoreRobotics  {
  \n\n
  */
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRSensorProbabilistic : public CRSensorModel {
+#else
+class CRSensorProbabilistic : public CRSensorModel {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

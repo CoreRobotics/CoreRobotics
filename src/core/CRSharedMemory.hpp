@@ -87,7 +87,11 @@ namespace CoreRobotics  {
  */
 //=====================================================================
 //! Enumerator for specifying thread priority
+#ifndef SWIG
 enum [[deprecated(CR_DEPRECATED)]] CRManagerRole {
+#else
+enum CRManagerRole {
+#endif
     CR_MANAGER_SERVER,
     CR_MANAGER_CLIENT,
 };
@@ -96,7 +100,11 @@ enum [[deprecated(CR_DEPRECATED)]] CRManagerRole {
 typedef boost::interprocess::allocator<double, boost::interprocess::managed_shared_memory::segment_manager>  ShmemAllocator;
 typedef boost::interprocess::vector<double, ShmemAllocator> Signal;
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRSharedMemory {
+#else
+class CRSharedMemory {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

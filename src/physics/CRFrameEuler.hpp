@@ -94,7 +94,11 @@ namespace CoreRobotics  {
  */
 //=====================================================================
 //! Enumerator for handling Euler angle free variable candidates
+#ifndef SWIG
 enum [[deprecated(CR_DEPRECATED)]] CREulerFreeVariable {
+#else
+enum CREulerFreeVariable {
+#endif
     CR_EULER_FREE_NONE,
     CR_EULER_FREE_POS_X,
     CR_EULER_FREE_POS_Y,
@@ -106,7 +110,11 @@ enum [[deprecated(CR_DEPRECATED)]] CREulerFreeVariable {
 
 
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRFrameEuler : public CRFrame  {
+#else
+class CRFrameEuler : public CRFrame  {
+#endif
 
 //---------------------------------------------------------------------
 // Constructor and Destructor

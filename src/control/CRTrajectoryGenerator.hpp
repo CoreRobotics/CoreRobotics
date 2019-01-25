@@ -92,7 +92,11 @@ namespace CoreRobotics  {
  */
 //=====================================================================
 //! Structure defining a waypoint (i.e. the output)
-struct [[deprecated(CR_DEPRECATED)]]CRWaypoint {
+#ifndef SWIG
+struct [[deprecated(CR_DEPRECATED)]] CRWaypoint {
+#else
+struct CRWaypoint {
+#endif
     double time;
     Eigen::VectorXd position;
     Eigen::VectorXd velocity;
@@ -101,7 +105,11 @@ struct [[deprecated(CR_DEPRECATED)]]CRWaypoint {
 };
 
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRTrajectoryGenerator {
+#else
+class CRTrajectoryGenerator {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

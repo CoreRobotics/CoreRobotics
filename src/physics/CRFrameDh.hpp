@@ -97,7 +97,11 @@ namespace CoreRobotics  {
  */
 //=====================================================================
 //! Enumerator for handling DH parameter free variable candidates
+#ifndef SWIG
 enum [[deprecated(CR_DEPRECATED)]] CRDhFreeVariable {
+#else
+enum CRDhFreeVariable {
+#endif
     CR_DH_FREE_NONE,
     CR_DH_FREE_R,
     CR_DH_FREE_ALPHA,
@@ -107,14 +111,22 @@ enum [[deprecated(CR_DEPRECATED)]] CRDhFreeVariable {
 
 
 //! Enumerator for handling DH conventions
+#ifndef SWIG
 enum [[deprecated(CR_DEPRECATED)]] CRDhMode {
+#else
+enum CRDhMode {
+#endif
     CR_DH_MODE_CLASSIC,
     CR_DH_MODE_MODIFIED,
 };
 
 
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRFrameDh : public CRFrame  {
+#else
+class CRFrameDh : public CRFrame  {
+#endif
     
 
 //---------------------------------------------------------------------

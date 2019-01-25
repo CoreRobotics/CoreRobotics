@@ -105,13 +105,21 @@ namespace CoreRobotics  {
 //=====================================================================
 //! Enumerator for specifying whether the specified dynamic model is
 //  either continuous or discrete.
+#ifndef SWIG
 enum [[deprecated(CR_DEPRECATED)]] CRMotionModelType {
+#else
+enum CRMotionModelType {
+#endif
     CR_MOTION_CONTINUOUS,
     CR_MOTION_DISCRETE
 };
 
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRMotionModel {
+#else
+class CRMotionModel {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

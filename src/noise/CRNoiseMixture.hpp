@@ -93,13 +93,21 @@ namespace CoreRobotics  {
  */
 //=====================================================================
 // Paramter structure declaration
-struct [[deprecated(CR_DEPRECATED)]]CRParamNoiseMixture{
+#ifndef SWIG
+struct [[deprecated(CR_DEPRECATED)]] CRParamNoiseMixture{
+#else
+struct CRParamNoiseMixture{
+#endif
     std::vector<CoreRobotics::CRNoiseModel*> models;
     std::vector<double> weights;
 };
     
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRNoiseMixture : public CRNoiseModel {
+#else
+class CRNoiseMixture : public CRNoiseModel {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

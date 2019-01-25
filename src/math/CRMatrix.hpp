@@ -90,7 +90,11 @@ John Wiley & Sons, 2011.
 */
 
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRMatrix {
+#else
+class CRMatrix {
+#endif
     
 //---------------------------------------------------------------------
 // Matrix downselection

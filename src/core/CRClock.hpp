@@ -80,7 +80,11 @@ namespace CoreRobotics  {
  \include example_CRCore.cpp
  */
 //=====================================================================
+#ifndef SWIG
 class [[deprecated(CR_DEPRECATED)]] CRClock {
+#else
+class CRClock {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
