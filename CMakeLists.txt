@@ -126,28 +126,34 @@ include_directories(${CR_INCLUDE_DIRS})
 # define source directories
 set(CR_SOURCE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-# define modules and target prefix
-set(CR_LIB_MODULES control core math model noise physics signal world)
+# define modules, target prefix, and module dependencies
 set(CR_LIB_PREFIX "cr-")
+set(CR_LIB_MODULES core math physics signal noise model world control)
+set(CR_LIB_DEP_core)
+set(CR_LIB_DEP_math)
+set(CR_LIB_DEP_physics)
+set(CR_LIB_DEP_signal ${CR_LIB_PREFIX}core)
+set(CR_LIB_DEP_noise ${CR_LIB_PREFIX}math)
+set(CR_LIB_DEP_model ${CR_LIB_PREFIX}core ${CR_LIB_PREFIX}math)
+set(CR_LIB_DEP_world ${CR_LIB_PREFIX}core ${CR_LIB_PREFIX}physics)
+set(CR_LIB_DEP_control ${CR_LIB_PREFIX}core)
 
-# create individual header and source files
-set(CR_HEADERS_1 "")
-set(CR_SOURCES_1 "")
+# get header and source files
+set(CR_HEADERS "")
+set(CR_SOURCES "")
 foreach(p ${CR_LIB_MODULES})
-  file(GLOB CR_HEADERS_1_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/CR*.hpp)
-  file(GLOB CR_SOURCES_1_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/CR*.cpp)
-  file(GLOB CR_HEADERS_2_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/*.hpp)
-  file(GLOB CR_SOURCES_2_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/*.cpp)
-  foreach(f ${CR_HEADERS_1_${p}})
-    list(REMOVE_ITEM CR_HEADERS_2_${p} "${f}")
+  file(GLOB CR_HEADERS_ ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/CR*.hpp)
+  file(GLOB CR_SOURCES_ ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/CR*.cpp)
+  file(GLOB CR_HEADERS_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/*.hpp)
+  file(GLOB CR_SOURCES_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/*.cpp)
+  foreach(f ${CR_HEADERS_})
+    list(REMOVE_ITEM CR_HEADERS_${p} "${f}")
   endforeach()
-  foreach(f ${CR_SOURCES_1_${p}})
-    list(REMOVE_ITEM CR_SOURCES_2_${p} "${f}")
+  foreach(f ${CR_SOURCES_})
+    list(REMOVE_ITEM CR_SOURCES_${p} "${f}")
   endforeach()
-  list(APPEND CR_HEADERS_1 ${CR_HEADERS_1_${p}})
-  list(APPEND CR_SOURCES_1 ${CR_SOURCES_1_${p}})
-  list(APPEND CR_HEADERS_2 ${CR_HEADERS_2_${p}})
-  list(APPEND CR_SOURCES_2 ${CR_SOURCES_2_${p}})
+  list(APPEND CR_HEADERS ${CR_HEADERS_})
+  list(APPEND CR_SOURCES ${CR_SOURCES_})
 endforeach()
 
 # If building on linux add pthread and rt
@@ -163,76 +169,21 @@ endif()
 # ---------------------------------------------------------------------
 
 # build the CoreRobotics library
-add_library(CoreRobotics STATIC ${CR_SOURCES_1} ${CR_HEADERS_1})
+add_library(CoreRobotics STATIC ${CR_SOURCES} ${CR_HEADERS})
 set_target_properties(CoreRobotics PROPERTIES
   LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
   ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
   PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/CoreRobotics.hpp)
 
 # build the v2.0 shared modules
-add_library(${CR_LIB_PREFIX}core SHARED ${CR_HEADERS_2_core} ${CR_SOURCES_2_core})
-set_target_properties(${CR_LIB_PREFIX}core PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/core)
-
-add_library(${CR_LIB_PREFIX}signal SHARED ${CR_HEADERS_2_signal} ${CR_SOURCES_2_signal})
-target_link_libraries(${CR_LIB_PREFIX}signal cr-core) # this is the trick
-set_target_properties(${CR_LIB_PREFIX}signal PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/signal)
-
-add_library(${CR_LIB_PREFIX}math SHARED ${CR_HEADERS_2_math} ${CR_SOURCES_2_math})
-set_target_properties(${CR_LIB_PREFIX}math PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/math)
-
-add_library(${CR_LIB_PREFIX}model SHARED ${CR_HEADERS_2_model} ${CR_SOURCES_2_model})
-target_link_libraries(${CR_LIB_PREFIX}model cr-core cr-math) # this is the trick
-set_target_properties(${CR_LIB_PREFIX}model PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/model)
-
-add_library(${CR_LIB_PREFIX}noise SHARED ${CR_HEADERS_2_noise} ${CR_SOURCES_2_noise})
-target_link_libraries(${CR_LIB_PREFIX}noise cr-math) # this is the trick
-set_target_properties(${CR_LIB_PREFIX}noise PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/noise)
-
-add_library(${CR_LIB_PREFIX}physics SHARED ${CR_HEADERS_2_physics} ${CR_SOURCES_2_physics})
-set_target_properties(${CR_LIB_PREFIX}physics PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/physics)
-
-add_library(${CR_LIB_PREFIX}world SHARED ${CR_HEADERS_2_world} ${CR_SOURCES_2_world})
-target_link_libraries(${CR_LIB_PREFIX}world cr-core cr-physics) # this is the trick
-set_target_properties(${CR_LIB_PREFIX}world PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/world)
-
-add_library(${CR_LIB_PREFIX}control SHARED ${CR_HEADERS_2_control} ${CR_SOURCES_2_control})
-target_link_libraries(${CR_LIB_PREFIX}control cr-core) # this is the trick
-set_target_properties(${CR_LIB_PREFIX}control PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/control)
-
-
-
-
-# foreach(p ${CR_LIB_MODULES})
-#  add_library(${CR_LIB_PREFIX}${p} STATIC ${CR_HEADERS_2_${p}} ${CR_SOURCES_2_${p}})
-#  set_target_properties(${CR_LIB_PREFIX}${p} PROPERTIES
-#    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-#    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-#    PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/${p})
-# endforeach()
+foreach(p ${CR_LIB_MODULES})
+  add_library(${CR_LIB_PREFIX}${p} SHARED ${CR_HEADERS_${p}} ${CR_SOURCES_${p}})
+  target_link_libraries(${CR_LIB_PREFIX}${p} ${CR_LIB_DEP_${p}})
+  set_target_properties(${CR_LIB_PREFIX}${p} PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/${p})
+endforeach()
 
 
 # define the project names
@@ -280,6 +231,8 @@ file(GLOB CR_TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
 add_executable(${TEST_TARGET_NAME} ${CR_TEST_SOURCES})
 add_dependencies(${TEST_TARGET_NAME} ${CR_LIB_TARGETS})
 target_link_libraries(${TEST_TARGET_NAME} ${CR_LIB_TARGETS} ${CR_LINK_FLAGS} ${GTEST_LIBRARIES})
+set_target_properties(${TEST_TARGET_NAME} PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 
 # ---------------------------------------------------------------------
