@@ -50,7 +50,9 @@ if (NOT full)
 endif()
 add_executable(${TEST_TARGET_NAME} ${CR_TEST_SOURCES})
 add_dependencies(${TEST_TARGET_NAME} ${CR_LIB_TARGETS})
-target_link_libraries(${TEST_TARGET_NAME} ${CR_LIB_TARGETS} ${CR_LINK_FLAGS} ${GTEST_LIBRARIES})
+
+# pthread needs to come after gtest
+target_link_libraries(${TEST_TARGET_NAME} ${CR_LIB_TARGETS} ${GTEST_LIBRARIES} ${CR_LINK_FLAGS})
 set_target_properties(${TEST_TARGET_NAME}
     PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
 )
