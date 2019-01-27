@@ -80,9 +80,10 @@ $ cd <path_to_cr>/build
 ```
 $ cmake -D[option]=true -G "<compiler>" ..
 ```  
-with options: `all` to set up all targets, `full` to build deprecated static library (all "CR" prefix classes),  `lib` to compile library, `tests` to build the tests, `python` to set python version/set wrapper target lib, `matlab` to set wrapper target lib.
+with options: `all` to set up all targets, `full` to build deprecated static library (all "CR" prefix classes),  `lib` to compile library, `tests` to build the tests, `examples` to build the examples, `python` to set python version/set wrapper target lib, `matlab` to set wrapper target lib.
 
 Use  `cmake --help` for a list of available compilers.  Note that if you have not installed Eigen and Boost using one of the methods outlined in the External Dependencies section above (i.e. the packages aren't found by CMake), you must manually specify the path to boost and eigen headers using cmake flags, e.g.:  `cmake -G "<compiler>" -DEIGEN3_INCLUDE_DIR=<path to eigen3> -DBoost_INCLUDE_DIR=<path to boost> ../`  We provide a convenience repository for the needed 3rd party dependencies at [https://gitlab.com/powan/CRexternal](https://gitlab.com/powan/CRexternal)
+
 4. Build.  On mac/Linux
 ```
 $ make
