@@ -79,7 +79,6 @@ typedef std::shared_ptr<Loop> LoopPtr;
  - Loop::pause pauses the loop execution, but does not exit the
  thread of execution.
  - Loop::stop exits the thread of execution.
- - Loop::stop stops the thread execution.
  */
 //---------------------------------------------------------------------
 class Loop {
