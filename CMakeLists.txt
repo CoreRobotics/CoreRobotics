@@ -157,7 +157,7 @@ foreach(p ${CR_LIB_MODULES})
 endforeach()
 
 # If building on linux add pthread and rt
-if(UNIX AND NOT APPLE) # This may be useful for apple too
+if(UNIX AND NOT APPLE)
     set(CR_LINK_FLAGS pthread rt)
 else()
     set(CR_LINK_FLAGS "")
