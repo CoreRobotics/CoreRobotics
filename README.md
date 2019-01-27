@@ -88,6 +88,10 @@ Use  `cmake --help` for a list of available compilers.  Note that if you have no
 $ make
 $ make install
 ```
+[Known issue on ubuntu docker image] You need to run the following command so the docker image can find the share libraries
+```
+$ ldconfig /usr/local/lib
+```
 5. Run the tests
 ```
 $ cr-tests
