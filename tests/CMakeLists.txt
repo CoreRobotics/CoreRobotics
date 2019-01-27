@@ -38,6 +38,13 @@
 #
 # =====================================================================
 
+# This may be useful for apple too
+if(UNIX AND NOT APPLE)
+    set(CR_LINK_FLAGS pthread rt)
+else()
+    set(CR_LINK_FLAGS "")
+endif()
+
 # create the test target
 set(TEST_TARGET_NAME ${CR_LIB_PREFIX}tests)
 file(GLOB CR_TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
