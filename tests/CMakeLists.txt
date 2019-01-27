@@ -41,11 +41,12 @@
 # create the test target
 set(TEST_TARGET_NAME ${CR_LIB_PREFIX}tests)
 file(GLOB CR_TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-file(GLOB CR_TEST_SKIP ${CMAKE_CURRENT_SOURCE_DIR}/test_CR*.cpp)
+
 if (NOT full)
-    foreach(f ${CR_TEST_SKIP})
-        list(REMOVE_ITEM CR_TEST_SOURCES "${f}")
-    endforeach()
+  file(GLOB FILES ${CMAKE_CURRENT_SOURCE_DIR}/test_CR*.cpp)
+  foreach(f ${FILES})
+    list(REMOVE_ITEM CR_TEST_SOURCES "${f}")
+  endforeach()
 endif()
 add_executable(${TEST_TARGET_NAME} ${CR_TEST_SOURCES})
 add_dependencies(${TEST_TARGET_NAME} ${CR_LIB_TARGETS})
@@ -54,8 +55,7 @@ set_target_properties(${TEST_TARGET_NAME}
     PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
 )
 
-# install the test
+# IMPORTANT: Add the executable to the "export-set"
 install(TARGETS ${TEST_TARGET_NAME}
-  # IMPORTANT: Add the executable to the "export-set"
   EXPORT CoreRoboticsTargets
   RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin)

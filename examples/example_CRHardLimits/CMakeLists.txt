@@ -38,49 +38,15 @@
 #
 # =====================================================================
 
-# cmake settings
-# cmake_minimum_required(VERSION 3.5)
-# set(CMAKE_CXX_STANDARD 14)
-# set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Find CoreRobotics
-# find_package(CoreRobotics REQUIRED 2.0.0)
-# include_directories(${CR_INCLUDE_DIRS})
-# link_directories(${CR_LIBRARY_DIRS})
-
 # Get the example name and source
 file(GLOB source *.cpp)
 get_filename_component(example ${source} NAME_WE)
 
-# If building on linux add pthread and rt
-# if(UNIX AND NOT APPLE) # This may be useful for apple too
-#     set(link_flags pthread rt)
-# else()
-#     set(link_flags "")
-# endif()
-
-# Add the executable target
-# set(target cr-${example})
-# add_executable(${target} ${source})
-# add_dependencies(${target} ${CR_LIB_TARGETS})
-# target_link_libraries(${target} ${CR_LIBRARIES} ${link_flags})
-# set_target_properties(${target}
-#     PROPERTIES
-#     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
-# )
-
-# create the test target
+# create the example target
 set(EXAMPLE_TARGET_NAME ${CR_LIB_PREFIX}${example})
 file(GLOB CR_EXAMPLE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 add_executable(${EXAMPLE_TARGET_NAME} ${CR_EXAMPLE_SOURCES})
 add_dependencies(${EXAMPLE_TARGET_NAME} ${CR_LIB_TARGETS})
 target_link_libraries(${EXAMPLE_TARGET_NAME} ${CR_LIB_TARGETS} ${CR_LINK_FLAGS} ${GTEST_LIBRARIES})
 set_target_properties(${EXAMPLE_TARGET_NAME}
-    PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
-)
-
-# install the test
-install(TARGETS ${EXAMPLE_TARGET_NAME}
-  # IMPORTANT: Add the executable to the "export-set"
-  EXPORT CoreRoboticsTargets
-  RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin)
+    PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)

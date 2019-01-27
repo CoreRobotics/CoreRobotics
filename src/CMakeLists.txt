@@ -38,24 +38,41 @@
 #
 # =====================================================================
 
-# Create target libraries
+
+# build the CoreRobotics library ("CR" prefix files)
+if (${full})
+  add_library(CoreRobotics STATIC ${CR_SOURCES} ${CR_HEADERS})
+  set_target_properties(CoreRobotics PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/CoreRobotics.hpp)
+
+  # IMPORTANT: Add the library to the "export-set"
+  install(TARGETS ${TARGET_NAME}
+    EXPORT CoreRoboticsTargets
+    LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT shlib
+    ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
+    PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}"
+    COMPONENT dev)
+endif()
+
+
+# build the v2.0 shared modules
 foreach(p ${CR_LIB_MODULES})
 
-    set(TARGET_NAME ${CR_LIB_PREFIX}${p})
-    add_library(${TARGET_NAME} STATIC
-        ${CR_HEADERS_${p}} ${CR_SOURCES_${p}})
-    set_target_properties(${TARGET_NAME} PROPERTIES
-        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-        PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/CoreRobotics.hpp)
+  add_library(${CR_LIB_PREFIX}${p} SHARED ${CR_HEADERS_${p}} ${CR_SOURCES_${p}})
+  target_link_libraries(${CR_LIB_PREFIX}${p} ${CR_LIB_DEP_${p}})
+  set_target_properties(${CR_LIB_PREFIX}${p} PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+    PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/cr/${p})
 
-    # IMPORTANT: Add the library to the "export-set"
-    install(TARGETS ${TARGET_NAME}
-        EXPORT CoreRoboticsTargets
-        LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT shlib
-        ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}"
+  # IMPORTANT: Add the library to the "export-set"
+  install(TARGETS ${TARGET_NAME}
+    EXPORT CoreRoboticsTargets
+    LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT shlib
+    ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
+    PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}/cr/"
     COMPONENT dev)
-    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/cr/${p}
-        DESTINATION "${INSTALL_INCLUDE_DIR}/cr")
+
 endforeach()

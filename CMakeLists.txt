@@ -38,14 +38,14 @@
 #
 # =====================================================================
 
-#
+# ---------------------------------------------------------------------
 # Settings:
 #   -Dall = [true,false]            all targets
-#   -Dsplit = [true,false]          split up CoreRobotics libraries
-#   -Dfull = [true,false]           use only 2.0 source
+#   -Dfull = [true,false]           include deprecated source
 #   -Dlib = [true,false]            c++ lib
 #   -Dtests = [true,false]          c++ tests
 #   -Dpython = [true,false,2,3]     python binding
+# ---------------------------------------------------------------------
 
 # cmake settings
 cmake_minimum_required(VERSION 3.5)
@@ -167,72 +167,27 @@ endif()
 # ---------------------------------------------------------------------
 # Setup the library targets
 # ---------------------------------------------------------------------
-
-# build the CoreRobotics library
-add_library(CoreRobotics STATIC ${CR_SOURCES} ${CR_HEADERS})
-set_target_properties(CoreRobotics PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-  PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/CoreRobotics.hpp)
-
-# build the v2.0 shared modules
-foreach(p ${CR_LIB_MODULES})
-  add_library(${CR_LIB_PREFIX}${p} SHARED ${CR_HEADERS_${p}} ${CR_SOURCES_${p}})
-  target_link_libraries(${CR_LIB_PREFIX}${p} ${CR_LIB_DEP_${p}})
-  set_target_properties(${CR_LIB_PREFIX}${p} PROPERTIES
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-    PUBLIC_HEADER ${CMAKE_SOURCE_DIR}/src/cr/${p})
-endforeach()
-
-
-# define the project names
-# set(LIB_TARGET_NAME CoreRobotics)
-
-# If "all" build c++ static library
-# If "python" or "matlab" do not build c++ library
-# If "all" and python version specified build c++ library
-# if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib)
-    # if "split", then multiple libraries will be created
-#    if (split)
-#        set(CR_LIB_TARGETS "")
-#        foreach(p ${CR_LIB_MODULES})
-#            list(APPEND CR_LIB_TARGETS ${CR_LIB_PREFIX}${p})
-#        endforeach()
-#        add_subdirectory(${PROJECT_SOURCE_DIR}/src)
-    # otherwise we just make "CoreRobotics"
-#    else()
-#        set(CR_LIB_TARGETS ${PROJECT_NAME})
-#        add_library(${CR_LIB_TARGETS} ${CR_SOURCES} ${CR_HEADERS})
-#        set_target_properties(${CR_LIB_TARGETS} PROPERTIES
-#            LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-#            ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
-#            PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/src/CoreRobotics.hpp)
-#    endif()
-#endif()
+if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib)
+  add_subdirectory(${PROJECT_SOURCE_DIR}/src)
+endif()
 
 
 # ---------------------------------------------------------------------
 # Setup the test target
 # ---------------------------------------------------------------------
-# if ((tests OR all) AND (GTest_FOUND))
-#     add_subdirectory(${PROJECT_SOURCE_DIR}/tests)
-# endif()
 
 # set CR_LIB_TARGETS
-set(CR_LIB_TARGETS CoreRobotics)
+set(CR_LIB_TARGETS "")
+if (full)
+  set(CR_LIB_TARGETS CoreRobotics)
+endif()
 foreach(p ${CR_LIB_MODULES})
   list(APPEND CR_LIB_TARGETS ${CR_LIB_PREFIX}${p})
 endforeach()
 
-# tests
-set(TEST_TARGET_NAME ${CR_LIB_PREFIX}tests)
-file(GLOB CR_TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
-add_executable(${TEST_TARGET_NAME} ${CR_TEST_SOURCES})
-add_dependencies(${TEST_TARGET_NAME} ${CR_LIB_TARGETS})
-target_link_libraries(${TEST_TARGET_NAME} ${CR_LIB_TARGETS} ${CR_LINK_FLAGS} ${GTEST_LIBRARIES})
-set_target_properties(${TEST_TARGET_NAME} PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+if ((tests OR all) AND (GTest_FOUND))
+  add_subdirectory(${PROJECT_SOURCE_DIR}/tests)
+endif()
 
 
 # ---------------------------------------------------------------------
@@ -255,23 +210,23 @@ set_target_properties(${TEST_TARGET_NAME} PROPERTIES
 # Export the package configuration and version files
 # ---------------------------------------------------------------------
 # export package for use from the build tree
-# export (TARGETS ${CR_LIB_TARGETS} FILE ${PROJECT_BINARY_DIR}/CoreRoboticsTargets.cmake)
-# export (PACKAGE CoreRobotics)
+export (TARGETS ${CR_LIB_TARGETS} FILE ${PROJECT_BINARY_DIR}/CoreRoboticsTargets.cmake)
+export (PACKAGE CoreRobotics)
 
 # package definitions
-# set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
-# set (CONF_LIBRARIES    ${CR_LIB_TARGETS})
-# set (CONF_LIBRARY_DIRS ${PROJECT_SOURCE_DIR}/lib)
-# set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
+set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
+set (CONF_LIBRARIES    ${CR_LIB_TARGETS})
+set (CONF_LIBRARY_DIRS ${PROJECT_SOURCE_DIR}/lib)
+set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
 
 # package configuration and version files
-# configure_file (CoreRoboticsConfig.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfig.cmake" @ONLY)
-# configure_file (CoreRoboticsConfigVersion.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY)
+configure_file (CoreRoboticsConfig.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfig.cmake" @ONLY)
+configure_file (CoreRoboticsConfigVersion.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY)
 
 
 # ---------------------------------------------------------------------
 # Setup the example targets
 # ---------------------------------------------------------------------
-# if (examples OR all)
-#     add_subdirectory(${PROJECT_SOURCE_DIR}/examples)
-# endif()
+if (examples OR all)
+  add_subdirectory(${PROJECT_SOURCE_DIR}/examples)
+endif()
