@@ -92,11 +92,6 @@ $ make install
 ```
 $ cr-tests
 ```
-6. Run a couple examples
-```
-$ cr-example_CRCore
-$ cr-example_CRTrajectoryGenerator
-```
 
 
 ## Use
