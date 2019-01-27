@@ -1,7 +1,7 @@
 //=====================================================================
 /*
 Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2017, CoreRobotics.
+Copyright (c) 2019, CoreRobotics.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -42,9 +42,11 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef CRTypes_hpp
 #define CRTypes_hpp
 
+#define CR_DEPRECATED "Not supported as of Core Robotics 2.0"
+
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace CoreRobotics  {
     
 //=====================================================================
 /*!
@@ -53,7 +55,11 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for signal types
+#ifndef SWIG
+enum [[deprecated(CR_DEPRECATED)]] CRSignalType {
+#else
 enum CRSignalType {
+#endif
     CR_SIGNAL_FORCE,
     CR_SIGNAL_POSITION,
     CR_SIGNAL_VELOCITY,
@@ -62,7 +68,11 @@ enum CRSignalType {
 };
 //=====================================================================
 //! Result enumerator for consistent operation result flags.
+#ifndef SWIG
+enum [[deprecated(CR_DEPRECATED)]] CRResult {
+#else
 enum CRResult {
+#endif
     CR_RESULT_SUCCESS,
     CR_RESULT_SINGULAR,
     CR_RESULT_UNWRITABLE,

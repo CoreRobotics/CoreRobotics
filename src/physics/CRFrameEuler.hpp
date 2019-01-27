@@ -1,7 +1,7 @@
 //=====================================================================
 /*
 Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2017, CoreRobotics.
+Copyright (c) 2019, CoreRobotics.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -46,11 +46,12 @@ POSSIBILITY OF SUCH DAMAGE.
 // Includes
 #include "Eigen/Dense"
 #include "CRFrame.hpp"
+#include "core/CRTypes.hpp"
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace CoreRobotics  {
     
 //=====================================================================
 /*!
@@ -93,7 +94,11 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for handling Euler angle free variable candidates
+#ifndef SWIG
+enum [[deprecated(CR_DEPRECATED)]] CREulerFreeVariable {
+#else
 enum CREulerFreeVariable {
+#endif
     CR_EULER_FREE_NONE,
     CR_EULER_FREE_POS_X,
     CR_EULER_FREE_POS_Y,
@@ -105,7 +110,11 @@ enum CREulerFreeVariable {
 
 
 //=====================================================================
+#ifndef SWIG
+class [[deprecated(CR_DEPRECATED)]] CRFrameEuler : public CRFrame  {
+#else
 class CRFrameEuler : public CRFrame  {
+#endif
 
 //---------------------------------------------------------------------
 // Constructor and Destructor

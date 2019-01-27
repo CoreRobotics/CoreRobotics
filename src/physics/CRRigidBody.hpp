@@ -1,7 +1,7 @@
 //=====================================================================
 /*
 Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2017, CoreRobotics.
+Copyright (c) 2019, CoreRobotics.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -47,11 +47,12 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CRFrame.hpp"
 #include "CRFrameDh.hpp"
 #include "CRFrameEuler.hpp"
+#include "core/CRTypes.hpp"
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace CoreRobotics  {
     
 //=====================================================================
 /*!
@@ -82,7 +83,11 @@ namespace CoreRobotics {
  Pearson, 2004.
  */
 //=====================================================================
+#ifndef SWIG
+class [[deprecated(CR_DEPRECATED)]] CRRigidBody {
+#else
 class CRRigidBody {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

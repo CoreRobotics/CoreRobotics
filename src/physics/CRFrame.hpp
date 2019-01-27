@@ -1,7 +1,7 @@
 //=====================================================================
 /*
 Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2017, CoreRobotics.
+Copyright (c) 2019, CoreRobotics.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include "CRTypes.hpp"
+#include "core/CRTypes.hpp"
 
 
 //=====================================================================
@@ -101,7 +101,11 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for handling Euler angle conventions
+#ifndef SWIG
+enum [[deprecated(CR_DEPRECATED)]] CREulerMode {
+#else
 enum CREulerMode {
+#endif
     CR_EULER_MODE_ZXZ,
     CR_EULER_MODE_XYX,
     CR_EULER_MODE_YZY,
@@ -117,7 +121,11 @@ enum CREulerMode {
 };
     
 //=====================================================================
+#ifndef SWIG
+class [[deprecated(CR_DEPRECATED)]] CRFrame {
+#else
 class CRFrame {
+#endif
 
 //---------------------------------------------------------------------
 // Constructor and Destructor

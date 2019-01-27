@@ -1,7 +1,7 @@
 //=====================================================================
 /*
 Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2017, CoreRobotics.
+Copyright (c) 2019, CoreRobotics.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -44,12 +44,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "CRTypes.hpp"
 #include <chrono>
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace CoreRobotics  {
     
 //=====================================================================
 /*!
@@ -79,7 +80,11 @@ namespace CoreRobotics {
  \include example_CRCore.cpp
  */
 //=====================================================================
+#ifndef SWIG
+class [[deprecated(CR_DEPRECATED)]] CRClock {
+#else
 class CRClock {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

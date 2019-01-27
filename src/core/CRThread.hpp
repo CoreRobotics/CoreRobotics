@@ -1,7 +1,7 @@
 //=====================================================================
 /*
 Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2017, CoreRobotics.
+Copyright (c) 2019, CoreRobotics.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -44,12 +44,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "CRTypes.hpp"
 #include <thread>
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace CoreRobotics  {
     
 //=====================================================================
 /*!
@@ -80,7 +81,11 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for specifying thread priority
+#ifndef SWIG
+enum [[deprecated(CR_DEPRECATED)]] CRThreadPriority {
+#else
 enum CRThreadPriority {
+#endif
 	CR_PRIORITY_LOWEST,
 	CR_PRIORITY_LOW,
 	CR_PRIORITY_NORMAL,
@@ -89,7 +94,11 @@ enum CRThreadPriority {
 };
 
 //=====================================================================
+#ifndef SWIG
+class [[deprecated(CR_DEPRECATED)]] CRThread {
+#else
 class CRThread {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor

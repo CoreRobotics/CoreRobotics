@@ -1,7 +1,7 @@
 //=====================================================================
 /*
 Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2017, CoreRobotics.
+Copyright (c) 2019, CoreRobotics.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -46,11 +46,12 @@ POSSIBILITY OF SUCH DAMAGE.
 // Includes
 #include "Eigen/Dense"
 #include "CRFrame.hpp"
+#include "core/CRTypes.hpp"
 
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace CoreRobotics  {
     
 //=====================================================================
 /*!
@@ -96,7 +97,11 @@ namespace CoreRobotics {
  */
 //=====================================================================
 //! Enumerator for handling DH parameter free variable candidates
+#ifndef SWIG
+enum [[deprecated(CR_DEPRECATED)]] CRDhFreeVariable {
+#else
 enum CRDhFreeVariable {
+#endif
     CR_DH_FREE_NONE,
     CR_DH_FREE_R,
     CR_DH_FREE_ALPHA,
@@ -106,14 +111,22 @@ enum CRDhFreeVariable {
 
 
 //! Enumerator for handling DH conventions
+#ifndef SWIG
+enum [[deprecated(CR_DEPRECATED)]] CRDhMode {
+#else
 enum CRDhMode {
+#endif
     CR_DH_MODE_CLASSIC,
     CR_DH_MODE_MODIFIED,
 };
 
 
 //=====================================================================
+#ifndef SWIG
+class [[deprecated(CR_DEPRECATED)]] CRFrameDh : public CRFrame  {
+#else
 class CRFrameDh : public CRFrame  {
+#endif
     
 
 //---------------------------------------------------------------------

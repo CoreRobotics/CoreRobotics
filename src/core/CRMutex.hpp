@@ -1,7 +1,7 @@
 //=====================================================================
 /*
 Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2017, CoreRobotics.
+Copyright (c) 2019, CoreRobotics.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -44,11 +44,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
+#include "CRTypes.hpp"
 #include <mutex>
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics {
+namespace CoreRobotics  {
     
 //=====================================================================
 /*!
@@ -73,7 +74,11 @@ namespace CoreRobotics {
  */
 
 //=====================================================================
+#ifndef SWIG
+class [[deprecated(CR_DEPRECATED)]] CRMutex {
+#else
 class CRMutex {
+#endif
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
