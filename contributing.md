@@ -1,3 +1,7 @@
+## Important note
+All classes with a "CR" prefix have been deprecated.  Please do not reference these classes as they will be removed in the future, and are provided for reference only  When examining style, refer to files without "CR" in the name.
+
+
 ## Guidelines
 For general questions about git, see the [Gitlab help pages](https://gitlab.com/help/)
 
