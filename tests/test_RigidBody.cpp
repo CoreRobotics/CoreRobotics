@@ -38,8 +38,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
+
 #include <iostream>
-#include "CoreRobotics.hpp"
+#include <cr/physics>
 #include "gtest/gtest.h"
 
 // Use the CoreRobotics namespace
