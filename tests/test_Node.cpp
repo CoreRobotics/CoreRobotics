@@ -40,7 +40,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 
 #include <iostream>
-#include "CoreRobotics.hpp"
+#include <cr/world>
 #include "gtest/gtest.h"
 
 
