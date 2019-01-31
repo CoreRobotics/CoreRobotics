@@ -44,6 +44,7 @@
 #   -Dfull = [true,false]           include deprecated source
 #   -Dlib = [true,false]            c++ lib
 #   -Dtests = [true,false]          c++ tests
+#   -Dreport = [true,false]         sets all options for lcov report
 #   -Dpython = [true,false,2,3]     python binding
 # ---------------------------------------------------------------------
 
@@ -165,9 +166,32 @@ endif()
 
 
 # ---------------------------------------------------------------------
+# Code coverage with lcov
+# ---------------------------------------------------------------------
+
+# Common configuration
+add_compile_options(-Wall -pedantic)
+
+# Code Coverage Configuration
+add_library(coverage_config INTERFACE)
+
+if (report)
+  # Add required flags (GCC & LLVM/Clang)
+  target_compile_options(coverage_config INTERFACE
+    -O0        # no optimization
+    -g         # generate debug info
+    --coverage # sets all required flags
+  )
+  target_link_options(coverage_config INTERFACE --coverage)
+endif()
+
+enable_testing() # CTest
+
+
+# ---------------------------------------------------------------------
 # Setup the library targets
 # ---------------------------------------------------------------------
-if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib)
+if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib OR report)
   add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 endif()
 
@@ -185,7 +209,7 @@ foreach(p ${CR_LIB_MODULES})
   list(APPEND CR_LIB_TARGETS ${CR_LIB_PREFIX}${p})
 endforeach()
 
-if ((tests OR all) AND (GTest_FOUND))
+if ((tests OR all OR report) AND (GTest_FOUND))
   add_subdirectory(${PROJECT_SOURCE_DIR}/tests)
 endif()
 
@@ -209,19 +233,22 @@ endif()
 # ---------------------------------------------------------------------
 # Export the package configuration and version files
 # ---------------------------------------------------------------------
-# export package for use from the build tree
-export (TARGETS ${CR_LIB_TARGETS} FILE ${PROJECT_BINARY_DIR}/CoreRoboticsTargets.cmake)
-export (PACKAGE CoreRobotics)
+if (NOT report)
 
-# package definitions
-set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
-set (CONF_LIBRARIES    ${CR_LIB_TARGETS})
-set (CONF_LIBRARY_DIRS ${PROJECT_SOURCE_DIR}/lib)
-set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
+  # export package for use from the build tree
+  export (TARGETS ${CR_LIB_TARGETS} FILE ${PROJECT_BINARY_DIR}/CoreRoboticsTargets.cmake)
+  export (PACKAGE CoreRobotics)
 
-# package configuration and version files
-configure_file (CoreRoboticsConfig.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfig.cmake" @ONLY)
-configure_file (CoreRoboticsConfigVersion.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY)
+  # package definitions
+  set (CONF_INCLUDE_DIRS ${CR_INCLUDE_DIRS})
+  set (CONF_LIBRARIES    ${CR_LIB_TARGETS})
+  set (CONF_LIBRARY_DIRS ${PROJECT_SOURCE_DIR}/lib)
+  set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
+
+  # package configuration and version files
+  configure_file (CoreRoboticsConfig.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfig.cmake" @ONLY)
+  configure_file (CoreRoboticsConfigVersion.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY)
+endif()
 
 
 # ---------------------------------------------------------------------

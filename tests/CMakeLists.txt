@@ -57,7 +57,15 @@ set_target_properties(${TEST_TARGET_NAME}
     PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
 )
 
+# Include code-coverage settings:
+if (report)
+  target_link_libraries(${TEST_TARGET_NAME} coverage_config)
+  add_test(NAME cr_test COMMAND ${TEST_TARGET_NAME})
+endif()
+
 # IMPORTANT: Add the executable to the "export-set"
-install(TARGETS ${TEST_TARGET_NAME}
-  EXPORT CoreRoboticsTargets
-  RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin)
+if(NOT report)
+  install(TARGETS ${TEST_TARGET_NAME}
+    EXPORT CoreRoboticsTargets
+    RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin)
+endif()
