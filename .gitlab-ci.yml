@@ -139,6 +139,24 @@ test-install:
   dependencies:
     - build-lib
 
+test-coverage:
+  stage: test
+  script:
+    - apt-get update && apt-get -y install lcov curl
+    - mkdir build && cd build
+    - cmake -Dreport=true ..
+    - cmake --build . --config Debug
+    - ctest --output-on-failure
+  after_script:
+    # Create lcov report
+    - lcov --capture --directory . --output-file coverage.info
+    - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+    - lcov --list coverage.info
+    # Uploading to CodeCov
+    - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
+  dependencies:
+    - build-lib
+
 # test-python2:
 #   stage: test
 #   script:

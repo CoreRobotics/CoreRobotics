@@ -15,6 +15,10 @@ For general questions about git, see the [Gitlab help pages](https://gitlab.com/
 8. Make sure tests pass before you commit to a main branch.
 9. Use the gitlab issue tracker for communicating feature requests and issues.
 
+Current code coverage using codecov
+![Sunbusrt coverage report](https://codecov.io/gh/CoreRobotics/CoreRobotics/branch/master/graphs/sunburst.svg)
+<img src="https://codecov.io/gh/CoreRobotics/CoreRobotics/branch/master/graphs/sunburst.svg">
+
 
 ## Style Guide
 Refer to the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) for detailed explanations.

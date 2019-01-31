@@ -41,45 +41,81 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include <iostream>
 #include <cr/signal>
+#include <cr/world>
 #include <cr/physics>
 #include <cr/core>
 #include "gtest/gtest.h"
 
 
 // Use the CoreRobotics namespace
-using namespace cr::physics;
 using namespace cr::core;
+using namespace cr::world;
 using namespace cr::signal;
-
+using namespace cr::physics;
 
 //
-// Test signal connection
+// Test Slot connection
 //
-TEST(Signal, Request){
+TEST(Log, Step){
     
-    // set up a Frame
-    std::shared_ptr<FrameEuler> myClass = std::make_shared<FrameEuler>();
-    myClass->setFreeVariable(CR_EULER_FREE_POS_X);
-    myClass->setFreeValue(0.71);
+    // set up 2 Frames
+    std::shared_ptr<Frame> myFrame1 = std::shared_ptr<Frame>(new Frame);
+    std::shared_ptr<Frame> myFrame2 = std::shared_ptr<Frame>(new Frame);
     
-    // create the signal
-    std::shared_ptr<Signal<double, FrameEuler>> mySignalFreeValue =
-        Signal<double, FrameEuler>::create(myClass, &FrameEuler::getFreeValue);
+    Eigen::Vector3d p = {0.0, 0.1, 1.0};
+    myFrame1->setTranslation(p);
     
-    // check values
-    EXPECT_EQ(myClass, mySignalFreeValue->getEmitter());
-    EXPECT_DOUBLE_EQ(0.71, mySignalFreeValue->request());
+    Eigen::Vector3d v = myFrame1->getTranslation();
+    EXPECT_DOUBLE_EQ(v(0), p(0));
+    EXPECT_DOUBLE_EQ(v(1), p(1));
+    EXPECT_DOUBLE_EQ(v(2), p(2));
+    v = myFrame2->getTranslation();
+    EXPECT_DOUBLE_EQ(v(0), 0);
+    EXPECT_DOUBLE_EQ(v(1), 0);
+    EXPECT_DOUBLE_EQ(v(2), 0);
     
-    // let's create another signal of different type
-    std::shared_ptr<Signal<Eigen::Vector3d, FrameEuler>> mySignalPose =
-        Signal<Eigen::Vector3d, FrameEuler>::create(myClass, &FrameEuler::getTranslation);
+    // create the signal(s)
+    std::shared_ptr<Signal<Eigen::Vector3d, Frame>> mySignal1 =
+      Signal<Eigen::Vector3d, Frame>::create(myFrame1, &Frame::getTranslation);
+    std::shared_ptr<Signal<Eigen::Vector3d, Frame>> mySignal2 =
+      Signal<Eigen::Vector3d, Frame>::create(myFrame2, &Frame::getTranslation);
+    mySignal1->setName("Signal 1");
+    mySignal2->setName("Signal 2");
     
-    // check values
-    Eigen::Vector3d v = mySignalPose->request();
-    EXPECT_EQ(myClass, mySignalPose->getEmitter());
-    EXPECT_DOUBLE_EQ(0.71, v(0));
-    EXPECT_DOUBLE_EQ(0.0, v(1));
-    EXPECT_DOUBLE_EQ(0.0, v(2));
+    // open a log and attach the signals
+    LogPtr myLog = Log::create();
+    myLog->add(mySignal1);
+    myLog->add(mySignal2);
+    
+    // Start the log
+    Clock c;
+    c.startTimer();
+    myLog->setName("my_log");
+    myLog->onStart();
+    myLog->step();
+    c.sleep(0.001);
+    myLog->step();
+    myLog->step();
+    c.sleep(0.001);
+    myLog->step();
+    myLog->step();
+    myLog->onStop();
+    
+    // Now we should load the log file
+    // and make sure it's what we expect
+    std::ifstream t;
+    t.open("my_log");
+    std::string buffer;
+    std::string line;
+    std::string str = "time,Signal 1[0],Signal 1[1],Signal 1[2],Signal 2[0],Signal 2[1],Signal 2[2],";
+    std::getline(t, line);
+    EXPECT_EQ(str, line);
+    std::cout << line << "\n";
+    while(t){
+        std::getline(t, line);
+        std::cout << line << "\n";
+    }
+    t.close();
 }
 
 
