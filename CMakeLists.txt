@@ -182,11 +182,7 @@ if (report)
     -g         # generate debug info
     --coverage # sets all required flags
   )
-  if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.13)
-    target_link_options(coverage_config INTERFACE --coverage)
-  else()
-    target_link_libraries(coverage_config INTERFACE --coverage)
-  endif()
+  target_link_libraries(coverage_config INTERFACE --coverage)
 endif()
 
 enable_testing() # CTest
