@@ -134,6 +134,7 @@ if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR cpp)
     set_target_properties( ${LIB_TARGET_NAME} PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
         ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
+        CXX_STANDARD ${CMAKE_CXX_STANDARD}
     )
 
 	# Sort into a group structure
