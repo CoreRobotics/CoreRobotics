@@ -40,11 +40,12 @@
 
 # ---------------------------------------------------------------------
 # Settings:
-#   -Dall = [true,false]            all targets
-#   -Dfull = [true,false]           include deprecated source
-#   -Dlib = [true,false]            c++ lib
-#   -Dtests = [true,false]          c++ tests
-#   -Dreport = [true,false]         sets all options for lcov report
+#   -Dall    = [true/false]         all targets
+#   -Dfull   = [true/false]         include deprecated source
+#   -Dlib    = [true/false]         c++ lib
+#   -Dtests  = [true/false]         c++ tests
+#   -Dreport = [true/false]         sets all options for lcov report
+#   -Dlint   = [true/false]         runs clang-tiny linter on lib
 #   -Dpython = [true,false,2,3]     python binding
 # ---------------------------------------------------------------------
 
@@ -92,12 +93,12 @@ endforeach()
 # ---------------------------------------------------------------------
 
 # If building wrappers Eigen 3.3.3 is required
-set (EIGEN_VERSION 3.3.3)
-find_package (Eigen3 ${EIGEN_VERSION})
+find_package (Eigen3 3.3.3)
 find_package (Boost 1.48)
 find_package (GTest)
-find_package (OpenSceneGraph)
+find_package (OpenSceneGraph 3.6)
 find_package (SWIG)
+find_program (CLANG_TIDY_EXE NAMES "clang-tidy")
 
 if(NOT Boost_INCLUDE_DIR)
   message(FATAL_ERROR "Boost_INCLUDE_DIR not found - please define the path to boost")
@@ -164,6 +165,15 @@ else()
     set(CR_LINK_FLAGS "")
 endif()
 
+# set CR_LIB_TARGETS
+set(CR_LIB_TARGETS "")
+if (full)
+  set(CR_LIB_TARGETS CoreRobotics)
+endif()
+foreach(p ${CR_LIB_MODULES})
+  list(APPEND CR_LIB_TARGETS ${CR_LIB_PREFIX}${p})
+endforeach()
+
 
 # ---------------------------------------------------------------------
 # Code coverage with lcov
@@ -189,6 +199,24 @@ enable_testing() # CTest
 
 
 # ---------------------------------------------------------------------
+# C++ Linting with clang-tidy
+# ---------------------------------------------------------------------
+
+# look for clang-tidy
+if (lint)
+  find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
+  if(NOT CLANG_TIDY_EXE)
+    message(STATUS "clang-tidy not found.")
+    set(lint false)
+  else()
+    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+    message(STATUS "clang-tidy found: ${CLANG_TIDY_EXE}, running C++ linter")
+    set(DO_CLANG_TIDY "${CLANG_TIDY_EXE}" "-checks=*,-clang-analyzer-alpha.*")
+  endif()
+endif()
+
+
+# ---------------------------------------------------------------------
 # Setup the library targets
 # ---------------------------------------------------------------------
 if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib OR report)
@@ -199,16 +227,6 @@ endif()
 # ---------------------------------------------------------------------
 # Setup the test target
 # ---------------------------------------------------------------------
-
-# set CR_LIB_TARGETS
-set(CR_LIB_TARGETS "")
-if (full)
-  set(CR_LIB_TARGETS CoreRobotics)
-endif()
-foreach(p ${CR_LIB_MODULES})
-  list(APPEND CR_LIB_TARGETS ${CR_LIB_PREFIX}${p})
-endforeach()
-
 if ((tests OR all OR report) AND (GTest_FOUND))
   add_subdirectory(${PROJECT_SOURCE_DIR}/tests)
 endif()

@@ -94,4 +94,11 @@ foreach(p ${CR_LIB_MODULES})
     target_link_libraries(${target} coverage_config)
   endif()
 
+  # Include linting settings:
+  if (lint)
+    message(STATUS "setting linter for ${target}")
+    set_target_properties(${target} PROPERTIES
+      CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
+  endif()
+
 endforeach()

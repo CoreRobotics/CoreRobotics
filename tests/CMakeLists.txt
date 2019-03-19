@@ -69,3 +69,10 @@ if(NOT report)
     EXPORT CoreRoboticsTargets
     RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin)
 endif()
+
+# Include linting settings:
+if (lint)
+  message(STATUS "setting linter for ${TEST_TARGET_NAME}")
+  set_target_properties(${TEST_TARGET_NAME} PROPERTIES
+    CXX_CLANG_TIDY "${DO_CLANG_TIDY}")
+endif()
