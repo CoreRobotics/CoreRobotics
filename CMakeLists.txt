@@ -1,56 +1,21 @@
-# =====================================================================
-#
-# Software License Agreement (BSD-3-Clause License)
-# Copyright (c) 2019, CoreRobotics.
-# All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
-#
-# * Redistributions of source code must retain the above copyright
-# notice, this list of conditions and the following disclaimer.
-#
-# * Redistributions in binary form must reproduce the above copyright
-# notice, this list of conditions and the following disclaimer in the
-# documentation and/or other materials provided with the distribution.
-#
-# * Neither the name of CoreRobotics nor the names of its contributors
-# may be used to endorse or promote products derived from this
-# software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-# COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-# POSSIBILITY OF SUCH DAMAGE.
-#
-# \project CoreRobotics Project
-# \url     www.corerobotics.org
-#
-#
-# =====================================================================
+# Copyright (c) 2017-2019, CoreRobotics.  All rights reserved.
+# Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
+# http://www.corerobotics.org
 
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Settings:
 #   -Dall    = [true/false]         all targets
 #   -Dfull   = [true/false]         include deprecated source
 #   -Dlib    = [true/false]         c++ lib
 #   -Dtests  = [true/false]         c++ tests
 #   -Dreport = [true/false]         sets all options for lcov report
-#   -Dlint   = [true/false]         runs clang-tiny linter on lib
+#   -Dlint   = [true/false]         runs clang-tiny linting on source code
+#   -Dformat = [true/false]         runs clang-format -i on source code
 #   -Dpython = [true,false,2,3]     python binding
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 # cmake settings
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.14)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 cmake_policy(SET CMP0054 NEW)
@@ -86,34 +51,35 @@ foreach(p LIB BIN INCLUDE CMAKE)
   endif()
 endforeach()
 
-
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Find depdendencies
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
-# If building wrappers Eigen 3.3.3 is required
-find_package (Eigen3 3.3.3)
+find_package (Eigen3 3.3.3)  # swig wrapper version
 find_package (Boost 1.48)
 find_package (GTest)
 find_package (OpenSceneGraph 3.6)
 find_package (SWIG)
 find_program (CLANG_TIDY_EXE NAMES "clang-tidy")
+find_program (CLANG_FORMAT_EXE NAMES "clang-format")
 
 if(NOT Boost_INCLUDE_DIR)
-  message(FATAL_ERROR "Boost_INCLUDE_DIR not found - please define the path to boost")
+  message(FATAL_ERROR
+    "Boost_INCLUDE_DIR not found - please define the path to boost"
+  )
 endif()
 
 if(NOT EIGEN3_INCLUDE_DIR)
-  message(FATAL_ERROR "EIGEN3_INCLUDE_DIR not found - please define the path to eigen")
+  message(FATAL_ERROR
+    "EIGEN3_INCLUDE_DIR not found - please define the path to eigen"
+  )
 else()
   message(STATUS "Eigen found at ${EIGEN3_INCLUDE_DIR}")
 endif()
 
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Global library variables (visible to subdirectory CMakeLists)
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 # define includes
 set(CR_INCLUDE_DIRS
@@ -143,11 +109,13 @@ set(CR_LIB_DEP_control ${CR_LIB_PREFIX}core)
 # get header and source files
 set(CR_HEADERS "")
 set(CR_SOURCES "")
+set(CR2_FILES "")
 foreach(p ${CR_LIB_MODULES})
   file(GLOB CR_HEADERS_ ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/CR*.hpp)
   file(GLOB CR_SOURCES_ ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/CR*.cpp)
   file(GLOB CR_HEADERS_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/*.hpp)
   file(GLOB CR_SOURCES_${p} ${CMAKE_CURRENT_SOURCE_DIR}/src/${p}/*.cpp)
+  list(APPEND CR2_FILES ${CR_HEADERS_${p}} ${CR_SOURCES_${p}})
   foreach(f ${CR_HEADERS_})
     list(REMOVE_ITEM CR_HEADERS_${p} "${f}")
   endforeach()
@@ -174,10 +142,9 @@ foreach(p ${CR_LIB_MODULES})
   list(APPEND CR_LIB_TARGETS ${CR_LIB_PREFIX}${p})
 endforeach()
 
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Code coverage with lcov
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 # Common configuration
 add_compile_options(-Wall -pedantic)
@@ -197,64 +164,77 @@ endif()
 
 enable_testing() # CTest
 
+# ------------------------------------------------------------------------------
+# C++ Formatting
+# ------------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------
-# C++ Linting with clang-tidy
-# ---------------------------------------------------------------------
-
-# look for clang-tidy
-if (lint)
-  find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
-  if(NOT CLANG_TIDY_EXE)
-    message(STATUS "clang-tidy not found.")
-    set(lint false)
+if (format)
+  if(NOT CLANG_FORMAT_EXE)
+    message(STATUS "clang-format not found, skipping format")
+    SET(format FALSE)
   else()
-    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-    message(STATUS "clang-tidy found: ${CLANG_TIDY_EXE}, running C++ linter")
-    set(DO_CLANG_TIDY "${CLANG_TIDY_EXE}" "-checks=*,-clang-analyzer-alpha.*")
+    message(STATUS "clang-format found: ${CLANG_FORMAT_EXE}")
+    add_custom_target(
+      run-format
+      COMMAND ${CLANG_FORMAT_EXE} -i -style=file ${CR2_FILES}
+    )
   endif()
 endif()
 
+# ------------------------------------------------------------------------------
+# C++ Linting
+# ------------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------
+# look for clang-tidy
+if (lint)
+  if(NOT CLANG_TIDY_EXE)
+    message(STATUS "clang-tidy not found.")
+    SET(lint FALSE)
+  else()
+    message(STATUS "clang-tidy found: ${CLANG_TIDY_EXE}")
+    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+    set(DO_CLANG_TIDY "${CLANG_TIDY_EXE}" "-checks=*")
+  endif()
+endif()
+
+# ------------------------------------------------------------------------------
 # Setup the library targets
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib OR report)
   add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 endif()
 
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Setup the test target
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 if ((tests OR all OR report) AND (GTest_FOUND))
   add_subdirectory(${PROJECT_SOURCE_DIR}/tests)
 endif()
 
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Setup the python target
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # if(python OR all)
 #     add_subdirectory(${PROJECT_SOURCE_DIR}/python)
 # endif()
 
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Setup the matlab target
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # if (matlab OR all)
 #     add_subdirectory(${PROJECT_SOURCE_DIR}/matlab)
 # endif()
 
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Export the package configuration and version files
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 if (NOT report)
 
   # export package for use from the build tree
-  export (TARGETS ${CR_LIB_TARGETS} FILE ${PROJECT_BINARY_DIR}/CoreRoboticsTargets.cmake)
+  export(
+    TARGETS ${CR_LIB_TARGETS}
+    FILE ${PROJECT_BINARY_DIR}/CoreRoboticsTargets.cmake
+  )
   export (PACKAGE CoreRobotics)
 
   # package definitions
@@ -264,14 +244,19 @@ if (NOT report)
   set (CONF_SOURCE_DIR   ${PROJECT_SOURCE_DIR})
 
   # package configuration and version files
-  configure_file (CoreRoboticsConfig.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfig.cmake" @ONLY)
-  configure_file (CoreRoboticsConfigVersion.cmake.in "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY)
+  configure_file(
+    CoreRoboticsConfig.cmake.in
+    "${PROJECT_BINARY_DIR}/CoreRoboticsConfig.cmake" @ONLY
+  )
+  configure_file(
+    CoreRoboticsConfigVersion.cmake.in
+    "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY
+  )
 endif()
 
-
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Setup the example targets
-# ---------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 if (examples OR all)
   add_subdirectory(${PROJECT_SOURCE_DIR}/examples)
 endif()
