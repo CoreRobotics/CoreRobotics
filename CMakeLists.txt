@@ -15,7 +15,7 @@
 # ------------------------------------------------------------------------------
 
 # cmake settings
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 cmake_policy(SET CMP0054 NEW)
@@ -126,6 +126,12 @@ foreach(p ${CR_LIB_MODULES})
   list(APPEND CR_SOURCES ${CR_SOURCES_})
 endforeach()
 
+# get the tests
+file(GLOB CR2_TESTS
+  ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.hpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp
+)
+
 # If building on linux add pthread and rt
 if(UNIX AND NOT APPLE)
     set(CR_LINK_FLAGS pthread rt)
@@ -176,7 +182,7 @@ if (format)
     message(STATUS "clang-format found: ${CLANG_FORMAT_EXE}")
     add_custom_target(
       run-format
-      COMMAND ${CLANG_FORMAT_EXE} -i -style=file ${CR2_FILES}
+      COMMAND ${CLANG_FORMAT_EXE} -i -style=file ${CR2_FILES} ${CR2_TESTS}
     )
   endif()
 endif()
