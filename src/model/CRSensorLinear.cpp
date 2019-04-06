@@ -41,47 +41,40 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "CRSensorLinear.hpp"
 
-
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  The constructor creates a sensor model.  The i_H specifies the H matrix
  for the observation equation:\n
- 
+
  \f$ zPredict =  H x \f$
- 
- where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
+
+ where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted
  sensor observation.
- 
+
  \param[in] i_H - the observation matrix H
  \param[in] i_x0 - the initial state.
  */
 //---------------------------------------------------------------------
-CRSensorLinear::CRSensorLinear(Eigen::MatrixXd i_H,
-                               Eigen::VectorXd i_x0)
-{
-    this->m_H = i_H;
-    this->setState(i_x0);
+CRSensorLinear::CRSensorLinear(Eigen::MatrixXd i_H, Eigen::VectorXd i_x0) {
+  this->m_H = i_H;
+  this->setState(i_x0);
 }
-    
-    
+
 //=====================================================================
 /*!
  This method simulates the measurement from the value of the underlying
  state.\n
- 
+
  \return - simulated measurement (z).
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRSensorLinear::measurement(void)
-{
-    return this->m_H * this->m_state;
+Eigen::VectorXd CRSensorLinear::measurement(void) {
+  return this->m_H * this->m_state;
 }
-
 
 //=====================================================================
 // End namespace

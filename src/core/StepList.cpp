@@ -10,67 +10,48 @@
 // Begin namespace
 namespace cr {
 namespace core {
-    
-    
+
 //---------------------------------------------------------------------
 /*!
  The constructor sets up the StepList.\n
  */
 //---------------------------------------------------------------------
-StepList::StepList(){
-    
-}
-
+StepList::StepList() {}
 
 //---------------------------------------------------------------------
 /*!
  The destructor closes the StepList.\n
  */
 //---------------------------------------------------------------------
-StepList::~StepList(){
-    
-    m_vertices.clear();
-}
-    
-    
+StepList::~StepList() { m_vertices.clear(); }
+
 //---------------------------------------------------------------------
 /*!
  Create a new StepList.\n
  */
 //---------------------------------------------------------------------
-StepListPtr StepList::create(){
-    return std::make_shared<StepList>();
-}
-
+StepListPtr StepList::create() { return std::make_shared<StepList>(); }
 
 //---------------------------------------------------------------------
 /*!
  This function adds a step element to the list.\n
  */
 //---------------------------------------------------------------------
-void StepList::attach(StepPtr i_element)
-{
-    m_vertices.push_back(i_element);
-}
-    
+void StepList::attach(StepPtr i_element) { m_vertices.push_back(i_element); }
 
 //---------------------------------------------------------------------
 /*!
  This function steps the list of elements.\n
  */
 //---------------------------------------------------------------------
-void StepList::step(){
-    
-    // step each of the vertices
-    for (unsigned i = 0; i < m_vertices.size(); i++){
-        m_vertices.at(i)->step();
-    }
+void StepList::step() {
+
+  // step each of the vertices
+  for (unsigned i = 0; i < m_vertices.size(); i++) {
+    m_vertices.at(i)->step();
+  }
 }
-
-
 }
 }
 // end namespace
 //---------------------------------------------------------------------
-
-

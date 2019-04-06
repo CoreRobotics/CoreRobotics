@@ -47,11 +47,10 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CRTypes.hpp"
 #include <chrono>
 
-
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRClock.hpp
@@ -61,68 +60,60 @@ namespace CoreRobotics  {
 /*!
  \class CRClock
  \ingroup core
- 
+
  \brief This class implements a clock for timing code sections and
  control loop rates.
- 
+
  \details
  ## Description
- CRClock implements a simple clock interface for timing the 
+ CRClock implements a simple clock interface for timing the
  execution of code.
- 
+
  - CRClock::startTimer starts the clock.
  - CRClock::getElapsedTime returns the elapsed time (s) since the most
  recent call of startTimer().
  - CRClock::sleep sleeps the current thread (s).
- 
+
  ## Example
  This example creates and runs a simple CRClock.
  \include example_CRCore.cpp
  */
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRClock {
+class[[deprecated(CR_DEPRECATED)]] CRClock {
 #else
 class CRClock {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
-public:
-    
-    //! Class constructor
-    CRClock();
-    
-    //! Class destructor
-    virtual ~CRClock();
-    
-    
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Start the timer
-    void startTimer(void);
-    
-    //! Get the elapsed time [s] since startTimer() was called
-    double getElapsedTime(void);
-    
-    //! Sleep the current thread
-    void sleep(double i_time);
-    
-    
-//---------------------------------------------------------------------
-// Protected Members
-private:
 
-	//! steady_clock object
-	std::chrono::steady_clock m_clock;
-    
-    //! steady_clock timepoints
-	std::chrono::steady_clock::time_point m_t0, m_t1;
-    
-    
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
+public:
+  //! Class constructor
+  CRClock();
+
+  //! Class destructor
+  virtual ~CRClock();
+
+  //---------------------------------------------------------------------
+  // Public Methods
+public:
+  //! Start the timer
+  void startTimer(void);
+
+  //! Get the elapsed time [s] since startTimer() was called
+  double getElapsedTime(void);
+
+  //! Sleep the current thread
+  void sleep(double i_time);
+
+  //---------------------------------------------------------------------
+  // Protected Members
+private:
+  //! steady_clock object
+  std::chrono::steady_clock m_clock;
+
+  //! steady_clock timepoints
+  std::chrono::steady_clock::time_point m_t0, m_t1;
 };
 //=====================================================================
 // End namespace

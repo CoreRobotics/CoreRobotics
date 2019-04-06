@@ -49,11 +49,10 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CRFrameEuler.hpp"
 #include "core/CRTypes.hpp"
 
-
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRRigidBody.hpp
@@ -64,56 +63,52 @@ namespace CoreRobotics  {
 /*!
  \class CRRigidBody
  \ingroup physics
- 
+
  \brief This class is a container for rigid body transformations and
  dynamic properties necessary for multibody representations.
- 
+
  \details
  ## Description
  CRRigidBody implements a container for representing rigid body
  dynamics.  At a minimum it points to a CoreRobotics::CRFrame class or
  derived subclass.
- 
+
  ## Example
  This example creates an Rigid body object.
  \include example_CRManipulator.cpp
- 
+
  ## References
  [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
  Pearson, 2004.
  */
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRRigidBody {
+class[[deprecated(CR_DEPRECATED)]] CRRigidBody {
 #else
 class CRRigidBody {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
+
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
-    
-    //! Class constructor
-    CRRigidBody(CRFrame* i_frame);
-    CRRigidBody();
-    
-    //! Class destructor
-    // virtual ~CRRigidBody() = 0;
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
+  //! Class constructor
+  CRRigidBody(CRFrame * i_frame);
+  CRRigidBody();
+
+  //! Class destructor
+  // virtual ~CRRigidBody() = 0;
+
+  //---------------------------------------------------------------------
+  // Get/Set Methods
 public:
-    
-    //! Sets the pointer to the frame class for the transformation
-    void setFrame(CRFrame* i_frame) {this->m_frame = i_frame;}
-    
-//---------------------------------------------------------------------
-// Public Members
+  //! Sets the pointer to the frame class for the transformation
+  void setFrame(CRFrame * i_frame) { this->m_frame = i_frame; }
+
+  //---------------------------------------------------------------------
+  // Public Members
 public:
-    
-    //! Pointer to the rigid body frame transformation
-    CoreRobotics::CRFrame* m_frame;
-    
+  //! Pointer to the rigid body frame transformation
+  CoreRobotics::CRFrame *m_frame;
 };
 
 //=====================================================================

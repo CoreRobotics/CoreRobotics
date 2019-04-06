@@ -44,14 +44,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "core/CRTypes.hpp"
-#include "Eigen/Dense"
 #include "CRSensorModel.hpp"
+#include "Eigen/Dense"
+#include "core/CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRSensorLinear.hpp
@@ -61,79 +61,72 @@ namespace CoreRobotics  {
 /*!
  \class CRSensorLinear
  \ingroup model
- 
+
  \brief This class implements a sensor model.
- 
+
  \details
  ## Description
  CRSensorLinear implements a sensor model from a supplied observation
  callback function.  Specifically, CRSensorLinear sets up a container
  for the linear observation model
- 
+
  \f$ z = H x \f$,
- 
- where \f$x\f$ is the state vector, and \f$z\f$ is the sensor 
+
+ where \f$x\f$ is the state vector, and \f$z\f$ is the sensor
  measurement vector.
- 
+
  These methods are used to interface with the Sensor Model:
  - CRSensorLinear::setState sets the underlying state vector.
  - CRSensorLinear::getState outputs the state vector.
- - CRSensorLinear::measurement computes a simulated measurement 
+ - CRSensorLinear::measurement computes a simulated measurement
  vector (z) from the underlying state (x).
  - CRSensorLinear::setObservation sets the observation matrix (H).
- 
+
  ## Example
  This example demonstrates use of the CRSensorLinear class.
  \include example_CRSensorLinear.cpp
- 
+
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
- 
+
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
  */
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRSensorLinear : public CRSensorModel {
+class[[deprecated(CR_DEPRECATED)]] CRSensorLinear : public CRSensorModel {
 #else
 class CRSensorLinear : public CRSensorModel {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
+
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
-    
-    //! Class constructor
-    CRSensorLinear(Eigen::MatrixXd i_H,
-                   Eigen::VectorXd i_x0);
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
+  //! Class constructor
+  CRSensorLinear(Eigen::MatrixXd i_H, Eigen::VectorXd i_x0);
+
+  //---------------------------------------------------------------------
+  // Get/Set Methods
 public:
-    
-    //! Set the dynamics and input matrices
-    void setObservation(Eigen::MatrixXd i_H){ this->m_H = i_H;}
-    
-//---------------------------------------------------------------------
-// Public Methods
+  //! Set the dynamics and input matrices
+  void setObservation(Eigen::MatrixXd i_H) { this->m_H = i_H; }
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Simulate the measurement
-    Eigen::VectorXd measurement(void);
-    
-//---------------------------------------------------------------------
-// Protected Members
+  //! Simulate the measurement
+  Eigen::VectorXd measurement(void);
+
+  //---------------------------------------------------------------------
+  // Protected Members
 protected:
-    
-    //! Observation matrix
-    Eigen::MatrixXd m_H;
-    
+  //! Observation matrix
+  Eigen::MatrixXd m_H;
 };
 
 //=====================================================================
 // End namespace
 }
-
 
 #endif

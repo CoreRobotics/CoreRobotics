@@ -44,14 +44,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "core/CRTypes.hpp"
-#include "Eigen/Dense"
 #include "CRMotionModel.hpp"
+#include "Eigen/Dense"
+#include "core/CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRMotionProbabilistic.hpp
@@ -61,29 +61,29 @@ namespace CoreRobotics  {
 /*!
  \class CRMotionProbabilistic
  \ingroup model
- 
+
  \brief This class implements a probabilistic motion model.
- 
+
  \details
  ## Description
  CRMotionModel implements a probabilistic motion model from a supplied
- dynamics callback function.  Specifically, CRMotionModel sets up a 
+ dynamics callback function.  Specifically, CRMotionModel sets up a
  container for the continuous model
- 
+
  \f[
  \dot{x} = f(t,x,u,w)
  \f]
- 
+
  or
- 
+
  \f[
  x_{k+1} = f(t_k,x_k,u_k,w_k)
  \f]
- 
+
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
  \f$t\f$ is time, \f$w\f$ is process noise, and \f$k\f$ is a discrete
  sampling index.
- 
+
  These methods are available for interfacing with the Motion Model:
  - CRMotionProbabilistic::setState sets the underlying state vector.
  - CRMotionProbabilistic::getState returns the state vector.
@@ -93,74 +93,61 @@ namespace CoreRobotics  {
  - CRMotionProbabilistic::motion computes a new state and updates the
  internal value for an input (u) and a flag that indicates whether noise
  should be sampled.
- 
+
  ## Example
  This example demonstrates use of the CRMotionModel class.
  \include example_CRMotionProbabilistic.cpp
- 
+
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
- 
+
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
  */
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRMotionProbabilistic : public CRMotionModel {
+class[[deprecated(CR_DEPRECATED)]] CRMotionProbabilistic
+    : public CRMotionModel {
 #else
 class CRMotionProbabilistic : public CRMotionModel {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
+
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
-    
-    //! Class constructor
-    CRMotionProbabilistic(Eigen::VectorXd(i_dynamics)(double,
-                                                      Eigen::VectorXd,
-                                                      Eigen::VectorXd,
-                                                      bool),
-                          CRMotionModelType i_type,
-                          Eigen::VectorXd i_x0,
-                          double i_timeStep);
-    CRMotionProbabilistic();
-    
-//---------------------------------------------------------------------
-// Public Methods
+  //! Class constructor
+  CRMotionProbabilistic(Eigen::VectorXd(i_dynamics)(double, Eigen::VectorXd,
+                                                    Eigen::VectorXd, bool),
+                        CRMotionModelType i_type, Eigen::VectorXd i_x0,
+                        double i_timeStep);
+  CRMotionProbabilistic();
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Simulate the motion
-    Eigen::VectorXd motion(Eigen::VectorXd i_u, bool sampleNoise);
-    
-    Eigen::VectorXd motion(Eigen::VectorXd i_u);
-    
-//---------------------------------------------------------------------
-// Protected Methods
+  //! Simulate the motion
+  Eigen::VectorXd motion(Eigen::VectorXd i_u, bool sampleNoise);
+
+  Eigen::VectorXd motion(Eigen::VectorXd i_u);
+
+  //---------------------------------------------------------------------
+  // Protected Methods
 protected:
-    
-    //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(double i_t,
-                            Eigen::VectorXd i_x,
-                            Eigen::VectorXd i_u,
-                            double i_dt,
-                            bool i_sample);
-    
-//---------------------------------------------------------------------
-// Protected Members
+  //! A Runge-Kutta solver on the dynFcn
+  Eigen::VectorXd rk4step(double i_t, Eigen::VectorXd i_x, Eigen::VectorXd i_u,
+                          double i_dt, bool i_sample);
+
+  //---------------------------------------------------------------------
+  // Protected Members
 protected:
-    
-    //! Callback to the dynamic model function
-    Eigen::VectorXd(*m_dynPredictFcn)(double,
-                                      Eigen::VectorXd,
-                                      Eigen::VectorXd,
-                                      bool);
-    
+  //! Callback to the dynamic model function
+  Eigen::VectorXd (*m_dynPredictFcn)(double, Eigen::VectorXd, Eigen::VectorXd,
+                                     bool);
 };
 
 //=====================================================================
 // End namespace
 };
-
 
 #endif

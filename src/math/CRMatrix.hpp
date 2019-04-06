@@ -47,10 +47,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "Eigen/Dense"
 #include "core/CRTypes.hpp"
 
-
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
+namespace CoreRobotics {
 
 //=====================================================================
 /*!
@@ -67,7 +66,7 @@ namespace CoreRobotics  {
 \details
 ## Description
 This class implements matrix and vector math.
- 
+
  - CRMatrix::reducedVector returns a sub vector
  - CRMatrix::reducedMatrix returns a sub matrix
  - CRMatrix::svd performs singular value decomposition.
@@ -78,11 +77,11 @@ This class implements matrix and vector math.
  - CRMatrix::normL1 takes the L1 norm of a vector.
  - CRMatrix::normL2 takes the L2 norm of a vector.
  - CRMatrix::normLinf takes the L-infinity norm of a vector.
- 
+
 ## Example
 This example shows usage of the math functions.
 \include example_CRMath.cpp
- 
+
 ## References
 [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,
 John Wiley & Sons, 2011.
@@ -91,95 +90,80 @@ John Wiley & Sons, 2011.
 
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRMatrix {
+class[[deprecated(CR_DEPRECATED)]] CRMatrix {
 #else
 class CRMatrix {
 #endif
-    
-//---------------------------------------------------------------------
-// Matrix downselection
+
+  //---------------------------------------------------------------------
+  // Matrix downselection
 public:
+  //! Return sub vector of indicated indices
+  static Eigen::VectorXd reducedVector(Eigen::VectorXd i_x,
+                                       Eigen::VectorXi i_indices);
 
-    //! Return sub vector of indicated indices
-    static Eigen::VectorXd reducedVector(Eigen::VectorXd i_x,
-                                         Eigen::VectorXi i_indices);
-    
-    //! Return sub matrix of indicated indices
-    static Eigen::MatrixXd reducedMatrix(Eigen::MatrixXd i_x,
-                                         Eigen::VectorXi i_rowIndices,
-                                         Eigen::VectorXi i_colIndices);
-    
-//---------------------------------------------------------------------
-// Matrix factorization
+  //! Return sub matrix of indicated indices
+  static Eigen::MatrixXd reducedMatrix(Eigen::MatrixXd i_x,
+                                       Eigen::VectorXi i_rowIndices,
+                                       Eigen::VectorXi i_colIndices);
+
+  //---------------------------------------------------------------------
+  // Matrix factorization
 public:
+  //! Singular Value decomposition (SVD)
+  static CRResult svd(Eigen::MatrixXd i_A, double i_tol, Eigen::MatrixXd &o_U,
+                      Eigen::VectorXd &o_Sigma, Eigen::MatrixXd &o_V);
 
-	//! Singular Value decomposition (SVD)
-	static CRResult svd(Eigen::MatrixXd i_A,
-						double i_tol,
-						Eigen::MatrixXd& o_U,
-						Eigen::VectorXd& o_Sigma,
-						Eigen::MatrixXd& o_V);
-
-    
-//---------------------------------------------------------------------
-// Matrix inversion routines
+  //---------------------------------------------------------------------
+  // Matrix inversion routines
 public:
-    
-    //! SVD-based matrix inverse
-    static CRResult svdInverse(Eigen::MatrixXd i_A,
-                               double i_tol,
-                               Eigen::MatrixXd& o_Ainv);
+  //! SVD-based matrix inverse
+  static CRResult svdInverse(Eigen::MatrixXd i_A, double i_tol,
+                             Eigen::MatrixXd &o_Ainv);
 
-
-//---------------------------------------------------------------------
-// Rotation matrices
+  //---------------------------------------------------------------------
+  // Rotation matrices
 public:
+  //! standard rotation about the x axis
+  static Eigen::Matrix3d rotAboutX(double i_ang) {
+    Eigen::Matrix3d o_rot;
+    o_rot << 1, 0, 0, 0, cos(i_ang), -sin(i_ang), 0, sin(i_ang), cos(i_ang);
+    return o_rot;
+  }
 
-	//! standard rotation about the x axis
-	static Eigen::Matrix3d rotAboutX(double i_ang) {
-		Eigen::Matrix3d o_rot;
-		o_rot << 1, 0, 0, 0, cos(i_ang), -sin(i_ang), 0, sin(i_ang), cos(i_ang);
-		return o_rot;
-	}
+  //! standard rotation about the y axis
+  static Eigen::Matrix3d rotAboutY(double i_ang) {
+    Eigen::Matrix3d o_rot;
+    o_rot << cos(i_ang), 0, sin(i_ang), 0, 1, 0, -sin(i_ang), 0, cos(i_ang);
+    return o_rot;
+  }
 
-	//! standard rotation about the y axis
-	static Eigen::Matrix3d rotAboutY(double i_ang) {
-		Eigen::Matrix3d o_rot;
-		o_rot << cos(i_ang), 0, sin(i_ang), 0, 1, 0, -sin(i_ang), 0, cos(i_ang);
-		return o_rot;
-	}
+  //! standard rotation about the z axis
+  static Eigen::Matrix3d rotAboutZ(double i_ang) {
+    Eigen::Matrix3d o_rot;
+    o_rot << cos(i_ang), -sin(i_ang), 0, sin(i_ang), cos(i_ang), 0, 0, 0, 1;
+    return o_rot;
+  }
 
-	//! standard rotation about the z axis
-	static Eigen::Matrix3d rotAboutZ(double i_ang) {
-		Eigen::Matrix3d o_rot;
-		o_rot << cos(i_ang), -sin(i_ang), 0, sin(i_ang), cos(i_ang), 0, 0, 0, 1;
-		return o_rot;
-	}
-
-//---------------------------------------------------------------------
-// Vector norms
+  //---------------------------------------------------------------------
+  // Vector norms
 public:
+  //! L-1 vector norm
+  // http://mathworld.wolfram.com/L1-Norm.html
+  static double normL1(Eigen::VectorXd x) { return x.array().abs().sum(); };
 
-	//! L-1 vector norm
-	// http://mathworld.wolfram.com/L1-Norm.html
-	static double normL1(Eigen::VectorXd x) {
-		return x.array().abs().sum();
-	};
+  //! L-2 vector norm
+  // http://mathworld.wolfram.com/L2-Norm.html
+  static double normL2(Eigen::VectorXd x) {
+    return sqrt(x.array().square().sum());
+  };
 
-	//! L-2 vector norm
-	// http://mathworld.wolfram.com/L2-Norm.html
-	static double normL2(Eigen::VectorXd x) {
-		return sqrt(x.array().square().sum());
-	};
-
-	//! L-infinity vector norm
-	// http://mathworld.wolfram.com/L-Infinity-Norm.html
-	static double normLinf(Eigen::VectorXd x) {
-		return x.array().abs().maxCoeff();
-	};
-    
+  //! L-infinity vector norm
+  // http://mathworld.wolfram.com/L-Infinity-Norm.html
+  static double normLinf(Eigen::VectorXd x) {
+    return x.array().abs().maxCoeff();
+  };
 };
-
 
 //=====================================================================
 // End namespace

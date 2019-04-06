@@ -49,8 +49,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRMutex.hpp
@@ -60,56 +60,49 @@ namespace CoreRobotics  {
 /*!
  \class CRMutex
  \ingroup core
- 
+
  \brief This class implements a mutex to ensure mutually exclusive
  writing of data to thread data.
- 
+
  \details
  ## Description
  CRMutex implements a mutex to for deterministic data transfer between
  threads.
- 
+
  - CRMutex::lock locks the thread from access.
  - CRMutex::unlock releases the thread for access.
  */
 
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRMutex {
+class[[deprecated(CR_DEPRECATED)]] CRMutex {
 #else
 class CRMutex {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
-public:
-    
-    //! Class constructor
-    CRMutex();
-    
-    //! Class destructor
-    ~CRMutex();
-    
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Acquire the mutex
-    void lock();
 
-	//! Release the mutex
-	void unlock();
-    
-    
-//---------------------------------------------------------------------
-// Protected Members
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
+public:
+  //! Class constructor
+  CRMutex();
+
+  //! Class destructor
+  ~CRMutex();
+
+  //---------------------------------------------------------------------
+  // Public Methods
+public:
+  //! Acquire the mutex
+  void lock();
+
+  //! Release the mutex
+  void unlock();
+
+  //---------------------------------------------------------------------
+  // Protected Members
 private:
-
-	//! thread pointer
-    std::recursive_mutex* m_mutex;
-    
-    
+  //! thread pointer
+  std::recursive_mutex *m_mutex;
 };
 //=====================================================================
 // End namespace

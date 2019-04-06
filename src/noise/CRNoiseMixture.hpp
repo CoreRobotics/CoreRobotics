@@ -44,16 +44,16 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "core/CRTypes.hpp"
+#include "CRNoiseModel.hpp"
 #include "Eigen/Dense"
+#include "core/CRTypes.hpp"
 #include <random>
 #include <vector>
-#include "CRNoiseModel.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRNoiseMixture.hpp
@@ -63,98 +63,90 @@ namespace CoreRobotics  {
 /*!
  \class CRNoiseMixture
  \ingroup noise
- 
+
  \brief Implements a class for modeling noise as a mixture of distributions.
- 
+
  \details
  ## Description
  CRNoiseMixture implements methods for sampling and modeling noise as a
  mixture of probability distributions [2-3].  Each specified noise model
  is also accompanied by a weight, indicating the probability of that
  distribution being selected for sampling of the noise.
- 
+
  - CRNoiseMixture::add adds a noise model to the mixture
  - CRNoiseMixture::sample samples from the noise model
  - CRNoiseMixture::probability evaluates the probability
- 
+
  ## Example
  This example demonstrates use of the CRNoiseMixture class.
- 
+
  \include example_CRNoiseMixture.cpp
- 
+
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
- 
+
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
- 
+
  [3] en.wikipedia.org/wiki/Mixture_model
  */
 //=====================================================================
 // Paramter structure declaration
 #ifndef SWIG
-struct [[deprecated(CR_DEPRECATED)]] CRParamNoiseMixture{
+struct[[deprecated(CR_DEPRECATED)]] CRParamNoiseMixture {
 #else
-struct CRParamNoiseMixture{
+struct CRParamNoiseMixture {
 #endif
-    std::vector<CoreRobotics::CRNoiseModel*> models;
-    std::vector<double> weights;
+  std::vector<CoreRobotics::CRNoiseModel *> models;
+  std::vector<double> weights;
 };
-    
+
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRNoiseMixture : public CRNoiseModel {
+class[[deprecated(CR_DEPRECATED)]] CRNoiseMixture : public CRNoiseModel {
 #else
 class CRNoiseMixture : public CRNoiseModel {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
+
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
-    
-    //! Class constructor
-    CRNoiseMixture(unsigned i_seed);
-    CRNoiseMixture();
-    
-//---------------------------------------------------------------------
-// Add models to the mixture
+  //! Class constructor
+  CRNoiseMixture(unsigned i_seed);
+  CRNoiseMixture();
+
+  //---------------------------------------------------------------------
+  // Add models to the mixture
 public:
-    
-    //! Add a distribution to the mixture model
-    void add(CRNoiseModel* i_model, double i_weight);
-    
-//---------------------------------------------------------------------
-// Public Methods
+  //! Add a distribution to the mixture model
+  void add(CRNoiseModel * i_model, double i_weight);
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Sample a noise vector from the density
-    using CRNoiseModel::sample;
-    Eigen::VectorXd sample(void);
-    
-    //! Evaluate the probability from the density
-    using CRNoiseModel::probability;
-    double probability(Eigen::VectorXd i_x);
-    
-//---------------------------------------------------------------------
-// Public Members
+  //! Sample a noise vector from the density
+  using CRNoiseModel::sample;
+  Eigen::VectorXd sample(void);
+
+  //! Evaluate the probability from the density
+  using CRNoiseModel::probability;
+  double probability(Eigen::VectorXd i_x);
+
+  //---------------------------------------------------------------------
+  // Public Members
 public:
-    
-    //! Noise model parameters
-    CRParamNoiseMixture m_parameters;
-    
-    
+  //! Noise model parameters
+  CRParamNoiseMixture m_parameters;
+
 private:
-    
-    //! hide the setParameters method and make it do nothing
-    using CRNoiseModel::setParameters;
-    void setParameters(void) {};
-    
+  //! hide the setParameters method and make it do nothing
+  using CRNoiseModel::setParameters;
+  void setParameters(void){};
 };
 
 //=====================================================================
 // End namespace
 }
-
 
 #endif

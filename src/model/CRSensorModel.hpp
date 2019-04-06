@@ -44,13 +44,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "core/CRTypes.hpp"
 #include "Eigen/Dense"
+#include "core/CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRSensorModel.hpp
@@ -60,85 +60,79 @@ namespace CoreRobotics  {
 /*!
  \class CRSensorModel
  \ingroup model
- 
+
  \brief This class implements a sensor model.
- 
+
  \details
  ## Description
  CRSensorModel implements a sensor model from a supplied observation
  callback function.  Specifically, CRSensorModel sets up a container
  for the model
- 
+
  \f$ z = h(x) \f$,
- 
- where \f$x\f$ is the state vector, and \f$z\f$ is the sensor 
+
+ where \f$x\f$ is the state vector, and \f$z\f$ is the sensor
  measurement vector.
- 
+
  These methods are used to interface with the Sensor Model:
  - CRSensorModel::setState sets the underlying state vector.
  - CRSensorModel::getState outputs the state vector.
- - CRSensorModel::measurement computes a simulated measurement 
+ - CRSensorModel::measurement computes a simulated measurement
  vector (z) from the underlying state (x).
- 
+
  ## Example
  This example demonstrates use of the CRSensorModel class.
  \include example_CRSensorModel.cpp
- 
+
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
- 
+
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
  */
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRSensorModel {
+class[[deprecated(CR_DEPRECATED)]] CRSensorModel {
 #else
 class CRSensorModel {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
+
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
-    
-    //! Class constructor
-    CRSensorModel(Eigen::VectorXd(i_predictor)(Eigen::VectorXd),
-                  Eigen::VectorXd i_x0);
-    CRSensorModel();
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
+  //! Class constructor
+  CRSensorModel(Eigen::VectorXd(i_predictor)(Eigen::VectorXd),
+                Eigen::VectorXd i_x0);
+  CRSensorModel();
+
+  //---------------------------------------------------------------------
+  // Get/Set Methods
 public:
-    
-    //! Set the state vector (x)
-    void setState(Eigen::VectorXd i_x) {this->m_state = i_x;}
-    
-    //! Get the state vector (x)
-    Eigen::VectorXd getState(void) {return this->m_state;}
-    
-//---------------------------------------------------------------------
-// Public Methods
+  //! Set the state vector (x)
+  void setState(Eigen::VectorXd i_x) { this->m_state = i_x; }
+
+  //! Get the state vector (x)
+  Eigen::VectorXd getState(void) { return this->m_state; }
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Simulate the measurement
-    Eigen::VectorXd measurement(void);
-    
-//---------------------------------------------------------------------
-// Protected Members
+  //! Simulate the measurement
+  Eigen::VectorXd measurement(void);
+
+  //---------------------------------------------------------------------
+  // Protected Members
 protected:
-    
-    //! Underlying state of the system
-    Eigen::VectorXd m_state;
-    
-    //! Callback to the deterministic predictor function z = h(x)
-    Eigen::VectorXd(*m_measPredictFcn)(Eigen::VectorXd);
-    
+  //! Underlying state of the system
+  Eigen::VectorXd m_state;
+
+  //! Callback to the deterministic predictor function z = h(x)
+  Eigen::VectorXd (*m_measPredictFcn)(Eigen::VectorXd);
 };
 
 //=====================================================================
 // End namespace
 }
-
 
 #endif

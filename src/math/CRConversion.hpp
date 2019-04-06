@@ -47,10 +47,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "Eigen/Dense"
 #include "core/CRTypes.hpp"
 
-
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
+namespace CoreRobotics {
 
 //=====================================================================
 /*!
@@ -67,15 +66,15 @@ namespace CoreRobotics  {
 \details
 ## Description
 This class implements vmath conversions.
- 
+
 - CRConversion::deg2rad converts degress to radians
 - CRConversion::rad2deg converts radians to degrees.
 - CRConversion::wrapToPi wraps angles to +/- \f$\pi\f$ radians.
- 
+
 ## Example
 This example shows usage of the math functions.
 \include example_CRMath.cpp
- 
+
 ## References
 [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,
 John Wiley & Sons, 2011.
@@ -84,40 +83,37 @@ John Wiley & Sons, 2011.
 
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRConversion {
+class[[deprecated(CR_DEPRECATED)]] CRConversion {
 #else
 class CRConversion {
 #endif
 
-//---------------------------------------------------------------------
-// Static conversion methods
+  //---------------------------------------------------------------------
+  // Static conversion methods
 public:
-    
-    //! Convert angles in degrees to radians
-    static double deg2rad(const double i_deg) { return M_PI * i_deg / 180.0; }
-    
-    //! Convert angles in radians to degrees
-    static double rad2deg(const double i_rad) { return 180.0 * i_rad / M_PI; }
+  //! Convert angles in degrees to radians
+  static double deg2rad(const double i_deg) { return M_PI * i_deg / 180.0; }
 
-	//! Wrap angle (rad) to +/- pi
-	static double wrapToPi(double angle) {
-		angle = fmod(angle + M_PI, 2 * M_PI);
-		if (angle < 0) {
-			angle += 2 * M_PI;
-		}
-		return angle - M_PI;
-	}
-    
-    //! Wrap angle (rad) to +/- pi
-    static Eigen::VectorXd wrapToPi(Eigen::VectorXd angle) {
-        for (int i = 0; i < angle.size(); i++) {
-            angle(i) = wrapToPi(angle(i));
-        }
-        return angle;
+  //! Convert angles in radians to degrees
+  static double rad2deg(const double i_rad) { return 180.0 * i_rad / M_PI; }
+
+  //! Wrap angle (rad) to +/- pi
+  static double wrapToPi(double angle) {
+    angle = fmod(angle + M_PI, 2 * M_PI);
+    if (angle < 0) {
+      angle += 2 * M_PI;
     }
-    
-};
+    return angle - M_PI;
+  }
 
+  //! Wrap angle (rad) to +/- pi
+  static Eigen::VectorXd wrapToPi(Eigen::VectorXd angle) {
+    for (int i = 0; i < angle.size(); i++) {
+      angle(i) = wrapToPi(angle(i));
+    }
+    return angle;
+  }
+};
 
 //=====================================================================
 // End namespace

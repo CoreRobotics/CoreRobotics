@@ -47,10 +47,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "Eigen/Dense"
 #include "core/CRTypes.hpp"
 
-
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
+namespace CoreRobotics {
 
 //=====================================================================
 /*!
@@ -67,14 +66,14 @@ namespace CoreRobotics  {
 \details
 ## Description
 This class implements numerical integration methods.
- 
+
 - CRIntegration::forwardEulerStep performs forward Euler integration.
 - CRIntegration::rungeKuttaStep performs 4th order Runga-Kutta integration.
- 
+
 ## Example
 This example shows usage of the math functions.
 \include example_CRMath.cpp
- 
+
 ## References
 [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,
 John Wiley & Sons, 2011.
@@ -83,37 +82,28 @@ John Wiley & Sons, 2011.
 
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRIntegration {
+class[[deprecated(CR_DEPRECATED)]] CRIntegration {
 #else
 class CRIntegration {
 #endif
-    
-#ifndef SWIG
-//---------------------------------------------------------------------
-// Numerical integration routines
-public:
-    
-    //! Forward euler integration
-    static Eigen::VectorXd forwardEulerStep(Eigen::VectorXd(i_dynamicSystem)(double,
-                                                                             Eigen::VectorXd,
-                                                                             Eigen::VectorXd),
-                                            double i_t,
-                                            Eigen::VectorXd i_x,
-                                            Eigen::VectorXd i_u,
-                                            double i_dt);
-    
-    //! Runge-Kutta 4th order integration
-    static Eigen::VectorXd rungeKuttaStep(Eigen::VectorXd(i_dynamicSystem)(double,
-                                                                           Eigen::VectorXd,
-                                                                           Eigen::VectorXd),
-                                          double i_t,
-                                          Eigen::VectorXd i_x,
-                                          Eigen::VectorXd i_u,
-                                          double i_dt);
-#endif
-    
-};
 
+#ifndef SWIG
+  //---------------------------------------------------------------------
+  // Numerical integration routines
+public:
+  //! Forward euler integration
+  static Eigen::VectorXd forwardEulerStep(
+      Eigen::VectorXd(i_dynamicSystem)(double, Eigen::VectorXd,
+                                       Eigen::VectorXd),
+      double i_t, Eigen::VectorXd i_x, Eigen::VectorXd i_u, double i_dt);
+
+  //! Runge-Kutta 4th order integration
+  static Eigen::VectorXd rungeKuttaStep(
+      Eigen::VectorXd(i_dynamicSystem)(double, Eigen::VectorXd,
+                                       Eigen::VectorXd),
+      double i_t, Eigen::VectorXd i_x, Eigen::VectorXd i_u, double i_dt);
+#endif
+};
 
 //=====================================================================
 // End namespace

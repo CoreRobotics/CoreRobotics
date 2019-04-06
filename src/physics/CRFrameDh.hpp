@@ -44,15 +44,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "Eigen/Dense"
 #include "CRFrame.hpp"
+#include "Eigen/Dense"
 #include "core/CRTypes.hpp"
-
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRFrameDh.hpp
@@ -63,160 +62,137 @@ namespace CoreRobotics  {
 /*!
  \class CRFrameDh
  \ingroup physics
- 
+
  \brief This class implements a homogeneous transformation in the
  special Euclidean group made up of rotations and translations, where
  the rotations and translations are defined by DH parameters.
- 
+
  \details
  ## Description
- CRFrameDh implements a DH parameter transformation specified by 4 
+ CRFrameDh implements a DH parameter transformation specified by 4
  parameters (<a href="wikipedia.org/wiki/Denavit–Hartenberg_parameters">
- see Wikipedia article).</a> With an additional 5th paramter for constant 
+ see Wikipedia article).</a> With an additional 5th paramter for constant
  offsets for the driven variable.
- 
+
  Properties of the transform can be set with methods
  - CRFrameDh::setParameters sets the DH parameter values.
  - CRFrameDh::setMode sets the DH convention (options are in
  CoreRobotics::CRDhMode).
- 
+
  The free variable can be specified by the CRFrameDh::m_freeVar member
  (options are in CoreRobotics::CRDhFreeVariable).
- 
+
  ## Example
  This example creates a DH parameter frame class.
  \include example_CRFrameDh.cpp
- 
+
  ## References
  [1] J. Denavit and R. Hartenberg, "A kinematic notation for lower-pair
  mechanisms based on matrices". Trans ASME J. Appl. Mech. 23, pp. 215-221, 1955.
- 
+
  [2] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
  Pearson, 2004.
- 
+
  */
 //=====================================================================
 //! Enumerator for handling DH parameter free variable candidates
 #ifndef SWIG
-enum [[deprecated(CR_DEPRECATED)]] CRDhFreeVariable {
+enum[[deprecated(CR_DEPRECATED)]] CRDhFreeVariable {
 #else
 enum CRDhFreeVariable {
 #endif
-    CR_DH_FREE_NONE,
-    CR_DH_FREE_R,
-    CR_DH_FREE_ALPHA,
-    CR_DH_FREE_D,
-    CR_DH_FREE_THETA,
+  CR_DH_FREE_NONE, CR_DH_FREE_R, CR_DH_FREE_ALPHA, CR_DH_FREE_D,
+      CR_DH_FREE_THETA,
 };
-
 
 //! Enumerator for handling DH conventions
 #ifndef SWIG
-enum [[deprecated(CR_DEPRECATED)]] CRDhMode {
+enum[[deprecated(CR_DEPRECATED)]] CRDhMode {
 #else
 enum CRDhMode {
 #endif
-    CR_DH_MODE_CLASSIC,
-    CR_DH_MODE_MODIFIED,
+  CR_DH_MODE_CLASSIC, CR_DH_MODE_MODIFIED,
 };
-
 
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRFrameDh : public CRFrame  {
+class[[deprecated(CR_DEPRECATED)]] CRFrameDh : public CRFrame {
 #else
-class CRFrameDh : public CRFrame  {
+class CRFrameDh : public CRFrame {
 #endif
-    
 
-//---------------------------------------------------------------------
-// Constructor and Destructor
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
+  //! Class constructor
+  CRFrameDh(double i_r, double i_alpha, double i_d, double i_theta,
+            CRDhMode i_mode, CRDhFreeVariable i_free);
+  CRFrameDh();
 
-    //! Class constructor
-    CRFrameDh(double i_r,
-              double i_alpha,
-              double i_d,
-              double i_theta,
-              CRDhMode i_mode,
-              CRDhFreeVariable i_free);
-    CRFrameDh();
-
-//---------------------------------------------------------------------
-// Get/Set Methods
+  //---------------------------------------------------------------------
+  // Get/Set Methods
 public:
-    
-    //! Set the value of the free variable
-    CRResult setFreeValue(double i_q);
-    
-    //! Get the value of the free variable
-    double getFreeValue(void);
-    
-    //! Set the free variable
-    void setFreeVariable(CRDhFreeVariable i_free) {m_freeVar = i_free;}
-    
-    //! Get the free variable
-    CRDhFreeVariable getFreeVariable(void) {return m_freeVar;}
-    
-    //! Set the DH convention
-    void setMode(CRDhMode i_mode);
-    
-    //! Get the DH convention
-    CRDhMode getMode(void);
-    
-    //! Set the DH parameter values
-    void setParameters(double i_r,
-                       double i_alpha,
-                       double i_d,
-                       double i_theta);
-    
-    //! Get the DH parameter values
-    void getParameters(double& o_r,
-                       double& o_alpha,
-                       double& o_d,
-                       double& o_theta);
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Query if the frame is driven, i.e. has a free variable
-    bool isDriven(void);
+  //! Set the value of the free variable
+  CRResult setFreeValue(double i_q);
 
-    
-//---------------------------------------------------------------------
-// Private Members
+  //! Get the value of the free variable
+  double getFreeValue(void);
+
+  //! Set the free variable
+  void setFreeVariable(CRDhFreeVariable i_free) { m_freeVar = i_free; }
+
+  //! Get the free variable
+  CRDhFreeVariable getFreeVariable(void) { return m_freeVar; }
+
+  //! Set the DH convention
+  void setMode(CRDhMode i_mode);
+
+  //! Get the DH convention
+  CRDhMode getMode(void);
+
+  //! Set the DH parameter values
+  void setParameters(double i_r, double i_alpha, double i_d, double i_theta);
+
+  //! Get the DH parameter values
+  void getParameters(double &o_r, double &o_alpha, double &o_d,
+                     double &o_theta);
+
+  //---------------------------------------------------------------------
+  // Public Methods
+public:
+  //! Query if the frame is driven, i.e. has a free variable
+  bool isDriven(void);
+
+  //---------------------------------------------------------------------
+  // Private Members
 private:
-    
-    //! free variable indicator
-    CRDhFreeVariable m_freeVar;
-    
-    //! DH convention mode
-    CRDhMode m_dhMode;
+  //! free variable indicator
+  CRDhFreeVariable m_freeVar;
 
-    //! r parameter
-    double m_dhR;
-    
-    //! d parameter
-    double m_dhD;
-    
-    //! alpha angle parameter [rad]
-    double m_dhAlpha;
-    
-    //! theta angle parameter [rad]
-    double m_dhTheta;
+  //! DH convention mode
+  CRDhMode m_dhMode;
 
-	//! free variable offset parameter [m] or [rad]
-    // double m_freeVarOffset;
-    
-//---------------------------------------------------------------------
-// Private Methods
+  //! r parameter
+  double m_dhR;
+
+  //! d parameter
+  double m_dhD;
+
+  //! alpha angle parameter [rad]
+  double m_dhAlpha;
+
+  //! theta angle parameter [rad]
+  double m_dhTheta;
+
+  //! free variable offset parameter [m] or [rad]
+  // double m_freeVarOffset;
+
+  //---------------------------------------------------------------------
+  // Private Methods
 private:
-    
-    //! Update the rotation and translation matrices from data
-    using CRFrame::setRotationAndTranslation;
-    void setRotationAndTranslation();
-
+  //! Update the rotation and translation matrices from data
+  using CRFrame::setRotationAndTranslation;
+  void setRotationAndTranslation();
 };
 
 //=====================================================================

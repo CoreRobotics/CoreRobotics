@@ -4,9 +4,9 @@
  * http://www.corerobotics.org
  */
 
-#include <iostream>
-#include <cr/physics>
 #include "gtest/gtest.h"
+#include <cr/physics>
+#include <iostream>
 
 // Use the CoreRobotics namespace
 using namespace cr;
@@ -22,4 +22,3 @@ TEST(RigidBody, SetFrame){
     EXPECT_EQ(link.m_frame, &frame);
 }
  */
-

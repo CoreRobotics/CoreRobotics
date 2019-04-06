@@ -44,50 +44,36 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  The constructor defines a mutex.\n
  */
 //---------------------------------------------------------------------
-CRMutex::CRMutex() {
-    m_mutex = new std::recursive_mutex;
-}
-
+CRMutex::CRMutex() { m_mutex = new std::recursive_mutex; }
 
 //=====================================================================
 /*!
  The destructor frees up memory.\n
  */
 //---------------------------------------------------------------------
-CRMutex::~CRMutex() { }
-
-    
+CRMutex::~CRMutex() {}
 
 //=====================================================================
 /*!
  This method acquires the mutex to block other threads from writing data.
  */
 //---------------------------------------------------------------------
-void CRMutex::lock() {
-    m_mutex->lock();
-}
-
+void CRMutex::lock() { m_mutex->lock(); }
 
 //=====================================================================
 /*!
 This method releases the mutex to allow other threads to write data.
 */
 //---------------------------------------------------------------------
-void CRMutex::unlock() {
-    m_mutex->unlock();
-}
-
+void CRMutex::unlock() { m_mutex->unlock(); }
 
 //=====================================================================
 // End namespace
 }
-
-

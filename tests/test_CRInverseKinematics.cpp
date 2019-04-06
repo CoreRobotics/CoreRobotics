@@ -38,119 +38,112 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
-#include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
+#include <iostream>
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-
 // Setup the CRManipulator robot and return the toolIndex
-int setup3dof(CRManipulator& MyRobot){
-    CRFrameEuler* F0 = new CRFrameEuler();
-    CRFrameEuler* F1 = new CRFrameEuler();
-    CRFrameEuler* F2 = new CRFrameEuler();
-    CRRigidBody* Link0 = new CRRigidBody();
-    CRRigidBody* Link1 = new CRRigidBody();
-    CRRigidBody* Link2 = new CRRigidBody();
-    
-    // Set info for Link 0 and add to MyRobot
-    F0->setFreeVariable(CR_EULER_FREE_ANG_G);
-    F0->setMode(CR_EULER_MODE_XYZ);
-    F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
-    Link0->setFrame(F0);
-    MyRobot.addLink(Link0);
-    
-    // Set info for Link 1 and add to MyRobot
-    F1->setFreeVariable(CR_EULER_FREE_ANG_G);
-    F1->setMode(CR_EULER_MODE_XYZ);
-    F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
-    Link1->setFrame(F1);
-    MyRobot.addLink(Link1);
-    
-    // Set info for Link 2 and add to MyRobot
-    F2->setFreeVariable(CR_EULER_FREE_ANG_G);
-    F2->setMode(CR_EULER_MODE_XYZ);
-    F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
-    Link2->setFrame(F2);
-    MyRobot.addLink(Link2);
-    
-    // create a tool frame and add to MyRobot
-    CRFrameEuler* Tool = new CRFrameEuler();
-    Tool->setMode(CR_EULER_MODE_XYZ);
-    Tool->setPositionAndOrientation(0, 0, 0, 0, 0, 0);
-    int toolIndex = MyRobot.addTool(2, Tool);
-    return toolIndex;
-}
+int setup3dof(CRManipulator &MyRobot) {
+  CRFrameEuler *F0 = new CRFrameEuler();
+  CRFrameEuler *F1 = new CRFrameEuler();
+  CRFrameEuler *F2 = new CRFrameEuler();
+  CRRigidBody *Link0 = new CRRigidBody();
+  CRRigidBody *Link1 = new CRRigidBody();
+  CRRigidBody *Link2 = new CRRigidBody();
 
+  // Set info for Link 0 and add to MyRobot
+  F0->setFreeVariable(CR_EULER_FREE_ANG_G);
+  F0->setMode(CR_EULER_MODE_XYZ);
+  F0->setPositionAndOrientation(0, 0, 0.5, 0, 0, 0);
+  Link0->setFrame(F0);
+  MyRobot.addLink(Link0);
+
+  // Set info for Link 1 and add to MyRobot
+  F1->setFreeVariable(CR_EULER_FREE_ANG_G);
+  F1->setMode(CR_EULER_MODE_XYZ);
+  F1->setPositionAndOrientation(1, 0, 0, 0, 0, 0);
+  Link1->setFrame(F1);
+  MyRobot.addLink(Link1);
+
+  // Set info for Link 2 and add to MyRobot
+  F2->setFreeVariable(CR_EULER_FREE_ANG_G);
+  F2->setMode(CR_EULER_MODE_XYZ);
+  F2->setPositionAndOrientation(2, 0, 0, 0, 0, 0);
+  Link2->setFrame(F2);
+  MyRobot.addLink(Link2);
+
+  // create a tool frame and add to MyRobot
+  CRFrameEuler *Tool = new CRFrameEuler();
+  Tool->setMode(CR_EULER_MODE_XYZ);
+  Tool->setPositionAndOrientation(0, 0, 0, 0, 0, 0);
+  int toolIndex = MyRobot.addTool(2, Tool);
+  return toolIndex;
+}
 
 //
 // test the set/get methods
 //
-TEST(CRInverseKinematics, SetGet){
-    CRManipulator MyRobot;
-    int toolIndex = setup3dof(MyRobot);
-    CRInverseKinematics ikSolver = CRInverseKinematics(MyRobot,
-                                                       toolIndex,
-                                                       CR_EULER_MODE_XYZ);
-    
-    ikSolver.setRobot(MyRobot);
-    ikSolver.setMaxIter(100);
-    ikSolver.setStepSize(0.1);
-    ikSolver.setEulerMode(CR_EULER_MODE_ZYX);
-    ikSolver.setTolerance(1e-4);
-    ikSolver.setToolIndex(toolIndex);
-    ikSolver.setDampingFactor(1.0);
-    
-    
-    EXPECT_EQ(100, ikSolver.getMaxIter());
-    EXPECT_DOUBLE_EQ(0.1, ikSolver.getStepSize());
-    EXPECT_EQ(CR_EULER_MODE_ZYX, ikSolver.getEulerMode());
-    EXPECT_DOUBLE_EQ(1e-4, ikSolver.getTolerance());
-    EXPECT_EQ(toolIndex, ikSolver.getToolIndex());
-    EXPECT_DOUBLE_EQ(1.0, ikSolver.getDampingFactor());
-}
+TEST(CRInverseKinematics, SetGet) {
+  CRManipulator MyRobot;
+  int toolIndex = setup3dof(MyRobot);
+  CRInverseKinematics ikSolver =
+      CRInverseKinematics(MyRobot, toolIndex, CR_EULER_MODE_XYZ);
 
+  ikSolver.setRobot(MyRobot);
+  ikSolver.setMaxIter(100);
+  ikSolver.setStepSize(0.1);
+  ikSolver.setEulerMode(CR_EULER_MODE_ZYX);
+  ikSolver.setTolerance(1e-4);
+  ikSolver.setToolIndex(toolIndex);
+  ikSolver.setDampingFactor(1.0);
+
+  EXPECT_EQ(100, ikSolver.getMaxIter());
+  EXPECT_DOUBLE_EQ(0.1, ikSolver.getStepSize());
+  EXPECT_EQ(CR_EULER_MODE_ZYX, ikSolver.getEulerMode());
+  EXPECT_DOUBLE_EQ(1e-4, ikSolver.getTolerance());
+  EXPECT_EQ(toolIndex, ikSolver.getToolIndex());
+  EXPECT_DOUBLE_EQ(1.0, ikSolver.getDampingFactor());
+}
 
 //
 // test the set/get methods
 //
-TEST(CRInverseKinematics, Solver){
-    CRManipulator* MyRobot = new CRManipulator();
-    int toolIndex = setup3dof(*MyRobot);
-    CRInverseKinematics ikSolver = CRInverseKinematics(*MyRobot,
-                                                       toolIndex,
-                                                       CR_EULER_MODE_XYZ);
-    
-    // variables for testing the results
-    Eigen::VectorXd q0(3);          // initial configuration
-    Eigen::VectorXd qSolved(3);     // configuration that solves p = fk(qSolved)
-    Eigen::Matrix<double, 6, 1> p;  // tool set point pose
-    Eigen::MatrixXd fk;             // forward kinematics (for testing the result)
-    CRResult result;
-    
-    // Solve a non-singular solution
-    p << 2.5, 0, 0, 0, 0, 0;
-    q0 << 0.1, -0.2, 0.0;
-    MyRobot->setConfiguration(q0);
-    result = ikSolver.solve(p, q0, qSolved);
-    EXPECT_EQ(CR_RESULT_SUCCESS, result);
-    
-    // Now check the solution results
-    ikSolver.setDampingFactor(0);
-    ikSolver.setMaxIter(100);
-    ikSolver.setTolerance(1e-4);
-    MyRobot->setConfiguration(q0);
-    result = ikSolver.solve(p, q0, qSolved);
-    MyRobot->setConfiguration(qSolved);
-    fk = MyRobot->getForwardKinematics();
-    
-    EXPECT_EQ(3, fk.rows());
-    EXPECT_EQ(4, fk.cols());
-    EXPECT_EQ(CR_RESULT_SUCCESS, result);
-    EXPECT_NEAR(2.5, fk(0,3), 1e-4);
-    EXPECT_NEAR(0, fk(1,3), 1e-4);
-    EXPECT_NEAR(0.5, fk(2,3), 1e-4);
-}
+TEST(CRInverseKinematics, Solver) {
+  CRManipulator *MyRobot = new CRManipulator();
+  int toolIndex = setup3dof(*MyRobot);
+  CRInverseKinematics ikSolver =
+      CRInverseKinematics(*MyRobot, toolIndex, CR_EULER_MODE_XYZ);
 
+  // variables for testing the results
+  Eigen::VectorXd q0(3);         // initial configuration
+  Eigen::VectorXd qSolved(3);    // configuration that solves p = fk(qSolved)
+  Eigen::Matrix<double, 6, 1> p; // tool set point pose
+  Eigen::MatrixXd fk;            // forward kinematics (for testing the result)
+  CRResult result;
+
+  // Solve a non-singular solution
+  p << 2.5, 0, 0, 0, 0, 0;
+  q0 << 0.1, -0.2, 0.0;
+  MyRobot->setConfiguration(q0);
+  result = ikSolver.solve(p, q0, qSolved);
+  EXPECT_EQ(CR_RESULT_SUCCESS, result);
+
+  // Now check the solution results
+  ikSolver.setDampingFactor(0);
+  ikSolver.setMaxIter(100);
+  ikSolver.setTolerance(1e-4);
+  MyRobot->setConfiguration(q0);
+  result = ikSolver.solve(p, q0, qSolved);
+  MyRobot->setConfiguration(qSolved);
+  fk = MyRobot->getForwardKinematics();
+
+  EXPECT_EQ(3, fk.rows());
+  EXPECT_EQ(4, fk.cols());
+  EXPECT_EQ(CR_RESULT_SUCCESS, result);
+  EXPECT_NEAR(2.5, fk(0, 3), 1e-4);
+  EXPECT_NEAR(0, fk(1, 3), 1e-4);
+  EXPECT_NEAR(0.5, fk(2, 3), 1e-4);
+}

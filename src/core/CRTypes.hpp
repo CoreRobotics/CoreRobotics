@@ -46,8 +46,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRTypes.hpp
@@ -56,27 +56,21 @@ namespace CoreRobotics  {
 //=====================================================================
 //! Enumerator for signal types
 #ifndef SWIG
-enum [[deprecated(CR_DEPRECATED)]] CRSignalType {
+enum[[deprecated(CR_DEPRECATED)]] CRSignalType {
 #else
 enum CRSignalType {
 #endif
-    CR_SIGNAL_FORCE,
-    CR_SIGNAL_POSITION,
-    CR_SIGNAL_VELOCITY,
-    CR_SIGNAL_ACCELERATION,
-    CR_SIGNAL_GENERIC
+  CR_SIGNAL_FORCE, CR_SIGNAL_POSITION, CR_SIGNAL_VELOCITY,
+      CR_SIGNAL_ACCELERATION, CR_SIGNAL_GENERIC
 };
 //=====================================================================
 //! Result enumerator for consistent operation result flags.
 #ifndef SWIG
-enum [[deprecated(CR_DEPRECATED)]] CRResult {
+enum[[deprecated(CR_DEPRECATED)]] CRResult {
 #else
 enum CRResult {
 #endif
-    CR_RESULT_SUCCESS,
-    CR_RESULT_SINGULAR,
-    CR_RESULT_UNWRITABLE,
-	CR_RESULT_BAD_IC,
+  CR_RESULT_SUCCESS, CR_RESULT_SINGULAR, CR_RESULT_UNWRITABLE, CR_RESULT_BAD_IC,
 };
 //=====================================================================
 // End namespace

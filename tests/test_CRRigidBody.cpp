@@ -38,9 +38,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
-#include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
+#include <iostream>
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
@@ -48,10 +48,9 @@ using namespace CoreRobotics;
 //
 // Test the set frame method
 //
-TEST(CRRigidBody, SetFrame){
-    CRFrame frame;
-    CRRigidBody link;
-    link.setFrame(&frame);
-    EXPECT_EQ(link.m_frame, &frame);
+TEST(CRRigidBody, SetFrame) {
+  CRFrame frame;
+  CRRigidBody link;
+  link.setFrame(&frame);
+  EXPECT_EQ(link.m_frame, &frame);
 }
-

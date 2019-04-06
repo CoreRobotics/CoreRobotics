@@ -39,10 +39,9 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
-
+#include <iostream>
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
@@ -50,23 +49,23 @@ using namespace CoreRobotics;
 //
 // Test the function of the clock to sleep for 100 ms
 //
-TEST(CRClock, ClockSleepLong){
-    CRClock MyClock;
-    double t;
-    MyClock.startTimer();
-    MyClock.sleep(0.1);
-    t = MyClock.getElapsedTime();
-    EXPECT_NEAR(0.1, t, 0.01);
+TEST(CRClock, ClockSleepLong) {
+  CRClock MyClock;
+  double t;
+  MyClock.startTimer();
+  MyClock.sleep(0.1);
+  t = MyClock.getElapsedTime();
+  EXPECT_NEAR(0.1, t, 0.01);
 }
 
 //
 // Test the function of the clock to sleep for 1 ms
 //
-TEST(CRClock, ClockSleepShort){
-    CRClock MyClock;
-    double t;
-    MyClock.startTimer();
-    MyClock.sleep(0.001);
-    t = MyClock.getElapsedTime();
-    EXPECT_NEAR(0.001, t, 0.001);
+TEST(CRClock, ClockSleepShort) {
+  CRClock MyClock;
+  double t;
+  MyClock.startTimer();
+  MyClock.sleep(0.001);
+  t = MyClock.getElapsedTime();
+  EXPECT_NEAR(0.001, t, 0.001);
 }

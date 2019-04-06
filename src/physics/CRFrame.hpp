@@ -47,11 +47,10 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "Eigen/Dense"
 #include "core/CRTypes.hpp"
 
-
 //=====================================================================
 // CoreRobotics namespace
 namespace CoreRobotics {
-    
+
 //=====================================================================
 /*!
  \file CRFrame.hpp
@@ -62,13 +61,13 @@ namespace CoreRobotics {
 /*!
  \class CRFrame
  \ingroup physics
- 
- \brief This class implements a basic homogeneous transformation made 
+
+ \brief This class implements a basic homogeneous transformation made
  up of rotations and translations.
- 
+
  \details
  ## Description
- CRFrame implements a homogeneous transformation specified by a 
+ CRFrame implements a homogeneous transformation specified by a
  rotation matrix \f$r\f$ and a translation vector \f$t\f$.  The
  transformation matrix
  \f[
@@ -81,127 +80,117 @@ namespace CoreRobotics {
  \f[
  {^{i-1} p} = ^{i-1}_{i}T {^i p}.
  \f]
- 
- These methods return the transformation \f$T\f$ and inverse 
+
+ These methods return the transformation \f$T\f$ and inverse
  \f$T^{-1}\f$:
  - CRFrame::getTransformToParent outputs \f$^{i-1}_{i}T\f$.
  - CRFrame::getTransformToChild outputs \f$_{i-1}^{i}T\f$.
- 
+
  These methods perform the transformation operation on a vector \f$p\f$
  - CRFrame::transformToParent performs \f$y = ^{i-1}_{i}T p\f$
  - CRFrame::transformToChild performs \f$y = _{i-1}^{i}T p\f$
- 
+
  ## Example
  \include example_CRManipulator.cpp
- 
+
  ## References
  [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
  Pearson, 2004.
- 
+
  */
 //=====================================================================
 //! Enumerator for handling Euler angle conventions
 #ifndef SWIG
-enum [[deprecated(CR_DEPRECATED)]] CREulerMode {
+enum[[deprecated(CR_DEPRECATED)]] CREulerMode {
 #else
 enum CREulerMode {
 #endif
-    CR_EULER_MODE_ZXZ,
-    CR_EULER_MODE_XYX,
-    CR_EULER_MODE_YZY,
-    CR_EULER_MODE_ZYZ,
-    CR_EULER_MODE_XZX,
-    CR_EULER_MODE_YXY,
-    CR_EULER_MODE_XYZ,
-    CR_EULER_MODE_YZX,
-    CR_EULER_MODE_ZXY,
-    CR_EULER_MODE_XZY,
-    CR_EULER_MODE_ZYX,
-    CR_EULER_MODE_YXZ,
+  CR_EULER_MODE_ZXZ, CR_EULER_MODE_XYX, CR_EULER_MODE_YZY, CR_EULER_MODE_ZYZ,
+      CR_EULER_MODE_XZX, CR_EULER_MODE_YXY, CR_EULER_MODE_XYZ,
+      CR_EULER_MODE_YZX, CR_EULER_MODE_ZXY, CR_EULER_MODE_XZY,
+      CR_EULER_MODE_ZYX, CR_EULER_MODE_YXZ,
 };
-    
+
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRFrame {
+class[[deprecated(CR_DEPRECATED)]] CRFrame {
 #else
 class CRFrame {
 #endif
 
-//---------------------------------------------------------------------
-// Constructor and Destructor
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
+  //! Class constructor
+  CRFrame();
+  CRFrame(Eigen::Matrix3d i_rot, Eigen::Vector3d i_trans);
 
-    //! Class constructor
-    CRFrame();
-    CRFrame(Eigen::Matrix3d i_rot, Eigen::Vector3d i_trans);
-    
-    //! Class destructor
-    // virtual ~CRFrame() = 0;
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
+  //! Class destructor
+  // virtual ~CRFrame() = 0;
+
+  //---------------------------------------------------------------------
+  // Get/Set Methods
 public:
+  //! Set the value of the free variable
+  virtual CRResult setFreeValue(double i_q);
 
-    //! Set the value of the free variable
-    virtual CRResult setFreeValue(double i_q);
-    
-    //! Get the value of the free variable
-    virtual double getFreeValue(void);
-    
-    //! Set the rotation and translation
-    void setRotationAndTranslation(Eigen::Matrix3d i_rot,
-                                   Eigen::Vector3d i_trans){
-        this->m_rotation = i_rot; this->m_translation = i_trans;
-    }
+  //! Get the value of the free variable
+  virtual double getFreeValue(void);
 
-    //! Return the rotation and translation
-    void getRotationAndTranslation(Eigen::Matrix3d &o_rot,
-                                   Eigen::Vector3d &o_trans){
-        o_rot = this->m_rotation; o_trans = this->m_translation;
-    }
-    
-//---------------------------------------------------------------------
-// Public Methods
+  //! Set the rotation and translation
+  void setRotationAndTranslation(Eigen::Matrix3d i_rot,
+                                 Eigen::Vector3d i_trans) {
+    this->m_rotation = i_rot;
+    this->m_translation = i_trans;
+  }
+
+  //! Return the rotation and translation
+  void getRotationAndTranslation(Eigen::Matrix3d & o_rot,
+                                 Eigen::Vector3d & o_trans) {
+    o_rot = this->m_rotation;
+    o_trans = this->m_translation;
+  }
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Get the transformation to the parent frame
-    Eigen::Matrix4d getTransformToParent(void);
-    
-    //! Get the transformation to the child frame
-    Eigen::Matrix4d getTransformToChild(void);
-    
-    //! Transform a point p in the child frame to a point y in the parent frame
-    Eigen::Vector3d transformToParent(Eigen::Vector3d i_point);
-    
-    //! Transform a point p in the parent frame to a point y in the child frame
-    Eigen::Vector3d transformToChild(Eigen::Vector3d i_point);
-    
-    //! Query if the frame is driven, i.e. has a free variable
-    virtual bool isDriven(void);
+  //! Get the transformation to the parent frame
+  Eigen::Matrix4d getTransformToParent(void);
 
-	//! Get the position vector
-	Eigen::Vector3d getPosition(void) { return this->m_translation; }
+  //! Get the transformation to the child frame
+  Eigen::Matrix4d getTransformToChild(void);
 
-    //! Get a vector of the Euler angles
-    Eigen::Vector3d getOrientation(CREulerMode i_mode);
+  //! Transform a point p in the child frame to a point y in the parent frame
+  Eigen::Vector3d transformToParent(Eigen::Vector3d i_point);
 
-    //! Get the pose vector where the Euler orientation convention is specified by mode
-    Eigen::Matrix<double, 6, 1> getPose(CREulerMode i_mode);
-    Eigen::VectorXd getPose(CREulerMode i_mode,
-                            Eigen::Matrix<bool, 6, 1> i_poseElements);
-    
-//---------------------------------------------------------------------
-// Protected Members
+  //! Transform a point p in the parent frame to a point y in the child frame
+  Eigen::Vector3d transformToChild(Eigen::Vector3d i_point);
+
+  //! Query if the frame is driven, i.e. has a free variable
+  virtual bool isDriven(void);
+
+  //! Get the position vector
+  Eigen::Vector3d getPosition(void) { return this->m_translation; }
+
+  //! Get a vector of the Euler angles
+  Eigen::Vector3d getOrientation(CREulerMode i_mode);
+
+  //! Get the pose vector where the Euler orientation convention is specified by
+  //! mode
+  Eigen::Matrix<double, 6, 1> getPose(CREulerMode i_mode);
+  Eigen::VectorXd getPose(CREulerMode i_mode,
+                          Eigen::Matrix<bool, 6, 1> i_poseElements);
+
+  //---------------------------------------------------------------------
+  // Protected Members
 protected:
-    
-    //! Rotation matrix data
-    Eigen::Matrix3d m_rotation;
+  //! Rotation matrix data
+  Eigen::Matrix3d m_rotation;
 
-    //! Translation vector data
-    Eigen::Vector3d m_translation;
-
+  //! Translation vector data
+  Eigen::Vector3d m_translation;
 };
-    
+
 //=====================================================================
 // End namespace
 }

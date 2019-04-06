@@ -47,11 +47,10 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "CRTypes.hpp"
 #include <thread>
 
-
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRThread.hpp
@@ -61,20 +60,20 @@ namespace CoreRobotics  {
 /*!
  \class CRThread
  \ingroup core
- 
+
  \brief This class implements threads to enable running multiple
  control loops within a single application.
- 
+
  \details
  ## Description
  CRThread implements a simple thread interface for setting a callback
  and starting and stopping thread execution.
- 
+
  - CRThread::setCallback sets the callback function.
  - CRThread::setPriority sets the priority of the thread.
  - CRThread::start starts the thread execution.
  - CRThread::stop stops the thread execution.
- 
+
  ## Example
  This example creates and runs a simple CRThread.
  \include example_CRCore.cpp
@@ -82,64 +81,54 @@ namespace CoreRobotics  {
 //=====================================================================
 //! Enumerator for specifying thread priority
 #ifndef SWIG
-enum [[deprecated(CR_DEPRECATED)]] CRThreadPriority {
+enum[[deprecated(CR_DEPRECATED)]] CRThreadPriority {
 #else
 enum CRThreadPriority {
 #endif
-	CR_PRIORITY_LOWEST,
-	CR_PRIORITY_LOW,
-	CR_PRIORITY_NORMAL,
-	CR_PRIORITY_HIGH,
-	CR_PRIORITY_HIGHEST
+  CR_PRIORITY_LOWEST, CR_PRIORITY_LOW, CR_PRIORITY_NORMAL, CR_PRIORITY_HIGH,
+      CR_PRIORITY_HIGHEST
 };
 
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRThread {
+class[[deprecated(CR_DEPRECATED)]] CRThread {
 #else
 class CRThread {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
-public:
-    
-    //! Class constructor
-    CRThread();
-	CRThread(CRThreadPriority i_priority);
-    
-    //! Class destructor
-    virtual ~CRThread();
-    
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Set the thread callback function
-    void setCallback(void(i_callbackFunction)(void));
-    
-    //! Set the thread callback function
-    void setCallback(void(i_callbackFunction)(void*), void* arg);
 
-	//! Set the thread priority
-	void setPriority(CRThreadPriority i_priority);
-    
-    //! Start the thread
-    void start();
-    
-    //! Stop the thread
-    void stop();
-    
-    
-//---------------------------------------------------------------------
-// Protected Members
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
+public:
+  //! Class constructor
+  CRThread();
+  CRThread(CRThreadPriority i_priority);
+
+  //! Class destructor
+  virtual ~CRThread();
+
+  //---------------------------------------------------------------------
+  // Public Methods
+public:
+  //! Set the thread callback function
+  void setCallback(void(i_callbackFunction)(void));
+
+  //! Set the thread callback function
+  void setCallback(void(i_callbackFunction)(void *), void *arg);
+
+  //! Set the thread priority
+  void setPriority(CRThreadPriority i_priority);
+
+  //! Start the thread
+  void start();
+
+  //! Stop the thread
+  void stop();
+
+  //---------------------------------------------------------------------
+  // Protected Members
 private:
-
-	//! thread pointer
-    std::thread* m_loop;
-    
-    
+  //! thread pointer
+  std::thread *m_loop;
 };
 //=====================================================================
 // End namespace

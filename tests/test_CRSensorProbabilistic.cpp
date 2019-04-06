@@ -38,58 +38,57 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
-#include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
+#include <iostream>
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
 // Create a global noise model
-CRNoiseGaussian* measNoise;
+CRNoiseGaussian *measNoise;
 
 // Declare a probabilistic prediction model: zHat = fcn(x,sample)
-Eigen::VectorXd probPredFcn(Eigen::VectorXd x,
-                            bool sample){
-    Eigen::VectorXd v(1);
-    if (sample){
-        v = measNoise->sample();
-    } else {
-        v << 0;
-    }
-    return x + v;  // observation
+Eigen::VectorXd probPredFcn(Eigen::VectorXd x, bool sample) {
+  Eigen::VectorXd v(1);
+  if (sample) {
+    v = measNoise->sample();
+  } else {
+    v << 0;
+  }
+  return x + v; // observation
 }
 
 // Declare a likelihood model: p = Pr(zObserved | zPredict)
-double probLikFcn(Eigen::VectorXd zObserved,
-                  Eigen::VectorXd zPredict){
-    
-    Eigen::MatrixXd cov(1,1);
-    cov << 0.001;
-    measNoise->setParameters(cov, zPredict);
-    return measNoise->probability(zObserved);
+double probLikFcn(Eigen::VectorXd zObserved, Eigen::VectorXd zPredict) {
+
+  Eigen::MatrixXd cov(1, 1);
+  cov << 0.001;
+  measNoise->setParameters(cov, zPredict);
+  return measNoise->probability(zObserved);
 }
 
 //
 // Test the prediction and likelihood evaluation
 //
-TEST(CRSensorProbabilistic, Predict){
-    Eigen::VectorXd x(1);   // state vector
-    Eigen::VectorXd z(1);   // observation
-    x << 1;     // initial condition
-    Eigen::MatrixXd cov(1,1);
-    Eigen::VectorXd mean(1);
-    cov << 0.001;
-    mean << 0;
-    measNoise = new CRNoiseGaussian(cov, mean);
-    CRSensorProbabilistic sensor = CRSensorProbabilistic(*probPredFcn, *probLikFcn, x);
-    z = sensor.measurement(false);
-    EXPECT_DOUBLE_EQ(1, z(0));
-    
-    double pExact = 1 / sqrt( cov(0,0) * 2 * M_PI );
-    double p = sensor.likelihood(z);
-    EXPECT_DOUBLE_EQ(pExact, p);
-    
-    z = sensor.measurement(true);
-    EXPECT_NE(1, z(0));
+TEST(CRSensorProbabilistic, Predict) {
+  Eigen::VectorXd x(1); // state vector
+  Eigen::VectorXd z(1); // observation
+  x << 1;               // initial condition
+  Eigen::MatrixXd cov(1, 1);
+  Eigen::VectorXd mean(1);
+  cov << 0.001;
+  mean << 0;
+  measNoise = new CRNoiseGaussian(cov, mean);
+  CRSensorProbabilistic sensor =
+      CRSensorProbabilistic(*probPredFcn, *probLikFcn, x);
+  z = sensor.measurement(false);
+  EXPECT_DOUBLE_EQ(1, z(0));
+
+  double pExact = 1 / sqrt(cov(0, 0) * 2 * M_PI);
+  double p = sensor.likelihood(z);
+  EXPECT_DOUBLE_EQ(pExact, p);
+
+  z = sensor.measurement(true);
+  EXPECT_NE(1, z(0));
 }

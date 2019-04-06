@@ -39,59 +39,56 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
-
+#include <iostream>
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-
 //
 // Test memory server set/get function
 //
-TEST(CRSharedMemory, Server){
-    const char* memoryName = "MyMemory";
-    CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
-    Eigen::VectorXd v(2);
-    v << 0.0, 0.8;
-    server.addSignal("signal_1", v);
-    Eigen::VectorXd v2 = server.get("signal_1");
-    EXPECT_EQ(2, v2.size());
-    EXPECT_DOUBLE_EQ(0, v2(0));
-    EXPECT_DOUBLE_EQ(0.8, v2(1));
-    
-    v << 1.0, 1.2;
-    server.set("signal_1", v);
-    v2 = server.get("signal_1");
-    EXPECT_EQ(2, v2.size());
-    EXPECT_DOUBLE_EQ(1.0, v2(0));
-    EXPECT_DOUBLE_EQ(1.2, v2(1));
-    server.removeSignal("signal_1");
+TEST(CRSharedMemory, Server) {
+  const char *memoryName = "MyMemory";
+  CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
+  Eigen::VectorXd v(2);
+  v << 0.0, 0.8;
+  server.addSignal("signal_1", v);
+  Eigen::VectorXd v2 = server.get("signal_1");
+  EXPECT_EQ(2, v2.size());
+  EXPECT_DOUBLE_EQ(0, v2(0));
+  EXPECT_DOUBLE_EQ(0.8, v2(1));
+
+  v << 1.0, 1.2;
+  server.set("signal_1", v);
+  v2 = server.get("signal_1");
+  EXPECT_EQ(2, v2.size());
+  EXPECT_DOUBLE_EQ(1.0, v2(0));
+  EXPECT_DOUBLE_EQ(1.2, v2(1));
+  server.removeSignal("signal_1");
 }
 
 //
 // Test memory client set/get function
 //
-TEST(CRSharedMemory, Client){
-    const char* memoryName = "MyMemory";
-    CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
-    Eigen::VectorXd v(1);
-    v << 1.4;
-    server.addSignal("signal_2", v);
-    
-    CRSharedMemory client(memoryName, CR_MANAGER_CLIENT);
-    Eigen::VectorXd v2 = client.get("signal_2");
-    EXPECT_EQ(1, v2.size());
-    EXPECT_DOUBLE_EQ(1.4, v2(0));
-    
-    v << 2.4;
-    client.set("signal_2", v);
-    v2 = server.get("signal_2");
-    EXPECT_EQ(1, v2.size());
-    EXPECT_DOUBLE_EQ(2.4, v2(0));
-    
-    server.removeSignal("signal_2");
-}
+TEST(CRSharedMemory, Client) {
+  const char *memoryName = "MyMemory";
+  CRSharedMemory server(memoryName, CR_MANAGER_SERVER);
+  Eigen::VectorXd v(1);
+  v << 1.4;
+  server.addSignal("signal_2", v);
 
+  CRSharedMemory client(memoryName, CR_MANAGER_CLIENT);
+  Eigen::VectorXd v2 = client.get("signal_2");
+  EXPECT_EQ(1, v2.size());
+  EXPECT_DOUBLE_EQ(1.4, v2(0));
+
+  v << 2.4;
+  client.set("signal_2", v);
+  v2 = server.get("signal_2");
+  EXPECT_EQ(1, v2.size());
+  EXPECT_DOUBLE_EQ(2.4, v2(0));
+
+  server.removeSignal("signal_2");
+}

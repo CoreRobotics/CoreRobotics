@@ -45,13 +45,13 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include "core/CRTypes.hpp"
 #include "core/CRClock.hpp"
+#include "core/CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRTrajectoryGenerator.hpp
@@ -61,17 +61,17 @@ namespace CoreRobotics  {
 /*!
  \class CRTrajectoryGenerator
  \ingroup control
- 
+
  \brief This class provides methods for generating minimum jerk
  trajectories from initial and final conditions.
- 
+
  \details
  ## Description
  CRTrajectoryGenerator implements the minimum-jerk trajectory generation
  technique from a set of initial condititions, final conditions, and their
  1st and 2nd derivatives.
- 
- 
+
+
  These methods are available with the trajectory generator:
  - CRTrajectoryGenerator::solve computes the minimum jerk trajectory for
  the specified initial and final conditions and stores the representation
@@ -79,87 +79,76 @@ namespace CoreRobotics  {
  - CRTrajectoryGenerator::step computes the values of the trajectory for
  a specified time (if specified) or for the time elapsed since the solve
  method was called (if time is not specified).
- 
+
  ## Example
  This example demonstrates use of the CRTrajectoryGenerator class.
  \include example_CRTrajectoryGenerator.cpp
- 
+
  ## References
  [1] N. Hogan, "Adaptive control of mechanical impedance by coactivation of
      antagonist muscles," IEEE Trans. on Automatic Control AC-29: 681-690,
      1984. \n\n
- 
+
  */
 //=====================================================================
 //! Structure defining a waypoint (i.e. the output)
 #ifndef SWIG
-struct [[deprecated(CR_DEPRECATED)]] CRWaypoint {
+struct[[deprecated(CR_DEPRECATED)]] CRWaypoint {
 #else
 struct CRWaypoint {
 #endif
-    double time;
-    Eigen::VectorXd position;
-    Eigen::VectorXd velocity;
-    Eigen::VectorXd acceleration;
-    Eigen::VectorXd jerk;
+  double time;
+  Eigen::VectorXd position;
+  Eigen::VectorXd velocity;
+  Eigen::VectorXd acceleration;
+  Eigen::VectorXd jerk;
 };
 
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRTrajectoryGenerator {
+class[[deprecated(CR_DEPRECATED)]] CRTrajectoryGenerator {
 #else
 class CRTrajectoryGenerator {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
+
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
-    
-    //! Class constructor
-    CRTrajectoryGenerator();
-    
-    
-//---------------------------------------------------------------------
-// Public Methods
+  //! Class constructor
+  CRTrajectoryGenerator();
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Solve for the coefficients needed to achieve the trajectory
-    CRResult solve(Eigen::VectorXd i_x0,
-                   Eigen::VectorXd i_v0,
-                   Eigen::VectorXd m_a0,
-                   Eigen::VectorXd m_xf,
-                   Eigen::VectorXd m_vf,
-                   Eigen::VectorXd m_af,
-                   double i_tf);
-    
-    //! Solve for the coefficients needed to achieve the trajectory
-    CRResult solve(CRWaypoint i_wp0,
-                   CRWaypoint i_wpf);
-    
-    //! Get the trajectory at time t
-    CRWaypoint step(double i_t);
-    
-    //! Step the next trajectory reference
-    CRWaypoint step(void);
-    
-//---------------------------------------------------------------------
-// Protected Members
+  //! Solve for the coefficients needed to achieve the trajectory
+  CRResult solve(Eigen::VectorXd i_x0, Eigen::VectorXd i_v0,
+                 Eigen::VectorXd m_a0, Eigen::VectorXd m_xf,
+                 Eigen::VectorXd m_vf, Eigen::VectorXd m_af, double i_tf);
+
+  //! Solve for the coefficients needed to achieve the trajectory
+  CRResult solve(CRWaypoint i_wp0, CRWaypoint i_wpf);
+
+  //! Get the trajectory at time t
+  CRWaypoint step(double i_t);
+
+  //! Step the next trajectory reference
+  CRWaypoint step(void);
+
+  //---------------------------------------------------------------------
+  // Protected Members
 protected:
-    
-    //! Final time
-    double m_tf = 1.0;
-    
-    //! Polynomial coefficient matrix
-    Eigen::Matrix<double, 6, Eigen::Dynamic> m_X;
-    
-    //! An internal clock for keeping track of time
-    CRClock m_timer;
-    
+  //! Final time
+  double m_tf = 1.0;
+
+  //! Polynomial coefficient matrix
+  Eigen::Matrix<double, 6, Eigen::Dynamic> m_X;
+
+  //! An internal clock for keeping track of time
+  CRClock m_timer;
 };
 
 //=====================================================================
 // End namespace
 }
-
 
 #endif

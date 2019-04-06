@@ -44,18 +44,17 @@ POSSIBILITY OF SUCH DAMAGE.
 
 // platform specific includes
 #if defined(WIN32) || defined(WIN64)
-	#include <windows.h>
+#include <windows.h>
 #endif
 
 #if defined(__linux__) || defined(__APPLE__)
-	#include <pthread.h>
+#include <pthread.h>
 #endif
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  The constructor defines a thread.\n
@@ -64,52 +63,45 @@ namespace CoreRobotics  {
  */
 //---------------------------------------------------------------------
 CRThread::CRThread(CRThreadPriority i_priority) {
-	this->m_loop = new std::thread;
-	this->setPriority(i_priority);
+  this->m_loop = new std::thread;
+  this->setPriority(i_priority);
 }
 CRThread::CRThread() {
-    this->m_loop = new std::thread;
-	this->setPriority(CR_PRIORITY_NORMAL);
+  this->m_loop = new std::thread;
+  this->setPriority(CR_PRIORITY_NORMAL);
 }
-
 
 //=====================================================================
 /*!
  The destructor frees up memory.\n
  */
 //---------------------------------------------------------------------
-CRThread::~CRThread() { }
-
-    
+CRThread::~CRThread() {}
 
 //=====================================================================
 /*!
  This method sets the thread callback function.
- 
+
  \param [in] i_callbackFunction - the callback function to be executed
                                 by the thread
  */
 //---------------------------------------------------------------------
 void CRThread::setCallback(void(i_callbackFunction)(void)) {
-    *m_loop = std::thread(i_callbackFunction);
+  *m_loop = std::thread(i_callbackFunction);
 }
 
-    
-    
 //=====================================================================
 /*!
  This method sets the thread callback function with an argument.
- 
+
  \param [in] i_callbackFunction - the callback function to be executed
  by the thread
  \param [in] i_arg              - argument to pass to thread
  */
 //---------------------------------------------------------------------
-void CRThread::setCallback(void(i_callbackFunction)(void*),
-                           void* i_arg) {
-    *m_loop = std::thread(i_callbackFunction, i_arg);
+void CRThread::setCallback(void(i_callbackFunction)(void *), void *i_arg) {
+  *m_loop = std::thread(i_callbackFunction, i_arg);
 }
-
 
 //=====================================================================
 /*!
@@ -120,95 +112,84 @@ This method sets the thread priority.
 //---------------------------------------------------------------------
 void CRThread::setPriority(CRThreadPriority i_priority) {
 
-	// Windows
-	#if defined(WIN32) || defined(WIN64)
+// Windows
+#if defined(WIN32) || defined(WIN64)
 
-		// get the thread handle
-		HANDLE hThread = this->m_loop->native_handle();
+  // get the thread handle
+  HANDLE hThread = this->m_loop->native_handle();
 
-		// get the process
-		HANDLE process = GetCurrentProcess();
-		SetPriorityClass(process, HIGH_PRIORITY_CLASS);
+  // get the process
+  HANDLE process = GetCurrentProcess();
+  SetPriorityClass(process, HIGH_PRIORITY_CLASS);
 
-		int tPriority = THREAD_PRIORITY_NORMAL;
-		switch (i_priority) {
-			case CR_PRIORITY_LOWEST:	// 11
-				tPriority = THREAD_PRIORITY_LOWEST;
-				break;
-			case CR_PRIORITY_LOW:		// 12
-				tPriority = THREAD_PRIORITY_BELOW_NORMAL;
-				break;
-			case CR_PRIORITY_NORMAL:	// 13
-				tPriority = THREAD_PRIORITY_NORMAL;
-				break;
-			case CR_PRIORITY_HIGH:		// 14
-				tPriority = THREAD_PRIORITY_ABOVE_NORMAL;
-				break;
-			case CR_PRIORITY_HIGHEST:   // 15
-				tPriority = THREAD_PRIORITY_HIGHEST;
-				break;
-		}
-		SetThreadPriority(hThread, tPriority);
+  int tPriority = THREAD_PRIORITY_NORMAL;
+  switch (i_priority) {
+  case CR_PRIORITY_LOWEST: // 11
+    tPriority = THREAD_PRIORITY_LOWEST;
+    break;
+  case CR_PRIORITY_LOW: // 12
+    tPriority = THREAD_PRIORITY_BELOW_NORMAL;
+    break;
+  case CR_PRIORITY_NORMAL: // 13
+    tPriority = THREAD_PRIORITY_NORMAL;
+    break;
+  case CR_PRIORITY_HIGH: // 14
+    tPriority = THREAD_PRIORITY_ABOVE_NORMAL;
+    break;
+  case CR_PRIORITY_HIGHEST: // 15
+    tPriority = THREAD_PRIORITY_HIGHEST;
+    break;
+  }
+  SetThreadPriority(hThread, tPriority);
 
-	#endif
+#endif
 
+#if defined(__linux__) || defined(__APPLE__)
 
-	#if defined(__linux__) || defined(__APPLE__)
-    
-        // get the thread handle
-        pthread_t hThread = this->m_loop->native_handle();
-    
-        // return the policy and params for the thread
-        struct sched_param sch;
-        int tPolicy;
-        pthread_getschedparam(hThread, &tPolicy, &sch);
-    
-        switch (i_priority) {
-            case CR_PRIORITY_LOWEST:
-                sch.sched_priority = 1;
-                break;
-            case CR_PRIORITY_LOW:
-                sch.sched_priority = 25;
-                break;
-            case CR_PRIORITY_NORMAL:
-                sch.sched_priority = 50;
-                break;
-            case CR_PRIORITY_HIGH:
-                sch.sched_priority = 75;
-                break;
-            case CR_PRIORITY_HIGHEST:
-                sch.sched_priority = 99;
-                break;
-        }
-        pthread_setschedparam(hThread, SCHED_FIFO, &sch);
+  // get the thread handle
+  pthread_t hThread = this->m_loop->native_handle();
 
-	#endif
+  // return the policy and params for the thread
+  struct sched_param sch;
+  int tPolicy;
+  pthread_getschedparam(hThread, &tPolicy, &sch);
 
+  switch (i_priority) {
+  case CR_PRIORITY_LOWEST:
+    sch.sched_priority = 1;
+    break;
+  case CR_PRIORITY_LOW:
+    sch.sched_priority = 25;
+    break;
+  case CR_PRIORITY_NORMAL:
+    sch.sched_priority = 50;
+    break;
+  case CR_PRIORITY_HIGH:
+    sch.sched_priority = 75;
+    break;
+  case CR_PRIORITY_HIGHEST:
+    sch.sched_priority = 99;
+    break;
+  }
+  pthread_setschedparam(hThread, SCHED_FIFO, &sch);
+
+#endif
 }
-
 
 //=====================================================================
 /*!
  This method starts the thread by joining it to the main thread.
  */
 //---------------------------------------------------------------------
-void CRThread::start() {
-    m_loop->join();
-}
-    
-    
+void CRThread::start() { m_loop->join(); }
+
 //=====================================================================
 /*!
  This method stops the thread execution by detaching it from the main.
  */
 //---------------------------------------------------------------------
-void CRThread::stop() {
-    m_loop->detach();
-}
-
+void CRThread::stop() { m_loop->detach(); }
 
 //=====================================================================
 // End namespace
 }
-
-

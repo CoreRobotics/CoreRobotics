@@ -38,62 +38,69 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
-#include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
+#include <iostream>
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
 // Declare a continuous motion model - xdot = fcn(t,x,u)
-Eigen::VectorXd continuousDynFcn(double t, Eigen::VectorXd x, Eigen::VectorXd u){
-    return -x + u;  // motion
+Eigen::VectorXd continuousDynFcn(double t, Eigen::VectorXd x,
+                                 Eigen::VectorXd u) {
+  return -x + u; // motion
 }
 
 // Declare a discrete motion model - xNext = fcn(t,x,u)
-Eigen::VectorXd discreteDynFcn(double t, Eigen::VectorXd x, Eigen::VectorXd u){
-    x(0) = exp(-1 * 0.01) * x(0) -1 * (exp(-1 * 0.01) - 1) * 1 * u(0); // motion (dt = 0.01)
-    return x;
+Eigen::VectorXd discreteDynFcn(double t, Eigen::VectorXd x, Eigen::VectorXd u) {
+  x(0) = exp(-1 * 0.01) * x(0) -
+         1 * (exp(-1 * 0.01) - 1) * 1 * u(0); // motion (dt = 0.01)
+  return x;
 }
 
 //
 // Test the continuous model.  Here we specify a continuous differential model,
-// which is solved using the internal integration scheme of the CRMotionLinear model
+// which is solved using the internal integration scheme of the CRMotionLinear
+// model
 //
-TEST(CRMotionModel, Continuous){
-    double dt = 0.01;   // sample rate (seconds)
-    Eigen::VectorXd x(1);   // state vector
-    Eigen::VectorXd u(1);   // input vector
-    x << 1;     // initial condition
-    u << 0;     // input value
-    CRMotionModel model = CRMotionModel(*continuousDynFcn, CR_MOTION_CONTINUOUS, x, dt);
-    double t = 0; // Initialize a time t
-    while(t < 5) { // simulate for 5 seconds
-        x = model.motion(u); // simulate the motion
-        t = model.getTime(); // get the simulation time
-    }
-    EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
-    EXPECT_NEAR(0, x(0), 0.01); // check the final state (should be within 1% of F.V. = 0)
+TEST(CRMotionModel, Continuous) {
+  double dt = 0.01;     // sample rate (seconds)
+  Eigen::VectorXd x(1); // state vector
+  Eigen::VectorXd u(1); // input vector
+  x << 1;               // initial condition
+  u << 0;               // input value
+  CRMotionModel model =
+      CRMotionModel(*continuousDynFcn, CR_MOTION_CONTINUOUS, x, dt);
+  double t = 0;          // Initialize a time t
+  while (t < 5) {        // simulate for 5 seconds
+    x = model.motion(u); // simulate the motion
+    t = model.getTime(); // get the simulation time
+  }
+  EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
+  EXPECT_NEAR(0, x(0),
+              0.01); // check the final state (should be within 1% of F.V. = 0)
 }
 
-
 //
-// Test the discrete model.  Here we discretize the same system using exact discretization:
+// Test the discrete model.  Here we discretize the same system using exact
+// discretization:
 // https://en.wikipedia.org/wiki/Discretization#Discretization_of_linear_state_space_models
 // this approach gives us full control over how the system is discretized
 //
-TEST(CRMotionModel, Discrete){
-    double dt = 0.01;   // sample rate (seconds)
-    Eigen::VectorXd x(1);   // state vector
-    Eigen::VectorXd u(1);   // input vector
-    x << 1;     // initial condition
-    u << 0;     // input value
-    CRMotionModel model = CRMotionModel(*discreteDynFcn, CR_MOTION_DISCRETE, x, dt);
-    double t = 0; // Initialize a time t
-    while(t < 5) { // simulate for 5 seconds
-        x = model.motion(u); // simulate the motion
-        t = model.getTime(); // get the simulation time
-    }
-    EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
-    EXPECT_NEAR(0, x(0), 0.01); // check the final state (should be within 1% of F.V. = 0)
+TEST(CRMotionModel, Discrete) {
+  double dt = 0.01;     // sample rate (seconds)
+  Eigen::VectorXd x(1); // state vector
+  Eigen::VectorXd u(1); // input vector
+  x << 1;               // initial condition
+  u << 0;               // input value
+  CRMotionModel model =
+      CRMotionModel(*discreteDynFcn, CR_MOTION_DISCRETE, x, dt);
+  double t = 0;          // Initialize a time t
+  while (t < 5) {        // simulate for 5 seconds
+    x = model.motion(u); // simulate the motion
+    t = model.getTime(); // get the simulation time
+  }
+  EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
+  EXPECT_NEAR(0, x(0),
+              0.01); // check the final state (should be within 1% of F.V. = 0)
 }

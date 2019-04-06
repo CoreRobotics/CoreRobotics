@@ -44,15 +44,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "Eigen/Dense"
 #include "CRFrame.hpp"
+#include "Eigen/Dense"
 #include "core/CRTypes.hpp"
-
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRFrameEuler.hpp
@@ -63,171 +62,146 @@ namespace CoreRobotics  {
 /*!
  \class CRFrameEuler
  \ingroup physics
- 
+
  \brief This class implements a homogeneous transformation in the
  special Euclidean group made up of rotations and translations, where
  the rotations are defined by Euler angles.
- 
+
  \details
  ## Description
- CRFrameEuler implements an transformation where the rotation is 
+ CRFrameEuler implements an transformation where the rotation is
  specified by three Euler angles (<a href="wikipedia.org/wiki/Euler_angles">
  see Wikipedia article).</a>
- 
+
  Properties of the transform can be set with methods
  - CRFrameEuler::setPosition, CRFrameEuler::setOrientation and
  CRFrameEuler::setPositionAndOrientation set transformation values.
  - CRFrameEuler::setMode sets the Euler angle convention (options are in
  CoreRobotics::CREulerMode).
- 
+
  The free variable can be specified by the CRFrameEuler::m_freeVar member
  (options are in CoreRobotics::CREulerFreeVariable).
- 
+
  ## Example
  This example creates an Euler frame class.
  \include example_CRManipulator.cpp
- 
+
  ## References
  [1] J. Craig, "Introduction to Robotics: Mechanics and Control", Ed. 3,
  Pearson, 2004.
- 
+
  */
 //=====================================================================
 //! Enumerator for handling Euler angle free variable candidates
 #ifndef SWIG
-enum [[deprecated(CR_DEPRECATED)]] CREulerFreeVariable {
+enum[[deprecated(CR_DEPRECATED)]] CREulerFreeVariable {
 #else
 enum CREulerFreeVariable {
 #endif
-    CR_EULER_FREE_NONE,
-    CR_EULER_FREE_POS_X,
-    CR_EULER_FREE_POS_Y,
-    CR_EULER_FREE_POS_Z,
-    CR_EULER_FREE_ANG_A,
-    CR_EULER_FREE_ANG_B,
-    CR_EULER_FREE_ANG_G,
+  CR_EULER_FREE_NONE, CR_EULER_FREE_POS_X, CR_EULER_FREE_POS_Y,
+      CR_EULER_FREE_POS_Z, CR_EULER_FREE_ANG_A, CR_EULER_FREE_ANG_B,
+      CR_EULER_FREE_ANG_G,
 };
-
 
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRFrameEuler : public CRFrame  {
+class[[deprecated(CR_DEPRECATED)]] CRFrameEuler : public CRFrame {
 #else
-class CRFrameEuler : public CRFrame  {
+class CRFrameEuler : public CRFrame {
 #endif
 
-//---------------------------------------------------------------------
-// Constructor and Destructor
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
+  //! Class constructor
+  CRFrameEuler(double i_x, double i_y, double i_z, double i_a, double i_b,
+               double i_g, CREulerMode i_mode, CREulerFreeVariable i_free);
+  CRFrameEuler();
 
-    //! Class constructor
-    CRFrameEuler(double i_x,
-                 double i_y,
-                 double i_z,
-                 double i_a,
-                 double i_b,
-                 double i_g,
-                 CREulerMode i_mode,
-                 CREulerFreeVariable i_free);
-    CRFrameEuler();
-
-//---------------------------------------------------------------------
-// Get/Set Methods
+  //---------------------------------------------------------------------
+  // Get/Set Methods
 public:
-    
-    //! Set the value of the free variable
-    CRResult setFreeValue(double i_q);
-    
-    //! Get the value of the free variable
-    double getFreeValue(void);
-    
-    //! Set the free variable
-    void setFreeVariable(CREulerFreeVariable i_free) {m_freeVar = i_free;}
-    
-    //! Get the free variable
-    CREulerFreeVariable getFreeVariable(void) {return m_freeVar;}
-    
-    //! Set the Euler convention
-    void setMode(CREulerMode i_mode);
-    
-    //! Get the Euler convention
-    CREulerMode getMode(void);
-    
-    //! Set the position values
-    void setPosition(double i_x, double i_y, double i_z);
-    
-    //! Get the x position
-    void getPosition(double& o_x, double& o_y, double& o_z);
-    
-    //! Set the angle values
-    void setOrientation(double i_a, double i_b, double i_g);
-    
-    //! Get the angle values
-    void getOrientation(double& o_a, double& o_b, double& o_g);
-    
-    //! Set the position and angle values
-    void setPositionAndOrientation(double i_x,
-                                   double i_y,
-                                   double i_z,
-                                   double i_a,
-                                   double i_b,
-                                   double i_g);
-    
-    //! Get the position and angle values
-    void getPositionAndOrientation(double& o_x,
-                                   double& o_y,
-                                   double& o_z,
-                                   double& o_a,
-                                   double& o_b,
-                                   double& o_g);
-    
-    //! (NOT RECOMMENDED) Set the rotation and translation matrices
-    void setRotationAndTranslation(Eigen::Matrix3d i_rot,
-                                   Eigen::Vector3d i_trans);
+  //! Set the value of the free variable
+  CRResult setFreeValue(double i_q);
 
-//---------------------------------------------------------------------
-// Public Methods
+  //! Get the value of the free variable
+  double getFreeValue(void);
+
+  //! Set the free variable
+  void setFreeVariable(CREulerFreeVariable i_free) { m_freeVar = i_free; }
+
+  //! Get the free variable
+  CREulerFreeVariable getFreeVariable(void) { return m_freeVar; }
+
+  //! Set the Euler convention
+  void setMode(CREulerMode i_mode);
+
+  //! Get the Euler convention
+  CREulerMode getMode(void);
+
+  //! Set the position values
+  void setPosition(double i_x, double i_y, double i_z);
+
+  //! Get the x position
+  void getPosition(double &o_x, double &o_y, double &o_z);
+
+  //! Set the angle values
+  void setOrientation(double i_a, double i_b, double i_g);
+
+  //! Get the angle values
+  void getOrientation(double &o_a, double &o_b, double &o_g);
+
+  //! Set the position and angle values
+  void setPositionAndOrientation(double i_x, double i_y, double i_z, double i_a,
+                                 double i_b, double i_g);
+
+  //! Get the position and angle values
+  void getPositionAndOrientation(double &o_x, double &o_y, double &o_z,
+                                 double &o_a, double &o_b, double &o_g);
+
+  //! (NOT RECOMMENDED) Set the rotation and translation matrices
+  void setRotationAndTranslation(Eigen::Matrix3d i_rot,
+                                 Eigen::Vector3d i_trans);
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Query if the frame is driven, i.e. has a free variable
-    bool isDriven(void);
+  //! Query if the frame is driven, i.e. has a free variable
+  bool isDriven(void);
 
-//---------------------------------------------------------------------
-// Private Members
+  //---------------------------------------------------------------------
+  // Private Members
 private:
-    
-    //! free variable indicator
-    CREulerFreeVariable m_freeVar;
-    
-    //! Euler convention
-    CREulerMode m_eulerMode;
+  //! free variable indicator
+  CREulerFreeVariable m_freeVar;
 
-    //! x position
-    double m_posX;
-    
-    //! y position
-    double m_posY;
-    
-    //! z position
-    double m_posZ;
-    
-    //! alpha angle [rad]
-    double m_angA;
-    
-    //! beta angle [rad]
-    double m_angB;
-    
-    //! gamma angle [rad]
-    double m_angG;
-    
-//---------------------------------------------------------------------
-// Private Methods
+  //! Euler convention
+  CREulerMode m_eulerMode;
+
+  //! x position
+  double m_posX;
+
+  //! y position
+  double m_posY;
+
+  //! z position
+  double m_posZ;
+
+  //! alpha angle [rad]
+  double m_angA;
+
+  //! beta angle [rad]
+  double m_angB;
+
+  //! gamma angle [rad]
+  double m_angG;
+
+  //---------------------------------------------------------------------
+  // Private Methods
 private:
-    
-    //! Update the rotation and translation matrices from data
-    // using CRFrame::setRotationAndTranslation;
-    void setRotationAndTranslation();
-
+  //! Update the rotation and translation matrices from data
+  // using CRFrame::setRotationAndTranslation;
+  void setRotationAndTranslation();
 };
 
 //=====================================================================

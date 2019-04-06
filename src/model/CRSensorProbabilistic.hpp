@@ -44,14 +44,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "core/CRTypes.hpp"
-#include "Eigen/Dense"
 #include "CRSensorModel.hpp"
+#include "Eigen/Dense"
+#include "core/CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRSensorProbabilistic.hpp
@@ -61,93 +61,86 @@ namespace CoreRobotics  {
 /*!
  \class CRSensorProbabilistic
  \ingroup model
- 
+
  \brief This class implements a probabilistic sensor model.
- 
+
  \details
  ## Description
- CRSensorProbabilistic implements a probabilistic sensor model from 
+ CRSensorProbabilistic implements a probabilistic sensor model from
  a supplied observation callback function and likelihood callback
  functions.  Specifically, CRSensorProbabilistic sets up a container
  for the model
- 
+
  \f$ z = h(x,w) \f$,
- 
+
  where \f$x\f$ is the state vector, and \f$z\f$ is the sensor
  measurement vector. and \f$w\f$ is noise.  Additionally, a probabilistic
  model
- 
+
  \f$ p(z \mid x) \f$
- 
+
  must be specified to return the probability of observing a measurement
  \f$z\f$ given the current state \f$x\f$.
- 
+
  These methods are used to interface with the Probabilistic Sensor Model:
  - CRSensorProbabilistic::setState sets the underlying state vector.
  - CRSensorProbabilistic::getState outputs the state vector.
  - CRSensorProbabilistic::measurement computes a simulated measurement
  vector (z) from the underlying state (x).
- - CRSensorProbabilistic::likelihood computes the probability of 
+ - CRSensorProbabilistic::likelihood computes the probability of
  observing measurement (z) for the given state (x).
- 
+
  ## Example
  This example demonstrates use of the CRSensorProbabilistic class.
  \include example_CRSensorProbabilistic.cpp
- 
+
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
- 
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press, 2006.
+
+ [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
+ 2006.
  \n\n
  */
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRSensorProbabilistic : public CRSensorModel {
+class[[deprecated(CR_DEPRECATED)]] CRSensorProbabilistic
+    : public CRSensorModel {
 #else
 class CRSensorProbabilistic : public CRSensorModel {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
+
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
-    
-    //! Class constructor
-    CRSensorProbabilistic(Eigen::VectorXd(i_predictor)(Eigen::VectorXd,
-                                                        bool),
-                          double(i_likelihood)(Eigen::VectorXd,
-                                                Eigen::VectorXd),
-                          Eigen::VectorXd i_x0);
-    
-//---------------------------------------------------------------------
-// Public Methods
+  //! Class constructor
+  CRSensorProbabilistic(Eigen::VectorXd(i_predictor)(Eigen::VectorXd, bool),
+                        double(i_likelihood)(Eigen::VectorXd, Eigen::VectorXd),
+                        Eigen::VectorXd i_x0);
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Simulate the measurement
-    Eigen::VectorXd measurement(bool i_sampleNoise);
-    
-    Eigen::VectorXd measurement(void);
-    
-    //! Get the likelihood of a measurement
-    double likelihood(Eigen::VectorXd i_z);
-    
-//---------------------------------------------------------------------
-// Protected Members
+  //! Simulate the measurement
+  Eigen::VectorXd measurement(bool i_sampleNoise);
+
+  Eigen::VectorXd measurement(void);
+
+  //! Get the likelihood of a measurement
+  double likelihood(Eigen::VectorXd i_z);
+
+  //---------------------------------------------------------------------
+  // Protected Members
 protected:
-    
-    //! Callback to the probabilistic predictor function z = h(x,v)
-    Eigen::VectorXd(*m_measPredictFcn)(Eigen::VectorXd,
-                                       bool);
-    
-    //! Callback to the probabilistic likelihood function p(zObserved|h(x))
-    double(*m_measLikelihoodFcn)(Eigen::VectorXd,
-                                 Eigen::VectorXd);
-    
+  //! Callback to the probabilistic predictor function z = h(x,v)
+  Eigen::VectorXd (*m_measPredictFcn)(Eigen::VectorXd, bool);
+
+  //! Callback to the probabilistic likelihood function p(zObserved|h(x))
+  double (*m_measLikelihoodFcn)(Eigen::VectorXd, Eigen::VectorXd);
 };
 
 //=====================================================================
 // End namespace
 }
-
 
 #endif

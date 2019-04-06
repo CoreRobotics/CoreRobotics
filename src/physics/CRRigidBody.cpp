@@ -41,40 +41,31 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "CRRigidBody.hpp"
 
-
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
 
 //=====================================================================
 /*!
  The constructor creates a rigid body container.\n
- 
+
  \param[in] i_frame - pointer to the frame associated with the rigid
  body transformation.
  */
 //---------------------------------------------------------------------
-CRRigidBody::CRRigidBody(CRFrame* i_frame){
-    this->m_frame = i_frame;
-}
-    
-CRRigidBody::CRRigidBody() { }
+CRRigidBody::CRRigidBody(CRFrame *i_frame) { this->m_frame = i_frame; }
 
+CRRigidBody::CRRigidBody() {}
 
 //=====================================================================
 /*!
  Destructor.\n
  */
 //---------------------------------------------------------------------
-//CRRigidBody::~CRRigidBody() {
+// CRRigidBody::~CRRigidBody() {
 //    delete frame;
 //}
-
-
 
 //=====================================================================
 // End namespace
 }
-
-

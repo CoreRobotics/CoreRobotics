@@ -44,15 +44,15 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "core/CRTypes.hpp"
-#include "Eigen/Dense"
-#include <random>
 #include "CRNoiseModel.hpp"
+#include "Eigen/Dense"
+#include "core/CRTypes.hpp"
+#include <random>
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRNoiseGaussian.hpp
@@ -62,97 +62,88 @@ namespace CoreRobotics  {
 /*!
  \class CRNoiseGaussian
  \ingroup noise
- 
+
  \brief Implements a class for modeling Gaussian noise.
- 
+
  \details
  ## Description
- CRNoiseGaussian implements methods for sampling from and modeling 
+ CRNoiseGaussian implements methods for sampling from and modeling
  multivariate Gaussian noise (see [1-3]). The Gaussian is completely
  defined by a mean \f$\mu\f$ and covariance \f$\Sigma\f$.
- 
+
  - CRNoiseGaussian::setParameters sets the parameters of the noise model
  - CRNoiseGaussian::sample samples from the noise model
  - CRNoiseGaussian::probability evaluates the probability
- 
+
  ## Example
  This example demonstrates use of the CRNoiseGaussian class.
- 
+
  \include example_CRNoiseGaussian.cpp
- 
+
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
- 
+
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
- 
+
  [3] en.wikipedia.org/wiki/Multivariate_normal_distribution
  */
 //=====================================================================
 // Paramter structure declaration
 #ifndef SWIG
-struct [[deprecated(CR_DEPRECATED)]] CRParamNoiseGaussian{
+struct[[deprecated(CR_DEPRECATED)]] CRParamNoiseGaussian {
 #else
-struct CRParamNoiseGaussian{
+struct CRParamNoiseGaussian {
 #endif
-    Eigen::MatrixXd cov;
-    Eigen::MatrixXd covInv;
-    Eigen::VectorXd mean;
+  Eigen::MatrixXd cov;
+  Eigen::MatrixXd covInv;
+  Eigen::VectorXd mean;
 };
-    
+
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRNoiseGaussian : public CRNoiseModel {
+class[[deprecated(CR_DEPRECATED)]] CRNoiseGaussian : public CRNoiseModel {
 #else
 class CRNoiseGaussian : public CRNoiseModel {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
+
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
-    
-    //! Class constructor
-    CRNoiseGaussian(Eigen::MatrixXd i_cov,
-                    Eigen::VectorXd i_mean,
-                    unsigned i_seed);
-    CRNoiseGaussian(Eigen::MatrixXd i_cov,
-                    Eigen::VectorXd i_mean);
-    CRNoiseGaussian();
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
+  //! Class constructor
+  CRNoiseGaussian(Eigen::MatrixXd i_cov, Eigen::VectorXd i_mean,
+                  unsigned i_seed);
+  CRNoiseGaussian(Eigen::MatrixXd i_cov, Eigen::VectorXd i_mean);
+  CRNoiseGaussian();
+
+  //---------------------------------------------------------------------
+  // Get/Set Methods
 public:
-    
-    //! Set the parameters that describe the distribution
-    using CRNoiseModel::setParameters;
-    void setParameters(Eigen::MatrixXd i_cov,
-                       Eigen::VectorXd i_mean);
-    
-//---------------------------------------------------------------------
-// Public Methods
+  //! Set the parameters that describe the distribution
+  using CRNoiseModel::setParameters;
+  void setParameters(Eigen::MatrixXd i_cov, Eigen::VectorXd i_mean);
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Sample a noise vector from the density
-    using CRNoiseModel::sample;
-    Eigen::VectorXd sample(void);
-    
-    //! Evaluate the probability from the density
-    using CRNoiseModel::probability;
-    double probability(Eigen::VectorXd i_x);
-    
-//---------------------------------------------------------------------
-// Public Members
+  //! Sample a noise vector from the density
+  using CRNoiseModel::sample;
+  Eigen::VectorXd sample(void);
+
+  //! Evaluate the probability from the density
+  using CRNoiseModel::probability;
+  double probability(Eigen::VectorXd i_x);
+
+  //---------------------------------------------------------------------
+  // Public Members
 public:
-    
-    //! Noise model parameters
-    CRParamNoiseGaussian m_parameters;
-    
+  //! Noise model parameters
+  CRParamNoiseGaussian m_parameters;
 };
 
 //=====================================================================
 // End namespace
 }
-
 
 #endif

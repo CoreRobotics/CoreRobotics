@@ -39,47 +39,43 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
-
+#include <iostream>
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
-
 //
 // Test the unit conversion maths
 //
-TEST(CRConversion, Units){
-    
-    // basic radian/degree conversions
-    EXPECT_DOUBLE_EQ(180, CRConversion::rad2deg(M_PI));
-    EXPECT_DOUBLE_EQ(90,  CRConversion::rad2deg(M_PI / 2));
-    EXPECT_DOUBLE_EQ(M_PI, CRConversion::deg2rad(180));
-    EXPECT_DOUBLE_EQ(M_PI / 2,  CRConversion::deg2rad(90));
-}
+TEST(CRConversion, Units) {
 
+  // basic radian/degree conversions
+  EXPECT_DOUBLE_EQ(180, CRConversion::rad2deg(M_PI));
+  EXPECT_DOUBLE_EQ(90, CRConversion::rad2deg(M_PI / 2));
+  EXPECT_DOUBLE_EQ(M_PI, CRConversion::deg2rad(180));
+  EXPECT_DOUBLE_EQ(M_PI / 2, CRConversion::deg2rad(90));
+}
 
 //
 // Test the angle wrapping maths
 //
-TEST(CRConversion, Wrapping){
-    
-    // check wrapping
-    EXPECT_NEAR(0, CRConversion::wrapToPi(0), 1e-12);
-    EXPECT_NEAR(0, CRConversion::wrapToPi(2 * M_PI), 1e-12);
-    EXPECT_NEAR(0, CRConversion::wrapToPi(4 * M_PI), 1e-12);
-    
-    // slight offsets
-    EXPECT_NEAR(0.1 - M_PI, CRConversion::wrapToPi(M_PI + 0.1), 1e-12);
-    EXPECT_NEAR(M_PI - 0.1, CRConversion::wrapToPi(-(M_PI + 0.1)), 1e-12);
-    EXPECT_NEAR(0.1, CRConversion::wrapToPi(2 * M_PI + 0.1), 1e-12);
-    
-    // at pi boundary (always goes to negative)
-    EXPECT_NEAR(-M_PI, CRConversion::wrapToPi(M_PI), 1e-12);
-    EXPECT_NEAR(-M_PI, CRConversion::wrapToPi(-M_PI), 1e-12);
-    EXPECT_NEAR(-M_PI, CRConversion::wrapToPi(11 * M_PI), 1e-12);
-    EXPECT_NEAR(-M_PI, CRConversion::wrapToPi(-11 * M_PI), 1e-12);
-}
+TEST(CRConversion, Wrapping) {
 
+  // check wrapping
+  EXPECT_NEAR(0, CRConversion::wrapToPi(0), 1e-12);
+  EXPECT_NEAR(0, CRConversion::wrapToPi(2 * M_PI), 1e-12);
+  EXPECT_NEAR(0, CRConversion::wrapToPi(4 * M_PI), 1e-12);
+
+  // slight offsets
+  EXPECT_NEAR(0.1 - M_PI, CRConversion::wrapToPi(M_PI + 0.1), 1e-12);
+  EXPECT_NEAR(M_PI - 0.1, CRConversion::wrapToPi(-(M_PI + 0.1)), 1e-12);
+  EXPECT_NEAR(0.1, CRConversion::wrapToPi(2 * M_PI + 0.1), 1e-12);
+
+  // at pi boundary (always goes to negative)
+  EXPECT_NEAR(-M_PI, CRConversion::wrapToPi(M_PI), 1e-12);
+  EXPECT_NEAR(-M_PI, CRConversion::wrapToPi(-M_PI), 1e-12);
+  EXPECT_NEAR(-M_PI, CRConversion::wrapToPi(11 * M_PI), 1e-12);
+  EXPECT_NEAR(-M_PI, CRConversion::wrapToPi(-11 * M_PI), 1e-12);
+}

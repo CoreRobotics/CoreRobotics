@@ -41,20 +41,18 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #include "CRSensorModel.hpp"
 
-
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
- The constructor creates a sensor model.  The i_predictor specifies 
+ The constructor creates a sensor model.  The i_predictor specifies
  the observation equation:\n
- 
+
  \f$ zPredict =  h(x) \f$
- 
- where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted 
+
+ where \f$x\f$ is the system state and \f$zPredict\f$ is the predicted
  sensor observation. The callback function prototype is thus
  \code
  Eigen::VectorXd i_predictor(Eigen::VectorXd x){
@@ -62,35 +60,31 @@ namespace CoreRobotics  {
     return zPredict;
  };
  \endcode
- 
+
  \param[in] i_predictor - a model function of the form specified above
  \param[in] i_x0 - the initial state.
  */
 //---------------------------------------------------------------------
 CRSensorModel::CRSensorModel(Eigen::VectorXd(i_predictor)(Eigen::VectorXd),
-                             Eigen::VectorXd i_x0)
-{
-    this->m_measPredictFcn = i_predictor;
-    this->setState(i_x0);
+                             Eigen::VectorXd i_x0) {
+  this->m_measPredictFcn = i_predictor;
+  this->setState(i_x0);
 }
 
 // overloaded constructor for initializing derived classes
-CRSensorModel::CRSensorModel() { }
-
+CRSensorModel::CRSensorModel() {}
 
 //=====================================================================
 /*!
  This method simulates the measurement from the value of the underlying
  state.\n
- 
+
  \return - simulated measurement (z).
  */
 //---------------------------------------------------------------------
-Eigen::VectorXd CRSensorModel::measurement(void)
-{
-    return (this->m_measPredictFcn)(this->m_state);
+Eigen::VectorXd CRSensorModel::measurement(void) {
+  return (this->m_measPredictFcn)(this->m_state);
 }
-
 
 //=====================================================================
 // End namespace

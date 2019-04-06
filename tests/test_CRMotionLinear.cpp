@@ -38,61 +38,62 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 //=====================================================================
-#include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
+#include <iostream>
 
 // Use the CoreRobotics namespace
 using namespace CoreRobotics;
 
 //
 // Test the continuous model.  Here we specify a continuous state space model,
-// which is solved using the internal integration scheme of the CRMotionLinear model
+// which is solved using the internal integration scheme of the CRMotionLinear
+// model
 //
-TEST(CRMotionLinear, Continuous){
-    double dt = 0.01;   // sample rate (seconds)
-    Eigen::VectorXd x(1);   // state vector
-    Eigen::VectorXd u(1);   // input vector
-    x << 1;     // initial condition
-    u << 0;     // input value
-    Eigen::Matrix<double,1,1> A;    // dynamics Matrix
-    Eigen::Matrix<double,1,1> B;    // input matrix
-    A << -1;
-    B << 1;
-    CRMotionLinear model = CRMotionLinear(A, B, CR_MOTION_CONTINUOUS, x, dt);
-    double t = 0; // Initialize a time t
-    while(t < 5) { // simulate for 5 seconds
-        x = model.motion(u); // simulate the motion
-        t = model.getTime(); // get the simulation time
-    }
-    EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
-    EXPECT_NEAR(0, x(0), 0.01); // check the final state (should be within 1% of F.V. = 0)
+TEST(CRMotionLinear, Continuous) {
+  double dt = 0.01;              // sample rate (seconds)
+  Eigen::VectorXd x(1);          // state vector
+  Eigen::VectorXd u(1);          // input vector
+  x << 1;                        // initial condition
+  u << 0;                        // input value
+  Eigen::Matrix<double, 1, 1> A; // dynamics Matrix
+  Eigen::Matrix<double, 1, 1> B; // input matrix
+  A << -1;
+  B << 1;
+  CRMotionLinear model = CRMotionLinear(A, B, CR_MOTION_CONTINUOUS, x, dt);
+  double t = 0;          // Initialize a time t
+  while (t < 5) {        // simulate for 5 seconds
+    x = model.motion(u); // simulate the motion
+    t = model.getTime(); // get the simulation time
+  }
+  EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
+  EXPECT_NEAR(0, x(0),
+              0.01); // check the final state (should be within 1% of F.V. = 0)
 }
 
-
 //
-// Test the discrete model.  Here we discretize the same system using exact discretization:
+// Test the discrete model.  Here we discretize the same system using exact
+// discretization:
 // https://en.wikipedia.org/wiki/Discretization#Discretization_of_linear_state_space_models
 // this approach gives us full control over how the system is discretized
 //
-TEST(CRMotionLinear, Discrete){
-    double dt = 0.01;   // sample rate (seconds)
-    Eigen::VectorXd x(1);   // state vector
-    Eigen::VectorXd u(1);   // input vector
-    x << 1;     // initial condition
-    u << 0;     // input value
-    Eigen::Matrix<double,1,1> A;    // dynamics Matrix
-    Eigen::Matrix<double,1,1> B;    // input matrix
-    A << exp(-1 * dt);                  // exact discretization
-    B << -1 * (exp(-1 * dt) - 1) * 1;   // exact discretization
-    CRMotionLinear model = CRMotionLinear(A, B, CR_MOTION_DISCRETE, x, dt);
-    double t = 0; // Initialize a time t
-    while(t < 5) { // simulate for 5 seconds
-        x = model.motion(u); // simulate the motion
-        t = model.getTime(); // get the simulation time
-    }
-    EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
-    EXPECT_NEAR(0, x(0), 0.01); // check the final state (should be within 1% of F.V. = 0)
+TEST(CRMotionLinear, Discrete) {
+  double dt = 0.01;                 // sample rate (seconds)
+  Eigen::VectorXd x(1);             // state vector
+  Eigen::VectorXd u(1);             // input vector
+  x << 1;                           // initial condition
+  u << 0;                           // input value
+  Eigen::Matrix<double, 1, 1> A;    // dynamics Matrix
+  Eigen::Matrix<double, 1, 1> B;    // input matrix
+  A << exp(-1 * dt);                // exact discretization
+  B << -1 * (exp(-1 * dt) - 1) * 1; // exact discretization
+  CRMotionLinear model = CRMotionLinear(A, B, CR_MOTION_DISCRETE, x, dt);
+  double t = 0;          // Initialize a time t
+  while (t < 5) {        // simulate for 5 seconds
+    x = model.motion(u); // simulate the motion
+    t = model.getTime(); // get the simulation time
+  }
+  EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
+  EXPECT_NEAR(0, x(0),
+              0.01); // check the final state (should be within 1% of F.V. = 0)
 }
-
-

@@ -21,7 +21,7 @@ RUN cmake --version
 
 # python3
 RUN apt-get update && \
-    apt-get install -y python3-pip0
+    apt-get install -y python3-pip
 
 # set working directory
 RUN mkdir /CoreRobotics

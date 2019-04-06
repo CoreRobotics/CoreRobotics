@@ -44,14 +44,14 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "core/CRTypes.hpp"
-#include "Eigen/Dense"
 #include "CRMotionModel.hpp"
+#include "Eigen/Dense"
+#include "core/CRTypes.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRMotionLinear.hpp
@@ -61,28 +61,28 @@ namespace CoreRobotics  {
 /*!
  \class CRMotionLinear
  \ingroup model
- 
+
  \brief This class implements a linear motion model.
- 
+
  \details
  ## Description
  CRMotionLinear implements a motion model from a supplied dynamics
  callback function.  Specifically, CRMotionLinear sets up a container
  for the continuous model
- 
+
  \f[
  \dot{x} = Ax + Bu
  \f]
- 
+
  or
- 
+
  \f[
  x_{k+1} = A x_k + B u_k
  \f]
- 
+
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
  and \f$k\f$ is a discrete sampling index.
- 
+
  These methods are available for interfacing with the linear motion model:
  - CRMotionLinear::setState sets the underlying state vector.
  - CRMotionLinear::getState returns the state vector.
@@ -92,87 +92,74 @@ namespace CoreRobotics  {
  - CRMotionLinear::setDynamics sets the dynamics matrices (A, B).
  - CRMotionLinear::motion computes a new state and updates the
  internal value for an input (u).
- 
+
  ## Example
  This example demonstrates use of the CRMotionLinear class.
  \include example_CRMotionLinear.cpp
- 
+
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
- 
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press, 2006.
+
+ [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
+ 2006.
  \n\n
  */
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRMotionLinear : public CRMotionModel {
+class[[deprecated(CR_DEPRECATED)]] CRMotionLinear : public CRMotionModel {
 #else
 class CRMotionLinear : public CRMotionModel {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
+
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
-    
-    //! Class constructor
-    CRMotionLinear(Eigen::MatrixXd i_A,
-                   Eigen::MatrixXd i_B,
-                   CRMotionModelType i_type,
-                   Eigen::VectorXd i_x0,
-                   double i_timeStep);
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
+  //! Class constructor
+  CRMotionLinear(Eigen::MatrixXd i_A, Eigen::MatrixXd i_B,
+                 CRMotionModelType i_type, Eigen::VectorXd i_x0,
+                 double i_timeStep);
+
+  //---------------------------------------------------------------------
+  // Get/Set Methods
 public:
-    
-    //! Set the dynamics and input matrices
-    void setDynamics(Eigen::MatrixXd i_A, Eigen::MatrixXd i_B){
-        this->m_A = i_A;
-        this->m_B = i_B;
-    }
-    
-    
-//---------------------------------------------------------------------
-// Public Methods
+  //! Set the dynamics and input matrices
+  void setDynamics(Eigen::MatrixXd i_A, Eigen::MatrixXd i_B) {
+    this->m_A = i_A;
+    this->m_B = i_B;
+  }
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Simulate the motion
-    Eigen::VectorXd motion(Eigen::VectorXd i_u);
-    
-    
-//---------------------------------------------------------------------
-// Protected Methods
+  //! Simulate the motion
+  Eigen::VectorXd motion(Eigen::VectorXd i_u);
+
+  //---------------------------------------------------------------------
+  // Protected Methods
 protected:
-    
-    //! A Runge-Kutta solver on the dynFcn
-    Eigen::VectorXd rk4step(double i_t,
-                            Eigen::VectorXd i_x,
-                            Eigen::VectorXd i_u,
-                            double i_dt);
-    
-    
-//---------------------------------------------------------------------
-// Protected Members
+  //! A Runge-Kutta solver on the dynFcn
+  Eigen::VectorXd rk4step(double i_t, Eigen::VectorXd i_x, Eigen::VectorXd i_u,
+                          double i_dt);
+
+  //---------------------------------------------------------------------
+  // Protected Members
 protected:
-    
-    //! Dynamics Matrix
-    Eigen::MatrixXd m_A;
-    
-    //! Input Matrix
-    Eigen::MatrixXd m_B;
-    
-    //! Callback to the dynamic model function
-    Eigen::VectorXd m_dynPredictFcn(double t,
-                                    Eigen::VectorXd x,
-                                    Eigen::VectorXd u){
-        return this->m_A*x + this->m_B*u;
-    }
+  //! Dynamics Matrix
+  Eigen::MatrixXd m_A;
+
+  //! Input Matrix
+  Eigen::MatrixXd m_B;
+
+  //! Callback to the dynamic model function
+  Eigen::VectorXd m_dynPredictFcn(double t, Eigen::VectorXd x,
+                                  Eigen::VectorXd u) {
+    return this->m_A * x + this->m_B * u;
+  }
 };
 
 //=====================================================================
 // End namespace
 };
-
 
 #endif

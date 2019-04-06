@@ -48,15 +48,14 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "Eigen/Dense"
 
 #define BOOST_DATE_TIME_NO_LIB
-#include "boost/interprocess/managed_shared_memory.hpp"
-#include "boost/interprocess/containers/vector.hpp"
 #include "boost/interprocess/allocators/allocator.hpp"
-
+#include "boost/interprocess/containers/vector.hpp"
+#include "boost/interprocess/managed_shared_memory.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRSharedMemory.hpp
@@ -66,21 +65,21 @@ namespace CoreRobotics  {
 /*!
  \class CRSharedMemory
  \ingroup core
- 
+
  \brief This class implements interprocess shared memory to easily write
  and read data across processes.  This is a simple method for
  communicating between sensors and different programming languages.
- 
+
  \details
  ## Description
  CRSharedMemory implements a simple shared memory interface with the
  following methods available.
- 
+
  - CRSharedMemory::addSignal adds a signal to the memory
  - CRSharedMemory::removeSignal removes a signal from the memory
  - CRSharedMemory::set sets the value in shared memory
  - CRSharedMemory::get returns the value from shared memory
- 
+
  ## Example
  This example shows use of the CRSharedMemory class.
  \include example_CRCore.cpp
@@ -88,73 +87,66 @@ namespace CoreRobotics  {
 //=====================================================================
 //! Enumerator for specifying thread priority
 #ifndef SWIG
-enum [[deprecated(CR_DEPRECATED)]] CRManagerRole {
+enum[[deprecated(CR_DEPRECATED)]] CRManagerRole {
 #else
 enum CRManagerRole {
 #endif
-    CR_MANAGER_SERVER,
-    CR_MANAGER_CLIENT,
+  CR_MANAGER_SERVER, CR_MANAGER_CLIENT,
 };
 //=====================================================================
 //! A couple type definitions
-typedef boost::interprocess::allocator<double, boost::interprocess::managed_shared_memory::segment_manager>  ShmemAllocator;
+typedef boost::interprocess::allocator<
+    double, boost::interprocess::managed_shared_memory::segment_manager>
+    ShmemAllocator;
 typedef boost::interprocess::vector<double, ShmemAllocator> Signal;
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRSharedMemory {
+class[[deprecated(CR_DEPRECATED)]] CRSharedMemory {
 #else
 class CRSharedMemory {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
-public:
-    
-    //! Class constructor
-    CRSharedMemory(const char* i_memoryName,
-                   CRManagerRole i_role);
-    
-    //! Class destructor
-    virtual ~CRSharedMemory();
-    
-    
-//---------------------------------------------------------------------
-// Public Methods
-public:
-    
-    //! Add a signal to the shared memory
-    void addSignal(const char* i_signalName,
-                   Eigen::VectorXd i_data);
-    
-    //! Remove a signal from the shared memory
-    void removeSignal(const char* i_signalName);
-    
-    //! Set the signal value in shared memory
-    void set(const char* i_signalName,
-             Eigen::VectorXd i_data);
-    
-    //! Set the signal value in shared memory
-    Eigen::VectorXd get(const char* i_signalName);
-    
-//---------------------------------------------------------------------
-// Protected Members
-private:
 
-	//! shared memory segment manager
-    boost::interprocess::managed_shared_memory* m_segment;
-    
-    //! shared memory allocator
-    const ShmemAllocator* m_alloc_inst;
-    
-    //! shared memory type
-    CRManagerRole m_role;
-    
-    //! name of the memory
-    const char* m_name;
-    
-    //! Vector of signals in the shared memory
-    // std::vector<const char*> m_signals;
-    
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
+public:
+  //! Class constructor
+  CRSharedMemory(const char *i_memoryName, CRManagerRole i_role);
+
+  //! Class destructor
+  virtual ~CRSharedMemory();
+
+  //---------------------------------------------------------------------
+  // Public Methods
+public:
+  //! Add a signal to the shared memory
+  void addSignal(const char *i_signalName, Eigen::VectorXd i_data);
+
+  //! Remove a signal from the shared memory
+  void removeSignal(const char *i_signalName);
+
+  //! Set the signal value in shared memory
+  void set(const char *i_signalName, Eigen::VectorXd i_data);
+
+  //! Set the signal value in shared memory
+  Eigen::VectorXd get(const char *i_signalName);
+
+  //---------------------------------------------------------------------
+  // Protected Members
+private:
+  //! shared memory segment manager
+  boost::interprocess::managed_shared_memory *m_segment;
+
+  //! shared memory allocator
+  const ShmemAllocator *m_alloc_inst;
+
+  //! shared memory type
+  CRManagerRole m_role;
+
+  //! name of the memory
+  const char *m_name;
+
+  //! Vector of signals in the shared memory
+  // std::vector<const char*> m_signals;
 };
 //=====================================================================
 // End namespace
