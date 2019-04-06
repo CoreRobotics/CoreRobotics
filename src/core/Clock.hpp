@@ -9,8 +9,6 @@
 
 #include <chrono>
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
@@ -32,36 +30,38 @@ namespace core {
 //---------------------------------------------------------------------
 class Clock {
 
-  // Constructor and Destructor
+//! Constructor and destructor
 public:
+
   //! Class constructor
   Clock();
 
   //! Class destructor
   virtual ~Clock();
 
-  // Public Methods
+//! API
 public:
+
   //! Start the timer
-  void startTimer(void);
+  void startTimer();
 
   //! Get the elapsed time [s] since startTimer() was called
-  double getElapsedTime(void);
+  double getElapsedTime();
 
   //! Sleep the current thread
-  void sleep(double i_time);
+  void sleep(const double i_time);
 
-  // Protected Members
+//! Private members
 private:
+
   //! steady_clock object
   std::chrono::steady_clock m_clock;
 
   //! steady_clock timepoints
   std::chrono::steady_clock::time_point m_t0, m_t1;
 };
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namespace core
+}  // namespace cr
 
 #endif

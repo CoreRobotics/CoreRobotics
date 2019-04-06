@@ -9,8 +9,6 @@
 
 #include <memory>
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
@@ -38,28 +36,27 @@ typedef std::shared_ptr<Step> StepPtr;
 //---------------------------------------------------------------------
 class Step : public std::enable_shared_from_this<Step> {
 
-  // Constructor and destructor
+//! Constructor and destructor
 public:
   //! constructor
   Step() {}
 
   //! destructor
-  ~Step() {}
+  virtual ~Step() {}
 
-  // Functions to be implemented
+//! Functions to be implemented
 public:
   //! The onStep function must be implemented in derived classes
   virtual void step() = 0;
 
   //! The onStart function can be implemented in derived classes
-  virtual void onStart(){};
+  virtual void onStart() {};
 
   //! The onStop function can be implemented in derived classes
-  virtual void onStop(){};
+  virtual void onStop() {};
 };
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namespace core
+}  // namepsace cr
 
 #endif

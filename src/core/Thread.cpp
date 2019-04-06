@@ -16,8 +16,6 @@
 #include <pthread.h>
 #endif
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
@@ -167,7 +165,6 @@ void Thread::join() { m_loop->join(); }
  */
 //---------------------------------------------------------------------
 void Thread::detach() { m_loop->detach(); }
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namepsace core
+}  // namespace cr

@@ -15,8 +15,6 @@
 #include <pthread.h>
 #endif
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
@@ -38,7 +36,7 @@ The constructor sets up the thread loop with a specific update
 \param[in]	   i_updateRate	 this sets a constant update rate (s)
 */
 //---------------------------------------------------------------------
-Loop::Loop(double i_updateRate) {
+Loop::Loop(const double i_updateRate) {
 
   // Set the thread update rate (s)
   m_updateRate = i_updateRate;
@@ -263,7 +261,6 @@ double Loop::getCurrentTime() {
 
   return m_timer.getElapsedTime() - tp;
 }
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namepsace core
+}  // namespace cr

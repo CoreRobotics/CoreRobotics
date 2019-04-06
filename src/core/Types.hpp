@@ -9,8 +9,6 @@
 
 #include <string>
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
@@ -36,9 +34,8 @@ enum RunState {
   CR_RUN_STATE_STOPPED,
   CR_RUN_STATE_PAUSED,
 };
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namepsace core
+}  // namespace cr
 
 #endif

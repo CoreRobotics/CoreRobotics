@@ -8,8 +8,6 @@
 #include <chrono>
 #include <thread>
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
@@ -61,7 +59,7 @@ double Clock::getElapsedTime(void) {
  \param[in] i_time - the time [s] to sleep
  */
 //---------------------------------------------------------------------
-void Clock::sleep(double i_time) {
+void Clock::sleep(const double i_time) {
   if (i_time < 0.05) {
     // spinlock the thread
     std::chrono::steady_clock::time_point tNow0 = this->m_clock.now();
@@ -76,7 +74,6 @@ void Clock::sleep(double i_time) {
     std::this_thread::sleep_for(std::chrono::duration<double>(i_time));
   }
 }
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namepsace core
+}  // namespace cr

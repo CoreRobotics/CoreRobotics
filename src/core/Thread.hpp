@@ -9,8 +9,6 @@
 
 #include <thread>
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
@@ -42,7 +40,7 @@ enum ThreadPriority {
 //---------------------------------------------------------------------
 class Thread {
 
-  // Constructor and Destructor
+//! Constructor and Destructor
 public:
   //! Class constructor
   Thread();
@@ -51,7 +49,7 @@ public:
   //! Class destructor
   virtual ~Thread();
 
-  // Public Methods
+//! API
 public:
   //! Set the thread callback function
   void setCallback(void(i_callbackFunction)(void));
@@ -68,14 +66,13 @@ public:
   //! Permits the thread to execute independently from the thread handle
   void detach();
 
-  // Protected Members
+//! Private Members
 private:
   //! thread pointer
   std::thread *m_loop;
 };
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namespace core
+}  // namespace cr
 
 #endif

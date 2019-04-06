@@ -6,8 +6,6 @@
 
 #include "StepList.hpp"
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
@@ -51,7 +49,6 @@ void StepList::step() {
     m_vertices.at(i)->step();
   }
 }
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namepsace core
+}  // namespace cr

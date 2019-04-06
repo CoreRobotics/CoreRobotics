@@ -13,12 +13,10 @@
 #include "Types.hpp"
 #include <thread>
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
-//! Smart pointer to Loop
+//! Loop smart pointer
 class Loop;
 typedef std::shared_ptr<Loop> LoopPtr;
 
@@ -45,8 +43,9 @@ typedef std::shared_ptr<Loop> LoopPtr;
 //---------------------------------------------------------------------
 class Loop {
 
-  // Constructor and Destructor
+//! Constructor and Destructor
 public:
+
   //! Class constructor
   Loop();
   Loop(double i_updateRate);
@@ -57,8 +56,9 @@ public:
   //! Create a pointer
   static LoopPtr create();
 
-  // Primary control functions
+//! API
 public:
+
   //! Start the thread execution
   void start();
 
@@ -74,8 +74,9 @@ public:
   //! Attach the step element
   void attach(StepPtr i_element) { m_element = i_element; }
 
-  // Set/get functions
+//! Property updates
 public:
+
   //! Set the internal thread priority
   void setPriority(ThreadPriority i_priority);
 
@@ -88,13 +89,13 @@ public:
   //! Get the current thread run time
   double getCurrentTime();
 
-  // Private members
+//! Private members
 private:
+
   //! simulation state
   RunState m_runState = CR_RUN_STATE_STOPPED;
 
   //! thread
-  // cr::Thread* m_thread = NULL;
   std::thread *m_thread = NULL;
 
   //! global timer
@@ -112,9 +113,8 @@ private:
   //! element to step
   StepPtr m_element;
 };
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namespace core
+}  // namespace cr
 
 #endif

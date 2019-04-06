@@ -10,8 +10,6 @@
 #include <iostream>
 #include <string>
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
@@ -26,24 +24,26 @@ namespace core {
 //---------------------------------------------------------------------
 class Item {
 
-  // Constructor and destructor
+//! Constructor and destructor
 public:
+
   //! constructor
   Item() {}
 
   //! destructor
   virtual ~Item() {}
 
-  // Get/set common properties
+//! API
 public:
+
   //! set the item name
-  virtual void setName(std::string i_name) { m_name = i_name; }
+  virtual void setName(const std::string& i_name) { m_name = i_name; }
 
   //! return the item name
-  std::string getName() { return m_name; }
+  std::string getName() const { return m_name; }
 
   //! set the item icon
-  virtual void setIcon(std::string i_icon) { m_icon = i_icon; }
+  virtual void setIcon(const std::string& i_icon) { m_icon = i_icon; }
 
   //! return the item icon
   std::string getIcon() { return m_icon; }
@@ -51,8 +51,9 @@ public:
   //! return the item type
   std::string getType() { return m_type; }
 
-  // Protected members
+//! Protected members
 protected:
+
   //! name
   std::string m_name;
 
@@ -62,9 +63,8 @@ protected:
   //! type (read only)
   std::string m_type = "Generic";
 };
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namespace core
+}  // namespace cr
 
 #endif

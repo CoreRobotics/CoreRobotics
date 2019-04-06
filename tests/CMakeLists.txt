@@ -5,7 +5,10 @@
 
 # create the test target
 set(TEST_TARGET_NAME ${CR_LIB_PREFIX}tests)
-file(GLOB CR_TEST_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+file(GLOB CR_TEST_SOURCES
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+)
 
 if (NOT full)
   file(GLOB FILES ${CMAKE_CURRENT_SOURCE_DIR}/test_CR*.cpp)

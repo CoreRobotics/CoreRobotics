@@ -11,12 +11,10 @@
 #include "Step.hpp"
 #include <vector>
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
-//! Manipulator shared pointer
+//! StepList shared pointer
 class StepList;
 typedef std::shared_ptr<StepList> StepListPtr;
 
@@ -36,8 +34,9 @@ typedef std::shared_ptr<StepList> StepListPtr;
 //---------------------------------------------------------------------
 class StepList : public Step {
 
-  // Constructor and Destructor
+//! Constructor and Destructor
 public:
+
   //! Class constructor
   StepList();
 
@@ -47,24 +46,26 @@ public:
   //! Create
   static StepListPtr create();
 
-  // Step member control
+//! API
 public:
+
   //! Attach a step item to the list of vertices
   void attach(StepPtr i_vertex);
 
   // Derived step function
 public:
+
   //! step the graph
   void step();
 
-  // Private members
+//! Private members
 private:
+
   //! list of step elements
   std::vector<StepPtr> m_vertices;
 };
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namepsace core
+}  // namespace cr
 
 #endif

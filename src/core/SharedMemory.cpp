@@ -7,8 +7,6 @@
 #include "SharedMemory.hpp"
 #include <iostream>
 
-//---------------------------------------------------------------------
-// Begin namespace
 namespace cr {
 namespace core {
 
@@ -21,7 +19,6 @@ namespace core {
  */
 //---------------------------------------------------------------------
 SharedMemory::SharedMemory(const char *i_memoryName, ManagerRole i_role) {
-  // static const char* name = i_memoryName;
   m_name = i_memoryName;
 
   // push the role
@@ -147,7 +144,6 @@ Eigen::VectorXd SharedMemory::get(const char *i_signalName) {
   }
   return data;
 }
-}
-}
-// end namespace
-//---------------------------------------------------------------------
+
+}  // namepsace core
+}  // namespace cr

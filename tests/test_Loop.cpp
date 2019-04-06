@@ -9,45 +9,23 @@
 #include <iostream>
 #include <memory>
 
+#include "simpleStep.hpp"
+
 // Use the CoreRobotics namespace
 using namespace cr::core;
 
 //------------------------------------------------------------------------------
-// Define a simple step element.
+/*!
+ Test the reset function (called on construction)
+ */
 //------------------------------------------------------------------------------
-class simpleStep : public Step {
+TEST(Loop, init) {
 
-  // init
-public:
-  // constructor
-  simpleStep(double dt) {
-    m_dt = dt;
-    x = x0;
-  }
-
-  // Primary ThreadElement functions
-public:
-  //! Step (called on each iteration of the thread)
-  virtual void step() {
-
-    // this is a simple low pass system with forward euler discretiation
-    x = (1 - m_dt / m_tau) * x;
-  };
-
-  // Private members
-public:
-  //! Initial condition
-  double x0 = 2.0;
-
-  //! internal state
-  double x = 0;
-
-  //! internal parameter
-  double m_tau = 0.5;
-
-  //! sample rate
-  double m_dt = 0.01;
-};
+  // Create the thread element smart pointer
+  double dt  = 0.124;
+  Loop myLoop(dt);
+  EXPECT_DOUBLE_EQ(dt, myLoop.getUpdateRate());
+}
 
 //------------------------------------------------------------------------------
 /*!
