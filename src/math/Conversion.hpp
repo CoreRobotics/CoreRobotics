@@ -40,8 +40,9 @@ John Wiley & Sons, 2011.
 //------------------------------------------------------------------------------
 class Conversion {
 
-  // Static conversion methods
+//! Static conversion methods
 public:
+
   //! Convert angles in degrees to radians
   static double deg2rad(const double i_deg) { return M_PI * i_deg / 180.0; }
 
