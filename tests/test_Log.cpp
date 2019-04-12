@@ -89,10 +89,8 @@ TEST(Log, Step) {
       "time,Vector[0],Vector[1],Vector[2],Bool[0],Int[0],Float[0],Double[0],";
   std::getline(t, line);
   EXPECT_EQ(str, line);
-  std::cout << line << "\n";
   while (t) {
     std::getline(t, line);
-    std::cout << line << "\n";
   }
   t.close();
 }

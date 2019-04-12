@@ -280,7 +280,7 @@ each class.
  threading) for implementation.
 - \subpage physics implements physics models such as frame transformations
  and rigid body representations for kinematics and dynamics.
-- \subpage models implements models such as dynamics, sensor, and noise
+- \subpage model implements models such as dynamics, sensor, and noise
  models, as well as a class for handling manupulators.
 - \subpage controllers implements controllers and planners.
  
@@ -362,11 +362,6 @@ project includes all the CoreRobotics modules.
 //! types, and thread loop control.
 //---------------------------------------------------------------------------
 #include <cr/core>
-#include "core/CRTypes.hpp"
-#include "core/CRClock.hpp"
-#include "core/CRThread.hpp"
-#include "core/CRMutex.hpp"
-#include "core/CRSharedMemory.hpp"
 
 //---------------------------------------------------------------------------
 //! \defgroup signal Signal
@@ -385,9 +380,6 @@ project includes all the CoreRobotics modules.
 //! \brief This module implements math components.
 //---------------------------------------------------------------------------
 #include <cr/math>
-#include "math/CRConversion.hpp"
-#include "math/CRIntegration.hpp"
-#include "math/CRMatrix.hpp"
 
 //---------------------------------------------------------------------------
 //! \defgroup physics Physics
@@ -395,34 +387,18 @@ project includes all the CoreRobotics modules.
 //! kinematics and dynamics.
 //---------------------------------------------------------------------------
 #include <cr/physics>
-#include "physics/CRFrame.hpp"
-#include "physics/CRFrameEuler.hpp"
-#include "physics/CRFrameDh.hpp"
-#include "physics/CRRigidBody.hpp"
 
 //---------------------------------------------------------------------------
 //! \defgroup noise Noise
 //! \brief This module implements noise models.
 //---------------------------------------------------------------------------
 #include <cr/noise>
-#include "model/CRManipulator.hpp"
-#include "noise/CRNoiseModel.hpp"
-#include "noise/CRNoiseGaussian.hpp"
-#include "noise/CRNoiseUniform.hpp"
-#include "noise/CRNoiseMixture.hpp"
-#include "noise/CRGmm.hpp"
 
 //---------------------------------------------------------------------------
 //! \defgroup model Model
 //! \brief This module implements model (sensor and motion) representations.
 //---------------------------------------------------------------------------
 #include <cr/model>
-#include "model/CRSensorModel.hpp"
-#include "model/CRSensorLinear.hpp"
-#include "model/CRSensorProbabilistic.hpp"
-#include "model/CRMotionModel.hpp"
-#include "model/CRMotionLinear.hpp"
-#include "model/CRMotionProbabilistic.hpp"
 
 //---------------------------------------------------------------------------
 //! \defgroup control Control
@@ -430,10 +406,5 @@ project includes all the CoreRobotics modules.
 //! motion and actions.
 //---------------------------------------------------------------------------
 #include <cr/control>
-#include "control/CRInverseKinematics.hpp"
-#include "control/CRNullSpace.hpp"
-#include "control/CRHardLimits.hpp"
-#include "control/CRTrajectoryGenerator.hpp"
-
 
 #endif

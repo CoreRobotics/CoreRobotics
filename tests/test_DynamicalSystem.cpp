@@ -12,22 +12,22 @@
 using namespace cr::model;
 
 // derive a dynamic model class
-class myMotionModel : public Motion {
+class myMotionModel : public DynamicalSystem {
 
 public:
   myMotionModel(Eigen::VectorXd x, Eigen::VectorXd u, double dt)
-      : Motion(x, u, dt) {}
+      : DynamicalSystem(x, u, dt) {}
 
-  virtual Eigen::VectorXd callback(double t, Eigen::VectorXd x,
-                                   Eigen::VectorXd u) {
-    return -x + u; // motion
+  Eigen::VectorXd motionCallback(double t, Eigen::VectorXd x,
+    Eigen::VectorXd u) override {
+    return -x + u;
   }
 };
 
 //
 // Test the model with explicit time stepping.
 //
-TEST(MotionModel, ExplicitTime) {
+TEST(DynamicalSystemModel, ExplicitTime) {
 
   // set up the states
   double dt = 0.01; // sample rate (seconds)
@@ -39,8 +39,6 @@ TEST(MotionModel, ExplicitTime) {
   u << 0; // input value
 
   // initialize the model
-  // std::shared_ptr<myMotionModel> mdl = std::make_shared<myMotionModel>(x, u,
-  // dt);
   myMotionModel mdl(x, u, dt);
 
   // loop the model

@@ -50,20 +50,21 @@ public:
   static double rad2deg(const double i_rad) { return 180.0 * i_rad / M_PI; }
 
   //! Wrap angle (rad) to +/- pi
-  static double wrapToPi(double angle) {
-    angle = fmod(angle + M_PI, 2 * M_PI);
+  static double wrapToPi(const double angle) {
+  double y = fmod(angle + M_PI, 2 * M_PI);
     if (angle < 0) {
-      angle += 2 * M_PI;
+      y += 2 * M_PI;
     }
-    return angle - M_PI;
+    return y - M_PI;
   }
 
   //! Wrap angle (rad) to +/- pi
-  static Eigen::VectorXd wrapToPi(Eigen::VectorXd angle) {
+  static Eigen::VectorXd wrapToPi(const Eigen::VectorXd& angle) {
+  Eigen::VectorXd y(angle.size());
     for (int i = 0; i < angle.size(); i++) {
-      angle(i) = wrapToPi(angle(i));
+      y(i) = wrapToPi(angle(i));
     }
-    return angle;
+    return y;
   }
 };
 

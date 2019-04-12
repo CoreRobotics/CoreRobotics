@@ -4,7 +4,7 @@
  * http://www.corerobotics.org
  */
 
-#include "Motion.hpp"
+#include "DynamicalSystem.hpp"
 #include "math/Integration.hpp"
 
 namespace cr {
@@ -19,11 +19,14 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-Motion::Motion(Eigen::VectorXd i_x0, Eigen::VectorXd i_u0, double i_dt) {
+DynamicalSystem::DynamicalSystem(const Eigen::VectorXd& i_x0,
+    const Eigen::VectorXd& i_u0, const double i_dt, ModelType i_type)
+    : Motion<Eigen::VectorXd, Eigen::VectorXd>(i_x0, i_u0, i_dt)  {
   m_time = 0;
   m_state = i_x0;
   m_action = i_u0;
   m_dt = i_dt;
+  m_type = i_type;
 }
 
 //------------------------------------------------------------------------------
@@ -31,17 +34,14 @@ Motion::Motion(Eigen::VectorXd i_x0, Eigen::VectorXd i_u0, double i_dt) {
  This method steps the motion model, updating the internal state.
  */
 //------------------------------------------------------------------------------
-void Motion::step() {
+void DynamicalSystem::step() {
+  if (m_type == DISCRETE_TIME) {
+    m_state = (m_motion_fcn)(m_time, m_state, m_action);
 
-  // use the bound member function pointer
-  // https://stackoverflow.com/questions/7582546/using-generic-stdfunction-objects-with-member-functions-in-one-class
-  //
-  // (lambdas create a memory leak with shared pointers!
-  // http://floating.io/2019/07/lambda-shared_ptr-memory-leak/)
-  m_state =
-      math::Integration::rungeKuttaStep(m_fcn, m_time, m_state, m_action, m_dt);
-
-  // update the time
+  } else if (m_type == CONTINUOUS_TIME) {
+    m_state = math::Integration::rungeKuttaStep(
+      m_motion_fcn, m_time, m_state, m_action, m_dt);
+  }
   m_time = m_time + m_dt;
 }
 
