@@ -8,7 +8,7 @@
 
 class simpleStep : public cr::core::Step {
 
-// init
+  // init
 public:
   // constructor
   simpleStep(double dt) {
@@ -16,9 +16,8 @@ public:
     x = x0;
   }
 
-// Primary ThreadElement functions
+  // Primary ThreadElement functions
 public:
-
   //! Step (called on each iteration of the thread)
   virtual void step() {
 
@@ -26,9 +25,8 @@ public:
     x = (1 - m_dt / m_tau) * x;
   };
 
-// Private members
+  // Private members
 public:
-
   //! Initial condition
   double x0 = 2.0;
 

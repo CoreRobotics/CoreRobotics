@@ -30,18 +30,16 @@ namespace core {
 //---------------------------------------------------------------------
 class Clock {
 
-//! Constructor and destructor
+  //! Constructor and destructor
 public:
-
   //! Class constructor
   Clock();
 
   //! Class destructor
   virtual ~Clock();
 
-//! API
+  //! API
 public:
-
   //! Start the timer
   void startTimer();
 
@@ -51,9 +49,8 @@ public:
   //! Sleep the current thread
   void sleep(const double i_time);
 
-//! Private members
+  //! Private members
 private:
-
   //! steady_clock object
   std::chrono::steady_clock m_clock;
 
@@ -61,7 +58,7 @@ private:
   std::chrono::steady_clock::time_point m_t0, m_t1;
 };
 
-}  // namespace core
-}  // namespace cr
+} // namespace core
+} // namespace cr
 
 #endif

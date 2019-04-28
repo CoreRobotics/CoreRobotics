@@ -16,32 +16,30 @@ using namespace cr::noise;
 //
 TEST(Gmm, Predict) {
 
-  // initialize a noise mixture model
-  Gmm gmm = Gmm();
-
-  // define a Gaussian distribution & add it to the mixture model
-  Eigen::MatrixXd cov(4, 4); // covariance
-  Eigen::VectorXd mean(4);   // mean
+  // set up the GMM parameters
+  GmmParameters gmmParams;
+  GaussianParameters gaussianParams(4);
 
   // Add a couple Gaussians
-  cov.diagonal() << 1.0, 2.0, 0.1, 4.0;
-  mean << 1, 2, 3, 4;
-  // NoiseGaussian* g1 = new NoiseGaussian(cov, mean);
-  NoiseGaussian g1(cov, mean);
-  gmm.add(g1, 0.5);
+  gaussianParams.cov.diagonal() << 1.0, 2.0, 0.1, 4.0;
+  gaussianParams.mean << 1, 2, 3, 4;
+  Gaussian g1(gaussianParams);
+  gmmParams.add(&g1, 0.5);
 
-  cov.diagonal() << 0.1, 0.2, 4, 5;
-  mean << 5, 6, 7, 8;
-  // NoiseGaussian* g2 = new NoiseGaussian(cov, mean);
-  NoiseGaussian g2(cov, mean);
-  gmm.add(g2, 0.3);
+  gaussianParams.cov.diagonal() << 0.1, 0.2, 4, 5;
+  gaussianParams.mean << 5, 6, 7, 8;
+  Gaussian g2(gaussianParams);
+  gmmParams.add(&g2, 0.3);
 
   // cov.diagonal()  << 0.1, 0.2, 4, 5;
-  cov << 0.1, 0, 0, 0.2, 0, 0.2, 0, 0, 0, 0, 4.0, -0.1, 0.2, 0, -0.1, 5.0;
-  mean << 9, 10, 11, 12;
-  // NoiseGaussian* g3 = new NoiseGaussian(cov, mean);
-  NoiseGaussian g3(cov, mean);
-  gmm.add(g3, 0.2);
+  gaussianParams.cov << 0.1, 0, 0, 0.2, 0, 0.2, 0, 0, 0, 0, 4.0, -0.1, 0.2, 0,
+      -0.1, 5.0;
+  gaussianParams.mean << 9, 10, 11, 12;
+  Gaussian g3(gaussianParams);
+  gmmParams.add(&g3, 0.2);
+
+  // initialize a noise mixture model
+  Gmm gmm = Gmm(gmmParams);
 
   // Construct the input/output booleans
   Eigen::VectorXi inputs(1);

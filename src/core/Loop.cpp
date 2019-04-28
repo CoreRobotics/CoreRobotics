@@ -262,5 +262,5 @@ double Loop::getCurrentTime() {
   return m_timer.getElapsedTime() - tp;
 }
 
-}  // namepsace core
-}  // namespace cr
+} // namepsace core
+} // namespace cr

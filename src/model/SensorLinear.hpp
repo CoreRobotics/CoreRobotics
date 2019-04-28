@@ -43,33 +43,29 @@ namespace model {
  */
 //------------------------------------------------------------------------------
 class SensorLinear
-  : public Sensor<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> {
+    : public Sensor<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> {
 
 public:
-
   //! Class constructor
-  SensorLinear(const Eigen::MatrixXd& i_C, const Eigen::MatrixXd& i_D,
-               const Eigen::VectorXd& i_x0, const Eigen::VectorXd& i_u0);
-    
+  SensorLinear(const Eigen::MatrixXd &i_C, const Eigen::MatrixXd &i_D,
+               const Eigen::VectorXd &i_x0, const Eigen::VectorXd &i_u0);
+
   //! Class destructor
   virtual ~SensorLinear() = default;
 
 public:
-
   //! The prototype sensorCallback function.
   virtual Eigen::VectorXd sensorCallback(double i_t, Eigen::VectorXd i_x,
-    Eigen::VectorXd i_u) override;
+                                         Eigen::VectorXd i_u) override;
 
 public:
-
   //! Set the dynamics and input matrices
-  void setObservation(const Eigen::MatrixXd& i_C, const Eigen::MatrixXd& i_D) {
+  void setObservation(const Eigen::MatrixXd &i_C, const Eigen::MatrixXd &i_D) {
     m_C = i_C;
     m_D = i_D;
   }
 
 protected:
-
   //! Observation Matrix
   Eigen::MatrixXd m_C;
 
@@ -77,7 +73,7 @@ protected:
   Eigen::MatrixXd m_D;
 };
 
-}  // namepsace model
-}  // namepsace cr
+} // namepsace model
+} // namepsace cr
 
 #endif

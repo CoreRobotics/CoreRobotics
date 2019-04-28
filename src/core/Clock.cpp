@@ -75,5 +75,5 @@ void Clock::sleep(const double i_time) {
   }
 }
 
-}  // namepsace core
-}  // namespace cr
+} // namepsace core
+} // namespace cr

@@ -38,7 +38,7 @@ namespace model {
 
  where \f$x\f$ is the state vector, \f$u\f$ is the input vector,
  \f$t\f$ is time, and \f$k\f$ is a discrete sampling index.
- 
+
  Use the ModelType parameter to select which callback is implemented.
 
  ## References
@@ -50,11 +50,9 @@ namespace model {
  \n\n
  */
 //------------------------------------------------------------------------------
-class DynamicalSystem
-  : public Motion<Eigen::VectorXd, Eigen::VectorXd> {
-  
-public:
+class DynamicalSystem : public Motion<Eigen::VectorXd, Eigen::VectorXd> {
 
+public:
   //! Motion model type
   enum ModelType {
     DISCRETE_TIME,
@@ -62,33 +60,29 @@ public:
   };
 
 public:
-
   //! Class constructor
-  DynamicalSystem(const Eigen::VectorXd& i_x0, const Eigen::VectorXd& i_u0,
-    const double i_dt = 0.01, ModelType i_type = CONTINUOUS_TIME);
-    
+  DynamicalSystem(const Eigen::VectorXd &i_x0, const Eigen::VectorXd &i_u0,
+                  const double i_dt = 0.01, ModelType i_type = CONTINUOUS_TIME);
+
   //! Class destructor
   virtual ~DynamicalSystem() = default;
-  
-public:
 
+public:
   //! The prototype motionCallback function must be implemented.
   virtual Eigen::VectorXd motionCallback(double i_t, Eigen::VectorXd i_x,
-    Eigen::VectorXd i_u) override = 0;
+                                         Eigen::VectorXd i_u) override = 0;
 
   ///! This function steps the callback and updates the state.
   virtual void step() override;
 
 public:
-  
   //! Set the model type
   void setType(ModelType i_type) { m_type = i_type; }
-  
+
   //! Get the model type
   ModelType getType() { return m_type; }
 
 protected:
-
   //! model type
   ModelType m_type;
 };

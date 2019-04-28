@@ -33,7 +33,6 @@ typedef std::shared_ptr<Origin> OriginPtr;
 //------------------------------------------------------------------------------
 class Origin : public core::Item {
 
-  // Constructor and Destructor
 public:
   //! Class constructor
   Origin();
@@ -44,25 +43,18 @@ public:
   //! Create a pointer
   static OriginPtr create();
 
-  // naming
-public:
   //! set the name
   virtual void setName(std::string i_name);
 
-  // Tree graph behaviors
-public:
   //! add a child to the list of children
   void addChild(NodePtr i_item) { m_rootItem->addChild(i_item); }
 
   //! remove a child from the list of children
   void removeChild(NodePtr i_item) { m_rootItem->removeChild(i_item); }
 
-  // Print details
-public:
   //! print out the scene
   virtual void print(std::ostream &i_stream);
 
-  // Private members
 private:
   //! add a world item
   NodePtr m_rootItem;

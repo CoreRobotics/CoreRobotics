@@ -4,24 +4,19 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_GMM_HPP_
-#define CR_GMM_HPP_
+#ifndef CR_NOISE_GMM_HPP_
+#define CR_NOISE_GMM_HPP_
 
 #include "Eigen/Dense"
-#include "NoiseGaussian.hpp"
-#include "NoiseMixture.hpp"
-#include "core/CRTypes.hpp"
-#include <random>
+#include "Gaussian.hpp"
+#include "Mixture.hpp"
 #include <vector>
 
 namespace cr {
 namespace noise {
 
 //! GMM paramter structure
-struct ParamGaussianMixture {
-  std::vector<NoiseGaussian> models;
-  std::vector<double> weights;
-};
+typedef MixtureParameters<Gaussian> GmmParameters;
 
 //------------------------------------------------------------------------------
 /*!
@@ -32,20 +27,10 @@ struct ParamGaussianMixture {
 
  \details
  ## Description
- Gmm implements methods for sampling and modeling noise as a
- mixture of Gaussian distributions [2-3].  Each specified Gaussian
- is also accompanied by a weight, indicating the probability of that
- distribution being selected for sampling of the noise.
-
- - CRGmm::add adds a noise model to the mixture
- - CRGmm::sample samples from the noise model
- - CRGmm::probability evaluates the probability
- - CRGmm::regression performs Gaussian mixture regression
-
- ## Example
- This example demonstrates use of the CRGmm class.
-
- \include example_CRGmm.cpp
+ Gmm implements methods for sampling and modeling noise as a mixture of Gaussian
+ distributions [2-3].  Each specified Gaussian is also accompanied by a weight,
+ indicating the probability of that distribution being selected for sampling of
+ the noise.
 
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
@@ -58,46 +43,19 @@ struct ParamGaussianMixture {
  Rice University, 2004. \n\n
  */
 //------------------------------------------------------------------------------
-class Gmm : public NoiseMixture {
+class Gmm : public Mixture<Eigen::VectorXd, Gaussian> {
 
-  // Constructor and Destructor
 public:
-  //! Class constructor
-  Gmm(unsigned i_seed);
-  Gmm();
-
-  //! Class destructor
-  ~Gmm();
-
-  // Add models to the mixture
-public:
-  //! Add a distribution to the mixture model
-  void add(NoiseGaussian i_model, double i_weight);
-
-  // Public Methods
-public:
-  //! Sample a noise vector from the density
-  using NoiseMixture::sample;
-  Eigen::VectorXd sample(void);
-
-  //! Evaluate the probability from the density
-  using NoiseMixture::probability;
-  double probability(Eigen::VectorXd i_x);
+  //! Constructor
+  Gmm() = default;
+  Gmm(GmmParameters i_parameters,
+      unsigned i_seed = DistributionBase<Eigen::VectorXd>::randomSeed())
+      : Mixture<Eigen::VectorXd, Gaussian>(i_parameters, i_seed){};
 
   //! Perform Gaussian Mixture Regression (GMR)
   void regression(Eigen::VectorXd i_x, Eigen::VectorXi i_inputIndices,
                   Eigen::VectorXi i_outputIndices, Eigen::VectorXd &o_mean,
                   Eigen::MatrixXd &o_covariance);
-
-  // Public Members
-public:
-  //! Noise model parameters
-  ParamGaussianMixture m_parameters;
-
-private:
-  //! Evaluate the multivariate normal dist
-  double mvnpdf(Eigen::VectorXd i_x, Eigen::VectorXd i_mean,
-                Eigen::MatrixXd i_covariance);
 };
 
 } // namespace noise

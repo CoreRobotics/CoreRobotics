@@ -52,18 +52,16 @@ typedef boost::interprocess::vector<double, ShmemAllocator> ShmemData;
 //---------------------------------------------------------------------
 class SharedMemory {
 
-//! Constructor and Destructor
+  //! Constructor and Destructor
 public:
-
   //! Class constructor
   SharedMemory(const char *i_memoryName, ManagerRole i_role);
 
   //! Class destructor
   virtual ~SharedMemory();
 
-//! API
+  //! API
 public:
-
   //! Add a signal to the shared memory
   void addSignal(const char *i_signalName, Eigen::VectorXd i_data);
 
@@ -76,9 +74,8 @@ public:
   //! Set the signal value in shared memory
   Eigen::VectorXd get(const char *i_signalName);
 
-//! Private Members
+  //! Private Members
 private:
-
   //! shared memory segment manager
   boost::interprocess::managed_shared_memory *m_segment;
 
@@ -92,7 +89,7 @@ private:
   const char *m_name;
 };
 
-}  // namespace core
-}  // namespace cr
+} // namespace core
+} // namespace cr
 
 #endif

@@ -47,7 +47,6 @@ typedef std::shared_ptr<Robot> RobotPtr;
 //------------------------------------------------------------------------------
 class Robot : public Node {
 
-  // Constructor and Destructor
 public:
   //! Class constructor
   Robot();
@@ -58,13 +57,9 @@ public:
   //! Create a pointer
   static RobotPtr create();
 
-  // Tree graph construction (with links)
-public:
   //! Register a link with the Manipulator to access Jacobian, Hessian, etc...
   void addLink(LinkPtr i_link);
 
-  // Get/Set Methods
-public:
   //! Get the number of links in the list
   unsigned getNumberOfLinks();
 
@@ -104,18 +99,12 @@ public:
   //                             EulerMode i_mode,
   //                             Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
-  // Kinematics
-public:
   //! compute the jacobian for the indicated child node
   Eigen::MatrixXd jacobian(NodePtr i_node, physics::EulerMode i_mode);
 
-  // Dynamics
-public:
   //! compute the generalized mass matrix (w.r.t. the free variables)
   Eigen::MatrixXd mass();
 
-  // Jacobian
-public:
   //! Compute the link Jacobian (of the COM)
 
   //! Compute the instantaneous numerical Jacobian
@@ -130,8 +119,6 @@ public:
   //                         EulerMode i_mode,
   //                         Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
-  // Hessian
-public:
   //! Compute the instantaneous numerical Hessian
   // Eigen::MatrixXd hessian(unsigned i_toolIndex, EulerMode i_mode);
 
@@ -141,16 +128,12 @@ public:
   // Eigen::MatrixXd hessian(unsigned i_toolIndex, EulerMode i_mode,
   // Eigen::Matrix<int, 6, 1> i_poseElementsInt);
 
-  // Add link/tool Methods
-public:
   //! Add a link to the kinematic structure, return the index of the added link
   // int addLink(cr::RigidBody* i_link);
 
   //! Add a tool to the manipulator, return the index of the added tool
   // int addTool(unsigned i_parentIndex, Frame* i_tool);
 
-  // Print details
-public:
   //! print the scene
   virtual void print(std::ostream &i_stream);
 

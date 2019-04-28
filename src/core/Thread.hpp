@@ -40,7 +40,7 @@ enum ThreadPriority {
 //---------------------------------------------------------------------
 class Thread {
 
-//! Constructor and Destructor
+  //! Constructor and Destructor
 public:
   //! Class constructor
   Thread();
@@ -49,7 +49,7 @@ public:
   //! Class destructor
   virtual ~Thread();
 
-//! API
+  //! API
 public:
   //! Set the thread callback function
   void setCallback(void(i_callbackFunction)(void));
@@ -66,13 +66,13 @@ public:
   //! Permits the thread to execute independently from the thread handle
   void detach();
 
-//! Private Members
+  //! Private Members
 private:
   //! thread pointer
   std::thread *m_loop;
 };
 
-}  // namespace core
-}  // namespace cr
+} // namespace core
+} // namespace cr
 
 #endif

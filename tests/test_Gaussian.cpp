@@ -14,17 +14,13 @@ using namespace cr::noise;
 //
 // Sample from the distribution and check the histogram
 //
-TEST(NoiseGaussian, Sample) {
+TEST(Gaussian, Sample) {
 
-  // define the Gaussian properties
-  Eigen::Matrix<double, 1, 1> mean;
-  Eigen::Matrix<double, 1, 1> cov;
-  mean << 5;
-  cov << 1;
-
-  // initialize a noise model
-  NoiseGaussian normalNoise = NoiseGaussian();
-  normalNoise.setParameters(cov, mean);
+  // define a Gaussian distribution
+  GaussianParameters gaussianParams(1);
+  gaussianParams.cov(0, 0) = 5;
+  gaussianParams.mean(0) = 1;
+  Gaussian normalNoise(gaussianParams);
 
   // initialize parameters for experiments
   const int n = 1000000; // number of experiments

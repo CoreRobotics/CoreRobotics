@@ -40,9 +40,7 @@ John Wiley & Sons, 2011.
 class Integration {
 
 #ifndef SWIG
-//! Numerical integration routines
 public:
-
   //! Forward euler integration
   static Eigen::VectorXd
   forwardEulerStep(Eigen::VectorXd(i_dynamicSystem)(double, Eigen::VectorXd,

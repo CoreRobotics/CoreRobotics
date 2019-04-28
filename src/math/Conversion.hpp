@@ -40,9 +40,7 @@ John Wiley & Sons, 2011.
 //------------------------------------------------------------------------------
 class Conversion {
 
-//! Static conversion methods
 public:
-
   //! Convert angles in degrees to radians
   static double deg2rad(const double i_deg) { return M_PI * i_deg / 180.0; }
 
@@ -51,7 +49,7 @@ public:
 
   //! Wrap angle (rad) to +/- pi
   static double wrapToPi(const double angle) {
-  double y = fmod(angle + M_PI, 2 * M_PI);
+    double y = std::fmod(angle + M_PI, 2 * M_PI);
     if (angle < 0) {
       y += 2 * M_PI;
     }
@@ -59,8 +57,8 @@ public:
   }
 
   //! Wrap angle (rad) to +/- pi
-  static Eigen::VectorXd wrapToPi(const Eigen::VectorXd& angle) {
-  Eigen::VectorXd y(angle.size());
+  static Eigen::VectorXd wrapToPi(const Eigen::VectorXd &angle) {
+    Eigen::VectorXd y(angle.size());
     for (int i = 0; i < angle.size(); i++) {
       y(i) = wrapToPi(angle(i));
     }

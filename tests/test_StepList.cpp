@@ -23,17 +23,17 @@ TEST(StepList, init) {
 
   // Create the thread element smart pointer
   StepListPtr myStepList = StepList::create();
-  
+
   // add the step function
   std::shared_ptr<simpleStep> myStep1 = std::make_shared<simpleStep>(0.01);
   std::shared_ptr<simpleStep> myStep2 = std::make_shared<simpleStep>(0.05);
   myStepList->attach(myStep1);
   myStepList->attach(myStep2);
-  
+
   // check internal states
   EXPECT_DOUBLE_EQ(myStep1->x, myStep1->x0);
   EXPECT_DOUBLE_EQ(myStep2->x, myStep2->x0);
-  
+
   // check the internal clocks
   myStepList->step();
 

@@ -35,7 +35,6 @@ typedef std::shared_ptr<Link> LinkPtr;
 //------------------------------------------------------------------------------
 class Link : public Node {
 
-  // Constructor and Destructor
 public:
   //! Class constructor
   Link();
@@ -46,8 +45,6 @@ public:
   //! Create a pointer
   static LinkPtr create();
 
-  // Link controls
-public:
   //! get the pointer to the center of mass node
   NodePtr getCenterOfMass() { return m_comItem; }
 
@@ -87,8 +84,6 @@ public:
   //! get euler mode
   physics::EulerMode getEulerMode() { return m_frame.getMode(); }
 
-  // Frame transformation controls
-public:
   //! set the local frame transformation
   void setLocalTransform(const physics::FrameEuler &i_frame) {
     m_frame = i_frame;
@@ -103,12 +98,9 @@ public:
   //! return the relative frame transformation
   virtual physics::Frame getRelativeTransform(NodePtr i_item);
 
-  // Print details
-public:
   //! print the scene
   virtual void print(std::ostream &i_stream);
 
-  // protected member data
 protected:
   //! Rigid body
   physics::RigidBody m_body;

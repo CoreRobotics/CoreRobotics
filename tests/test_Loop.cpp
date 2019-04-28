@@ -22,7 +22,7 @@ using namespace cr::core;
 TEST(Loop, init) {
 
   // Create the thread element smart pointer
-  double dt  = 0.124;
+  double dt = 0.124;
   Loop myLoop(dt);
   EXPECT_DOUBLE_EQ(dt, myLoop.getUpdateRate());
 }

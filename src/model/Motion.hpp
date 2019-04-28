@@ -8,8 +8,8 @@
 #define CR_MOTION_HPP_
 
 #include "Eigen/Dense"
-#include "core/Step.hpp"
 #include "core/Item.hpp"
+#include "core/Step.hpp"
 
 namespace cr {
 namespace model {
@@ -34,10 +34,10 @@ namespace ph = std::placeholders;
 
  where \f$x\f$ is the state, \f$u\f$ is the input, \f$t\f$ is time, and \f$k\f$
  is a discrete sampling index, specified by \f$dt\$.
- 
+
  To use this class, users must derive
  - `StateType callback(double i_t, StateType i_x, ActionType i_u)`
- 
+
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
@@ -47,24 +47,22 @@ namespace ph = std::placeholders;
  \n\n
  */
 //------------------------------------------------------------------------------
-template<typename StateType, typename ActionType>
+template <typename StateType, typename ActionType>
 class Motion : public core::Step, core::Item {
 
 public:
-
   //! Class constructor
-  Motion(const StateType& i_x0, const ActionType& i_u0,
-    const double i_dt = 0.01)
-    : m_state(i_x0), m_action(i_u0), m_dt(i_dt) {};
-    
+  Motion(const StateType &i_x0, const ActionType &i_u0,
+         const double i_dt = 0.01)
+      : m_state(i_x0), m_action(i_u0), m_dt(i_dt){};
+
   //! Class destructor
   virtual ~Motion() = default;
 
 public:
-
   //! The prototype motionCallback function must be implemented.
   virtual StateType motionCallback(double i_t, StateType i_x,
-    ActionType i_u) = 0;
+                                   ActionType i_u) = 0;
 
   ///! This function steps the callback and updates the state.
   virtual void step() {
@@ -73,15 +71,14 @@ public:
   }
 
 public:
-
   //! Set the state vector (x)
-  void setState(const StateType& i_x) { m_state = i_x; }
+  void setState(const StateType &i_x) { m_state = i_x; }
 
   //! Get the state vector (x)
   StateType getState() { return m_state; }
 
   //! Set the action vector (u)
-  void setAction(const ActionType& i_u) { m_action = i_u; }
+  void setAction(const ActionType &i_u) { m_action = i_u; }
 
   //! Get the action vector (u)
   ActionType setAction() { return m_action; }
@@ -96,10 +93,9 @@ public:
   double getTime() { return m_time; }
 
 protected:
-
   //! bound callback function
   std::function<StateType(double, StateType, ActionType)> m_motion_fcn =
-    std::bind(&Motion::motionCallback, this, ph::_1, ph::_2, ph::_3);
+      std::bind(&Motion::motionCallback, this, ph::_1, ph::_2, ph::_3);
 
   //! Sample rate (s)
   double m_dt;

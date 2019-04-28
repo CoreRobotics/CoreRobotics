@@ -40,7 +40,7 @@ TEST(Conversion, Wrapping) {
 
   // at pi boundary (always goes to negative)
   EXPECT_NEAR(-M_PI, math::Conversion::wrapToPi(M_PI), 1e-12);
-  EXPECT_NEAR(-M_PI, math::Conversion::wrapToPi(-M_PI), 1e-12);
+  EXPECT_NEAR(M_PI, math::Conversion::wrapToPi(-M_PI), 1e-12);
   EXPECT_NEAR(-M_PI, math::Conversion::wrapToPi(11 * M_PI), 1e-12);
   EXPECT_NEAR(-M_PI, math::Conversion::wrapToPi(-11 * M_PI), 1e-12);
 }

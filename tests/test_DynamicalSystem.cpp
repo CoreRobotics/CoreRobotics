@@ -19,7 +19,7 @@ public:
       : DynamicalSystem(x, u, dt) {}
 
   Eigen::VectorXd motionCallback(double t, Eigen::VectorXd x,
-    Eigen::VectorXd u) override {
+                                 Eigen::VectorXd u) override {
     return -x + u;
   }
 };

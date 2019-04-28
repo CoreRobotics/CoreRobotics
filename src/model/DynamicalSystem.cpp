@@ -19,9 +19,10 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-DynamicalSystem::DynamicalSystem(const Eigen::VectorXd& i_x0,
-    const Eigen::VectorXd& i_u0, const double i_dt, ModelType i_type)
-    : Motion<Eigen::VectorXd, Eigen::VectorXd>(i_x0, i_u0, i_dt)  {
+DynamicalSystem::DynamicalSystem(const Eigen::VectorXd &i_x0,
+                                 const Eigen::VectorXd &i_u0, const double i_dt,
+                                 ModelType i_type)
+    : Motion<Eigen::VectorXd, Eigen::VectorXd>(i_x0, i_u0, i_dt) {
   m_time = 0;
   m_state = i_x0;
   m_action = i_u0;
@@ -39,8 +40,8 @@ void DynamicalSystem::step() {
     m_state = (m_motion_fcn)(m_time, m_state, m_action);
 
   } else if (m_type == CONTINUOUS_TIME) {
-    m_state = math::Integration::rungeKuttaStep(
-      m_motion_fcn, m_time, m_state, m_action, m_dt);
+    m_state = math::Integration::rungeKuttaStep(m_motion_fcn, m_time, m_state,
+                                                m_action, m_dt);
   }
   m_time = m_time + m_dt;
 }

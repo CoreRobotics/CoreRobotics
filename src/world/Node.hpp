@@ -34,7 +34,6 @@ typedef std::shared_ptr<Node> NodePtr;
 //------------------------------------------------------------------------------
 class Node : public std::enable_shared_from_this<Node>, public core::Item {
 
-  // Constructor and Destructor
 public:
   //! Class constructor
   Node();
@@ -45,8 +44,6 @@ public:
   //! Create a pointer
   static NodePtr create();
 
-  // Tree graph controls
-public:
   //! add a child to the list of children
   void addChild(NodePtr i_item);
 
@@ -74,8 +71,6 @@ public:
   //! return the depth of the node (0 = root)
   unsigned getDepth();
 
-  // Frame transformation controls
-public:
   //! set the local frame transformation
   void setLocalTransform(const physics::Frame &i_frame);
 
@@ -88,12 +83,9 @@ public:
   //! return the relative frame transformation
   virtual physics::Frame getRelativeTransform(NodePtr i_item);
 
-  // Print details
-public:
   //! print the scene
   virtual void print(std::ostream &i_stream);
 
-  // protected member data
 protected:
   //! Transformation
   physics::Frame m_frame;

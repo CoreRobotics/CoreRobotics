@@ -42,10 +42,10 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-SensorLinear::SensorLinear(const Eigen::MatrixXd& i_C,
-                           const Eigen::MatrixXd& i_D,
-                           const Eigen::VectorXd& i_x0,
-                           const Eigen::VectorXd& i_u0)
+SensorLinear::SensorLinear(const Eigen::MatrixXd &i_C,
+                           const Eigen::MatrixXd &i_D,
+                           const Eigen::VectorXd &i_x0,
+                           const Eigen::VectorXd &i_u0)
     : Sensor(i_x0, i_u0) {
   this->m_C = i_C;
   this->m_D = i_D;
@@ -63,8 +63,8 @@ SensorLinear::SensorLinear(const Eigen::MatrixXd& i_C,
 //------------------------------------------------------------------------------
 Eigen::VectorXd SensorLinear::sensorCallback(double i_t, Eigen::VectorXd i_x,
                                              Eigen::VectorXd i_u) {
-   return m_C * i_x + m_D * i_u;
+  return m_C * i_x + m_D * i_u;
 }
 
-}  // namespace model
-}  // namepsace cr
+} // namespace model
+} // namepsace cr

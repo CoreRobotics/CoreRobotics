@@ -7,8 +7,8 @@
 #ifndef CR_MOTION_LINEAR_HPP_
 #define CR_MOTION_LINEAR_HPP_
 
-#include "Eigen/Dense"
 #include "DynamicalSystem.hpp"
+#include "Eigen/Dense"
 
 namespace cr {
 namespace model {
@@ -51,32 +51,28 @@ namespace model {
 class MotionLinear : public DynamicalSystem {
 
 public:
-
   //! Class constructor
-  MotionLinear(const Eigen::MatrixXd& i_A, const Eigen::MatrixXd& i_B,
-               const Eigen::VectorXd& i_x0, const Eigen::VectorXd& i_u0,
-               const double i_dt = 0.01,
-               DynamicalSystem::ModelType i_type = DynamicalSystem::CONTINUOUS_TIME);
-    
+  MotionLinear(const Eigen::MatrixXd &i_A, const Eigen::MatrixXd &i_B,
+               const Eigen::VectorXd &i_x0, const Eigen::VectorXd &i_u0,
+               const double i_dt = 0.01, DynamicalSystem::ModelType i_type =
+                                             DynamicalSystem::CONTINUOUS_TIME);
+
   //! Class destructor
   virtual ~MotionLinear() = default;
-    
-public:
 
+public:
   //! The prototype motionCallback function.
   virtual Eigen::VectorXd motionCallback(double i_t, Eigen::VectorXd i_x,
-    Eigen::VectorXd i_u) override;
+                                         Eigen::VectorXd i_u) override;
 
 public:
-
   //! Set the dynamics and input matrices
-  void setDynamics(const Eigen::MatrixXd& i_A, const Eigen::MatrixXd& i_B) {
+  void setDynamics(const Eigen::MatrixXd &i_A, const Eigen::MatrixXd &i_B) {
     m_A = i_A;
     m_B = i_B;
   };
 
 protected:
-
   //! Dynamics Matrix
   Eigen::MatrixXd m_A;
 
@@ -84,7 +80,7 @@ protected:
   Eigen::MatrixXd m_B;
 };
 
-}  // namepsace model
-}  // namepsace cr
+} // namepsace model
+} // namepsace cr
 
 #endif

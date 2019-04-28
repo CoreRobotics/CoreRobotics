@@ -34,9 +34,8 @@ typedef std::shared_ptr<StepList> StepListPtr;
 //---------------------------------------------------------------------
 class StepList : public Step {
 
-//! Constructor and Destructor
+  //! Constructor and Destructor
 public:
-
   //! Class constructor
   StepList();
 
@@ -46,26 +45,23 @@ public:
   //! Create
   static StepListPtr create();
 
-//! API
+  //! API
 public:
-
   //! Attach a step item to the list of vertices
   void attach(StepPtr i_vertex);
 
   // Derived step function
 public:
-
   //! step the graph
   void step();
 
-//! Private members
+  //! Private members
 private:
-
   //! list of step elements
   std::vector<StepPtr> m_vertices;
 };
 
-}  // namepsace core
-}  // namespace cr
+} // namepsace core
+} // namespace cr
 
 #endif

@@ -35,7 +35,7 @@ enum RunState {
   CR_RUN_STATE_PAUSED,
 };
 
-}  // namepsace core
-}  // namespace cr
+} // namepsace core
+} // namespace cr
 
 #endif

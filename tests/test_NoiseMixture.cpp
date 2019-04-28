@@ -14,26 +14,27 @@ using namespace cr::noise;
 //
 // Sample from the distribution and check the histogram
 //
-TEST(NoiseMixture, Sample) {
+TEST(Mixture, Sample) {
 
-  // initialize a noise mixture model
-  NoiseMixture mixModel = NoiseMixture();
+  // init the mixture model params
+  MixtureParameters<DistributionBase<Eigen::VectorXd>> mixParams;
 
   // define a Gaussian distribution & add it to the mixture model
-  Eigen::MatrixXd cov(1, 1);
-  Eigen::VectorXd mean(1);
-  cov(0) = 1;
-  mean(0) = 3;
-  NoiseGaussian *gaussian = new NoiseGaussian(cov, mean);
-  mixModel.add(gaussian, 0.7);
+  GaussianParameters gaussianParams(1);
+  gaussianParams.cov << 1;
+  gaussianParams.mean << 3;
+  Gaussian *gaussian = new Gaussian(gaussianParams);
+  mixParams.add(gaussian, 0.7);
 
   // define a uniform distribution & add it to the mixture model
-  Eigen::VectorXd a(1);
-  a(0) = 1;
-  Eigen::VectorXd b(1);
-  b(0) = 9;
-  NoiseUniform *uniform = new NoiseUniform(a, b);
-  mixModel.add(uniform, 0.6);
+  UniformParameters uniformParams(1);
+  uniformParams.a << 1;
+  uniformParams.b << 9;
+  Uniform *uniform = new Uniform(uniformParams);
+  mixParams.add(uniform, 0.6);
+
+  // initialize a noise mixture model
+  Mixture<Eigen::VectorXd> mixModel(mixParams);
 
   // initialize parameters for experiments
   const int n = 1000000; // number of experiments

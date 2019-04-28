@@ -14,17 +14,13 @@ using namespace cr::noise;
 //
 // Sample from the distribution and check the histogram
 //
-TEST(NoiseUniform, Sample) {
+TEST(Uniform, Sample) {
 
-  // define the uniform properties
-  Eigen::VectorXd a(1);
-  Eigen::VectorXd b(1);
-  a << 2;
-  b << 7;
-
-  // initialize a noise model
-  NoiseUniform uniformNoise = NoiseUniform();
-  uniformNoise.setParameters(a, b);
+  // define a uniform distribution & add it to the mixture model
+  UniformParameters uniformParams(1);
+  uniformParams.a(0) = 2;
+  uniformParams.b(0) = 7;
+  Uniform uniformNoise(uniformParams);
 
   // initialize parameters for experiments
   const int n = 1000000; // number of experiments

@@ -42,11 +42,10 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-MotionLinear::MotionLinear(const Eigen::MatrixXd& i_A,
-                           const Eigen::MatrixXd& i_B,
-                           const Eigen::VectorXd& i_x0,
-                           const Eigen::VectorXd& i_u0,
-                           const double i_dt,
+MotionLinear::MotionLinear(const Eigen::MatrixXd &i_A,
+                           const Eigen::MatrixXd &i_B,
+                           const Eigen::VectorXd &i_x0,
+                           const Eigen::VectorXd &i_u0, const double i_dt,
                            DynamicalSystem::ModelType i_type)
     : DynamicalSystem(i_x0, i_u0, i_dt, i_type) {
   this->m_time = 0;
@@ -66,8 +65,8 @@ MotionLinear::MotionLinear(const Eigen::MatrixXd& i_A,
 //------------------------------------------------------------------------------
 Eigen::VectorXd MotionLinear::motionCallback(double i_t, Eigen::VectorXd i_x,
                                              Eigen::VectorXd i_u) {
-   return m_A * i_x + m_B * i_u;
+  return m_A * i_x + m_B * i_u;
 }
 
-}  // namespace model
-}  // namepsace cr
+} // namespace model
+} // namepsace cr

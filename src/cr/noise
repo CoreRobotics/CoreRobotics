@@ -43,10 +43,11 @@
 #ifndef CR_NOISE_HPP_
 #define CR_NOISE_HPP_
 
-#include "noise/NoiseModel.hpp"
-#include "noise/NoiseGaussian.hpp"
-#include "noise/NoiseUniform.hpp"
-#include "noise/NoiseMixture.hpp"
+#include "noise/Discrete.hpp"
+#include "noise/Distribution.hpp"
+#include "noise/Gaussian.hpp"
 #include "noise/Gmm.hpp"
+#include "noise/Mixture.hpp"
+#include "noise/Uniform.hpp"
 
 #endif

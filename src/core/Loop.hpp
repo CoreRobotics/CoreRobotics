@@ -43,9 +43,8 @@ typedef std::shared_ptr<Loop> LoopPtr;
 //---------------------------------------------------------------------
 class Loop {
 
-//! Constructor and Destructor
+  //! Constructor and Destructor
 public:
-
   //! Class constructor
   Loop();
   Loop(double i_updateRate);
@@ -56,9 +55,8 @@ public:
   //! Create a pointer
   static LoopPtr create();
 
-//! API
+  //! API
 public:
-
   //! Start the thread execution
   void start();
 
@@ -74,9 +72,8 @@ public:
   //! Attach the step element
   void attach(StepPtr i_element) { m_element = i_element; }
 
-//! Property updates
+  //! Property updates
 public:
-
   //! Set the internal thread priority
   void setPriority(ThreadPriority i_priority);
 
@@ -89,9 +86,8 @@ public:
   //! Get the current thread run time
   double getCurrentTime();
 
-//! Private members
+  //! Private members
 private:
-
   //! simulation state
   RunState m_runState = CR_RUN_STATE_STOPPED;
 
@@ -114,7 +110,7 @@ private:
   StepPtr m_element;
 };
 
-}  // namespace core
-}  // namespace cr
+} // namespace core
+} // namespace cr
 
 #endif

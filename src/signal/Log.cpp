@@ -88,9 +88,7 @@ void Log::onStart() {
  This method stops the signal log.
  */
 //------------------------------------------------------------------------------
-void Log::onStop() {
-  m_logFile.close();
-}
+void Log::onStop() { m_logFile.close(); }
 
 } // namespace signal
 } // namepsace cr

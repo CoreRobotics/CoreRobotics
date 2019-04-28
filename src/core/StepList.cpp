@@ -50,5 +50,5 @@ void StepList::step() {
   }
 }
 
-}  // namepsace core
-}  // namespace cr
+} // namepsace core
+} // namespace cr

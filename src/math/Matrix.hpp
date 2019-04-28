@@ -47,9 +47,8 @@ John Wiley & Sons, 2011.
 //------------------------------------------------------------------------------
 class Matrix {
 
-//! Matrix downselection
+  //! Matrix downselection
 public:
-
   //! Return sub vector of indicated indices
   static Eigen::VectorXd reducedVector(Eigen::VectorXd i_x,
                                        Eigen::VectorXi i_indices);
@@ -59,21 +58,20 @@ public:
                                        Eigen::VectorXi i_rowIndices,
                                        Eigen::VectorXi i_colIndices);
 
-//! Matrix factorization
+  //! Matrix factorization
 public:
   //! Singular Value decomposition (SVD)
   static core::Result svd(Eigen::MatrixXd i_A, double i_tol,
                           Eigen::MatrixXd &o_U, Eigen::VectorXd &o_Sigma,
                           Eigen::MatrixXd &o_V);
 
-//! Matrix inversion routines
+  //! Matrix inversion routines
 public:
-
   //! SVD-based matrix inverse
   static core::Result svdInverse(Eigen::MatrixXd i_A, double i_tol,
                                  Eigen::MatrixXd &o_Ainv);
 
-//! Rotation matrices
+  //! Rotation matrices
 public:
   //! standard rotation about the x axis
   static Eigen::Matrix3d rotAboutX(double i_ang) {
@@ -96,7 +94,7 @@ public:
     return o_rot;
   }
 
-//! Vector norms
+  //! Vector norms
 public:
   //! L-1 vector norm
   // http://mathworld.wolfram.com/L1-Norm.html

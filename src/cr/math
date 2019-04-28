@@ -45,6 +45,7 @@
 
 #include "math/Conversion.hpp"
 #include "math/Integration.hpp"
+#include "math/Probability.hpp"
 #include "math/Matrix.hpp"
 
 #endif
