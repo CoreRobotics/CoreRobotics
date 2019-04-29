@@ -115,18 +115,18 @@ test-lib:
   dependencies:
    - build-lib
 
-test-examples:
-  stage: test
-  script:
-   - mkdir build
-   - cd build
-   - cmake -Dexamples=true ..
-   - make
-   - for file in $CI_PROJECT_DIR/bin/*; do
-   - $file
-   - done
-  dependencies:
-   - build-lib
+# test-examples:
+#  stage: test
+#  script:
+#   - mkdir build
+#   - cd build
+#   - cmake -Dexamples=true ..
+#   - make
+#   - for file in $CI_PROJECT_DIR/bin/*; do
+#   - $file
+#   - done
+#  dependencies:
+#   - build-lib
 
 test-install:
   stage: test
