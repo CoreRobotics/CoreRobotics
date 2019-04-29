@@ -61,6 +61,6 @@ TEST(Gmm, Predict) {
   EXPECT_NEAR(8.236436140374021, y_mu(1), tol);
   EXPECT_NEAR(3.704887227956277, y_cov(0, 0), tol);
   EXPECT_NEAR(-0.092618710733151, y_cov(0, 1), tol);
-  // EXPECT_NEAR(-0.092618710733151, y_cov(1, 0), tol);
+  EXPECT_NEAR(-0.092618710733151, y_cov(1, 0), tol);
   EXPECT_NEAR(4.265976289199881, y_cov(1, 1), tol);
 }
