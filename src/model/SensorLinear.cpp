@@ -46,10 +46,7 @@ SensorLinear::SensorLinear(const Eigen::MatrixXd &i_C,
                            const Eigen::MatrixXd &i_D,
                            const Eigen::VectorXd &i_x0,
                            const Eigen::VectorXd &i_u0)
-    : Sensor(i_x0, i_u0) {
-  this->m_C = i_C;
-  this->m_D = i_D;
-}
+    : Sensor(i_x0, i_u0), m_C(i_C), m_D(i_D) {}
 
 //------------------------------------------------------------------------------
 /*!

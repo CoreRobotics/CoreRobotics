@@ -848,7 +848,7 @@ return this->m_listToolFrames.size()-1;
  Print the children.\n
  */
 //------------------------------------------------------------------------------
-void Robot::print(std::ostream &i_stream) {
+void Robot::printInfo(std::ostream &i_stream) {
   unsigned d = getDepth();
   for (size_t i = 0; i < d; i++) {
     i_stream << "  ";
@@ -860,10 +860,10 @@ void Robot::print(std::ostream &i_stream) {
     id = "R";
   }
   i_stream << "+ [" << id
-           << "] world::Manipulator #DOF = " << getDegreesOfFreedom() << " '"
+           << "] world::Robot #DOF = " << getDegreesOfFreedom() << " '"
            << getName() << "'\n";
   for (size_t i = 0; i < m_children.size(); i++) {
-    m_children.at(i)->print(i_stream);
+    m_children.at(i)->printInfo(i_stream);
   }
 }
 

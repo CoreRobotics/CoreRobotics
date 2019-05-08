@@ -31,7 +31,6 @@ FrameDh::FrameDh(double i_r, double i_alpha, double i_d, double i_theta,
   m_dhTheta = i_theta;
   m_dhMode = i_mode;
   m_freeVar = i_free;
-  // m_freeVarOffset = i_offset;
   this->setRotationAndTranslation();
 }
 FrameDh::FrameDh() {
@@ -41,7 +40,6 @@ FrameDh::FrameDh() {
   m_dhTheta = 0.0;
   m_dhMode = CR_DH_MODE_MODIFIED;
   m_freeVar = CR_DH_FREE_NONE;
-  // m_freeVarOffset = 0.0;
   this->setRotationAndTranslation();
 }
 
@@ -143,7 +141,6 @@ void FrameDh::setParameters(double i_r, double i_alpha, double i_d,
   m_dhAlpha = i_alpha;
   m_dhD = i_d;
   m_dhTheta = i_theta;
-  // m_freeVarOffset = i_offset;
   this->setRotationAndTranslation();
 }
 
@@ -163,7 +160,6 @@ void FrameDh::getParameters(double &o_r, double &o_alpha, double &o_d,
   o_alpha = m_dhAlpha;
   o_d = m_dhD;
   o_theta = m_dhTheta;
-  // o_offset = m_freeVarOffset;
 }
 
 //------------------------------------------------------------------------------
@@ -190,27 +186,6 @@ bool FrameDh::isDriven(void) {
 //  anytime a parameter gets set in the frame class, this method gets
 //  called to update the rotation/translation members.
 void FrameDh::setRotationAndTranslation() {
-
-  // Todo: add a variable offset to make handling offsets easier on real robots.
-  /*
-      switch (m_freeVar) {
-      case CR_DH_FREE_NONE:
-              break;
-      case CR_DH_FREE_R:
-              m_dhR = m_dhR + m_freeVarOffset;
-              break;
-      case CR_DH_FREE_ALPHA:
-              m_dhAlpha = m_dhAlpha + m_freeVarOffset;
-              break;
-      case CR_DH_FREE_D:
-              m_dhD = m_dhD + m_freeVarOffset;
-              break;
-      case CR_DH_FREE_THETA:
-              m_dhTheta = m_dhTheta + m_freeVarOffset;
-              break;
-      }
-   */
-
   switch (m_dhMode) {
   case CR_DH_MODE_CLASSIC:
     m_rotation << cos(m_dhTheta), -sin(m_dhTheta) * cos(m_dhAlpha),
@@ -227,25 +202,6 @@ void FrameDh::setRotationAndTranslation() {
     m_translation << m_dhR, -m_dhD * sin(m_dhAlpha), m_dhD * cos(m_dhAlpha);
     break;
   }
-
-  /*
-      switch (m_freeVar) {
-      case CR_DH_FREE_NONE:
-              break;
-      case CR_DH_FREE_R:
-              m_dhR = m_dhR - m_freeVarOffset;
-              break;
-      case CR_DH_FREE_ALPHA:
-              m_dhAlpha = m_dhAlpha - m_freeVarOffset;
-              break;
-      case CR_DH_FREE_D:
-              m_dhD = m_dhD - m_freeVarOffset;
-              break;
-      case CR_DH_FREE_THETA:
-              m_dhTheta = m_dhTheta - m_freeVarOffset;
-              break;
-      }
-   */
 }
 
 } // namespace physics

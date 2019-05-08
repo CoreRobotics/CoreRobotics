@@ -48,13 +48,14 @@ namespace ph = std::placeholders;
  */
 //------------------------------------------------------------------------------
 template <typename StateType, typename ActionType>
-class Motion : public core::Step, core::Item {
+class Motion : public core::Step, public core::Item {
 
 public:
   //! Class constructor
-  Motion(const StateType &i_x0, const ActionType &i_u0,
+  Motion(const StateType &i_x0,
+         const ActionType &i_u0,
          const double i_dt = 0.01)
-      : m_state(i_x0), m_action(i_u0), m_dt(i_dt){};
+      : m_state(i_x0), m_action(i_u0), m_dt(i_dt) {};
 
   //! Class destructor
   virtual ~Motion() = default;

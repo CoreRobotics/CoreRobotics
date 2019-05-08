@@ -22,13 +22,8 @@ namespace model {
 DynamicalSystem::DynamicalSystem(const Eigen::VectorXd &i_x0,
                                  const Eigen::VectorXd &i_u0, const double i_dt,
                                  ModelType i_type)
-    : Motion<Eigen::VectorXd, Eigen::VectorXd>(i_x0, i_u0, i_dt) {
-  m_time = 0;
-  m_state = i_x0;
-  m_action = i_u0;
-  m_dt = i_dt;
-  m_type = i_type;
-}
+    : Motion<Eigen::VectorXd, Eigen::VectorXd>(i_x0, i_u0, i_dt), m_type(i_type)
+{}
 
 //------------------------------------------------------------------------------
 /*!

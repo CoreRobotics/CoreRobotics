@@ -37,8 +37,8 @@ public:
   //! get the signal dimension
   virtual unsigned size() = 0;
 
-  //! print signal value to ostream
-  virtual void print(std::ostream &i_log) = 0;
+  //! write signal value to ostream
+  virtual void write(std::ostream &i_log) = 0;
 
   // private members
 private:

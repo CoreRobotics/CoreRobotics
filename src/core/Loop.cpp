@@ -221,25 +221,34 @@ void Loop::setPriority(ThreadPriority i_priority) {
   struct sched_param sch;
   int tPolicy;
   pthread_getschedparam(hThread, &tPolicy, &sch);
+  int fifo_min = sched_get_priority_min(SCHED_FIFO);
+  int fifo_max = sched_get_priority_max(SCHED_FIFO);
+  int rr_min = sched_get_priority_min(SCHED_RR);
+  int rr_max = sched_get_priority_max(SCHED_RR);
 
   switch (i_priority) {
   case CR_PRIORITY_LOWEST:
-    sch.sched_priority = 1;
+    sch.sched_priority = rr_min;
+    tPolicy = SCHED_RR;
     break;
   case CR_PRIORITY_LOW:
-    sch.sched_priority = 25;
+    sch.sched_priority = rr_max;
+    tPolicy = SCHED_RR;
     break;
   case CR_PRIORITY_NORMAL:
-    sch.sched_priority = 50;
+    sch.sched_priority = fifo_min;
+    tPolicy = SCHED_FIFO;
     break;
   case CR_PRIORITY_HIGH:
-    sch.sched_priority = 75;
+    sch.sched_priority = (fifo_max + fifo_min) / 2;
+    tPolicy = SCHED_FIFO;
     break;
   case CR_PRIORITY_HIGHEST:
-    sch.sched_priority = 99;
+    sch.sched_priority = fifo_max;
+    tPolicy = SCHED_FIFO;
     break;
   }
-  pthread_setschedparam(hThread, SCHED_FIFO, &sch);
+  pthread_setschedparam(hThread, tPolicy, &sch);
 
 #endif
 }

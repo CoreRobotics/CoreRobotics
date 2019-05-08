@@ -44,7 +44,7 @@ public:
   static OriginPtr create();
 
   //! set the name
-  virtual void setName(std::string i_name);
+  void setName(const std::string &i_name) override;
 
   //! add a child to the list of children
   void addChild(NodePtr i_item) { m_rootItem->addChild(i_item); }
@@ -53,7 +53,7 @@ public:
   void removeChild(NodePtr i_item) { m_rootItem->removeChild(i_item); }
 
   //! print out the scene
-  virtual void print(std::ostream &i_stream);
+  virtual void printInfo(std::ostream &i_stream);
 
 private:
   //! add a world item

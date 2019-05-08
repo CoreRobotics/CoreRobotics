@@ -16,6 +16,7 @@ namespace noise {
 //! Mixture paramter structure
 struct DiscreteParameters {
   DiscreteParameters() = default;
+  virtual ~DiscreteParameters() = default;
 
   //! The discrete weights.  At sample time, these are normalized to sum to 1
   std::vector<double> weights;
@@ -53,6 +54,9 @@ public:
   Discrete(DiscreteParameters i_parameters,
            unsigned i_seed = DistributionBase<unsigned>::randomSeed())
       : Distribution<unsigned, DiscreteParameters>(i_parameters, i_seed){};
+    
+  //! Destructor
+  virtual ~Discrete() = default;
 
   //! The sample function must be implemented.
   unsigned sample() override;

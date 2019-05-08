@@ -60,6 +60,8 @@ find_package (Boost 1.48)
 find_package (GTest)
 find_package (OpenSceneGraph 3.6)
 find_package (SWIG)
+# find_package (PythonLibs COMPONENTS NumPy)
+find_package (Python3 COMPONENTS NumPy)
 find_program (CLANG_TIDY_EXE NAMES "clang-tidy")
 find_program (CLANG_FORMAT_EXE NAMES "clang-format")
 
@@ -86,6 +88,9 @@ set(CR_INCLUDE_DIRS
   ${CMAKE_CURRENT_SOURCE_DIR}/src
   ${EIGEN3_INCLUDE_DIR}
   ${Boost_INCLUDE_DIR}
+#  ${PYTHON_INCLUDE_DIRS}
+  ${Python3_INCLUDE_DIRS}
+  ${Python3_NumPy_INCLUDE_DIRS}
 )
 
 # set include search paths
@@ -206,9 +211,9 @@ endif()
 # ------------------------------------------------------------------------------
 # Setup the library targets
 # ------------------------------------------------------------------------------
-if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib OR report)
+# if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib OR report)
   add_subdirectory(${PROJECT_SOURCE_DIR}/src)
-endif()
+# endif()
 
 # ------------------------------------------------------------------------------
 # Setup the test target
@@ -220,9 +225,9 @@ endif()
 # ------------------------------------------------------------------------------
 # Setup the python target
 # ------------------------------------------------------------------------------
-# if(python OR all)
-#     add_subdirectory(${PROJECT_SOURCE_DIR}/python)
-# endif()
+if(python OR all)
+  add_subdirectory(${PROJECT_SOURCE_DIR}/python)
+endif()
 
 # ------------------------------------------------------------------------------
 # Setup the matlab target

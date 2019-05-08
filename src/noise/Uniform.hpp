@@ -15,7 +15,8 @@ namespace noise {
 
 //! Uniform paramter structure
 struct UniformParameters {
-  UniformParameters() = delete;
+  UniformParameters() = default;
+  virtual ~UniformParameters() = default;
 
   //! Initializes the multivariate standard uniform
   UniformParameters(std::size_t i_n)
@@ -60,6 +61,9 @@ public:
           unsigned i_seed = DistributionBase<Eigen::VectorXd>::randomSeed())
       : Distribution<Eigen::VectorXd, UniformParameters>(i_parameters,
                                                          i_seed){};
+    
+  //! Destructor
+  virtual ~Uniform() = default;
 
   //! The sample function must be implemented.
   Eigen::VectorXd sample() override;

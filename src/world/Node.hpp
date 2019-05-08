@@ -84,7 +84,7 @@ public:
   virtual physics::Frame getRelativeTransform(NodePtr i_item);
 
   //! print the scene
-  virtual void print(std::ostream &i_stream);
+  virtual void printInfo(std::ostream &i_stream);
 
 protected:
   //! Transformation

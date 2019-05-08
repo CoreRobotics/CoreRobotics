@@ -41,9 +41,9 @@ OriginPtr Origin::create() { return std::make_shared<Origin>(); }
  \param[in]     i_name - the name to set
  */
 //------------------------------------------------------------------------------
-void Origin::setName(std::string i_name) {
+void Origin::setName(const std::string& i_name) {
   Item::setName(i_name);
-  m_rootItem->setName(i_name.append(" root"));
+  m_rootItem->setName(i_name + " root");
 }
 
 //------------------------------------------------------------------------------
@@ -51,9 +51,9 @@ void Origin::setName(std::string i_name) {
  Print the output scene.\n
  */
 //------------------------------------------------------------------------------
-void Origin::print(std::ostream &i_stream) {
+void Origin::printInfo(std::ostream &i_stream) {
   i_stream << "\nTree graph structure from world::Origin\n\n";
-  m_rootItem->print(i_stream);
+  m_rootItem->printInfo(i_stream);
   i_stream << "\n";
 }
 

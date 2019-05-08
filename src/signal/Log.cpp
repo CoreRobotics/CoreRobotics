@@ -48,7 +48,7 @@ void Log::step() {
 
   // now write each signal value
   for (unsigned i = 0; i < m_signals.size(); i++) {
-    m_signals.at(i)->print(m_logFile);
+    m_signals.at(i)->write(m_logFile);
   }
 
   // write the new line

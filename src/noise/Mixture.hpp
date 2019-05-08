@@ -16,7 +16,7 @@ namespace noise {
 
 //! Mixture paramter structure
 template <typename DistributionType> struct MixtureParameters {
-  MixtureParameters() = default;
+  virtual ~MixtureParameters() = default;
 
   //! Add a distribution to the model
   void add(DistributionType *i_model, double i_weight) {
@@ -66,6 +66,9 @@ public:
           unsigned i_seed = DistributionBase<DomainType>::randomSeed())
       : Distribution<DomainType, MixtureParameters<DistributionType>>(
             i_parameters, i_seed){};
+        
+  //! Destructor
+  virtual ~Mixture() = default;
 
   //! The sample function must be implemented.
   DomainType sample() override {

@@ -46,7 +46,6 @@
 #include "core/Types.hpp"
 #include "core/Item.hpp"
 #include "core/Clock.hpp"
-#include "core/Thread.hpp"
 #include "core/Step.hpp"
 #include "core/Loop.hpp"
 #include "core/StepList.hpp"

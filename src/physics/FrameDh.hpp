@@ -126,9 +126,6 @@ private:
   //! theta angle parameter [rad]
   double m_dhTheta;
 
-  //! free variable offset parameter [m] or [rad]
-  // double m_freeVarOffset;
-
   // Private Methods
 private:
   //! Update the rotation and translation matrices from data

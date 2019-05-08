@@ -36,24 +36,29 @@ typedef std::shared_ptr<Step> StepPtr;
 //---------------------------------------------------------------------
 class Step : public std::enable_shared_from_this<Step> {
 
-  //! Constructor and destructor
 public:
   //! constructor
-  Step() {}
+  Step() = default;
 
   //! destructor
-  virtual ~Step() {}
+  virtual ~Step() = default;
+  
+  //! factory
+  static StepPtr create() { return std::make_shared<Step>(); }
+  
+  //! Return the shared pointer
+  StepPtr asStepPtr() { return shared_from_this(); }
 
   //! Functions to be implemented
 public:
-  //! The onStep function must be implemented in derived classes
-  virtual void step() = 0;
+  //! The onStep function can be implemented in derived classes
+  virtual void step() {};
 
   //! The onStart function can be implemented in derived classes
-  virtual void onStart(){};
+  virtual void onStart() {};
 
   //! The onStop function can be implemented in derived classes
-  virtual void onStop(){};
+  virtual void onStop() {};
 };
 
 } // namespace core

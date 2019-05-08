@@ -221,7 +221,7 @@ physics::Frame Node::getRelativeTransform(NodePtr i_item) {
  Print the children.\n
  */
 //------------------------------------------------------------------------------
-void Node::print(std::ostream &i_stream) {
+void Node::printInfo(std::ostream &i_stream) {
   unsigned d = getDepth();
   for (unsigned i = 0; i < d; i++) {
     i_stream << "  ";
@@ -234,7 +234,7 @@ void Node::print(std::ostream &i_stream) {
   }
   i_stream << "+ [" << id << "] world::Node '" << getName() << "'\n";
   for (unsigned i = 0; i < m_children.size(); i++) {
-    m_children.at(i)->print(i_stream);
+    m_children.at(i)->printInfo(i_stream);
   }
 }
 

@@ -15,7 +15,8 @@ namespace noise {
 
 //! Gaussian paramters
 struct GaussianParameters {
-  GaussianParameters() = delete;
+  GaussianParameters() = default;
+  virtual ~GaussianParameters() = default;
 
   //! Initializes the multivariate standard normal
   GaussianParameters(std::size_t i_n)
@@ -58,6 +59,9 @@ public:
            unsigned i_seed = DistributionBase<Eigen::VectorXd>::randomSeed())
       : Distribution<Eigen::VectorXd, GaussianParameters>(i_parameters,
                                                           i_seed){};
+  
+  //! Destructor
+  virtual ~Gaussian() = default;
 
   //! The sample function must be implemented.
   Eigen::VectorXd sample() override;

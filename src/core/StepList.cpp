@@ -35,7 +35,7 @@ StepListPtr StepList::create() { return std::make_shared<StepList>(); }
  This function adds a step element to the list.\n
  */
 //---------------------------------------------------------------------
-void StepList::attach(StepPtr i_element) { m_vertices.push_back(i_element); }
+void StepList::attach(std::shared_ptr<Step> i_element) { m_vertices.push_back(i_element); }
 
 //---------------------------------------------------------------------
 /*!

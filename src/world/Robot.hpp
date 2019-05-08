@@ -135,7 +135,7 @@ public:
   // int addTool(unsigned i_parentIndex, Frame* i_tool);
 
   //! print the scene
-  virtual void print(std::ostream &i_stream);
+  virtual void printInfo(std::ostream &i_stream);
 
   // Protected Members
 protected:
