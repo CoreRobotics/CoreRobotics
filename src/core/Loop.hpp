@@ -9,6 +9,7 @@
 
 #include "Clock.hpp"
 #include "Step.hpp"
+#include "Thread.hpp"
 #include "Types.hpp"
 #include <thread>
 
@@ -18,15 +19,6 @@ namespace core {
 //! Loop smart pointer
 class Loop;
 typedef std::shared_ptr<Loop> LoopPtr;
-
-//! Enumerator for specifying thread priority
-enum ThreadPriority {
-  CR_PRIORITY_LOWEST,
-  CR_PRIORITY_LOW,
-  CR_PRIORITY_NORMAL,
-  CR_PRIORITY_HIGH,
-  CR_PRIORITY_HIGHEST
-};
 
 //---------------------------------------------------------------------
 /*!

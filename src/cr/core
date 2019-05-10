@@ -44,6 +44,7 @@
 #define CR_CORE_HPP_
 
 #include "core/Types.hpp"
+#include "core/Thread.hpp"
 #include "core/Item.hpp"
 #include "core/Clock.hpp"
 #include "core/Step.hpp"
