@@ -81,7 +81,7 @@ TEST(Thread, StartArgument) {
   server.addSignal("signal_4", v);
 
   // Create a thread
-  void *arg;
+  void *arg = nullptr;
   Thread myThread;
   myThread.setCallback(*myCallback2, arg);
 
