@@ -1,71 +1,12 @@
-//=====================================================================
 /*
- Software License Agreement (BSD-3-Clause License)
- Copyright (c) 2017, CoreRobotics.
- All rights reserved.
- 
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions
- are met:
- 
- * Redistributions of source code must retain the above copyright
- notice, this list of conditions and the following disclaimer.
- 
- * Redistributions in binary form must reproduce the above copyright
- notice, this list of conditions and the following disclaimer in the
- documentation and/or other materials provided with the distribution.
- 
- * Neither the name of CoreRobotics nor the names of its contributors
- may be used to endorse or promote products derived from this
- software without specific prior written permission.
- 
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
- COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- POSSIBILITY OF SUCH DAMAGE.
- 
- \project CoreRobotics Project
- \url     www.corerobotics.org
- \author  Cameron Devine
- \version 0.0
- 
+ * Copyright (c) 2017-2019, CoreRobotics.  All rights reserved.
+ * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
+ * http://www.corerobotics.org
  */
-//=====================================================================
 
 
 /*!
 \page python Python Wrapper
-
-A Python wrapper for a portion of the CoreRobotics library has been
-generated with SWIG. The CoreRobotics modules included in the wrapper
-are:
-
-* - CRClock
-* - CRTypes
-* - CRMath
-* - CRFrame
-* - CRFrameEuler
-* - CRFrameDh
-* - CRRigidBody
-* - CRManipulator
-* - CRNoiseModel
-* - CRNoiseGaussian
-* - CRNoiseUniform
-* - CRNoiseMixture
-* - CRSensorLinear
-* - CRInverseKinematics
-* - CRNullSpace
-* - CRHardLimits
-* - CRSharedMemory
-* - CRTrajectoryGenerator
 
 The Python wrappers can be built by running CMake with `-Dpython=true` to
 build the Python wrappers which are located at `python/lib`. To build all libraries
@@ -91,34 +32,68 @@ in the `python/util` directory.
 * - The CRClock module does not work as expected.
 * - The CRMath module has had the Forward Euler and 4th order Runge-Kutta integrators
 removed for compatability.
-* - The following modules have not been tested:
-	* - CRNoiseModel
-	* - CRNoiseGaussian
-	* - CRNoiseUniform
-	* - CRNoiseMixture
-	* - CRSensorLinear
 */
 
-
-%include "eigen.i"
-
 %module CoreRobotics
+
 %{
 #define SWIG_FILE_WITH_INIT
+#include <memory>
 #include <Python.h>
 
-#include "CoreRobotics.hpp"
+#include <cr/core>
+
+// typdefs
+typedef std::shared_ptr<cr::core::Loop> LoopPtr;
+typedef std::shared_ptr<cr::core::Step> StepPtr;
 %}
 
-%include <typemaps.i>
+%include <eigen.i>
+%include <std_string.i>
+%include <std_shared_ptr.i>
 %include <std_vector.i>
+%include <typemaps.i>
 
-%template(vectorMatrixXd) std::vector<Eigen::MatrixXd>;
-%template(vectorVectorXd) std::vector<Eigen::VectorXd>;
+// smart pointers
+%shared_ptr(cr::core::Loop)
+%shared_ptr(cr::core::Step)
+
+/*
+%{
+namespace std {
+template <typename T>
+struct enable_shared_from_this {};
+}
+%}
+*/
+
+// %import std::enable_shared_from_this;
+// %template(IStepSharedFromThis) std::enable_shared_from_this<cr::core::Step>;
+
+// smart pointers
+// %shared_ptr(Step);
+// %template(IEnableStepPtr) std::enable_shared_from_this<cr::core::Step>;
+// %template(IStepPtr) std::shared_ptr<cr::core::Step>;
+
+/*
+%template(DiscreteNoise) cr::noise::DistributionBase<unsigned>;
+%template(ContinuousNoise) cr::noise::DistributionBase<Eigen::VectorXd>;
+
+%template(DiscreteBase) cr::noise::Distribution<unsigned, DiscreteParameters>;
+%template(GaussianBase) cr::noise::Distribution<Eigen::VectorXd, GaussianParameters>;
+%template(GmmBase) cr::noise::Mixture<Eigen::VectorXd, Gaussian>;
+%template(UniformBase) cr::noise::Distribution<Eigen::VectorXd, UniformParameters>;
+
+%template(DynamicalSystemBase) cr::model::Motion<Eigen::VectorXd, Eigen::VectorXd>;
+%template(SensorLinearBase) cr::model::Sensor<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd>;
+*/
+
+// eigen
+%template(IVectorMatrixXd) std::vector<Eigen::MatrixXd>;
+%template(IVectorVectorXd) std::vector<Eigen::VectorXd>;
 %eigen_typemaps(Eigen::VectorXd)
 %eigen_typemaps(Eigen::MatrixXd)
 %eigen_typemaps(Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic>)
-
 %eigen_typemaps(Eigen::Matrix<double, 6, 1>)
 %eigen_typemaps(Eigen::Vector3d)
 %eigen_typemaps(Eigen::Matrix3d)
@@ -130,29 +105,55 @@ import_array();
 %}
 
 
-%include "core/CRClock.hpp"
-%include "core/CRThread.hpp"
-%include "core/CRTypes.hpp"
-%include "math/CRConversion.hpp"
-%include "math/CRIntegration.hpp"
-%include "math/CRMatrix.hpp"
-%include "physics/CRFrame.hpp"
-%include "physics/CRFrameEuler.hpp"
-%include "physics/CRFrameDh.hpp"
-%include "physics/CRRigidBody.hpp"
-%include "model/CRManipulator.hpp"
-%include "noise/CRNoiseModel.hpp"
-%include "noise/CRNoiseGaussian.hpp"
-%include "noise/CRNoiseUniform.hpp"
-%include "noise/CRNoiseMixture.hpp"
-//%include "model/CRSensorModel.hpp"
-//%include "model/CRSensorLinear.hpp"
-//%include "model/CRSensorProbabilistic.hpp"
-//%include "model/CRMotionModel.hpp"
-//%include "model/CRMotionLinear.hpp"
-//%include "model/CRMotionProbabilistic.hpp"
-%include "control/CRInverseKinematics.hpp"
-%include "control/CRNullSpace.hpp"
-%include "control/CRHardLimits.hpp"
-%include "core/CRSharedMemory.hpp"
-%include "control/CRTrajectoryGenerator.hpp"
+// core
+%include "core/Clock.hpp"
+%include "core/Item.hpp"
+%include "core/Loop.hpp"
+%include "core/Step.hpp"
+// %include "core/SharedMemory.hpp"
+// %include "core/StepList.hpp"
+// %include "core/Types.hpp"
+
+// math
+// %include "math/Conversion.hpp"
+// %include "math/Integration.hpp"
+// %include "math/Matrix.hpp"
+// %include "math/Probability.hpp"
+
+// physics
+/*
+%include "physics/Frame.hpp"
+%include "physics/FrameDh.hpp"
+%include "physics/FrameEuler.hpp"
+%include "physics/RigidBody.hpp"
+
+// world
+%include "world/Link.hpp"
+%include "world/Node.hpp"
+%include "world/Origin.hpp"
+%include "world/Robot.hpp"
+
+// noise
+%include "noise/Discrete.hpp"
+%include "noise/Distribution.hpp"
+%include "noise/Gaussian.hpp"
+%include "noise/Gmm.hpp"
+%include "noise/Mixture.hpp"
+%include "noise/Uniform.hpp"
+
+// signal
+%include "signal/Log.hpp"
+%include "signal/Signal.hpp"
+%include "signal/Slot.hpp"
+%include "signal/Utility.hpp"
+
+// model
+%include "model/DynamicalSystem.hpp"
+%include "model/Motion.hpp"
+%include "model/MotionLinear.hpp"
+%include "model/Sensor.hpp"
+%include "model/SensorLinear.hpp"
+
+// control
+%include "control/TrajectoryGenerator.hpp"
+*/

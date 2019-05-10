@@ -3179,7 +3179,9 @@ namespace swig {
 #define SWIG_FILE_WITH_INIT
 #include <Python.h>
 
-#include "CoreRobotics.hpp"
+#include <memory>
+
+#include <cr/core>
 
 
 #include <iostream>
