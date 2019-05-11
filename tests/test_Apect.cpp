@@ -33,7 +33,7 @@ public:
 //
 // Can we define a static struct
 //
-TEST(Playground, TemplateClassParameters) {
+TEST(Aspect, AspectStructue) {
 
   auto my_base = Base();;
   // auto params = Base::Parameters();
