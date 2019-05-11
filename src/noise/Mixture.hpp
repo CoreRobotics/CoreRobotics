@@ -54,10 +54,10 @@ template <typename DistributionType> struct MixtureParameters {
  [3] en.wikipedia.org/wiki/Mixture_model
  */
 //------------------------------------------------------------------------------
-template <typename DomainType,
-          typename DistributionType = DistributionBase<DomainType>>
+template<typename DomainType, 
+  typename DistributionType = DistributionBase<DomainType>>
 class Mixture
-    : public Distribution<DomainType, MixtureParameters<DistributionType>> {
+  : public Distribution<DomainType, MixtureParameters<DistributionType>> {
 
 public:
   //! Constructor
@@ -65,7 +65,7 @@ public:
   Mixture(MixtureParameters<DistributionType> i_parameters,
           unsigned i_seed = DistributionBase<DomainType>::randomSeed())
       : Distribution<DomainType, MixtureParameters<DistributionType>>(
-            i_parameters, i_seed){};
+            i_parameters, i_seed) {};
 
   //! Destructor
   virtual ~Mixture() = default;

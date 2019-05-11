@@ -357,6 +357,12 @@ project includes all the CoreRobotics modules.
 #include <cmath>
 
 //---------------------------------------------------------------------------
+//! \defgroup aspect Aspect
+//! \brief This module defines aspects such as parameters.
+//---------------------------------------------------------------------------
+#include <cr/aspect>
+
+//---------------------------------------------------------------------------
 //! \defgroup core Core
 //! \brief This module implements core functionality such as timing, common
 //! types, and thread loop control.
