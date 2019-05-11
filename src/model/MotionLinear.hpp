@@ -20,11 +20,11 @@ struct MotionLinearParameters {
 
   //! Initializes the multivariate standard uniform
   MotionLinearParameters(std::size_t i_stateDim, std::size_t i_actionDim)
-      : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)), 
-        m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)) {};
+      : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)),
+        m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)){};
 
-  Eigen::MatrixXd m_A;  /** Dynamics matrix */
-  Eigen::MatrixXd m_B;  /** Input matrix */
+  Eigen::MatrixXd m_A; /** Dynamics matrix */
+  Eigen::MatrixXd m_B; /** Input matrix */
 };
 
 //------------------------------------------------------------------------------
@@ -67,8 +67,7 @@ class MotionLinear : public DynamicalSystem<MotionLinearParameters> {
 public:
   //! Class constructor
   MotionLinear(const MotionLinearParameters &i_parameters,
-               const Eigen::VectorXd &i_state, 
-               const Eigen::VectorXd &i_action,
+               const Eigen::VectorXd &i_state, const Eigen::VectorXd &i_action,
                const double i_dt = 0.01,
                const SystemType i_type = CONTINUOUS_TIME);
 

@@ -33,7 +33,7 @@ namespace ph = std::placeholders;
  x_{k+1} = f(t_k, x_k, u_k)
  \f]
 
- where \f$x\f$ is the state, \f$u\f$ is the input action, \f$t\f$ is time, and 
+ where \f$x\f$ is the state, \f$u\f$ is the input action, \f$t\f$ is time, and
  \f$k\f$ is a discrete sampling index.
 
  To use this class, users must derive
@@ -52,14 +52,11 @@ template <typename StateType, typename ActionType, typename ParameterType>
 class Motion : public core::Step, public core::Item {
 
 public:
-
   //! Class constructor
-  Motion(const ParameterType &i_parameters,
-         const StateType &i_state,
-         const ActionType &i_action,
-         const double i_dt = 0.01)
-    : m_parameters(i_parameters), m_state(i_state), m_action(i_action), 
-      m_dt(i_dt) {};
+  Motion(const ParameterType &i_parameters, const StateType &i_state,
+         const ActionType &i_action, const double i_dt = 0.01)
+      : m_parameters(i_parameters), m_state(i_state), m_action(i_action),
+        m_dt(i_dt){};
 
   //! Class destructor
   virtual ~Motion() = default;
@@ -70,9 +67,7 @@ public:
                                    ActionType i_u) = 0;
 
   //! This function steps the callback and updates the state.
-  virtual void step() {
-    m_state = (m_motion_fcn)(m_time, m_state, m_action);
-  }
+  virtual void step() { m_state = (m_motion_fcn)(m_time, m_state, m_action); }
 
 public:
   //! Set the state vector (x)

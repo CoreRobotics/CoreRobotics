@@ -61,7 +61,7 @@ public:
           unsigned i_seed = DistributionBase<Eigen::VectorXd>::randomSeed())
       : Distribution<Eigen::VectorXd, UniformParameters>(i_parameters,
                                                          i_seed){};
-    
+
   //! Destructor
   virtual ~Uniform() = default;
 

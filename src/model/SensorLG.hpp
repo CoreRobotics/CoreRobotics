@@ -7,9 +7,9 @@
 #ifndef CR_SENSOR_LINEAR_HPP_
 #define CR_SENSOR_LINEAR_HPP_
 
+#include "Eigen/Dense"
 #include "Sensor.hpp"
 #include "noise/Gaussian.hpp"
-#include "Eigen/Dense"
 
 namespace cr {
 namespace model {
@@ -21,12 +21,12 @@ struct SensorLGParameters {
 
   //! Initializes the multivariate standard uniform
   SensorLGParameters(std::size_t i_stateDim, std::size_t i_measDim,
-    std::size_t i_noiseDim)
+                     std::size_t i_noiseDim)
       : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)),
-        m_R(Eigen::MatrixXd::Zero(i_measDim, i_measDim)) {};
+        m_R(Eigen::MatrixXd::Zero(i_measDim, i_measDim)){};
 
-  Eigen::MatrixXd m_H;  /** Observation matrix */
-  Eigen::MatrixXd m_R;  /** Measurement noise covariance */
+  Eigen::MatrixXd m_H; /** Observation matrix */
+  Eigen::MatrixXd m_R; /** Measurement noise covariance */
 };
 
 //------------------------------------------------------------------------------
@@ -64,8 +64,7 @@ class SensorLG
 public:
   //! Class constructor
   SensorLG(const SensorLGParameters &i_parameters,
-           const Eigen::VectorXd &i_state,
-           const double i_dt = 0.01);
+           const Eigen::VectorXd &i_state, const double i_dt = 0.01);
 
   //! Class destructor
   virtual ~SensorLG() = default;

@@ -7,9 +7,9 @@
 #ifndef CR_MOTION_LG_HPP_
 #define CR_MOTION_LG_HPP_
 
+#include "Eigen/Dense"
 #include "Motion.hpp"
 #include "noise/Gaussian.hpp"
-#include "Eigen/Dense"
 
 namespace cr {
 namespace model {
@@ -21,16 +21,16 @@ struct MotionLGParameters {
 
   //! Initializes the multivariate standard uniform
   MotionLGParameters(std::size_t i_stateDim, std::size_t i_actionDim,
-    std::size_t i_noiseDim)
-      : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)), 
+                     std::size_t i_noiseDim)
+      : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)),
         m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)),
         m_C(Eigen::MatrixXd::Zero(i_stateDim, i_noiseDim)),
-        m_Q(Eigen::MatrixXd::Zero(i_noiseDim, i_noiseDim)) {};
+        m_Q(Eigen::MatrixXd::Zero(i_noiseDim, i_noiseDim)){};
 
-  Eigen::MatrixXd m_A;  /** Dynamics matrix */
-  Eigen::MatrixXd m_B;  /** Input matrix */
-  Eigen::MatrixXd m_C;  /** Process noise matrix */
-  Eigen::MatrixXd m_Q;  /** Process noise covariance */
+  Eigen::MatrixXd m_A; /** Dynamics matrix */
+  Eigen::MatrixXd m_B; /** Input matrix */
+  Eigen::MatrixXd m_C; /** Process noise matrix */
+  Eigen::MatrixXd m_Q; /** Process noise covariance */
 };
 
 //------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ struct MotionLGParameters {
  x_{k+1} = A x_k + B u_k + C w_k
  \f]
 
- where \f$x\f$ is the state vector, \f$u\f$ is the input vector, \f$w\f$ is 
+ where \f$x\f$ is the state vector, \f$u\f$ is the input vector, \f$w\f$ is
  the Gaussian noise vector, and \f$k\f$ is a discrete sampling index.
 
  ## References
@@ -69,13 +69,12 @@ struct MotionLGParameters {
  */
 //------------------------------------------------------------------------------
 class MotionLG
-  : public Motion<noise::Gaussian, Eigen::VectorXd, MotionLGParameters> {
+    : public Motion<noise::Gaussian, Eigen::VectorXd, MotionLGParameters> {
 
 public:
   //! Class constructor
   MotionLG(const MotionLGParameters &i_parameters,
-           const noise::Gaussian &i_state, 
-           const Eigen::VectorXd &i_action,
+           const noise::Gaussian &i_state, const Eigen::VectorXd &i_action,
            const double i_dt = 0.01);
 
   //! Class destructor

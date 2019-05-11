@@ -99,29 +99,30 @@ core::Result FrameEuler::setFreeValue(double i_q) {
  */
 //------------------------------------------------------------------------------
 double FrameEuler::getFreeValue(void) {
+  double value = 0.0;
   switch (m_freeVar) {
   case CR_EULER_FREE_NONE:
-    return 0.0;
     break;
   case CR_EULER_FREE_POS_X:
-    return m_posX;
+    value = m_posX;
     break;
   case CR_EULER_FREE_POS_Y:
-    return m_posY;
+    value = m_posY;
     break;
   case CR_EULER_FREE_POS_Z:
-    return m_posZ;
+    value = m_posZ;
     break;
   case CR_EULER_FREE_ANG_A:
-    return m_angA;
+    value = m_angA;
     break;
   case CR_EULER_FREE_ANG_B:
-    return m_angB;
+    value = m_angB;
     break;
   case CR_EULER_FREE_ANG_G:
-    return m_angG;
+    value = m_angG;
     break;
   }
+  return value;
 }
 
 //------------------------------------------------------------------------------

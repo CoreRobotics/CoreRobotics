@@ -66,7 +66,7 @@ public:
           unsigned i_seed = DistributionBase<DomainType>::randomSeed())
       : Distribution<DomainType, MixtureParameters<DistributionType>>(
             i_parameters, i_seed){};
-        
+
   //! Destructor
   virtual ~Mixture() = default;
 

@@ -39,7 +39,7 @@ John Wiley & Sons, 2011.
 //------------------------------------------------------------------------------
 class Integration {
 
-// #ifndef SWIG
+  // #ifndef SWIG
 public:
   //! Forward euler integration
   static Eigen::VectorXd
@@ -64,7 +64,7 @@ public:
       std::function<Eigen::VectorXd(double, Eigen::VectorXd, Eigen::VectorXd)>
           i_dynamicSystem,
       double i_t, Eigen::VectorXd i_x, Eigen::VectorXd i_u, double i_dt);
-// #endif
+  // #endif
 };
 
 } // namepsace math

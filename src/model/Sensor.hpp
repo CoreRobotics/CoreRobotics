@@ -32,7 +32,7 @@ namespace ph = std::placeholders;
  z_k = h(t_k, x_k)
  \f]
 
- where \f$x\f$ is the state, \f$t\f$ is time, \f$z\$ is the measurement, and 
+ where \f$x\f$ is the state, \f$t\f$ is time, \f$z\$ is the measurement, and
  \f$k\f$ is a discrete sampling index.
 
  ## References
@@ -49,10 +49,9 @@ class Sensor : public core::Step, public core::Item {
 
 public:
   //! Class constructor
-  Sensor(const ParameterType &i_parameters,
-         const StateType &i_state,
+  Sensor(const ParameterType &i_parameters, const StateType &i_state,
          const double i_dt = 0.01)
-    : m_parameters(i_parameters), m_state(i_state), m_dt(i_dt) {}
+      : m_parameters(i_parameters), m_state(i_state), m_dt(i_dt) {}
 
   //! Class destructor
   virtual ~Sensor() = default;
@@ -68,7 +67,6 @@ public:
   }
 
 public:
-
   //! Get the measurement vector (z)
   MeasurementType getMeasurement() { return m_measurement; }
 

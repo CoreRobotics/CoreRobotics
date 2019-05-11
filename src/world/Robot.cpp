@@ -859,9 +859,8 @@ void Robot::printInfo(std::ostream &i_stream) {
   } else if (isRoot()) {
     id = "R";
   }
-  i_stream << "+ [" << id
-           << "] world::Robot #DOF = " << getDegreesOfFreedom() << " '"
-           << getName() << "'\n";
+  i_stream << "+ [" << id << "] world::Robot #DOF = " << getDegreesOfFreedom()
+           << " '" << getName() << "'\n";
   for (size_t i = 0; i < m_children.size(); i++) {
     m_children.at(i)->printInfo(i_stream);
   }

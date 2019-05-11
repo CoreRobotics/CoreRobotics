@@ -43,10 +43,9 @@ namespace model {
  */
 //------------------------------------------------------------------------------
 SensorLinear::SensorLinear(const SensorLinearParameters &i_parameters,
-                           const Eigen::VectorXd &i_state,
-                           const double i_dt)
-  : Sensor<Eigen::VectorXd, Eigen::VectorXd, SensorLinearParameters>(
-    i_parameters, i_state, i_dt) {}
+                           const Eigen::VectorXd &i_state, const double i_dt)
+    : Sensor<Eigen::VectorXd, Eigen::VectorXd, SensorLinearParameters>(
+          i_parameters, i_state, i_dt) {}
 
 //------------------------------------------------------------------------------
 /*!

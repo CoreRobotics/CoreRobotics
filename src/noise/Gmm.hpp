@@ -51,7 +51,7 @@ public:
   Gmm(GmmParameters i_parameters,
       unsigned i_seed = DistributionBase<Eigen::VectorXd>::randomSeed())
       : Mixture<Eigen::VectorXd, Gaussian>(i_parameters, i_seed){};
-  
+
   //! Destructor
   virtual ~Gmm() = default;
 

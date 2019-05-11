@@ -1,67 +1,22 @@
-//=====================================================================
 /*
-Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2017, CoreRobotics.
-All rights reserved.
+ * Copyright (c) 2017-2019, CoreRobotics.  All rights reserved.
+ * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
+ * http://www.corerobotics.org
+ */
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
+#ifndef CR_PARTICLE_FILTER_HPP_
+#define CR_PARTICLE_FILTER_HPP_
 
-* Redistributions of source code must retain the above copyright
-notice, this list of conditions and the following disclaimer.
-
-* Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-
-* Neither the name of CoreRobotics nor the names of its contributors
-may be used to endorse or promote products derived from this
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-\project CoreRobotics Project
-\url     www.corerobotics.org
-\author  Parker Owan
-
-*/
-//=====================================================================
-
-#ifndef CRParticleFilter_hpp
-#define CRParticleFilter_hpp
-
-//=====================================================================
-// Includes
 #include <vector>
 #include "Eigen/Dense"
-#include "CRNoiseUniform.hpp"
-#include "CRSensorProbabilistic.hpp"
-#include "CRMotionProbabilistic.hpp"
+#include "noise/Discrete.hpp"
 
-//=====================================================================
-// CoreRobotics namespace
-namespace CoreRobotics {
-    
-//=====================================================================
+namespace cr {
+namespace estimation {
+
+//------------------------------------------------------------------------------
 /*!
- \file CRParticleFilter.hpp
- \brief Implements a particle filter.
- */
-//---------------------------------------------------------------------
-/*!
- \class CRParticleFilter
+ \class ParticleFilter
  \ingroup estimators
  
  \brief This class implements a particle filter for nonlinear,
@@ -70,14 +25,6 @@ namespace CoreRobotics {
  \details
  ## Description
  
- 
- These methods are available:
- - CRParticleFilter::setState sets ...
- 
- ## Example
- This example demonstrates use of the CRParticleFilter class.
- \include test_CRParticleFilter.cpp
- 
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
@@ -85,20 +32,38 @@ namespace CoreRobotics {
  [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
  2006. \n\n
  */
-//=====================================================================
-class CRParticleFilter {
+//------------------------------------------------------------------------------
+class ParticleFilter {
     
 //---------------------------------------------------------------------
 // Constructor and Destructor
 public:
     
     //! Class constructor
-    CRParticleFilter(CRMotionProbabilistic* i_motionModel,
-                     CRSensorProbabilistic* i_sensorModel,
-                     std::vector<Eigen::VectorXd> i_particles);
+    CRParticleFilter(const model::MotionStatistical& i_motion,
+                     const model::SensorStatistical& i_sensor,
+                     const noise::Particle& i_state);
     
     //! Class destructor
-    ~CRParticleFilter();
+    virtual ~CRParticleFilter() = delete;
+	
+	//! This function steps the callback and updates the state.
+	void step() override;
+
+    //! Set the state estimate
+	void setState(const noise::Particle& i_x) { m_state = i_x; }
+
+	//! Get the state estimate
+	const noise::Particle& getState() { return m_state; }
+
+    //! Prediction step
+	void predict(const Eigen::VectorXd& i_u, noise::Particle& o_x);
+
+	//! Correction step
+	void correct(const Eigen::VectorXd& i_z, noise::Particle& o_x);
+
+    //! Resample step
+    void resample(noise::Particle& i_state);
     
 //---------------------------------------------------------------------
 // Public Methods
@@ -122,10 +87,8 @@ public:
     
     //! Compute the covariance
     Eigen::MatrixXd getExpectedCovariance();
-    
-//---------------------------------------------------------------------
-// Public Members
-public:
+
+protected:
     
     //! Motion Model
     CRMotionProbabilistic* m_motionModel;
@@ -145,15 +108,9 @@ public:
     //! Uniform random noise
     CRNoiseUniform* m_uniform;
     
-//---------------------------------------------------------------------
-// Protected Members
-protected:
-    
 };
 
-//=====================================================================
-// End namespace
-}
-
+} // namespace estimation
+} // namespace cr
 
 #endif

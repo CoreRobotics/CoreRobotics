@@ -64,7 +64,7 @@ class Requester : public std::enable_shared_from_this<Requester<DataType>>,
   // public methods
 public:
   //! constructor
-  Requester() {};
+  Requester(){};
 
   //! request function to implement
   virtual DataType request() = 0;

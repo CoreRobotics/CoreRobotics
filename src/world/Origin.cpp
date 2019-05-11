@@ -41,7 +41,7 @@ OriginPtr Origin::create() { return std::make_shared<Origin>(); }
  \param[in]     i_name - the name to set
  */
 //------------------------------------------------------------------------------
-void Origin::setName(const std::string& i_name) {
+void Origin::setName(const std::string &i_name) {
   Item::setName(i_name);
   m_rootItem->setName(i_name + " root");
 }

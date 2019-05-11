@@ -43,10 +43,9 @@ namespace model {
  */
 //------------------------------------------------------------------------------
 SensorLG::SensorLG(const SensorLGParameters &i_parameters,
-                   const Eigen::VectorXd &i_state,
-                   const double i_dt)
-  : Sensor<noise::Gaussian, Eigen::VectorXd, SensorLGParameters>(
-    i_parameters, i_state, i_dt) {}
+                   const Eigen::VectorXd &i_state, const double i_dt)
+    : Sensor<noise::Gaussian, Eigen::VectorXd, SensorLGParameters>(
+          i_parameters, i_state, i_dt) {}
 
 //------------------------------------------------------------------------------
 /*!

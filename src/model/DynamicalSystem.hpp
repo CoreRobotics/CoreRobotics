@@ -61,19 +61,19 @@ enum SystemType {
  \n\n
  */
 //------------------------------------------------------------------------------
-template<typename ParameterType = void *>
+template <typename ParameterType = void *>
 class DynamicalSystem
-  : public Motion<Eigen::VectorXd, Eigen::VectorXd, ParameterType> {
+    : public Motion<Eigen::VectorXd, Eigen::VectorXd, ParameterType> {
 
 public:
   //! Class constructor
   DynamicalSystem(const ParameterType &i_parameters,
                   const Eigen::VectorXd &i_state,
-                  const Eigen::VectorXd &i_action,
-                  const double i_dt = 0.01,
+                  const Eigen::VectorXd &i_action, const double i_dt = 0.01,
                   const SystemType &i_type = CONTINUOUS_TIME)
-    : Motion<Eigen::VectorXd, Eigen::VectorXd, ParameterType>(
-      i_parameters, i_state, i_action, i_dt), m_systemType(i_type) {};
+      : Motion<Eigen::VectorXd, Eigen::VectorXd, ParameterType>(
+            i_parameters, i_state, i_action, i_dt),
+        m_systemType(i_type){};
 
   //! Class destructor
   virtual ~DynamicalSystem() = default;
@@ -86,11 +86,12 @@ public:
   //! This function steps the callback and updates the state.
   void step() override {
     if (m_systemType == DISCRETE_TIME) {
-      this->m_state = (this->m_motion_fcn)(
-        this->m_time, this->m_state, this->m_action);
+      this->m_state =
+          (this->m_motion_fcn)(this->m_time, this->m_state, this->m_action);
     } else if (m_systemType == CONTINUOUS_TIME) {
-      this->m_state = math::Integration::rungeKuttaStep(this->m_motion_fcn, 
-        this->m_time, this->m_state, this->m_action, this->m_dt);
+      this->m_state = math::Integration::rungeKuttaStep(
+          this->m_motion_fcn, this->m_time, this->m_state, this->m_action,
+          this->m_dt);
     }
     this->m_time += this->m_dt;
   };

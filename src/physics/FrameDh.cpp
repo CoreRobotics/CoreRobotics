@@ -79,29 +79,30 @@ core::Result FrameDh::setFreeValue(double i_q) {
 //------------------------------------------------------------------------------
 /*!
  This method get the value of the free variable.  The method returns
- q = NULL if m_freeVar is set to CR_DH_FREE_NONE.\n
+ q = 0 if m_freeVar is set to CR_DH_FREE_NONE.\n
 
  \return - value of the free variable.
  */
 //------------------------------------------------------------------------------
 double FrameDh::getFreeValue() {
+  double value = 0.0;
   switch (m_freeVar) {
   case CR_DH_FREE_NONE:
-    return 0.0;
     break;
   case CR_DH_FREE_R:
-    return m_dhR;
+    value = m_dhR;
     break;
   case CR_DH_FREE_ALPHA:
-    return m_dhAlpha;
+    value = m_dhAlpha;
     break;
   case CR_DH_FREE_D:
-    return m_dhD;
+    value = m_dhD;
     break;
   case CR_DH_FREE_THETA:
-    return m_dhTheta;
+    value = m_dhTheta;
     break;
   }
+  return value;
 }
 
 //------------------------------------------------------------------------------

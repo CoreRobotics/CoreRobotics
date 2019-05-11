@@ -20,10 +20,10 @@ namespace estimation {
 /*!
  \class KalmanFilter
  \ingroup estimation
- 
- \brief This class provides methods for solving continuous and discrete 
+
+ \brief This class provides methods for solving continuous and discrete
  time state estimation problems using a kalman filter.
- 
+
  \details
  ## Description
  KalmanFilter is a module with implements the standard discrete and
@@ -46,64 +46,65 @@ namespace estimation {
 
  where all the variable are defined in the same way as the continuous time
  version.
- 
+
  ## References
 
  [1] Wikipedia: "Kalman filter",
  https://en.wikipedia.org/wiki/Kalman_filter 2017.\n\n
- 
+
  */
 //------------------------------------------------------------------------------
 class KalmanFilter : public core::Step, public core::Item {
 
 public:
-	//! Class constructor
-	KalmanFilter(const model::MotionLG& i_motion,
-				 const model::SensorLG& i_sensor,
-				 const noise::Gaussian& i_state);
-	
-	//! This function steps the callback and updates the state.
-	void step() override;
+  //! Class constructor
+  KalmanFilter(const model::MotionLG &i_motion, const model::SensorLG &i_sensor,
+               const noise::Gaussian &i_state);
 
-	//! Set the state estimate
-	void setState(const noise::Gaussian& i_x) { m_state = i_x; }
+  //! Class destructor
+  virtual ~KalmanFilter() = default;
 
-	//! Get the state estimate
-	const noise::Gaussian& getState() { return m_state; }
+  //! This function steps the callback and updates the state.
+  void step() override;
 
-	//! Prediction step
-	const noise::Gaussian& predict(const Eigen::VectorXd& i_u);
+  //! Set the state estimate
+  void setState(const noise::Gaussian &i_x) { m_state = i_x; }
 
-	//! Correction step
-	const noise::Gaussian correct(const Eigen::VectorXd& i_z);
+  //! Get the state estimate
+  const noise::Gaussian &getState() { return m_state; }
 
-	//! Get the Kalman Gain
-	Eigen::MatrixXd getKalmanGain();
+  //! Prediction step
+  void predict(const Eigen::VectorXd &i_u, noise::Gaussian &o_x);
 
-	//! Set the observed sensor measurement
-	void setMeasurement(Eigen::VectorXd i_z) { m_measurement = i_z; }
+  //! Correction step
+  void correct(const Eigen::VectorXd &i_z, noise::Gaussian &o_x);
 
-	//! Set the applied motion action
-	void setAction(Eigen::VectorXd i_u) { m_action = i_u; }
+  //! Get the Kalman Gain
+  Eigen::MatrixXd getKalmanGain();
 
-//---------------------------------------------------------------------
-// Protected Members
+  //! Set the observed sensor measurement
+  void setMeasurement(Eigen::VectorXd i_z) { m_measurement = i_z; }
+
+  //! Set the applied motion action
+  void setAction(Eigen::VectorXd i_u) { m_action = i_u; }
+
+  //---------------------------------------------------------------------
+  // Protected Members
 protected:
+  //! The linear Gaussian motion model
+  model::MotionLG m_motion;
 
-	//! The linear Gaussian motion model
-	model::MotionLG m_motion;
+  //! The linear Gaussian sensor model
+  model::SensorLG m_sensor;
 
-	//! The linear Gaussian sensor model
-	model::SensorLG m_sensor;
+  //! The state estimate
+  noise::Gaussian m_state;
 
-	//! The state estimate
-	noise::Gaussian m_state;
+  //! Sensor measurement
+  Eigen::VectorXd m_measurement;
 
-	//! Sensor measurement
-	Eigen::VectorXd m_measurement;
-
-	//! Motion action
-	Eigen::VectorXd m_action;
+  //! Motion action
+  Eigen::VectorXd m_action;
 };
 
 } // namespace estimation

@@ -113,8 +113,9 @@ testData test_CRNullSpace(Eigen::VectorXd initJoints,
   double d10 = 39.36;
 
   // Set Euler Angles and Position Offsets
-  //							  dx		dy		dz
-  //tx
+  //							  dx		dy
+  // dz
+  // tx
   // ty		tz
   F0->setPositionAndOrientation(0.0, 0.0, d1, 0.0, 0.0, 0.0);
   F1->setPositionAndOrientation(0.0, 0.0, 0.0, M_PI / 2.0, 0.0, 0.0);

@@ -10,43 +10,43 @@ namespace cr {
 namespace estimation {
 
 //------------------------------------------------------------------------------
-KalmanFilter::KalmanFilter(const model::MotionLG& i_motion,
-				 		   const model::SensorLG& i_sensor,
-				 		   const noise::Gaussian& i_state)
-  : m_motion(i_motion), m_sensor(i_sensor), m_state(i_state) {}
+KalmanFilter::KalmanFilter(const model::MotionLG &i_motion,
+                           const model::SensorLG &i_sensor,
+                           const noise::Gaussian &i_state)
+    : m_motion(i_motion), m_sensor(i_sensor), m_state(i_state) {}
 
 //------------------------------------------------------------------------------
 void KalmanFilter::step() {
-  m_state = predict(m_action);
-  m_state = correct(m_measurement);
+  predict(m_action, m_state);
+  correct(m_measurement, m_state);
 }
 
 //------------------------------------------------------------------------------
-const noise::Gaussian& KalmanFilter::predict(const Eigen::VectorXd& i_u) {
-  m_motion.setState(m_state);
+void KalmanFilter::predict(const Eigen::VectorXd &i_u, noise::Gaussian &o_x) {
+  m_motion.setState(o_x);
   m_motion.setAction(i_u);
   m_motion.step();
-  return m_motion.getState();
+  o_x = m_motion.getState();
 }
 
 //------------------------------------------------------------------------------
-const noise::Gaussian KalmanFilter::correct(const Eigen::VectorXd& i_z) {
-  auto x = m_state.getParameters();
-  m_sensor.setState(x.mean);
+void KalmanFilter::correct(const Eigen::VectorXd &i_z, noise::Gaussian &o_x) {
+  auto gp = o_x.getParameters();
+  m_sensor.setState(gp.mean);
   m_sensor.step();
-  const auto& e = i_z - m_sensor.getMeasurement().getParameters().mean;
-  const auto& K = getKalmanGain();
-  x.mean += K * e;
-  const auto& KH = K * m_sensor.getParameters().m_H;
-  x.cov = (Eigen::MatrixXd::Identity(KH.rows(), KH.cols()) - KH) * x.cov;
-  noise::Gaussian g(x);
-  return g;
+  const auto &e = i_z - m_sensor.getMeasurement().getParameters().mean;
+  const auto &K = getKalmanGain();
+  gp.mean += K * e;
+  const auto &KH = K * m_sensor.getParameters().m_H;
+  gp.cov = (Eigen::MatrixXd::Identity(KH.rows(), KH.cols()) - KH) * gp.cov;
+  o_x.setParameters(gp);
 }
 
 //------------------------------------------------------------------------------
 Eigen::MatrixXd KalmanFilter::getKalmanGain() {
-  const auto& S = m_sensor.getParameters().m_H * m_state.getParameters().cov
-     * m_sensor.getParameters().m_H.transpose() + m_sensor.getParameters().m_R;
+  const auto &S = m_sensor.getParameters().m_H * m_state.getParameters().cov *
+                      m_sensor.getParameters().m_H.transpose() +
+                  m_sensor.getParameters().m_R;
   Eigen::MatrixXd Sinv = S.inverse();
   return m_state.getParameters().cov * m_sensor.getParameters().m_H * Sinv;
 }

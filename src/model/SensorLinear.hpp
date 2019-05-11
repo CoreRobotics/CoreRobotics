@@ -20,9 +20,9 @@ struct SensorLinearParameters {
 
   //! Initializes the multivariate standard uniform
   SensorLinearParameters(std::size_t i_stateDim, std::size_t i_measDim)
-      : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)) {};
+      : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)){};
 
-  Eigen::MatrixXd m_H;  /** Observation matrix */
+  Eigen::MatrixXd m_H; /** Observation matrix */
 };
 
 //------------------------------------------------------------------------------
@@ -55,13 +55,12 @@ struct SensorLinearParameters {
  */
 //------------------------------------------------------------------------------
 class SensorLinear
-  : public Sensor<Eigen::VectorXd, Eigen::VectorXd, SensorLinearParameters> {
+    : public Sensor<Eigen::VectorXd, Eigen::VectorXd, SensorLinearParameters> {
 
 public:
   //! Class constructor
   SensorLinear(const SensorLinearParameters &i_parameters,
-               const Eigen::VectorXd &i_state,
-               const double i_dt = 0.01);
+               const Eigen::VectorXd &i_state, const double i_dt = 0.01);
 
   //! Class destructor
   virtual ~SensorLinear() = default;
@@ -69,7 +68,7 @@ public:
 public:
   //! The prototype sensorCallback function.
   virtual Eigen::VectorXd sensorCallback(double i_t,
-    Eigen::VectorXd i_x) override;
+                                         Eigen::VectorXd i_x) override;
 };
 
 } // namepsace model
