@@ -407,5 +407,11 @@ project includes all the CoreRobotics modules.
 //---------------------------------------------------------------------------
 #include <cr/control>
 
+//---------------------------------------------------------------------------
+//! \defgroup estimation Estimation
+//! \brief This module implements state estimators for control.
+//---------------------------------------------------------------------------
+#include <cr/estimation>
+
 
 #endif

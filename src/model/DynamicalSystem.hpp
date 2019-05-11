@@ -13,6 +13,14 @@
 namespace cr {
 namespace model {
 
+//! Dynamical system type
+enum SystemType {
+  //! motionCallback returns next state \f$x_{k+1}\f$
+  DISCRETE_TIME,
+  //! motionCallback returns time rate of change of state \f$\dot{x}\f$
+  CONTINUOUS_TIME,
+};
+
 //------------------------------------------------------------------------------
 /*!
  \class DynamicalSystem
@@ -41,6 +49,9 @@ namespace model {
 
  Use the ModelType parameter to select which callback is implemented.
 
+  To use this class, users must derive
+ - `StateType motionCallback(double i_t, StateType i_x, ActionType i_u)`
+
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
  Ed. 2, CRC Press, 2012. \n\n
@@ -50,19 +61,19 @@ namespace model {
  \n\n
  */
 //------------------------------------------------------------------------------
-class DynamicalSystem : public Motion<Eigen::VectorXd, Eigen::VectorXd> {
-
-public:
-  //! Motion model type
-  enum ModelType {
-    DISCRETE_TIME,
-    CONTINUOUS_TIME,
-  };
+template<typename ParameterType = void *>
+class DynamicalSystem
+  : public Motion<Eigen::VectorXd, Eigen::VectorXd, ParameterType> {
 
 public:
   //! Class constructor
-  DynamicalSystem(const Eigen::VectorXd &i_x0, const Eigen::VectorXd &i_u0,
-                  const double i_dt = 0.01, ModelType i_type = CONTINUOUS_TIME);
+  DynamicalSystem(const ParameterType &i_parameters,
+                  const Eigen::VectorXd &i_state,
+                  const Eigen::VectorXd &i_action,
+                  const double i_dt = 0.01,
+                  const SystemType &i_type = CONTINUOUS_TIME)
+    : Motion<Eigen::VectorXd, Eigen::VectorXd, ParameterType>(
+      i_parameters, i_state, i_action, i_dt), m_systemType(i_type) {};
 
   //! Class destructor
   virtual ~DynamicalSystem() = default;
@@ -72,19 +83,28 @@ public:
   virtual Eigen::VectorXd motionCallback(double i_t, Eigen::VectorXd i_x,
                                          Eigen::VectorXd i_u) override = 0;
 
-  ///! This function steps the callback and updates the state.
-  virtual void step() override;
+  //! This function steps the callback and updates the state.
+  void step() override {
+    if (m_systemType == DISCRETE_TIME) {
+      this->m_state = (this->m_motion_fcn)(
+        this->m_time, this->m_state, this->m_action);
+    } else if (m_systemType == CONTINUOUS_TIME) {
+      this->m_state = math::Integration::rungeKuttaStep(this->m_motion_fcn, 
+        this->m_time, this->m_state, this->m_action, this->m_dt);
+    }
+    this->m_time += this->m_dt;
+  };
 
 public:
-  //! Set the model type
-  void setType(ModelType i_type) { m_type = i_type; }
+  //! Set the system type
+  void setSystemType(const SystemType &i_type) { m_systemType = i_type; }
 
-  //! Get the model type
-  ModelType getType() { return m_type; }
+  //! Get the system type
+  const SystemType &getSystemType() { return m_systemType; }
 
 protected:
-  //! model type
-  ModelType m_type;
+  //! system type
+  SystemType m_systemType;
 };
 
 } // namepsace model

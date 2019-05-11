@@ -101,15 +101,16 @@ set(CR_SOURCE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # define modules, target prefix, and module dependencies
 set(CR_LIB_PREFIX "cr-")
-set(CR_LIB_MODULES core math physics signal noise model world control)
+set(CR_LIB_MODULES core math physics signal noise model world control estimation)
 set(CR_LIB_DEP_core)
 set(CR_LIB_DEP_math)
 set(CR_LIB_DEP_physics)
 set(CR_LIB_DEP_signal ${CR_LIB_PREFIX}core)
 set(CR_LIB_DEP_noise ${CR_LIB_PREFIX}math)
-set(CR_LIB_DEP_model ${CR_LIB_PREFIX}core ${CR_LIB_PREFIX}math)
+set(CR_LIB_DEP_model ${CR_LIB_PREFIX}core ${CR_LIB_PREFIX}math ${CR_LIB_PREFIX}noise)
 set(CR_LIB_DEP_world ${CR_LIB_PREFIX}core ${CR_LIB_PREFIX}physics)
 set(CR_LIB_DEP_control ${CR_LIB_PREFIX}core)
+set(CR_LIB_DEP_estimation ${CR_LIB_PREFIX}model ${CR_LIB_PREFIX}noise)
 
 # get header and source files
 set(CR_HEADERS "")

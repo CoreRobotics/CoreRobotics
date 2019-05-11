@@ -29,11 +29,11 @@ namespace ph = std::placeholders;
  Specifically, MotionModel sets up a container for the discrete-time model
 
  \f[
- z_k = h(t_k, x_k, u_k)
+ z_k = h(t_k, x_k)
  \f]
 
- where \f$x\f$ is the state, \f$u\f$ is the input, \f$t\f$ is time, \f$z\$ is
- the measurement, and \f$k\f$ is a discrete sampling index.
+ where \f$x\f$ is the state, \f$t\f$ is time, \f$z\$ is the measurement, and 
+ \f$k\f$ is a discrete sampling index.
 
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
@@ -44,35 +44,33 @@ namespace ph = std::placeholders;
  \n\n
  */
 //------------------------------------------------------------------------------
-template <typename MeasType, typename StateType, typename ActionType>
+template <typename MeasurementType, typename StateType, typename ParameterType>
 class Sensor : public core::Step, public core::Item {
 
 public:
   //! Class constructor
-  Sensor(const StateType &i_x0, const ActionType &i_u0,
+  Sensor(const ParameterType &i_parameters,
+         const StateType &i_state,
          const double i_dt = 0.01)
-      : m_state(i_x0), m_action(i_u0), m_dt(i_dt) {};
+    : m_parameters(i_parameters), m_state(i_state), m_dt(i_dt) {}
 
   //! Class destructor
   virtual ~Sensor() = default;
 
 public:
   //! The prototype sensorCallback function must be implemented.
-  virtual MeasType sensorCallback(double i_t, StateType i_x,
-                                  ActionType i_u) = 0;
+  virtual MeasurementType sensorCallback(double i_t, StateType i_x) = 0;
 
   ///! This function steps the callback and updates the state.
   virtual void step() {
-    m_meas = this->m_sensor_fcn(m_time, m_state, m_action);
+    m_measurement = this->m_sensor_fcn(m_time, m_state);
     m_time += m_dt;
   }
 
 public:
-  //! Set the measurement vector (z)
-  void setMeasurement(const MeasType &i_z) { m_meas = i_z; }
 
   //! Get the measurement vector (z)
-  MeasType getMeasurement() { return m_meas; }
+  MeasurementType getMeasurement() { return m_measurement; }
 
   //! Set the state vector (x)
   void setState(const StateType &i_x) { m_state = i_x; }
@@ -80,11 +78,16 @@ public:
   //! Get the state vector (x)
   StateType getState() { return m_state; }
 
-  //! Set the action vector (u)
-  void setAction(const ActionType &i_u) { m_action = i_u; }
+  //! Set the parameters that describe the distribution.
+  void setParameters(const ParameterType &i_parameters) {
+    m_parameters = i_parameters;
+  }
 
-  //! Get the action vector (u)
-  ActionType setAction() { return m_action; }
+  //! Get the parameters that descrive the distribution.
+  const ParameterType &getParameters() { return m_parameters; }
+
+  //! Get the parameters that descrive the distribution.
+  ParameterType *parameters() { return *m_parameters; }
 
   //! Set the time step (s)
   void setTimeStep(const double i_timeStep) { m_dt = i_timeStep; }
@@ -97,8 +100,14 @@ public:
 
 protected:
   //! bound callback function
-  std::function<MeasType(double, StateType, ActionType)> m_sensor_fcn =
-      std::bind(&Sensor::sensorCallback, this, ph::_1, ph::_2, ph::_3);
+  std::function<MeasurementType(double, StateType)> m_sensor_fcn =
+      std::bind(&Sensor::sensorCallback, this, ph::_1, ph::_2);
+
+  //! System parameters
+  ParameterType m_parameters;
+
+  //! Dynamic state of the system (x)
+  StateType m_state;
 
   //! Sample rate (s)
   double m_dt;
@@ -106,14 +115,8 @@ protected:
   //! Current time (s)
   double m_time = 0.0;
 
-  //! Dynamic state of the system (x)
-  StateType m_state;
-
-  //! Dynamic state of the system (u)
-  ActionType m_action;
-
   //! Sensor observation (z)
-  MeasType m_meas;
+  MeasurementType m_measurement;
 };
 
 } // namepsace model

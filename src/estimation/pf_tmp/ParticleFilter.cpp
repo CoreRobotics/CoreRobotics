@@ -39,7 +39,7 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#include "CRParticleFilter.hpp"
+#include "ParticleFilter.hpp"
 
 //=====================================================================
 // CoreRobotics namespace

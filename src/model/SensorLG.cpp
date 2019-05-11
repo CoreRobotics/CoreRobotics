@@ -4,7 +4,7 @@
  * http://www.corerobotics.org
  */
 
-#include "SensorLinear.hpp"
+#include "SensorLG.hpp"
 
 namespace cr {
 namespace model {
@@ -42,10 +42,10 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-SensorLinear::SensorLinear(const SensorLinearParameters &i_parameters,
-                           const Eigen::VectorXd &i_state,
-                           const double i_dt)
-  : Sensor<Eigen::VectorXd, Eigen::VectorXd, SensorLinearParameters>(
+SensorLG::SensorLG(const SensorLGParameters &i_parameters,
+                   const Eigen::VectorXd &i_state,
+                   const double i_dt)
+  : Sensor<noise::Gaussian, Eigen::VectorXd, SensorLGParameters>(
     i_parameters, i_state, i_dt) {}
 
 //------------------------------------------------------------------------------
@@ -57,8 +57,13 @@ SensorLinear::SensorLinear(const SensorLinearParameters &i_parameters,
  \return - the sensor measurement z(k)
  */
 //------------------------------------------------------------------------------
-Eigen::VectorXd SensorLinear::sensorCallback(double i_t, Eigen::VectorXd i_x) {
-  return m_parameters.m_H * i_x;
+noise::Gaussian SensorLG::sensorCallback(double i_t, Eigen::VectorXd i_x) {
+  noise::Gaussian g;
+  auto gp = g.getParameters();
+  gp.mean = m_parameters.m_H * i_x;
+  gp.cov = m_parameters.m_R;
+  g.setParameters(gp);
+  return g;
 }
 
 } // namespace model

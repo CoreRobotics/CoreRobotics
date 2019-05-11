@@ -13,6 +13,20 @@
 namespace cr {
 namespace model {
 
+//! Motion linear paramter structure
+struct MotionLinearParameters {
+  MotionLinearParameters() = default;
+  virtual ~MotionLinearParameters() = default;
+
+  //! Initializes the multivariate standard uniform
+  MotionLinearParameters(std::size_t i_stateDim, std::size_t i_actionDim)
+      : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)), 
+        m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)) {};
+
+  Eigen::MatrixXd m_A;  /** Dynamics matrix */
+  Eigen::MatrixXd m_B;  /** Input matrix */
+};
+
 //------------------------------------------------------------------------------
 /*!
  \class MotionLinear
@@ -48,36 +62,23 @@ namespace model {
  \n\n
  */
 //------------------------------------------------------------------------------
-class MotionLinear : public DynamicalSystem {
+class MotionLinear : public DynamicalSystem<MotionLinearParameters> {
 
 public:
   //! Class constructor
-  MotionLinear(const Eigen::MatrixXd &i_A, const Eigen::MatrixXd &i_B,
-               const Eigen::VectorXd &i_x0, const Eigen::VectorXd &i_u0,
-               const double i_dt = 0.01, DynamicalSystem::ModelType i_type =
-                                             DynamicalSystem::CONTINUOUS_TIME);
+  MotionLinear(const MotionLinearParameters &i_parameters,
+               const Eigen::VectorXd &i_state, 
+               const Eigen::VectorXd &i_action,
+               const double i_dt = 0.01,
+               const SystemType i_type = CONTINUOUS_TIME);
 
   //! Class destructor
   virtual ~MotionLinear() = default;
 
 public:
   //! The prototype motionCallback function.
-  virtual Eigen::VectorXd motionCallback(double i_t, Eigen::VectorXd i_x,
-                                         Eigen::VectorXd i_u) override;
-
-public:
-  //! Set the dynamics and input matrices
-  void setDynamics(const Eigen::MatrixXd &i_A, const Eigen::MatrixXd &i_B) {
-    m_A = i_A;
-    m_B = i_B;
-  };
-
-protected:
-  //! Dynamics Matrix
-  Eigen::MatrixXd m_A;
-
-  //! Input Matrix
-  Eigen::MatrixXd m_B;
+  Eigen::VectorXd motionCallback(double i_t, Eigen::VectorXd i_x,
+                                 Eigen::VectorXd i_u) override;
 };
 
 } // namepsace model

@@ -53,7 +53,7 @@ public:
   Discrete() = default;
   Discrete(DiscreteParameters i_parameters,
            unsigned i_seed = DistributionBase<unsigned>::randomSeed())
-      : Distribution<unsigned, DiscreteParameters>(i_parameters, i_seed){};
+      : Distribution<unsigned, DiscreteParameters>(i_parameters, i_seed) {};
     
   //! Destructor
   virtual ~Discrete() = default;

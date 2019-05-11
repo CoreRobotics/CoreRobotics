@@ -42,16 +42,13 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-MotionLinear::MotionLinear(const Eigen::MatrixXd &i_A,
-                           const Eigen::MatrixXd &i_B,
-                           const Eigen::VectorXd &i_x0,
-                           const Eigen::VectorXd &i_u0, const double i_dt,
-                           DynamicalSystem::ModelType i_type)
-    : DynamicalSystem(i_x0, i_u0, i_dt, i_type) {
-  this->m_time = 0;
-  this->m_A = i_A;
-  this->m_B = i_B;
-}
+MotionLinear::MotionLinear(const MotionLinearParameters &i_parameters,
+                           const Eigen::VectorXd &i_state, 
+                           const Eigen::VectorXd &i_action,
+                           const double i_dt,
+                           const SystemType i_type)
+  : DynamicalSystem<MotionLinearParameters>(
+    i_parameters, i_state, i_action, i_dt, i_type) {}
 
 //------------------------------------------------------------------------------
 /*!
@@ -60,12 +57,13 @@ MotionLinear::MotionLinear(const Eigen::MatrixXd &i_A,
  \param[in] i_t - time t(k)
  \param[in] i_x - state x(k)
  \param[in] i_u - input u(k)
- \return - the state derivative \dot{x} or next state x_{k+1}
+ \return - the state derivative \dot{x} or next state x_{k+1}, given ModelType
  */
 //------------------------------------------------------------------------------
-Eigen::VectorXd MotionLinear::motionCallback(double i_t, Eigen::VectorXd i_x,
+Eigen::VectorXd MotionLinear::motionCallback(double i_t, 
+                                             Eigen::VectorXd i_x,
                                              Eigen::VectorXd i_u) {
-  return m_A * i_x + m_B * i_u;
+  return m_parameters.m_A * i_x + m_parameters.m_B * i_u;
 }
 
 } // namespace model

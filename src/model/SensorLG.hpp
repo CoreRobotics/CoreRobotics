@@ -7,22 +7,26 @@
 #ifndef CR_SENSOR_LINEAR_HPP_
 #define CR_SENSOR_LINEAR_HPP_
 
-#include "Eigen/Dense"
 #include "Sensor.hpp"
+#include "noise/Gaussian.hpp"
+#include "Eigen/Dense"
 
 namespace cr {
 namespace model {
 
 //! Sensor linear paramter structure
-struct SensorLinearParameters {
-  SensorLinearParameters() = default;
-  virtual ~SensorLinearParameters() = default;
+struct SensorLGParameters {
+  SensorLGParameters() = default;
+  virtual ~SensorLGParameters() = default;
 
   //! Initializes the multivariate standard uniform
-  SensorLinearParameters(std::size_t i_stateDim, std::size_t i_measDim)
-      : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)) {};
+  SensorLGParameters(std::size_t i_stateDim, std::size_t i_measDim,
+    std::size_t i_noiseDim)
+      : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)),
+        m_R(Eigen::MatrixXd::Zero(i_measDim, i_measDim)) {};
 
   Eigen::MatrixXd m_H;  /** Observation matrix */
+  Eigen::MatrixXd m_R;  /** Measurement noise covariance */
 };
 
 //------------------------------------------------------------------------------
@@ -54,22 +58,21 @@ struct SensorLinearParameters {
  \n\n
  */
 //------------------------------------------------------------------------------
-class SensorLinear
-  : public Sensor<Eigen::VectorXd, Eigen::VectorXd, SensorLinearParameters> {
+class SensorLG
+    : public Sensor<noise::Gaussian, Eigen::VectorXd, SensorLGParameters> {
 
 public:
   //! Class constructor
-  SensorLinear(const SensorLinearParameters &i_parameters,
-               const Eigen::VectorXd &i_state,
-               const double i_dt = 0.01);
+  SensorLG(const SensorLGParameters &i_parameters,
+           const Eigen::VectorXd &i_state,
+           const double i_dt = 0.01);
 
   //! Class destructor
-  virtual ~SensorLinear() = default;
+  virtual ~SensorLG() = default;
 
 public:
   //! The prototype sensorCallback function.
-  virtual Eigen::VectorXd sensorCallback(double i_t,
-    Eigen::VectorXd i_x) override;
+  noise::Gaussian sensorCallback(double i_t, Eigen::VectorXd i_x) override;
 };
 
 } // namepsace model

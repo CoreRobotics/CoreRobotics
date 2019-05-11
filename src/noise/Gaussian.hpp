@@ -58,7 +58,7 @@ public:
   Gaussian(GaussianParameters i_parameters,
            unsigned i_seed = DistributionBase<Eigen::VectorXd>::randomSeed())
       : Distribution<Eigen::VectorXd, GaussianParameters>(i_parameters,
-                                                          i_seed){};
+                                                          i_seed) {};
   
   //! Destructor
   virtual ~Gaussian() = default;

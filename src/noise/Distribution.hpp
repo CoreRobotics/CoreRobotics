@@ -99,7 +99,7 @@ public:
   Distribution() = default;
   Distribution(ParameterType i_parameters,
                unsigned i_seed = DistributionBase<DomainType>::randomSeed())
-      : DistributionBase<DomainType>(i_seed), m_parameters(i_parameters){};
+      : DistributionBase<DomainType>(i_seed), m_parameters(i_parameters) {};
 
   //! Class destructor
   virtual ~Distribution() = default;

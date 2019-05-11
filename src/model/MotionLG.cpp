@@ -4,7 +4,7 @@
  * http://www.corerobotics.org
  */
 
-#include "SensorLinear.hpp"
+#include "MotionLG.hpp"
 
 namespace cr {
 namespace model {
@@ -42,23 +42,35 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-SensorLinear::SensorLinear(const SensorLinearParameters &i_parameters,
-                           const Eigen::VectorXd &i_state,
-                           const double i_dt)
-  : Sensor<Eigen::VectorXd, Eigen::VectorXd, SensorLinearParameters>(
-    i_parameters, i_state, i_dt) {}
+MotionLG::MotionLG(const MotionLGParameters &i_parameters,
+                   const noise::Gaussian &i_state, 
+                   const Eigen::VectorXd &i_action,
+                   const double i_dt)
+  : Motion<noise::Gaussian, Eigen::VectorXd, MotionLGParameters>(
+    i_parameters, i_state, i_action, i_dt) {}
 
 //------------------------------------------------------------------------------
 /*!
- This method performs the linear model.\n
+ This method performs the linear Gaussian model.\n
 
  \param[in] i_t - time t(k)
  \param[in] i_x - state x(k)
- \return - the sensor measurement z(k)
+ \param[in] i_u - input u(k)
+ \return - the next state x_{k+1}
  */
 //------------------------------------------------------------------------------
-Eigen::VectorXd SensorLinear::sensorCallback(double i_t, Eigen::VectorXd i_x) {
-  return m_parameters.m_H * i_x;
+noise::Gaussian MotionLG::motionCallback(double i_t,
+                                             noise::Gaussian i_x,
+                                             Eigen::VectorXd i_u) {
+  Eigen::VectorXd x = i_x.getParameters().mean;
+  Eigen::MatrixXd P = i_x.getParameters().cov;
+  noise::Gaussian g;
+  auto gp = g.getParameters();
+  gp.mean = m_parameters.m_A * x + m_parameters.m_B * i_u;
+  gp.cov = m_parameters.m_A * P * m_parameters.m_A.transpose()
+    + m_parameters.m_C * m_parameters.m_Q * m_parameters.m_C.transpose();
+  g.setParameters(gp);
+  return g;
 }
 
 } // namespace model

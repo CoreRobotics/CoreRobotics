@@ -12,14 +12,16 @@
 using namespace cr::model;
 
 // derive a dynamic model class
-class myMotionModel : public DynamicalSystem {
+class myMotionModel : public DynamicalSystem<void *> {
 
 public:
   myMotionModel(Eigen::VectorXd x, Eigen::VectorXd u, double dt)
-      : DynamicalSystem(x, u, dt) {}
+      : DynamicalSystem<void *>(nullptr, x, u, dt) {}
+  
+  virtual ~myMotionModel() = default;
 
   Eigen::VectorXd motionCallback(double t, Eigen::VectorXd x,
-                                 Eigen::VectorXd u) override {
+                        Eigen::VectorXd u) override {
     return -x + u;
   }
 };
@@ -27,16 +29,15 @@ public:
 //
 // Test the model with explicit time stepping.
 //
-TEST(DynamicalSystemModel, ExplicitTime) {
+TEST(Motion, ExplicitTime) {
 
   // set up the states
   double dt = 0.01; // sample rate (seconds)
 
-  Eigen::VectorXd x(1); // state vector
-  Eigen::VectorXd u(1); // input vector
-
-  x << 1; // initial condition
-  u << 0; // input value
+  Eigen::VectorXd x(1);  // state vector
+  Eigen::VectorXd u(1);  // input vector
+  x << 1.0;
+  u << 0.0;
 
   // initialize the model
   myMotionModel mdl(x, u, dt);
@@ -50,6 +51,5 @@ TEST(DynamicalSystemModel, ExplicitTime) {
   }
 
   EXPECT_NEAR(5, t, dt); // check that the simulation integrated properly
-  EXPECT_NEAR(0, x(0),
-              0.01); // check the final state (should be within 1% of F.V. = 0)
+  EXPECT_NEAR(0, x(0), 0.01); // check the final state (should be within 1% of F.V. = 0)
 }

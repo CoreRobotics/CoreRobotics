@@ -4,12 +4,10 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_COMM_HPP_
-#define CR_COMM_HPP_
+#ifndef CR_ESTIMATION_HPP_
+#define CR_ESTIMATION_HPP_
 
-#include "signal/Signal.hpp"
-#include "signal/Slot.hpp"
-#include "signal/Log.hpp"
-#include "signal/Utility.hpp"
+// #include "estimation/KalmanFilter.hpp"
+// #include "estimation/ParticleFilter.hpp"
 
 #endif
