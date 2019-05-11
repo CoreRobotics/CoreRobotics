@@ -36,9 +36,8 @@ stages:
 build-lib:
   stage: build
   script: 
-   - mkdir build
-   - cd build
-   - cmake -Dfull=true ..
+   - mkdir build && cd build
+   - cmake ..
    - make
   dependencies: []
   artifacts:
@@ -107,8 +106,7 @@ build-lib:
 test-lib:
   stage: test
   script:
-   - mkdir build
-   - cd build
+   - mkdir build && cd build
    - cmake -Dtests=true ..
    - make
    - $CI_PROJECT_DIR/bin/cr-tests
