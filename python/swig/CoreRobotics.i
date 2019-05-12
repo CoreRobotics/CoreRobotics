@@ -132,6 +132,7 @@ import_array();
 %include "world/Node.hpp"
 %include "world/Origin.hpp"
 %include "world/Robot.hpp"
+*/
 
 // noise
 %include "noise/Discrete.hpp"
@@ -141,6 +142,7 @@ import_array();
 %include "noise/Mixture.hpp"
 %include "noise/Uniform.hpp"
 
+/*
 // signal
 %include "signal/Log.hpp"
 %include "signal/Signal.hpp"
