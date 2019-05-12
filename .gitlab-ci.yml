@@ -19,11 +19,10 @@ build-lib:
 build-python:
   stage: build
   script:
+    - mkdir bin
     - mkdir build && cd build
     - cmake -Dpython=true ..
     - make
-    - python $CI_PROJECT_DIR/bin/cr-example-core.py
-    - python $CI_PROJECT_DIR/bin/cr-example-math.py
   artifacts:
     paths:
       - $CI_PROJECT_DIR/lib/*
