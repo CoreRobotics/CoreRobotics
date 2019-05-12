@@ -17,24 +17,24 @@ using namespace cr::noise;
 TEST(Mixture, Sample) {
 
   // init the mixture model params
-  MixtureParameters<DistributionBase<Eigen::VectorXd>> mixParams;
+  Mixture<Eigen::VectorXd>::Parameters<Distribution<Eigen::VectorXd>> mixParams;
 
   // define a Gaussian distribution & add it to the mixture model
-  GaussianParameters gaussianParams(1);
+  Gaussian::Parameters gaussianParams(1);
   gaussianParams.cov << 1;
   gaussianParams.mean << 3;
   Gaussian *gaussian = new Gaussian(gaussianParams);
   mixParams.add(gaussian, 0.7);
 
   // define a uniform distribution & add it to the mixture model
-  UniformParameters uniformParams(1);
+  Uniform::Parameters uniformParams(1);
   uniformParams.a << 1;
   uniformParams.b << 9;
   Uniform *uniform = new Uniform(uniformParams);
   mixParams.add(uniform, 0.6);
 
   // initialize a noise mixture model
-  Mixture<Eigen::VectorXd> mixModel(mixParams);
+  Mixture<Eigen::VectorXd, Distribution<Eigen::VectorXd>> mixModel(mixParams);
 
   // initialize parameters for experiments
   const int n = 1000000; // number of experiments

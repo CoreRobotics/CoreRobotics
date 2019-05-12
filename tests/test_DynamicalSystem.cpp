@@ -12,11 +12,11 @@
 using namespace cr::model;
 
 // derive a dynamic model class
-class myMotionModel : public DynamicalSystem<void *> {
+class myMotionModel : public DynamicalSystem {
 
 public:
   myMotionModel(Eigen::VectorXd x, Eigen::VectorXd u, double dt)
-      : DynamicalSystem<void *>(nullptr, x, u, dt) {}
+      : DynamicalSystem(x, u, dt) {}
 
   virtual ~myMotionModel() = default;
 

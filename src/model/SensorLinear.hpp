@@ -13,18 +13,6 @@
 namespace cr {
 namespace model {
 
-//! Sensor linear paramter structure
-struct SensorLinearParameters {
-  SensorLinearParameters() = default;
-  virtual ~SensorLinearParameters() = default;
-
-  //! Initializes the multivariate standard uniform
-  SensorLinearParameters(std::size_t i_stateDim, std::size_t i_measDim)
-      : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)){};
-
-  Eigen::MatrixXd m_H; /** Observation matrix */
-};
-
 //------------------------------------------------------------------------------
 /*!
  \class SensorLinear
@@ -54,16 +42,31 @@ struct SensorLinearParameters {
  \n\n
  */
 //------------------------------------------------------------------------------
-class SensorLinear
-    : public Sensor<Eigen::VectorXd, Eigen::VectorXd, SensorLinearParameters> {
+class SensorLinear : public Sensor<Eigen::VectorXd, Eigen::VectorXd> {
 
 public:
+  //! Parameters
+  struct Parameters {
+    Parameters() = default;
+    virtual ~Parameters() = default;
+
+    //! Initializes the multivariate standard uniform
+    Parameters(std::size_t i_stateDim,
+               std::size_t i_measDim)
+        : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)){};
+
+    Eigen::MatrixXd m_H; /** Observation matrix */
+  };
+
   //! Class constructor
-  SensorLinear(const SensorLinearParameters &i_parameters,
-               const Eigen::VectorXd &i_state, const double i_dt = 0.01);
+  SensorLinear(const Parameters &i_parameters,
+               const Eigen::VectorXd &i_state,
+               const double i_dt = 0.01);
 
   //! Class destructor
   virtual ~SensorLinear() = default;
+
+  CR_ASPECT_PARAMETER_MUTABLE(SensorLinear::Parameters);
 
 public:
   //! The prototype sensorCallback function.

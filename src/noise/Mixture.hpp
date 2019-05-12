@@ -14,22 +14,6 @@
 namespace cr {
 namespace noise {
 
-//! Mixture paramter structure
-template <typename DistributionType> struct MixtureParameters {
-  virtual ~MixtureParameters() = default;
-
-  //! Add a distribution to the model
-  void add(DistributionType *i_model, double i_weight) {
-    models.emplace_back(i_model);
-    auto dp = discrete.getParameters();
-    dp.weights.emplace_back(i_weight);
-    discrete.setParameters(dp);
-  }
-
-  Discrete discrete;
-  std::vector<DistributionType *> models;
-};
-
 //------------------------------------------------------------------------------
 /*!
  \class Mixture
@@ -55,20 +39,38 @@ template <typename DistributionType> struct MixtureParameters {
  */
 //------------------------------------------------------------------------------
 template<typename DomainType, 
-  typename DistributionType = DistributionBase<DomainType>>
-class Mixture
-  : public Distribution<DomainType, MixtureParameters<DistributionType>> {
+  typename DistributionType = Distribution<DomainType>>
+class Mixture : public Distribution<DomainType> {
 
 public:
+  //! Mixture paramter structure
+  template<typename T>
+  struct Parameters {
+    Parameters() = default;
+    virtual ~Parameters() = default;
+
+    //! Add a distribution to the model
+    void add(T *i_model, double i_weight) {
+      models.emplace_back(i_model);
+      auto dp = discrete.getParameters();
+      dp.weights.emplace_back(i_weight);
+      discrete.setParameters(dp);
+    }
+
+    Discrete discrete;
+    std::vector<T*> models;
+  };
+
   //! Constructor
   Mixture() = default;
-  Mixture(MixtureParameters<DistributionType> i_parameters,
-          unsigned i_seed = DistributionBase<DomainType>::randomSeed())
-      : Distribution<DomainType, MixtureParameters<DistributionType>>(
-            i_parameters, i_seed) {};
+  Mixture(Parameters<DistributionType> i_parameters,
+          unsigned i_seed = Distribution<DomainType>::randomSeed())
+      : Distribution<DomainType>(i_seed), m_parameters(i_parameters) {};
 
   //! Destructor
   virtual ~Mixture() = default;
+
+  CR_ASPECT_PARAMETER_MUTABLE(Mixture::Parameters<DistributionType>);
 
   //! The sample function must be implemented.
   DomainType sample() override {

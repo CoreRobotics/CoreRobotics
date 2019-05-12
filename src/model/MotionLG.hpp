@@ -14,25 +14,6 @@
 namespace cr {
 namespace model {
 
-//! Motion linear Gaussian paramter structure
-struct MotionLGParameters {
-  MotionLGParameters() = default;
-  virtual ~MotionLGParameters() = default;
-
-  //! Initializes the multivariate standard uniform
-  MotionLGParameters(std::size_t i_stateDim, std::size_t i_actionDim,
-                     std::size_t i_noiseDim)
-      : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)),
-        m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)),
-        m_C(Eigen::MatrixXd::Zero(i_stateDim, i_noiseDim)),
-        m_Q(Eigen::MatrixXd::Zero(i_noiseDim, i_noiseDim)){};
-
-  Eigen::MatrixXd m_A; /** Dynamics matrix */
-  Eigen::MatrixXd m_B; /** Input matrix */
-  Eigen::MatrixXd m_C; /** Process noise matrix */
-  Eigen::MatrixXd m_Q; /** Process noise covariance */
-};
-
 //------------------------------------------------------------------------------
 /*!
  \class MotionLG
@@ -68,17 +49,38 @@ struct MotionLGParameters {
  \n\n
  */
 //------------------------------------------------------------------------------
-class MotionLG
-    : public Motion<noise::Gaussian, Eigen::VectorXd, MotionLGParameters> {
+class MotionLG : public Motion<noise::Gaussian, Eigen::VectorXd> {
 
 public:
+  //! Motion linear Gaussian paramter structure
+  struct Parameters {
+    Parameters() = default;
+    virtual ~Parameters() = default;
+
+    //! Initializes the multivariate standard uniform
+    Parameters(std::size_t i_stateDim, std::size_t i_actionDim,
+                      std::size_t i_noiseDim)
+        : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)),
+          m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)),
+          m_C(Eigen::MatrixXd::Zero(i_stateDim, i_noiseDim)),
+          m_Q(Eigen::MatrixXd::Zero(i_noiseDim, i_noiseDim)){};
+
+    Eigen::MatrixXd m_A; /** Dynamics matrix */
+    Eigen::MatrixXd m_B; /** Input matrix */
+    Eigen::MatrixXd m_C; /** Process noise matrix */
+    Eigen::MatrixXd m_Q; /** Process noise covariance */
+  };
+
   //! Class constructor
-  MotionLG(const MotionLGParameters &i_parameters,
-           const noise::Gaussian &i_state, const Eigen::VectorXd &i_action,
+  MotionLG(const Parameters &i_parameters,
+           const noise::Gaussian &i_state,
+           const Eigen::VectorXd &i_action,
            const double i_dt = 0.01);
 
   //! Class destructor
   virtual ~MotionLG() = default;
+
+  CR_ASPECT_PARAMETER_MUTABLE(MotionLG::Parameters);
 
 public:
   //! The prototype motionCallback function.

@@ -30,23 +30,13 @@ public:
   CR_ASPECT_STATE_READ(Derived::States)
 };
 
-//
-// Can we define a static struct
-//
 TEST(Aspect, AspectStructue) {
 
   auto my_base = Base();;
-  // auto params = Base::Parameters();
-  std::cout << "Base::Parameters()\n";
-  std::cout << my_base.parameters()->name << "\n";
+  EXPECT_EQ(my_base.parameters()->name, "Base");
 
   auto my_class = Derived();
-  // auto more_params = Derived::Parameters();
-  std::cout << "Derived::Parameters()\n";
-  std::cout << my_class.parameters()->name << "\n";
-  std::cout << my_class.parameters()->value << "\n";
-  std::cout << "Derived::States()\n";
-  std::cout << my_class.getState().value << "\n";
-
-  
+  EXPECT_EQ(my_class.parameters()->name, "Base");
+  EXPECT_DOUBLE_EQ(my_class.parameters()->value, 3.1415);
+  EXPECT_DOUBLE_EQ(my_class.getState().value, 0.0);
 }

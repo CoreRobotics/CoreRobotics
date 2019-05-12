@@ -7,8 +7,8 @@
 //! Classes that have a read only state aspect should include this macro
 #define CR_ASPECT_STATE_READ(StateType)\
 public:\
-  const StateType& getState() { return m_state; }\
-private:\
+  const StateType& getState() const { return m_state; }\
+protected:\
   StateType m_state;\
 
 //! Classes that have a read/write state aspect should include this macro

@@ -17,7 +17,7 @@ using namespace cr::noise;
 TEST(Uniform, Sample) {
 
   // define a uniform distribution & add it to the mixture model
-  UniformParameters uniformParams(1);
+  Uniform::Parameters uniformParams(1);
   uniformParams.a(0) = 2;
   uniformParams.b(0) = 7;
   Uniform uniformNoise(uniformParams);

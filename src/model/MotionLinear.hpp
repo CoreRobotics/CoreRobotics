@@ -13,20 +13,6 @@
 namespace cr {
 namespace model {
 
-//! Motion linear paramter structure
-struct MotionLinearParameters {
-  MotionLinearParameters() = default;
-  virtual ~MotionLinearParameters() = default;
-
-  //! Initializes the multivariate standard uniform
-  MotionLinearParameters(std::size_t i_stateDim, std::size_t i_actionDim)
-      : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)),
-        m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)){};
-
-  Eigen::MatrixXd m_A; /** Dynamics matrix */
-  Eigen::MatrixXd m_B; /** Input matrix */
-};
-
 //------------------------------------------------------------------------------
 /*!
  \class MotionLinear
@@ -62,17 +48,34 @@ struct MotionLinearParameters {
  \n\n
  */
 //------------------------------------------------------------------------------
-class MotionLinear : public DynamicalSystem<MotionLinearParameters> {
+class MotionLinear : public DynamicalSystem {
 
 public:
+  //! Parameters
+  struct Parameters {
+    Parameters() = default;
+    virtual ~Parameters() = default;
+
+    //! Initializes the multivariate standard uniform
+    Parameters(std::size_t i_stateDim, std::size_t i_actionDim)
+        : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)),
+          m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)){};
+
+    Eigen::MatrixXd m_A; /** Dynamics matrix */
+    Eigen::MatrixXd m_B; /** Input matrix */
+  };
+
   //! Class constructor
-  MotionLinear(const MotionLinearParameters &i_parameters,
-               const Eigen::VectorXd &i_state, const Eigen::VectorXd &i_action,
+  MotionLinear(const Parameters &i_parameters,
+               const Eigen::VectorXd &i_state,
+               const Eigen::VectorXd &i_action,
                const double i_dt = 0.01,
                const SystemType i_type = CONTINUOUS_TIME);
 
   //! Class destructor
   virtual ~MotionLinear() = default;
+
+  CR_ASPECT_PARAMETER_MUTABLE(MotionLinear::Parameters);
 
 public:
   //! The prototype motionCallback function.

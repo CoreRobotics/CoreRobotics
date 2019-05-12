@@ -9,20 +9,21 @@
 
 #include <chrono>
 #include <random>
+#include "aspect/Parameter.hpp"
 
 namespace cr {
 namespace noise {
 
 //------------------------------------------------------------------------------
 /*!
- \class DistributionBase
+ \class Distribution
  \ingroup noise
 
  \brief A class template for an abstract Distribution model.
 
  \details
  ## Description
- DistributionBase defines prototype methods for sampling from a distribution and
+ Distribution defines prototype methods for sampling from a distribution and
  evaluating probability.  It serves as a base class to specfic distributions.
 
  ## References
@@ -35,16 +36,16 @@ namespace noise {
  [3] en.wikipedia.org/wiki/Inverse_transform_sampling
  */
 //------------------------------------------------------------------------------
-template <typename DomainType> class DistributionBase {
+template <typename DomainType> class Distribution {
 
 public:
   //! Class constructor
-  DistributionBase(unsigned i_seed = randomSeed()) : m_seed(i_seed) {
+  Distribution(unsigned i_seed = randomSeed()) : m_seed(i_seed) {
     m_generator.seed(m_seed);
   }
 
   //! Class destructor
-  virtual ~DistributionBase() = default;
+  virtual ~Distribution() = default;
 
 public:
   //! The sample function must be implemented.
@@ -66,56 +67,6 @@ protected:
 
   //! Random number generator
   std::default_random_engine m_generator;
-};
-
-//------------------------------------------------------------------------------
-/*!
- \class Distribution
- \ingroup noise
-
- \brief A class template for an abstract Distribution model with parameters.
-
- \details
- ## Description
- DistributionBase defines prototype methods for sampling from a distribution and
- evaluating probability.  It serves as a base class to specfic distributions,
- with parameter specification.
-
- ## References
- [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",
- Ed. 2, CRC Press, 2012. \n\n
-
- [2] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press,
- 2006. \n\n
-
- [3] en.wikipedia.org/wiki/Inverse_transform_sampling
- */
-//------------------------------------------------------------------------------
-template <typename DomainType, typename ParameterType>
-class Distribution : public DistributionBase<DomainType> {
-
-public:
-  //! Class constructor
-  Distribution() = default;
-  Distribution(ParameterType i_parameters,
-               unsigned i_seed = DistributionBase<DomainType>::randomSeed())
-      : DistributionBase<DomainType>(i_seed), m_parameters(i_parameters){};
-
-  //! Class destructor
-  virtual ~Distribution() = default;
-
-public:
-  //! Set the parameters that describe the distribution.
-  virtual void setParameters(const ParameterType &i_parameters) {
-    m_parameters = i_parameters;
-  }
-
-  //! Get the parameters that descrive the distribution.
-  virtual const ParameterType &getParameters() { return m_parameters; }
-
-protected:
-  //! Noise model parameters
-  ParameterType m_parameters;
 };
 
 } // namespace noise

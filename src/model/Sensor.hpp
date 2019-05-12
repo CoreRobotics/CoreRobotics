@@ -8,6 +8,10 @@
 #define CR_SENSOR_HPP_
 
 #include "Eigen/Dense"
+#include "aspect/Measurement.hpp"
+#include "aspect/Parameter.hpp"
+#include "aspect/State.hpp"
+#include "aspect/Temporal.hpp"
 #include "core/Item.hpp"
 #include "core/Step.hpp"
 
@@ -44,17 +48,23 @@ namespace ph = std::placeholders;
  \n\n
  */
 //------------------------------------------------------------------------------
-template <typename MeasurementType, typename StateType, typename ParameterType>
+template <typename MeasurementType, typename StateType>
 class Sensor : public core::Step, public core::Item {
 
 public:
   //! Class constructor
-  Sensor(const ParameterType &i_parameters, const StateType &i_state,
+  Sensor(const StateType &i_state,
          const double i_dt = 0.01)
-      : m_parameters(i_parameters), m_state(i_state), m_dt(i_dt) {}
+      : m_state(i_state), m_dt(i_dt) {}
 
   //! Class destructor
   virtual ~Sensor() = default;
+
+  CR_ASPECT_STATE_WRITE(StateType);
+
+  CR_ASPECT_MEASUREMENT_WRITE(MeasurementType);
+
+  CR_ASPECT_TEMPORAL
 
 public:
   //! The prototype sensorCallback function must be implemented.
@@ -66,55 +76,10 @@ public:
     m_time += m_dt;
   }
 
-public:
-  //! Get the measurement vector (z)
-  MeasurementType getMeasurement() { return m_measurement; }
-
-  //! Set the state vector (x)
-  void setState(const StateType &i_x) { m_state = i_x; }
-
-  //! Get the state vector (x)
-  StateType getState() { return m_state; }
-
-  //! Set the parameters that describe the distribution.
-  void setParameters(const ParameterType &i_parameters) {
-    m_parameters = i_parameters;
-  }
-
-  //! Get the parameters that descrive the distribution.
-  const ParameterType &getParameters() { return m_parameters; }
-
-  //! Get the parameters that descrive the distribution.
-  ParameterType *parameters() { return *m_parameters; }
-
-  //! Set the time step (s)
-  void setTimeStep(const double i_timeStep) { m_dt = i_timeStep; }
-
-  //! Get the time step (s)
-  double getTimeStep() { return m_dt; }
-
-  //! Get the model time (s)
-  double getTime() { return m_time; }
-
 protected:
   //! bound callback function
   std::function<MeasurementType(double, StateType)> m_sensor_fcn =
       std::bind(&Sensor::sensorCallback, this, ph::_1, ph::_2);
-
-  //! System parameters
-  ParameterType m_parameters;
-
-  //! Dynamic state of the system (x)
-  StateType m_state;
-
-  //! Sample rate (s)
-  double m_dt;
-
-  //! Current time (s)
-  double m_time = 0.0;
-
-  //! Sensor observation (z)
-  MeasurementType m_measurement;
 };
 
 } // namepsace model

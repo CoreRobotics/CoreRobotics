@@ -42,12 +42,13 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-MotionLinear::MotionLinear(const MotionLinearParameters &i_parameters,
+MotionLinear::MotionLinear(const Parameters &i_parameters,
                            const Eigen::VectorXd &i_state,
-                           const Eigen::VectorXd &i_action, const double i_dt,
+                           const Eigen::VectorXd &i_action,
+                           const double i_dt,
                            const SystemType i_type)
-    : DynamicalSystem<MotionLinearParameters>(i_parameters, i_state, i_action,
-                                              i_dt, i_type) {}
+  : DynamicalSystem(i_state, i_action, i_dt, i_type),
+    m_parameters(i_parameters) {}
 
 //------------------------------------------------------------------------------
 /*!

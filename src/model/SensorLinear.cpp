@@ -42,10 +42,11 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-SensorLinear::SensorLinear(const SensorLinearParameters &i_parameters,
-                           const Eigen::VectorXd &i_state, const double i_dt)
-    : Sensor<Eigen::VectorXd, Eigen::VectorXd, SensorLinearParameters>(
-          i_parameters, i_state, i_dt) {}
+SensorLinear::SensorLinear(const Parameters &i_parameters,
+                           const Eigen::VectorXd &i_state,
+                           const double i_dt)
+  : Sensor<Eigen::VectorXd, Eigen::VectorXd>(i_state, i_dt),
+    m_parameters(i_parameters) {}
 
 //------------------------------------------------------------------------------
 /*!

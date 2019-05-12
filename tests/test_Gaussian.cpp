@@ -17,7 +17,7 @@ using namespace cr::noise;
 TEST(Gaussian, Sample) {
 
   // define a Gaussian distribution
-  GaussianParameters gaussianParams(1);
+  Gaussian::Parameters gaussianParams(1);
   gaussianParams.cov(0, 0) = 5;
   gaussianParams.mean(0) = 1;
   Gaussian normalNoise(gaussianParams);

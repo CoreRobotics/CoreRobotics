@@ -13,19 +13,6 @@
 namespace cr {
 namespace noise {
 
-//! Uniform paramter structure
-struct UniformParameters {
-  UniformParameters() = default;
-  virtual ~UniformParameters() = default;
-
-  //! Initializes the multivariate standard uniform
-  UniformParameters(std::size_t i_n)
-      : a(Eigen::VectorXd::Zero(i_n)), b(Eigen::VectorXd::Ones(i_n)){};
-
-  Eigen::VectorXd a;
-  Eigen::VectorXd b;
-};
-
 //------------------------------------------------------------------------------
 /*!
  \class Uniform
@@ -52,18 +39,32 @@ struct UniformParameters {
  \n\n
  */
 //------------------------------------------------------------------------------
-class Uniform : public Distribution<Eigen::VectorXd, UniformParameters> {
+class Uniform : public Distribution<Eigen::VectorXd> {
 
 public:
+  //! Uniform paramter structure
+  struct Parameters {
+    Parameters() = default;
+    virtual ~Parameters() = default;
+
+    //! Initializes the multivariate standard uniform
+    Parameters(std::size_t i_n)
+        : a(Eigen::VectorXd::Zero(i_n)), b(Eigen::VectorXd::Ones(i_n)){};
+
+    Eigen::VectorXd a;
+    Eigen::VectorXd b;
+  };
+
   //! Constructor
   Uniform() = default;
-  Uniform(UniformParameters i_parameters,
-          unsigned i_seed = DistributionBase<Eigen::VectorXd>::randomSeed())
-      : Distribution<Eigen::VectorXd, UniformParameters>(i_parameters,
-                                                         i_seed){};
+  Uniform(Parameters i_parameters,
+          unsigned i_seed = Distribution<Eigen::VectorXd>::randomSeed())
+      : Distribution<Eigen::VectorXd>(i_seed), m_parameters(i_parameters){};
 
   //! Destructor
   virtual ~Uniform() = default;
+
+  CR_ASPECT_PARAMETER_MUTABLE(Uniform::Parameters);
 
   //! The sample function must be implemented.
   Eigen::VectorXd sample() override;

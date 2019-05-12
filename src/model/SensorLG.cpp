@@ -42,10 +42,11 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-SensorLG::SensorLG(const SensorLGParameters &i_parameters,
-                   const Eigen::VectorXd &i_state, const double i_dt)
-    : Sensor<noise::Gaussian, Eigen::VectorXd, SensorLGParameters>(
-          i_parameters, i_state, i_dt) {}
+SensorLG::SensorLG(const Parameters &i_parameters,
+                   const Eigen::VectorXd &i_state,
+                   const double i_dt)
+  : Sensor<noise::Gaussian, Eigen::VectorXd>(i_state, i_dt),
+    m_parameters(i_parameters) {}
 
 //------------------------------------------------------------------------------
 /*!

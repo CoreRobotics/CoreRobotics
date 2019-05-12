@@ -14,21 +14,6 @@
 namespace cr {
 namespace model {
 
-//! Sensor linear paramter structure
-struct SensorLGParameters {
-  SensorLGParameters() = default;
-  virtual ~SensorLGParameters() = default;
-
-  //! Initializes the multivariate standard uniform
-  SensorLGParameters(std::size_t i_stateDim, std::size_t i_measDim,
-                     std::size_t i_noiseDim)
-      : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)),
-        m_R(Eigen::MatrixXd::Zero(i_measDim, i_measDim)){};
-
-  Eigen::MatrixXd m_H; /** Observation matrix */
-  Eigen::MatrixXd m_R; /** Measurement noise covariance */
-};
-
 //------------------------------------------------------------------------------
 /*!
  \class SensorLinear
@@ -58,16 +43,34 @@ struct SensorLGParameters {
  \n\n
  */
 //------------------------------------------------------------------------------
-class SensorLG
-    : public Sensor<noise::Gaussian, Eigen::VectorXd, SensorLGParameters> {
+class SensorLG : public Sensor<noise::Gaussian, Eigen::VectorXd> {
 
 public:
+  //! Parameters
+struct Parameters {
+  Parameters() = default;
+  virtual ~Parameters() = default;
+
+  //! Initializes the multivariate standard uniform
+  Parameters(std::size_t i_stateDim,
+             std::size_t i_measDim,
+             std::size_t i_noiseDim)
+      : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)),
+        m_R(Eigen::MatrixXd::Zero(i_measDim, i_measDim)){};
+
+  Eigen::MatrixXd m_H; /** Observation matrix */
+  Eigen::MatrixXd m_R; /** Measurement noise covariance */
+};
+
   //! Class constructor
-  SensorLG(const SensorLGParameters &i_parameters,
-           const Eigen::VectorXd &i_state, const double i_dt = 0.01);
+  SensorLG(const Parameters &i_parameters,
+           const Eigen::VectorXd &i_state,
+           const double i_dt = 0.01);
 
   //! Class destructor
   virtual ~SensorLG() = default;
+
+  CR_ASPECT_PARAMETER_MUTABLE(SensorLG::Parameters);
 
 public:
   //! The prototype sensorCallback function.

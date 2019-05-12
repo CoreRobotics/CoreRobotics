@@ -42,11 +42,12 @@ namespace model {
  \param[in] i_timeStep - the time step of the system
  */
 //------------------------------------------------------------------------------
-MotionLG::MotionLG(const MotionLGParameters &i_parameters,
+MotionLG::MotionLG(const Parameters &i_parameters,
                    const noise::Gaussian &i_state,
-                   const Eigen::VectorXd &i_action, const double i_dt)
-    : Motion<noise::Gaussian, Eigen::VectorXd, MotionLGParameters>(
-          i_parameters, i_state, i_action, i_dt) {}
+                   const Eigen::VectorXd &i_action,
+                   const double i_dt)
+  : Motion<noise::Gaussian, Eigen::VectorXd>(i_state, i_action, i_dt),
+    m_parameters(i_parameters) {}
 
 //------------------------------------------------------------------------------
 /*!

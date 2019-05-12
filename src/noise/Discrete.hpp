@@ -13,15 +13,6 @@
 namespace cr {
 namespace noise {
 
-//! Mixture paramter structure
-struct DiscreteParameters {
-  DiscreteParameters() = default;
-  virtual ~DiscreteParameters() = default;
-
-  //! The discrete weights.  At sample time, these are normalized to sum to 1
-  std::vector<double> weights;
-};
-
 //------------------------------------------------------------------------------
 /*!
  \class Discrete
@@ -46,17 +37,28 @@ struct DiscreteParameters {
  [3] en.wikipedia.org/wiki/Mixture_model
  */
 //------------------------------------------------------------------------------
-class Discrete : public Distribution<unsigned, DiscreteParameters> {
+class Discrete : public Distribution<unsigned> {
 
 public:
+  //! Mixture paramter structure
+  struct Parameters {
+    Parameters() = default;
+    virtual ~Parameters() = default;
+
+    //! The discrete weights.  At sample time, these are normalized to sum to 1
+    std::vector<double> weights;
+  };
+
   //! Constructor
   Discrete() = default;
-  Discrete(DiscreteParameters i_parameters,
-           unsigned i_seed = DistributionBase<unsigned>::randomSeed())
-      : Distribution<unsigned, DiscreteParameters>(i_parameters, i_seed){};
+  Discrete(Parameters i_parameters,
+           unsigned i_seed = Distribution<unsigned>::randomSeed())
+      : Distribution<unsigned>(i_seed), m_parameters(i_parameters){};
 
   //! Destructor
   virtual ~Discrete() = default;
+
+  CR_ASPECT_PARAMETER_MUTABLE(Discrete::Parameters);
 
   //! The sample function must be implemented.
   unsigned sample() override;

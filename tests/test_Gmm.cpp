@@ -17,8 +17,8 @@ using namespace cr::noise;
 TEST(Gmm, Predict) {
 
   // set up the GMM parameters
-  GmmParameters gmmParams;
-  GaussianParameters gaussianParams(4);
+  Gmm::Parameters gmmParams;
+  Gaussian::Parameters gaussianParams(4);
 
   // Add a couple Gaussians
   gaussianParams.cov.diagonal() << 1.0, 2.0, 0.1, 4.0;

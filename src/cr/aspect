@@ -8,7 +8,9 @@
 #define CR_ASPECT_HPP_
 
 #include "aspect/Action.hpp"
+#include "aspect/Measurement.hpp"
 #include "aspect/Parameter.hpp"
 #include "aspect/State.hpp"
+#include "aspect/Temporal.hpp"
 
 #endif

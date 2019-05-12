@@ -13,20 +13,6 @@
 namespace cr {
 namespace noise {
 
-//! Gaussian paramters
-struct GaussianParameters {
-  GaussianParameters() = default;
-  virtual ~GaussianParameters() = default;
-
-  //! Initializes the multivariate standard normal
-  GaussianParameters(std::size_t i_n)
-      : cov(Eigen::MatrixXd::Identity(i_n, i_n)),
-        mean(Eigen::VectorXd::Zero(i_n)){};
-
-  Eigen::MatrixXd cov;
-  Eigen::VectorXd mean;
-};
-
 //------------------------------------------------------------------------------
 /*!
  \class Gaussian
@@ -50,18 +36,33 @@ struct GaussianParameters {
  [3] en.wikipedia.org/wiki/Multivariate_normal_distribution
  */
 //------------------------------------------------------------------------------
-class Gaussian : public Distribution<Eigen::VectorXd, GaussianParameters> {
+class Gaussian : public Distribution<Eigen::VectorXd> {
 
 public:
+  //! Gaussian paramters
+  struct Parameters {
+    Parameters() = default;
+    virtual ~Parameters() = default;
+
+    //! Initializes the multivariate standard normal
+    Parameters(std::size_t i_n)
+        : cov(Eigen::MatrixXd::Identity(i_n, i_n)),
+          mean(Eigen::VectorXd::Zero(i_n)){};
+
+    Eigen::MatrixXd cov;
+    Eigen::VectorXd mean;
+  };
+
   //! Constructor
   Gaussian() = default;
-  Gaussian(GaussianParameters i_parameters,
-           unsigned i_seed = DistributionBase<Eigen::VectorXd>::randomSeed())
-      : Distribution<Eigen::VectorXd, GaussianParameters>(i_parameters,
-                                                          i_seed){};
+  Gaussian(Parameters i_parameters,
+           unsigned i_seed = Distribution<Eigen::VectorXd>::randomSeed())
+      : Distribution<Eigen::VectorXd>(i_seed), m_parameters(i_parameters) {};
 
   //! Destructor
   virtual ~Gaussian() = default;
+
+  CR_ASPECT_PARAMETER_MUTABLE(Gaussian::Parameters);
 
   //! The sample function must be implemented.
   Eigen::VectorXd sample() override;

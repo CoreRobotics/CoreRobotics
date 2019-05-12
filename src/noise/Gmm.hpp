@@ -15,9 +15,6 @@
 namespace cr {
 namespace noise {
 
-//! GMM paramter structure
-typedef MixtureParameters<Gaussian> GmmParameters;
-
 //------------------------------------------------------------------------------
 /*!
  \class Gmm
@@ -46,11 +43,14 @@ typedef MixtureParameters<Gaussian> GmmParameters;
 class Gmm : public Mixture<Eigen::VectorXd, Gaussian> {
 
 public:
+  //! GMM paramter structure
+  typedef Mixture::Parameters<Gaussian> Parameters;
+
   //! Constructor
   Gmm() = default;
-  Gmm(GmmParameters i_parameters,
-      unsigned i_seed = DistributionBase<Eigen::VectorXd>::randomSeed())
-      : Mixture<Eigen::VectorXd, Gaussian>(i_parameters, i_seed){};
+  Gmm(Parameters i_parameters,
+      unsigned i_seed = Distribution<Eigen::VectorXd>::randomSeed())
+      : Mixture<Eigen::VectorXd, Gaussian>(i_parameters, i_seed) {};
 
   //! Destructor
   virtual ~Gmm() = default;

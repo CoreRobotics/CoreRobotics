@@ -8,6 +8,10 @@
 #define CR_MOTION_HPP_
 
 #include "Eigen/Dense"
+#include "aspect/Action.hpp"
+#include "aspect/Parameter.hpp"
+#include "aspect/State.hpp"
+#include "aspect/Temporal.hpp"
 #include "core/Item.hpp"
 #include "core/Step.hpp"
 #include "math/Integration.hpp"
@@ -48,18 +52,24 @@ namespace ph = std::placeholders;
  \n\n
  */
 //------------------------------------------------------------------------------
-template <typename StateType, typename ActionType, typename ParameterType>
+template <typename StateType, typename ActionType>
 class Motion : public core::Step, public core::Item {
 
 public:
   //! Class constructor
-  Motion(const ParameterType &i_parameters, const StateType &i_state,
-         const ActionType &i_action, const double i_dt = 0.01)
-      : m_parameters(i_parameters), m_state(i_state), m_action(i_action),
-        m_dt(i_dt){};
+  Motion(const StateType &i_state, 
+         const ActionType &i_action, 
+         const double i_dt = 0.01)
+    : m_state(i_state), m_action(i_action), m_dt(i_dt) {};
 
   //! Class destructor
   virtual ~Motion() = default;
+
+  CR_ASPECT_STATE_WRITE(StateType);
+
+  CR_ASPECT_ACTION_WRITE(ActionType);
+
+  CR_ASPECT_TEMPORAL
 
 public:
   //! The prototype motionCallback function must be implemented.
@@ -69,58 +79,10 @@ public:
   //! This function steps the callback and updates the state.
   virtual void step() { m_state = (m_motion_fcn)(m_time, m_state, m_action); }
 
-public:
-  //! Set the state vector (x)
-  void setState(const StateType &i_state) { m_state = i_state; }
-
-  //! Get the state vector (x)
-  const StateType &getState() { return m_state; }
-
-  //! Set the action vector (u)
-  void setAction(const ActionType &i_action) { m_action = i_action; }
-
-  //! Get the action vector (u)
-  const ActionType &getAction() { return m_action; }
-
-  //! Set the parameters that describe the distribution.
-  void setParameters(const ParameterType &i_parameters) {
-    m_parameters = i_parameters;
-  }
-
-  //! Get the parameters that descrive the distribution.
-  const ParameterType &getParameters() { return m_parameters; }
-
-  //! Get the parameters that descrive the distribution.
-  ParameterType *parameters() { return *m_parameters; }
-
-  //! Set the time step (s)
-  void setTimeStep(const double i_dt) { m_dt = i_dt; }
-
-  //! Get the time step (s)
-  const double getTimeStep() const { return m_dt; }
-
-  //! Get the model time (s)
-  const double getTime() const { return m_time; }
-
 protected:
   //! bound callback function
   std::function<StateType(double, StateType, ActionType)> m_motion_fcn =
       std::bind(&Motion::motionCallback, this, ph::_1, ph::_2, ph::_3);
-
-  //! System parameters
-  ParameterType m_parameters;
-
-  //! Dynamic state of the system (x)
-  StateType m_state;
-
-  //! Dynamic state of the system (u)
-  ActionType m_action;
-
-  //! Sample rate (s)
-  double m_dt;
-
-  //! Current time (s)
-  double m_time = 0.0;
 };
 
 } // namepsace model

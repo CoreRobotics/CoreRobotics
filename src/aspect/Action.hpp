@@ -7,8 +7,8 @@
 //! Classes that have a read only action aspect should include this macro
 #define CR_ASPECT_ACTION_READ(ActionType)\
 public:\
-  const ActionType& getAction() { return m_action; }\
-private:\
+  const ActionType& getAction() const { return m_action; }\
+protected:\
   ActionType m_action;\
 
 //! Classes that have a read/write action aspect should include this macro
