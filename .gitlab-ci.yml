@@ -2,7 +2,6 @@ image: camerondevine/corerobotics:latest
 
 stages:
    - build
-   - wrap
    - test
    - deploy
 
@@ -12,43 +11,53 @@ build-lib:
    - mkdir build && cd build
    - cmake ..
    - make
-  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/lib/*
-     - $CI_PROJECT_DIR/build/*
     expire_in: 1 week
 
-wrap-python:
-  stage: wrap
+build-python:
+  stage: build
   script:
-    - cd build
+    - mkdir build && cd build
     - cmake -Dpython=true ..
     - make
     - python $CI_PROJECT_DIR/bin/cr-example-core.py
     - python $CI_PROJECT_DIR/bin/cr-example-math.py
-  dependencies:
-    - build-lib
   artifacts:
     paths:
-     - $CI_PROJECT_DIR/lib/python/*
-     - $CI_PROJECT_DIR/build/*
+      - $CI_PROJECT_DIR/lib/*
+      - $CI_PROJECT_DIR/lib/python/*
+      - $CI_PROJECT_DIR/bin/*
     expire_in: 1 week
+
+build-test:
+  stage: build
+  script:
+    - mkdir build && cd build
+    - cmake -Dtests=true ..
+    - make
+    - $CI_PROJECT_DIR/bin/cr-tests
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/lib/*
+      - $CI_PROJECT_DIR/bin/*
+    expire_in: 1 week
+
+test-python:
+  stage: test
+  script:
+    - python $CI_PROJECT_DIR/bin/cr-example-core.py
+    - python $CI_PROJECT_DIR/bin/cr-example-math.py
+  dependencies:
+    - build-python
 
 test-lib:
   stage: test
   script:
-   - cd build
-   - cmake -Dtests=true ..
-   - make
-   - $CI_PROJECT_DIR/bin/cr-tests
+    - $CI_PROJECT_DIR/bin/cr-tests
   dependencies:
-   - build-lib
-  artifacts:
-    paths:
-     - $CI_PROJECT_DIR/bin/*
-     - $CI_PROJECT_DIR/build/*
-    expire_in: 1 week
+    - build-test
 
 test-install:
   stage: deploy
@@ -59,7 +68,7 @@ test-install:
     - ldconfig /usr/local/lib
     - cr-tests
   dependencies:
-    - test-lib
+    - build-test
 
 test-coverage:
   stage: deploy
