@@ -8,6 +8,7 @@
 #define CR_STEP_HPP_
 
 #include <memory>
+#include <iostream>
 
 namespace cr {
 namespace core {
@@ -47,18 +48,18 @@ public:
   static StepPtr create() { return std::make_shared<Step>(); }
 
   //! Return the shared pointer
-  StepPtr asStepPtr() { return shared_from_this(); }
+  StepPtr ptr() { return shared_from_this(); }
 
   //! Functions to be implemented
 public:
   //! The onStep function can be implemented in derived classes
-  virtual void step(){};
+  virtual void step() {}
 
   //! The onStart function can be implemented in derived classes
-  virtual void onStart(){};
+  virtual void onStart() {}
 
   //! The onStop function can be implemented in derived classes
-  virtual void onStop(){};
+  virtual void onStop() {}
 };
 
 } // namespace core

@@ -56,12 +56,9 @@ endforeach()
 # ------------------------------------------------------------------------------
 
 find_package (Eigen3 3.3.3)  # swig wrapper version
-find_package (Boost 1.48)
+find_package (Boost 1.58.0)
 find_package (GTest)
 find_package (OpenSceneGraph 3.6)
-find_package (SWIG)
-# find_package (PythonLibs COMPONENTS NumPy)
-find_package (Python3 COMPONENTS NumPy)
 find_program (CLANG_TIDY_EXE NAMES "clang-tidy")
 find_program (CLANG_FORMAT_EXE NAMES "clang-format")
 
@@ -88,9 +85,6 @@ set(CR_INCLUDE_DIRS
   ${CMAKE_CURRENT_SOURCE_DIR}/src
   ${EIGEN3_INCLUDE_DIR}
   ${Boost_INCLUDE_DIR}
-#  ${PYTHON_INCLUDE_DIRS}
-  ${Python3_INCLUDE_DIRS}
-  ${Python3_NumPy_INCLUDE_DIRS}
 )
 
 # set include search paths
@@ -157,13 +151,9 @@ endforeach()
 # ------------------------------------------------------------------------------
 # Code coverage with lcov
 # ------------------------------------------------------------------------------
-
-# Common configuration
 add_compile_options(-Wall -pedantic)
-
-# Code Coverage Configuration
 add_library(coverage_config INTERFACE)
-
+ 
 if (report)
   # Add required flags (GCC & LLVM/Clang)
   target_compile_options(coverage_config INTERFACE
@@ -179,7 +169,6 @@ enable_testing() # CTest
 # ------------------------------------------------------------------------------
 # C++ Formatting
 # ------------------------------------------------------------------------------
-
 if (format)
   if(NOT CLANG_FORMAT_EXE)
     message(STATUS "clang-format not found, skipping format")
@@ -196,8 +185,6 @@ endif()
 # ------------------------------------------------------------------------------
 # C++ Linting
 # ------------------------------------------------------------------------------
-
-# look for clang-tidy
 if (lint)
   if(NOT CLANG_TIDY_EXE)
     message(STATUS "clang-tidy not found.")
@@ -212,9 +199,7 @@ endif()
 # ------------------------------------------------------------------------------
 # Setup the library targets
 # ------------------------------------------------------------------------------
-# if ((NOT python AND NOT matlab AND NOT only-swig) OR all OR lib OR report)
-  add_subdirectory(${PROJECT_SOURCE_DIR}/src)
-# endif()
+add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 
 # ------------------------------------------------------------------------------
 # Setup the test target
@@ -229,13 +214,6 @@ endif()
 if(python OR all)
   add_subdirectory(${PROJECT_SOURCE_DIR}/python)
 endif()
-
-# ------------------------------------------------------------------------------
-# Setup the matlab target
-# ------------------------------------------------------------------------------
-# if (matlab OR all)
-#     add_subdirectory(${PROJECT_SOURCE_DIR}/matlab)
-# endif()
 
 # ------------------------------------------------------------------------------
 # Export the package configuration and version files
@@ -264,11 +242,4 @@ if (NOT report)
     CoreRoboticsConfigVersion.cmake.in
     "${PROJECT_BINARY_DIR}/CoreRoboticsConfigVersion.cmake" @ONLY
   )
-endif()
-
-# ------------------------------------------------------------------------------
-# Setup the example targets
-# ------------------------------------------------------------------------------
-if (examples OR all)
-  add_subdirectory(${PROJECT_SOURCE_DIR}/examples)
 endif()

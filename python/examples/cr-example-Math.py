@@ -11,9 +11,9 @@ import CoreRobotics as cr
 import numpy as np
 
 # We have some conversion utilities
-print("Pi radians =", cr.Conversion.deg2rad(180))
-print("Pi degrees =", cr.Conversion.rad2deg(np.pi))
-print("Wrap 3*pi [rad] = ", cr.Conversion.wrapToPi(3*np.pi))
+print("Pi radians =", cr.math.Conversion.deg2rad(180))
+print("Pi degrees =", cr.math.Conversion.rad2deg(np.pi))
+# print("Wrap 3*pi [rad] = ", cr.math.Conversion.wrapToPi(3*np.pi))
 
 # We have some integrators
 

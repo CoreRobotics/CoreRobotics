@@ -2,49 +2,74 @@
 # Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
 # http://www.corerobotics.org
 
-# Include SWIG
-include(${SWIG_USE_FILE})
+# If "python" is not a true consider it as a version number
+if(NOT ${python} STREQUAL true)
+  if(python EQUAL 3)
+    SET(python_version 3)
+  endif()
+endif()
 
-# include the core robotics directories
-include_directories(${CR_INCLUDE_DIRS})
+find_package (PythonInterp ${python_version} REQUIRED)
+find_package (PythonLibs ${python_version} REQUIRED)
+if (UNIX AND NOT APPLE)
+  if(python_version EQUAL 3)
+    find_package(Boost COMPONENTS python${PYTHON_VERSION_SUFFIX})
+  else()
+    find_package(Boost COMPONENTS python)
+  endif()
+else()
+  find_package(Boost 
+    COMPONENTS python${PYTHON_VERSION_MAJOR}${PYTHON_VERSION_MINOR})
+endif()
 
-# Set SWIG to use C++
-set_source_files_properties(
-  SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/swig/CoreRobotics.i
-  PROPERTIES CPLUSPLUS ON)
+message(STATUS "PYTHON_LIBRARIES = ${PYTHON_LIBRARIES}")
+message(STATUS "PYTHON_EXECUTABLE = ${PYTHON_EXECUTABLE}")
+message(STATUS "PYTHON_INCLUDE_DIRS = ${PYTHON_INCLUDE_DIRS}")
+message(STATUS "Boost_LIBRARIES = ${Boost_LIBRARIES}")
 
-# Create SWIG Module
-swig_add_library(${PROJECT_NAME}
-  LANGUAGE python
-  SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/swig/CoreRobotics.i)
+include_directories (
+  ${Boost_INCLUDE_DIRS}
+  ${PYTHON_INCLUDE_DIRS}
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/PyCoreRobotics.hpp)
 
-# Link Module with Python
-swig_link_libraries(${PROJECT_NAME}
-  ${PYTHON_LIBRARIES}
-  ${Python3_LIBRARIES}
-  ${CR_LIB_TARGETS})
+# Get the wrapper modules
+file(GLOB py_wrappers
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp
+)
+message (STATUS ${py_wrappers})
 
-# Copy Python file to the Python lib folder
-message(STATUS ${CMAKE_BINARY_DIR})
-add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy
-  ${CMAKE_BINARY_DIR}/python/${PROJECT_NAME}.py
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/)
+set (PYTHON_TARGET "CoreRobotics")
 
-# Copy C++ wrapper file to the Python swig folder
-# add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
-#  COMMAND ${CMAKE_COMMAND} -E copy
-#    ${CMAKE_BINARY_DIR}/${PROJECT_NAME}PYTHON_wrap.cxx
-#    ${CMAKE_CURRENT_SOURCE_DIR}/swig/)
+# Add the python module
+python_add_module (${PYTHON_TARGET} ${py_wrappers})
+
+# Link the core robotics libraries
+target_link_libraries(${PYTHON_TARGET}
+  ${Boost_LIBRARIES} 
+  ${PYTHON_LIBRARIES} 
+  ${CR_LIB_TARGETS} 
+  ${CR_LINK_FLAGS}
+)
 
 # Set the shared library output directory
-set_target_properties(_${PROJECT_NAME} PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
-  LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/lib
-  LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+set_target_properties(${PYTHON_TARGET} PROPERTIES
+  LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib/python
+  LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/lib/python
+  LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/lib/python)
 
-# Copy the contents of the Python lib folder to the Python examples folder
-add_custom_command(TARGET _${PROJECT_NAME} POST_BUILD
+# copy over the init
+add_custom_command(TARGET ${PYTHON_TARGET} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/python/src/__init__.py
+  ${PROJECT_SOURCE_DIR}/lib/python)
+
+add_custom_command(TARGET ${PYTHON_TARGET} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_CURRENT_SOURCE_DIR}/lib
-    ${CMAKE_CURRENT_SOURCE_DIR}/examples)
+  ${PROJECT_SOURCE_DIR}/python/examples
+  ${PROJECT_SOURCE_DIR}/bin/)
+
+add_custom_command(TARGET ${PYTHON_TARGET} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_directory
+  ${PROJECT_SOURCE_DIR}/lib/python
+  ${PROJECT_SOURCE_DIR}/bin/)
