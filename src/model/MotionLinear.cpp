@@ -62,7 +62,7 @@ MotionLinear::MotionLinear(const Parameters &i_parameters,
 //------------------------------------------------------------------------------
 Eigen::VectorXd MotionLinear::motionCallback(double i_t, Eigen::VectorXd i_x,
                                              Eigen::VectorXd i_u) {
-  return m_parameters.m_A * i_x + m_parameters.m_B * i_u;
+  return m_parameters.A() * i_x + m_parameters.B() * i_u;
 }
 
 } // namespace model

@@ -39,23 +39,33 @@ namespace noise {
 class Gaussian : public Distribution<Eigen::VectorXd> {
 
 public:
-  //! Gaussian paramters
-  struct Parameters {
+  //! Paramters
+  class Parameters {
+  public:
     Parameters() = default;
+    Parameters(std::size_t i_dim)
+        : m_cov(Eigen::MatrixXd::Identity(i_dim, i_dim)),
+          m_mean(Eigen::VectorXd::Zero(i_dim)) {
+      m_covInv = m_cov.inverse();
+    }
     virtual ~Parameters() = default;
-
-    //! Initializes the multivariate standard normal
-    Parameters(std::size_t i_n)
-        : cov(Eigen::MatrixXd::Identity(i_n, i_n)),
-          mean(Eigen::VectorXd::Zero(i_n)){};
-
-    Eigen::MatrixXd cov;
-    Eigen::VectorXd mean;
+    const Eigen::MatrixXd& cov() const { return m_cov; }
+    const Eigen::MatrixXd& covInv() const { return m_covInv; }
+    const Eigen::VectorXd& mean() const { return m_mean; }
+    void setCov(const Eigen::MatrixXd& i_covariance ) { 
+      m_cov = i_covariance; 
+      m_covInv = m_cov.inverse();
+      }
+    void setMean(const Eigen::VectorXd& i_mu ) { m_mean = i_mu; }
+  private:
+    Eigen::MatrixXd m_cov;
+    Eigen::MatrixXd m_covInv;
+    Eigen::VectorXd m_mean;
   };
 
   //! Constructor
   Gaussian() = default;
-  Gaussian(Parameters i_parameters,
+  Gaussian(const Parameters& i_parameters,
            unsigned i_seed = Distribution<Eigen::VectorXd>::randomSeed())
       : Distribution<Eigen::VectorXd>(i_seed), m_parameters(i_parameters) {};
 

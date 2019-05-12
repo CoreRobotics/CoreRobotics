@@ -55,44 +55,33 @@ void Gmm::regression(Eigen::VectorXd i_x, Eigen::VectorXi i_inputIndices,
 
     // Get matrices we need
     Eigen::MatrixXd SigmaYY = math::Matrix::reducedMatrix(
-        m_parameters.models.at(k)->getParameters().cov, i_outputIndices,
+        m_parameters.models.at(k)->getParameters().cov(), i_outputIndices,
         i_outputIndices);
     Eigen::MatrixXd SigmaYX = math::Matrix::reducedMatrix(
-        m_parameters.models.at(k)->getParameters().cov, i_outputIndices,
+        m_parameters.models.at(k)->getParameters().cov(), i_outputIndices,
         i_inputIndices);
     Eigen::MatrixXd SigmaXY = math::Matrix::reducedMatrix(
-        m_parameters.models.at(k)->getParameters().cov, i_inputIndices,
+        m_parameters.models.at(k)->getParameters().cov(), i_inputIndices,
         i_outputIndices);
     Eigen::MatrixXd SigmaXX = math::Matrix::reducedMatrix(
-        m_parameters.models.at(k)->getParameters().cov, i_inputIndices,
+        m_parameters.models.at(k)->getParameters().cov(), i_inputIndices,
         i_inputIndices);
     Eigen::MatrixXd SigmaXXInv = SigmaXX.inverse();
-    // Eigen::MatrixXd SigmaXXInv;
-    // CRMatrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv);
-    /*
-    if (CRMatrix::svdInverse(SigmaXX, 1e-8, SigmaXXInv) == CR_RESULT_SINGULAR) {
-        printf("\n\nSingular SigmaXX inverse!!!!\n\n");
-    }
-    */
     Eigen::VectorXd MuY = math::Matrix::reducedVector(
-        m_parameters.models.at(k)->getParameters().mean, i_outputIndices);
+        m_parameters.models.at(k)->getParameters().mean(), i_outputIndices);
     Eigen::VectorXd MuX = math::Matrix::reducedVector(
-        m_parameters.models.at(k)->getParameters().mean, i_inputIndices);
+        m_parameters.models.at(k)->getParameters().mean(), i_inputIndices);
 
     // Return the mean, covariance, and weight
     Eigen::VectorXd Mu = MuY + SigmaYX * SigmaXXInv * (i_x - MuX);
     Eigen::MatrixXd Sigma = SigmaYY - SigmaYX * SigmaXXInv * SigmaXY;
-    weight = m_parameters.discrete.getParameters().weights.at(k) *
+    weight = m_parameters.weights.at(k) *
              math::Probability::mvnpdf(i_x, MuX, SigmaXX);
     cweight += weight;
 
     // compute the mean & covariance
     o_mean += weight * Mu;
     o_covariance += pow(weight, 2.0) * Sigma;
-
-    // Eigen::VectorXd m2 = Mu.array().square();
-    // Eigen::MatrixXd M2 = m2.asDiagonal();
-    // c1 += pow(weight, 2.0) * (M2 + Sigma);
   }
 
   // Normalize

@@ -17,15 +17,8 @@ namespace noise {
  */
 //------------------------------------------------------------------------------
 unsigned Discrete::sample() {
-
-  // return the sum of the weights
-  double sum_of_weights = 0;
-
-  for (size_t i = 0; i < m_parameters.weights.size(); i++) {
-    sum_of_weights += m_parameters.weights[i];
-  }
-
-  // now push into a cdf vector
+  m_parameters.normalizeWeights();
+  
   std::vector<double> cdf;
 
   cdf.resize(m_parameters.weights.size());
@@ -33,7 +26,7 @@ unsigned Discrete::sample() {
   double wPrev = 0;
 
   for (size_t i = 0; i < m_parameters.weights.size(); i++) {
-    cdf[i] = m_parameters.weights[i] / sum_of_weights + wPrev;
+    cdf[i] = m_parameters.weights[i] + wPrev;
     wPrev = cdf[i];
   }
 
@@ -59,15 +52,8 @@ unsigned Discrete::sample() {
  */
 //------------------------------------------------------------------------------
 double Discrete::probability(const unsigned &i_x) {
-
-  // return the sum of the weights
-  double sum_of_weights = 0;
-
-  for (size_t i = 0; i < m_parameters.weights.size(); i++) {
-    sum_of_weights += m_parameters.weights[i];
-  }
-
-  return m_parameters.weights[i_x] / sum_of_weights;
+  m_parameters.normalizeWeights();
+  return m_parameters.weights[i_x];
 }
 
 } // namespace noise

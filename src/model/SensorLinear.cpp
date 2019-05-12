@@ -58,7 +58,7 @@ SensorLinear::SensorLinear(const Parameters &i_parameters,
  */
 //------------------------------------------------------------------------------
 Eigen::VectorXd SensorLinear::sensorCallback(double i_t, Eigen::VectorXd i_x) {
-  return m_parameters.m_H * i_x;
+  return m_parameters.H() * i_x;
 }
 
 } // namespace model

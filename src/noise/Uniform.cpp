@@ -18,17 +18,17 @@ namespace noise {
 //------------------------------------------------------------------------------
 Eigen::VectorXd Uniform::sample() {
   // Initialize the sampled vector and set to zero
-  Eigen::VectorXd x = this->m_parameters.a;
+  Eigen::VectorXd x = this->m_parameters.a();
   x.setZero();
-  for (int i = 0; i < this->m_parameters.a.size(); i++) {
+  for (int i = 0; i < this->m_parameters.a().size(); i++) {
     x(i) = m_uniform(m_generator);
   }
 
   // linearly scale the output of the unit uniform
-  Eigen::VectorXd L = m_parameters.b - m_parameters.a;
+  Eigen::VectorXd L = m_parameters.b() - m_parameters.a();
 
   // return the sampled vector
-  return L.asDiagonal() * x + this->m_parameters.a;
+  return L.asDiagonal() * x + this->m_parameters.a();
 }
 
 //------------------------------------------------------------------------------
@@ -40,15 +40,15 @@ Eigen::VectorXd Uniform::sample() {
  */
 //------------------------------------------------------------------------------
 double Uniform::probability(const Eigen::VectorXd &i_x) {
-  Eigen::VectorXd e = (this->m_parameters.b - this->m_parameters.a);
+  Eigen::VectorXd e = (this->m_parameters.b() - this->m_parameters.a());
 
   // compute the probability of sampling over the continuous domain
   double p = 1 / e.prod();
 
   // check if x is in the domain of the distribution
   for (int i = 0; i < i_x.size(); i++) {
-    if ((i_x(i) > this->m_parameters.b(i)) ||
-        (i_x(i) < this->m_parameters.a(i))) {
+    if ((i_x(i) > this->m_parameters.b(i) ||
+        (i_x(i) < this->m_parameters.a(i)))) {
       p = 0.0;
     }
   }

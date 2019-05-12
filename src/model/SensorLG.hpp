@@ -4,11 +4,12 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_SENSOR_LINEAR_HPP_
-#define CR_SENSOR_LINEAR_HPP_
+#ifndef CR_SENSOR_LG_HPP_
+#define CR_SENSOR_LG_HPP_
 
 #include "Eigen/Dense"
 #include "Sensor.hpp"
+#include "SensorLinear.hpp"
 #include "noise/Gaussian.hpp"
 
 namespace cr {
@@ -47,20 +48,20 @@ class SensorLG : public Sensor<noise::Gaussian, Eigen::VectorXd> {
 
 public:
   //! Parameters
-struct Parameters {
-  Parameters() = default;
-  virtual ~Parameters() = default;
-
-  //! Initializes the multivariate standard uniform
-  Parameters(std::size_t i_stateDim,
-             std::size_t i_measDim,
-             std::size_t i_noiseDim)
-      : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)),
-        m_R(Eigen::MatrixXd::Zero(i_measDim, i_measDim)){};
-
-  Eigen::MatrixXd m_H; /** Observation matrix */
-  Eigen::MatrixXd m_R; /** Measurement noise covariance */
-};
+  class Parameters : public SensorLinear::Parameters {
+  public:
+    Parameters() = default;
+    Parameters(std::size_t i_stateDim,
+               std::size_t i_measDim,
+               std::size_t i_noiseDim)
+        : SensorLinear::Parameters(i_measDim, i_stateDim),
+          m_R(Eigen::MatrixXd::Zero(i_measDim, i_measDim)){};
+    virtual ~Parameters() = default;
+    const Eigen::MatrixXd& R() const { return m_R; }
+    void setR(const Eigen::MatrixXd& i_R ) { m_R = i_R; }
+  private:
+    Eigen::MatrixXd m_R; /** Measurement noise covariance */
+  };
 
   //! Class constructor
   SensorLG(const Parameters &i_parameters,

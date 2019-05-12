@@ -17,10 +17,14 @@ using namespace cr::noise;
 TEST(Gaussian, Sample) {
 
   // define a Gaussian distribution
-  Gaussian::Parameters gaussianParams(1);
-  gaussianParams.cov(0, 0) = 5;
-  gaussianParams.mean(0) = 1;
-  Gaussian normalNoise(gaussianParams);
+  Gaussian::Parameters gp(1);
+  auto cov = gp.cov();
+  auto mean = gp.cov();
+  cov << 5;
+  mean << 1;
+  gp.setCov(cov);
+  gp.setMean(mean);
+  Gaussian normalNoise(gp);
 
   // initialize parameters for experiments
   const int n = 1000000; // number of experiments

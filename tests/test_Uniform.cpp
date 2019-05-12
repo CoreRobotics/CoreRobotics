@@ -17,10 +17,14 @@ using namespace cr::noise;
 TEST(Uniform, Sample) {
 
   // define a uniform distribution & add it to the mixture model
-  Uniform::Parameters uniformParams(1);
-  uniformParams.a(0) = 2;
-  uniformParams.b(0) = 7;
-  Uniform uniformNoise(uniformParams);
+  Uniform::Parameters up(1);
+  auto a = up.a();
+  auto b = up.b();
+  a << 2;
+  b << 7;
+  up.setA(a);
+  up.setB(b);
+  Uniform uniformNoise(up);
 
   // initialize parameters for experiments
   const int n = 1000000; // number of experiments

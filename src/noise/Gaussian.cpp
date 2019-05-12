@@ -21,19 +21,19 @@ namespace noise {
 //------------------------------------------------------------------------------
 Eigen::VectorXd Gaussian::sample() {
   // initialize the sampled state and set to zero
-  Eigen::VectorXd x = m_parameters.mean;
+  Eigen::VectorXd x = m_parameters.mean();
   x.setZero();
 
   // sample from standard normal distribution
-  for (int i = 0; i < m_parameters.mean.size(); i++) {
+  for (int i = 0; i < m_parameters.mean().size(); i++) {
     x(i) = m_gaussian(m_generator);
   }
 
   // compute the Cholesky decomposition of A & project x onto
   // the defined distribution
-  Eigen::LLT<Eigen::MatrixXd> lltOfCov(m_parameters.cov);
+  Eigen::LLT<Eigen::MatrixXd> lltOfCov(m_parameters.cov());
   Eigen::MatrixXd L = lltOfCov.matrixL();
-  return L * x + m_parameters.mean;
+  return L * x + m_parameters.mean();
 }
 
 //------------------------------------------------------------------------------
@@ -45,7 +45,8 @@ Eigen::VectorXd Gaussian::sample() {
  */
 //------------------------------------------------------------------------------
 double Gaussian::probability(const Eigen::VectorXd &i_x) {
-  return math::Probability::mvnpdf(i_x, m_parameters.mean, m_parameters.cov);
+  return math::Probability::mvnpdf(i_x, m_parameters.mean(), 
+    m_parameters.cov());
 }
 
 } // namespace noise

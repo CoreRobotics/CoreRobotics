@@ -59,10 +59,9 @@ SensorLG::SensorLG(const Parameters &i_parameters,
 //------------------------------------------------------------------------------
 noise::Gaussian SensorLG::sensorCallback(double i_t, Eigen::VectorXd i_x) {
   noise::Gaussian g;
-  auto gp = g.getParameters();
-  gp.mean = m_parameters.m_H * i_x;
-  gp.cov = m_parameters.m_R;
-  g.setParameters(gp);
+  auto gp = g.parameter();
+  gp->setMean(m_parameters.H() * i_x);
+  gp->setCov(m_parameters.R());
   return g;
 }
 

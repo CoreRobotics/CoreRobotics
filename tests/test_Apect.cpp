@@ -33,10 +33,10 @@ public:
 TEST(Aspect, AspectStructue) {
 
   auto my_base = Base();;
-  EXPECT_EQ(my_base.parameters()->name, "Base");
+  EXPECT_EQ(my_base.parameter()->name, "Base");
 
   auto my_class = Derived();
-  EXPECT_EQ(my_class.parameters()->name, "Base");
-  EXPECT_DOUBLE_EQ(my_class.parameters()->value, 3.1415);
+  EXPECT_EQ(my_class.parameter()->name, "Base");
+  EXPECT_DOUBLE_EQ(my_class.parameter()->value, 3.1415);
   EXPECT_DOUBLE_EQ(my_class.getState().value, 0.0);
 }

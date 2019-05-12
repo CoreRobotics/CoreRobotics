@@ -46,15 +46,16 @@ class SensorLinear : public Sensor<Eigen::VectorXd, Eigen::VectorXd> {
 
 public:
   //! Parameters
-  struct Parameters {
+  class Parameters {
+  public:
     Parameters() = default;
-    virtual ~Parameters() = default;
-
-    //! Initializes the multivariate standard uniform
     Parameters(std::size_t i_stateDim,
                std::size_t i_measDim)
         : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)){};
-
+    virtual ~Parameters() = default;
+    const Eigen::MatrixXd& H() const { return m_H; }
+    void setH(const Eigen::MatrixXd& i_H ) { m_H = i_H; }
+  private:
     Eigen::MatrixXd m_H; /** Observation matrix */
   };
 

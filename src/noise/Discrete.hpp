@@ -44,8 +44,16 @@ public:
   struct Parameters {
     Parameters() = default;
     virtual ~Parameters() = default;
-
-    //! The discrete weights.  At sample time, these are normalized to sum to 1
+    void normalizeWeights() {
+      double w = 0;
+      for (const auto weight : weights) {
+        w += weight;
+      }
+      for (auto& weight : weights) {
+        weight = weight / w;
+      }
+    }
+    //! The discrete weights. At sample time, these are normalized to sum to 1
     std::vector<double> weights;
   };
 

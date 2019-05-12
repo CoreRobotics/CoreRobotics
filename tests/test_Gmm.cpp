@@ -18,24 +18,34 @@ TEST(Gmm, Predict) {
 
   // set up the GMM parameters
   Gmm::Parameters gmmParams;
-  Gaussian::Parameters gaussianParams(4);
+  Gaussian::Parameters gp(4);
+  auto cov = gp.cov();
+  auto mean = gp.mean();
 
   // Add a couple Gaussians
-  gaussianParams.cov.diagonal() << 1.0, 2.0, 0.1, 4.0;
-  gaussianParams.mean << 1, 2, 3, 4;
-  Gaussian g1(gaussianParams);
+  cov.diagonal() << 1.0, 2.0, 0.1, 4.0;
+  mean << 1, 2, 3, 4;
+  gp.setCov(cov);
+  gp.setMean(mean);
+  Gaussian normalNoise(gp);
+  Gaussian g1(gp);
   gmmParams.add(&g1, 0.5);
 
-  gaussianParams.cov.diagonal() << 0.1, 0.2, 4, 5;
-  gaussianParams.mean << 5, 6, 7, 8;
-  Gaussian g2(gaussianParams);
+  cov.diagonal() << 0.1, 0.2, 4, 5;
+  mean << 5, 6, 7, 8;
+  gp.setCov(cov);
+  gp.setMean(mean);
+  Gaussian g2(gp);
   gmmParams.add(&g2, 0.3);
 
-  // cov.diagonal()  << 0.1, 0.2, 4, 5;
-  gaussianParams.cov << 0.1, 0, 0, 0.2, 0, 0.2, 0, 0, 0, 0, 4.0, -0.1, 0.2, 0,
-      -0.1, 5.0;
-  gaussianParams.mean << 9, 10, 11, 12;
-  Gaussian g3(gaussianParams);
+  cov << 0.1, 0,   0,    0.2, 
+         0,   0.2, 0,    0, 
+         0,   0,   4.0, -0.1, 
+         0.2, 0,  -0.1,  5.0;
+  mean << 9, 10, 11, 12;
+  gp.setCov(cov);
+  gp.setMean(mean);
+  Gaussian g3(gp);
   gmmParams.add(&g3, 0.2);
 
   // initialize a noise mixture model
@@ -50,8 +60,8 @@ TEST(Gmm, Predict) {
   // Predict
   Eigen::VectorXd x(1);
   x << 7.2;
-  Eigen::VectorXd y_mu(2);
-  Eigen::MatrixXd y_cov(2, 2);
+  Eigen::VectorXd y_mu;
+  Eigen::MatrixXd y_cov;
   gmm.regression(x, inputs, outputs, y_mu, y_cov);
 
   // We computed the above problem with an existing GMM/GMR library in MATLAB

@@ -7,7 +7,7 @@
 //! Classes that have a read only measurement aspect should include this macro
 #define CR_ASPECT_MEASUREMENT_READ(MeasurementType)\
 public:\
-  const MeasurementType& getMeasurement() { return m_measurement; }\
+  const MeasurementType& getMeasurement() const { return m_measurement; }\
 protected:\
   MeasurementType m_measurement;\
 

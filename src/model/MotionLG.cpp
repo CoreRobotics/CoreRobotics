@@ -61,14 +61,13 @@ MotionLG::MotionLG(const Parameters &i_parameters,
 //------------------------------------------------------------------------------
 noise::Gaussian MotionLG::motionCallback(double i_t, noise::Gaussian i_x,
                                          Eigen::VectorXd i_u) {
-  Eigen::VectorXd x = i_x.getParameters().mean;
-  Eigen::MatrixXd P = i_x.getParameters().cov;
+  Eigen::VectorXd x = i_x.getParameters().mean();
+  Eigen::MatrixXd P = i_x.getParameters().cov();
   noise::Gaussian g;
-  auto gp = g.getParameters();
-  gp.mean = m_parameters.m_A * x + m_parameters.m_B * i_u;
-  gp.cov = m_parameters.m_A * P * m_parameters.m_A.transpose() +
-           m_parameters.m_C * m_parameters.m_Q * m_parameters.m_C.transpose();
-  g.setParameters(gp);
+  auto gp = g.parameter();
+  gp->setMean(m_parameters.A() * x + m_parameters.B() * i_u);
+  gp->setCov(m_parameters.A() * P * m_parameters.A().transpose() +
+            m_parameters.C() * m_parameters.Q() * m_parameters.C().transpose());
   return g;
 }
 

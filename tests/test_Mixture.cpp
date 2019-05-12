@@ -20,18 +20,28 @@ TEST(Mixture, Sample) {
   Mixture<Eigen::VectorXd>::Parameters<Distribution<Eigen::VectorXd>> mixParams;
 
   // define a Gaussian distribution & add it to the mixture model
-  Gaussian::Parameters gaussianParams(1);
-  gaussianParams.cov << 1;
-  gaussianParams.mean << 3;
-  Gaussian *gaussian = new Gaussian(gaussianParams);
-  mixParams.add(gaussian, 0.7);
+  /*
+  Gaussian::Parameters gp(1);
+  auto cov = gp.cov();
+  auto mean = gp.mean();
+  cov << 1;
+  mean << 3;
+  gp.setCov(cov);
+  gp.setMean(mean);
+  Gaussian gaussian(gp);
+  mixParams.add(&gaussian, 0.7);
+  */
 
   // define a uniform distribution & add it to the mixture model
-  Uniform::Parameters uniformParams(1);
-  uniformParams.a << 1;
-  uniformParams.b << 9;
-  Uniform *uniform = new Uniform(uniformParams);
-  mixParams.add(uniform, 0.6);
+  Uniform::Parameters up(1);
+  auto a = up.a();
+  auto b = up.b();
+  a << 1;
+  b << 9;
+  up.setA(a);
+  up.setB(b);
+  Uniform uniform(up);
+  mixParams.add(&uniform, 0.6);
 
   // initialize a noise mixture model
   Mixture<Eigen::VectorXd, Distribution<Eigen::VectorXd>> mixModel(mixParams);

@@ -21,4 +21,4 @@ public:\
 #define CR_ASPECT_PARAMETER_MUTABLE(ParameterType)\
 CR_ASPECT_PARAMETER_WRITE(ParameterType)\
 public:\
-  ParameterType* parameters() { return &m_parameters; }\
+  ParameterType* parameter() { return &m_parameters; }\

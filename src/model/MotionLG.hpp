@@ -9,6 +9,7 @@
 
 #include "Eigen/Dense"
 #include "Motion.hpp"
+#include "MotionLinear.hpp"
 #include "noise/Gaussian.hpp"
 
 namespace cr {
@@ -53,20 +54,20 @@ class MotionLG : public Motion<noise::Gaussian, Eigen::VectorXd> {
 
 public:
   //! Motion linear Gaussian paramter structure
-  struct Parameters {
+  class Parameters : public MotionLinear::Parameters {
+  public: 
     Parameters() = default;
-    virtual ~Parameters() = default;
-
-    //! Initializes the multivariate standard uniform
     Parameters(std::size_t i_stateDim, std::size_t i_actionDim,
                       std::size_t i_noiseDim)
-        : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)),
-          m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)),
+        : MotionLinear::Parameters(i_stateDim, i_actionDim),
           m_C(Eigen::MatrixXd::Zero(i_stateDim, i_noiseDim)),
           m_Q(Eigen::MatrixXd::Zero(i_noiseDim, i_noiseDim)){};
-
-    Eigen::MatrixXd m_A; /** Dynamics matrix */
-    Eigen::MatrixXd m_B; /** Input matrix */
+    virtual ~Parameters() = default;
+    const Eigen::MatrixXd& C() const { return m_C; }
+    const Eigen::MatrixXd& Q() const { return m_Q; }
+    void setC(const Eigen::MatrixXd& i_C ) { m_C = i_C; }
+    void setQ(const Eigen::MatrixXd& i_Q ) { m_Q = i_Q; }
+  private:
     Eigen::MatrixXd m_C; /** Process noise matrix */
     Eigen::MatrixXd m_Q; /** Process noise covariance */
   };

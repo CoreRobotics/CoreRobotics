@@ -50,25 +50,28 @@ class Matrix {
   //! Matrix downselection
 public:
   //! Return sub vector of indicated indices
-  static Eigen::VectorXd reducedVector(Eigen::VectorXd i_x,
-                                       Eigen::VectorXi i_indices);
+  static const Eigen::VectorXd reducedVector(const Eigen::VectorXd& i_x,
+                                             const Eigen::VectorXi& i_indices);
 
   //! Return sub matrix of indicated indices
-  static Eigen::MatrixXd reducedMatrix(Eigen::MatrixXd i_x,
-                                       Eigen::VectorXi i_rowIndices,
-                                       Eigen::VectorXi i_colIndices);
+  static const Eigen::MatrixXd reducedMatrix(const Eigen::MatrixXd& i_x,
+                                             const Eigen::VectorXi& i_rowIndices,
+                                             const Eigen::VectorXi& i_colIndices);
 
   //! Matrix factorization
 public:
   //! Singular Value decomposition (SVD)
-  static core::Result svd(Eigen::MatrixXd i_A, double i_tol,
-                          Eigen::MatrixXd &o_U, Eigen::VectorXd &o_Sigma,
+  static core::Result svd(const Eigen::MatrixXd& i_A, 
+                          double i_tol,
+                          Eigen::MatrixXd &o_U, 
+                          Eigen::VectorXd &o_Sigma,
                           Eigen::MatrixXd &o_V);
 
   //! Matrix inversion routines
 public:
   //! SVD-based matrix inverse
-  static core::Result svdInverse(Eigen::MatrixXd i_A, double i_tol,
+  static core::Result svdInverse(const Eigen::MatrixXd& i_A,
+                                 double i_tol,
                                  Eigen::MatrixXd &o_Ainv);
 
   //! Rotation matrices

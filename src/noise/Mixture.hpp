@@ -43,29 +43,25 @@ template<typename DomainType,
 class Mixture : public Distribution<DomainType> {
 
 public:
-  //! Mixture paramter structure
+  //! Parameters
   template<typename T>
-  struct Parameters {
+  struct Parameters : public Discrete::Parameters {
     Parameters() = default;
     virtual ~Parameters() = default;
-
     //! Add a distribution to the model
     void add(T *i_model, double i_weight) {
       models.emplace_back(i_model);
-      auto dp = discrete.getParameters();
-      dp.weights.emplace_back(i_weight);
-      discrete.setParameters(dp);
+      weights.emplace_back(i_weight);
     }
-
-    Discrete discrete;
     std::vector<T*> models;
   };
 
   //! Constructor
   Mixture() = default;
-  Mixture(Parameters<DistributionType> i_parameters,
+  Mixture(const Parameters<DistributionType>& i_parameters,
           unsigned i_seed = Distribution<DomainType>::randomSeed())
-      : Distribution<DomainType>(i_seed), m_parameters(i_parameters) {};
+      : Distribution<DomainType>(i_seed), m_parameters(i_parameters),
+        m_discrete(i_parameters) {};
 
   //! Destructor
   virtual ~Mixture() = default;
@@ -74,15 +70,18 @@ public:
 
   //! The sample function must be implemented.
   DomainType sample() override {
-    unsigned index = this->m_parameters.discrete.sample();
+    m_parameters.normalizeWeights();
+    m_discrete.setParameters(getParameters());
+    unsigned index = m_discrete.sample();
     return this->m_parameters.models[index]->sample();
   }
 
   //! The probability (pdf: continuous, pmf: discrete) must be implemented.
   double probability(const DomainType &i_x) override {
+    m_parameters.normalizeWeights();
     double p = 0.0;
     for (size_t i = 0; i < this->m_parameters.models.size(); i++) {
-      double weight = this->m_parameters.discrete.probability(i);
+      double weight = this->m_parameters.weights[i];
       p += weight * this->m_parameters.models[i]->probability(i_x);
     }
     return p;
@@ -91,6 +90,9 @@ public:
 protected:
   //! Uniform distribution generator
   std::uniform_real_distribution<double> m_uniform{0.0, 1.0};
+
+  //! Discrete distribution
+  Discrete m_discrete;
 };
 
 } // namespace noise

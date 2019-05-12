@@ -42,17 +42,23 @@ namespace noise {
 class Uniform : public Distribution<Eigen::VectorXd> {
 
 public:
-  //! Uniform paramter structure
-  struct Parameters {
+  //! Parameters
+  class Parameters {
+  public:
     Parameters() = default;
+    Parameters(std::size_t i_dim)
+      : m_a(Eigen::VectorXd::Zero(i_dim)),
+        m_b(Eigen::VectorXd::Zero(i_dim)) {}
     virtual ~Parameters() = default;
-
-    //! Initializes the multivariate standard uniform
-    Parameters(std::size_t i_n)
-        : a(Eigen::VectorXd::Zero(i_n)), b(Eigen::VectorXd::Ones(i_n)){};
-
-    Eigen::VectorXd a;
-    Eigen::VectorXd b;
+    const Eigen::VectorXd& a() const { return m_a; }
+    const Eigen::VectorXd& b() const { return m_b; }
+    const double a(unsigned i) const { return m_a(i); }
+    const double b(unsigned i) const { return m_b(i); }
+    void setA(const Eigen::VectorXd& i_domainMin) { m_a = i_domainMin; } 
+    void setB(const Eigen::VectorXd& i_domainMax) { m_b = i_domainMax; } 
+  private:
+    Eigen::VectorXd m_a;
+    Eigen::VectorXd m_b;
   };
 
   //! Constructor

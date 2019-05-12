@@ -52,15 +52,18 @@ class MotionLinear : public DynamicalSystem {
 
 public:
   //! Parameters
-  struct Parameters {
+  class Parameters {
+  public:
     Parameters() = default;
-    virtual ~Parameters() = default;
-
-    //! Initializes the multivariate standard uniform
     Parameters(std::size_t i_stateDim, std::size_t i_actionDim)
         : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)),
           m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)){};
-
+    virtual ~Parameters() = default;
+    const Eigen::MatrixXd& A() const { return m_A; }
+    const Eigen::MatrixXd& B() const { return m_B; }
+    void setA(const Eigen::MatrixXd& i_A ) { m_A = i_A; }
+    void setB(const Eigen::MatrixXd& i_B ) { m_A = i_B; }
+  private:
     Eigen::MatrixXd m_A; /** Dynamics matrix */
     Eigen::MatrixXd m_B; /** Input matrix */
   };
