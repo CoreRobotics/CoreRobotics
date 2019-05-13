@@ -22,7 +22,7 @@ build-python:
     - apt-get update && apt-get -y install python3.7 libboost-python-dev
     - mkdir bin
     - mkdir build && cd build
-    - cmake -Dpython=3 ..
+    - cmake -Dpython=2 ..
     - make
   artifacts:
     paths:
