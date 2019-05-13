@@ -19,7 +19,6 @@ build-lib:
 build-python:
   stage: build
   script:
-    - apt-get update && apt-get -y install python3.7 libboost-python-dev
     - mkdir bin
     - mkdir build && cd build
     - cmake -Dpython=2 ..
@@ -47,7 +46,6 @@ build-test:
 test-python:
   stage: test
   script:
-    - apt-get update && apt-get -y install python3.7 libboost-python-dev
     - python $CI_PROJECT_DIR/bin/cr-example-core.py
     - python $CI_PROJECT_DIR/bin/cr-example-math.py
   dependencies:
