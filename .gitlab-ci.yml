@@ -50,7 +50,6 @@ build-test:
     - mkdir build && cd build
     - cmake -Dtests=true ..
     - make
-    - $CI_PROJECT_DIR/bin/cr-tests
   artifacts:
     paths:
       - $CI_PROJECT_DIR/lib/*
@@ -95,7 +94,7 @@ deploy-coverage:
   stage: deploy
   script:
     - apt-get update && apt-get -y install lcov curl
-    - cd build
+    - mkdir build && cd build
     - cmake -Dreport=true ..
     - cmake --build . --config Debug
     - ctest --output-on-failure
