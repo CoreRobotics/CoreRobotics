@@ -9,6 +9,9 @@
 
 #include <cr/math>
 
+// double          (cr::math::Conversion::*wrapToPi1)(const double)           = &cr::math::Conversion::wrapToPi;
+// Eigen::VectorXd (cr::math::Conversion::*wrapToPi2)(const Eigen::VectorXd&) = &cr::math::Conversion::wrapToPi;
+
 //! Python bindings
 void export_py_math() {
   ADD_NESTED_NAMESPACE("math")
@@ -18,7 +21,9 @@ void export_py_math() {
     .staticmethod("deg2rad")
     .def("rad2deg", &cr::math::Conversion::rad2deg)
     .staticmethod("rad2deg")
-    // .def("wrapToPi", &cr::math::Conversion::wrapToPi)
-    // .staticmethod("wrapToPi")
+    //.def("wrapToPi", wrapToPi1)
+    //.staticmethod("wrapToPi")
+    //.def("wrapToPi", wrapToPi2)
+    //.staticmethod("wrapToPi")
   ;
 }

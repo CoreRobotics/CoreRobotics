@@ -1,4 +1,4 @@
-image: camerondevine/corerobotics:latest
+image: owan/corerobotics:latest
 
 stages:
    - build
@@ -16,12 +16,26 @@ build-lib:
      - $CI_PROJECT_DIR/lib/*
     expire_in: 1 week
 
-build-python:
+build-python-2:
   stage: build
   script:
     - mkdir bin
     - mkdir build && cd build
     - cmake -Dpython=2 ..
+    - make
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/lib/*
+      - $CI_PROJECT_DIR/lib/python/*
+      - $CI_PROJECT_DIR/bin/*
+    expire_in: 1 week
+
+build-python-3:
+  stage: build
+  script:
+    - mkdir bin
+    - mkdir build && cd build
+    - cmake -Dpython=3 ..
     - make
   artifacts:
     paths:
@@ -43,13 +57,21 @@ build-test:
       - $CI_PROJECT_DIR/bin/*
     expire_in: 1 week
 
-test-python:
+test-python-2:
   stage: test
   script:
     - python $CI_PROJECT_DIR/bin/cr-example-core.py
     - python $CI_PROJECT_DIR/bin/cr-example-math.py
   dependencies:
-    - build-python
+    - build-python-2
+
+test-python-3:
+  stage: test
+  script:
+    - python3 $CI_PROJECT_DIR/bin/cr-example-core.py
+    - python3 $CI_PROJECT_DIR/bin/cr-example-math.py
+  dependencies:
+    - build-python-3
 
 test-lib:
   stage: test

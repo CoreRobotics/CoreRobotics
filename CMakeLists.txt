@@ -54,27 +54,12 @@ endforeach()
 # ------------------------------------------------------------------------------
 # Find depdendencies
 # ------------------------------------------------------------------------------
-
-find_package (Eigen3 3.3.3)  # swig wrapper version
-find_package (Boost 1.58.0)
+find_package (Eigen3 3.3.3 REQUIRED)  # swig wrapper version
+find_package (Boost 1.65.0 REQUIRED)
 find_package (GTest)
 find_package (OpenSceneGraph 3.6)
 find_program (CLANG_TIDY_EXE NAMES "clang-tidy")
 find_program (CLANG_FORMAT_EXE NAMES "clang-format")
-
-if(NOT Boost_INCLUDE_DIR)
-  message(FATAL_ERROR
-    "Boost_INCLUDE_DIR not found - please define the path to boost"
-  )
-endif()
-
-if(NOT EIGEN3_INCLUDE_DIR)
-  message(FATAL_ERROR
-    "EIGEN3_INCLUDE_DIR not found - please define the path to eigen"
-  )
-else()
-  message(STATUS "Eigen found at ${EIGEN3_INCLUDE_DIR}")
-endif()
 
 # ------------------------------------------------------------------------------
 # Global library variables (visible to subdirectory CMakeLists)

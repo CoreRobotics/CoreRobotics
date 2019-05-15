@@ -11,16 +11,15 @@ endif()
 
 find_package (PythonInterp ${python_version} REQUIRED)
 find_package (PythonLibs ${python_version} REQUIRED)
-if (UNIX AND NOT APPLE)
-  if(python_version EQUAL 3)
-    find_package(Boost COMPONENTS python${PYTHON_VERSION_SUFFIX})
-  else()
-    find_package(Boost COMPONENTS python)
-  endif()
-else()
-  find_package(Boost 
-    COMPONENTS python${PYTHON_VERSION_MAJOR}${PYTHON_VERSION_MINOR})
-endif()
+if (python_version EQUAL 3)
+  if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    find_package(Boost COMPONENTS python37 REQUIRED)
+  else ()
+    find_package(Boost COMPONENTS python3 REQUIRED)
+  endif ()
+else ()
+  find_package(Boost COMPONENTS python REQUIRED)
+endif ()
 
 message(STATUS "PYTHON_LIBRARIES = ${PYTHON_LIBRARIES}")
 message(STATUS "PYTHON_EXECUTABLE = ${PYTHON_EXECUTABLE}")
@@ -37,7 +36,6 @@ file(GLOB py_wrappers
   ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp
 )
-message (STATUS ${py_wrappers})
 
 set (PYTHON_TARGET "CoreRobotics")
 

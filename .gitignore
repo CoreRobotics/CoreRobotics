@@ -14,7 +14,8 @@ Win32
 # temp & build folders
 DerivedData
 obj
-build
+build*
+lib
 html
 bin
 *.dir

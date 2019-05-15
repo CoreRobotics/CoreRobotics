@@ -110,6 +110,7 @@ void export_py_core () {
     .def("step", &cr::core::Step::step, &StepWrapper::default_step)
     .def("onStart", &cr::core::Step::onStart, &StepWrapper::default_onStart)
     .def("onStop", &cr::core::Step::onStop, &StepWrapper::default_onStop)
+    .def("ptr", &cr::core::Step::ptr)
   ;
 
   python::class_<cr::core::StepList, cr::core::StepListPtr,
