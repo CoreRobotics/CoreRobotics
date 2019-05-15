@@ -82,7 +82,7 @@ test-lib:
 deploy-install:
   stage: deploy
   script:
-    - cd build
+    - mkdir build && cd build
     - cmake -Dtests=true ..
     - make && make install
     - ldconfig /usr/local/lib
