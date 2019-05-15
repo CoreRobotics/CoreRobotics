@@ -1,4 +1,4 @@
-image: owan/corerobotics:cr-docker
+image: owan/corerobotics:latest
 
 stages:
    - build

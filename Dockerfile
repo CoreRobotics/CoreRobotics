@@ -1,4 +1,3 @@
-# FROM camerondevine/corerobotics
 FROM ubuntu:latest
 
 # Dev tools
@@ -15,7 +14,7 @@ RUN apt-get update && \
     libicu-dev \
     libbz2-dev
 
-# We need cmake 3.6 features
+# We need newer cmake features
 RUN apt purge -y --auto-remove cmake
 RUN cd ~/ \
     && wget https://cmake.org/files/v3.14/cmake-3.14.0.tar.gz \
@@ -40,7 +39,7 @@ RUN apt-get update && \
 RUN cd /usr/src/gtest/ && \
     cmake . && \
     make && \
-    ln -s *.a /usr/lib
+    cp *.a /usr/lib
 
 # Python packages
 RUN pip install numpy 

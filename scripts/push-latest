@@ -1,0 +1,10 @@
+#!/bin/bash
+
+dir="$( cd "$(dirname "$0")" ; pwd -P )"
+
+echo [CoreRobotics] This script pushes the corerobotics docker image to latest
+
+docker build -t cr_image $dir/..
+
+docker tag cr_image owan/corerobotics:latest
+docker push owan/corerobotics:latest
