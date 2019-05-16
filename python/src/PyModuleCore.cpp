@@ -11,6 +11,7 @@
 
 #include <cr/core>
 
+//! Needed to expose caller access
 //! See: https://www.boost.org/doc/libs/1_50_0/libs/python/doc/v2/wrapper.html
 class StepWrapper
   : public cr::core::Step, public python::wrapper<cr::core::Step>

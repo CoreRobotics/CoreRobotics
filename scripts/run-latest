@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo [CoreRobotics] This script pulls and  runs the latest corerobotics docker image
+
+docker pull owan/corerobotics:latest
+
+# start the sessions
+docker run -it --rm \
+    -v $dir/..:/CoreRobotics \
+    owan/corerobotics:latest \
+    /bin/bash
+

@@ -4,7 +4,6 @@ dir="$( cd "$(dirname "$0")" ; pwd -P )"
 
 echo [CoreRobotics] This script runs the corerobotics docker image
 
-# pull cameron's image with swig
 docker build -t cr_image $dir/..
 
 # start the sessions

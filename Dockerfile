@@ -29,11 +29,13 @@ RUN cmake --version
 RUN apt-get update && \
     apt-get install -y \
     python-dev \
+    python3-dev \
     python-pip \
     python3-pip \
     libeigen3-dev \
     libboost-all-dev \
-    libgtest-dev
+    libgtest-dev \
+    doxygen
 
 # install gtest
 RUN cd /usr/src/gtest/ && \
@@ -42,10 +44,28 @@ RUN cd /usr/src/gtest/ && \
     cp *.a /usr/lib
 
 # Python packages
-RUN pip install numpy 
+RUN pip install \
+    numpy \
+    pytest
 
 # Python3 packages
-RUN pip3 install numpy 
+RUN pip3 install \
+    numpy \
+    pytest==4.0.0 \
+    sphinx \
+    recommonmark \
+    mkdocs
+
+# PyBind11
+RUN cd ~/ \
+    && wget -c https://github.com/pybind/pybind11/archive/v2.2.4.tar.gz \
+    -O pybind11-v2.2.4.tar.gz \
+    && tar -xzvf pybind11-v2.2.4.tar.gz \
+    && cd pybind11-2.2.4/ \
+    && mkdir build && cd build \
+    && cmake .. \
+    && make check -j4 \
+    && make install
 
 # set working directory
 RUN mkdir /CoreRobotics
