@@ -5,20 +5,20 @@
  */
 
 //! Classes that have a read only state aspect should include this macro
-#define CR_ASPECT_STATE_READ(StateType)\
-public:\
-  const StateType& getState() const { return m_state; }\
-protected:\
-  StateType m_state;\
+#define CR_ASPECT_STATE_READ(StateType) \
+public: \
+  const StateType& getState() const { return m_state; } \
+protected: \
+  StateType m_state;
 
 //! Classes that have a read/write state aspect should include this macro
 #define CR_ASPECT_STATE_WRITE(StateType) \
 CR_ASPECT_STATE_READ(StateType) \
 public: \
-  void setState(const StateType& i_x) { m_state = i_x; } \
+  void setState(const StateType& i_x) { m_state = i_x; }
 
 //! Classes that have a mutable state aspect should include this macro
 #define CR_ASPECT_STATE_MUTABLE(StateType) \
 CR_ASPECT_STATE_WRITE(StateType) \
 public: \
-  StateType* state() { return &m_state; } \
+  StateType* state() { return &m_state; }

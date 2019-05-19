@@ -15,7 +15,7 @@
 public: \
   const ActionType& getAction() const { return m_action; } \
 protected: \
-  ActionType m_action; \
+  ActionType m_action;
 
 /*!
   \def CR_ASPECT_ACTION_WRITE(ActionType)
@@ -27,7 +27,7 @@ protected: \
 #define CR_ASPECT_ACTION_WRITE(ActionType) \
 CR_ASPECT_ACTION_READ(ActionType) \
 public: \
-  void setAction(const ActionType& i_x) { m_action = i_x; } \
+  void setAction(const ActionType& i_x) { m_action = i_x; }
 
 /*!
   \def CR_ASPECT_ACTION_MUTABLE(ActionType)
@@ -39,4 +39,4 @@ public: \
 #define CR_ASPECT_ACTION_MUTABLE(ActionType) \
 CR_ASPECT_ACTION_WRITE(ActionType) \
 public: \
-  ActionType* action() { return &m_action; } \
+  ActionType* action() { return &m_action; }

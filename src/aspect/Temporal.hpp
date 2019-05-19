@@ -6,10 +6,10 @@
 
 //! Classes that maintain a time parameter should include this macro
 #define CR_ASPECT_TEMPORAL \
-public:\
-  void setTimeStep(const double i_dt) { m_dt = i_dt; }\
-  const double getTimeStep() const { return m_dt; }\
-  const double getTime() const { return m_time; }\
-protected:\
-  double m_dt;\
-  double m_time = 0.0;\
+public: \
+  void setTimeStep(const double i_dt) { m_dt = i_dt; } \
+  const double getTimeStep() const { return m_dt; } \
+  const double getTime() const { return m_time; } \
+protected: \
+  double m_dt; \
+  double m_time = 0.0;
