@@ -1,5 +1,7 @@
 #!/bin/bash
 
+dir="$( cd "$(dirname "$0")" ; pwd -P )"
+
 echo [CoreRobotics] This script pulls and  runs the latest corerobotics docker image
 
 docker pull owan/corerobotics:latest

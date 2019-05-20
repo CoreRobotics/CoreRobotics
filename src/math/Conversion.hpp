@@ -42,28 +42,16 @@ class Conversion {
 
 public:
   //! Convert angles in degrees to radians
-  static double deg2rad(const double i_deg) { return M_PI * i_deg / 180.0; }
+  static double deg2rad(const double i_deg);
 
   //! Convert angles in radians to degrees
-  static double rad2deg(const double i_rad) { return 180.0 * i_rad / M_PI; }
+  static double rad2deg(const double i_rad);
 
   //! Wrap angle (rad) to +/- pi
-  static double wrapToPi(const double angle) {
-    double y = std::fmod(angle + M_PI, 2 * M_PI);
-    if (angle < 0) {
-      y += 2 * M_PI;
-    }
-    return y - M_PI;
-  }
+  static double wrapToPi(const double angle);
 
   //! Wrap angle (rad) to +/- pi
-  static Eigen::VectorXd wrapToPi(const Eigen::VectorXd &angle) {
-    Eigen::VectorXd y(angle.size());
-    for (int i = 0; i < angle.size(); i++) {
-      y(i) = wrapToPi(angle(i));
-    }
-    return y;
-  }
+  static Eigen::VectorXd wrapToPi(const Eigen::VectorXd &angle);
 };
 
 } // namepsace math

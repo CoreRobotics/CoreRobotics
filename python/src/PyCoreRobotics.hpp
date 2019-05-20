@@ -7,26 +7,15 @@
 #ifndef PY_CORE_ROBOTICS_HPP_
 #define PY_CORE_ROBOTICS_HPP_
 
-#include <boost/python.hpp>
-#include <boost/python/class.hpp>
-#include <boost/python/scope.hpp>
-#include <vector>
-#include <string>
+#include <pybind11/pybind11.h>
+#include <pybind11/eigen.h>
+#include <pybind11/functional.h>
 
-//! Map boost namespace
-namespace python = boost::python;
-
-//! This macro sets up the nested namespace
-#define ADD_NESTED_NAMESPACE(ModuleName)\
-std::string packageName = "CoreRobotics";\
-python::object pyModule(python::handle<>(\
-  python::borrowed(PyImport_AddModule(\
-  packageName.append(ModuleName).c_str()))));\
-python::scope().attr(ModuleName) = pyModule;\
-python::scope moduleScope = pyModule;\
+//! Map pybind11 namespace
+namespace py = pybind11;
 
 //! Export modules
-void export_py_core();
-void export_py_math();
+void export_py_core(py::module& m);
+void export_py_math(py::module& m);
 
 #endif /* PY_CORE_ROBOTICS_HPP_ */

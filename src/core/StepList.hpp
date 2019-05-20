@@ -42,9 +42,6 @@ public:
   //! Class destructor
   virtual ~StepList();
 
-  //! Create
-  static StepListPtr create();
-
   //! API
 public:
   //! Attach a step item to the list of vertices

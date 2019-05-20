@@ -5,55 +5,43 @@
  */
 
 #include "PyCoreRobotics.hpp"
-// #include <boost/python/numpy.hpp>
-#include <boost/python/wrapper.hpp>
-#include <boost/python/call.hpp>
 
 #include <cr/core>
 
-//! Needed to expose caller access
-//! See: https://www.boost.org/doc/libs/1_50_0/libs/python/doc/v2/wrapper.html
-class StepWrapper
-  : public cr::core::Step, public python::wrapper<cr::core::Step>
-{
+//! Step trampoline class
+class PyStep : public cr::core::Step {
 public:
-  void step() {
-    if (python::override step = this->get_override("step")) {
-      step();
-      return;
-    } else {
-      cr::core::Step::step();
-      return;
+    // Inherit the constructors
+    using Step::Step;
+
+    // Trampoline (need one for each virtual function)
+    void step() override {
+      PYBIND11_OVERLOAD(
+        void,
+        cr::core::Step,
+        step);
     }
-  }
-  void onStart() {
-    if (python::override onStart = this->get_override("onStart")) {
-      onStart();
-      return;
-    } else {
-      cr::core::Step::onStart();
-      return;
+
+    // Trampoline (need one for each virtual function)
+    void onStart() override {
+      PYBIND11_OVERLOAD(
+        void,
+        cr::core::Step,
+        onStart);
     }
-  }
-  void onStop() {
-    if (python::override onStop = this->get_override("onStop")) {
-      onStop();
-      return;
-    } else {
-      cr::core::Step::onStop();
-      return;
+
+    // Trampoline (need one for each virtual function)
+    void onStop() override {
+      PYBIND11_OVERLOAD(
+        void,
+        cr::core::Step,
+        onStop);
     }
-  }
-  void default_step() { return this->Step::step(); }
-  void default_onStart() { return this->Step::onStart(); }
-  void default_onStop() { return this->Step::onStop(); }
 };
 
-//! Python bindings
-void export_py_core () {
-  ADD_NESTED_NAMESPACE("core")
-  
-  python::enum_<cr::core::Result>("Result")
+void export_py_core(py::module& m) {
+
+  py::enum_<cr::core::Result>(m,  "Result")
     .value("CR_RESULT_SUCCESS", cr::core::CR_RESULT_SUCCESS)
     .value("CR_RESULT_SINGULAR", cr::core::CR_RESULT_SINGULAR)
     .value("CR_RESULT_UNWRITABLE", cr::core::CR_RESULT_UNWRITABLE)
@@ -62,14 +50,14 @@ void export_py_core () {
     .export_values()
     ;
 
-  python::enum_<cr::core::RunState>("RunState")
+  py::enum_<cr::core::RunState>(m, "RunState")
     .value("CR_RUN_STATE_RUNNING", cr::core::CR_RUN_STATE_RUNNING)
     .value("CR_RUN_STATE_STOPPED", cr::core::CR_RUN_STATE_STOPPED)
     .value("CR_RUN_STATE_PAUSED", cr::core::CR_RUN_STATE_PAUSED)
     .export_values()
     ;
 
-  python::enum_<cr::core::ThreadPriority>("ThreadPriority")
+  py::enum_<cr::core::ThreadPriority>(m, "ThreadPriority")
     .value("CR_PRIORITY_LOWEST", cr::core::CR_PRIORITY_LOWEST)
     .value("CR_PRIORITY_LOW", cr::core::CR_PRIORITY_LOW)
     .value("CR_PRIORITY_NORMAL", cr::core::CR_PRIORITY_NORMAL)
@@ -78,13 +66,15 @@ void export_py_core () {
     .export_values()
     ;
 
-  python::class_<cr::core::Clock>("Clock")
+  py::class_<cr::core::Clock>(m, "Clock")
+    .def(py::init())
     .def("startTimer", &cr::core::Clock::startTimer)
     .def("getElapsedTime", &cr::core::Clock::getElapsedTime)
     .def("sleep", &cr::core::Clock::sleep)
   ;
 
-  python::class_<cr::core::Item>("Item")
+  py::class_<cr::core::Item>(m, "Item")
+    .def(py::init())
     .def("setName", &cr::core::Item::setName)
     .def("getName", &cr::core::Item::getName)
     .def("setIcon", &cr::core::Item::setIcon)
@@ -92,11 +82,24 @@ void export_py_core () {
     .def("getType", &cr::core::Item::getType)
   ;
 
-  python::class_<cr::core::Loop, cr::core::LoopPtr>("Loop")
-    .def(python::init<double>())
-    .def("__init__", python::make_constructor(&cr::core::StepList::create))
-    .def("create", &cr::core::Loop::create)
-    .staticmethod("create")
+  py::class_<cr::core::Step, cr::core::StepPtr, PyStep>(m,  "Step")
+    .def(py::init<>())
+    .def_static("create", &cr::core::Step::create)
+    .def("step", &cr::core::Step::step)
+    .def("onStart", &cr::core::Step::onStart)
+    .def("onStop", &cr::core::Step::onStop)
+    .def("ptr", &cr::core::Step::ptr)
+  ;
+
+  py::class_<cr::core::StepList, cr::core::StepListPtr,
+      cr::core::Step>(m, "StepList")
+    .def("attach", &cr::core::StepList::attach)
+    .def("step", &cr::core::StepList::step)
+  ;
+
+  py::class_<cr::core::Loop, cr::core::LoopPtr>(m, "Loop")
+    .def(py::init<double>())
+    .def_static("create", &cr::core::Loop::create)
     .def("start", &cr::core::Loop::start)
     .def("pause", &cr::core::Loop::pause)
     .def("stop", &cr::core::Loop::stop)
@@ -105,21 +108,5 @@ void export_py_core () {
     .def("setUpdateRate", &cr::core::Loop::setUpdateRate)
     .def("getUpdateRate", &cr::core::Loop::getUpdateRate)
     .def("getCurrentTime", &cr::core::Loop::getCurrentTime)
-  ;
-
-  python::class_<StepWrapper, boost::noncopyable, std::shared_ptr<StepWrapper>>("Step")
-    .def("step", &cr::core::Step::step, &StepWrapper::default_step)
-    .def("onStart", &cr::core::Step::onStart, &StepWrapper::default_onStart)
-    .def("onStop", &cr::core::Step::onStop, &StepWrapper::default_onStop)
-    .def("ptr", &cr::core::Step::ptr)
-  ;
-
-  python::class_<cr::core::StepList, cr::core::StepListPtr,
-      python::bases<cr::core::Step>>("StepList")
-    .def("__init__", python::make_constructor(&cr::core::StepList::create))
-    .def("create", &cr::core::StepList::create)
-    .staticmethod("create")
-    .def("attach", &cr::core::StepList::attach)
-    .def("step", &cr::core::StepList::step)
   ;
 }

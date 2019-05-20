@@ -24,15 +24,13 @@ namespace core {
 //---------------------------------------------------------------------
 class Item {
 
-  //! Constructor and destructor
 public:
   //! constructor
-  Item() {}
+  Item() = default;
 
   //! destructor
-  virtual ~Item() {}
+  virtual ~Item() = default;
 
-  //! API
 public:
   //! set the item name
   virtual void setName(const std::string &i_name) { m_name = i_name; }
@@ -49,7 +47,6 @@ public:
   //! return the item type
   std::string getType() { return m_type; }
 
-  //! Protected members
 protected:
   //! name
   std::string m_name;

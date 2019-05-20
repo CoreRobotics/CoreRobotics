@@ -11,18 +11,33 @@ import CoreRobotics as cr
 import numpy as np
 
 # We have some conversion utilities
-print("Pi radians =", cr.math.Conversion.deg2rad(180))
-print("Pi degrees =", cr.math.Conversion.rad2deg(np.pi))
-# print("Wrap 3*pi [rad] = ", cr.math.Conversion.wrapToPi(3*np.pi))
+print("Pi radians =", cr.Conversion.deg2rad(180))
+print("Pi degrees =", cr.Conversion.rad2deg(np.pi))
+print("Wrap 3*pi radians = ", cr.Conversion.wrapToPi(3*np.pi))
+v1 = np.array([[0],[3*np.pi]])
+print("Wrap [0 3]*pi radians = ", cr.Conversion.wrapToPi(v1))
 
-# We have some integrators
+# let's define a dynamical system
+def linearSystem(t, x, u):
+    return u - x
 
+# we have different integrators available to the system
+dt = 0.01
+tf = 2.0
+t = np.arange(tf / dt) * dt
+x = np.zeros((2, t.size))
+x[:,0] = np.array([[0, 1]])
+u = np.array([[1],[-1]])
+for k in range(t.size - 1):
+    xk = np.reshape(x[:,k], (2, 1))
+    x[:,k+1] = cr.Integration.rungeKuttaStep(
+        linearSystem, t[k], xk, u, dt)
 
 # We have some matrix utilities
 # cr.Matrix.reducedVector()
 
 # We have some probaility methods
-x = np.array([0, 0])[None,:]
-mu = np.array([0, 0])[None,:]
+x = np.array([[0], [0]])
+mu = np.array([[0], [0]])
 Sigma = np.array([[1, 0], [0, 1]])
 # print(cr.Probability.mvnpdf(x, mu, Sigma))

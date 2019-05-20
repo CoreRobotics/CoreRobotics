@@ -7,25 +7,25 @@ from __future__ import print_function
 
 # This script is an example of how to use CoreRobotics python bindings
 
-import CoreRobotics as cr
+import CoreRobotics
 import numpy as np
 
 # We can make a clock that sleeps and returns elapsed time
-my_clock = cr.core.Clock()
+my_clock = CoreRobotics.Clock()
 my_clock.startTimer()
 my_clock.sleep(0.1)
 print("my_clock reports t (s): ", my_clock.getElapsedTime())
 
 # Many types derive from a base item class
-my_item = cr.core.Item()
+my_item = CoreRobotics.Item()
 my_item.setName(str("Amelia Pond"))
 print("my_item name is: ", my_item.getName())
 
 # We can implement a control object from an abstract base step class
-class MyStep(cr.core.Step):
+class MyStep(CoreRobotics.Step):
 	def __init__(self):
 		self.counter = 0
-		cr.core.Step.__init__(self)  # Needed to expose the wrapped base class
+		CoreRobotics.Step.__init__(self)  # Needed to expose the wrapped base class
 	# A control loop calls the step method once every time step
 	def step(self):
 		self.counter = self.counter + 1
@@ -38,7 +38,7 @@ class MyStep(cr.core.Step):
 
 # We can create loops to control the step items
 dt = 0.1
-my_loop = cr.core.Loop(dt)
+my_loop = CoreRobotics.Loop(dt)
 
 # Lets use the loop to run the step
 my_step = MyStep()
