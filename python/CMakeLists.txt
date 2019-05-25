@@ -49,7 +49,7 @@ add_custom_command(TARGET ${PYTHON_TARGET} POST_BUILD
 add_custom_command(TARGET ${PYTHON_TARGET} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_directory
   ${PROJECT_SOURCE_DIR}/lib/python
-  ${PROJECT_SOURCE_DIR}/python/examples)
+  ${PROJECT_SOURCE_DIR}/bin/)
 
 install(TARGETS ${PYTHON_TARGET}
   EXPORT CoreRoboticsTargets
