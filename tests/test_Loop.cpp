@@ -6,6 +6,7 @@
 
 #include "gtest/gtest.h"
 #include <cr/core>
+#include <cr/runtime>
 #include <iostream>
 #include <memory>
 
@@ -14,6 +15,7 @@
 
 // Use the CoreRobotics namespace
 using namespace cr::core;
+using namespace cr::runtime;
 
 //------------------------------------------------------------------------------
 /*!

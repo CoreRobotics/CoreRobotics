@@ -17,7 +17,7 @@
 #endif
 
 namespace cr {
-namespace core {
+namespace runtime {
 
 //---------------------------------------------------------------------
 /*!
@@ -166,5 +166,5 @@ void Thread::join() { m_loop->join(); }
 //---------------------------------------------------------------------
 void Thread::detach() { m_loop->detach(); }
 
-} // namepsace core
+} // namepsace runtime
 } // namespace cr

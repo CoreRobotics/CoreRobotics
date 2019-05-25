@@ -39,23 +39,6 @@ public:
     }
 };
 
-//! Loop trampoline class
-class PyLoop : public cr::core::Loop {
-public:
-    // Inherit the constructors
-    using Loop::Loop;
-
-    // Trampoline (need one for each virtual function)
-    void start() override {
-      py::gil_scoped_acquire acquire;
-
-      PYBIND11_OVERLOAD(
-        void,
-        cr::core::Loop,
-        start);
-    }
-};
-
 void export_py_core(py::module& m) {
 
   py::enum_<cr::core::Result>(m,  "Result")
@@ -64,22 +47,6 @@ void export_py_core(py::module& m) {
     .value("CR_RESULT_UNWRITABLE", cr::core::CR_RESULT_UNWRITABLE)
     .value("CR_RESULT_BAD_IC", cr::core::CR_RESULT_BAD_IC)
     .value("CR_RESULT_NOT_FOUND", cr::core::CR_RESULT_NOT_FOUND)
-    .export_values()
-    ;
-
-  py::enum_<cr::core::RunState>(m, "RunState")
-    .value("CR_RUN_STATE_RUNNING", cr::core::CR_RUN_STATE_RUNNING)
-    .value("CR_RUN_STATE_STOPPED", cr::core::CR_RUN_STATE_STOPPED)
-    .value("CR_RUN_STATE_PAUSED", cr::core::CR_RUN_STATE_PAUSED)
-    .export_values()
-    ;
-
-  py::enum_<cr::core::ThreadPriority>(m, "ThreadPriority")
-    .value("CR_PRIORITY_LOWEST", cr::core::CR_PRIORITY_LOWEST)
-    .value("CR_PRIORITY_LOW", cr::core::CR_PRIORITY_LOW)
-    .value("CR_PRIORITY_NORMAL", cr::core::CR_PRIORITY_NORMAL)
-    .value("CR_PRIORITY_HIGH", cr::core::CR_PRIORITY_HIGH)
-    .value("CR_PRIORITY_HIGHEST", cr::core::CR_PRIORITY_HIGHEST)
     .export_values()
     ;
 
@@ -112,19 +79,5 @@ void export_py_core(py::module& m) {
       cr::core::Step>(m, "StepList")
     .def("attach", &cr::core::StepList::attach)
     .def("step", &cr::core::StepList::step)
-  ;
-
-  py::class_<cr::core::Loop, cr::core::LoopPtr, PyLoop>(m, "Loop")
-    .def(py::init<double>())
-    .def_static("create", &cr::core::Loop::create)
-    .def("start", &cr::core::Loop::start, py::call_guard<py::gil_scoped_release>())
-    .def("pause", &cr::core::Loop::pause)
-    .def("stop", &cr::core::Loop::stop)
-    .def("attach", &cr::core::Loop::attach)
-    .def("setPriority", &cr::core::Loop::setPriority)
-    .def("getPriority", &cr::core::Loop::getPriority)
-    .def("setUpdateRate", &cr::core::Loop::setUpdateRate)
-    .def("getUpdateRate", &cr::core::Loop::getUpdateRate)
-    .def("getCurrentTime", &cr::core::Loop::getCurrentTime)
   ;
 }

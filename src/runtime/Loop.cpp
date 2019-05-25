@@ -16,7 +16,7 @@
 #endif
 
 namespace cr {
-namespace core {
+namespace runtime {
 
 //---------------------------------------------------------------------
 /*!
@@ -260,5 +260,5 @@ void Loop::updatePriority() {
 #endif
 }
 
-} // namepsace core
+} // namepsace runtime
 } // namespace cr

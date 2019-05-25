@@ -6,11 +6,12 @@
 
 #include "gtest/gtest.h"
 #include <cr/core>
+#include <cr/runtime>
 #include <iostream>
 
 // Use the CoreRobotics namespace
-using namespace cr;
 using namespace cr::core;
+using namespace cr::runtime;
 
 // Callback for the thread
 void myCallback1(void) {

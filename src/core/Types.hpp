@@ -28,13 +28,6 @@ enum Result {
   CR_RESULT_NOT_FOUND,
 };
 
-//! Thread run state
-enum RunState {
-  CR_RUN_STATE_RUNNING,
-  CR_RUN_STATE_STOPPED,
-  CR_RUN_STATE_PAUSED,
-};
-
 } // namepsace core
 } // namespace cr
 

@@ -365,13 +365,19 @@ project includes all the CoreRobotics modules.
 //---------------------------------------------------------------------------
 //! \defgroup core Core
 //! \brief This module implements core functionality such as timing, common
-//! types, and thread loop control.
+//! types, and base classes for other modules.
+//---------------------------------------------------------------------------
+#include <cr/core>
+
+//---------------------------------------------------------------------------
+//! \defgroup runtime Runtime
+//! \brief This module implements runtime threaded loop control.
 //---------------------------------------------------------------------------
 #include <cr/core>
 
 //---------------------------------------------------------------------------
 //! \defgroup signal Signal
-//! \brief This module implements a signal framework.
+//! \brief This module implements a signal/receiver framework.
 //---------------------------------------------------------------------------
 #include <cr/signal>
 

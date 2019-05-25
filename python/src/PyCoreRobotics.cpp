@@ -10,6 +10,7 @@ PYBIND11_PLUGIN(CoreRobotics) {
   py::module m("CoreRobotics", "CoreRobotics Python bindings");
 
   export_py_core(m);
+  export_py_runtime(m);
   export_py_math(m);
   return m.ptr();
 }

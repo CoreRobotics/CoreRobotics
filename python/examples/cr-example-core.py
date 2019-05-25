@@ -26,11 +26,8 @@ my_item.setName(str("Data"))
 print("my_item name is: ", my_item.getName())
 
 
-# We can create loops to control the step items
-dt = 0.1
-my_loop = CoreRobotics.Loop(dt)
-
 # We can implement a control object from an abstract base step class
+# These Step types are used extensively in other modules.
 class MyStep(CoreRobotics.Step):
 	def __init__(self):
 		self.counter = 0
@@ -49,16 +46,3 @@ class MyStep(CoreRobotics.Step):
 	# This is called on stop
 	def onStop(self):
 		print("MyStep stopped with step total: ", self.counter)
-
-
-# Lets use the loop to run the step
-# TODO: https://gitlab.com/powan/CoreRobotics/issues/52
-# my_step = MyStep()
-my_step  = CoreRobotics.Step()
-my_loop.attach(my_step)
-my_loop.setPriority(CoreRobotics.CR_PRIORITY_HIGH)
-
-my_loop.start()
-my_clock.sleep(1.0)
-my_loop.stop()
-

@@ -16,7 +16,7 @@ namespace py = pybind11;
 
 //! Export modules
 void export_py_core(py::module& m);
+void export_py_runtime(py::module& m);
 void export_py_math(py::module& m);
-void export_py_model(py::module& m);
 
 #endif /* PY_CORE_ROBOTICS_HPP_ */

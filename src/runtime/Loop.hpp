@@ -7,15 +7,23 @@
 #ifndef CR_LOOP_HPP_
 #define CR_LOOP_HPP_
 
-#include "Item.hpp"
-#include "Clock.hpp"
-#include "Step.hpp"
-#include "Thread.hpp"
-#include "Types.hpp"
 #include <thread>
 
+#include "core/Item.hpp"
+#include "core/Clock.hpp"
+#include "core/Step.hpp"
+#include "core/Types.hpp"
+#include "Thread.hpp"
+
 namespace cr {
-namespace core {
+namespace runtime {
+
+//! Loop run state
+enum RunState {
+  CR_RUN_STATE_RUNNING,
+  CR_RUN_STATE_STOPPED,
+  CR_RUN_STATE_PAUSED,
+};
 
 //! Enumerator for specifying thread priority
 // TODO: https://gitlab.com/powan/CoreRobotics/issues/55
@@ -31,7 +39,7 @@ typedef std::shared_ptr<Loop> LoopPtr;
 //---------------------------------------------------------------------
 /*!
  \class Loop
- \ingroup core
+ \ingroup runtime
 
  \brief This class implements looped thread execution, which includes
  real-time control and start/stop functionality.
@@ -76,7 +84,7 @@ public:
   void callback();
 
   //! Attach the step element
-  void attach(StepPtr i_element) { m_element = i_element; }
+  void attach(core::StepPtr i_element) { m_element = i_element; }
 
 public:
   //! Set the internal thread priority
@@ -115,7 +123,7 @@ private:
   std::thread *m_thread = NULL;
 
   //! global timer
-  Clock m_timer;
+  core::Clock m_timer;
 
   //! amount of time spent in pause since first start from stop (s).
   double m_t0 = 0;
@@ -124,10 +132,10 @@ private:
   double m_tPaused = 0;
 
   //! element to step
-  StepPtr m_element;
+  core::StepPtr m_element;
 };
 
-} // namespace core
+} // namespace runtime
 } // namespace cr
 
 #endif

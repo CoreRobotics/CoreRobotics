@@ -10,7 +10,7 @@
 #include <thread>
 
 namespace cr {
-namespace core {
+namespace runtime {
 
 //! Enumerator for specifying thread priority
 enum ThreadPriority {
@@ -24,7 +24,7 @@ enum ThreadPriority {
 //---------------------------------------------------------------------
 /*!
  \class Thread
- \ingroup core
+ \ingroup runtime
 
  \brief This class implements threading.
 
@@ -72,7 +72,7 @@ private:
   std::thread *m_loop;
 };
 
-} // namespace core
+} // namespace runtime
 } // namespace cr
 
 #endif

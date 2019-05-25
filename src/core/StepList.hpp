@@ -7,7 +7,6 @@
 #ifndef CR_STEP_LIST_HPP_
 #define CR_STEP_LIST_HPP_
 
-#include "Loop.hpp"
 #include "Step.hpp"
 #include <vector>
 

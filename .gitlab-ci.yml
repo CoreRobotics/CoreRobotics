@@ -59,16 +59,14 @@ build-test:
 test-python-2:
   stage: test
   script:
-    - python $CI_PROJECT_DIR/bin/cr-example-core.py
-    - python $CI_PROJECT_DIR/bin/cr-example-math.py
+    - for f in *.py; do python "$f"; done
   dependencies:
     - build-python-2
 
 test-python-3:
   stage: test
   script:
-    - python3 $CI_PROJECT_DIR/bin/cr-example-core.py
-    - python3 $CI_PROJECT_DIR/bin/cr-example-math.py
+    - for f in *.py; do python3 "$f"; done
   dependencies:
     - build-python-3
 
@@ -85,7 +83,7 @@ deploy-install:
     - mkdir build && cd build
     - cmake -Dtests=true ..
     - make && make install
-    # - ldconfig /usr/local/lib
+    - ldconfig /usr/local/lib
     - cr-tests
   dependencies:
     - build-test

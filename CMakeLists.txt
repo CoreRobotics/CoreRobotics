@@ -54,7 +54,7 @@ endforeach()
 # ------------------------------------------------------------------------------
 # Find depdendencies
 # ------------------------------------------------------------------------------
-find_package (Eigen3 3.3.3 REQUIRED)  # swig wrapper version
+find_package (Eigen3 3.3.3 REQUIRED)
 find_package (Boost 1.58.0 REQUIRED)
 find_package (GTest)
 find_program (CLANG_TIDY_EXE NAMES "clang-tidy")
@@ -79,8 +79,9 @@ set(CR_SOURCE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # define modules, target prefix, and module dependencies
 set(CR_LIB_PREFIX "cr-")
-set(CR_LIB_MODULES core math physics signal noise model world control estimation)
+set(CR_LIB_MODULES core runtime math physics signal noise model world control estimation)
 set(CR_LIB_DEP_core)
+set(CR_LIB_DEP_runtime ${CR_LIB_PREFIX}core)
 set(CR_LIB_DEP_math)
 set(CR_LIB_DEP_physics)
 set(CR_LIB_DEP_signal ${CR_LIB_PREFIX}core)
