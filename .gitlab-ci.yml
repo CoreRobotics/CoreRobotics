@@ -104,8 +104,7 @@ deploy-coverage:
     # Uploading to CodeCov
     - cd ..
     - >
-      bash <(curl -s https://codecov.io/bash) -f 
-      $CI_PROJECT_DIR/build/coverage.info || 
+      bash <(curl -s https://codecov.io/bash) -f coverage.info || 
       echo "Codecov did not collect coverage reports"
   dependencies:
     - build-lib
