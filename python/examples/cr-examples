@@ -2,6 +2,7 @@
 
 # defaults
 py_version=python3
+dir="$( cd "$(dirname "$0")" ; pwd -P )"
 
 # check input args
 while [ "$1" != "" ]; do
@@ -18,4 +19,7 @@ while [ "$1" != "" ]; do
     shift
 done
 
-for f in *.py; do $py_version "$f"; done
+for f in $dir/*.py; do
+  echo "Running $f ..."
+  $py_version "$f"
+done

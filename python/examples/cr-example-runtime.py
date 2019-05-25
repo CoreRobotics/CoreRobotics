@@ -28,4 +28,3 @@ my_loop.setPriority(CoreRobotics.CR_PRIORITY_HIGH)
 my_loop.start()
 clock.sleep(1.0)
 my_loop.stop()
-
