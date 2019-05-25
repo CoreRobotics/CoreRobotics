@@ -39,24 +39,7 @@ public:
     }
 };
 
-//! Loop trampoline class
-class PyLoop : public cr::core::Loop {
-public:
-    // Inherit the constructors
-    using Loop::Loop;
-
-    // Trampoline (need one for each virtual function)
-    void start() override {
-      py::gil_scoped_acquire acquire;
-
-      PYBIND11_OVERLOAD(
-        void,
-        cr::core::Loop,
-        start);
-    }
-};
-
-void export_py_core(py::module& m) {
+void export_py_model(py::module& m) {
 
   py::enum_<cr::core::Result>(m,  "Result")
     .value("CR_RESULT_SUCCESS", cr::core::CR_RESULT_SUCCESS)
@@ -114,15 +97,14 @@ void export_py_core(py::module& m) {
     .def("step", &cr::core::StepList::step)
   ;
 
-  py::class_<cr::core::Loop, cr::core::LoopPtr, PyLoop>(m, "Loop")
+  py::class_<cr::core::Loop, cr::core::LoopPtr>(m, "Loop")
     .def(py::init<double>())
     .def_static("create", &cr::core::Loop::create)
-    .def("start", &cr::core::Loop::start, py::call_guard<py::gil_scoped_release>())
+    .def("start", &cr::core::Loop::start)
     .def("pause", &cr::core::Loop::pause)
     .def("stop", &cr::core::Loop::stop)
     .def("attach", &cr::core::Loop::attach)
     .def("setPriority", &cr::core::Loop::setPriority)
-    .def("getPriority", &cr::core::Loop::getPriority)
     .def("setUpdateRate", &cr::core::Loop::setUpdateRate)
     .def("getUpdateRate", &cr::core::Loop::getUpdateRate)
     .def("getCurrentTime", &cr::core::Loop::getCurrentTime)

@@ -67,6 +67,9 @@ RUN cd ~/ \
     && make check -j4 \
     && make install
 
+# Export the linker library
+RUN ldconfig /usr/local/lib
+
 # set working directory
 RUN mkdir /CoreRobotics
 WORKDIR "/CoreRobotics"

@@ -18,14 +18,6 @@ namespace core {
  \ingroup core
 
  \brief This class implements a clock for timing and sleeping.
-
- \details
- Clock implements a simple clock interface for timing and sleeping.
-
- - Clock::startTimer starts the clock.
- - Clock::getElapsedTime returns the elapsed time (s) since the most
- recent call of startTimer().
- - Clock::sleep sleeps the current thread (s).
  */
 //---------------------------------------------------------------------
 class Clock {

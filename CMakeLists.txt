@@ -55,9 +55,8 @@ endforeach()
 # Find depdendencies
 # ------------------------------------------------------------------------------
 find_package (Eigen3 3.3.3 REQUIRED)  # swig wrapper version
-find_package (Boost 1.65.0 REQUIRED)
+find_package (Boost 1.58.0 REQUIRED)
 find_package (GTest)
-find_package (OpenSceneGraph 3.6)
 find_program (CLANG_TIDY_EXE NAMES "clang-tidy")
 find_program (CLANG_FORMAT_EXE NAMES "clang-format")
 

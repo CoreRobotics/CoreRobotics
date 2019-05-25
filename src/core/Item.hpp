@@ -55,7 +55,7 @@ protected:
   std::string m_icon;
 
   //! type (read only)
-  std::string m_type = "Generic";
+  std::string m_type = "Item";
 };
 
 } // namespace core

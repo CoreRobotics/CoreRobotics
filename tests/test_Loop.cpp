@@ -10,6 +10,7 @@
 #include <memory>
 
 #include "simpleStep.hpp"
+#include "counterStep.hpp"
 
 // Use the CoreRobotics namespace
 using namespace cr::core;
@@ -38,7 +39,7 @@ TEST(Loop, reset) {
   LoopPtr myLoop = Loop::create();
 
   // add the step function
-  std::shared_ptr<simpleStep> myStep = std::make_shared<simpleStep>(0.01);
+  auto myStep = std::make_shared<simpleStep>(0.01);
   myLoop->attach(myStep);
 
   // Query the internal state to make sure the reset call happened
@@ -52,89 +53,45 @@ TEST(Loop, reset) {
 //------------------------------------------------------------------------------
 TEST(Loop, execution) {
 
-  // Create the thread element smart pointer
   LoopPtr myLoop = Loop::create();
+  myLoop->setPriority(CR_PRIORITY_HIGHEST);
 
-  // Set the update rate to be super slow - 20 Hz
-  double dt = 0.05;
-
-  // add the step function
-  std::shared_ptr<simpleStep> myStep = std::make_shared<simpleStep>(dt);
+  auto myStep = std::make_shared<counterStep>();
   myLoop->attach(myStep);
 
-  // check the update rate
+  double dt = 0.01;
   myLoop->setUpdateRate(dt);
   EXPECT_DOUBLE_EQ(myLoop->getUpdateRate(), dt);
 
-  // Create a timer
   Clock timer;
 
-  // Start the thread
-  // std::cout << "Start() call\n";
   myLoop->start();
-
-  // wait for 1 second
-  timer.startTimer();
-  timer.sleep(1.0);
-
-  // Pause the thread
-  // std::cout << "Pause() call\n";
+  timer.sleep(10.1 * dt);
   myLoop->pause();
 
-  EXPECT_NEAR(myLoop->getCurrentTime(), 1.0, dt); // within dt
-  EXPECT_NEAR(myStep->x, 0, 0.4 * myStep->x0);    // 1 time constant
+  EXPECT_EQ(myStep->counter, 11);
 
-  // wait for 1 second
-  timer.sleep(1.0);
+  timer.sleep(10 * dt);
 
-  EXPECT_NEAR(myLoop->getCurrentTime(), 1.0, dt); // within dt
-  EXPECT_NEAR(myStep->x, 0, 0.4 * myStep->x0);    // 1 time constant
+  EXPECT_EQ(myStep->counter, 11);
 
-  // start the thread
-  // std::cout << "Start() call\n";
   myLoop->start();
-
-  // wait for 1 second
-  timer.sleep(1.0);
-
-  // Pause the thread
-  // std::cout << "Pause() call\n";
+  timer.sleep(10 * dt);
   myLoop->pause();
 
-  EXPECT_NEAR(myLoop->getCurrentTime(), 2.0, dt); // within dt
-  EXPECT_NEAR(myStep->x, 0, 0.28 * myStep->x0);   // 2 time constants
+  EXPECT_EQ(myStep->counter, 21);
 
-  // wait for 1 second
-  timer.sleep(1.0);
-
-  // start the thread
-  // std::cout << "Start() call\n";
+  timer.sleep(10 * dt);
   myLoop->start();
-
-  // wait for 1 second
-  timer.sleep(1.0);
-
-  // stop the thread
-  // std::cout << "Stop() call\n";
+  timer.sleep(10 * dt);
   myLoop->stop();
 
-  EXPECT_NEAR(myLoop->getCurrentTime(), 3.0, 2 * dt); // within 2dt
-  EXPECT_NEAR(myStep->x, 0, 0.07 * myStep->x0);       // 3 time constants
+  EXPECT_EQ(myStep->counter, 31);
 
-  // wait for 1 second
-  timer.sleep(1.0);
-
-  // restart the thread
-  // std::cout << "Start() call\n";
+  timer.sleep(10 * dt);
   myLoop->start();
-
-  // wait for 1 second
-  timer.sleep(1.0);
-
-  // stop the thread
-  // std::cout << "Stop() call\n";
+  timer.sleep(10.1 * dt);
   myLoop->stop();
 
-  EXPECT_NEAR(myLoop->getCurrentTime(), 1.0, 2 * dt); // within 2dt
-  EXPECT_NEAR(myStep->x, 0, 0.4 * myStep->x0);        // 1 time constant
+  EXPECT_EQ(myStep->counter, 11);
 }

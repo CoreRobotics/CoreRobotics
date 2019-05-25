@@ -20,27 +20,16 @@ namespace core {
 
 //---------------------------------------------------------------------
 /*!
- The constructor sets up the thread loop without a specific update
- rate.  The loop will attempt to execute each step as quickly as
- possible.\n
- */
-//---------------------------------------------------------------------
-Loop::Loop() {}
+The constructor sets up the thread loop.  The loop will attempt to execute
+each step at the rate specified by i_updateRate.\n
 
-//---------------------------------------------------------------------
-/*!
-The constructor sets up the thread loop with a specific update
- rate.  The loop will attempt to execute each step at the rate
- specified by i_updateRate.\n
-
-\param[in]	   i_updateRate	 this sets a constant update rate (s)
+\param[in]  i_updateRate  The target update rate (s).
+\param[in]  i_priority    The thread priority.
 */
 //---------------------------------------------------------------------
-Loop::Loop(const double i_updateRate) {
-
-  // Set the thread update rate (s)
-  m_updateRate = i_updateRate;
-}
+Loop::Loop(const double i_updateRate,
+           const ThreadPriority i_priority)
+  : m_updateRate(i_updateRate), m_priority(i_priority) {}
 
 //---------------------------------------------------------------------
 /*!
@@ -91,6 +80,7 @@ void Loop::start() {
     // Assign the callback (which begins the thread)
     // see lambdas: https://msdn.microsoft.com/en-us/library/dd293608.aspx
     m_thread = new std::thread([this] { callback(); });
+    updatePriority();
 
   } else if (m_runState == CR_RUN_STATE_PAUSED) {
     // compute the new offset
@@ -164,7 +154,7 @@ void Loop::callback() {
     // update the frequency counter
     double et = m_timer.getElapsedTime() - t1;
 
-    // sleep until completed
+    // check for task overrun and sleep until completed
     if (m_updateRate > 0) {
       m_timer.sleep(m_updateRate - et);
     }
@@ -173,17 +163,34 @@ void Loop::callback() {
 
 //---------------------------------------------------------------------
 /*!
- This method sets the internal thread priority.
+ This function returns the current run time.\n
 
- \param[in] i_priority - the thread priority, see cr::ThreadPriority
+ \return        current run time (s)
  */
 //---------------------------------------------------------------------
-void Loop::setPriority(ThreadPriority i_priority) {
+double Loop::getCurrentTime() {
+
+  // compute the amount of time spent paused
+  double tp = m_t0;
+  if (m_runState == CR_RUN_STATE_PAUSED) {
+    tp += m_timer.getElapsedTime() - m_tPaused;
+  }
+
+  return m_timer.getElapsedTime() - tp;
+}
+
+//---------------------------------------------------------------------
+/*!
+ This method sets the internal thread priority.
+ */
+//---------------------------------------------------------------------
+void Loop::updatePriority() {
 
 // Windows
 #if defined(WIN32) || defined(WIN64)
 
   // get the thread handle
+  assert(m_thread);
   HANDLE hThread = m_thread->native_handle();
 
   // get the process
@@ -191,7 +198,7 @@ void Loop::setPriority(ThreadPriority i_priority) {
   SetPriorityClass(process, HIGH_PRIORITY_CLASS);
 
   int tPriority = THREAD_PRIORITY_NORMAL;
-  switch (i_priority) {
+  switch (m_priority) {
   case CR_PRIORITY_LOWEST: // 11
     tPriority = THREAD_PRIORITY_LOWEST;
     break;
@@ -226,7 +233,7 @@ void Loop::setPriority(ThreadPriority i_priority) {
   int rr_min = sched_get_priority_min(SCHED_RR);
   int rr_max = sched_get_priority_max(SCHED_RR);
 
-  switch (i_priority) {
+  switch (m_priority) {
   case CR_PRIORITY_LOWEST:
     sch.sched_priority = rr_min;
     tPolicy = SCHED_RR;
@@ -251,24 +258,6 @@ void Loop::setPriority(ThreadPriority i_priority) {
   pthread_setschedparam(hThread, tPolicy, &sch);
 
 #endif
-}
-
-//---------------------------------------------------------------------
-/*!
- This function returns the current run time.\n
-
- \return        current run time (s)
- */
-//---------------------------------------------------------------------
-double Loop::getCurrentTime() {
-
-  // compute the amount of time spent paused
-  double tp = m_t0;
-  if (m_runState == CR_RUN_STATE_PAUSED) {
-    tp += m_timer.getElapsedTime() - m_tPaused;
-  }
-
-  return m_timer.getElapsedTime() - tp;
 }
 
 } // namepsace core
