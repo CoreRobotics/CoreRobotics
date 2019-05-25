@@ -98,11 +98,14 @@ deploy-coverage:
     - ctest --output-on-failure
   after_script:
     # Create lcov report
-    - cd ..
-    - lcov --capture --directory build/ --output-file coverage.info
+    - lcov --capture --directory . --output-file coverage.info
     - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
     - lcov --list coverage.info
     # Uploading to CodeCov
-    - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
+    - cd ..
+    - >
+      bash <(curl -s https://codecov.io/bash) -f 
+      $CI_PROJECT_DIR/build/coverage.info || 
+      echo "Codecov did not collect coverage reports"
   dependencies:
     - build-lib
