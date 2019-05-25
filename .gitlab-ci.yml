@@ -59,14 +59,14 @@ build-test:
 test-python-2:
   stage: test
   script:
-    - ./cr-examples --python2
+    - $CI_PROJECT_DIR/bin/cr-examples --python2
   dependencies:
     - build-python-2
 
 test-python-3:
   stage: test
   script:
-    - ./cr-examples --python3
+    - $CI_PROJECT_DIR/bin/cr-examples --python3
   dependencies:
     - build-python-3
 
