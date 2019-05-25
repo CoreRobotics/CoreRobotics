@@ -59,14 +59,14 @@ build-test:
 test-python-2:
   stage: test
   script:
-    - for f in *.py; do python "$f"; done
+    - ./cr-examples --python2
   dependencies:
     - build-python-2
 
 test-python-3:
   stage: test
   script:
-    - for f in *.py; do python3 "$f"; done
+    - ./cr-examples --python3
   dependencies:
     - build-python-3
 
@@ -98,7 +98,8 @@ deploy-coverage:
     - ctest --output-on-failure
   after_script:
     # Create lcov report
-    - lcov --capture --directory . --output-file coverage.info
+    - cd ..
+    - lcov --capture --directory build/ --output-file coverage.info
     - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
     - lcov --list coverage.info
     # Uploading to CodeCov
