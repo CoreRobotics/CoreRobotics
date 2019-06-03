@@ -4,6 +4,9 @@
  * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
  */
 
+#ifndef CR_APSECT_PARAMETER_HPP_
+#define CR_APSECT_PARAMETER_HPP_
+
 //! Classes that have a read only parameter aspect should include this macro
 #define CR_ASPECT_PARAMETER_READ(ParameterType) \
 public: \
@@ -22,3 +25,5 @@ public: \
 CR_ASPECT_PARAMETER_WRITE(ParameterType) \
 public: \
   ParameterType* parameter() { return &m_parameters; }
+
+#endif

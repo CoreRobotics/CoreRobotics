@@ -64,7 +64,7 @@ public:
 
   CR_ASPECT_MEASUREMENT_WRITE(MeasurementType);
 
-  CR_ASPECT_TEMPORAL
+  CR_ASPECT_TEMPORAL_DISCRETIZED
 
 public:
   //! The prototype sensorCallback function must be implemented.

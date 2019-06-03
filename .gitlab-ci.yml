@@ -91,7 +91,6 @@ deploy-install:
 deploy-coverage:
   stage: deploy
   script:
-    - apt-get update && apt-get -y install lcov curl
     - mkdir build && cd build
     - cmake -Dreport=true ..
     - cmake --build . --config Debug
@@ -102,9 +101,6 @@ deploy-coverage:
     - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
     - lcov --list coverage.info
     # Uploading to CodeCov
-    - cd ..
-    - >
-      bash <(curl -s https://codecov.io/bash) -f coverage.info || 
-      echo "Codecov did not collect coverage reports"
+    - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
   dependencies:
     - build-lib

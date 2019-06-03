@@ -8,11 +8,14 @@ RUN apt-get update && \
     g++ \
     nano \
     wget \
-    clang-tidy \
-    clang-format \
+    curl \
     autotools-dev \
     libicu-dev \
-    libbz2-dev
+    libbz2-dev \
+    clang-format \
+    clang-tidy \
+    valgrind \
+    lcov
 
 # We need newer cmake features
 RUN apt purge -y --auto-remove cmake
@@ -54,7 +57,8 @@ RUN pip3 install \
     pytest==4.0.0 \
     sphinx \
     recommonmark \
-    mkdocs
+    mkdocs \
+    sphinx_rtd_theme
 
 # PyBind11
 RUN cd ~/ \

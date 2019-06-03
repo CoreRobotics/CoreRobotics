@@ -69,7 +69,7 @@ public:
 
   CR_ASPECT_ACTION_WRITE(ActionType);
 
-  CR_ASPECT_TEMPORAL
+  CR_ASPECT_TEMPORAL_DISCRETIZED
 
 public:
   //! The prototype motionCallback function must be implemented.

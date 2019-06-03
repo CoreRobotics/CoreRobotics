@@ -4,20 +4,13 @@
  * http://www.corerobotics.org
  */
 
-#include "TrajectoryGenerator.hpp"
+#include "MinimumJerk.hpp"
 #include "math/Matrix.hpp"
 #include <iostream>
 #include <math.h>
 
 namespace cr {
 namespace control {
-
-//------------------------------------------------------------------------------
-/*!
- Constructor.\n
- */
-//------------------------------------------------------------------------------
-TrajectoryGenerator::TrajectoryGenerator() {}
 
 //------------------------------------------------------------------------------
 /*!
@@ -30,26 +23,27 @@ TrajectoryGenerator::TrajectoryGenerator() {}
  \param[in]     i_xf - final state vector (position)
  \param[in]     i_vf - final state 1st derivative (velocity)
  \param[in]     i_af - final state 2nd derivative (acceleration)
- \param[in]     i_tf - final time
+ \param[in]     i_duration - duration of trajectory (s)
  \return        cr::Result indicator
  */
 //------------------------------------------------------------------------------
-core::Result TrajectoryGenerator::solve(Eigen::VectorXd i_x0,
-                                        Eigen::VectorXd i_v0,
-                                        Eigen::VectorXd i_a0,
-                                        Eigen::VectorXd i_xf,
-                                        Eigen::VectorXd i_vf,
-                                        Eigen::VectorXd i_af, double i_tf) {
+core::Result MinimumJerk::Parameters::solve(const Eigen::VectorXd& i_x0,
+                                            const Eigen::VectorXd& i_v0,
+                                            const Eigen::VectorXd& i_a0,
+                                            const Eigen::VectorXd& i_xf,
+                                            const Eigen::VectorXd& i_vf,
+                                            const Eigen::VectorXd& i_af, 
+                                            double i_duration) {
 
   // indicator if solution is singular
   core::Result result =
       core::CR_RESULT_SUCCESS; // break the algorithm if it is singular
 
   // Set the internal time to the specified final time
-  this->m_tf = i_tf;
+  m_duration = i_duration;
 
   // Compute the inv(A) matrix
-  double t = i_tf;
+  double t = m_duration;
   Eigen::Matrix<double, 6, 6> Ainv;
   Ainv << 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0,
       -10 / pow(t, 3), -6 / pow(t, 2), -3 / (2 * t), 10 / pow(t, 3),
@@ -66,10 +60,7 @@ core::Result TrajectoryGenerator::solve(Eigen::VectorXd i_x0,
       i_vf.transpose(), i_af.transpose();
 
   // Find the coefficient matrix
-  this->m_X = Ainv * b;
-
-  // start the internal clock
-  this->m_timer.startTimer();
+  m_A = Ainv * b;
 
   // return result
   return result;
@@ -85,7 +76,8 @@ core::Result TrajectoryGenerator::solve(Eigen::VectorXd i_x0,
  \return        cr::Result indicator
  */
 //------------------------------------------------------------------------------
-core::Result TrajectoryGenerator::solve(Waypoint i_wp0, Waypoint i_wpf) {
+core::Result MinimumJerk::Parameters::solve(const Waypoint& i_wp0, 
+                                            const Waypoint& i_wpf) {
   // define the vectors
   Eigen::VectorXd x0 = i_wp0.position;
   Eigen::VectorXd v0 = i_wp0.velocity;
@@ -93,7 +85,7 @@ core::Result TrajectoryGenerator::solve(Waypoint i_wp0, Waypoint i_wpf) {
   Eigen::VectorXd xf = i_wpf.position;
   Eigen::VectorXd vf = i_wpf.velocity;
   Eigen::VectorXd af = i_wpf.acceleration;
-  double tf = i_wpf.time - i_wpf.time;
+  double tf = i_wpf.time - i_wp0.time;
 
   // solve
   return solve(x0, v0, a0, xf, vf, af, tf);
@@ -107,11 +99,11 @@ core::Result TrajectoryGenerator::solve(Waypoint i_wp0, Waypoint i_wpf) {
  \return        Waypoint trajectory structure.
  */
 //------------------------------------------------------------------------------
-Waypoint TrajectoryGenerator::step(double i_t) {
+Waypoint MinimumJerk::policyCallback(double i_t) {
   // Limit the defined time
   double t = i_t;
-  if (t >= this->m_tf) {
-    t = this->m_tf;
+  if (t >= m_parameters.getDuration()) {
+    t = m_parameters.getDuration();
   }
   if (t < 0) {
     t = 0;
@@ -138,7 +130,7 @@ Waypoint TrajectoryGenerator::step(double i_t) {
   T << pow(t, 0), pow(t, 1), pow(t, 2), pow(t, 3), pow(t, 4), pow(t, 5);
 
   // Initialize the output values to zero
-  int n = this->m_X.cols();
+  int n = m_parameters.coefficients().cols();
   wp.position.setZero(n, 1);
   wp.velocity.setZero(n, 1);
   wp.acceleration.setZero(n, 1);
@@ -149,33 +141,13 @@ Waypoint TrajectoryGenerator::step(double i_t) {
 
     // Get the coefficient vector
     Eigen::Matrix<double, 1, 6> X;
-    X = this->m_X.col(i).transpose();
+    X = m_parameters.coefficients().col(i).transpose();
 
     wp.position(i) = X * T; // pos
     wp.velocity(i) = vCoeff.cwiseProduct(X.tail(5)) * T.head(5);
     wp.acceleration(i) = aCoeff.cwiseProduct(X.tail(4)) * T.head(4);
     wp.jerk(i) = jCoeff.cwiseProduct(X.tail(3)) * T.head(3);
   }
-
-  // return the struct
-  return wp;
-}
-
-//------------------------------------------------------------------------------
-/*!
- This method computes the values of the trajectory for the elapsed time
- since the internal clock was started on the TrajectoryGenerator::solve
- call.\n
-
-\return        Waypoint trajectory structure.
- */
-//------------------------------------------------------------------------------
-Waypoint TrajectoryGenerator::step(void) {
-  // Get the elapsed time since the solver was called
-  double t = this->m_timer.getElapsedTime();
-
-  // Compute the trajectory at the internal clock time
-  Waypoint wp = TrajectoryGenerator::step(t);
 
   // return the struct
   return wp;

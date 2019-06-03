@@ -67,8 +67,10 @@ TEST(Loop, execution) {
 
   Clock timer;
 
+  double eps = 0.5;
+
   myLoop->start();
-  timer.sleep(10.5 * dt);
+  timer.sleep((10 + eps) * dt);
   myLoop->pause();
 
   EXPECT_EQ(myStep->counter, 11);
@@ -90,7 +92,7 @@ TEST(Loop, execution) {
 
   EXPECT_EQ(myStep->counter, 31);
 
-  timer.sleep(10 * dt);
+  timer.sleep((10 + eps) * dt);
   myLoop->start();
   timer.sleep(10 * dt);
   myLoop->stop();

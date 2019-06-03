@@ -4,6 +4,9 @@
  * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
  */
 
+#ifndef CR_ASPECT_STATE_HPP_
+#define CR_ASPECT_STATE_HPP_
+
 //! Classes that have a read only state aspect should include this macro
 #define CR_ASPECT_STATE_READ(StateType) \
 public: \
@@ -22,3 +25,5 @@ public: \
 CR_ASPECT_STATE_WRITE(StateType) \
 public: \
   StateType* state() { return &m_state; }
+
+#endif

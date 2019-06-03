@@ -4,6 +4,9 @@
  * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
  */
 
+#ifndef CR_ASPECT_MEASUREMENT_HPP_
+#define CR_ASPECT_MEASUREMENT_HPP_
+
 //! Classes that have a read only measurement aspect should include this macro
 #define CR_ASPECT_MEASUREMENT_READ(MeasurementType) \
 public: \
@@ -22,3 +25,5 @@ public: \
 CR_ASPECT_MEASUREMENT_WRITE(MeasurementType) \
 public: \
   MeasurementType* measurement() { return &m_measurement; }
+
+#endif

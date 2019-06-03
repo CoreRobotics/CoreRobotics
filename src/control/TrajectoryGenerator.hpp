@@ -4,17 +4,19 @@
  * http://www.corerobotics.org
  */
 
-#ifndef TrajectoryGenerator_hpp
-#define TrajectoryGenerator_hpp
+#ifndef CR_TRAJECTORY_GENERATOR_HPP_
+#define CR_TRAJECTORY_GENERATOR_HPP_
 
 #include "Eigen/Dense"
+#include "aspect/Temporal.hpp"
 #include "core/Clock.hpp"
 #include "core/Types.hpp"
+#include "control/Policy.hpp"
 
 namespace cr {
 namespace control {
 
-//! Structure defining a waypoint (i.e. the output)
+//! Structure defining a waypoint
 struct Waypoint {
   double time;
   Eigen::VectorXd position;
@@ -57,36 +59,39 @@ struct Waypoint {
 
  */
 //------------------------------------------------------------------------------
-class TrajectoryGenerator {
+template <typename ActionType>
+class TrajectoryGenerator : public Policy<ActionType> {
 
 public:
   //! Class constructor
-  TrajectoryGenerator();
+  TrajectoryGenerator(const ActionType& i_action)
+    : Policy<ActionType>(i_action) {}
+
+  //! Destructor
+  virtual ~TrajectoryGenerator() = default;
+
+  //! Factory
+  static core::StepPtr create(const ActionType& i_action) {
+    return core::StepPtr(new TrajectoryGenerator(i_action));
+  }
+
+  CR_ASPECT_TEMPORAL_RUNTIME
 
 public:
-  //! Solve for the coefficients needed to achieve the trajectory
-  core::Result solve(Eigen::VectorXd i_x0, Eigen::VectorXd i_v0,
-                     Eigen::VectorXd m_a0, Eigen::VectorXd m_xf,
-                     Eigen::VectorXd m_vf, Eigen::VectorXd m_af, double i_tf);
+  //! The prototype policyCallback function must be implemented.
+  virtual ActionType policyCallback(double i_t) = 0;
 
-  //! Solve for the coefficients needed to achieve the trajectory
-  core::Result solve(Waypoint i_wp0, Waypoint i_wpf);
+  //! This function starts the trajectory generator
+  void onStart() { m_timer.startTimer(); }
 
-  //! Get the trajectory at time t
-  Waypoint step(double i_t);
-
-  //! Step the next trajectory reference
-  Waypoint step(void);
+  //! This function steps the callback and updates the action.
+  virtual void step() { this->m_action = (m_policy_fcn)(getTime()); }
 
 protected:
-  //! Final time
-  double m_tf = 1.0;
-
-  //! Polynomial coefficient matrix
-  Eigen::Matrix<double, 6, Eigen::Dynamic> m_X;
-
-  //! An internal clock for keeping track of time
-  core::Clock m_timer;
+  //! bound callback function
+  std::function<ActionType(double)> m_policy_fcn =
+      std::bind(&TrajectoryGenerator::policyCallback, this, ph::_1);
+  
 };
 
 } // namepsace control

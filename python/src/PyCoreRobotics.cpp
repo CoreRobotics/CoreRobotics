@@ -12,5 +12,6 @@ PYBIND11_PLUGIN(CoreRobotics) {
   export_py_core(m);
   export_py_runtime(m);
   export_py_math(m);
+  export_py_control(m);
   return m.ptr();
 }

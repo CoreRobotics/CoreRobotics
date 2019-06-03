@@ -36,7 +36,7 @@ void Clock::startTimer(void) { this->m_t0 = this->m_clock.now(); }
  \return - the time [s] since the last call of startTimer()
  */
 //---------------------------------------------------------------------
-double Clock::getElapsedTime(void) {
+double Clock::getElapsedTime() {
   m_t1 = this->m_clock.now();
   std::chrono::duration<double> elapsed = this->m_t1 - this->m_t0;
   return elapsed.count();
