@@ -129,8 +129,8 @@ public:
     return Utility::size(d);
   }
 
-  //! print signal value to ostream
-  virtual void print(std::ostream &i_log) {
+  //! write signal value to ostream
+  virtual void write(std::ostream &i_log) {
     DataType d = request();
     Utility::write(i_log, d);
   }

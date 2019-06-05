@@ -32,8 +32,6 @@ public:
 //
 // Test Slot connection
 //
-// TODO: test breaks on Signal::create()
-/*
 TEST(Log, Step) {
 
   std::shared_ptr<TestTypes> test = std::shared_ptr<TestTypes>(new TestTypes);
@@ -96,4 +94,3 @@ TEST(Log, Step) {
   }
   t.close();
 }
-*/

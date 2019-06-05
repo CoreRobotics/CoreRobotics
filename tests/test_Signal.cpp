@@ -18,8 +18,6 @@ using namespace cr::signal;
 //
 // Test signal connection
 //
-// TODO: test breaks on Signal::create()
-/*
 TEST(Signal, Request) {
 
   // set up a Frame
@@ -47,4 +45,3 @@ TEST(Signal, Request) {
   EXPECT_DOUBLE_EQ(0.0, v(1));
   EXPECT_DOUBLE_EQ(0.0, v(2));
 }
-*/
