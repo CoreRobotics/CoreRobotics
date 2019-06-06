@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_CONVERSIONS_HPP_
-#define CR_CONVERSIONS_HPP_
+#ifndef CR_MATH_CONVERSIONS_HPP_
+#define CR_MATH_CONVERSIONS_HPP_
 
 #include "Eigen/Dense"
 #include "core/Types.hpp"
@@ -20,17 +20,9 @@ namespace math {
 
 \brief This class implements math conversions.
 
-\details
-## Description
-This class implements vmath conversions.
-
 - Conversion::deg2rad converts degress to radians
 - Conversion::rad2deg converts radians to degrees.
 - Conversion::wrapToPi wraps angles to +/- \f$\pi\f$ radians.
-
-## Example
-This example shows usage of the math functions.
-\include example_CRMath.cpp
 
 ## References
 [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,

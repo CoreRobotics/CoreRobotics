@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_RIGIDBODY_HPP_
-#define CR_RIGIDBODY_HPP_
+#ifndef CR_PHYSICS_RIGID_BODY_HPP_
+#define CR_PHYSICS_RIGID_BODY_HPP_
 
 #include "Frame.hpp"
 

@@ -4,8 +4,8 @@
  * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
  */
 
-#ifndef CR_SHARED_MEMORY_HPP_
-#define CR_SHARED_MEMORY_HPP_
+#ifndef CR_CORE_SHARED_MEMORY_HPP_
+#define CR_CORE_SHARED_MEMORY_HPP_
 
 #include "Eigen/Dense"
 #include "Types.hpp"
@@ -38,11 +38,8 @@ typedef boost::interprocess::vector<double, ShmemAllocator> ShmemData;
  \ingroup core
 
  \brief This class implements interprocess shared memory to write
- and read data across processes.
-
- \details
- SharedMemory implements a simple shared memory interface with the
- following methods available.
+ and read vectors across processes.  SharedMemory implements a simple
+ shared memory interface with the following methods available.
 
  - SharedMemory::addSignal adds a signal to the memory
  - SharedMemory::removeSignal removes a signal from the memory

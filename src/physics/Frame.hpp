@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_FRAME_HPP_
-#define CR_FRAME_HPP_
+#ifndef CR_PHYSICS_FRAME_HPP_
+#define CR_PHYSICS_FRAME_HPP_
 
 #include "Eigen/Dense"
 #include "core/Types.hpp"

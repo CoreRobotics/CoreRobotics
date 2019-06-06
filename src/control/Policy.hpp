@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_POLICY_HPP_
-#define CR_POLICY_HPP_
+#ifndef CR_CONTROL_POLICY_HPP_
+#define CR_CONTROL_POLICY_HPP_
 
 #include "Eigen/Dense"
 #include "aspect/Action.hpp"
@@ -26,13 +26,8 @@ namespace ph = std::placeholders;
  \brief This class implements a control policy.
 
  \details
- ## Description
- Policy implements a control law, which computes an action \f$u\f$ from state
- \f$x\f$, i.e.
-
- \f[
- u_{k} = \pi(t_k, x_k)
- \f]
+ A control policy in general computes an action \f$u\f$, and is represented
+ by \f$\pi : \rightarrow u\f$.
 
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

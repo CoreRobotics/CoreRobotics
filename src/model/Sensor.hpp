@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_SENSOR_HPP_
-#define CR_SENSOR_HPP_
+#ifndef CR_MODEL_SENSOR_HPP_
+#define CR_MODEL_SENSOR_HPP_
 
 #include "Eigen/Dense"
 #include "aspect/Measurement.hpp"
@@ -25,19 +25,16 @@ namespace ph = std::placeholders;
  \class Sensor
  \ingroup model
 
- \brief This class implements a sensor model.
-
- \details
- ## Description
- Sensor implements a sesnor model from a supplied observation callback function.
- Specifically, MotionModel sets up a container for the discrete-time model
+ \brief This class implements a sensor model from a supplied observation callback
+ function.  Specifically, MotionModel sets up a container for the discrete-time 
+ set of equations
 
  \f[
  z_k = h(t_k, x_k)
  \f]
 
- where \f$x\f$ is the state, \f$t\f$ is time, \f$z\$ is the measurement, and
- \f$k\f$ is a discrete sampling index.
+ where \f$x\f$ is state, \f$t\f$ is time, \f$z\$ is measurement, and \f$k\f$
+ is a discrete sampling index.
 
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

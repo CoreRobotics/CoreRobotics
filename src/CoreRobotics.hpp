@@ -1,48 +1,14 @@
-//===========================================================================
 /*
-Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2017, CoreRobotics.
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-
-* Redistributions of source code must retain the above copyright
-notice, this list of conditions and the following disclaimer.
-
-* Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-
-* Neither the name of CoreRobotics nor the names of its contributors
-may be used to endorse or promote products derived from this
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-\project CoreRobotics Project
-\url     www.corerobotics.org
-\author  Parker Owan, Cameron Devine, Tony Piaskowy
-
-*/
-//===========================================================================
+ * Copyright (c) 2017-2019, CoreRobotics.  All rights reserved.
+ * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
+ * http://www.corerobotics.org
+ * Authors: Parker Owan, Cameron Devine, Tony Piaskowy
+ */
 
 #ifndef corerobotics_hpp
 #define corerobotics_hpp
 
-//===========================================================================
+//---------------------------------------------------------------------------
 /*! \mainpage Introduction
 
 The CoreRobotics libraries provide basic modules for real-time robot control
@@ -343,37 +309,64 @@ included in the class descriptions.
  [5] S. Thrun, W. Burgard, and D. Fox, "Probabilistic Robotics", MIT Press, 2006. \n\n
  
 */
-//===========================================================================
-
-//===========================================================================
-/*!
-\file CoreRobotics.hpp
-\brief This is the CoreRobotics header file.  Including this file in your
-project includes all the CoreRobotics modules.
-*/
-//===========================================================================
+//---------------------------------------------------------------------------
 
 #define _USE_MATH_DEFINES
 #include <cmath>
 
 //---------------------------------------------------------------------------
 //! \defgroup aspect Aspect
-//! \brief This module defines aspects such as parameters.
+//! \brief This module defines aspects such as parameters, states, and time.
 //---------------------------------------------------------------------------
 #include <cr/aspect>
 
 //---------------------------------------------------------------------------
+//! \defgroup control Control
+//! \brief This module defines and implements control policies.
+//---------------------------------------------------------------------------
+#include <cr/control>
+
+//---------------------------------------------------------------------------
 //! \defgroup core Core
-//! \brief This module implements core functionality such as timing, common
-//! types, and base classes for other modules.
+//! \brief This module implements timing, common types, and base classes.
 //---------------------------------------------------------------------------
 #include <cr/core>
 
 //---------------------------------------------------------------------------
-//! \defgroup runtime Runtime
-//! \brief This module implements runtime threaded loop control.
+//! \defgroup estimation Estimation
+//! \brief This module defines and implements state estimators for control.
 //---------------------------------------------------------------------------
-#include <cr/core>
+#include <cr/estimation>
+
+//---------------------------------------------------------------------------
+//! \defgroup math Math
+//! \brief This module implements math components.
+//---------------------------------------------------------------------------
+#include <cr/math>
+
+//---------------------------------------------------------------------------
+//! \defgroup model Model
+//! \brief This module defines and implements model representations.
+//---------------------------------------------------------------------------
+#include <cr/model>
+
+//---------------------------------------------------------------------------
+//! \defgroup noise Noise
+//! \brief This module defines and implements statistical types.
+//---------------------------------------------------------------------------
+#include <cr/noise>
+
+//---------------------------------------------------------------------------
+//! \defgroup physics Physics
+//! \brief This module implements kinematics and dynamics.
+//---------------------------------------------------------------------------
+#include <cr/physics>
+
+//---------------------------------------------------------------------------
+//! \defgroup runtime Runtime
+//! \brief This module implements threaded loop control.
+//---------------------------------------------------------------------------
+#include <cr/runtime>
 
 //---------------------------------------------------------------------------
 //! \defgroup signal Signal
@@ -386,44 +379,6 @@ project includes all the CoreRobotics modules.
 //! \brief This module implements a kinematic tree graph.
 //---------------------------------------------------------------------------
 #include <cr/world>
-
-//---------------------------------------------------------------------------
-//! \defgroup math Math
-//! \brief This module implements math components.
-//---------------------------------------------------------------------------
-#include <cr/math>
-
-//---------------------------------------------------------------------------
-//! \defgroup physics Physics
-//! \brief This module implements physics representations for computing
-//! kinematics and dynamics.
-//---------------------------------------------------------------------------
-#include <cr/physics>
-
-//---------------------------------------------------------------------------
-//! \defgroup noise Noise
-//! \brief This module implements noise models.
-//---------------------------------------------------------------------------
-#include <cr/noise>
-
-//---------------------------------------------------------------------------
-//! \defgroup model Model
-//! \brief This module implements model (sensor and motion) representations.
-//---------------------------------------------------------------------------
-#include <cr/model>
-
-//---------------------------------------------------------------------------
-//! \defgroup control Control
-//! \brief This module implements control policies for regulating
-//! motion and actions.
-//---------------------------------------------------------------------------
-#include <cr/control>
-
-//---------------------------------------------------------------------------
-//! \defgroup estimation Estimation
-//! \brief This module implements state estimators for control.
-//---------------------------------------------------------------------------
-#include <cr/estimation>
 
 
 #endif

@@ -76,8 +76,8 @@ core::Result MinimumJerk::Parameters::solve(const Eigen::VectorXd& i_x0,
  \return        cr::Result indicator
  */
 //------------------------------------------------------------------------------
-core::Result MinimumJerk::Parameters::solve(const Waypoint& i_wp0, 
-                                            const Waypoint& i_wpf) {
+core::Result MinimumJerk::Parameters::solve(const KinematicWaypoint& i_wp0, 
+                                            const KinematicWaypoint& i_wpf) {
   // define the vectors
   Eigen::VectorXd x0 = i_wp0.position;
   Eigen::VectorXd v0 = i_wp0.velocity;
@@ -99,7 +99,7 @@ core::Result MinimumJerk::Parameters::solve(const Waypoint& i_wp0,
  \return        Waypoint trajectory structure.
  */
 //------------------------------------------------------------------------------
-Waypoint MinimumJerk::policyCallback(double i_t) {
+KinematicWaypoint MinimumJerk::policyCallback(double i_t) {
   // Limit the defined time
   double t = i_t;
   if (t >= m_parameters.getDuration()) {
@@ -110,7 +110,7 @@ Waypoint MinimumJerk::policyCallback(double i_t) {
   }
 
   // Define a waypoint
-  Waypoint wp;
+  KinematicWaypoint wp;
   wp.time = t;
 
   //! Velocity Coefficients

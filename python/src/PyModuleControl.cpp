@@ -10,13 +10,13 @@
 
 void export_py_control(py::module& m) {
 
-  py::class_<cr::control::Waypoint>(m, "Waypoint")
+  py::class_<cr::control::KinematicWaypoint>(m, "KinematicWaypoint")
     .def(py::init<double>())
-    .def_readwrite("time", &cr::control::Waypoint::time)
-    .def_readwrite("position", &cr::control::Waypoint::position)
-    .def_readwrite("velocity", &cr::control::Waypoint::velocity)
-    .def_readwrite("acceleration", &cr::control::Waypoint::acceleration)
-    .def_readwrite("jerk", &cr::control::Waypoint::jerk)
+    .def_readwrite("time", &cr::control::KinematicWaypoint::time)
+    .def_readwrite("position", &cr::control::KinematicWaypoint::position)
+    .def_readwrite("velocity", &cr::control::KinematicWaypoint::velocity)
+    .def_readwrite("acceleration", &cr::control::KinematicWaypoint::acceleration)
+    .def_readwrite("jerk", &cr::control::KinematicWaypoint::jerk)
   ;
 
 /*
@@ -39,7 +39,7 @@ void export_py_control(py::module& m) {
     .def("coefficients", &cr::control::MinimumJerk::Parameters::coefficients)
     .def("getDuration", &cr::control::MinimumJerk::Parameters::getDuration)
     .def("solve", (cr::core::Result (cr::control::MinimumJerk::Parameters::*)(
-      const cr::control::Waypoint&, const cr::control::Waypoint&)) 
+      const cr::control::KinematicWaypoint&, const cr::control::KinematicWaypoint&)) 
       &cr::control::MinimumJerk::Parameters::solve)
     .def("solve", (cr::core::Result (cr::control::MinimumJerk::Parameters::*)(
       const Eigen::VectorXd&, const Eigen::VectorXd&, const Eigen::VectorXd&,

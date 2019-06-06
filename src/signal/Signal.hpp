@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_SIG_HPP_
-#define CR_SIG_HPP_
+#ifndef CR_SIGNAL_SIGNAL_HPP_
+#define CR_SIGNAL_SIGNAL_HPP_
 
 #include "Utility.hpp"
 #include "core/Item.hpp"
@@ -20,16 +20,10 @@ namespace signal {
 /*!
  \class SignalBase
  \ingroup signal
-
- \brief
-
- \details
-
  */
 //------------------------------------------------------------------------------
 class SignalBase : public core::Item {
 
-  // public methods
 public:
   //! constructor
   SignalBase(){};
@@ -40,7 +34,6 @@ public:
   //! write signal value to ostream
   virtual void write(std::ostream &i_log) = 0;
 
-  // private members
 private:
   //! type (read only)
   std::string m_type = "Signal";
@@ -50,18 +43,12 @@ private:
 /*!
  \class Requester
  \ingroup signal
-
- \brief
-
- \details
-
  */
 //------------------------------------------------------------------------------
 template <typename DataType>
 class Requester : public std::enable_shared_from_this<Requester<DataType>>,
                   public SignalBase {
 
-  // public methods
 public:
   //! constructor
   Requester(){};
@@ -75,16 +62,12 @@ public:
  \class Signal
  \ingroup signal
 
- \brief
-
- \details
-
+ \brief A signal writes reads from an EmitterType callback function.
  */
 //------------------------------------------------------------------------------
 template <typename DataType, typename EmitterType>
 class Signal : public Requester<DataType> {
 
-  // Constructor public access functions
 public:
   //! constructor
   Signal(std::shared_ptr<EmitterType> i_emitter,
@@ -102,8 +85,6 @@ public:
                                                            i_callback);
   }
 
-  // public access functions
-public:
   //! get the parent
   // EmitterType* getEmitter() {
   //     return static_cast<EmitterType*>(m_emitter); }
@@ -121,8 +102,6 @@ public:
     return d;
   }
 
-  // signal base functions
-public:
   //! get the signal dimension
   virtual unsigned size() {
     DataType d = request();
@@ -135,7 +114,6 @@ public:
     Utility::write(i_log, d);
   }
 
-  //! private members
 private:
   //! Parent
   // void* m_emitter;

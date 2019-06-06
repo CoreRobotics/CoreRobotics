@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_MOTION_HPP_
-#define CR_MOTION_HPP_
+#ifndef CR_MODEL_MOTION_HPP_
+#define CR_MODEL_MOTION_HPP_
 
 #include "Eigen/Dense"
 #include "aspect/Action.hpp"
@@ -26,22 +26,18 @@ namespace ph = std::placeholders;
  \class Motion
  \ingroup model
 
- \brief This class implements a motion model.
-
- \details
- ## Description
- Motion implements a motion model from a supplied dynamics callback function.
- Specifically, MotionModel sets up a container for the discrete time model
+ \brief This class implements a motion model from a supplied dynamics callback 
+ function. Specifically, MotionModel sets up a container for the discrete time
+ set of equations
 
  \f[
  x_{k+1} = f(t_k, x_k, u_k)
  \f]
 
- where \f$x\f$ is the state, \f$u\f$ is the input action, \f$t\f$ is time, and
- \f$k\f$ is a discrete sampling index.
+ where \f$x\f$ is state, \f$u\f$ is input action, \f$t\f$ is time, and \f$k\f$
+ is a discrete sampling index.
 
- To use this class, users must derive
- - `StateType motionCallback(double i_t, StateType i_x, ActionType i_u)`
+ To use this class, users must override Motion::motionCallback
 
  ## References
  [1] J. Crassidis and J. Junkins, "Optimal Estimation of Dynamic Systems",

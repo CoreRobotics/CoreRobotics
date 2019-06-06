@@ -4,12 +4,13 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_MINIMUM_JERK_HPP_
-#define CR_MINIMUM_JERK_HPP_
+#ifndef CR_CONTROL_MINIMUM_JERK_HPP_
+#define CR_CONTROL_MINIMUM_JERK_HPP_
 
 #include "Eigen/Dense"
 #include "aspect/Parameter.hpp"
 #include "core/Types.hpp"
+#include "control/Types.hpp"
 #include "control/TrajectoryGenerator.hpp"
 
 namespace cr {
@@ -17,30 +18,17 @@ namespace control {
 
 //------------------------------------------------------------------------------
 /*!
- \class TrajectoryGenerator
+ \class MinimumJerk
  \ingroup control
 
- \brief This class provides methods for generating minimum jerk
- trajectories from initial and final conditions.
+ \brief This class provides methods for generating unconstrained minimum jerk
+ trajectories from initial and final conditions, i.e. 
 
- \details
- ## Description
- TrajectoryGenerator implements the minimum-jerk trajectory generation
- technique from a set of initial condititions, final conditions, and their
- 1st and 2nd derivatives.
+  \f[
+ u_{k} = \pi(t_k)
+ \f]
 
-
- These methods are available with the trajectory generator:
- - TrajectoryGenerator::solve computes the minimum jerk trajectory for
- the specified initial and final conditions and stores the representation
- of the trajectory internally.
- - TrajectoryGenerator::step computes the values of the trajectory for
- a specified time (if specified) or for the time elapsed since the solve
- method was called (if time is not specified).
-
- ## Example
- This example demonstrates use of the TrajectoryGenerator class.
- \include example_TrajectoryGenerator.cpp
+where \f$u\f$ is a KinematicWaypoint.
 
  ## References
  [1] N. Hogan, "Adaptive control of mechanical impedance by coactivation of
@@ -49,7 +37,7 @@ namespace control {
 
  */
 //------------------------------------------------------------------------------
-class MinimumJerk : public TrajectoryGenerator<Waypoint> {
+class MinimumJerk : public TrajectoryGenerator<KinematicWaypoint> {
 
 public:
   //! Parameters
@@ -73,7 +61,7 @@ public:
                        double i_duration);
 
     //! Solve for the coefficients needed to achieve the trajectory
-    core::Result solve(const Waypoint& i_wp0, const Waypoint& i_wpf);
+    core::Result solve(const KinematicWaypoint& i_wp0, const KinematicWaypoint& i_wpf);
 
   protected:
     /** Polynomial coefficient matrix */
@@ -85,15 +73,15 @@ public:
 
   //! Class constructor
   MinimumJerk(const Parameters &i_parameters,
-              const Waypoint& i_action)
-    : TrajectoryGenerator<Waypoint>(i_action), m_parameters(i_parameters) {}
+              const KinematicWaypoint& i_action)
+    : TrajectoryGenerator<KinematicWaypoint>(i_action), m_parameters(i_parameters) {}
 
   //! Destructor
   virtual ~MinimumJerk() = default;
 
   //! Factory
   static core::StepPtr create(const Parameters &i_parameters,
-                              const Waypoint& i_action) {
+                              const KinematicWaypoint& i_action) {
     return core::StepPtr(new MinimumJerk(i_parameters, i_action));
   }
 
@@ -102,7 +90,7 @@ public:
 public:
 
   //! Callback for the trajectory.
-  Waypoint policyCallback(double i_t) override;
+  KinematicWaypoint policyCallback(double i_t) override;
   
 };
 

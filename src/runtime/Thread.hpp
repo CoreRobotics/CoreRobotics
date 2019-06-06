@@ -11,8 +11,11 @@
 
 namespace cr {
 namespace runtime {
-
-//! Enumerator for specifying thread priority
+ 
+/*!
+Enumerator for specifying thread priority
+\ingroup runtime
+*/
 enum ThreadPriority {
   CR_PRIORITY_LOWEST,
   CR_PRIORITY_LOW,

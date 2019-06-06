@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_UTILITY_HPP_
-#define CR_UTILITY_HPP_
+#ifndef CR_SIGNAL_UTILITY_HPP_
+#define CR_SIGNAL_UTILITY_HPP_
 
 #include "Eigen/Dense"
 #include <iostream>
@@ -34,16 +34,11 @@ enum SignalType {
  \class Utility
  \ingroup signal
 
- \brief This static class provides utilities for supported signal types
-
- \details
- ## Description
-
+ \brief This static class provides utilities for supported signal types.
  */
 //------------------------------------------------------------------------------
 class Utility {
 
-  // Static methods for writing data
 public:
   //! write a supported signal type
   // static void write(std::ostream& i_log, SupportedSignalTypes i_x);
@@ -66,7 +61,6 @@ public:
   //! write vector
   static void write(std::ostream &i_log, Eigen::VectorXd i_x);
 
-  // Static methods for getting data size
 public:
   //! size of the supported signal types
   // static unsigned size(SupportedSignalTypes i_x);

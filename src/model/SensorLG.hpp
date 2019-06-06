@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_SENSOR_LG_HPP_
-#define CR_SENSOR_LG_HPP_
+#ifndef CR_MODEL_SENSOR_LG_HPP_
+#define CR_MODEL_SENSOR_LG_HPP_
 
 #include "Eigen/Dense"
 #include "Sensor.hpp"
@@ -17,14 +17,10 @@ namespace model {
 
 //------------------------------------------------------------------------------
 /*!
- \class SensorLinear
+ \class SensorLG
  \ingroup model
 
- \brief This class implements a linear sensor model.
-
- \details
- ## Description
- SensorLinear implements a snesor model from a supplied linear
+ \brief This class implements a linear sensor model from a supplied linear
  callback function.  Specifically, SensorLinear sets up a container
  for the continuous model
 

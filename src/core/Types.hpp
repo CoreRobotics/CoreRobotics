@@ -4,22 +4,18 @@
  * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
  */
 
-#ifndef CR_TYPES_HPP_
-#define CR_TYPES_HPP_
+#ifndef CR_CORE_TYPES_HPP_
+#define CR_CORE_TYPES_HPP_
 
 #include <string>
 
 namespace cr {
 namespace core {
 
-//---------------------------------------------------------------------
 /*!
- \file Types.hpp
- \brief Enumerator and basic types for common usage across all modules.
- */
-//---------------------------------------------------------------------
-
-//! Result enumerator for consistent operation result flags.
+Result enumerator for consistent operation result flags.
+\ingroup core
+*/
 enum Result {
   CR_RESULT_SUCCESS,
   CR_RESULT_SINGULAR,

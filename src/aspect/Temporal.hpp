@@ -9,19 +9,38 @@
 
 #include "core/Clock.hpp"
 
-//! Classes that maintain sense of time should include this macro
+/*!
+  \def CR_ASPECT_TEMPORAL_READ
+  \ingroup aspect
+  Classes that can read time should include this macro
+
+  \brief This macro adds class members.
+*/
 #define CR_ASPECT_TEMPORAL_READ \
 public: \
   const double getTime() const { return m_time; } \
 protected: \
   double m_time = 0.0;
 
+/*!
+  \def CR_ASPECT_TEMPORAL_READ
+  \ingroup aspect
+  Classes that can read/write time should include this macro
+
+  \brief This macro adds class members.
+*/
 #define CR_ASPECT_TEMPORAL_WRITE \
 CR_ASPECT_TEMPORAL_READ \
 public: \
   void setTime(const double i_time) { m_time = i_time; }
 
-//! Classes that maintain a time step should this macro
+/*!
+  \def CR_ASPECT_TEMPORAL_DISCRETIZED
+  \ingroup aspect
+  Classes that maintain a time step include this macro.
+
+  \brief This macro adds class members.
+*/
 #define CR_ASPECT_TEMPORAL_DISCRETIZED \
 CR_ASPECT_TEMPORAL_READ \
 public: \
@@ -30,7 +49,13 @@ public: \
 protected: \
   double m_dt;
 
-//! Classes that maintain a time step should this macro
+/*!
+  \def CR_ASPECT_TEMPORAL_RUNTIME
+  \ingroup aspect
+  Classes that get time from an interal clock include this macro.
+
+  \brief This macro adds class members.
+*/
 #define CR_ASPECT_TEMPORAL_RUNTIME \
 public: \
   double getTime() { return m_timer.getElapsedTime(); } \

@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_MOTION_LG_HPP_
-#define CR_MOTION_LG_HPP_
+#ifndef CR_MODEL_MOTION_LG_HPP_
+#define CR_MODEL_MOTION_LG_HPP_
 
 #include "Eigen/Dense"
 #include "Motion.hpp"
@@ -20,13 +20,9 @@ namespace model {
  \class MotionLG
  \ingroup model
 
- \brief This class implements a linear Gaussian motion model.
-
- \details
- ## Description
- MotionLG implements a motion model from a supplied dynamics callback
- function.  Specifically, MotionLinear sets up a container for the continuous
- time model
+ \brief This class implements a linear Gaussian motion model from a supplied 
+ dynamics callback function.  Specifically, MotionLinear sets up a container 
+ for the continuous time model
 
  \f[
  \dot{x} = Ax + Bu + Cw

@@ -4,8 +4,8 @@
  * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
  */
 
-#ifndef CR_CLOCK_HPP_
-#define CR_CLOCK_HPP_
+#ifndef CR_CORE_CLOCK_HPP_
+#define CR_CORE_CLOCK_HPP_
 
 #include <chrono>
 

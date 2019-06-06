@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_TRAJECTORY_GENERATOR_HPP_
-#define CR_TRAJECTORY_GENERATOR_HPP_
+#ifndef CR_CONTROL_TRAJECTORY_GENERATOR_HPP_
+#define CR_CONTROL_TRAJECTORY_GENERATOR_HPP_
 
 #include "Eigen/Dense"
 #include "aspect/Temporal.hpp"
@@ -16,15 +16,6 @@
 namespace cr {
 namespace control {
 
-//! Structure defining a waypoint
-struct Waypoint {
-  double time;
-  Eigen::VectorXd position;
-  Eigen::VectorXd velocity;
-  Eigen::VectorXd acceleration;
-  Eigen::VectorXd jerk;
-};
-
 //------------------------------------------------------------------------------
 /*!
  \class TrajectoryGenerator
@@ -34,23 +25,11 @@ struct Waypoint {
  trajectories from initial and final conditions.
 
  \details
- ## Description
- TrajectoryGenerator implements the minimum-jerk trajectory generation
- technique from a set of initial condititions, final conditions, and their
- 1st and 2nd derivatives.
+ The TrajectoryGenerator uses an internal clock to produce a time-based action
 
-
- These methods are available with the trajectory generator:
- - TrajectoryGenerator::solve computes the minimum jerk trajectory for
- the specified initial and final conditions and stores the representation
- of the trajectory internally.
- - TrajectoryGenerator::step computes the values of the trajectory for
- a specified time (if specified) or for the time elapsed since the solve
- method was called (if time is not specified).
-
- ## Example
- This example demonstrates use of the TrajectoryGenerator class.
- \include example_TrajectoryGenerator.cpp
+ \f[
+ u_{k} = \pi(t_k)
+ \f]
 
  ## References
  [1] N. Hogan, "Adaptive control of mechanical impedance by coactivation of

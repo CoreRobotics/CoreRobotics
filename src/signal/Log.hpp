@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_LOG_HPP_
-#define CR_LOG_HPP_
+#ifndef CR_SIGNAL_LOG_HPP_
+#define CR_SIGNAL_LOG_HPP_
 
 #include "Signal.hpp"
 #include "core/Clock.hpp"
@@ -26,11 +26,7 @@ typedef std::shared_ptr<Log> LogPtr;
  \class Log
  \ingroup signal
 
- \brief This class implements a signal logger.
-
- \details
- ## Description
-
+ \brief This class implements a logger that calls signal::SignalBase methods.
  */
 //------------------------------------------------------------------------------
 class Log : public core::Step, public core::Item {

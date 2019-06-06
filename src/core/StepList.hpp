@@ -4,8 +4,8 @@
  * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
  */
 
-#ifndef CR_STEP_LIST_HPP_
-#define CR_STEP_LIST_HPP_
+#ifndef CR_CORE_STEP_LIST_HPP_
+#define CR_CORE_STEP_LIST_HPP_
 
 #include "Step.hpp"
 #include <vector>
@@ -24,11 +24,8 @@ typedef std::shared_ptr<StepList> StepListPtr;
 
  \brief
  This class implements a list of individual step() classes (i.e. a
- a directed graph when signals are included)
-
- \details
- This class implements a step list.  Individual Step() classes are
- executed in the order in which they have been added to the list.
+ a directed run graph when classes are connected).  Step() classes are
+ executed in the order in which they have been attached to the list.
  */
 //---------------------------------------------------------------------
 class StepList : public Step {

@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_STATE_FEEDBACK_HPP_
-#define CR_STATE_FEEDBACK_HPP_
+#ifndef CR_CONTROL_STATE_FEEDBACK_HPP_
+#define CR_CONTROL_STATE_FEEDBACK_HPP_
 
 #include "Eigen/Dense"
 #include "aspect/State.hpp"
@@ -22,7 +22,6 @@ namespace control {
  \brief This class implements a state feedback control policy.
 
  \details
- ## Description
  Policy implements a control law, which computes an action \f$u\f$ from state
  \f$x\f$, i.e.
 

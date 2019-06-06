@@ -18,15 +18,21 @@
 namespace cr {
 namespace runtime {
 
-//! Loop run state
+/*!
+Loop run state
+\ingroup runtime
+*/
 enum RunState {
   CR_RUN_STATE_RUNNING,
   CR_RUN_STATE_STOPPED,
   CR_RUN_STATE_PAUSED,
 };
 
-//! Enumerator for specifying thread priority
-// TODO: https://gitlab.com/powan/CoreRobotics/issues/55
+/*!
+Enumerator for specifying thread priority
+\ingroup runtime
+TODO: https://gitlab.com/powan/CoreRobotics/issues/55
+*/
 enum RealtimePolicy {
   CR_REALTIME_POLICY_SOFT,
   CR_REALTIME_POLICY_HARD

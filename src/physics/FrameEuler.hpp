@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_FRAMEEULER_HPP_
-#define CR_FRAMEEULER_HPP_
+#ifndef CR_PHYSICS_FRAME_EULER_HPP_
+#define CR_PHYSICS_FRAME_EULER_HPP_
 
 #include "Eigen/Dense"
 #include "Frame.hpp"

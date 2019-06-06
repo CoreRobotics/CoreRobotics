@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_DYNAMICAL_SYSTEM_HPP_
-#define CR_DYNAMICAL_SYSTEM_HPP_
+#ifndef CR_MODEL_DYNAMICAL_SYSTEM_HPP_
+#define CR_MODEL_DYNAMICAL_SYSTEM_HPP_
 
 #include "Eigen/Dense"
 #include "Motion.hpp"

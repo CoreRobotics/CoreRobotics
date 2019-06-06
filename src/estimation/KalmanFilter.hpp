@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_KALMAN_FILTER_HPP_
-#define CR_KALMAN_FILTER_HPP_
+#ifndef CR_ESTIMATION_KALMAN_FILTER_HPP_
+#define CR_ESTIMATION_KALMAN_FILTER_HPP_
 
 #include "Eigen/Dense"
 #include "core/Step.hpp"

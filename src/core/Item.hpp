@@ -4,8 +4,8 @@
  * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
  */
 
-#ifndef CR_ITEM_HPP_
-#define CR_ITEM_HPP_
+#ifndef CR_CORE_ITEM_HPP_
+#define CR_CORE_ITEM_HPP_
 
 #include <iostream>
 #include <string>

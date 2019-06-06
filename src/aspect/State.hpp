@@ -7,20 +7,41 @@
 #ifndef CR_ASPECT_STATE_HPP_
 #define CR_ASPECT_STATE_HPP_
 
-//! Classes that have a read only state aspect should include this macro
+/*!
+  \def CR_ASPECT_STATE_READ(StateType)
+  \ingroup aspect
+  Classes that have a read only state aspect should include this macro.
+
+  \brief This macro adds class members.
+  \param StateType  The state data type.
+*/
 #define CR_ASPECT_STATE_READ(StateType) \
 public: \
   const StateType& getState() const { return m_state; } \
 protected: \
   StateType m_state;
 
-//! Classes that have a read/write state aspect should include this macro
+/*!
+  \def CR_ASPECT_STATE_WRITE(StateType)
+  \ingroup aspect
+  Classes that have a read/write state aspect should include this macro.
+
+  \brief This macro adds class members.
+  \param StateType  The state data type.
+*/
 #define CR_ASPECT_STATE_WRITE(StateType) \
 CR_ASPECT_STATE_READ(StateType) \
 public: \
   void setState(const StateType& i_x) { m_state = i_x; }
 
-//! Classes that have a mutable state aspect should include this macro
+/*!
+  \def CR_ASPECT_STATE_MUTABLE(StateType)
+  \ingroup aspect
+  Classes that have a mutable state aspect should include this macro.
+
+  \brief This macro adds class members.
+  \param StateType  The state data type.
+*/
 #define CR_ASPECT_STATE_MUTABLE(StateType) \
 CR_ASPECT_STATE_WRITE(StateType) \
 public: \

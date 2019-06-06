@@ -7,12 +7,12 @@
 #ifndef CR_MODEL_HPP_
 #define CR_MODEL_HPP_
 
-#include "model/Motion.hpp"
 #include "model/DynamicalSystem.hpp"
-#include "model/MotionLinear.hpp"
+#include "model/Motion.hpp"
 #include "model/MotionLG.hpp"
+#include "model/MotionLinear.hpp"
 #include "model/Sensor.hpp"
-#include "model/SensorLinear.hpp"
 #include "model/SensorLG.hpp"
+#include "model/SensorLinear.hpp"
 
 #endif

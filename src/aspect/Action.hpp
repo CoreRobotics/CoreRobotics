@@ -4,8 +4,12 @@
  * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
  */
 
+#ifndef CR_ASPECT_ACTION_HPP_
+#define CR_ASPECT_ACTION_HPP_
+
 /*!
   \def CR_ASPECT_ACTION_READ(ActionType)
+  \ingroup aspect
   Classes that have a read only action aspect should include this macro.
 
   \brief This macro adds class members.
@@ -19,6 +23,7 @@ protected: \
 
 /*!
   \def CR_ASPECT_ACTION_WRITE(ActionType)
+  \ingroup aspect
   Classes that have a read/write action aspect should include this macro
 
   \brief This macro adds class members.
@@ -31,6 +36,7 @@ public: \
 
 /*!
   \def CR_ASPECT_ACTION_MUTABLE(ActionType)
+  \ingroup aspect
   Classes that have a mutable action aspect should include this macro
 
   \brief This macro adds class members.
@@ -40,3 +46,5 @@ public: \
 CR_ASPECT_ACTION_WRITE(ActionType) \
 public: \
   ActionType* action() { return &m_action; }
+
+#endif

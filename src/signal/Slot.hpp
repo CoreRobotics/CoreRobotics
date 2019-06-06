@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_SLOT_HPP_
-#define CR_SLOT_HPP_
+#ifndef CR_SIGNAL_SLOT_HPP_
+#define CR_SIGNAL_SLOT_HPP_
 
 #include "Signal.hpp"
 #include "core/Step.hpp"
@@ -20,16 +20,12 @@ namespace signal {
  \class Slot
  \ingroup signal
 
- \brief
-
- \details
-
+ \brief A Slot writes data from a signal::Signal to a ReceiverType callback.
  */
 //------------------------------------------------------------------------------
 template <typename DataType, typename ReceiverType>
 class Slot : public core::Step {
 
-  // constructor
 public:
   //! constructor
   Slot(std::shared_ptr<Requester<DataType>> i_signal,
@@ -50,8 +46,6 @@ public:
                                                           i_callback);
   }
 
-  // public access functions
-public:
   //! get the receiver
   // ReceiverType* getReceiver() { return
   // static_cast<ReceiverType*>(m_receiver); }
@@ -69,7 +63,6 @@ public:
     m_mutex.unlock();
   }
 
-  // inherited access members
 private:
   //! Receiver
   // void* m_receiver;

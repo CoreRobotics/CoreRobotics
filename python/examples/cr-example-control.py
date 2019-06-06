@@ -13,14 +13,14 @@ import numpy as np
 # define starting and ending waypoints
 dim = 2
 
-wp0 = CoreRobotics.Waypoint(dim)
+wp0 = CoreRobotics.KinematicWaypoint(dim)
 wp0.time = 0
 wp0.position = np.array([0, 0])
 wp0.velocity = np.array([-2, 0])
 wp0.acceleration = np.array([0, 1])
 wp0.jerk = np.array([0, 0])
 
-wp1 = CoreRobotics.Waypoint(dim)
+wp1 = CoreRobotics.KinematicWaypoint(dim)
 wp1.time = 5
 wp1.position = np.array([1, 2])
 wp1.velocity = np.array([-3, 0])

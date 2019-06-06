@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_MATRIX_HPP_
-#define CR_MATRIX_HPP_
+#ifndef CR_MATH_MATRIX_HPP_
+#define CR_MATH_MATRIX_HPP_
 
 #include "Eigen/Dense"
 #include "core/Types.hpp"
@@ -20,10 +20,6 @@ namespace math {
 
 \brief This class implements matrix and vector math.
 
-\details
-## Description
-This class implements matrix and vector math.
-
  - Matrix::reducedVector returns a sub vector
  - Matrix::reducedMatrix returns a sub matrix
  - Matrix::svd performs singular value decomposition.
@@ -34,10 +30,6 @@ This class implements matrix and vector math.
  - Matrix::normL1 takes the L1 norm of a vector.
  - Matrix::normL2 takes the L2 norm of a vector.
  - Matrix::normLinf takes the L-infinity norm of a vector.
-
-## Example
-This example shows usage of the math functions.
-\include example_CRMath.cpp
 
 ## References
 [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,

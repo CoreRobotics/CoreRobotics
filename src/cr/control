@@ -7,10 +7,11 @@
 #ifndef CR_CONTROL_HPP_
 #define CR_CONTROL_HPP_
 
+#include "control/MinimumJerk.hpp"
 #include "control/Policy.hpp"
 #include "control/StateFeedback.hpp"
 #include "control/TrajectoryGenerator.hpp"
-#include "control/MinimumJerk.hpp"
+#include "control/Types.hpp"
 // #include "control/InverseKinematics.hpp"
 // #include "control/NullSpace.hpp"
 // #include "control/HardLimits.hpp"

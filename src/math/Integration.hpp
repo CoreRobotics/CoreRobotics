@@ -4,8 +4,8 @@
  * http://www.corerobotics.org
  */
 
-#ifndef CR_INTEGRATION_HPP_
-#define CR_INTEGRATION_HPP_
+#ifndef CR_MATH_INTEGRATION_HPP_
+#define CR_MATH_INTEGRATION_HPP_
 
 #include "Eigen/Dense"
 #include "core/Types.hpp"
@@ -20,16 +20,8 @@ namespace math {
 
 \brief This class implements numerical integration methods.
 
-\details
-## Description
-This class implements numerical integration methods.
-
 - Integration::forwardEulerStep performs forward Euler integration.
 - Integration::rungeKuttaStep performs 4th order Runga-Kutta integration.
-
-## Example
-This example shows usage of the math functions.
-\include example_CRMath.cpp
 
 ## References
 [1] Kreyszig, E., Advanced Engineering Mathematics, Ed.9,

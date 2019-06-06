@@ -7,20 +7,41 @@
 #ifndef CR_ASPECT_MEASUREMENT_HPP_
 #define CR_ASPECT_MEASUREMENT_HPP_
 
-//! Classes that have a read only measurement aspect should include this macro
+/*!
+  \def CR_ASPECT_MEASUREMENT_READ(MeasurementType)
+  \ingroup aspect
+  Classes that have a read only measurement aspect should include this macro.
+
+  \brief This macro adds class members.
+  \param MeasurementType  The measurement data type.
+*/
 #define CR_ASPECT_MEASUREMENT_READ(MeasurementType) \
 public: \
   const MeasurementType& getMeasurement() const { return m_measurement; } \
 protected: \
   MeasurementType m_measurement;
 
-//! Classes that have a read/write measurement aspect should include this macro
+/*!
+  \def CR_ASPECT_MEASUREMENT_WRITE(MeasurementType)
+  \ingroup aspect
+  Classes that have a read/write measurement aspect should include this macro.
+
+  \brief This macro adds class members.
+  \param MeasurementType  The measurement data type.
+*/
 #define CR_ASPECT_MEASUREMENT_WRITE(MeasurementType) \
 CR_ASPECT_MEASUREMENT_READ(MeasurementType) \
 public: \
   void setMeasurement(const MeasurementType& i_z) { m_measurement = i_z; }
 
-//! Classes that have a mutable measurement aspect should include this macro
+/*!
+  \def CR_ASPECT_MEASUREMENT_MUTABLE(MeasurementType)
+  \ingroup aspect
+  Classes that have a mutable measurement aspect should include this macro.
+
+  \brief This macro adds class members.
+  \param MeasurementType  The measurement data type.
+*/
 #define CR_ASPECT_MEASUREMENT_MUTABLE(MeasurementType) \
 CR_ASPECT_MEASUREMENT_WRITE(MeasurementType) \
 public: \
