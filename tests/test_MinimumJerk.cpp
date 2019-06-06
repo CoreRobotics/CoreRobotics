@@ -17,8 +17,8 @@ using namespace cr::core;
 // Test solve method
 //
 TEST(MinimumJerk, Solve) {
-  MinimumJerk::Parameters tgParams(2);
-  Waypoint wp0, wpf;
+  MinimumJerk::Parameters params(2);
+  KinematicWaypoint wp0, wpf;
 
   // Initial conditions
   Eigen::Vector2d x0, v0, a0;
@@ -34,7 +34,7 @@ TEST(MinimumJerk, Solve) {
   af << 0, 0;
 
   // Check the solve function
-  Result result = tgParams.solve(x0, v0, a0, xf, vf, af, tf);
+  Result result = params.solve(x0, v0, a0, xf, vf, af, tf);
   EXPECT_EQ(result, CR_RESULT_SUCCESS);
 
   // Now check the solve function with the waypoints
@@ -47,7 +47,7 @@ TEST(MinimumJerk, Solve) {
   wpf.velocity = vf;
   wpf.acceleration = af;
   wpf.time = tf;
-  result = tgParams.solve(wp0, wpf);
+  result = params.solve(wp0, wpf);
   EXPECT_EQ(result, CR_RESULT_SUCCESS);
 }
 
@@ -55,8 +55,8 @@ TEST(MinimumJerk, Solve) {
 // Test step methods
 //
 TEST(MinimumJerk, Step) {
-  MinimumJerk::Parameters tgParams(2);
-  Waypoint wp;
+  MinimumJerk::Parameters params(2);
+  KinematicWaypoint wp;
 
   // Initial conditions
   Eigen::Vector2d x0, v0, a0;
@@ -75,10 +75,10 @@ TEST(MinimumJerk, Step) {
   Clock timer;
 
   // solve the trajectory
-  tgParams.solve(x0, v0, a0, xf, vf, af, tf);
+  params.solve(x0, v0, a0, xf, vf, af, tf);
 
   // Check the internal timer
-  MinimumJerk mjt(tgParams, wp);
+  MinimumJerk mjt(params, wp);
   mjt.onStart();
   timer.startTimer();
   timer.sleep(tf);
