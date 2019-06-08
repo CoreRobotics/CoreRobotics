@@ -57,7 +57,8 @@ MotionLinear::MotionLinear(const Parameters &i_parameters,
  \param[in] i_t - time t(k)
  \param[in] i_x - state x(k)
  \param[in] i_u - input u(k)
- \return - the state derivative \dot{x} or next state x_{k+1}, given ModelType
+ \return - the state derivative \f$\dot{x}\f$ or next state \f$x_{k+1}\f$, 
+           given ModelType
  */
 //------------------------------------------------------------------------------
 Eigen::VectorXd MotionLinear::motionCallback(double i_t, Eigen::VectorXd i_x,
@@ -65,5 +66,5 @@ Eigen::VectorXd MotionLinear::motionCallback(double i_t, Eigen::VectorXd i_x,
   return m_parameters.A() * i_x + m_parameters.B() * i_u;
 }
 
-} // namespace model
-} // namepsace cr
+}  // namespace model
+}  // namepsace cr

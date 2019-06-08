@@ -33,7 +33,7 @@ namespace ph = std::placeholders;
  z_k = h(t_k, x_k)
  \f]
 
- where \f$x\f$ is state, \f$t\f$ is time, \f$z\$ is measurement, and \f$k\f$
+ where \f$x\f$ is state, \f$t\f$ is time, \f$z\f$ is measurement, and \f$k\f$
  is a discrete sampling index.
 
  ## References

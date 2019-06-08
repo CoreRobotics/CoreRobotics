@@ -28,7 +28,7 @@ namespace model {
  z = Hx
  \f]
 
- where \f$x\f$ is the state, \f$t\f$ is time, \f$z\$ is the measurement, and
+ where \f$x\f$ is the state, \f$t\f$ is time, \f$z\f$ is the measurement, and
 \f$k\f$ is a discrete sampling index.
 
  ## References
