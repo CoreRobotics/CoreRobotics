@@ -72,7 +72,6 @@ public:
   //! constructor
   Signal(std::shared_ptr<EmitterType> i_emitter,
          DataType (EmitterType::*i_callback)()) {
-    // m_emitter = static_cast<void*>(i_emitter);
     m_emitter = i_emitter;
     m_callback = reinterpret_cast<void *(EmitterType::*)()>(i_callback);
   }
@@ -86,19 +85,15 @@ public:
   }
 
   //! get the parent
-  // EmitterType* getEmitter() {
-  //     return static_cast<EmitterType*>(m_emitter); }
   std::shared_ptr<EmitterType> getEmitter() { return m_emitter; }
 
   //! request data
   virtual DataType request() {
-    // EmitterType* p = static_cast<EmitterType*>(m_emitter);
     DataType (EmitterType::*fcn)() =
         reinterpret_cast<DataType (EmitterType::*)()>(m_callback);
-    // m_mutex.lock();
-    // DataType d = (p->*fcn)();
+    m_mutex.lock();
     DataType d = (m_emitter.get()->*fcn)();
-    // m_mutex.unlock();
+    m_mutex.unlock();
     return d;
   }
 
@@ -116,14 +111,13 @@ public:
 
 private:
   //! Parent
-  // void* m_emitter;
   std::shared_ptr<EmitterType> m_emitter;
 
   //! callback request functions
   void *(EmitterType::*m_callback)();
 
   //! mutex member
-  // std::recursive_mutex m_mutex;
+  std::recursive_mutex m_mutex;
 };
 
 } // namespace signal
