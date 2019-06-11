@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# defaults
+py_version=python3
+dir="$( cd "$(dirname "$0")" ; pwd -P )"
+
+# check input args
+while [ "$1" != "" ]; do
+  case $1 in
+    -3 | --python3 )
+      shift
+      py_version='python3'
+      ;;
+    -2 | --python2 )
+      shift
+      py_version='python'
+      ;;
+    esac
+    shift
+done
+
+for f in $dir/*.py; do
+  echo "Running $f ..."
+  $py_version "$f"
+done

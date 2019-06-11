@@ -1,0 +1,13 @@
+/*
+ * Copyright (c) 2017-2019, CoreRobotics.  All rights reserved.
+ * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
+ * http://www.corerobotics.org
+ */
+
+#ifndef CR_ESTIMATION_HPP_
+#define CR_ESTIMATION_HPP_
+
+// #include "estimation/KalmanFilter.hpp"
+// #include "estimation/ParticleFilter.hpp"
+
+#endif

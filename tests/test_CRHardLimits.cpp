@@ -39,212 +39,222 @@ POSSIBILITY OF SUCH DAMAGE.
 */
 //=====================================================================
 
-#include <iostream>
 #include "CoreRobotics.hpp"
 #include "gtest/gtest.h"
+#include <iostream>
 
 using namespace CoreRobotics;
 
 CREulerMode convention = CR_EULER_MODE_XYZ;
 
-Eigen::Matrix<bool, 6, 1> poseElements = (Eigen::Matrix<bool, 6, 1>() << 1, 1, 0, 0, 0, 0).finished();
+Eigen::Matrix<bool, 6, 1> poseElements =
+    (Eigen::Matrix<bool, 6, 1>() << 1, 1, 0, 0, 0, 0).finished();
 
 struct robotData {
-	CRHardLimits solver;
-	CRManipulator* robot;
-	int toolIndex; };
+  CRHardLimits solver;
+  CRManipulator *robot;
+  int toolIndex;
+};
 
 robotData setup_solver(void) {
-	// Define a robot
-	CRManipulator* MyRobot = new CRManipulator();
+  // Define a robot
+  CRManipulator *MyRobot = new CRManipulator();
 
-	// Define several frames
-	CRFrameEuler* F0 = new CRFrameEuler(0, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F1 = new CRFrameEuler(2, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F2 = new CRFrameEuler(-4, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
-	CRFrameEuler* F3 = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
+  // Define several frames
+  CRFrameEuler *F0 =
+      new CRFrameEuler(0, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
+  CRFrameEuler *F1 =
+      new CRFrameEuler(2, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
+  CRFrameEuler *F2 =
+      new CRFrameEuler(-4, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
+  CRFrameEuler *F3 =
+      new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_ANG_G);
 
-	// Define the robot links
-	CRRigidBody* Link0 = new CRRigidBody(F0);
-	CRRigidBody* Link1 = new CRRigidBody(F1);
-	CRRigidBody* Link2 = new CRRigidBody(F2);
-	CRRigidBody* Link3 = new CRRigidBody(F3);
+  // Define the robot links
+  CRRigidBody *Link0 = new CRRigidBody(F0);
+  CRRigidBody *Link1 = new CRRigidBody(F1);
+  CRRigidBody *Link2 = new CRRigidBody(F2);
+  CRRigidBody *Link3 = new CRRigidBody(F3);
 
-	// Add the links to the robot
-	MyRobot->addLink(Link0);
-	MyRobot->addLink(Link1);
-	MyRobot->addLink(Link2);
-	int linkIndex = MyRobot->addLink(Link3);
+  // Add the links to the robot
+  MyRobot->addLink(Link0);
+  MyRobot->addLink(Link1);
+  MyRobot->addLink(Link2);
+  int linkIndex = MyRobot->addLink(Link3);
 
-	// Create a tool and add it
-	CRFrameEuler* Tool = new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_NONE);
-	int toolIndex = MyRobot->addTool(linkIndex, Tool);
+  // Create a tool and add it
+  CRFrameEuler *Tool =
+      new CRFrameEuler(1, 0, 0, 0, 0, 0, convention, CR_EULER_FREE_NONE);
+  int toolIndex = MyRobot->addTool(linkIndex, Tool);
 
-	// Initialize a Hard Limits solver
-	CRHardLimits solver = CRHardLimits(*MyRobot, toolIndex, convention, true);
+  // Initialize a Hard Limits solver
+  CRHardLimits solver = CRHardLimits(*MyRobot, toolIndex, convention, true);
 
-	// Change IK solver maximum iterations
-	solver.getIKSolver()->setMaxIter(20);
+  // Change IK solver maximum iterations
+  solver.getIKSolver()->setMaxIter(20);
 
-	// Set the pose elements
-	solver.setPoseElements(poseElements);
+  // Set the pose elements
+  solver.setPoseElements(poseElements);
 
-	robotData returnStruct = {solver, MyRobot, toolIndex};
-	//returnStruct.solver = solver;
-	//returnStruct.robot = MyRobot;
-	//returnStruct.toolIndex = toolIndex;
-	return returnStruct;
+  robotData returnStruct = {solver, MyRobot, toolIndex};
+  // returnStruct.solver = solver;
+  // returnStruct.robot = MyRobot;
+  // returnStruct.toolIndex = toolIndex;
+  return returnStruct;
 }
 
 TEST(CRHardLimits, NoLimits) {
-	robotData data = setup_solver();
-	
-	CRHardLimits solver = data.solver;
-	CRManipulator* MyRobot = data.robot;
-	int toolIndex = data.toolIndex;
+  robotData data = setup_solver();
 
-	// Disable the nullspace solver for now
-	solver.useNullSpace(false);
+  CRHardLimits solver = data.solver;
+  CRManipulator *MyRobot = data.robot;
+  int toolIndex = data.toolIndex;
 
-	// Define the initial configuration
-	Eigen::VectorXd q(4), q0(4);
-	q0 << 0, 0.1, 0.2, 0.3;
+  // Disable the nullspace solver for now
+  solver.useNullSpace(false);
 
-	// Define and set the goal location
-	Eigen::VectorXd goal(2);
-	goal << 0, 4.5;
-	solver.setToolPose(goal);
+  // Define the initial configuration
+  Eigen::VectorXd q(4), q0(4);
+  q0 << 0, 0.1, 0.2, 0.3;
 
-	// Run the solver
-	q = q0;
-	for (int i = 0; i < 5; i++) {
-		solver.setQ0(q);
-		solver.solve(q);
-	}
+  // Define and set the goal location
+  Eigen::VectorXd goal(2);
+  goal << 0, 4.5;
+  solver.setToolPose(goal);
 
-	// Get tool pose
-	MyRobot->setConfiguration(q);
-	Eigen::VectorXd toolPose = MyRobot->getToolPose(toolIndex, convention, poseElements);
-	
-	// Tests
-	for (int i = 0; i < toolPose.size(); i++) {
-		EXPECT_NEAR(goal(i), toolPose(i), 1e-3);
-	}
+  // Run the solver
+  q = q0;
+  for (int i = 0; i < 5; i++) {
+    solver.setQ0(q);
+    solver.solve(q);
+  }
+
+  // Get tool pose
+  MyRobot->setConfiguration(q);
+  Eigen::VectorXd toolPose =
+      MyRobot->getToolPose(toolIndex, convention, poseElements);
+
+  // Tests
+  for (int i = 0; i < toolPose.size(); i++) {
+    EXPECT_NEAR(goal(i), toolPose(i), 1e-3);
+  }
 }
 
 TEST(CRHardLimits, Limits) {
-	robotData data = setup_solver();
-	
-	CRHardLimits solver = data.solver;
-	CRManipulator* MyRobot = data.robot;
-	int toolIndex = data.toolIndex;
+  robotData data = setup_solver();
 
-	// Set jont limits
-	solver.setJointLimits(2, -1, 1);
+  CRHardLimits solver = data.solver;
+  CRManipulator *MyRobot = data.robot;
+  int toolIndex = data.toolIndex;
 
-	// Disable the nullspace solver for now
-	solver.useNullSpace(false);
+  // Set jont limits
+  solver.setJointLimits(2, -1, 1);
 
-	// Define the initial configuration
-	Eigen::VectorXd q(4), q0(4);
-	q0 << 0, 0.1, 0.2, 0.3;
+  // Disable the nullspace solver for now
+  solver.useNullSpace(false);
 
-	// Define and set the goal location
-	Eigen::VectorXd goal(2);
-	goal << 0, 4.5;
-	solver.setToolPose(goal);
+  // Define the initial configuration
+  Eigen::VectorXd q(4), q0(4);
+  q0 << 0, 0.1, 0.2, 0.3;
 
-	// Run the solver
-	q = q0;
-	for (int i = 0; i < 5; i++) {
-		solver.setQ0(q);
-		solver.solve(q);
-	}
+  // Define and set the goal location
+  Eigen::VectorXd goal(2);
+  goal << 0, 4.5;
+  solver.setToolPose(goal);
 
-	// Get tool pose
-	MyRobot->setConfiguration(q);
-	Eigen::VectorXd toolPose = MyRobot->getToolPose(toolIndex, convention, poseElements);
-	
-	// Tests
-	EXPECT_GT(1, q(2));
-	EXPECT_LT(-1, q(2));
-	for (int i = 0; i < toolPose.size(); i++) {
-		EXPECT_NEAR(goal(i), toolPose(i), 1e-3);
-	}
+  // Run the solver
+  q = q0;
+  for (int i = 0; i < 5; i++) {
+    solver.setQ0(q);
+    solver.solve(q);
+  }
+
+  // Get tool pose
+  MyRobot->setConfiguration(q);
+  Eigen::VectorXd toolPose =
+      MyRobot->getToolPose(toolIndex, convention, poseElements);
+
+  // Tests
+  EXPECT_GT(1, q(2));
+  EXPECT_LT(-1, q(2));
+  for (int i = 0; i < toolPose.size(); i++) {
+    EXPECT_NEAR(goal(i), toolPose(i), 1e-3);
+  }
 }
 
 TEST(CRHardLimits, NullSpace) {
-	robotData data = setup_solver();
-	
-	CRHardLimits solver = data.solver;
-	CRManipulator* MyRobot = data.robot;
-	int toolIndex = data.toolIndex;
+  robotData data = setup_solver();
 
-	// Set jont limits
-	solver.setJointLimits(2, -1, 1);
+  CRHardLimits solver = data.solver;
+  CRManipulator *MyRobot = data.robot;
+  int toolIndex = data.toolIndex;
 
-	// Define the initial configuration
-	Eigen::VectorXd q(4), q0(4);
-	q0 << 0, 0.1, 0.2, 0.3;
+  // Set jont limits
+  solver.setJointLimits(2, -1, 1);
 
-	// Define and set the goal location
-	Eigen::VectorXd goal(2);
-	goal << 0, 4.5;
-	solver.setToolPose(goal);
+  // Define the initial configuration
+  Eigen::VectorXd q(4), q0(4);
+  q0 << 0, 0.1, 0.2, 0.3;
 
-	// Set the desired nullspace joint motion
-	Eigen::VectorXd desiredJointMotion(4);
-	desiredJointMotion << -1, 0, 0, 0;
-	solver.setJointMotion(desiredJointMotion);
+  // Define and set the goal location
+  Eigen::VectorXd goal(2);
+  goal << 0, 4.5;
+  solver.setToolPose(goal);
 
-	// Run the solver
-	q = q0;
-	for (int i = 0; i < 5; i++) {
-		solver.setQ0(q);
-		solver.solve(q);
-	}
+  // Set the desired nullspace joint motion
+  Eigen::VectorXd desiredJointMotion(4);
+  desiredJointMotion << -1, 0, 0, 0;
+  solver.setJointMotion(desiredJointMotion);
 
-	// Get tool pose
-	MyRobot->setConfiguration(q);
-	Eigen::VectorXd toolPose = MyRobot->getToolPose(toolIndex, convention, poseElements);
-	
-	// Tests
-	EXPECT_GT(1, q(2));
-	EXPECT_LT(-1, q(2));
-	for (int i = 0; i < toolPose.size(); i++) {
-		EXPECT_NEAR(goal(i), toolPose(i), 1e-3);
-	}
+  // Run the solver
+  q = q0;
+  for (int i = 0; i < 5; i++) {
+    solver.setQ0(q);
+    solver.solve(q);
+  }
+
+  // Get tool pose
+  MyRobot->setConfiguration(q);
+  Eigen::VectorXd toolPose =
+      MyRobot->getToolPose(toolIndex, convention, poseElements);
+
+  // Tests
+  EXPECT_GT(1, q(2));
+  EXPECT_LT(-1, q(2));
+  for (int i = 0; i < toolPose.size(); i++) {
+    EXPECT_NEAR(goal(i), toolPose(i), 1e-3);
+  }
 }
 
 TEST(CRHardLimits, BadIC) {
-	robotData data = setup_solver();
-	
-	CRHardLimits solver = data.solver;
-	CRManipulator* MyRobot = data.robot;
-	int toolIndex = data.toolIndex;
+  robotData data = setup_solver();
 
-	// Set jont limits
-	solver.setJointLimits(2, -1, 1);
+  CRHardLimits solver = data.solver;
+  CRManipulator *MyRobot = data.robot;
+  int toolIndex = data.toolIndex;
 
-	// Disable the nullspace solver for now
-	solver.useNullSpace(false);
+  // Set jont limits
+  solver.setJointLimits(2, -1, 1);
 
-	// Define the initial configuration
-	Eigen::VectorXd q(4), q0(4);
-	q0 << 0, 0.1, M_PI, 0.3;
+  // Disable the nullspace solver for now
+  solver.useNullSpace(false);
 
-	// Define and set the goal location
-	Eigen::VectorXd goal(2);
-	goal << 0, 4.5;
-	solver.setToolPose(goal);
+  // Define the initial configuration
+  Eigen::VectorXd q(4), q0(4);
+  q0 << 0, 0.1, M_PI, 0.3;
 
-	// Run the solver
-	solver.setQ0(q0);
-	CRResult result = solver.solve(q);
-	
-	// Tests
-	EXPECT_EQ(CR_RESULT_BAD_IC, result);
-	for (int i = 0; i < q.size(); i++) {
-		EXPECT_DOUBLE_EQ(q0(i), q(i));
-	}
+  // Define and set the goal location
+  Eigen::VectorXd goal(2);
+  goal << 0, 4.5;
+  solver.setToolPose(goal);
+
+  // Run the solver
+  solver.setQ0(q0);
+  CRResult result = solver.solve(q);
+
+  // Tests
+  EXPECT_EQ(CR_RESULT_BAD_IC, result);
+  for (int i = 0; i < q.size(); i++) {
+    EXPECT_DOUBLE_EQ(q0(i), q(i));
+  }
 }
