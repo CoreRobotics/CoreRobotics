@@ -4,7 +4,8 @@
 *.vcxproj
 *.vcxproj.filters
 *.VC.opendb
-.vs
+*.vs
+*.vscode
 Debug
 # x64
 # x86
@@ -13,7 +14,8 @@ Win32
 # temp & build folders
 DerivedData
 obj
-build
+build*
+lib
 html
 bin
 *.dir

@@ -1,135 +1,84 @@
-image: camerondevine/corerobotics:latest
+image: owan/corerobotics:latest
 
 stages:
-#   - wrap
    - build
    - test
    - deploy
 
-# python-wrappers:
-#   stage: wrap
-#   script:
-#    - mkdir build
-#    - cd build
-#    - cmake ../ -Dpython=only-swig
-#    - make
-#   artifacts:
-#     paths:
-#      - $CI_PROJECT_DIR/python/swig/CoreRoboticsPYTHON_wrap.cxx
-#      - $CI_PROJECT_DIR/python/lib/CoreRobotics.py
-#     expire_in: 1 week
-
-# matlab-wrappers:
-#   stage: wrap
-#   script:
-#    - mkdir build
-#    - cd build
-#    - cmake ../ -Dmatlab=only-swig
-#    - make
-#   artifacts:
-#     paths:
-#      - $CI_PROJECT_DIR/matlab/swig/CoreRoboticsMATLAB_wrap.cxx
-#      - $CI_PROJECT_DIR/matlab/lib/*.m
-#      - $CI_PROJECT_DIR/matlab/lib/+CoreRobotics/*.m
-#     expire_in: 1 week
-
 build-lib:
   stage: build
   script: 
-   - mkdir build
-   - cd build
-   - cmake -Dfull=true ..
+   - mkdir build && cd build
+   - cmake ..
    - make
-  dependencies: []
   artifacts:
     paths:
      - $CI_PROJECT_DIR/lib/*
     expire_in: 1 week
 
-# build-python2:
-#   stage: build
-#   script:
-#    - mkdir build
-#    - cd build
-#    - cmake ../ -Dpython=2
-#    - make
-#   dependencies: []
-#   artifacts:
-#     paths:
-#      - $CI_PROJECT_DIR/python/examples/CoreRobotics.py
-#      - $CI_PROJECT_DIR/python/examples/_CoreRobotics.so
-#     expire_in: 1 week
+build-python-2:
+  stage: build
+  script:
+    - mkdir bin
+    - mkdir build && cd build
+    - cmake -Dpython=2 ..
+    - make
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/lib/*
+      - $CI_PROJECT_DIR/lib/python/*
+      - $CI_PROJECT_DIR/bin/*
+    expire_in: 1 week
 
-# build-python3:
-#   stage: build
-#   script:
-#    - mkdir build
-#    - cd build
-#    - cmake ../ -Dpython=3
-#    - make
-#   dependencies: []
-#   artifacts:
-#     paths:
-#      - $CI_PROJECT_DIR/python/examples/CoreRobotics.py
-#      - $CI_PROJECT_DIR/python/examples/_CoreRobotics.so
-#     expire_in: 1 week
+build-python-3:
+  stage: build
+  script:
+    - mkdir bin
+    - mkdir build && cd build
+    - cmake -Dpython=3 ..
+    - make
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/lib/*
+      - $CI_PROJECT_DIR/lib/python/*
+      - $CI_PROJECT_DIR/bin/*
+    expire_in: 1 week
 
-# build-python2-noswig:
-#   stage: build
-#   script:
-#    - mkdir build
-#    - cd build
-#    - cmake ../ -Dpython=2 -Dnoswig=true
-#    - make
-#   dependencies:
-#    - python-wrappers
-#   artifacts:
-#     paths:
-#      - $CI_PROJECT_DIR/python/examples/CoreRobotics.py
-#      - $CI_PROJECT_DIR/python/examples/_CoreRobotics.so
-#     expire_in: 1 week
+build-test:
+  stage: build
+  script:
+    - mkdir build && cd build
+    - cmake -Dtests=true ..
+    - make
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/lib/*
+      - $CI_PROJECT_DIR/bin/*
+    expire_in: 1 week
 
-# build-python3-noswig:
-#   stage: build
-#   script:
-#    - mkdir build
-#    - cd build
-#    - cmake ../ -Dpython=3 -Dnoswig=true
-#    - make
-#   dependencies:
-#    - python-wrappers
-#   artifacts:
-#     paths:
-#      - $CI_PROJECT_DIR/python/examples/CoreRobotics.py
-#      - $CI_PROJECT_DIR/python/examples/_CoreRobotics.so
-#     expire_in: 1 week
+test-python-2:
+  stage: test
+  script:
+    - $CI_PROJECT_DIR/bin/cr-examples --python2
+  dependencies:
+    - build-python-2
+
+test-python-3:
+  stage: test
+  script:
+    - $CI_PROJECT_DIR/bin/cr-examples --python3
+  dependencies:
+    - build-python-3
 
 test-lib:
   stage: test
   script:
-   - mkdir build
-   - cd build
-   - cmake -Dfull=true -Dtests=true ..
-   - make
-   - $CI_PROJECT_DIR/bin/cr-tests
+    - $CI_PROJECT_DIR/bin/cr-tests
   dependencies:
-   - build-lib
+    - build-test
 
-test-examples:
-  stage: test
-  script:
-   - mkdir build
-   - cd build
-   - cmake -Dfull=true -Dexamples=true ..
-   - make
-   - for file in $CI_PROJECT_DIR/bin/*; do
-   - $file
-   - done
-  dependencies:
-   - build-lib
-
-test-install:
-  stage: test
+deploy-install:
+  stage: deploy
   script:
     - mkdir build && cd build
     - cmake -Dtests=true ..
@@ -137,12 +86,11 @@ test-install:
     - ldconfig /usr/local/lib
     - cr-tests
   dependencies:
-    - build-lib
+    - build-test
 
-test-coverage:
-  stage: test
+deploy-coverage:
+  stage: deploy
   script:
-    - apt-get update && apt-get -y install lcov curl
     - mkdir build && cd build
     - cmake -Dreport=true ..
     - cmake --build . --config Debug
@@ -156,75 +104,3 @@ test-coverage:
     - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
   dependencies:
     - build-lib
-
-# test-python2:
-#   stage: test
-#   script:
-#    - cd $CI_PROJECT_DIR/python/examples
-#    - for file in example*.py; do
-#    - python2 $file
-#    - done
-#   dependencies:
-#    - build-python2
-
-# test-python3:
-#   stage: test
-#   script:
-#    - cd $CI_PROJECT_DIR/python/examples
-#    - for file in example*.py; do
-#    - python3 $file
-#    - done
-#   dependencies:
-#    - build-python3
-
-# test-python2-noswig:
-#   stage: test
-#   script:
-#    - cd $CI_PROJECT_DIR/python/examples
-#    - for file in example*.py; do
-#    - python2 $file
-#    - done
-#   dependencies:
-#    - build-python2-noswig
-
-# test-python3-noswig:
-#   stage: test
-#   script:
-#    - cd $CI_PROJECT_DIR/python/examples
-#    - for file in example*.py; do
-#    - python3 $file
-#    - done
-#   dependencies:
-#    - build-python3-noswig
-
-# deploy-wrappers:
-#   stage: deploy
-#  script:
-#   - eval $(ssh-agent -s)
-#   - ssh-add <(echo "$SSH_PRIVATE_KEY")
-#   - mkdir -p ~/.ssh
-#   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-#   - cd $CI_PROJECT_DIR
-#   - if [[ -n $(git status -s) ]]; then
-#   - git config user.email "$GITLAB_USER_EMAIL"
-#   - git config user.name "$GITLAB_USER_NAME"
-#   - git add python/swig/CoreRoboticsPYTHON_wrap.cxx
-#   - git add python/lib/CoreRobotics.py
-#   - git add matlab/swig/CoreRoboticsMATLAB_wrap.cxx
-#   - git add matlab/lib/+CoreRobotics/*
-#   - git stash
-#   - git remote add ssh git@gitlab.com:$CI_PROJECT_PATH.git
-#   - git fetch ssh $CI_COMMIT_REF_NAME
-#   - git checkout ssh/$CI_COMMIT_REF_NAME
-#   - git stash apply
-#   - git add python/swig/CoreRoboticsPYTHON_wrap.cxx
-#   - git add python/lib/CoreRobotics.py
-#   - git add matlab/swig/CoreRoboticsMATLAB_wrap.cxx
-#   - git add matlab/lib/+CoreRobotics/*
-#   - git commit -m "swig wrappers [ci skip]"
-#    - git push ssh HEAD:$CI_COMMIT_REF_NAME
-#    - fi
-#   dependencies:
-#    - python-wrappers
-#    - matlab-wrappers
-#   allow_failure: true

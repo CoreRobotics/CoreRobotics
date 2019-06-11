@@ -1,51 +1,15 @@
-//=====================================================================
 /*
-Software License Agreement (BSD-3-Clause License)
-Copyright (c) 2019, CoreRobotics.
-All rights reserved.
+ * Copyright (c) 2017-2019, CoreRobotics.  All rights reserved.
+ * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
+ * http://www.corerobotics.org
+ */
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-
-* Redistributions of source code must retain the above copyright
-notice, this list of conditions and the following disclaimer.
-
-* Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-
-* Neither the name of CoreRobotics nor the names of its contributors
-may be used to endorse or promote products derived from this
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.
-
-\project CoreRobotics Project
-\url     www.corerobotics.org
-\author  Parker Owan
-
-*/
-//=====================================================================
-
-#include <iostream>
+#include "gtest/gtest.h"
+#include <cr/core>
+#include <cr/physics>
 #include <cr/signal>
 #include <cr/world>
-#include <cr/physics>
-#include <cr/core>
-#include "gtest/gtest.h"
-
+#include <iostream>
 
 // Use the CoreRobotics namespace
 using namespace cr::core;
@@ -53,70 +17,103 @@ using namespace cr::world;
 using namespace cr::signal;
 using namespace cr::physics;
 
+struct CustomType {
+  double value{1.0};
+  std::string id{"my_string"};
+};
+
+class TypeEmitter {
+public:
+  Eigen::Vector3d getVector() {
+    Eigen::Vector3d p(0.0, 1.0, 2.0);
+    return p;
+  }
+  double getDouble() { return 1.0; }
+  float getFloat() { return 2.0; }
+  int getInt() { return 5; }
+  bool getBool() { return false; }
+  CustomType getCustom() { return CustomType(); }
+};
+
+class CustomSerializer : public GenericSerializer {
+public:
+  static void write(std::ostream &i_log, CustomType i_data) {
+    i_log << i_data.value  << "," << i_data.id << ",";
+  }
+  static unsigned size(CustomType i_data) { return 2; }
+};
+
 //
 // Test Slot connection
 //
-TEST(Log, Step){
-    
-    // set up 2 Frames
-    std::shared_ptr<Frame> myFrame1 = std::shared_ptr<Frame>(new Frame);
-    std::shared_ptr<Frame> myFrame2 = std::shared_ptr<Frame>(new Frame);
-    
-    Eigen::Vector3d p = {0.0, 0.1, 1.0};
-    myFrame1->setTranslation(p);
-    
-    Eigen::Vector3d v = myFrame1->getTranslation();
-    EXPECT_DOUBLE_EQ(v(0), p(0));
-    EXPECT_DOUBLE_EQ(v(1), p(1));
-    EXPECT_DOUBLE_EQ(v(2), p(2));
-    v = myFrame2->getTranslation();
-    EXPECT_DOUBLE_EQ(v(0), 0);
-    EXPECT_DOUBLE_EQ(v(1), 0);
-    EXPECT_DOUBLE_EQ(v(2), 0);
-    
-    // create the signal(s)
-    std::shared_ptr<Signal<Eigen::Vector3d, Frame>> mySignal1 =
-      Signal<Eigen::Vector3d, Frame>::create(myFrame1, &Frame::getTranslation);
-    std::shared_ptr<Signal<Eigen::Vector3d, Frame>> mySignal2 =
-      Signal<Eigen::Vector3d, Frame>::create(myFrame2, &Frame::getTranslation);
-    mySignal1->setName("Signal 1");
-    mySignal2->setName("Signal 2");
-    
-    // open a log and attach the signals
-    LogPtr myLog = Log::create();
-    myLog->add(mySignal1);
-    myLog->add(mySignal2);
-    
-    // Start the log
-    Clock c;
-    c.startTimer();
-    myLog->setName("my_log");
-    myLog->onStart();
-    myLog->step();
-    c.sleep(0.001);
-    myLog->step();
-    myLog->step();
-    c.sleep(0.001);
-    myLog->step();
-    myLog->step();
-    myLog->onStop();
-    
-    // Now we should load the log file
-    // and make sure it's what we expect
-    std::ifstream t;
-    t.open("my_log");
-    std::string buffer;
-    std::string line;
-    std::string str = "time,Signal 1[0],Signal 1[1],Signal 1[2],Signal 2[0],Signal 2[1],Signal 2[2],";
+TEST(Log, Step) {
+
+  auto test = std::shared_ptr<TypeEmitter>(new TypeEmitter);
+
+  // create the signal(s)
+  auto myVectorSignal =
+    Signal<Eigen::Vector3d, TypeEmitter>::create(test, &TypeEmitter::getVector);
+  auto myBoolSignal =
+    Signal<bool, TypeEmitter>::create(test, &TypeEmitter::getBool);
+  auto myIntSignal =
+    Signal<int, TypeEmitter>::create(test, &TypeEmitter::getInt);
+  auto myFloatSignal =
+    Signal<float, TypeEmitter>::create(test, &TypeEmitter::getFloat);
+  auto myDoubleSignal =
+    Signal<double, TypeEmitter>::create(test, &TypeEmitter::getDouble);
+  auto myCustomSignal =
+    Signal<CustomType, TypeEmitter>::create(test, &TypeEmitter::getCustom);
+
+  // tap the signals as messages
+  auto myVectorMessage = Tap<Eigen::Vector3d>::create(myVectorSignal);
+  auto myBoolMessage = Tap<bool>::create(myBoolSignal);
+  auto myIntMessage = Tap<int>::create(myIntSignal);
+  auto myFloatMessage = Tap<float>::create(myFloatSignal);
+  auto myDoubleMessage = Tap<double>::create(myDoubleSignal);
+  auto myCustomMessage = Tap<CustomType, CustomSerializer>::create(myCustomSignal);
+
+  myVectorMessage->setName("Vector");
+  myBoolMessage->setName("Bool");
+  myIntMessage->setName("Int");
+  myFloatMessage->setName("Float");
+  myDoubleMessage->setName("Double");
+  myCustomMessage->setName("Custom");
+
+  // open a log and attach the signals
+  LogPtr myLog = Log::create();
+  myLog->add(myVectorMessage);
+  myLog->add(myBoolMessage);
+  myLog->add(myIntMessage);
+  myLog->add(myFloatMessage);
+  myLog->add(myDoubleMessage);
+  myLog->add(myCustomMessage);
+
+  // Start the log
+  Clock c;
+  c.startTimer();
+  myLog->setName("my_log");
+  myLog->onStart();
+  myLog->step();
+  c.sleep(0.001);
+  myLog->step();
+  myLog->step();
+  c.sleep(0.001);
+  myLog->step();
+  myLog->step();
+  myLog->onStop();
+
+  // Now we should load the log file
+  // and make sure it's what we expect
+  std::ifstream t;
+  t.open("my_log");
+  std::string buffer;
+  std::string line;
+  std::string str =
+      "time,Vector[0],Vector[1],Vector[2],Bool[0],Int[0],Float[0],Double[0],Custom[0],Custom[1],";
+  std::getline(t, line);
+  EXPECT_EQ(str, line);
+  while (t) {
     std::getline(t, line);
-    EXPECT_EQ(str, line);
-    std::cout << line << "\n";
-    while(t){
-        std::getline(t, line);
-        std::cout << line << "\n";
-    }
-    t.close();
+  }
+  t.close();
 }
-
-
-

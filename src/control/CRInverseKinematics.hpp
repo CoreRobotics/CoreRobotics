@@ -45,13 +45,13 @@ POSSIBILITY OF SUCH DAMAGE.
 //=====================================================================
 // Includes
 #include "Eigen/Dense"
-#include "model/CRManipulator.hpp"
 #include "core/CRTypes.hpp"
+#include "model/CRManipulator.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
-    
+namespace CoreRobotics {
+
 //=====================================================================
 /*!
  \file CRInverseKinematics.hpp
@@ -60,29 +60,28 @@ namespace CoreRobotics  {
 //---------------------------------------------------------------------
 /*!
  \class CRInverseKinematics
- \ingroup control
- 
+
  \brief This class provides methods for solving the manipulator inverse
  kinematics (IK) problem.
- 
+
  \details
  ## Description
- CRInverseKinematics implements the Jacobian generalized inverse 
+ CRInverseKinematics implements the Jacobian generalized inverse
  technique using the SVD for finding a manipulator configuration that
  yields a desired pose.
- 
+
  \f$ x = f(q) \f$,
- 
+
  where \f$x\f$ is the desired pose, \f$f\f$ is the forward kinematics
  function, and \f$q\f$ is the configuration we are trying to find.  The
- algorithm accomplishes this by iteratively updating the configuration 
+ algorithm accomplishes this by iteratively updating the configuration
  according to
- 
+
  \f$ q_{k+1} = q_k + \gamma J^\dagger (x - f(q_k)) \f$
- 
+
  These methods are used to interface with the IK controller:
  - CRInverseKinematics::setRobot sets the manipulator IK to solve
- - CRInverseKinematics::setToolIndex set the tool index of the 
+ - CRInverseKinematics::setToolIndex set the tool index of the
  associated manipulator (see CRManipulator::addTool) for which we are
  setting a desired pose.  Note that a tool must be added in the manipulator
  prior to using the IK solve.
@@ -91,169 +90,164 @@ namespace CoreRobotics  {
  - CRInverseKinematics::solve solves the IK problem described above for
  an initial configuration and a desired pose vector.  The method is overloaded
  to allow for solving for a reduced pose vector (see CRFrame::getPose)
- 
+
  Optimization parameters can be set:
  - CRInverseKinematics::setTolerance sets the convergence tolerance of
  the algorithm.  The tolerance is compared to the 2-norm of the pose error.
  (Default = 0.001)
  - CRInverseKinematics::setMaxIter sets the maximum number of iterations the
  solver can run prior to stopping. (Default = 1)
- - CRInverseKinematics::setStepSize sets the convergence gain \f$\gamma\f$ 
+ - CRInverseKinematics::setStepSize sets the convergence gain \f$\gamma\f$
  in the above equation. (Default = 0.1)
  - CRInverseKinematics::setDampingFactor sets the damping factor in the
- approximation of Jinv.  High damping is more immune to singularities (Default = 0)
+ approximation of Jinv.  High damping is more immune to singularities (Default =
+ 0)
  - CRInverseKinematics::setSingularThresh sets the threshold for numerically
  determining if the Jacobian is singular by comparing singular values of
  the SVD to the threshold. (Default = 0.1)
- 
- 
+
+
  ## Example
  This example demonstrates use of the CRInverseKinematics class.
  \include example_CRInverseKinematics.cpp
- 
+
  ## References
  [1] O. Khatib, Lecture Notes (CS327A): "Advanced Robotic Manipulation",
- http://www.in.tum.de/fileadmin/user_upload/Lehrstuehle/Lehrstuhl_XXIII/AdvancedRoboticManipulation.pdf 2005.\n\n
- 
+ http://www.in.tum.de/fileadmin/user_upload/Lehrstuehle/Lehrstuhl_XXIII/AdvancedRoboticManipulation.pdf
+ 2005.\n\n
+
  [2] A. Aristidou and J. Lasenby, "Inverse Kinematics: a review of
  existing techniques and introduction of a new fast iterative solver,"
  University of Cambridge, Technical Report, 2009.
  http://www.andreasaristidou.com/publications/CUEDF-INFENG,%20TR-632.pdf
  \n\n
- 
+
  */
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRInverseKinematics {
+class[[deprecated(CR_DEPRECATED)]] CRInverseKinematics {
 #else
 class CRInverseKinematics {
 #endif
-    
-//---------------------------------------------------------------------
-// Constructor and Destructor
+
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
-    
-    //! Class constructor
-    CRInverseKinematics(const CRManipulator& i_robot,
-                        unsigned int i_toolIndex,
-                        CREulerMode i_eulerMode);
-    
-//---------------------------------------------------------------------
-// Get/Set Methods
+  //! Class constructor
+  CRInverseKinematics(const CRManipulator &i_robot, unsigned int i_toolIndex,
+                      CREulerMode i_eulerMode);
+
+  //---------------------------------------------------------------------
+  // Get/Set Methods
 public:
-    
-    //! Set the robot to be used
-    void setRobot(const CRManipulator& i_robot) {this->m_robot = i_robot;}
-    
-    //! Get the robot being used
-    CRManipulator getRobot(void) {return m_robot;}
-    
-    //! Set robot tool index to use to compute the IK.  Note that a tool must be specified in the robot.
-    void setToolIndex(unsigned int i_toolIndex) {this->m_toolIndex = i_toolIndex;}
-    
-    //! Get robot tool index
-    unsigned int getToolIndex(void) {return this->m_toolIndex;}
-    
-    //! Set the Euler angle convention of the IK solver.  This must match the
-    //  Euler convention used to supply the set point in the solve() method.
-    void setEulerMode(CREulerMode i_eulerMode) {this->m_eulerMode = i_eulerMode;}
-    
-    //! Get the Euler convention
-    CREulerMode getEulerMode(void) {return this->m_eulerMode;}
-    
-    //! Set the algorithm convergence tolerance
-    void setTolerance(double i_tolerance) {this->m_tolerance = i_tolerance;}
-    
-    //! Get the algorithm convergence tolerance
-    double getTolerance(void) {return this->m_tolerance;}
-    
-    //! Set the maximum number of iterations the algorithm can run
-    void setMaxIter(unsigned int i_maxIter) {this->m_maxIter = i_maxIter;}
-    
-    //! Get the algorithm convergence tolerance
-    unsigned int getMaxIter(void) {return this->m_maxIter;}
-    
-    //! Set the iteration step size (i.e. the gain)
-    void setStepSize(double i_stepSize) {this->m_stepSize = i_stepSize;}
-    
-    //! Get the iteration step size (i.e. the gain)
-    double getStepSize(void) {return this->m_stepSize;}
+  //! Set the robot to be used
+  void setRobot(const CRManipulator &i_robot) { this->m_robot = i_robot; }
 
-	//! Set the damping factor (for damped least squares solvers)
-	void setDampingFactor(double i_dampingFactor) { this->m_dampingFactor = i_dampingFactor; }
+  //! Get the robot being used
+  CRManipulator getRobot(void) { return m_robot; }
 
-	//!  Get the damping factor (for damped least squares solvers)
-	double getDampingFactor(void) { return this->m_dampingFactor; }
-    
-    //! Set the minimum threshold for a non-singular matrix
-    void setSingularThresh(double i_thresh) {this->m_svdTol = i_thresh;}
-    
-    //! Get the minimum threshold for a non-singular matrix
-    double getSingularThresh(void) {return this->m_svdTol;}
-    
-    //! Get the DLS jacobian inverse
-    CRResult getJacInv(Eigen::MatrixXd i_jac, Eigen::MatrixXd &o_jacInv);
+  //! Set robot tool index to use to compute the IK.  Note that a tool must be
+  //! specified in the robot.
+  void setToolIndex(unsigned int i_toolIndex) {
+    this->m_toolIndex = i_toolIndex;
+  }
 
-    
-//---------------------------------------------------------------------
-// Public Methods
+  //! Get robot tool index
+  unsigned int getToolIndex(void) { return this->m_toolIndex; }
+
+  //! Set the Euler angle convention of the IK solver.  This must match the
+  //  Euler convention used to supply the set point in the solve() method.
+  void setEulerMode(CREulerMode i_eulerMode) {
+    this->m_eulerMode = i_eulerMode;
+  }
+
+  //! Get the Euler convention
+  CREulerMode getEulerMode(void) { return this->m_eulerMode; }
+
+  //! Set the algorithm convergence tolerance
+  void setTolerance(double i_tolerance) { this->m_tolerance = i_tolerance; }
+
+  //! Get the algorithm convergence tolerance
+  double getTolerance(void) { return this->m_tolerance; }
+
+  //! Set the maximum number of iterations the algorithm can run
+  void setMaxIter(unsigned int i_maxIter) { this->m_maxIter = i_maxIter; }
+
+  //! Get the algorithm convergence tolerance
+  unsigned int getMaxIter(void) { return this->m_maxIter; }
+
+  //! Set the iteration step size (i.e. the gain)
+  void setStepSize(double i_stepSize) { this->m_stepSize = i_stepSize; }
+
+  //! Get the iteration step size (i.e. the gain)
+  double getStepSize(void) { return this->m_stepSize; }
+
+  //! Set the damping factor (for damped least squares solvers)
+  void setDampingFactor(double i_dampingFactor) {
+    this->m_dampingFactor = i_dampingFactor;
+  }
+
+  //!  Get the damping factor (for damped least squares solvers)
+  double getDampingFactor(void) { return this->m_dampingFactor; }
+
+  //! Set the minimum threshold for a non-singular matrix
+  void setSingularThresh(double i_thresh) { this->m_svdTol = i_thresh; }
+
+  //! Get the minimum threshold for a non-singular matrix
+  double getSingularThresh(void) { return this->m_svdTol; }
+
+  //! Get the DLS jacobian inverse
+  CRResult getJacInv(Eigen::MatrixXd i_jac, Eigen::MatrixXd & o_jacInv);
+
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
-    
-    //! Solve for the joint angles (q) that yield the desired setPoint
-    CRResult solve(const Eigen::Matrix<double, 6, 1>& i_setPoint,
-				   Eigen::VectorXd i_q0,
-				   Eigen::VectorXd &o_qSolved);
-    
-    CRResult solve(Eigen::VectorXd& i_setPoint,
-				   Eigen::Matrix<bool, 6, 1> i_poseElements,
-				   Eigen::VectorXd i_q0,
-				   Eigen::VectorXd &o_qSolved);
+  //! Solve for the joint angles (q) that yield the desired setPoint
+  CRResult solve(const Eigen::Matrix<double, 6, 1> &i_setPoint,
+                 Eigen::VectorXd i_q0, Eigen::VectorXd &o_qSolved);
 
-	CRResult solve(Eigen::VectorXd& i_setPoint,
-                   Eigen::Matrix<bool, 6, 1> i_poseElements,
-                   Eigen::VectorXd i_q0,
-                   Eigen::MatrixXd i_w,
-                   Eigen::VectorXd &o_qSolved);
+  CRResult solve(Eigen::VectorXd & i_setPoint,
+                 Eigen::Matrix<bool, 6, 1> i_poseElements, Eigen::VectorXd i_q0,
+                 Eigen::VectorXd & o_qSolved);
 
-	CRResult solve(Eigen::VectorXd& i_setPoint,
-				   Eigen::Matrix<int, 6, 1> i_poseElementsInt,
-				   Eigen::VectorXd i_q0,
-				   Eigen::VectorXd &o_qSolved);
-    
-//---------------------------------------------------------------------
-// Protected Members
+  CRResult solve(Eigen::VectorXd & i_setPoint,
+                 Eigen::Matrix<bool, 6, 1> i_poseElements, Eigen::VectorXd i_q0,
+                 Eigen::MatrixXd i_w, Eigen::VectorXd & o_qSolved);
+
+  CRResult solve(Eigen::VectorXd & i_setPoint,
+                 Eigen::Matrix<int, 6, 1> i_poseElementsInt,
+                 Eigen::VectorXd i_q0, Eigen::VectorXd & o_qSolved);
+
+  //---------------------------------------------------------------------
+  // Protected Members
 protected:
-    
-    //! Manipulator object to solve
-    CRManipulator m_robot;
-    
-    //! Index of the manipulator tool for which to solve the IK
-    unsigned int m_toolIndex;
-    
-    //! Euler Convention to use
-    CREulerMode m_eulerMode;
-    
-    //! Convergence threshold
-    double m_tolerance;
-    
-    //! Maximum interations
-    unsigned int m_maxIter;
-    
-    //! Optimizer step size (gain)
-    double m_stepSize;
+  //! Manipulator object to solve
+  CRManipulator m_robot;
 
-	//! Damping term (DLS)
-	double m_dampingFactor;
-    
-    //! Tolerance for computing if a matrix is singular using SVD svals
-    double m_svdTol;
-    
-    
+  //! Index of the manipulator tool for which to solve the IK
+  unsigned int m_toolIndex;
+
+  //! Euler Convention to use
+  CREulerMode m_eulerMode;
+
+  //! Convergence threshold
+  double m_tolerance;
+
+  //! Maximum interations
+  unsigned int m_maxIter;
+
+  //! Optimizer step size (gain)
+  double m_stepSize;
+
+  //! Damping term (DLS)
+  double m_dampingFactor;
+
+  //! Tolerance for computing if a matrix is singular using SVD svals
+  double m_svdTol;
 };
 
 //=====================================================================
 // End namespace
 }
-
 
 #endif

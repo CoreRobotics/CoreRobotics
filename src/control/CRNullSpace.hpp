@@ -44,12 +44,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 //=====================================================================
 // Includes
-#include "model/CRManipulator.hpp"
 #include "core/CRTypes.hpp"
+#include "model/CRManipulator.hpp"
 
 //=====================================================================
 // CoreRobotics namespace
-namespace CoreRobotics  {
+namespace CoreRobotics {
 
 //=====================================================================
 /*!
@@ -59,11 +59,10 @@ namespace CoreRobotics  {
 //---------------------------------------------------------------------
 /*!
  \class CRNullSpace
- \ingroup control
- 
+
  \brief This class provides methods for solving the manipulator nullspace
  control problem.
- 
+
  \details
  ## Description
 
@@ -74,147 +73,147 @@ namespace CoreRobotics  {
 
  CRNullSpace find the orthogonal projection of the arbetrary joint space
  vector usingthe following equation,
- 
+
  \f$ \dot{q}_{null} = (I - J^\dagger J) \dot{q}_0 \f$,
- 
+
  where \f$\dot{q}_0\f$ is the desired joint velocities, \f$J\f$ is the robot
- jacobian, and \f$\dot{q}_{null}\f$ is a set of joint velocities in the nullspace
+ jacobian, and \f$\dot{q}_{null}\f$ is a set of joint velocities in the
+ nullspace
  of the robot jacobian.
- 
+
  These methods are used to interface with the nullspace controller:
  - CRNullSpace::setRobot sets the manipulator nullspace to solve
- - CRNullSpace::setToolIndex set the tool index of the 
+ - CRNullSpace::setToolIndex set the tool index of the
  associated manipulator (see CRManipulator::addTool) for which we are
- setting a desired nullspace command.  Note that a tool must be added in the manipulator
+ setting a desired nullspace command.  Note that a tool must be added in the
+ manipulator
  prior to using the nullspace solver.
  - CRNullSpace::setEulerMode sets the Euler convention of the pose
  vector
  - CRNullSpace::solve solves the nullspace control problem described above for
  an initial configuration and a desired set of joint velocities.  The method is
- overloaded to allow for solving for a reduced pose vector (see CRFrame::getPose)
- 
+ overloaded to allow for solving for a reduced pose vector (see
+ CRFrame::getPose)
+
  Optimization parameters can be set:
  - CRNullSpace::setSingularThresh sets the threshold for numerically
  determining if the Jacobian is singular by comparing singular values of
  the SVD to the threshold. (Default = 0.1)
- 
- 
+
+
  ## Example
  This example demonstrates use of the CRNullSpace class.
  \include example_CRNullSpace.cpp
- 
+
  ## References
  [3] B. Siciliano and O. Khatib, "Springer Handbook of Robotics",
- Springer, 2016.\n\n 
- 
+ Springer, 2016.\n\n
+
  */
 //=====================================================================
 #ifndef SWIG
-class [[deprecated(CR_DEPRECATED)]] CRNullSpace {
+class[[deprecated(CR_DEPRECATED)]] CRNullSpace {
 #else
 class CRNullSpace {
 #endif
 
-//---------------------------------------------------------------------
-// Constructor and Destructor
+  //---------------------------------------------------------------------
+  // Constructor and Destructor
 public:
+  //! Class constructor
+  CRNullSpace(const CRManipulator &i_robot, unsigned int i_toolIndex,
+              CREulerMode i_eulerMode);
 
-	//! Class constructor
-	CRNullSpace(const CRManipulator& i_robot,
-                unsigned int i_toolIndex,
-                CREulerMode i_eulerMode);
-
-//---------------------------------------------------------------------
-// Get/Set Methods
+  //---------------------------------------------------------------------
+  // Get/Set Methods
 public:
+  //! Set the robot to be used
+  void setRobot(const CRManipulator &i_robot) { this->m_robot = i_robot; }
 
-	//! Set the robot to be used
-	void setRobot(const CRManipulator& i_robot) {this->m_robot = i_robot;}
+  //! Set robot tool index to use to compute the nullspace.  Note that a tool
+  //! must be specified in the robot.
+  void setToolIndex(unsigned int i_toolIndex) {
+    this->m_toolIndex = i_toolIndex;
+  }
 
-	//! Set robot tool index to use to compute the nullspace.  Note that a tool must be specified in the robot.
-	void setToolIndex(unsigned int i_toolIndex) {this->m_toolIndex = i_toolIndex;}
+  //! Set the Euler angle convention of the IK solver.  This must match the
+  //  Euler convention used to supply the set point in the solve() method.
+  void setEulerMode(CREulerMode i_eulerMode) {
+    this->m_eulerMode = i_eulerMode;
+  }
 
-	//! Set the Euler angle convention of the IK solver.  This must match the
-    //  Euler convention used to supply the set point in the solve() method.
-	void setEulerMode(CREulerMode i_eulerMode) {this->m_eulerMode = i_eulerMode;}
+  //! Get the Euler convention
+  CREulerMode getEulerMode(void) { return this->m_eulerMode; }
 
-	//! Get the Euler convention
-	CREulerMode getEulerMode(void) {return this->m_eulerMode;}
+  //! Set the minimum threshold for a non-singular matrix
+  void setSingularThresh(double i_thresh) { this->m_svdTol = i_thresh; }
 
-	//! Set the minimum threshold for a non-singular matrix
-	void setSingularThresh(double i_thresh) {this->m_svdTol = i_thresh;}
+  //! Get the minimum threshold for a non-singular matrix
+  double getSingularThresh(void) { return this->m_svdTol; }
 
-	//! Get the minimum threshold for a non-singular matrix
-	double getSingularThresh(void) {return this->m_svdTol;}
+  //! Set the minimum step size
+  void setMinStepSize(double i_stepSize) { this->m_stepSize = i_stepSize; }
 
-	//! Set the minimum step size
-	void setMinStepSize(double i_stepSize) {this->m_stepSize = i_stepSize;}
+  //! Get the minimum step size
+  double getMinStepSize(void) { return this->m_stepSize; }
 
-	//! Get the minimum step size
-	double getMinStepSize(void) {return this->m_stepSize;}
+  //! Set the maximum number of iterations
+  void setMaxIter(double i_maxIter) { this->m_maxIter = i_maxIter; }
 
-	//! Set the maximum number of iterations
-	void setMaxIter(double i_maxIter) {this->m_maxIter = i_maxIter;}
+  //! Get the maximum number of iterations
+  double getMaxIter(void) { return this->m_maxIter; }
 
-	//! Get the maximum number of iterations
-	double getMaxIter(void) {return this->m_maxIter;}
+  //! Set the tolerance for checking if the nullspace is trivial
+  void setTrivialTolerance(double i_trivialTolerance) {
+    this->m_trivTol = i_trivialTolerance;
+  }
 
-	//! Set the tolerance for checking if the nullspace is trivial
-	void setTrivialTolerance(double i_trivialTolerance) {this->m_trivTol = i_trivialTolerance;}
+  //! Get the tolerance for checking if the nullspace is trivial
+  double getTrivialTolerance(void) { return this->m_trivTol; }
 
-	//! Get the tolerance for checking if the nullspace is trivial
-	double getTrivialTolerance(void) {return this->m_trivTol;}
-
-//---------------------------------------------------------------------
-// Public Methods
+  //---------------------------------------------------------------------
+  // Public Methods
 public:
+  //! Solve for the joint velocities that yield no tool motion, or tool motion
+  //! only in the degrees of freedom specified in i_poseElements
+  CRResult solve(Eigen::VectorXd i_jointMotion, Eigen::VectorXd i_q0,
+                 Eigen::VectorXd & o_nullSpaceJointMotion);
 
-	//! Solve for the joint velocities that yield no tool motion, or tool motion only in the degrees of freedom specified in i_poseElements
-	CRResult solve(Eigen::VectorXd i_jointMotion,
-                   Eigen::VectorXd i_q0,
-                   Eigen::VectorXd &o_nullSpaceJointMotion);
+  CRResult solve(Eigen::VectorXd i_jointMotion, Eigen::VectorXd i_q0,
+                 Eigen::Matrix<bool, 6, 1> i_poseElements,
+                 Eigen::VectorXd & o_nullSpaceJointMotion);
 
-	CRResult solve(Eigen::VectorXd i_jointMotion,
-                   Eigen::VectorXd i_q0,
-                   Eigen::Matrix<bool, 6, 1> i_poseElements,
-                   Eigen::VectorXd &o_nullSpaceJointMotion);
+  CRResult solve(Eigen::VectorXd i_jointMotion, Eigen::VectorXd i_q0,
+                 Eigen::Matrix<bool, 6, 1> i_poseElements, Eigen::MatrixXd i_w,
+                 Eigen::VectorXd & o_nullSpaceJointMotion);
 
-	CRResult solve(Eigen::VectorXd i_jointMotion,
-                   Eigen::VectorXd i_q0,
-                   Eigen::Matrix<bool, 6, 1> i_poseElements,
-                   Eigen::MatrixXd i_w,
-                   Eigen::VectorXd &o_nullSpaceJointMotion);
+  CRResult solve(Eigen::VectorXd i_jointMotion, Eigen::VectorXd i_q0,
+                 Eigen::Matrix<int, 6, 1> i_poseElementsInt,
+                 Eigen::VectorXd & o_nullSpaceJointMotion);
 
-	CRResult solve(Eigen::VectorXd i_jointMotion,
-                   Eigen::VectorXd i_q0,
-                   Eigen::Matrix<int, 6, 1> i_poseElementsInt,
-                   Eigen::VectorXd &o_nullSpaceJointMotion);
-
-//---------------------------------------------------------------------
-// Protected Members
+  //---------------------------------------------------------------------
+  // Protected Members
 protected:
+  //! Manipulator object to solve
+  CRManipulator m_robot;
 
-	//! Manipulator object to solve
-	CRManipulator m_robot;
+  //! Index of the manipulator tool for which to solve the IK
+  unsigned int m_toolIndex;
 
-	//! Index of the manipulator tool for which to solve the IK
-	unsigned int m_toolIndex;
+  //! Euler Convention to use
+  CREulerMode m_eulerMode;
 
-	//! Euler Convention to use
-	CREulerMode m_eulerMode;
+  //! Tolerance for computing if a matrix is singular using SVD svals
+  double m_svdTol;
 
-	//! Tolerance for computing if a matrix is singular using SVD svals
-	double m_svdTol;
+  //! The minimum step size to use when computing the nullspace
+  double m_stepSize;
 
-	//! The minimum step size to use when computing the nullspace
-	double m_stepSize;
+  //! The maximum number of iterations to compute when finding the null space
+  double m_maxIter;
 
-	//! The maximum number of iterations to compute when finding the null space
-	double m_maxIter;
-
-	//! The tolerance used for checking if the nullspace is trivial
-	double m_trivTol;
-
+  //! The tolerance used for checking if the nullspace is trivial
+  double m_trivTol;
 };
 
 //=====================================================================

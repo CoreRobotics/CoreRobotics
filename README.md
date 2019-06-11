@@ -32,34 +32,29 @@ CoreRobotics is distrubted under the [BSD-3-Clause license](https://opensource.o
 - *examples/* use of the library modules.  Binaries are compiled to bin.
 
 ## Dependencies
+- [Required] CMake build utility [https://cmake.org/](https://cmake.org/)
 - [Required] Eigen (vector/matrix math header only) [http://eigen.tuxfamily.org/](http://eigen.tuxfamily.org/)
 - [Required] Boost libraries (header only) [http://www.boost.org/](http://www.boost.org/)
 - [Optional] Google test [https://github.com/google/googletest](https://github.com/google/googletest))
 - [Optional] Open scene graph (OSG) [http://www.openscenegraph.org/](http://www.openscenegraph.org/)
+- [Optional] Doxygen [http://www.doxygen.nl/](http://www.doxygen.nl/)
 
 On Mac with homebrew:
 ```
-$ brew install eigen
-$ brew install boost
-$ brew install open-scene-graph
-$ git clone https://github.com/google/googletest
-$ cd googletest
-$ mkdir build
-$ cd build
+$ brew install cmake eigen boost open-scene-graph doxygen
+$ git clone https://github.com/google/googletest ~/googletest
+$ cd ~/googletest
+$ mkdir build && cd build
 $ cmake ..
-$ make
-$ make install
+$ make && make install
 ```
 
 On Linux with apt-get:
 ```
-$ apt-get install libeigen3-dev
-$ apt-get install libboost-all-dev
-$ apt-get install openscenegraph
+$ apt-get install cmake libeigen3-dev libboost-all-dev openscenegraph doxygen
 $ sudo apt-get install libgtest-dev
 $ cd /usr/src/gtest
-$ mkdir build
-$ cd build
+$ mkdir build && cd build
 $ cmake ..
 $ make
 $ cp *.a /usr/lib
@@ -67,15 +62,15 @@ $ cp *.a /usr/lib
 
 
 ## Compiling
-CoreRobotics use CMake to manage build instructions.  To build CoreRobotics for development:
-1. Install cmake [https://cmake.org/](https://cmake.org/). On mac,
+1. Clone the CoreRobotics repository (first `cd` into the parent directory you want to put CoreRobotics, here we use the root
 ```
-$ brew install cmake
+$ cd ~/
+$ git clone https://gitlab.com/powan/CoreRobotics.git
 ```
 2. Set up the cmake build folder
 ```
-$ mkdir <path_to_cr>/build
-$ cd <path_to_cr>/build
+$ mkdir ~/CoreRobotics/build
+$ cd ~/CoreRobotics/build
 ```
 3. Run cmake
 ```
@@ -87,10 +82,9 @@ Use  `cmake --help` for a list of available compilers.  Note that if you have no
 
 4. Build.  On mac/Linux
 ```
-$ make
-$ make install
+$ make && make install
 ```
-[Known issue on ubuntu docker image] You need to run the following command so the docker image can find the share libraries
+[Known issue on ubuntu docker image] You may need to run the following command so the docker image can find the share libraries
 ```
 $ ldconfig /usr/local/lib
 ```
@@ -111,6 +105,15 @@ link_directories(${CR_LIBRARY_DIRS})
 add_executable("target" main.cpp)
 target_link_libraries("target" ${CR_LIBRARIES})
 ```
+
+
+## Documentation
+Documentation for latest version is at [http://www.corerobotics.org/docs/](http://www.corerobotics.org/docs/).  To generate this documentation yourself, doxygen needs to be installed (see above dependencies).  Assuming CoreRobotics is in your home directory, use the following commands to generate the docs
+```
+cd ~/CoreRobotics/doc
+doxygen
+```
+This command will generate a subfolder `/html`.  Open `html/index.html` in your web browser.
 
 
 ## Support
