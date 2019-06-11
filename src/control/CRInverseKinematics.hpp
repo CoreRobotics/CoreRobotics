@@ -60,7 +60,6 @@ namespace CoreRobotics {
 //---------------------------------------------------------------------
 /*!
  \class CRInverseKinematics
- \ingroup control
 
  \brief This class provides methods for solving the manipulator inverse
  kinematics (IK) problem.

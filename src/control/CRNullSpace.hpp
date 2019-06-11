@@ -59,7 +59,6 @@ namespace CoreRobotics {
 //---------------------------------------------------------------------
 /*!
  \class CRNullSpace
- \ingroup control
 
  \brief This class provides methods for solving the manipulator nullspace
  control problem.

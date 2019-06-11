@@ -63,7 +63,6 @@ namespace CoreRobotics {
 //---------------------------------------------------------------------
 /*!
  \class CRHardLimits
- \ingroup control
 
  \brief This class provides methods for solving the manipulator inverse
  kinematics and nullspace control problems under hard joint limits.
