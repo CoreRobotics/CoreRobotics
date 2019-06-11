@@ -7,6 +7,7 @@
 #ifndef CR_SIGNAL_LOG_HPP_
 #define CR_SIGNAL_LOG_HPP_
 
+#include "Message.hpp"
 #include "Signal.hpp"
 #include "core/Clock.hpp"
 #include "core/Step.hpp"
@@ -31,23 +32,20 @@ typedef std::shared_ptr<Log> LogPtr;
 //------------------------------------------------------------------------------
 class Log : public core::Step, public core::Item {
 
-  // Constructor and Destructor
 public:
   //! Class constructor
-  Log();
+  Log() = default;
 
   //! destructor
-  ~Log(){};
+  virtual ~Log() = default;
 
   //! create a new log
   static LogPtr create();
 
-  // signal log controls
 public:
-  //! add a signal to the list
-  void add(std::shared_ptr<SignalBase> i_signal);
+  //! add a message to the list
+  void add(std::shared_ptr<MessageBase> i_message);
 
-  // Step method
 public:
   //! step the signal log
   virtual void step();
@@ -58,11 +56,10 @@ public:
   //! stop the signal log
   virtual void onStop();
 
-  // Protected members
 protected:
+
   //! list of signals to log
-  // std::vector<Requester<SupportedSignalTypes>*> m_signals;
-  std::vector<std::shared_ptr<SignalBase>> m_signals;
+  std::vector<std::shared_ptr<MessageBase>> m_messages;
 
   //! filename
   std::string m_filename;

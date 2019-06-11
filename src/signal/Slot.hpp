@@ -32,10 +32,12 @@ public:
        std::shared_ptr<ReceiverType> i_receiver,
        void (ReceiverType::*i_callback)(const DataType &)) {
     m_signal = i_signal;
-    // m_receiver = static_cast<void*>(i_receiver);
     m_receiver = i_receiver;
     m_callback = reinterpret_cast<void (ReceiverType::*)(void *)>(i_callback);
   }
+
+  //! destructor
+  virtual ~Slot() = default;
 
   //! Create a new slot
   static std::shared_ptr<Slot<DataType, ReceiverType>>
@@ -47,25 +49,20 @@ public:
   }
 
   //! get the receiver
-  // ReceiverType* getReceiver() { return
-  // static_cast<ReceiverType*>(m_receiver); }
   std::shared_ptr<ReceiverType> getReceiver() { return m_receiver; }
 
   //! step the data push
   virtual void step() {
-    // ReceiverType* c = static_cast<ReceiverType*>(m_receiver);
     void (ReceiverType::*fcn)(const DataType &) =
         reinterpret_cast<void (ReceiverType::*)(const DataType &)>(m_callback);
     DataType d = m_signal->request();
     m_mutex.lock();
-    // (c->*fcn)( d );
     (m_receiver.get()->*fcn)(d);
     m_mutex.unlock();
   }
 
 private:
   //! Receiver
-  // void* m_receiver;
   std::shared_ptr<ReceiverType> m_receiver;
 
   //! callback request functions

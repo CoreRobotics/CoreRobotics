@@ -17,7 +17,12 @@ using namespace cr::world;
 using namespace cr::signal;
 using namespace cr::physics;
 
-class TestTypes {
+struct CustomType {
+  double value{1.0};
+  std::string id{"my_string"};
+};
+
+class TypeEmitter {
 public:
   Eigen::Vector3d getVector() {
     Eigen::Vector3d p(0.0, 1.0, 2.0);
@@ -27,6 +32,15 @@ public:
   float getFloat() { return 2.0; }
   int getInt() { return 5; }
   bool getBool() { return false; }
+  CustomType getCustom() { return CustomType(); }
+};
+
+class CustomSerializer : public GenericSerializer {
+public:
+  static void write(std::ostream &i_log, CustomType i_data) {
+    i_log << i_data.value  << "," << i_data.id << ",";
+  }
+  static unsigned size(CustomType i_data) { return 2; }
 };
 
 //
@@ -34,36 +48,45 @@ public:
 //
 TEST(Log, Step) {
 
-  std::shared_ptr<TestTypes> test = std::shared_ptr<TestTypes>(new TestTypes);
+  auto test = std::shared_ptr<TypeEmitter>(new TypeEmitter);
 
   // create the signal(s)
-  std::shared_ptr<Signal<Eigen::Vector3d, TestTypes>> myVectorSignal =
-      Signal<Eigen::Vector3d, TestTypes>::create(test, &TestTypes::getVector);
-  myVectorSignal->setName("Vector");
+  auto myVectorSignal =
+    Signal<Eigen::Vector3d, TypeEmitter>::create(test, &TypeEmitter::getVector);
+  auto myBoolSignal =
+    Signal<bool, TypeEmitter>::create(test, &TypeEmitter::getBool);
+  auto myIntSignal =
+    Signal<int, TypeEmitter>::create(test, &TypeEmitter::getInt);
+  auto myFloatSignal =
+    Signal<float, TypeEmitter>::create(test, &TypeEmitter::getFloat);
+  auto myDoubleSignal =
+    Signal<double, TypeEmitter>::create(test, &TypeEmitter::getDouble);
+  auto myCustomSignal =
+    Signal<CustomType, TypeEmitter>::create(test, &TypeEmitter::getCustom);
 
-  std::shared_ptr<Signal<bool, TestTypes>> myBoolSignal =
-      Signal<bool, TestTypes>::create(test, &TestTypes::getBool);
-  myBoolSignal->setName("Bool");
+  // tap the signals as messages
+  auto myVectorMessage = Tap<Eigen::Vector3d>::create(myVectorSignal);
+  auto myBoolMessage = Tap<bool>::create(myBoolSignal);
+  auto myIntMessage = Tap<int>::create(myIntSignal);
+  auto myFloatMessage = Tap<float>::create(myFloatSignal);
+  auto myDoubleMessage = Tap<double>::create(myDoubleSignal);
+  auto myCustomMessage = Tap<CustomType, CustomSerializer>::create(myCustomSignal);
 
-  std::shared_ptr<Signal<int, TestTypes>> myIntSignal =
-      Signal<int, TestTypes>::create(test, &TestTypes::getInt);
-  myIntSignal->setName("Int");
-
-  std::shared_ptr<Signal<float, TestTypes>> myFloatSignal =
-      Signal<float, TestTypes>::create(test, &TestTypes::getFloat);
-  myFloatSignal->setName("Float");
-
-  std::shared_ptr<Signal<double, TestTypes>> myDoubleSignal =
-      Signal<double, TestTypes>::create(test, &TestTypes::getDouble);
-  myDoubleSignal->setName("Double");
+  myVectorMessage->setName("Vector");
+  myBoolMessage->setName("Bool");
+  myIntMessage->setName("Int");
+  myFloatMessage->setName("Float");
+  myDoubleMessage->setName("Double");
+  myCustomMessage->setName("Custom");
 
   // open a log and attach the signals
   LogPtr myLog = Log::create();
-  myLog->add(myVectorSignal);
-  myLog->add(myBoolSignal);
-  myLog->add(myIntSignal);
-  myLog->add(myFloatSignal);
-  myLog->add(myDoubleSignal);
+  myLog->add(myVectorMessage);
+  myLog->add(myBoolMessage);
+  myLog->add(myIntMessage);
+  myLog->add(myFloatMessage);
+  myLog->add(myDoubleMessage);
+  myLog->add(myCustomMessage);
 
   // Start the log
   Clock c;
@@ -86,7 +109,7 @@ TEST(Log, Step) {
   std::string buffer;
   std::string line;
   std::string str =
-      "time,Vector[0],Vector[1],Vector[2],Bool[0],Int[0],Float[0],Double[0],";
+      "time,Vector[0],Vector[1],Vector[2],Bool[0],Int[0],Float[0],Double[0],Custom[0],Custom[1],";
   std::getline(t, line);
   EXPECT_EQ(str, line);
   while (t) {

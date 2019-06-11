@@ -7,7 +7,6 @@
 #ifndef CR_SIGNAL_SIGNAL_HPP_
 #define CR_SIGNAL_SIGNAL_HPP_
 
-#include "Utility.hpp"
 #include "core/Item.hpp"
 #include <fstream>
 #include <memory>
@@ -18,40 +17,19 @@ namespace signal {
 
 //------------------------------------------------------------------------------
 /*!
- \class SignalBase
- \ingroup signal
- */
-//------------------------------------------------------------------------------
-class SignalBase : public core::Item {
-
-public:
-  //! constructor
-  SignalBase(){};
-
-  //! get the signal dimension
-  virtual unsigned size() = 0;
-
-  //! write signal value to ostream
-  virtual void write(std::ostream &i_log) = 0;
-
-private:
-  //! type (read only)
-  std::string m_type = "Signal";
-};
-
-//------------------------------------------------------------------------------
-/*!
  \class Requester
  \ingroup signal
  */
 //------------------------------------------------------------------------------
 template <typename DataType>
-class Requester : public std::enable_shared_from_this<Requester<DataType>>,
-                  public SignalBase {
+class Requester : public std::enable_shared_from_this<Requester<DataType>> {
 
 public:
   //! constructor
-  Requester(){};
+  Requester() = default;
+
+  //! destructor
+  virtual ~Requester() = default;
 
   //! request function to implement
   virtual DataType request() = 0;
@@ -66,7 +44,7 @@ public:
  */
 //------------------------------------------------------------------------------
 template <typename DataType, typename EmitterType>
-class Signal : public Requester<DataType> {
+class Signal : public Requester<DataType>, public core::Item {
 
 public:
   //! constructor
@@ -75,6 +53,9 @@ public:
     m_emitter = i_emitter;
     m_callback = reinterpret_cast<void *(EmitterType::*)()>(i_callback);
   }
+
+  //! destructor
+  virtual ~Signal() = default;
 
   //! Create a new signal
   static std::shared_ptr<Signal<DataType, EmitterType>>
@@ -95,18 +76,6 @@ public:
     DataType d = (m_emitter.get()->*fcn)();
     m_mutex.unlock();
     return d;
-  }
-
-  //! get the signal dimension
-  virtual unsigned size() {
-    DataType d = request();
-    return Utility::size(d);
-  }
-
-  //! write signal value to ostream
-  virtual void write(std::ostream &i_log) {
-    DataType d = request();
-    Utility::write(i_log, d);
   }
 
 private:
