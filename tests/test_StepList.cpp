@@ -9,7 +9,7 @@
 #include <iostream>
 #include <memory>
 
-#include "simpleStep.hpp"
+#include "counterStep.hpp"
 
 // Use the CoreRobotics namespace
 using namespace cr::core;
@@ -25,19 +25,30 @@ TEST(StepList, init) {
   StepList myStepList;
 
   // add the step function
-  std::shared_ptr<simpleStep> myStep1 = std::make_shared<simpleStep>(0.01);
-  std::shared_ptr<simpleStep> myStep2 = std::make_shared<simpleStep>(0.05);
+  auto myStep1 = std::make_shared<counterStep>();
+  auto myStep2 = std::make_shared<counterStep>();
   myStepList.attach(myStep1);
   myStepList.attach(myStep2);
 
   // check internal states
-  EXPECT_DOUBLE_EQ(myStep1->x, myStep1->x0);
-  EXPECT_DOUBLE_EQ(myStep2->x, myStep2->x0) ;
+  EXPECT_DOUBLE_EQ(myStep1->counter, 0);
+  EXPECT_DOUBLE_EQ(myStep2->counter, 0);
 
-  // check the internal clocks
   myStepList.step();
 
-  // Query the internal state to make sure the reset call happened
-  EXPECT_NE(myStep1->x, myStep1->x0);
-  EXPECT_NE(myStep2->x, myStep2->x0);
+  // check internal states
+  EXPECT_DOUBLE_EQ(myStep1->counter, 1);
+  EXPECT_DOUBLE_EQ(myStep2->counter, 1);
+
+  myStepList.onStart();
+
+  // check internal states
+  EXPECT_DOUBLE_EQ(myStep1->counter, 0);
+  EXPECT_DOUBLE_EQ(myStep2->counter, 0);
+
+  myStepList.onStop();
+
+  // check internal states
+  EXPECT_DOUBLE_EQ(myStep1->counter, -1);
+  EXPECT_DOUBLE_EQ(myStep2->counter, -1);
 }

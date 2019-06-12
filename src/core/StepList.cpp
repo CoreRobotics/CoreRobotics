@@ -21,7 +21,10 @@ StepList::StepList() {}
  The destructor closes the StepList.\n
  */
 //---------------------------------------------------------------------
-StepList::~StepList() { m_vertices.clear(); }
+StepList::~StepList() {
+  onStop();
+  m_vertices.clear();
+}
 
 //---------------------------------------------------------------------
 /*!
@@ -38,10 +41,30 @@ void StepList::attach(std::shared_ptr<Step> i_element) {
  */
 //---------------------------------------------------------------------
 void StepList::step() {
-
-  // step each of the vertices
   for (unsigned i = 0; i < m_vertices.size(); i++) {
     m_vertices.at(i)->step();
+  }
+}
+
+//---------------------------------------------------------------------
+/*!
+ This function starts the list of elements.\n
+ */
+//---------------------------------------------------------------------
+void StepList::onStart() {
+  for (unsigned i = 0; i < m_vertices.size(); i++) {
+    m_vertices.at(i)->onStart();
+  }
+}
+
+//---------------------------------------------------------------------
+/*!
+ This function starts the list of elements.\n
+ */
+//---------------------------------------------------------------------
+void StepList::onStop() {
+  for (unsigned i = 0; i < m_vertices.size(); i++) {
+    m_vertices.at(i)->onStop();
   }
 }
 

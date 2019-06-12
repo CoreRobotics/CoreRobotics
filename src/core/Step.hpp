@@ -49,7 +49,7 @@ public:
 
   //! Functions to be implemented
 public:
-  //! The onStep function can be implemented in derived classes
+  //! The step function can be implemented in derived classes
   virtual void step() {}
 
   //! The onStart function can be implemented in derived classes

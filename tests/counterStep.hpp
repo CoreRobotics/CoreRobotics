@@ -18,6 +18,7 @@ public:
     counter++;
   }
   void onStop() override {
+    counter = -1;
   }
-  unsigned counter = 0;
+  int counter = 0;
 };

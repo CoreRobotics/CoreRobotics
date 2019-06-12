@@ -19,7 +19,7 @@ public:
   // Primary ThreadElement functions
 public:
   //! Step (called on each iteration of the thread)
-  virtual void step() {
+  void step() override {
 
     // this is a simple low pass system with forward euler discretiation
     x = (1 - m_dt / m_tau) * x;

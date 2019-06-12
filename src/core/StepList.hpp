@@ -45,8 +45,14 @@ public:
 
   // Derived step function
 public:
-  //! step the graph
-  void step();
+  //! Step the graph
+  void step() override;
+
+  //! Start the graph
+  void onStart() override;
+
+  //! Stop the graph
+  void onStop() override;
 
   //! Private members
 private:
