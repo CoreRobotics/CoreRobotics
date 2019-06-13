@@ -17,6 +17,50 @@
 using namespace cr::core;
 using namespace cr::runtime;
 
+// this function runs a timed test of the loop at a specified sample rate
+void timed_loop_test(const double dt, const double eps) {
+  LoopPtr myLoop = Loop::create();
+  myLoop->setPriority(CR_PRIORITY_HIGHEST);
+
+  auto myStep = std::make_shared<counterStep>();
+  myLoop->attach(myStep);
+
+  myLoop->setUpdateRate(dt);
+  EXPECT_DOUBLE_EQ(myLoop->getUpdateRate(), dt);
+
+  Clock timer;
+
+  // check start run and pause
+  myLoop->start();
+  timer.sleep((10 + eps) * dt);
+  myLoop->pause();
+  EXPECT_EQ(myStep->counter, 11);
+
+  // check nothing happens while paused
+  timer.sleep(10 * dt);
+  EXPECT_EQ(myStep->counter, 11);
+
+  // check restart from pause
+  myLoop->start();
+  timer.sleep(10 * dt);
+  myLoop->pause();
+  EXPECT_EQ(myStep->counter, 21);
+
+  // check reset on stop
+  myLoop->start();
+  timer.sleep(1 * dt);
+  myLoop->stop();
+  EXPECT_EQ(myStep->counter, -1);
+
+  // check start after previous stop
+  myLoop->start();
+  timer.sleep((10 + eps) * dt);
+  myLoop->pause();
+  EXPECT_EQ(myStep->counter, 11);
+
+  myLoop->stop();
+}
+
 //------------------------------------------------------------------------------
 /*!
  Test the reset function (called on construction)
@@ -53,49 +97,8 @@ TEST(Loop, reset) {
  Test the thread execution functionality
  */
 //------------------------------------------------------------------------------
-TEST(Loop, execution) {
-
-  LoopPtr myLoop = Loop::create();
-  myLoop->setPriority(CR_PRIORITY_HIGHEST);
-
-  auto myStep = std::make_shared<counterStep>();
-  myLoop->attach(myStep);
-
+TEST(Loop, execution100Hz) {
   double dt = 0.01;
-  myLoop->setUpdateRate(dt);
-  EXPECT_DOUBLE_EQ(myLoop->getUpdateRate(), dt);
-
-  Clock timer;
-
-  double eps = 0.5;
-
-  myLoop->start();
-  timer.sleep((10 + eps) * dt);
-  myLoop->pause();
-
-  EXPECT_EQ(myStep->counter, 11);
-
-  timer.sleep(10 * dt);
-
-  EXPECT_EQ(myStep->counter, 11);
-
-  myLoop->start();
-  timer.sleep(10 * dt);
-  myLoop->pause();
-
-  EXPECT_EQ(myStep->counter, 21);
-
-  timer.sleep(10 * dt);
-  myLoop->start();
-  timer.sleep(10 * dt);
-  myLoop->stop();
-
-  EXPECT_EQ(myStep->counter, 31);
-
-  timer.sleep((10 + eps) * dt);
-  myLoop->start();
-  timer.sleep(10 * dt);
-  myLoop->stop();
-
-  EXPECT_EQ(myStep->counter, 11);
+  double eps = 1e-6;
+  timed_loop_test(dt, eps);
 }
