@@ -74,8 +74,7 @@ public:
 
   //! Class constructor
   MinimumJerk() : TrajectoryGenerator<KinematicWaypoint>() {}
-  MinimumJerk(const Parameters &i_parameters,
-                       const KinematicWaypoint &i_action)
+  MinimumJerk(const Parameters &i_parameters, const KinematicWaypoint &i_action)
       : TrajectoryGenerator<KinematicWaypoint>(i_action),
         m_parameters(i_parameters) {}
 

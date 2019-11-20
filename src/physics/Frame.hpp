@@ -77,7 +77,7 @@ class Frame {
 public:
   //! Class constructor
   Frame();
-  Frame(const Eigen::Matrix3d& i_rot, const Eigen::Vector3d& i_trans);
+  Frame(const Eigen::Matrix3d &i_rot, const Eigen::Vector3d &i_trans);
 
   //! Class destructor
   virtual ~Frame() = default;
