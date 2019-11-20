@@ -45,5 +45,5 @@ double Probability::mvnpdf(Eigen::VectorXd i_x, Eigen::VectorXd i_mean,
   }
 }
 
-} // namepsace math
-} // namepsace cr
+} // namespace math
+} // namespace cr

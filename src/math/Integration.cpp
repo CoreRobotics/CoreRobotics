@@ -95,5 +95,5 @@ Eigen::VectorXd Integration::rungeKuttaStep(
   return i_x + i_dt / 6 * (f1 + 2 * f2 + 2 * f3 + f4);
 }
 
-} // namepsace math
-} // namepsace cr
+} // namespace math
+} // namespace cr

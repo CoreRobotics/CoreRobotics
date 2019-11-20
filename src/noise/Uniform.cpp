@@ -48,7 +48,7 @@ double Uniform::probability(const Eigen::VectorXd &i_x) {
   // check if x is in the domain of the distribution
   for (int i = 0; i < i_x.size(); i++) {
     if ((i_x(i) > this->m_parameters.b(i) ||
-        (i_x(i) < this->m_parameters.a(i)))) {
+         (i_x(i) < this->m_parameters.a(i)))) {
       p = 0.0;
     }
   }

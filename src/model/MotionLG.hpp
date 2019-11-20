@@ -20,8 +20,8 @@ namespace model {
  \class MotionLG
  \ingroup model
 
- \brief This class implements a linear Gaussian motion model from a supplied 
- dynamics callback function.  Specifically, MotionLinear sets up a container 
+ \brief This class implements a linear Gaussian motion model from a supplied
+ dynamics callback function.  Specifically, MotionLinear sets up a container
  for the continuous time model
 
  \f[
@@ -51,28 +51,27 @@ class MotionLG : public Motion<noise::Gaussian, Eigen::VectorXd> {
 public:
   //! Motion linear Gaussian paramter structure
   class Parameters : public MotionLinear::Parameters {
-  public: 
+  public:
     Parameters() = default;
     Parameters(std::size_t i_stateDim, std::size_t i_actionDim,
-                      std::size_t i_noiseDim)
+               std::size_t i_noiseDim)
         : MotionLinear::Parameters(i_stateDim, i_actionDim),
           m_C(Eigen::MatrixXd::Zero(i_stateDim, i_noiseDim)),
           m_Q(Eigen::MatrixXd::Zero(i_noiseDim, i_noiseDim)){};
     virtual ~Parameters() = default;
-    const Eigen::MatrixXd& C() const { return m_C; }
-    const Eigen::MatrixXd& Q() const { return m_Q; }
-    void setC(const Eigen::MatrixXd& i_C ) { m_C = i_C; }
-    void setQ(const Eigen::MatrixXd& i_Q ) { m_Q = i_Q; }
+    const Eigen::MatrixXd &C() const { return m_C; }
+    const Eigen::MatrixXd &Q() const { return m_Q; }
+    void setC(const Eigen::MatrixXd &i_C) { m_C = i_C; }
+    void setQ(const Eigen::MatrixXd &i_Q) { m_Q = i_Q; }
+
   private:
     Eigen::MatrixXd m_C; /** Process noise matrix */
     Eigen::MatrixXd m_Q; /** Process noise covariance */
   };
 
   //! Class constructor
-  MotionLG(const Parameters &i_parameters,
-           const noise::Gaussian &i_state,
-           const Eigen::VectorXd &i_action,
-           const double i_dt = 0.01);
+  MotionLG(const Parameters &i_parameters, const noise::Gaussian &i_state,
+           const Eigen::VectorXd &i_action, const double i_dt = 0.01);
 
   //! Class destructor
   virtual ~MotionLG() = default;
@@ -85,7 +84,7 @@ public:
                                  Eigen::VectorXd i_u) override;
 };
 
-} // namepsace model
-} // namepsace cr
+} // namespace model
+} // namespace cr
 
 #endif

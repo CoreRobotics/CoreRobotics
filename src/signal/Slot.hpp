@@ -76,6 +76,6 @@ private:
 };
 
 } // namespace signal
-} // namepsace cr
+} // namespace cr
 
 #endif

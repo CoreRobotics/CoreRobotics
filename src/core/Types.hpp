@@ -24,7 +24,7 @@ enum Result {
   CR_RESULT_NOT_FOUND,
 };
 
-} // namepsace core
+} // namespace core
 } // namespace cr
 
 #endif

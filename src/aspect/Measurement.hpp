@@ -15,10 +15,11 @@
   \brief This macro adds class members.
   \param MeasurementType  The measurement data type.
 */
-#define CR_ASPECT_MEASUREMENT_READ(MeasurementType) \
-public: \
-  const MeasurementType& getMeasurement() const { return m_measurement; } \
-protected: \
+#define CR_ASPECT_MEASUREMENT_READ(MeasurementType)                            \
+public:                                                                        \
+  const MeasurementType &getMeasurement() const { return m_measurement; }      \
+                                                                               \
+protected:                                                                     \
   MeasurementType m_measurement;
 
 /*!
@@ -29,10 +30,10 @@ protected: \
   \brief This macro adds class members.
   \param MeasurementType  The measurement data type.
 */
-#define CR_ASPECT_MEASUREMENT_WRITE(MeasurementType) \
-CR_ASPECT_MEASUREMENT_READ(MeasurementType) \
-public: \
-  void setMeasurement(const MeasurementType& i_z) { m_measurement = i_z; }
+#define CR_ASPECT_MEASUREMENT_WRITE(MeasurementType)                           \
+  CR_ASPECT_MEASUREMENT_READ(MeasurementType)                                  \
+public:                                                                        \
+  void setMeasurement(const MeasurementType &i_z) { m_measurement = i_z; }
 
 /*!
   \def CR_ASPECT_MEASUREMENT_MUTABLE(MeasurementType)
@@ -42,9 +43,9 @@ public: \
   \brief This macro adds class members.
   \param MeasurementType  The measurement data type.
 */
-#define CR_ASPECT_MEASUREMENT_MUTABLE(MeasurementType) \
-CR_ASPECT_MEASUREMENT_WRITE(MeasurementType) \
-public: \
-  MeasurementType* measurement() { return &m_measurement; }
+#define CR_ASPECT_MEASUREMENT_MUTABLE(MeasurementType)                         \
+  CR_ASPECT_MEASUREMENT_WRITE(MeasurementType)                                 \
+public:                                                                        \
+  MeasurementType *measurement() { return &m_measurement; }
 
 #endif

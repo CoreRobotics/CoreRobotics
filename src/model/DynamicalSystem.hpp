@@ -66,11 +66,10 @@ class DynamicalSystem : public Motion<Eigen::VectorXd, Eigen::VectorXd> {
 public:
   //! Class constructor
   DynamicalSystem(const Eigen::VectorXd &i_state,
-                  const Eigen::VectorXd &i_action,
-                  const double i_dt = 0.01,
+                  const Eigen::VectorXd &i_action, const double i_dt = 0.01,
                   const SystemType &i_type = CONTINUOUS_TIME)
       : Motion<Eigen::VectorXd, Eigen::VectorXd>(i_state, i_action, i_dt),
-        m_systemType(i_type) {};
+        m_systemType(i_type){};
 
   //! Class destructor
   virtual ~DynamicalSystem() = default;
@@ -105,7 +104,7 @@ protected:
   SystemType m_systemType;
 };
 
-} // namepsace model
-} // namepsace cr
+} // namespace model
+} // namespace cr
 
 #endif

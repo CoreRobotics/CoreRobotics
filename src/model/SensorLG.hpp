@@ -47,20 +47,19 @@ public:
   class Parameters : public SensorLinear::Parameters {
   public:
     Parameters() = default;
-    Parameters(std::size_t i_stateDim,
-               std::size_t i_measDim)
+    Parameters(std::size_t i_stateDim, std::size_t i_measDim)
         : SensorLinear::Parameters(i_measDim, i_stateDim),
           m_R(Eigen::MatrixXd::Zero(i_measDim, i_measDim)){};
     virtual ~Parameters() = default;
-    const Eigen::MatrixXd& R() const { return m_R; }
-    void setR(const Eigen::MatrixXd& i_R ) { m_R = i_R; }
+    const Eigen::MatrixXd &R() const { return m_R; }
+    void setR(const Eigen::MatrixXd &i_R) { m_R = i_R; }
+
   private:
     Eigen::MatrixXd m_R; /** Measurement noise covariance */
   };
 
   //! Class constructor
-  SensorLG(const Parameters &i_parameters,
-           const Eigen::VectorXd &i_state,
+  SensorLG(const Parameters &i_parameters, const Eigen::VectorXd &i_state,
            const double i_dt = 0.01);
 
   //! Class destructor
@@ -73,7 +72,7 @@ public:
   noise::Gaussian sensorCallback(double i_t, Eigen::VectorXd i_x) override;
 };
 
-} // namepsace model
-} // namepsace cr
+} // namespace model
+} // namespace cr
 
 #endif

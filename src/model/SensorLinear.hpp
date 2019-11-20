@@ -45,19 +45,18 @@ public:
   class Parameters {
   public:
     Parameters() = default;
-    Parameters(std::size_t i_stateDim,
-               std::size_t i_measDim)
+    Parameters(std::size_t i_stateDim, std::size_t i_measDim)
         : m_H(Eigen::MatrixXd::Zero(i_measDim, i_stateDim)){};
     virtual ~Parameters() = default;
-    const Eigen::MatrixXd& H() const { return m_H; }
-    void setH(const Eigen::MatrixXd& i_H ) { m_H = i_H; }
+    const Eigen::MatrixXd &H() const { return m_H; }
+    void setH(const Eigen::MatrixXd &i_H) { m_H = i_H; }
+
   private:
     Eigen::MatrixXd m_H; /** Observation matrix */
   };
 
   //! Class constructor
-  SensorLinear(const Parameters &i_parameters,
-               const Eigen::VectorXd &i_state,
+  SensorLinear(const Parameters &i_parameters, const Eigen::VectorXd &i_state,
                const double i_dt = 0.01);
 
   //! Class destructor
@@ -71,7 +70,7 @@ public:
                                          Eigen::VectorXd i_x) override;
 };
 
-} // namepsace model
-} // namepsace cr
+} // namespace model
+} // namespace cr
 
 #endif

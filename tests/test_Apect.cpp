@@ -32,7 +32,7 @@ public:
 
 TEST(Aspect, AspectStructue) {
 
-  auto my_base = Base();;
+  auto my_base = Base();
   EXPECT_EQ(my_base.parameter()->name, "Base");
 
   auto my_class = Derived();

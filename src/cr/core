@@ -7,11 +7,11 @@
 #ifndef CR_CORE_HPP_
 #define CR_CORE_HPP_
 
-#include "core/Types.hpp"
-#include "core/Item.hpp"
 #include "core/Clock.hpp"
+#include "core/Item.hpp"
+#include "core/SharedMemory.hpp"
 #include "core/Step.hpp"
 #include "core/StepList.hpp"
-#include "core/SharedMemory.hpp"
+#include "core/Types.hpp"
 
 #endif

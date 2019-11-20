@@ -38,14 +38,13 @@ namespace noise {
  [3] en.wikipedia.org/wiki/Mixture_model
  */
 //------------------------------------------------------------------------------
-template<typename DomainType, 
-  typename DistributionType = Distribution<DomainType>>
+template <typename DomainType,
+          typename DistributionType = Distribution<DomainType>>
 class Mixture : public Distribution<DomainType> {
 
 public:
   //! Parameters
-  template<typename T>
-  struct Parameters : public Discrete::Parameters {
+  template <typename T> struct Parameters : public Discrete::Parameters {
     Parameters() = default;
     virtual ~Parameters() = default;
     //! Add a distribution to the model
@@ -53,15 +52,15 @@ public:
       models.emplace_back(i_model);
       weights.emplace_back(i_weight);
     }
-    std::vector<T*> models;
+    std::vector<T *> models;
   };
 
   //! Constructor
   Mixture() = default;
-  Mixture(const Parameters<DistributionType>& i_parameters,
+  Mixture(const Parameters<DistributionType> &i_parameters,
           unsigned i_seed = Distribution<DomainType>::randomSeed())
       : Distribution<DomainType>(i_seed), m_parameters(i_parameters),
-        m_discrete(i_parameters) {};
+        m_discrete(i_parameters){};
 
   //! Destructor
   virtual ~Mixture() = default;

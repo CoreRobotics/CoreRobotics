@@ -34,7 +34,7 @@ public:
                        Eigen::MatrixXd i_covariance);
 };
 
-} // namepsace math
-} // namepsace cr
+} // namespace math
+} // namespace cr
 
 #endif

@@ -145,5 +145,5 @@ Eigen::VectorXd SharedMemory::get(const char *i_signalName) {
   return data;
 }
 
-} // namepsace core
+} // namespace core
 } // namespace cr

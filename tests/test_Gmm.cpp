@@ -38,10 +38,7 @@ TEST(Gmm, Predict) {
   Gaussian g2(gp);
   gmmParams.add(&g2, 0.3);
 
-  cov << 0.1, 0,   0,    0.2, 
-         0,   0.2, 0,    0, 
-         0,   0,   4.0, -0.1, 
-         0.2, 0,  -0.1,  5.0;
+  cov << 0.1, 0, 0, 0.2, 0, 0.2, 0, 0, 0, 0, 4.0, -0.1, 0.2, 0, -0.1, 5.0;
   mean << 9, 10, 11, 12;
   gp.setCov(cov);
   gp.setMean(mean);

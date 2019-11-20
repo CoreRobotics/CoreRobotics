@@ -45,8 +45,8 @@ Eigen::VectorXd Gaussian::sample() {
  */
 //------------------------------------------------------------------------------
 double Gaussian::probability(const Eigen::VectorXd &i_x) {
-  return math::Probability::mvnpdf(i_x, m_parameters.mean(), 
-    m_parameters.cov());
+  return math::Probability::mvnpdf(i_x, m_parameters.mean(),
+                                   m_parameters.cov());
 }
 
 } // namespace noise

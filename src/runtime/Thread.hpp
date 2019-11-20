@@ -11,7 +11,7 @@
 
 namespace cr {
 namespace runtime {
- 
+
 /*!
 Enumerator for specifying thread priority
 \ingroup runtime

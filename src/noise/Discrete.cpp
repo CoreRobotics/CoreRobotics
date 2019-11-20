@@ -18,7 +18,7 @@ namespace noise {
 //------------------------------------------------------------------------------
 unsigned Discrete::sample() {
   m_parameters.normalizeWeights();
-  
+
   std::vector<double> cdf;
 
   cdf.resize(m_parameters.weights.size());

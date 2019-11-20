@@ -50,34 +50,33 @@ using namespace std::placeholders;
 
 //
 // Test different function prototypes
-// 
+//
 TEST(Signal, Types) {
 
   struct MyStruct {
     double getDouble() { return m_value; }
-    double getDoubleConst()  const { return m_value; }
+    double getDoubleConst() const { return m_value; }
     void setDouble(double value) { m_value = value; }
     void setDoubleConst(const double value) { m_value = value; }
-    void setDoubleConstRef(const double& value) { m_value = value; }
+    void setDoubleConstRef(const double &value) { m_value = value; }
     double m_value = 1.0;
   };
 
   auto test = std::shared_ptr<MyStruct>(new MyStruct);
 
-  std::function<double(void)> f1 = std::bind(
-    &MyStruct::getDouble, test.get());
+  std::function<double(void)> f1 = std::bind(&MyStruct::getDouble, test.get());
 
-  std::function<double(void)> f2 = std::bind(
-    &MyStruct::getDoubleConst, test.get());
+  std::function<double(void)> f2 =
+      std::bind(&MyStruct::getDoubleConst, test.get());
 
-  std::function<void(double)> f3 = std::bind(
-    &MyStruct::setDouble, test.get(), _1);
+  std::function<void(double)> f3 =
+      std::bind(&MyStruct::setDouble, test.get(), _1);
 
-  std::function<void(double)> f4 = std::bind(
-    &MyStruct::setDoubleConst, test.get(), _1);
+  std::function<void(double)> f4 =
+      std::bind(&MyStruct::setDoubleConst, test.get(), _1);
 
-  std::function<void(double)> f5 = std::bind(
-    &MyStruct::setDoubleConstRef, test.get(), _1);
+  std::function<void(double)> f5 =
+      std::bind(&MyStruct::setDoubleConstRef, test.get(), _1);
 
   // create the signal(s)
   auto myGetDouble = new MySignal<double>(f1);

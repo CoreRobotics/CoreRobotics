@@ -68,5 +68,5 @@ void StepList::onStop() {
   }
 }
 
-} // namepsace core
+} // namespace core
 } // namespace cr

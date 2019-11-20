@@ -26,7 +26,7 @@ namespace ph = std::placeholders;
  \class Motion
  \ingroup model
 
- \brief This class implements a motion model from a supplied dynamics callback 
+ \brief This class implements a motion model from a supplied dynamics callback
  function. Specifically, MotionModel sets up a container for the discrete time
  set of equations
 
@@ -53,10 +53,9 @@ class Motion : public core::Step, public core::Item {
 
 public:
   //! Class constructor
-  Motion(const StateType &i_state, 
-         const ActionType &i_action, 
+  Motion(const StateType &i_state, const ActionType &i_action,
          const double i_dt = 0.01)
-    : m_state(i_state), m_action(i_action), m_dt(i_dt) {};
+      : m_state(i_state), m_action(i_action), m_dt(i_dt){};
 
   //! Class destructor
   virtual ~Motion() = default;
@@ -81,7 +80,7 @@ protected:
       std::bind(&Motion::motionCallback, this, ph::_1, ph::_2, ph::_3);
 };
 
-} // namepsace model
-} // namepsace cr
+} // namespace model
+} // namespace cr
 
 #endif

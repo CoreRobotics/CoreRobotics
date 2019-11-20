@@ -49,7 +49,7 @@ public:
       for (const auto weight : weights) {
         w += weight;
       }
-      for (auto& weight : weights) {
+      for (auto &weight : weights) {
         weight = weight / w;
       }
     }

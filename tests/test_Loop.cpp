@@ -10,8 +10,8 @@
 #include <iostream>
 #include <memory>
 
-#include "simpleStep.hpp"
 #include "counterStep.hpp"
+#include "simpleStep.hpp"
 
 // Use the CoreRobotics namespace
 using namespace cr::core;

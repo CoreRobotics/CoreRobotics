@@ -18,8 +18,8 @@ namespace model {
  \class MotionLinear
  \ingroup model
 
- \brief This class implements a linear motion model from a supplied dynamics 
- callback function.  Specifically, MotionLinear sets up a container for the 
+ \brief This class implements a linear motion model from a supplied dynamics
+ callback function.  Specifically, MotionLinear sets up a container for the
  continuous time model
 
  \f[
@@ -55,20 +55,19 @@ public:
         : m_A(Eigen::MatrixXd::Zero(i_stateDim, i_stateDim)),
           m_B(Eigen::MatrixXd::Zero(i_stateDim, i_actionDim)){};
     virtual ~Parameters() = default;
-    const Eigen::MatrixXd& A() const { return m_A; }
-    const Eigen::MatrixXd& B() const { return m_B; }
-    void setA(const Eigen::MatrixXd& i_A ) { m_A = i_A; }
-    void setB(const Eigen::MatrixXd& i_B ) { m_A = i_B; }
+    const Eigen::MatrixXd &A() const { return m_A; }
+    const Eigen::MatrixXd &B() const { return m_B; }
+    void setA(const Eigen::MatrixXd &i_A) { m_A = i_A; }
+    void setB(const Eigen::MatrixXd &i_B) { m_A = i_B; }
+
   private:
     Eigen::MatrixXd m_A; /** Dynamics matrix */
     Eigen::MatrixXd m_B; /** Input matrix */
   };
 
   //! Class constructor
-  MotionLinear(const Parameters &i_parameters,
-               const Eigen::VectorXd &i_state,
-               const Eigen::VectorXd &i_action,
-               const double i_dt = 0.01,
+  MotionLinear(const Parameters &i_parameters, const Eigen::VectorXd &i_state,
+               const Eigen::VectorXd &i_action, const double i_dt = 0.01,
                const SystemType i_type = CONTINUOUS_TIME);
 
   //! Class destructor
@@ -82,7 +81,7 @@ public:
                                  Eigen::VectorXd i_u) override;
 };
 
-} // namepsace model
-} // namepsace cr
+} // namespace model
+} // namespace cr
 
 #endif

@@ -7,9 +7,9 @@
 #ifndef CR_NOISE_DISTRIBUTION_HPP_
 #define CR_NOISE_DISTRIBUTION_HPP_
 
+#include "aspect/Parameter.hpp"
 #include <chrono>
 #include <random>
-#include "aspect/Parameter.hpp"
 
 namespace cr {
 namespace noise {

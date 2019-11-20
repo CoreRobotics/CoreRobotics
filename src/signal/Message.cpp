@@ -29,7 +29,9 @@ void GenericSerializer::write(std::ostream &i_log, std::string i_x) {
  \param[in]     i_x - the value to write
  */
 //------------------------------------------------------------------------------
-void GenericSerializer::write(std::ostream &i_log, bool i_x) { i_log << i_x << ","; }
+void GenericSerializer::write(std::ostream &i_log, bool i_x) {
+  i_log << i_x << ",";
+}
 
 //------------------------------------------------------------------------------
 /*!
@@ -39,7 +41,9 @@ void GenericSerializer::write(std::ostream &i_log, bool i_x) { i_log << i_x << "
  \param[in]     i_x - the value to write
  */
 //------------------------------------------------------------------------------
-void GenericSerializer::write(std::ostream &i_log, int i_x) { i_log << i_x << ","; }
+void GenericSerializer::write(std::ostream &i_log, int i_x) {
+  i_log << i_x << ",";
+}
 
 //------------------------------------------------------------------------------
 /*!
@@ -49,7 +53,9 @@ void GenericSerializer::write(std::ostream &i_log, int i_x) { i_log << i_x << ",
  \param[in]     i_x - the value to write
  */
 //------------------------------------------------------------------------------
-void GenericSerializer::write(std::ostream &i_log, float i_x) { i_log << i_x << ","; }
+void GenericSerializer::write(std::ostream &i_log, float i_x) {
+  i_log << i_x << ",";
+}
 
 //------------------------------------------------------------------------------
 /*!
@@ -59,7 +65,9 @@ void GenericSerializer::write(std::ostream &i_log, float i_x) { i_log << i_x << 
  \param[in]     i_x - the value to write
  */
 //------------------------------------------------------------------------------
-void GenericSerializer::write(std::ostream &i_log, double i_x) { i_log << i_x << ","; }
+void GenericSerializer::write(std::ostream &i_log, double i_x) {
+  i_log << i_x << ",";
+}
 
 //------------------------------------------------------------------------------
 /*!
@@ -76,4 +84,4 @@ void GenericSerializer::write(std::ostream &i_log, Eigen::VectorXd i_x) {
 }
 
 } // namespace signal
-} // namepsace cr
+} // namespace cr

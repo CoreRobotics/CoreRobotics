@@ -9,11 +9,11 @@
 
 #include <thread>
 
-#include "core/Item.hpp"
+#include "Thread.hpp"
 #include "core/Clock.hpp"
+#include "core/Item.hpp"
 #include "core/Step.hpp"
 #include "core/Types.hpp"
-#include "Thread.hpp"
 
 namespace cr {
 namespace runtime {
@@ -33,10 +33,7 @@ Enumerator for specifying thread priority
 \ingroup runtime
 TODO: https://gitlab.com/powan/CoreRobotics/issues/55
 */
-enum RealtimePolicy {
-  CR_REALTIME_POLICY_SOFT,
-  CR_REALTIME_POLICY_HARD
-};
+enum RealtimePolicy { CR_REALTIME_POLICY_SOFT, CR_REALTIME_POLICY_HARD };
 
 //! Loop smart pointer
 class Loop;

@@ -19,7 +19,7 @@ template <typename DomainType> struct ParticleParameters {
   virtual ~ParticleParameters() = default;
 
   //! Add a distribution to the model
-  void add(const DomainType& i_particle, double i_weight) {
+  void add(const DomainType &i_particle, double i_weight) {
     particles.emplace_back(i_particle);
     auto dp = discrete.getParameters();
     dp.weights.emplace_back(i_weight);
@@ -27,7 +27,7 @@ template <typename DomainType> struct ParticleParameters {
   }
 
   Discrete discrete;
-  std::vector<const DomainType& > particles;
+  std::vector<const DomainType &> particles;
 };
 
 //------------------------------------------------------------------------------
@@ -40,8 +40,8 @@ template <typename DomainType> struct ParticleParameters {
  \details
  ## Description
  Particle implements methods for sampling and modeling noise as a set of states
- and weights [2-3].  Each state (particle) is also accompanied by a weight, 
- indicating the probability of that distribution being selected for sampling of 
+ and weights [2-3].  Each state (particle) is also accompanied by a weight,
+ indicating the probability of that distribution being selected for sampling of
  the noise.
 
  ## References
@@ -54,17 +54,17 @@ template <typename DomainType> struct ParticleParameters {
  [3] en.wikipedia.org/wiki/Mixture_model
  */
 //------------------------------------------------------------------------------
-template<typename DomainType>
+template <typename DomainType>
 class Particle
-  : public Distribution<DomainType, ParticleParameters<DomainType>> {
+    : public Distribution<DomainType, ParticleParameters<DomainType>> {
 
 public:
   //! Constructor
   Particle() = default;
   Particle(ParticleParameters<DomainType> i_parameters,
            unsigned i_seed = DistributionBase<DomainType>::randomSeed())
-      : Distribution<DomainType, ParticleParameters<DomainType>>>(
-        i_parameters, i_seed) {};
+      : Distribution<DomainType, ParticleParameters<DomainType>>>
+        (i_parameters, i_seed){};
 
   //! Destructor
   virtual ~Particle() = default;
@@ -76,8 +76,8 @@ public:
   }
 
   //! The probability (pdf: continuous, pmf: discrete) must be implemented.
-  double probability(const DomainType &i_x) override {
-    //  TODO: compute the probability
+  double probability(const DomainType &i_x) override{
+      //  TODO: compute the probability
   };
 };
 

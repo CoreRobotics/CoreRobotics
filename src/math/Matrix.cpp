@@ -21,8 +21,8 @@ namespace math {
  \return - the reduced vector
  */
 //------------------------------------------------------------------------------
-const Eigen::VectorXd Matrix::reducedVector(const Eigen::VectorXd& i_x,
-                                            const Eigen::VectorXi& i_indices) {
+const Eigen::VectorXd Matrix::reducedVector(const Eigen::VectorXd &i_x,
+                                            const Eigen::VectorXi &i_indices) {
   Eigen::VectorXd y;
   y.setZero(i_indices.size());
 
@@ -47,9 +47,10 @@ const Eigen::VectorXd Matrix::reducedVector(const Eigen::VectorXd& i_x,
  \return - the reduced matrix
  */
 //------------------------------------------------------------------------------
-const Eigen::MatrixXd Matrix::reducedMatrix(const Eigen::MatrixXd& i_x,
-                                            const Eigen::VectorXi& i_rowIndices,
-                                            const Eigen::VectorXi& i_colIndices) {
+const Eigen::MatrixXd
+Matrix::reducedMatrix(const Eigen::MatrixXd &i_x,
+                      const Eigen::VectorXi &i_rowIndices,
+                      const Eigen::VectorXi &i_colIndices) {
   Eigen::MatrixXd y;
   y.setZero(i_rowIndices.size(), i_colIndices.size());
 
@@ -85,10 +86,8 @@ singular values were below the specified tolerance (i.e. singular)
 
 */
 //------------------------------------------------------------------------------
-core::Result Matrix::svd(const Eigen::MatrixXd& i_A,
-                         double i_tol,
-                         Eigen::MatrixXd &o_U,
-                         Eigen::VectorXd &o_Sigma,
+core::Result Matrix::svd(const Eigen::MatrixXd &i_A, double i_tol,
+                         Eigen::MatrixXd &o_U, Eigen::VectorXd &o_Sigma,
                          Eigen::MatrixXd &o_V) {
   core::Result result = core::CR_RESULT_SUCCESS;
 
@@ -145,8 +144,7 @@ core::Result Matrix::svd(const Eigen::MatrixXd& i_A,
 
  */
 //------------------------------------------------------------------------------
-core::Result Matrix::svdInverse(const Eigen::MatrixXd& i_A,
-                                double i_tol,
+core::Result Matrix::svdInverse(const Eigen::MatrixXd &i_A, double i_tol,
                                 Eigen::MatrixXd &o_Ainv) {
   core::Result result = core::CR_RESULT_SUCCESS;
 
@@ -174,5 +172,5 @@ core::Result Matrix::svdInverse(const Eigen::MatrixXd& i_A,
   return result;
 }
 
-} // namepsace math
-} // namepsace cr
+} // namespace math
+} // namespace cr

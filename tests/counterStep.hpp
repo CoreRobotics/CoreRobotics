@@ -12,15 +12,9 @@
 //! This step class increments its count on every call
 class counterStep : public cr::core::Step {
 public:
-  void onStart() override { 
-    counter = 0;
-  }
-  void step() override { 
-    counter++;
-  }
-  void onStop() override {
-    counter = -1;
-  }
+  void onStart() override { counter = 0; }
+  void step() override { counter++; }
+  void onStop() override { counter = -1; }
   int counter = 0;
 };
 

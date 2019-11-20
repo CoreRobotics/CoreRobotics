@@ -46,7 +46,7 @@ public:
   static Eigen::VectorXd wrapToPi(const Eigen::VectorXd &angle);
 };
 
-} // namepsace math
-} // namepsace cr
+} // namespace math
+} // namespace cr
 
 #endif

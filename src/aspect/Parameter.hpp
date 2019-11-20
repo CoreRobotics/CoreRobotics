@@ -15,10 +15,11 @@
   \brief This macro adds class members.
   \param ParameterType  The parameter data type.
 */
-#define CR_ASPECT_PARAMETER_READ(ParameterType) \
-public: \
-  const ParameterType& getParameters() const { return m_parameters; } \
-protected: \
+#define CR_ASPECT_PARAMETER_READ(ParameterType)                                \
+public:                                                                        \
+  const ParameterType &getParameters() const { return m_parameters; }          \
+                                                                               \
+protected:                                                                     \
   ParameterType m_parameters;
 
 /*!
@@ -29,10 +30,10 @@ protected: \
   \brief This macro adds class members.
   \param ParameterType  The parameter data type.
 */
-#define CR_ASPECT_PARAMETER_WRITE(ParameterType) \
-CR_ASPECT_PARAMETER_READ(ParameterType) \
-public: \
-  void setParameters(const ParameterType& i_p) { m_parameters = i_p; }
+#define CR_ASPECT_PARAMETER_WRITE(ParameterType)                               \
+  CR_ASPECT_PARAMETER_READ(ParameterType)                                      \
+public:                                                                        \
+  void setParameters(const ParameterType &i_p) { m_parameters = i_p; }
 
 /*!
   \def CR_ASPECT_PARAMETER_MUTABLE(ParameterType)
@@ -42,9 +43,9 @@ public: \
   \brief This macro adds class members.
   \param ParameterType  The parameter data type.
 */
-#define CR_ASPECT_PARAMETER_MUTABLE(ParameterType) \
-CR_ASPECT_PARAMETER_WRITE(ParameterType) \
-public: \
-  ParameterType* parameter() { return &m_parameters; }
+#define CR_ASPECT_PARAMETER_MUTABLE(ParameterType)                             \
+  CR_ASPECT_PARAMETER_WRITE(ParameterType)                                     \
+public:                                                                        \
+  ParameterType *parameter() { return &m_parameters; }
 
 #endif

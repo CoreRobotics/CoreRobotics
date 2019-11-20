@@ -27,9 +27,8 @@ each step at the rate specified by i_updateRate.\n
 \param[in]  i_priority    The thread priority.
 */
 //---------------------------------------------------------------------
-Loop::Loop(const double i_updateRate,
-           const ThreadPriority i_priority)
-  : m_updateRate(i_updateRate), m_priority(i_priority) {}
+Loop::Loop(const double i_updateRate, const ThreadPriority i_priority)
+    : m_updateRate(i_updateRate), m_priority(i_priority) {}
 
 //---------------------------------------------------------------------
 /*!
@@ -260,5 +259,5 @@ void Loop::updatePriority() {
 #endif
 }
 
-} // namepsace runtime
+} // namespace runtime
 } // namespace cr

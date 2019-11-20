@@ -9,13 +9,9 @@
 namespace cr {
 namespace math {
 
-double Conversion::deg2rad(const double i_deg) {
-  return M_PI * i_deg / 180.0;
-}
+double Conversion::deg2rad(const double i_deg) { return M_PI * i_deg / 180.0; }
 
-double Conversion::rad2deg(const double i_rad) {
-  return 180.0 * i_rad / M_PI;
-}
+double Conversion::rad2deg(const double i_rad) { return 180.0 * i_rad / M_PI; }
 
 double Conversion::wrapToPi(const double angle) {
   double y = std::fmod(angle + M_PI, 2 * M_PI);
@@ -33,5 +29,5 @@ Eigen::VectorXd Conversion::wrapToPi(const Eigen::VectorXd &angle) {
   return y;
 }
 
-} // namepsace math
-} // namepsace cr
+} // namespace math
+} // namespace cr

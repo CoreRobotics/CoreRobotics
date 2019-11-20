@@ -57,7 +57,6 @@ public:
   virtual void onStop();
 
 protected:
-
   //! list of signals to log
   std::vector<std::shared_ptr<MessageBase>> m_messages;
 
@@ -75,6 +74,6 @@ protected:
 };
 
 } // namespace signal
-} // namepsace cr
+} // namespace cr
 
 #endif

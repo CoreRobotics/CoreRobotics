@@ -7,8 +7,8 @@
 #ifndef CR_CORE_STEP_HPP_
 #define CR_CORE_STEP_HPP_
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
 namespace cr {
 namespace core {
@@ -60,6 +60,6 @@ public:
 };
 
 } // namespace core
-} // namepsace cr
+} // namespace cr
 
 #endif

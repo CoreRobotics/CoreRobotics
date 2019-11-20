@@ -15,10 +15,11 @@
   \brief This macro adds class members.
   \param StateType  The state data type.
 */
-#define CR_ASPECT_STATE_READ(StateType) \
-public: \
-  const StateType& getState() const { return m_state; } \
-protected: \
+#define CR_ASPECT_STATE_READ(StateType)                                        \
+public:                                                                        \
+  const StateType &getState() const { return m_state; }                        \
+                                                                               \
+protected:                                                                     \
   StateType m_state;
 
 /*!
@@ -29,10 +30,10 @@ protected: \
   \brief This macro adds class members.
   \param StateType  The state data type.
 */
-#define CR_ASPECT_STATE_WRITE(StateType) \
-CR_ASPECT_STATE_READ(StateType) \
-public: \
-  void setState(const StateType& i_x) { m_state = i_x; }
+#define CR_ASPECT_STATE_WRITE(StateType)                                       \
+  CR_ASPECT_STATE_READ(StateType)                                              \
+public:                                                                        \
+  void setState(const StateType &i_x) { m_state = i_x; }
 
 /*!
   \def CR_ASPECT_STATE_MUTABLE(StateType)
@@ -42,9 +43,9 @@ public: \
   \brief This macro adds class members.
   \param StateType  The state data type.
 */
-#define CR_ASPECT_STATE_MUTABLE(StateType) \
-CR_ASPECT_STATE_WRITE(StateType) \
-public: \
-  StateType* state() { return &m_state; }
+#define CR_ASPECT_STATE_MUTABLE(StateType)                                     \
+  CR_ASPECT_STATE_WRITE(StateType)                                             \
+public:                                                                        \
+  StateType *state() { return &m_state; }
 
 #endif

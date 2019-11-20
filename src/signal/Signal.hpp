@@ -108,9 +108,7 @@ private:
 
 template <typename DataType> class MySlot {
 public:
-  MySlot(std::function<void(DataType)> i_callback) {
-    m_callback = i_callback;
-  }
+  MySlot(std::function<void(DataType)> i_callback) { m_callback = i_callback; }
 
   //! request data
   virtual void step() {

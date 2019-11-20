@@ -14,9 +14,7 @@ namespace signal {
  Create a new signal log item.\n
  */
 //------------------------------------------------------------------------------
-LogPtr Log::create() {
-  return std::make_shared<Log>();
-}
+LogPtr Log::create() { return std::make_shared<Log>(); }
 
 //------------------------------------------------------------------------------
 /*!
@@ -67,7 +65,8 @@ void Log::onStart() {
     unsigned n = m_messages.at(i)->size();
     for (unsigned j = 0; j < n; j++) {
       std::string index = "[" + std::to_string(j) + "]";
-      GenericSerializer::write(m_logFile, m_messages.at(i)->getName().append(index));
+      GenericSerializer::write(m_logFile,
+                               m_messages.at(i)->getName().append(index));
     }
   }
 
@@ -86,4 +85,4 @@ void Log::onStart() {
 void Log::onStop() { m_logFile.close(); }
 
 } // namespace signal
-} // namepsace cr
+} // namespace cr

@@ -47,15 +47,16 @@ public:
   public:
     Parameters() = default;
     Parameters(std::size_t i_dim)
-      : m_a(Eigen::VectorXd::Zero(i_dim)),
-        m_b(Eigen::VectorXd::Zero(i_dim)) {}
+        : m_a(Eigen::VectorXd::Zero(i_dim)), m_b(Eigen::VectorXd::Zero(i_dim)) {
+    }
     virtual ~Parameters() = default;
-    const Eigen::VectorXd& a() const { return m_a; }
-    const Eigen::VectorXd& b() const { return m_b; }
+    const Eigen::VectorXd &a() const { return m_a; }
+    const Eigen::VectorXd &b() const { return m_b; }
     double a(unsigned i) const { return m_a(i); }
     double b(unsigned i) const { return m_b(i); }
-    void setA(const Eigen::VectorXd& i_domainMin) { m_a = i_domainMin; } 
-    void setB(const Eigen::VectorXd& i_domainMax) { m_b = i_domainMax; } 
+    void setA(const Eigen::VectorXd &i_domainMin) { m_a = i_domainMin; }
+    void setB(const Eigen::VectorXd &i_domainMax) { m_b = i_domainMax; }
+
   private:
     Eigen::VectorXd m_a;
     Eigen::VectorXd m_b;

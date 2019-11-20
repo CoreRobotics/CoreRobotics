@@ -38,13 +38,15 @@ void KalmanFilter::correct(const Eigen::VectorXd &i_z, noise::Gaussian &o_x) {
   const auto &K = getKalmanGain();
   gp->setMean(gp->mean() + K * e);
   const auto &KH = K * m_sensor.getParameters().H();
-  gp->setCov((Eigen::MatrixXd::Identity(KH.rows(), KH.cols()) - KH) * gp->cov());
+  gp->setCov((Eigen::MatrixXd::Identity(KH.rows(), KH.cols()) - KH) *
+             gp->cov());
 }
 
 //------------------------------------------------------------------------------
 Eigen::MatrixXd KalmanFilter::getKalmanGain() {
   const auto &S = m_sensor.getParameters().H() * m_state.getParameters().cov() *
-    m_sensor.getParameters().H().transpose() + m_sensor.getParameters().R();
+                      m_sensor.getParameters().H().transpose() +
+                  m_sensor.getParameters().R();
   Eigen::MatrixXd Sinv = S.inverse();
   return m_state.getParameters().cov() * m_sensor.getParameters().H() * Sinv;
 }

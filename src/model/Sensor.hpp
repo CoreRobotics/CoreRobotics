@@ -25,9 +25,9 @@ namespace ph = std::placeholders;
  \class Sensor
  \ingroup model
 
- \brief This class implements a sensor model from a supplied observation callback
- function.  Specifically, MotionModel sets up a container for the discrete-time 
- set of equations
+ \brief This class implements a sensor model from a supplied observation
+ callback function.  Specifically, MotionModel sets up a container for the
+ discrete-time set of equations
 
  \f[
  z_k = h(t_k, x_k)
@@ -50,8 +50,7 @@ class Sensor : public core::Step, public core::Item {
 
 public:
   //! Class constructor
-  Sensor(const StateType &i_state,
-         const double i_dt = 0.01)
+  Sensor(const StateType &i_state, const double i_dt = 0.01)
       : m_state(i_state), m_dt(i_dt) {}
 
   //! Class destructor
@@ -79,7 +78,7 @@ protected:
       std::bind(&Sensor::sensorCallback, this, ph::_1, ph::_2);
 };
 
-} // namepsace model
-} // namepsace cr
+} // namespace model
+} // namespace cr
 
 #endif

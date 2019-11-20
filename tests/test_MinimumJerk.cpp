@@ -3,9 +3,9 @@
  * Licensed under BSD-3, https://opensource.org/licenses/BSD-3-Clause
  * http://www.corerobotics.org
  */
- 
-#include "cr/core"
+
 #include "cr/control"
+#include "cr/core"
 #include "gtest/gtest.h"
 #include <iostream>
 

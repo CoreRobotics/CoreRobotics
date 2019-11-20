@@ -15,10 +15,11 @@
   \brief This macro adds class members.
   \param ActionType  The action data type.
 */
-#define CR_ASPECT_ACTION_READ(ActionType) \
-public: \
-  const ActionType& getAction() const { return m_action; } \
-protected: \
+#define CR_ASPECT_ACTION_READ(ActionType)                                      \
+public:                                                                        \
+  const ActionType &getAction() const { return m_action; }                     \
+                                                                               \
+protected:                                                                     \
   ActionType m_action;
 
 /*!
@@ -29,10 +30,10 @@ protected: \
   \brief This macro adds class members.
   \param ActionType  The action data type.
 */
-#define CR_ASPECT_ACTION_WRITE(ActionType) \
-CR_ASPECT_ACTION_READ(ActionType) \
-public: \
-  void setAction(const ActionType& i_x) { m_action = i_x; }
+#define CR_ASPECT_ACTION_WRITE(ActionType)                                     \
+  CR_ASPECT_ACTION_READ(ActionType)                                            \
+public:                                                                        \
+  void setAction(const ActionType &i_x) { m_action = i_x; }
 
 /*!
   \def CR_ASPECT_ACTION_MUTABLE(ActionType)
@@ -42,9 +43,9 @@ public: \
   \brief This macro adds class members.
   \param ActionType  The action data type.
 */
-#define CR_ASPECT_ACTION_MUTABLE(ActionType) \
-CR_ASPECT_ACTION_WRITE(ActionType) \
-public: \
-  ActionType* action() { return &m_action; }
+#define CR_ASPECT_ACTION_MUTABLE(ActionType)                                   \
+  CR_ASPECT_ACTION_WRITE(ActionType)                                           \
+public:                                                                        \
+  ActionType *action() { return &m_action; }
 
 #endif

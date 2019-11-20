@@ -57,7 +57,7 @@ public:
       double i_t, Eigen::VectorXd i_x, Eigen::VectorXd i_u, double i_dt);
 };
 
-} // namepsace math
-} // namepsace cr
+} // namespace math
+} // namespace cr
 
 #endif

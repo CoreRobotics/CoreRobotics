@@ -49,14 +49,15 @@ public:
       m_covInv = m_cov.inverse();
     }
     virtual ~Parameters() = default;
-    const Eigen::MatrixXd& cov() const { return m_cov; }
-    const Eigen::MatrixXd& covInv() const { return m_covInv; }
-    const Eigen::VectorXd& mean() const { return m_mean; }
-    void setCov(const Eigen::MatrixXd& i_covariance ) { 
-      m_cov = i_covariance; 
+    const Eigen::MatrixXd &cov() const { return m_cov; }
+    const Eigen::MatrixXd &covInv() const { return m_covInv; }
+    const Eigen::VectorXd &mean() const { return m_mean; }
+    void setCov(const Eigen::MatrixXd &i_covariance) {
+      m_cov = i_covariance;
       m_covInv = m_cov.inverse();
-      }
-    void setMean(const Eigen::VectorXd& i_mu ) { m_mean = i_mu; }
+    }
+    void setMean(const Eigen::VectorXd &i_mu) { m_mean = i_mu; }
+
   private:
     Eigen::MatrixXd m_cov;
     Eigen::MatrixXd m_covInv;
@@ -65,9 +66,9 @@ public:
 
   //! Constructor
   Gaussian() = default;
-  Gaussian(const Parameters& i_parameters,
+  Gaussian(const Parameters &i_parameters,
            unsigned i_seed = Distribution<Eigen::VectorXd>::randomSeed())
-      : Distribution<Eigen::VectorXd>(i_seed), m_parameters(i_parameters) {};
+      : Distribution<Eigen::VectorXd>(i_seed), m_parameters(i_parameters){};
 
   //! Destructor
   virtual ~Gaussian() = default;

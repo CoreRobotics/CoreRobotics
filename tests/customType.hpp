@@ -30,7 +30,7 @@ public:
 class CustomSerializer : public cr::signal::GenericSerializer {
 public:
   static void write(std::ostream &i_log, CustomType i_data) {
-    i_log << i_data.value  << "," << i_data.id << ",";
+    i_log << i_data.value << "," << i_data.id << ",";
   }
   static unsigned size(CustomType /** i_data **/) { return 2; }
 };

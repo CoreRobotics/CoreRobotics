@@ -60,7 +60,7 @@ private:
   std::vector<StepPtr> m_vertices;
 };
 
-} // namepsace core
+} // namespace core
 } // namespace cr
 
 #endif

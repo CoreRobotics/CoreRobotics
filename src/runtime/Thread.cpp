@@ -166,5 +166,5 @@ void Thread::join() { m_loop->join(); }
 //---------------------------------------------------------------------
 void Thread::detach() { m_loop->detach(); }
 
-} // namepsace runtime
+} // namespace runtime
 } // namespace cr
