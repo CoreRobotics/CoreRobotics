@@ -27,12 +27,12 @@ namespace control {
  \return        cr::Result indicator
  */
 //------------------------------------------------------------------------------
-core::Result MinimumJerk::Parameters::solve(const Eigen::VectorXd& i_x0,
-                                            const Eigen::VectorXd& i_v0,
-                                            const Eigen::VectorXd& i_a0,
-                                            const Eigen::VectorXd& i_xf,
-                                            const Eigen::VectorXd& i_vf,
-                                            const Eigen::VectorXd& i_af, 
+core::Result MinimumJerk::Parameters::solve(const Eigen::VectorXd &i_x0,
+                                            const Eigen::VectorXd &i_v0,
+                                            const Eigen::VectorXd &i_a0,
+                                            const Eigen::VectorXd &i_xf,
+                                            const Eigen::VectorXd &i_vf,
+                                            const Eigen::VectorXd &i_af,
                                             double i_duration) {
 
   // indicator if solution is singular
@@ -76,8 +76,8 @@ core::Result MinimumJerk::Parameters::solve(const Eigen::VectorXd& i_x0,
  \return        cr::Result indicator
  */
 //------------------------------------------------------------------------------
-core::Result MinimumJerk::Parameters::solve(const KinematicWaypoint& i_wp0, 
-                                            const KinematicWaypoint& i_wpf) {
+core::Result MinimumJerk::Parameters::solve(const KinematicWaypoint &i_wp0,
+                                            const KinematicWaypoint &i_wpf) {
   // define the vectors
   Eigen::VectorXd x0 = i_wp0.position;
   Eigen::VectorXd v0 = i_wp0.velocity;
@@ -153,5 +153,5 @@ KinematicWaypoint MinimumJerk::policyCallback(double i_t) {
   return wp;
 }
 
-} // control
-} // cr
+} // namespace control
+} // namespace cr

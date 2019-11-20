@@ -44,10 +44,9 @@ namespace model {
 //------------------------------------------------------------------------------
 MotionLG::MotionLG(const Parameters &i_parameters,
                    const noise::Gaussian &i_state,
-                   const Eigen::VectorXd &i_action,
-                   const double i_dt)
-  : Motion<noise::Gaussian, Eigen::VectorXd>(i_state, i_action, i_dt),
-    m_parameters(i_parameters) {}
+                   const Eigen::VectorXd &i_action, const double i_dt)
+    : Motion<noise::Gaussian, Eigen::VectorXd>(i_state, i_action, i_dt),
+      m_parameters(i_parameters) {}
 
 //------------------------------------------------------------------------------
 /*!
@@ -59,7 +58,8 @@ MotionLG::MotionLG(const Parameters &i_parameters,
  \return - the next state x_{k+1}
  */
 //------------------------------------------------------------------------------
-noise::Gaussian MotionLG::motionCallback(double i_t, noise::Gaussian i_x,
+noise::Gaussian MotionLG::motionCallback(double /** i_t **/,
+                                         noise::Gaussian i_x,
                                          Eigen::VectorXd i_u) {
   Eigen::VectorXd x = i_x.getParameters().mean();
   Eigen::MatrixXd P = i_x.getParameters().cov();
@@ -67,9 +67,10 @@ noise::Gaussian MotionLG::motionCallback(double i_t, noise::Gaussian i_x,
   auto gp = g.parameter();
   gp->setMean(m_parameters.A() * x + m_parameters.B() * i_u);
   gp->setCov(m_parameters.A() * P * m_parameters.A().transpose() +
-            m_parameters.C() * m_parameters.Q() * m_parameters.C().transpose());
+             m_parameters.C() * m_parameters.Q() *
+                 m_parameters.C().transpose());
   return g;
 }
 
 } // namespace model
-} // namepsace cr
+} // namespace cr

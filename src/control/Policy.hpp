@@ -9,9 +9,9 @@
 
 #include "Eigen/Dense"
 #include "aspect/Action.hpp"
+#include "core/Clock.hpp"
 #include "core/Item.hpp"
 #include "core/Step.hpp"
-#include "core/Clock.hpp"
 
 namespace cr {
 namespace control {
@@ -43,21 +43,22 @@ class Policy : public core::Step, public core::Item {
 
 public:
   //! Class constructor
-  Policy(const ActionType &i_action)
-    : m_action(i_action) {};
+  Policy() = default;
+  Policy(const ActionType &i_action) : m_action(i_action){};
 
   //! Class destructor
   virtual ~Policy() = default;
 
   //! Factory
-  static core::StepPtr create(const ActionType &i_action) { 
-    return core::StepPtr(new Policy<ActionType>(i_action));
+  static std::shared_ptr<Policy<ActionType>>
+  create(const ActionType &i_action) {
+    return std::make_shared<Policy<ActionType>>(i_action);
   }
 
   CR_ASPECT_ACTION_READ(ActionType)
 };
 
-} // namepsace model
-} // namepsace cr
+} // namespace control
+} // namespace cr
 
 #endif

@@ -15,6 +15,13 @@ Structure defining a 3rd order kinematic waypoint
 \ingroup control
 */
 struct KinematicWaypoint {
+  KinematicWaypoint() = default;
+  KinematicWaypoint(std::size_t n)
+      : time(0), position(Eigen::VectorXd::Zero(n)),
+        velocity(Eigen::VectorXd::Zero(n)),
+        acceleration(Eigen::VectorXd::Zero(n)), jerk(Eigen::VectorXd::Zero(n)) {
+  }
+
   double time;
   Eigen::VectorXd position;
   Eigen::VectorXd velocity;
@@ -22,7 +29,7 @@ struct KinematicWaypoint {
   Eigen::VectorXd jerk;
 };
 
-} // namepsace control
-} // namepsace cr
+} // namespace control
+} // namespace cr
 
 #endif

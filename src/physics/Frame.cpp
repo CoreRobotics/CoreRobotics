@@ -22,14 +22,11 @@ namespace physics {
  \param[in]     i_trans     the 3x1 translation vector (zeros)
  */
 //------------------------------------------------------------------------------
-Frame::Frame(Eigen::Matrix3d i_rot, Eigen::Vector3d i_trans) {
-  this->m_rotation = i_rot;
-  this->m_translation = i_trans;
-}
-Frame::Frame() {
-  this->m_rotation << 1, 0, 0, 0, 1, 0, 0, 0, 1;
-  this->m_translation << 0, 0, 0;
-}
+Frame::Frame(const Eigen::Matrix3d &i_rot, const Eigen::Vector3d &i_trans)
+    : m_rotation(i_rot), m_translation(i_trans) {}
+Frame::Frame()
+    : m_rotation(Eigen::Matrix3d::Identity()),
+      m_translation(Eigen::Vector3d::Zero()) {}
 
 //------------------------------------------------------------------------------
 /*!
@@ -48,7 +45,7 @@ Frame::Frame() {
                         value to write
  */
 //------------------------------------------------------------------------------
-core::Result Frame::setFreeValue(double i_q) {
+core::Result Frame::setFreeValue(double /** i_q **/) {
   return core::CR_RESULT_UNWRITABLE;
 }
 

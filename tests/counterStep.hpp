@@ -4,9 +4,10 @@
  * http://www.corerobotics.org
  */
 
-#include <cr/core>
+#ifndef CR_COUNTER_STEP_HPP_
+#define CR_COUNTER_STEP_HPP_
 
-#include <iostream>
+#include <cr/core>
 
 //! This step class increments its count on every call
 class counterStep : public cr::core::Step {
@@ -22,3 +23,5 @@ public:
   }
   int counter = 0;
 };
+
+#endif

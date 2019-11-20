@@ -9,6 +9,7 @@
 
 #include "core/Item.hpp"
 #include <fstream>
+#include <functional>
 #include <memory>
 #include <mutex>
 
@@ -89,7 +90,39 @@ private:
   std::recursive_mutex m_mutex;
 };
 
+template <typename DataType>
+class MySignal : public cr::signal::Requester<DataType> {
+public:
+  MySignal(std::function<DataType()> i_callback) { m_callback = i_callback; }
+
+  //! request data
+  virtual DataType request() {
+    m_data = m_callback();
+    return m_data;
+  }
+
+private:
+  std::function<DataType()> m_callback;
+  DataType m_data;
+};
+
+template <typename DataType> class MySlot {
+public:
+  MySlot(std::function<void(DataType)> i_callback) {
+    m_callback = i_callback;
+  }
+
+  //! request data
+  virtual void step() {
+    DataType d;
+    m_callback(d);
+  }
+
+private:
+  std::function<void(DataType)> m_callback;
+};
+
 } // namespace signal
-} // namepsace cr
+} // namespace cr
 
 #endif

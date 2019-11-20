@@ -9,9 +9,9 @@
 
 #include "Eigen/Dense"
 #include "aspect/Temporal.hpp"
+#include "control/Policy.hpp"
 #include "core/Clock.hpp"
 #include "core/Types.hpp"
-#include "control/Policy.hpp"
 
 namespace cr {
 namespace control {
@@ -43,22 +43,20 @@ class TrajectoryGenerator : public Policy<ActionType> {
 
 public:
   //! Class constructor
-  TrajectoryGenerator(const ActionType& i_action)
-    : Policy<ActionType>(i_action) {}
+  TrajectoryGenerator() : Policy<ActionType>() {}
+  TrajectoryGenerator(const ActionType &i_action)
+      : Policy<ActionType>(i_action) {}
 
   //! Destructor
   virtual ~TrajectoryGenerator() = default;
-
-  //! Factory
-  static core::StepPtr create(const ActionType& i_action) {
-    return core::StepPtr(new TrajectoryGenerator(i_action));
-  }
 
   CR_ASPECT_TEMPORAL_RUNTIME
 
 public:
   //! The prototype policyCallback function must be implemented.
-  virtual ActionType policyCallback(double i_t) = 0;
+  virtual ActionType policyCallback(double /** i_t **/) {
+    return this->m_action;
+  }
 
   //! This function starts the trajectory generator
   void onStart() { m_timer.startTimer(); }
@@ -70,10 +68,9 @@ protected:
   //! bound callback function
   std::function<ActionType(double)> m_policy_fcn =
       std::bind(&TrajectoryGenerator::policyCallback, this, ph::_1);
-  
 };
 
-} // namepsace control
-} // namepsace cr
+} // namespace control
+} // namespace cr
 
 #endif

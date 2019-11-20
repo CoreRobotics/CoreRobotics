@@ -117,7 +117,7 @@ private:
 
   //! Realtime policy
   // TODO: https://gitlab.com/powan/CoreRobotics/issues/55
-  RealtimePolicy m_policy;
+  // RealtimePolicy m_policy;
 
   //! simulation state
   RunState m_runState = CR_RUN_STATE_STOPPED;

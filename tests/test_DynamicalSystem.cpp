@@ -20,7 +20,7 @@ public:
 
   virtual ~myMotionModel() = default;
 
-  Eigen::VectorXd motionCallback(double t, Eigen::VectorXd x,
+  Eigen::VectorXd motionCallback(double /** t **/, Eigen::VectorXd x,
                                  Eigen::VectorXd u) override {
     return -x + u;
   }

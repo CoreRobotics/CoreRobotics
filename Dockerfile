@@ -73,6 +73,7 @@ RUN cd ~/ \
 
 # Export the linker library
 RUN ldconfig /usr/local/lib
+ENV PYTHONPATH=/usr/local/lib:$PYTHONPATH
 
 # set working directory
 RUN mkdir /CoreRobotics

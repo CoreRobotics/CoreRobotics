@@ -9,9 +9,9 @@
 
 #include "Eigen/Dense"
 #include "aspect/Parameter.hpp"
-#include "core/Types.hpp"
-#include "control/Types.hpp"
 #include "control/TrajectoryGenerator.hpp"
+#include "control/Types.hpp"
+#include "core/Types.hpp"
 
 namespace cr {
 namespace control {
@@ -22,7 +22,7 @@ namespace control {
  \ingroup control
 
  \brief This class provides methods for generating unconstrained minimum jerk
- trajectories from initial and final conditions, i.e. 
+ trajectories from initial and final conditions, i.e.
 
   \f[
  u_{k} = \pi(t_k)
@@ -45,7 +45,7 @@ public:
   public:
     Parameters() = default;
     Parameters(std::size_t i_actionDim)
-        : m_A(Eigen::Matrix<double, 6, Eigen::Dynamic>::Zero(6, i_actionDim)) {};
+        : m_A(Eigen::Matrix<double, 6, Eigen::Dynamic>::Zero(6, i_actionDim)){};
     virtual ~Parameters() = default;
 
     //! Return the coefficient matrix
@@ -55,13 +55,14 @@ public:
     double getDuration() { return m_duration; }
 
     //! Solve for the coefficients needed to achieve the trajectory
-    core::Result solve(const Eigen::VectorXd& i_x0, const Eigen::VectorXd& i_v0,
-                       const Eigen::VectorXd& i_a0, const Eigen::VectorXd& i_xf,
-                       const Eigen::VectorXd& i_vf, const Eigen::VectorXd& i_af,
+    core::Result solve(const Eigen::VectorXd &i_x0, const Eigen::VectorXd &i_v0,
+                       const Eigen::VectorXd &i_a0, const Eigen::VectorXd &i_xf,
+                       const Eigen::VectorXd &i_vf, const Eigen::VectorXd &i_af,
                        double i_duration);
 
     //! Solve for the coefficients needed to achieve the trajectory
-    core::Result solve(const KinematicWaypoint& i_wp0, const KinematicWaypoint& i_wpf);
+    core::Result solve(const KinematicWaypoint &i_wp0,
+                       const KinematicWaypoint &i_wpf);
 
   protected:
     /** Polynomial coefficient matrix */
@@ -72,29 +73,29 @@ public:
   };
 
   //! Class constructor
+  MinimumJerk() : TrajectoryGenerator<KinematicWaypoint>() {}
   MinimumJerk(const Parameters &i_parameters,
-              const KinematicWaypoint& i_action)
-    : TrajectoryGenerator<KinematicWaypoint>(i_action), m_parameters(i_parameters) {}
+                       const KinematicWaypoint &i_action)
+      : TrajectoryGenerator<KinematicWaypoint>(i_action),
+        m_parameters(i_parameters) {}
 
   //! Destructor
   virtual ~MinimumJerk() = default;
 
   //! Factory
-  static core::StepPtr create(const Parameters &i_parameters,
-                              const KinematicWaypoint& i_action) {
-    return core::StepPtr(new MinimumJerk(i_parameters, i_action));
+  static std::shared_ptr<MinimumJerk>
+  create(const Parameters &i_parameters, const KinematicWaypoint &i_action) {
+    return std::make_shared<MinimumJerk>(i_parameters, i_action);
   }
 
   CR_ASPECT_PARAMETER_MUTABLE(MinimumJerk::Parameters);
 
 public:
-
   //! Callback for the trajectory.
   KinematicWaypoint policyCallback(double i_t) override;
-  
 };
 
-} // namepsace control
-} // namepsace cr
+} // namespace control
+} // namespace cr
 
 #endif

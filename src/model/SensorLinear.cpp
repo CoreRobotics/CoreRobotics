@@ -43,10 +43,9 @@ namespace model {
  */
 //------------------------------------------------------------------------------
 SensorLinear::SensorLinear(const Parameters &i_parameters,
-                           const Eigen::VectorXd &i_state,
-                           const double i_dt)
-  : Sensor<Eigen::VectorXd, Eigen::VectorXd>(i_state, i_dt),
-    m_parameters(i_parameters) {}
+                           const Eigen::VectorXd &i_state, const double i_dt)
+    : Sensor<Eigen::VectorXd, Eigen::VectorXd>(i_state, i_dt),
+      m_parameters(i_parameters) {}
 
 //------------------------------------------------------------------------------
 /*!
@@ -57,9 +56,10 @@ SensorLinear::SensorLinear(const Parameters &i_parameters,
  \return - the sensor measurement z(k)
  */
 //------------------------------------------------------------------------------
-Eigen::VectorXd SensorLinear::sensorCallback(double i_t, Eigen::VectorXd i_x) {
+Eigen::VectorXd SensorLinear::sensorCallback(double /** i_t **/,
+                                             Eigen::VectorXd i_x) {
   return m_parameters.H() * i_x;
 }
 
 } // namespace model
-} // namepsace cr
+} // namespace cr

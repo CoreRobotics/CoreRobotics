@@ -13,7 +13,7 @@ using namespace cr::math;
 
 // Declare a continuous dynamical system - xdot = fcn(t,x,u)
 // The exact solution of this system is y = exp(-t) for u = 0
-Eigen::VectorXd myDynamicalSystem(double t, Eigen::VectorXd x,
+Eigen::VectorXd myDynamicalSystem(double /** t **/, Eigen::VectorXd x,
                                   Eigen::VectorXd u) {
   return -x + u; // motion
 }

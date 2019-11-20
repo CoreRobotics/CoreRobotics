@@ -7,10 +7,10 @@
 #ifndef CR_SIGNAL_MESSAGE_HPP_
 #define CR_SIGNAL_MESSAGE_HPP_
 
-#include "Signal.hpp"
-#include "core/Step.hpp"
-#include "core/Item.hpp"
 #include "Eigen/Dense"
+#include "Signal.hpp"
+#include "core/Item.hpp"
+#include "core/Step.hpp"
 #include <iostream>
 #include <string>
 
@@ -33,8 +33,8 @@ enum GenericTypes {
  \ingroup signal
  */
 //------------------------------------------------------------------------------
-class MessageBase
-  : public std::enable_shared_from_this<MessageBase>, public core::Item {
+class MessageBase : public std::enable_shared_from_this<MessageBase>,
+                    public core::Item {
 
 public:
   //! constructor
@@ -54,7 +54,6 @@ private:
   std::string m_type = "Message";
 };
 
-
 //------------------------------------------------------------------------------
 /*!
  \class GenericSerializer
@@ -66,7 +65,6 @@ private:
 class GenericSerializer {
 
 public:
-
   //! write string
   static void write(std::ostream &i_log, std::string i_x);
 
@@ -86,26 +84,24 @@ public:
   static void write(std::ostream &i_log, Eigen::VectorXd i_x);
 
 public:
-
   //! size string
-  static unsigned size(std::string i_x) { return 1; }
+  static unsigned size(std::string /** i_x **/) { return 1; }
 
   //! size bool
-  static unsigned size(bool i_x) { return 1; }
+  static unsigned size(bool /** i_x **/) { return 1; }
 
   //! size int
-  static unsigned size(int i_x) { return 1; }
+  static unsigned size(int /** i_x **/) { return 1; }
 
   //! size float
-  static unsigned size(float i_x) { return 1; }
+  static unsigned size(float /** i_x **/) { return 1; }
 
   //! size double
-  static unsigned size(double i_x) { return 1; }
+  static unsigned size(double /** i_x **/) { return 1; }
 
   //! size vector
   static unsigned size(Eigen::VectorXd i_x) { return i_x.size(); }
 };
-
 
 //------------------------------------------------------------------------------
 /*!
@@ -120,8 +116,8 @@ class Tap : public MessageBase {
 
 public:
   //! constructor
-  Tap(std::shared_ptr<Requester<DataType>> i_requester) 
-    : MessageBase(), m_requester(i_requester) {}
+  Tap(std::shared_ptr<Requester<DataType>> i_requester)
+      : MessageBase(), m_requester(i_requester) {}
 
   //! destructor
   virtual ~Tap() = default;
@@ -133,9 +129,7 @@ public:
   }
 
   //! get the signal dimension
-  virtual unsigned size() {
-    return Serializer::size(m_requester->request());
-  }
+  virtual unsigned size() { return Serializer::size(m_requester->request()); }
 
   //! write signal value to ostream
   virtual void write(std::ostream &i_log) {
@@ -147,8 +141,7 @@ private:
   std::shared_ptr<Requester<DataType>> m_requester;
 };
 
-
 } // namespace signal
-} // namepsace cr
+} // namespace cr
 
 #endif

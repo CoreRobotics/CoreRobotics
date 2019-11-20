@@ -4,6 +4,9 @@
  * http://www.corerobotics.org
  */
 
+#ifndef CR_SIMPLE_STEP_HPP_
+#define CR_SIMPLE_STEP_HPP_
+
 #include <cr/core>
 
 class simpleStep : public cr::core::Step {
@@ -39,3 +42,5 @@ public:
   //! sample rate
   double m_dt = 0.01;
 };
+
+#endif

@@ -44,11 +44,10 @@ namespace model {
 //------------------------------------------------------------------------------
 MotionLinear::MotionLinear(const Parameters &i_parameters,
                            const Eigen::VectorXd &i_state,
-                           const Eigen::VectorXd &i_action,
-                           const double i_dt,
+                           const Eigen::VectorXd &i_action, const double i_dt,
                            const SystemType i_type)
-  : DynamicalSystem(i_state, i_action, i_dt, i_type),
-    m_parameters(i_parameters) {}
+    : DynamicalSystem(i_state, i_action, i_dt, i_type),
+      m_parameters(i_parameters) {}
 
 //------------------------------------------------------------------------------
 /*!
@@ -57,14 +56,15 @@ MotionLinear::MotionLinear(const Parameters &i_parameters,
  \param[in] i_t - time t(k)
  \param[in] i_x - state x(k)
  \param[in] i_u - input u(k)
- \return - the state derivative \f$\dot{x}\f$ or next state \f$x_{k+1}\f$, 
+ \return - the state derivative \f$\dot{x}\f$ or next state \f$x_{k+1}\f$,
            given ModelType
  */
 //------------------------------------------------------------------------------
-Eigen::VectorXd MotionLinear::motionCallback(double i_t, Eigen::VectorXd i_x,
+Eigen::VectorXd MotionLinear::motionCallback(double /** i_t **/,
+                                             Eigen::VectorXd i_x,
                                              Eigen::VectorXd i_u) {
   return m_parameters.A() * i_x + m_parameters.B() * i_u;
 }
 
-}  // namespace model
-}  // namepsace cr
+} // namespace model
+} // namespace cr

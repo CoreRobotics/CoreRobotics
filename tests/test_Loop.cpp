@@ -99,6 +99,6 @@ TEST(Loop, reset) {
 //------------------------------------------------------------------------------
 TEST(Loop, execution100Hz) {
   double dt = 0.01;
-  double eps = 1e-3;
+  double eps = 1e-1;
   timed_loop_test(dt, eps);
 }

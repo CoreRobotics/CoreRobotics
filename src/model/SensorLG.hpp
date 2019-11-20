@@ -48,8 +48,7 @@ public:
   public:
     Parameters() = default;
     Parameters(std::size_t i_stateDim,
-               std::size_t i_measDim,
-               std::size_t i_noiseDim)
+               std::size_t i_measDim)
         : SensorLinear::Parameters(i_measDim, i_stateDim),
           m_R(Eigen::MatrixXd::Zero(i_measDim, i_measDim)){};
     virtual ~Parameters() = default;

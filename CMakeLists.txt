@@ -30,6 +30,9 @@ set(CR_VERSION ${CR_MAJOR_VERSION}.${CR_MINOR_VERSION}.${CR_PATCH_VERSION})
 set(PROJECT_NAME CoreRobotics)
 project(${PROJECT_NAME} VERSION ${CR_VERSION})
 
+# Turn on useful compiler options
+add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+
 # Offer the user the choice of overriding the installation directories
 set(INSTALL_LIB_DIR lib CACHE PATH "Installation directory for libraries")
 set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
@@ -63,6 +66,7 @@ find_program (CLANG_FORMAT_EXE NAMES "clang-format")
 # ------------------------------------------------------------------------------
 # Global library variables (visible to subdirectory CMakeLists)
 # ------------------------------------------------------------------------------
+add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
 # define includes
 set(CR_INCLUDE_DIRS

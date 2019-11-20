@@ -43,10 +43,9 @@ namespace model {
  */
 //------------------------------------------------------------------------------
 SensorLG::SensorLG(const Parameters &i_parameters,
-                   const Eigen::VectorXd &i_state,
-                   const double i_dt)
-  : Sensor<noise::Gaussian, Eigen::VectorXd>(i_state, i_dt),
-    m_parameters(i_parameters) {}
+                   const Eigen::VectorXd &i_state, const double i_dt)
+    : Sensor<noise::Gaussian, Eigen::VectorXd>(i_state, i_dt),
+      m_parameters(i_parameters) {}
 
 //------------------------------------------------------------------------------
 /*!
@@ -57,7 +56,8 @@ SensorLG::SensorLG(const Parameters &i_parameters,
  \return - the sensor measurement z(k)
  */
 //------------------------------------------------------------------------------
-noise::Gaussian SensorLG::sensorCallback(double i_t, Eigen::VectorXd i_x) {
+noise::Gaussian SensorLG::sensorCallback(double /** i_t **/,
+                                         Eigen::VectorXd i_x) {
   noise::Gaussian g;
   auto gp = g.parameter();
   gp->setMean(m_parameters.H() * i_x);
@@ -66,4 +66,4 @@ noise::Gaussian SensorLG::sensorCallback(double i_t, Eigen::VectorXd i_x) {
 }
 
 } // namespace model
-} // namepsace cr
+} // namespace cr

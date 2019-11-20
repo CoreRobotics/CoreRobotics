@@ -32,7 +32,7 @@ void myCallback1(void) {
 }
 
 // Callback for the thread
-void myCallback2(void *arg) {
+void myCallback2(void* /** arg **/) {
   const char *memoryName = "MyMemory2";
   // Open some shared memory as client
   SharedMemory mem(memoryName, CR_MANAGER_CLIENT);

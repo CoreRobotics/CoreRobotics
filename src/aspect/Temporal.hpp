@@ -18,7 +18,7 @@
 */
 #define CR_ASPECT_TEMPORAL_READ \
 public: \
-  const double getTime() const { return m_time; } \
+  double getTime() const { return m_time; } \
 protected: \
   double m_time = 0.0;
 
@@ -45,7 +45,7 @@ public: \
 CR_ASPECT_TEMPORAL_READ \
 public: \
   void setTimeStep(const double i_dt) { m_dt = i_dt; } \
-  const double getTimeStep() const { return m_dt; } \
+  double getTimeStep() const { return m_dt; } \
 protected: \
   double m_dt;
 

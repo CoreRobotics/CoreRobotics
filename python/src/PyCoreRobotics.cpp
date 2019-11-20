@@ -6,12 +6,9 @@
 
 #include "PyCoreRobotics.hpp"
 
-PYBIND11_PLUGIN(CoreRobotics) {
-  py::module m("CoreRobotics", "CoreRobotics Python bindings");
-
+PYBIND11_MODULE(CoreRobotics, m) {
   export_py_core(m);
   export_py_runtime(m);
   export_py_math(m);
   export_py_control(m);
-  return m.ptr();
 }
